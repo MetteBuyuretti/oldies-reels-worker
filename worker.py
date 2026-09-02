@@ -148,7 +148,7 @@ def commons_search(query: str) -> list[dict]:
         "action": "query",
         "format": "json",
         "generator": "search",
-        "gsrsearch": f'"{query}" filetype:bitmap',
+        "gsrsearch": f"{query} filetype:bitmap",
         "gsrnamespace": 6,
         "gsrlimit": 20,
         "prop": "imageinfo",
@@ -167,7 +167,7 @@ def usable_image(page: dict) -> dict | None:
     usage_terms = clean_meta(meta.get("UsageTerms"))
     if not str(info.get("mime", "")).startswith("image/"):
         return None
-    if int(info.get("width", 0)) < 900 or int(info.get("height", 0)) < 700:
+    if int(info.get("width", 0)) < 450 or int(info.get("height", 0)) < 450:
         return None
     return {
         "title": page.get("title", ""),
@@ -181,14 +181,12 @@ def usable_image(page: dict) -> dict | None:
 
 def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path], list[dict]]:
     paths, credits, seen_titles, seen_hashes = [], [], set(), set()
-    artist_terms = {term for term in re.findall(r"[a-z0-9]+", str(candidate["artist"]).lower()) if len(term) > 2}
     queries = list(candidate["image_search_queries"][:3]) + [str(candidate["artist"])]
     for query in queries:
         choices = []
         for page in commons_search(str(query)):
             image = usable_image(page)
-            title_terms = set(re.findall(r"[a-z0-9]+", str(page.get("title", "")).lower()))
-            if image and artist_terms.intersection(title_terms) and image["title"] not in seen_titles:
+            if image and image["title"] not in seen_titles:
                 choices.append(image)
         for image in choices:
             response = requests.get(image["url"], headers={"User-Agent": USER_AGENT}, timeout=90)
