@@ -3,22 +3,26 @@
 
 from __future__ import annotations
 
-import base64
+import hashlib
+import html
 import json
 import os
 import re
 import subprocess
 import textwrap
-from datetime import datetime
+from datetime import datetime, timezone
+from io import BytesIO
 from pathlib import Path
 from urllib.parse import urlparse
 
 import requests
 from openai import OpenAI
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
 OUTPUT = Path("output")
 WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 18
+COMMONS_API = "https://commons.wikimedia.org/w/api.php"
+USER_AGENT = "OldiesRadyoReelsWorker/2.0 (https://oldiesradyo.com)"
 SCORE_LIMITS = {
     "date_relevance": 30,
     "audience_fit": 25,
@@ -80,7 +84,7 @@ def normalized_score(value) -> dict[str, int]:
 
 
 def research_candidate(client: OpenAI, recent_artists: list[str]) -> dict:
-    today = datetime.utcnow()
+    today = datetime.now(timezone.utc)
     prompt = f"""
 Bugün {today:%d %B %Y}. Oldies Radyo'nun Türkçe Instagram Reels hesabı için
 "müzik tarihinde bugün" araştırması yap. 1950'ler-1990'lar pop, rock, soul ve
@@ -90,15 +94,18 @@ sayfası gerçekten o bilgiyi desteklesin. Şu sanatçıları tekrar etme:
 {', '.join(recent_artists) if recent_artists else 'yok'}.
 
 Yalnızca JSON dizi döndür. Her öğede şu alanlar olsun:
-artist, topic, event_date (YYYY-MM-DD), hook, facts (en az 2 kısa Türkçe bilgi),
-sources (en az 2 farklı alan adından tam URL), caption (Türkçe, 80-900 karakter,
-sonunda tek soru ve en fazla 5 hashtag), visual_prompt (İngilizce; 9:16 editoryal
-arka plan, yazı/logo/kapak görseli ve sanatçının birebir yüzü yok),
-instagram_music_title (Instagram uygulamasında aranacak gerçek şarkı),
-instagram_music_artist, instagram_music_clip_note (önerilen 10-15 saniyelik bölüm),
-score_breakdown: date_relevance 0-30, audience_fit 0-25,
-source_confidence 0-20, visual_strength 0-15, freshness 0-10.
-Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. Uydurma bilgi verme.
+artist, topic, event_date (YYYY-MM-DD), date_label (ör. "2 EYLÜL 1946'DA DOĞDU"),
+hook, facts (en az 2 kısa Türkçe bilgi), sources (en az 2 farklı alan adından tam
+URL), caption (Türkçe, 80-900 karakter, sonunda tek soru ve en fazla 5 hashtag),
+image_search_queries (Wikimedia Commons'ta sanatçının farklı dönem/ortamlardaki
+gerçek fotoğraflarını bulmak için İngilizce 3 farklı kısa arama; sadece sanatçı
+adı + yıl, konser, portre gibi sözcükler), instagram_music_title (Instagram
+uygulamasında aranacak gerçek şarkı), instagram_music_artist,
+instagram_music_clip_note (önerilen 10-15 saniyelik bölüm), score_breakdown:
+date_relevance 0-30, audience_fit 0-25, source_confidence 0-20,
+visual_strength 0-15, freshness 0-10.
+Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. date_label olayın anlamını
+açıkça söylemeli; tarihi tek başına yazma. Uydurma bilgi verme.
 """
     response = client.responses.create(
         model=os.getenv("OPENAI_RESEARCH_MODEL", "gpt-5.4"),
@@ -112,6 +119,7 @@ Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. Uydurma bilgi verm
         candidate["score_breakdown"] = normalized_score(candidate.get("score_breakdown"))
         candidate["score"] = sum(candidate["score_breakdown"].values())
         facts = candidate.get("facts") if isinstance(candidate.get("facts"), list) else []
+        queries = candidate.get("image_search_queries") if isinstance(candidate.get("image_search_queries"), list) else []
         try:
             event_date = datetime.strptime(str(candidate.get("event_date")), "%Y-%m-%d")
         except ValueError:
@@ -120,6 +128,7 @@ Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. Uydurma bilgi verm
             event_date.strftime("%m-%d") == today.strftime("%m-%d")
             and len(candidate["sources"]) >= 2
             and len(facts) >= 2
+            and len(queries) >= 3
             and candidate["score"] >= 80
             and 80 <= len(str(candidate.get("caption", ""))) <= 900
         ):
@@ -129,20 +138,83 @@ Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. Uydurma bilgi verm
     return max(accepted, key=lambda item: item["score"])
 
 
-def generate_background(client: OpenAI, candidate: dict, target: Path) -> None:
-    prompt = (
-        str(candidate["visual_prompt"])
-        + " Vertical 9:16, sophisticated vintage radio editorial art, deep red, black and warm gold, "
-          "cinematic grain, strong negative space for large typography, no words, no letters, no logo, "
-          "no album artwork, no exact celebrity likeness."
-    )
-    response = client.images.generate(
-        model=os.getenv("OPENAI_IMAGE_MODEL", "gpt-image-2"),
-        prompt=prompt,
-        size="1024x1536",
-        quality="high",
-    )
-    target.write_bytes(base64.b64decode(response.data[0].b64_json))
+def clean_meta(value) -> str:
+    raw = value.get("value", "") if isinstance(value, dict) else str(value or "")
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw))).strip()
+
+
+def commons_search(query: str) -> list[dict]:
+    params = {
+        "action": "query",
+        "format": "json",
+        "generator": "search",
+        "gsrsearch": f'"{query}" filetype:bitmap',
+        "gsrnamespace": 6,
+        "gsrlimit": 20,
+        "prop": "imageinfo",
+        "iiprop": "url|size|mime|extmetadata",
+        "iiurlwidth": 1800,
+    }
+    response = requests.get(COMMONS_API, params=params, headers={"User-Agent": USER_AGENT}, timeout=45)
+    response.raise_for_status()
+    return list(response.json().get("query", {}).get("pages", {}).values())
+
+
+def usable_image(page: dict) -> dict | None:
+    info = (page.get("imageinfo") or [{}])[0]
+    meta = info.get("extmetadata") or {}
+    license_name = clean_meta(meta.get("LicenseShortName"))
+    usage_terms = clean_meta(meta.get("UsageTerms"))
+    if not str(info.get("mime", "")).startswith("image/"):
+        return None
+    if int(info.get("width", 0)) < 900 or int(info.get("height", 0)) < 700:
+        return None
+    return {
+        "title": page.get("title", ""),
+        "url": info.get("thumburl") or info.get("url", ""),
+        "description_url": info.get("descriptionurl", ""),
+        "license": license_name or usage_terms,
+        "creator": clean_meta(meta.get("Artist")) or "Unknown",
+        "credit": clean_meta(meta.get("Credit")),
+    }
+
+
+def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path], list[dict]]:
+    paths, credits, seen_titles, seen_hashes = [], [], set(), set()
+    artist_terms = {term for term in re.findall(r"[a-z0-9]+", str(candidate["artist"]).lower()) if len(term) > 2}
+    queries = list(candidate["image_search_queries"][:3]) + [str(candidate["artist"])]
+    for query in queries:
+        choices = []
+        for page in commons_search(str(query)):
+            image = usable_image(page)
+            title_terms = set(re.findall(r"[a-z0-9]+", str(page.get("title", "")).lower()))
+            if image and artist_terms.intersection(title_terms) and image["title"] not in seen_titles:
+                choices.append(image)
+        for image in choices:
+            response = requests.get(image["url"], headers={"User-Agent": USER_AGENT}, timeout=90)
+            response.raise_for_status()
+            digest = hashlib.sha256(response.content).hexdigest()
+            if digest in seen_hashes:
+                continue
+            try:
+                opened = Image.open(BytesIO(response.content))
+                opened.verify()
+                opened = Image.open(BytesIO(response.content)).convert("RGB")
+            except Exception:
+                continue
+            path = directory / f"photo-{len(paths) + 1}.jpg"
+            opened.save(path, "JPEG", quality=94, optimize=True)
+            paths.append(path)
+            credits.append(image)
+            seen_titles.add(image["title"])
+            seen_hashes.add(digest)
+            if len(paths) == 3:
+                break
+        if len(paths) == 3:
+            break
+    if len(paths) != 3:
+        raise RuntimeError(f"Three different artist photos were required; only {len(paths)} were found")
+    return paths, credits
 
 
 def font(size: int, bold: bool = False):
@@ -150,61 +222,83 @@ def font(size: int, bold: bool = False):
     return ImageFont.truetype(f"/usr/share/fonts/truetype/dejavu/{name}", size)
 
 
-def fit_text(draw: ImageDraw.ImageDraw, text: str, max_width: int, start: int, minimum: int = 40):
-    size = start
-    while size >= minimum:
+def fit_text(draw: ImageDraw.ImageDraw, text: str, max_width: int, start: int, minimum: int = 38):
+    for size in range(start, minimum - 1, -2):
         fnt = font(size, True)
-        lines = textwrap.wrap(text, width=max(8, int(max_width / (size * 0.58))))
-        if all(draw.textbbox((0, 0), line, font=fnt)[2] <= max_width for line in lines):
+        lines = textwrap.wrap(text, width=max(8, int(max_width / (size * 0.57))))
+        if len(lines) <= 4 and all(draw.textbbox((0, 0), line, font=fnt)[2] <= max_width for line in lines):
             return fnt, lines
-        size -= 2
-    return font(minimum, True), textwrap.wrap(text, width=22)
+    return font(minimum, True), textwrap.wrap(text, width=25)[:4]
 
 
-def make_cards(candidate: dict, directory: Path) -> list[Path]:
-    cards = [
-        ("BUGÜN MÜZİK TARİHİNDE", datetime.strptime(candidate["event_date"], "%Y-%m-%d").strftime("%d.%m.%Y")),
-        (str(candidate["artist"]).upper(), str(candidate["topic"]).upper()),
-        (str(candidate["hook"]).upper(), str(candidate["facts"][0])),
-        ("SENİN YORUMUN NE?", "@oldiesradyo"),
+def cover_photo(path: Path) -> Image.Image:
+    photo = Image.open(path).convert("RGB")
+    canvas = ImageOps.fit(photo, (WIDTH, HEIGHT), method=Image.Resampling.LANCZOS, centering=(0.5, 0.42))
+    canvas = ImageEnhance.Contrast(canvas).enhance(1.06)
+    return ImageEnhance.Color(canvas).enhance(0.92)
+
+
+def add_gradient(canvas: Image.Image) -> None:
+    overlay = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    for y in range(HEIGHT):
+        top_alpha = int(max(0, 95 * (1 - y / 500)))
+        bottom_alpha = int(max(0, 238 * ((y - 760) / (HEIGHT - 760))))
+        alpha = max(top_alpha, min(238, bottom_alpha))
+        draw.line((0, y, WIDTH, y), fill=(7, 7, 9, alpha))
+    canvas.alpha_composite(overlay)
+
+
+def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, accent: str) -> None:
+    draw.rounded_rectangle((72, 1260, 1008, 1305), radius=16, fill=(204, 34, 43, 245))
+    draw.text((104, 1266), accent, font=font(27, True), fill=(255, 246, 221, 255))
+    title_font, title_lines = fit_text(draw, headline.upper(), 870, 88)
+    y = 1342
+    for line in title_lines:
+        draw.text((96, y), line, font=title_font, fill=(255, 248, 231, 255), stroke_width=1, stroke_fill=(0, 0, 0, 170))
+        y += title_font.size + 10
+    sub_font, sub_lines = fit_text(draw, subline, 870, 45, 32)
+    y += 12
+    for line in sub_lines[:3]:
+        draw.text((98, y), line, font=sub_font, fill=(232, 229, 222, 255))
+        y += sub_font.size + 8
+    draw.text((96, 1833), "OLDIES RADYO", font=font(30, True), fill=(232, 187, 61, 255))
+    draw.text((790, 1833), "@oldiesradyo", font=font(25), fill=(245, 245, 245, 235))
+
+
+def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Path]:
+    scenes = [
+        (str(candidate["artist"]), str(candidate["date_label"]), "BUGÜN MÜZİK TARİHİNDE"),
+        (str(candidate["hook"]), str(candidate["facts"][0]), "BİR DÖNEME DAMGA VURDU"),
+        ("SENİN FAVORİN HANGİSİ?", str(candidate["facts"][1]), "HATIRLIYORUZ • DİNLİYORUZ"),
     ]
     paths = []
-    for index, (headline, subline) in enumerate(cards):
-        canvas = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-        draw = ImageDraw.Draw(canvas)
-        draw.rounded_rectangle((70, 1150, 1010, 1710), radius=24, fill=(10, 8, 9, 218), outline=(221, 180, 64, 230), width=3)
-        draw.rectangle((70, 1150, 82, 1710), fill=(204, 32, 44, 255))
-        title_font, title_lines = fit_text(draw, headline, 800, 86)
-        y = 1220
-        for line in title_lines[:3]:
-            draw.text((130, y), line, font=title_font, fill=(255, 244, 215, 255))
-            y += title_font.size + 14
-        sub_font, sub_lines = fit_text(draw, subline, 800, 52, 34)
-        y += 18
-        for line in sub_lines[:3]:
-            draw.text((130, y), line, font=sub_font, fill=(239, 239, 239, 255))
-            y += sub_font.size + 10
-        draw.text((130, 1645), "OLDIES RADYO", font=font(34, True), fill=(221, 180, 64, 255))
-        path = directory / f"card-{index}.png"
-        canvas.save(path)
+    for index, (photo, content) in enumerate(zip(photos, scenes), start=1):
+        canvas = cover_photo(photo).convert("RGBA")
+        add_gradient(canvas)
+        draw_text_block(ImageDraw.Draw(canvas), *content)
+        path = directory / f"scene-{index}.jpg"
+        canvas.convert("RGB").save(path, "JPEG", quality=95, optimize=True)
         paths.append(path)
     return paths
 
 
-def render(background: Path, cards: list[Path], target: Path) -> None:
-    inputs = ["-loop", "1", "-i", str(background)]
-    for card in cards:
-        inputs += ["-loop", "1", "-i", str(card)]
+def render(scenes: list[Path], target: Path) -> None:
+    inputs = []
+    for scene in scenes:
+        inputs += ["-loop", "1", "-t", "6.5", "-i", str(scene)]
     graph = (
-        f"[0:v]scale={WIDTH}:{HEIGHT}:force_original_aspect_ratio=increase,crop={WIDTH}:{HEIGHT},"
-        f"zoompan=z='min(zoom+0.00035,1.07)':d={DURATION*FPS}:s={WIDTH}x{HEIGHT}:fps={FPS},"
-        "eq=brightness=-0.06:saturation=0.9[bg];"
-        "[bg][1:v]overlay=enable='between(t,0,4.5)'[v1];"
-        "[v1][2:v]overlay=enable='between(t,4.5,9)'[v2];"
-        "[v2][3:v]overlay=enable='between(t,9,13.5)'[v3];"
-        "[v3][4:v]overlay=enable='between(t,13.5,18)'[v]"
+        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00045,1.075)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
+        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00040,1.07)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
+        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00045,1.075)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
+        "[a][b]xfade=transition=fade:duration=0.75:offset=5.75[x];"
+        "[x][c]xfade=transition=fade:duration=0.75:offset=11.5[v]"
     )
-    command = ["ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an", "-t", str(DURATION), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target)]
+    command = [
+        "ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an",
+        "-t", str(DURATION), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
+        "-crf", "19", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
+    ]
     subprocess.run(command, check=True)
 
 
@@ -231,14 +325,12 @@ def main() -> None:
     base_url = require_env("OLDIES_WP_BASE_URL")
     OUTPUT.mkdir(parents=True, exist_ok=True)
     client = OpenAI(api_key=api_key)
-    recent = get_recent_artists(bearer, base_url)
-    candidate = research_candidate(client, recent)
+    candidate = research_candidate(client, get_recent_artists(bearer, base_url))
+    photos, credits = download_commons_photos(candidate, OUTPUT)
+    candidate["image_credits"] = credits
     (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
-    background = OUTPUT / "background.png"
     video = OUTPUT / "oldies-reels-draft.mp4"
-    generate_background(client, candidate, background)
-    cards = make_cards(candidate, OUTPUT)
-    render(background, cards, video)
+    render(make_scenes(candidate, photos, OUTPUT), video)
     result = upload_draft(candidate, video, bearer, base_url)
     (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Created approval-only draft {result.get('draft', {}).get('id', '')}; no live post was made.")
