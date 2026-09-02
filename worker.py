@@ -83,7 +83,7 @@ def normalized_score(value) -> dict[str, int]:
     return {key: max(0, min(limit, int(value.get(key, 0)))) for key, limit in SCORE_LIMITS.items()}
 
 
-def research_candidate(client: OpenAI, recent_artists: list[str]) -> dict:
+def research_candidates(client: OpenAI, recent_artists: list[str]) -> list[dict]:
     today = datetime.now(timezone.utc)
     prompt = f"""
 Bugün {today:%d %B %Y}. Oldies Radyo'nun Türkçe Instagram Reels hesabı için
@@ -105,7 +105,9 @@ instagram_music_clip_note (önerilen 10-15 saniyelik bölüm), score_breakdown:
 date_relevance 0-30, audience_fit 0-25, source_confidence 0-20,
 visual_strength 0-15, freshness 0-10.
 Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. date_label olayın anlamını
-açıkça söylemeli; tarihi tek başına yazma. Uydurma bilgi verme.
+açıkça söylemeli; tarihi tek başına yazma. Sanatçı veya grup tanınabilir olmalı
+ve Wikimedia Commons'ta en az üç farklı gerçek fotoğrafı bulunabilmeli. Uydurma
+bilgi verme.
 """
     response = client.responses.create(
         model=os.getenv("OPENAI_RESEARCH_MODEL", "gpt-5.4"),
@@ -135,7 +137,7 @@ açıkça söylemeli; tarihi tek başına yazma. Uydurma bilgi verme.
             accepted.append(candidate)
     if not accepted:
         raise RuntimeError("No candidate passed the source and quality policy")
-    return max(accepted, key=lambda item: item["score"])
+    return sorted(accepted, key=lambda item: item["score"], reverse=True)
 
 
 def clean_meta(value) -> str:
@@ -167,7 +169,7 @@ def usable_image(page: dict) -> dict | None:
     usage_terms = clean_meta(meta.get("UsageTerms"))
     if not str(info.get("mime", "")).startswith("image/"):
         return None
-    if int(info.get("width", 0)) < 450 or int(info.get("height", 0)) < 450:
+    if max(int(info.get("width", 0)), int(info.get("height", 0))) < 320:
         return None
     return {
         "title": page.get("title", ""),
@@ -323,8 +325,23 @@ def main() -> None:
     base_url = require_env("OLDIES_WP_BASE_URL")
     OUTPUT.mkdir(parents=True, exist_ok=True)
     client = OpenAI(api_key=api_key)
-    candidate = research_candidate(client, get_recent_artists(bearer, base_url))
-    photos, credits = download_commons_photos(candidate, OUTPUT)
+    candidates = research_candidates(client, get_recent_artists(bearer, base_url))
+    candidate = None
+    photos, credits = [], []
+    photo_errors = []
+    for option in candidates:
+        for old_photo in OUTPUT.glob("photo-*.jpg"):
+            old_photo.unlink()
+        try:
+            print(f"Trying visual candidate: {option['artist']}")
+            photos, credits = download_commons_photos(option, OUTPUT)
+            candidate = option
+            break
+        except Exception as exc:
+            photo_errors.append(f"{option.get('artist', 'Unknown')}: {exc}")
+            print(f"Skipping visual candidate: {photo_errors[-1]}")
+    if candidate is None:
+        raise RuntimeError("No candidate had three usable photos. " + " | ".join(photo_errors))
     candidate["image_credits"] = credits
     (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
     video = OUTPUT / "oldies-reels-draft.mp4"
