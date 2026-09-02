@@ -10,6 +10,7 @@ import os
 import re
 import subprocess
 import textwrap
+import time
 from datetime import datetime, timezone
 from io import BytesIO
 from pathlib import Path
@@ -43,10 +44,17 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
     endpoint = f"{base_url.rstrip('/')}/?rest_route=/oldies/v1/instagram/reels/{path.lstrip('/')}"
     headers = kwargs.pop("headers", {})
     headers.update({"Authorization": f"Bearer {bearer}", "Accept": "application/json"})
-    response = requests.request(method, endpoint, headers=headers, timeout=180, **kwargs)
-    if response.status_code >= 400:
-        raise RuntimeError(f"WordPress {response.status_code}: {response.text[:700]}")
-    return response.json()
+    response = None
+    for attempt in range(4):
+        response = requests.request(method, endpoint, headers=headers, timeout=180, **kwargs)
+        if response.status_code < 400:
+            return response.json()
+        if response.status_code not in {429, 502, 503, 504} or attempt == 3:
+            break
+        delay = 15 * (2**attempt)
+        print(f"WordPress temporarily returned {response.status_code}; retrying in {delay}s")
+        time.sleep(delay)
+    raise RuntimeError(f"WordPress {response.status_code}: {response.text[:700]}")
 
 
 def get_recent_artists(bearer: str, base_url: str) -> list[str]:
@@ -71,7 +79,13 @@ def valid_foreign_sources(values) -> list[str]:
         url = str(value).strip()
         parsed = urlparse(url)
         host = (parsed.hostname or "").lower()
-        if parsed.scheme != "https" or not host or host.endswith(".tr") or host in hosts:
+        if (
+            parsed.scheme != "https"
+            or not host
+            or host.endswith(".tr")
+            or host in {"commons.wikimedia.org", "upload.wikimedia.org"}
+            or host in hosts
+        ):
             continue
         hosts.add(host)
         result.append(url)
@@ -81,6 +95,44 @@ def valid_foreign_sources(values) -> list[str]:
 def normalized_score(value) -> dict[str, int]:
     value = value if isinstance(value, dict) else {}
     return {key: max(0, min(limit, int(value.get(key, 0)))) for key, limit in SCORE_LIMITS.items()}
+
+
+def independently_verified(client: OpenAI, candidates: list[dict], today: datetime) -> list[dict]:
+    review_payload = [
+        {
+            "artist": item.get("artist"),
+            "topic": item.get("topic"),
+            "event_date": item.get("event_date"),
+            "hook": item.get("hook"),
+            "facts": item.get("facts"),
+            "sources": item.get("sources"),
+        }
+        for item in candidates
+    ]
+    prompt = f"""
+Bugün {today:%d %B %Y}. Aşağıdaki müzik-tarihi adaylarını bağımsız bir doğruluk
+kontrolünden geçir. Verilen yabancı kaynakları aç ve ayrıca web araması yap.
+Sanatçı, olay, gün, ay ve yıl iddiası açıkça doğrulanmıyorsa adayı reddet.
+Özellikle doğum tarihlerini resmi biyografi, Britannica, Grammy, Rock Hall,
+Billboard, AllMusic veya güvenilir gazete/arşiv kaynaklarıyla karşılaştır.
+Wikimedia Commons ve görsel sayfaları olay kanıtı değildir.
+
+Yalnızca JSON dizi döndür: artist, verified (true/false), reason.
+Şüphede kalırsan false yaz. Adaylar:
+{json.dumps(review_payload, ensure_ascii=False)}
+"""
+    response = client.responses.create(
+        model=os.getenv("OPENAI_RESEARCH_MODEL", "gpt-5.4"),
+        tools=[{"type": "web_search"}],
+        input=prompt,
+    )
+    verdicts = extract_json(response.output_text)
+    verdicts = verdicts if isinstance(verdicts, list) else []
+    approved = {
+        str(item.get("artist", "")).strip().casefold()
+        for item in verdicts if item.get("verified") is True
+    }
+    return [item for item in candidates if str(item.get("artist", "")).strip().casefold() in approved]
 
 
 def research_candidates(client: OpenAI, recent_artists: list[str]) -> list[dict]:
@@ -95,8 +147,9 @@ sayfası gerçekten o bilgiyi desteklesin. Şu sanatçıları tekrar etme:
 
 Yalnızca JSON dizi döndür. Her öğede şu alanlar olsun:
 artist, topic, event_date (YYYY-MM-DD), date_label (ör. "2 EYLÜL 1946'DA DOĞDU"),
-hook, facts (en az 2 kısa Türkçe bilgi), sources (en az 2 farklı alan adından tam
-URL), caption (Türkçe, 80-900 karakter, sonunda tek soru ve en fazla 5 hashtag),
+hook, facts (en az 2 kısa Türkçe bilgi), sources (iddianın tarihini açıkça
+doğrulayan en az 2 farklı alan adından tam URL; Commons ve görsel arşivlerini
+haber kaynağı sayma), caption (Türkçe, 80-900 karakter, sonunda tek soru ve en fazla 5 hashtag),
 image_search_queries (Wikimedia Commons'ta sanatçının farklı dönem/ortamlardaki
 gerçek fotoğraflarını bulmak için İngilizce 3 farklı kısa arama; sadece sanatçı
 adı + yıl, konser, portre gibi sözcükler), instagram_music_title (Instagram
@@ -137,6 +190,9 @@ bilgi verme.
             accepted.append(candidate)
     if not accepted:
         raise RuntimeError("No candidate passed the source and quality policy")
+    accepted = independently_verified(client, accepted, today)
+    if not accepted:
+        raise RuntimeError("No candidate passed the independent fact check")
     return sorted(accepted, key=lambda item: item["score"], reverse=True)
 
 
@@ -150,7 +206,7 @@ def commons_search(query: str) -> list[dict]:
         "action": "query",
         "format": "json",
         "generator": "search",
-        "gsrsearch": f"{query} filetype:bitmap",
+        "gsrsearch": f'intitle:"{query}" filetype:bitmap',
         "gsrnamespace": 6,
         "gsrlimit": 20,
         "prop": "imageinfo",
@@ -183,7 +239,8 @@ def usable_image(page: dict) -> dict | None:
 
 def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path], list[dict]]:
     paths, credits, seen_titles, seen_hashes = [], [], set(), set()
-    queries = list(candidate["image_search_queries"][:3]) + [str(candidate["artist"])]
+    artist_query = re.sub(r"^the\s+", "", str(candidate["artist"]), flags=re.I).strip()
+    queries = [artist_query] + list(candidate["image_search_queries"][:3])
     for query in queries:
         choices = []
         for page in commons_search(str(query)):
