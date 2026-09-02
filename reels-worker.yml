@@ -1,0 +1,48 @@
+name: Oldies Reels Draft Worker
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oldies-reels-draft-worker
+  cancel-in-progress: false
+
+jobs:
+  create-draft:
+    if: github.event_name == 'workflow_dispatch' || vars.REELS_AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install renderer and Python packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Research, render and upload review draft
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OLDIES_WP_BEARER: ${{ secrets.OLDIES_WP_BEARER }}
+          OLDIES_WP_BASE_URL: ${{ vars.OLDIES_WP_BASE_URL }}
+          OPENAI_RESEARCH_MODEL: ${{ vars.OPENAI_RESEARCH_MODEL }}
+          OPENAI_IMAGE_MODEL: ${{ vars.OPENAI_IMAGE_MODEL }}
+        run: python worker.py
+      - name: Keep preview for seven days
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oldies-reels-preview
+          path: output/
+          retention-days: 7
+          if-no-files-found: ignore
+
