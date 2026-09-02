@@ -46,6 +46,12 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
     headers.update({"Authorization": f"Bearer {bearer}", "Accept": "application/json"})
     response = None
     for attempt in range(4):
+        # requests leaves uploaded file handles at EOF after an attempt. Rewind
+        # them so a retry after a temporary 429/5xx sends the real video again.
+        for value in (kwargs.get("files") or {}).values():
+            handle = value[1] if isinstance(value, tuple) and len(value) > 1 else value
+            if hasattr(handle, "seek"):
+                handle.seek(0)
         response = requests.request(method, endpoint, headers=headers, timeout=180, **kwargs)
         if response.status_code < 400:
             return response.json()
@@ -147,7 +153,8 @@ sayfası gerçekten o bilgiyi desteklesin. Şu sanatçıları tekrar etme:
 
 Yalnızca JSON dizi döndür. Her öğede şu alanlar olsun:
 artist, topic, event_date (YYYY-MM-DD), date_label (ör. "2 EYLÜL 1946'DA DOĞDU"),
-hook, facts (en az 2 kısa Türkçe bilgi), sources (iddianın tarihini açıkça
+hook (en fazla 80 karakter; "Reels", "gönderi" gibi üretim dili kullanma),
+facts (en az 2 kısa Türkçe bilgi; her biri en fazla 110 karakter), sources (iddianın tarihini açıkça
 doğrulayan en az 2 farklı alan adından tam URL; Commons ve görsel arşivlerini
 haber kaynağı sayma), caption (Türkçe, 80-900 karakter, sonunda tek soru ve en fazla 5 hashtag),
 image_search_queries (Wikimedia Commons'ta sanatçının farklı dönem/ortamlardaki
@@ -174,6 +181,10 @@ bilgi verme.
         candidate["score_breakdown"] = normalized_score(candidate.get("score_breakdown"))
         candidate["score"] = sum(candidate["score_breakdown"].values())
         facts = candidate.get("facts") if isinstance(candidate.get("facts"), list) else []
+        candidate["hook"] = textwrap.shorten(str(candidate.get("hook", "")), width=80, placeholder="…")
+        candidate["date_label"] = textwrap.shorten(str(candidate.get("date_label", "")), width=64, placeholder="…")
+        candidate["facts"] = [textwrap.shorten(str(fact), width=110, placeholder="…") for fact in facts[:2]]
+        facts = candidate["facts"]
         queries = candidate.get("image_search_queries") if isinstance(candidate.get("image_search_queries"), list) else []
         try:
             event_date = datetime.strptime(str(candidate.get("event_date")), "%Y-%m-%d")
@@ -234,7 +245,21 @@ def usable_image(page: dict) -> dict | None:
         "license": license_name or usage_terms,
         "creator": clean_meta(meta.get("Artist")) or "Unknown",
         "credit": clean_meta(meta.get("Credit")),
+        "width": int(info.get("width", 0)),
+        "height": int(info.get("height", 0)),
     }
+
+
+def image_priority(image: dict, artist: str) -> tuple[int, int, int, str]:
+    """Prefer clearly named, solo-looking and useful period photographs."""
+    title = re.sub(r"^file:", "", str(image.get("title", "")), flags=re.I).casefold()
+    artist_name = artist.casefold()
+    group_terms = (" and ", " with ", " & ", " group", " band", " members", "family")
+    group_penalty = sum(term in title for term in group_terms)
+    exact_name = int(title.startswith(artist_name))
+    period_year = int(bool(re.search(r"\b(?:19[5-9]\d|200\d)\b", title)))
+    portrait_shape = int(int(image.get("height", 0)) >= int(image.get("width", 0)) * 0.85)
+    return (-group_penalty, exact_name, period_year + portrait_shape, title)
 
 
 def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path], list[dict]]:
@@ -247,6 +272,7 @@ def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path
             image = usable_image(page)
             if image and image["title"] not in seen_titles:
                 choices.append(image)
+        choices.sort(key=lambda image: image_priority(image, artist_query), reverse=True)
         for image in choices:
             response = requests.get(image["url"], headers={"User-Agent": USER_AGENT}, timeout=90)
             response.raise_for_status()
