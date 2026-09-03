@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+  #!/usr/bin/env python3
 """Research, render and upload one approval-only Oldies Radyo Reels draft."""
 
 from __future__ import annotations
@@ -146,7 +146,12 @@ def research_candidates(client: OpenAI, recent_artists: list[str]) -> list[dict]
     prompt = f"""
 Bugün {today:%d %B %Y}. Oldies Radyo'nun Türkçe Instagram Reels hesabı için
 "müzik tarihinde bugün" araştırması yap. 1950'ler-1990'lar pop, rock, soul ve
-disco kitlesine uygun 5 aday bul. Yalnızca yabancı, güvenilir HTTPS kaynakları
+disco kitlesine uygun 5 aday bul. Yalnızca geniş kitlelerce tanınan, kayda değer
+büyük sanatçı ve grupları seç. Daha az tanınan bir ismi sırf doğum veya ölüm
+yıldönümü bugüne denk geliyor diye seçme. Alternatif olarak Billboard, UK
+Official Charts veya başka büyük uluslararası listelerde 1 numara, önemli rekor,
+tarihî yükseliş ya da müzik tarihinde belirgin bir değişim yaratan liste
+olaylarını seç. Yalnızca yabancı, güvenilir HTTPS kaynakları
 kullan; Türkçe siteleri ve .tr alan adlarını kullanma. Her iddia için kaynak
 sayfası gerçekten o bilgiyi desteklesin. Şu sanatçıları tekrar etme:
 {', '.join(recent_artists) if recent_artists else 'yok'}.
@@ -154,9 +159,14 @@ sayfası gerçekten o bilgiyi desteklesin. Şu sanatçıları tekrar etme:
 Yalnızca JSON dizi döndür. Her öğede şu alanlar olsun:
 artist, topic, event_date (YYYY-MM-DD), date_label (ör. "2 EYLÜL 1946'DA DOĞDU"),
 hook (en fazla 80 karakter; "Reels", "gönderi" gibi üretim dili kullanma),
-facts (en az 2 kısa Türkçe bilgi; her biri en fazla 110 karakter), sources (iddianın tarihini açıkça
+closing_headline (en fazla 50 karakter; konuya uygun doğal bir kapanış yaz,
+soru olmak zorunda değil),
+facts (en az 2 kısa Türkçe bilgi; her biri en fazla 110 karakter; metinde kaynak
+ve yayın adı anma, doğrulanmış bilgiyi doğrudan anlat), sources (iddianın tarihini açıkça
 doğrulayan en az 2 farklı alan adından tam URL; Commons ve görsel arşivlerini
-haber kaynağı sayma), caption (Türkçe, 80-900 karakter, sonunda tek soru ve en fazla 5 hashtag),
+haber kaynağı sayma), caption (Türkçe, 80-900 karakter, sıcak ve doğal; en fazla
+5 hashtag. Her paylaşımı soruyla bitirme. Yalnızca gerçekten anlamlıysa soru sor;
+doğum veya ölüm yıldönümünde kısa bir anma ya da şarkı önerisiyle bitir),
 image_search_queries (Wikimedia Commons'ta sanatçının farklı dönem/ortamlardaki
 gerçek fotoğraflarını bulmak için İngilizce 3 farklı kısa arama; sadece sanatçı
 adı + yıl, konser, portre gibi sözcükler), instagram_music_title (Instagram
@@ -165,7 +175,8 @@ instagram_music_clip_note (önerilen 10-15 saniyelik bölüm), score_breakdown:
 date_relevance 0-30, audience_fit 0-25, source_confidence 0-20,
 visual_strength 0-15, freshness 0-10.
 Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. date_label olayın anlamını
-açıkça söylemeli; tarihi tek başına yazma. Sanatçı veya grup tanınabilir olmalı
+açıkça söylemeli; tarihi tek başına yazma. Sanatçı veya grup geniş kitlelerce
+tanınabilir olmalı
 ve Wikimedia Commons'ta en az üç farklı gerçek fotoğrafı bulunabilmeli. Uydurma
 bilgi verme.
 """
@@ -182,6 +193,9 @@ bilgi verme.
         candidate["score"] = sum(candidate["score_breakdown"].values())
         facts = candidate.get("facts") if isinstance(candidate.get("facts"), list) else []
         candidate["hook"] = textwrap.shorten(str(candidate.get("hook", "")), width=80, placeholder="…")
+        candidate["closing_headline"] = textwrap.shorten(
+            str(candidate.get("closing_headline", "MÜZİĞİ HÂLÂ BİZİMLE")), width=50, placeholder="…"
+        )
         candidate["date_label"] = textwrap.shorten(str(candidate.get("date_label", "")), width=64, placeholder="…")
         candidate["facts"] = [textwrap.shorten(str(fact), width=110, placeholder="…") for fact in facts[:2]]
         facts = candidate["facts"]
@@ -196,6 +210,7 @@ bilgi verme.
             and len(facts) >= 2
             and len(queries) >= 3
             and candidate["score"] >= 80
+            and candidate["score_breakdown"]["audience_fit"] >= 22
             and 80 <= len(str(candidate.get("caption", ""))) <= 900
         ):
             accepted.append(candidate)
@@ -353,7 +368,7 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Pa
     scenes = [
         (str(candidate["artist"]), str(candidate["date_label"]), "BUGÜN MÜZİK TARİHİNDE"),
         (str(candidate["hook"]), str(candidate["facts"][0]), "BİR DÖNEME DAMGA VURDU"),
-        ("SENİN FAVORİN HANGİSİ?", str(candidate["facts"][1]), "HATIRLIYORUZ • DİNLİYORUZ"),
+        (str(candidate["closing_headline"]), str(candidate["facts"][1]), "HATIRLIYORUZ • DİNLİYORUZ"),
     ]
     paths = []
     for index, (photo, content) in enumerate(zip(photos, scenes), start=1):
