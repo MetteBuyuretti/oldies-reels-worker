@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """Research, render and upload one approval-only Oldies Radyo Reels draft."""
 
 from __future__ import annotations
