@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "tiers": {
+    "1": [
+      "Elvis Presley","The Beatles","John Lennon","Paul McCartney","George Harrison","Ringo Starr","The Rolling Stones","Mick Jagger","Keith Richards","Queen","Freddie Mercury","David Bowie","Michael Jackson","Madonna","Prince","Elton John","Stevie Wonder","Aretha Franklin","Marvin Gaye","Diana Ross","The Supremes","Bee Gees","ABBA","Fleetwood Mac","Led Zeppelin","Pink Floyd","The Who","The Doors","Jimi Hendrix","Janis Joplin","Bob Dylan","Bruce Springsteen","Tina Turner","Cher","Frank Sinatra","Johnny Cash","Dolly Parton","Roy Orbison","Buddy Holly","Chuck Berry","Little Richard","Ray Charles","Otis Redding","James Brown","Sam Cooke","Neil Diamond","Rod Stewart","Eric Clapton","Phil Collins","Genesis","Dire Straits","George Michael","Whitney Houston","Celine Dion","Bon Jovi","Aerosmith","U2","AC/DC","Eagles","Journey","Foreigner","The Police","Sting","Billy Joel","Lionel Richie","Donna Summer","Gloria Gaynor","Earth, Wind & Fire","Electric Light Orchestra","Creedence Clearwater Revival","Simon & Garfunkel","The Beach Boys","The Kinks","The Animals","The Temptations","Four Tops","Smokey Robinson","The Jackson 5","Carpenters","Olivia Newton-John","Barbra Streisand","Duran Duran","Wham!","Pet Shop Boys","Depeche Mode","a-ha","Tears for Fears","Eurythmics","INXS","Simple Minds","Roxette"
+    ],
+    "2": [
+      "Patsy Cline","Gene Vincent","Eddie Cochran","Fats Domino","Jerry Lee Lewis","Carl Perkins","Everly Brothers","The Platters","The Drifters","Ben E. King","Dion","Connie Francis","Brenda Lee","Dusty Springfield","Petula Clark","Sandie Shaw","Cilla Black","The Hollies","The Searchers","The Troggs","Small Faces","The Zombies","The Byrds","The Mamas & the Papas","The Monkees","Jefferson Airplane","Cream","Traffic","Deep Purple","Black Sabbath","Yes","Jethro Tull","Supertramp","10cc","Slade","Sweet","T. Rex","Status Quo","Faces","Free","Bad Company","Boston","Kansas","Toto","REO Speedwagon","Heart","Pat Benatar","Blondie","The Cars","Talking Heads","Hall & Oates","Chicago","America","Bread","Seals and Crofts","KC and the Sunshine Band","Chic","Sister Sledge","Kool & the Gang","The Commodores","Barry White","Al Green","Gladys Knight & the Pips","The Pointer Sisters","Boney M.","Village People","The Human League","Spandau Ballet","Culture Club","Erasure","New Order","OMD","Ultravox","The Cure","The Smiths","R.E.M.","The Cranberries","No Doubt","Bryan Adams","Richard Marx","Belinda Carlisle","Kim Wilde","Cyndi Lauper","Laura Branigan","Bonnie Tyler","Jennifer Rush","Alphaville","Europe","Scorpions","Def Leppard","ZZ Top","Meat Loaf","Huey Lewis and the News","Fine Young Cannibals","Simply Red","Crowded House","UB40"
+    ],
+    "3": [
+      "Marmalade","Badfinger","Pilot","Mud","Smokie","Dr. Hook","Nazareth","Uriah Heep","Argent","Hot Chocolate","Heatwave","Rose Royce","The Real Thing","Imagination","Shalamar","Level 42","Nik Kershaw","Howard Jones","Paul Young","Alison Moyet","ABC","Thompson Twins","Kajagoogoo","Go West","Cutting Crew","Starship","Survivor","Mr. Mister","Mike + The Mechanics","Wet Wet Wet"
+    ]
+  },
+  "aliases": {
+    "The Beatles":["Beatles"],
+    "The Rolling Stones":["Rolling Stones"],
+    "Bee Gees":["The Bee Gees"],
+    "ABBA":["Abba"],
+    "Electric Light Orchestra":["ELO"],
+    "Creedence Clearwater Revival":["CCR"],
+    "Earth, Wind & Fire":["Earth Wind & Fire"],
+    "Wham!":["Wham"],
+    "a-ha":["A-ha","Aâ€ha"],
+    "Gladys Knight & the Pips":["Gladys Knight and the Pips"],
+    "Hall & Oates":["Daryl Hall & John Oates"],
+    "KC and the Sunshine Band":["KC & the Sunshine Band"],
+    "Mike + The Mechanics":["Mike and the Mechanics"],
+    "The Mamas & the Papas":["The Mamas and the Papas"],
+    "R.E.M.":["REM"],
+    "AC/DC":["ACDC"]
+  }
+}
