@@ -1,6 +1,10 @@
-  #!/usr/bin/env python3
-"""Research, render and upload one approval-only Oldies Radyo Reels draft."""
+#!/usr/bin/env python3
+"""Create one zero-cost, approval-only Oldies Radyo Reels draft.
 
+The research path uses only Wikimedia/Wikidata/Wikipedia open data. No OpenAI
+or other paid model API is imported or called. Existing Commons -> FFmpeg ->
+WordPress DRAFT_REVIEW behavior is preserved.
+"""
 from __future__ import annotations
 
 import hashlib
@@ -14,23 +18,23 @@ import time
 from datetime import datetime, timezone
 from io import BytesIO
 from pathlib import Path
-from urllib.parse import urlparse
 
 import requests
-from openai import OpenAI
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
+
+from zero_cost import research_candidates
 
 OUTPUT = Path("output")
 WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 18
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
-USER_AGENT = "OldiesRadyoReelsWorker/2.0 (https://oldiesradyo.com)"
-SCORE_LIMITS = {
-    "date_relevance": 30,
-    "audience_fit": 25,
-    "source_confidence": 20,
-    "visual_strength": 15,
-    "freshness": 10,
-}
+USER_AGENT = "OldiesRadyoBot/1.0 (https://oldiesradyo.com; info@oldiesradyo.com)"
+MAX_VIDEO_BYTES = 100 * 1024 * 1024
+
+ALLOWED_LICENSE_MARKERS = (
+    "public domain", "cc0", "cc by", "cc-by", "cc by-sa", "cc-by-sa",
+    "creative commons attribution", "creative commons cc0",
+)
+FORBIDDEN_LICENSE_MARKERS = ("noncommercial", "no derivatives", "cc by-nc", "cc-by-nc", "cc by-nd", "cc-by-nd")
 
 
 def require_env(name: str) -> str:
@@ -46,8 +50,6 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
     headers.update({"Authorization": f"Bearer {bearer}", "Accept": "application/json"})
     response = None
     for attempt in range(4):
-        # requests leaves uploaded file handles at EOF after an attempt. Rewind
-        # them so a retry after a temporary 429/5xx sends the real video again.
         for value in (kwargs.get("files") or {}).values():
             handle = value[1] if isinstance(value, tuple) and len(value) > 1 else value
             if hasattr(handle, "seek"):
@@ -65,166 +67,23 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
 
 def get_recent_artists(bearer: str, base_url: str) -> list[str]:
     data = wordpress_request("GET", "drafts", bearer, base_url)
-    return sorted({str(item.get("artist", "")).strip() for item in data.get("drafts", []) if item.get("artist")})[:30]
-
-
-def extract_json(text: str):
-    cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip(), flags=re.I | re.S)
-    try:
-        return json.loads(cleaned)
-    except json.JSONDecodeError:
-        start, end = cleaned.find("["), cleaned.rfind("]")
-        if start >= 0 and end > start:
-            return json.loads(cleaned[start : end + 1])
-        raise
-
-
-def valid_foreign_sources(values) -> list[str]:
-    result, hosts = [], set()
-    for value in values if isinstance(values, list) else []:
-        url = str(value).strip()
-        parsed = urlparse(url)
-        host = (parsed.hostname or "").lower()
-        if (
-            parsed.scheme != "https"
-            or not host
-            or host.endswith(".tr")
-            or host in {"commons.wikimedia.org", "upload.wikimedia.org"}
-            or host in hosts
-        ):
-            continue
-        hosts.add(host)
-        result.append(url)
-    return result
-
-
-def normalized_score(value) -> dict[str, int]:
-    value = value if isinstance(value, dict) else {}
-    return {key: max(0, min(limit, int(value.get(key, 0)))) for key, limit in SCORE_LIMITS.items()}
-
-
-def independently_verified(client: OpenAI, candidates: list[dict], today: datetime) -> list[dict]:
-    review_payload = [
-        {
-            "artist": item.get("artist"),
-            "topic": item.get("topic"),
-            "event_date": item.get("event_date"),
-            "hook": item.get("hook"),
-            "facts": item.get("facts"),
-            "sources": item.get("sources"),
-        }
-        for item in candidates
-    ]
-    prompt = f"""
-Bugün {today:%d %B %Y}. Aşağıdaki müzik-tarihi adaylarını bağımsız bir doğruluk
-kontrolünden geçir. Verilen yabancı kaynakları aç ve ayrıca web araması yap.
-Sanatçı, olay, gün, ay ve yıl iddiası açıkça doğrulanmıyorsa adayı reddet.
-Özellikle doğum tarihlerini resmi biyografi, Britannica, Grammy, Rock Hall,
-Billboard, AllMusic veya güvenilir gazete/arşiv kaynaklarıyla karşılaştır.
-Wikimedia Commons ve görsel sayfaları olay kanıtı değildir.
-
-Yalnızca JSON dizi döndür: artist, verified (true/false), reason.
-Şüphede kalırsan false yaz. Adaylar:
-{json.dumps(review_payload, ensure_ascii=False)}
-"""
-    response = client.responses.create(
-        model=os.getenv("OPENAI_RESEARCH_MODEL", "gpt-5.4"),
-        tools=[{"type": "web_search"}],
-        input=prompt,
-    )
-    verdicts = extract_json(response.output_text)
-    verdicts = verdicts if isinstance(verdicts, list) else []
-    approved = {
-        str(item.get("artist", "")).strip().casefold()
-        for item in verdicts if item.get("verified") is True
-    }
-    return [item for item in candidates if str(item.get("artist", "")).strip().casefold() in approved]
-
-
-def research_candidates(client: OpenAI, recent_artists: list[str]) -> list[dict]:
-    today = datetime.now(timezone.utc)
-    prompt = f"""
-Bugün {today:%d %B %Y}. Oldies Radyo'nun Türkçe Instagram Reels hesabı için
-"müzik tarihinde bugün" araştırması yap. 1950'ler-1990'lar pop, rock, soul ve
-disco kitlesine uygun 5 aday bul. Yalnızca geniş kitlelerce tanınan, kayda değer
-büyük sanatçı ve grupları seç. Daha az tanınan bir ismi sırf doğum veya ölüm
-yıldönümü bugüne denk geliyor diye seçme. Alternatif olarak Billboard, UK
-Official Charts veya başka büyük uluslararası listelerde 1 numara, önemli rekor,
-tarihî yükseliş ya da müzik tarihinde belirgin bir değişim yaratan liste
-olaylarını seç. Yalnızca yabancı, güvenilir HTTPS kaynakları
-kullan; Türkçe siteleri ve .tr alan adlarını kullanma. Her iddia için kaynak
-sayfası gerçekten o bilgiyi desteklesin. Şu sanatçıları tekrar etme:
-{', '.join(recent_artists) if recent_artists else 'yok'}.
-
-Yalnızca JSON dizi döndür. Her öğede şu alanlar olsun:
-artist, topic, event_date (YYYY-MM-DD), date_label (ör. "2 EYLÜL 1946'DA DOĞDU"),
-hook (en fazla 80 karakter; "Reels", "gönderi" gibi üretim dili kullanma),
-closing_headline (en fazla 50 karakter; konuya uygun doğal bir kapanış yaz,
-soru olmak zorunda değil),
-facts (en az 2 kısa Türkçe bilgi; her biri en fazla 110 karakter; metinde kaynak
-ve yayın adı anma, doğrulanmış bilgiyi doğrudan anlat), sources (iddianın tarihini açıkça
-doğrulayan en az 2 farklı alan adından tam URL; Commons ve görsel arşivlerini
-haber kaynağı sayma), caption (Türkçe, 80-900 karakter, sıcak ve doğal; en fazla
-5 hashtag. Her paylaşımı soruyla bitirme. Yalnızca gerçekten anlamlıysa soru sor;
-doğum veya ölüm yıldönümünde kısa bir anma ya da şarkı önerisiyle bitir),
-image_search_queries (Wikimedia Commons'ta sanatçının farklı dönem/ortamlardaki
-gerçek fotoğraflarını bulmak için İngilizce 3 farklı kısa arama; sadece sanatçı
-adı + yıl, konser, portre gibi sözcükler), instagram_music_title (Instagram
-uygulamasında aranacak gerçek şarkı), instagram_music_artist,
-instagram_music_clip_note (önerilen 10-15 saniyelik bölüm), score_breakdown:
-date_relevance 0-30, audience_fit 0-25, source_confidence 0-20,
-visual_strength 0-15, freshness 0-10.
-Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. date_label olayın anlamını
-açıkça söylemeli; tarihi tek başına yazma. Sanatçı veya grup geniş kitlelerce
-tanınabilir olmalı
-ve Wikimedia Commons'ta en az üç farklı gerçek fotoğrafı bulunabilmeli. Uydurma
-bilgi verme.
-"""
-    response = client.responses.create(
-        model=os.getenv("OPENAI_RESEARCH_MODEL", "gpt-5.4"),
-        tools=[{"type": "web_search"}],
-        input=prompt,
-    )
-    candidates = extract_json(response.output_text)
-    accepted = []
-    for candidate in candidates if isinstance(candidates, list) else []:
-        candidate["sources"] = valid_foreign_sources(candidate.get("sources"))
-        candidate["score_breakdown"] = normalized_score(candidate.get("score_breakdown"))
-        candidate["score"] = sum(candidate["score_breakdown"].values())
-        facts = candidate.get("facts") if isinstance(candidate.get("facts"), list) else []
-        candidate["hook"] = textwrap.shorten(str(candidate.get("hook", "")), width=80, placeholder="…")
-        candidate["closing_headline"] = textwrap.shorten(
-            str(candidate.get("closing_headline", "MÜZİĞİ HÂLÂ BİZİMLE")), width=50, placeholder="…"
-        )
-        candidate["date_label"] = textwrap.shorten(str(candidate.get("date_label", "")), width=64, placeholder="…")
-        candidate["facts"] = [textwrap.shorten(str(fact), width=110, placeholder="…") for fact in facts[:2]]
-        facts = candidate["facts"]
-        queries = candidate.get("image_search_queries") if isinstance(candidate.get("image_search_queries"), list) else []
-        try:
-            event_date = datetime.strptime(str(candidate.get("event_date")), "%Y-%m-%d")
-        except ValueError:
-            continue
-        if (
-            event_date.strftime("%m-%d") == today.strftime("%m-%d")
-            and len(candidate["sources"]) >= 2
-            and len(facts) >= 2
-            and len(queries) >= 3
-            and candidate["score"] >= 80
-            and candidate["score_breakdown"]["audience_fit"] >= 22
-            and 80 <= len(str(candidate.get("caption", ""))) <= 900
-        ):
-            accepted.append(candidate)
-    if not accepted:
-        raise RuntimeError("No candidate passed the source and quality policy")
-    accepted = independently_verified(client, accepted, today)
-    if not accepted:
-        raise RuntimeError("No candidate passed the independent fact check")
-    return sorted(accepted, key=lambda item: item["score"], reverse=True)
+    return sorted({
+        str(item.get("artist", "")).strip()
+        for item in data.get("drafts", [])
+        if item.get("artist")
+    })[:50]
 
 
 def clean_meta(value) -> str:
     raw = value.get("value", "") if isinstance(value, dict) else str(value or "")
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw))).strip()
+
+
+def license_allowed(license_name: str, usage_terms: str = "") -> bool:
+    value = f"{license_name} {usage_terms}".casefold()
+    if any(marker in value for marker in FORBIDDEN_LICENSE_MARKERS):
+        return False
+    return any(marker in value for marker in ALLOWED_LICENSE_MARKERS)
 
 
 def commons_search(query: str) -> list[dict]:
@@ -234,7 +93,7 @@ def commons_search(query: str) -> list[dict]:
         "generator": "search",
         "gsrsearch": f'intitle:"{query}" filetype:bitmap',
         "gsrnamespace": 6,
-        "gsrlimit": 20,
+        "gsrlimit": 25,
         "prop": "imageinfo",
         "iiprop": "url|size|mime|extmetadata",
         "iiurlwidth": 1800,
@@ -251,11 +110,16 @@ def usable_image(page: dict) -> dict | None:
     usage_terms = clean_meta(meta.get("UsageTerms"))
     if not str(info.get("mime", "")).startswith("image/"):
         return None
-    if max(int(info.get("width", 0)), int(info.get("height", 0))) < 320:
+    if max(int(info.get("width", 0)), int(info.get("height", 0))) < 1080:
+        return None
+    if not license_allowed(license_name, usage_terms):
+        return None
+    url = info.get("thumburl") or info.get("url", "")
+    if not str(url).startswith("https://"):
         return None
     return {
         "title": page.get("title", ""),
-        "url": info.get("thumburl") or info.get("url", ""),
+        "url": url,
         "description_url": info.get("descriptionurl", ""),
         "license": license_name or usage_terms,
         "creator": clean_meta(meta.get("Artist")) or "Unknown",
@@ -266,7 +130,6 @@ def usable_image(page: dict) -> dict | None:
 
 
 def image_priority(image: dict, artist: str) -> tuple[int, int, int, str]:
-    """Prefer clearly named, solo-looking and useful period photographs."""
     title = re.sub(r"^file:", "", str(image.get("title", "")), flags=re.I).casefold()
     artist_name = artist.casefold()
     group_terms = (" and ", " with ", " & ", " group", " band", " members", "family")
@@ -280,7 +143,7 @@ def image_priority(image: dict, artist: str) -> tuple[int, int, int, str]:
 def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path], list[dict]]:
     paths, credits, seen_titles, seen_hashes = [], [], set(), set()
     artist_query = re.sub(r"^the\s+", "", str(candidate["artist"]), flags=re.I).strip()
-    queries = [artist_query] + list(candidate["image_search_queries"][:3])
+    queries = [artist_query] + list(candidate.get("image_search_queries", [])[:3])
     for query in queries:
         choices = []
         for page in commons_search(str(query)):
@@ -311,7 +174,7 @@ def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path
         if len(paths) == 3:
             break
     if len(paths) != 3:
-        raise RuntimeError(f"Three different artist photos were required; only {len(paths)} were found")
+        raise RuntimeError(f"Three different licensed artist photos were required; only {len(paths)} were found")
     return paths, credits
 
 
@@ -366,9 +229,9 @@ def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, acce
 
 def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Path]:
     scenes = [
-        (str(candidate["artist"]), str(candidate["date_label"]), "BUGÜN MÜZİK TARİHİNDE"),
-        (str(candidate["hook"]), str(candidate["facts"][0]), "BİR DÖNEME DAMGA VURDU"),
-        (str(candidate["closing_headline"]), str(candidate["facts"][1]), "HATIRLIYORUZ • DİNLİYORUZ"),
+        (str(candidate["artist"]), str(candidate["date_label"]), "BUGÃœN MÃœZÄ°K TARÄ°HÄ°NDE"),
+        (str(candidate["hook"]), str(candidate["facts"][0]), "BÄ°R DÃ–NEME DAMGA VURDU"),
+        (str(candidate["closing_headline"]), str(candidate["facts"][1]), "HATIRLIYORUZ â€¢ DÄ°NLÄ°YORUZ"),
     ]
     paths = []
     for index, (photo, content) in enumerate(zip(photos, scenes), start=1):
@@ -398,6 +261,8 @@ def render(scenes: list[Path], target: Path) -> None:
         "-crf", "19", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
     ]
     subprocess.run(command, check=True)
+    if not target.exists() or target.stat().st_size <= 0 or target.stat().st_size > MAX_VIDEO_BYTES:
+        raise RuntimeError("Rendered MP4 failed size validation")
 
 
 def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
@@ -418,12 +283,12 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
 
 
 def main() -> None:
-    api_key = require_env("OPENAI_API_KEY")
     bearer = require_env("OLDIES_WP_BEARER")
     base_url = require_env("OLDIES_WP_BASE_URL")
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    client = OpenAI(api_key=api_key)
-    candidates = research_candidates(client, get_recent_artists(bearer, base_url))
+    override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
+    today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
+    candidates = research_candidates(get_recent_artists(bearer, base_url), today=today)
     candidate = None
     photos, credits = [], []
     photo_errors = []
@@ -431,7 +296,7 @@ def main() -> None:
         for old_photo in OUTPUT.glob("photo-*.jpg"):
             old_photo.unlink()
         try:
-            print(f"Trying visual candidate: {option['artist']}")
+            print(f"Trying zero-cost visual candidate: {option['artist']} (score={option['score']})")
             photos, credits = download_commons_photos(option, OUTPUT)
             candidate = option
             break
@@ -439,14 +304,15 @@ def main() -> None:
             photo_errors.append(f"{option.get('artist', 'Unknown')}: {exc}")
             print(f"Skipping visual candidate: {photo_errors[-1]}")
     if candidate is None:
-        raise RuntimeError("No candidate had three usable photos. " + " | ".join(photo_errors))
+        raise RuntimeError("No zero-cost candidate had three usable licensed photos. " + " | ".join(photo_errors))
     candidate["image_credits"] = credits
+    candidate["pipeline"] = "zero-cost-v1"
     (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
     video = OUTPUT / "oldies-reels-draft.mp4"
     render(make_scenes(candidate, photos, OUTPUT), video)
     result = upload_draft(candidate, video, bearer, base_url)
     (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Created approval-only draft {result.get('draft', {}).get('id', '')}; no live post was made.")
+    print(f"Created approval-only zero-cost draft {result.get('draft', {}).get('id', '')}; no live post was made.")
 
 
 if __name__ == "__main__":
