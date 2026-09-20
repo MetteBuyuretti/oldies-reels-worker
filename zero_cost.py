@@ -329,42 +329,116 @@ def _short(text: str, width: int) -> str:
 
 
 def deterministic_copy(*, artist: str, kind: str, event_date: datetime, source_text: str, tr_extract: str) -> dict:
-    month_names = ["", "OCAK", "\u015eUBAT", "MART", "N\u0130SAN", "MAYIS", "HAZ\u0130RAN", "TEMMUZ", "A\u011eUSTOS", "EYL\u00dcL", "EK\u0130M", "KASIM", "ARALIK"]
+    month_names = ["", "OCAK", "ŞUBAT", "MART", "NİSAN", "MAYIS", "HAZİRAN", "TEMMUZ", "AĞUSTOS", "EYLÜL", "EKİM", "KASIM", "ARALIK"]
     date_text = f"{event_date.day} {month_names[event_date.month]} {event_date.year}"
+
+    if kind == "events":
+        clean = (
+            str(source_text or "")
+            .replace("‘", "'").replace("’", "'")
+            .replace("“", '"').replace("”", '"')
+        )
+        titles = [re.sub(r"\s+", " ", x).strip() for x in re.findall(r"""['"]([^'"]{2,80})['"]""", clean)]
+        music_title = titles[0] if titles else ""
+        hook = f"{artist.upper()} • MÜZİK TARİHİNDE BUGÜN"
+        fact1 = f"{date_text}: {artist} için müzik tarihinde kayda geçen bir gelişme yaşandı."
+        fact2 = _short(clean, 120)
+
+        number_words = {
+            "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+            "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+        }
+
+        m = re.search(
+            r"soundtrack album\s+['\"]([^'\"]+)['\"].*?started a\s+([a-z]+)-week run at No\.?1 in the UK",
+            clean, re.I,
+        )
+        if m:
+            music_title = m.group(1).strip()
+            weeks = number_words.get(m.group(2).casefold())
+            hook = f"{music_title.upper()} • İNGİLTERE'DE 1 NUMARA"
+            fact1 = f"{date_text}: {artist}, '{music_title}' soundtrack albümüyle İngiltere listesinin zirvesine çıktı."
+            fact2 = f"Albüm {weeks} hafta boyunca 1 numarada kaldı." if weeks else "Albüm liste zirvesine yerleşti."
+        else:
+            m = re.search(
+                r"started a\s+([a-z]+)-week run at No\.?1.*?(?:with\s+)?['\"]([^'\"]+)['\"]",
+                clean, re.I,
+            )
+            if m:
+                weeks = number_words.get(m.group(1).casefold())
+                music_title = m.group(2).strip()
+                hook = f"{music_title.upper()} • 1 NUMARA"
+                fact1 = f"{date_text}: {artist}, '{music_title}' ile listelerde 1 numaraya çıktı."
+                fact2 = f"Bu başarı {weeks} hafta boyunca sürdü." if weeks else "Kayıt liste zirvesine yerleşti."
+            else:
+                m = re.search(r"\breleased\s+['\"]([^'\"]+)['\"]", clean, re.I)
+                if m:
+                    music_title = m.group(1).strip()
+                    hook = f"{music_title.upper()} • YAYINLANDI"
+                    fact1 = f"{date_text}: {artist}, '{music_title}' kaydını yayınladı."
+                    fact2 = "Oldies Radyo arşivinde bugünün kaydı."
+                elif artist == "John Lennon" and ("left the beatles" in clean.casefold() or "leaving the band" in clean.casefold()):
+                    hook = "LENNON • BEATLES'TAN AYRILMA KARARI"
+                    fact1 = f"{date_text}: John Lennon, Beatles'tan ayrılmak istediğini grup arkadaşlarına açıkladı."
+                    fact2 = "Karar o gün kamuoyuna duyurulmadı; resmi dağılma süreci daha sonra netleşti."
+                elif "no.1" in clean.casefold() or "#1" in clean.casefold() or "number one" in clean.casefold():
+                    hook = f"{music_title.upper()} • 1 NUMARA" if music_title else f"{artist.upper()} • ZİRVEDE"
+                    fact1 = f"{date_text}: {artist}, müzik listelerinde zirveye çıktı."
+                    fact2 = f"Zirvedeki kayıt: '{music_title}'." if music_title else _short(clean, 120)
+                elif "started recording" in clean.casefold() or "began recording" in clean.casefold():
+                    hook = f"{artist.upper()} • STÜDYO GÜNÜ"
+                    fact1 = f"{date_text}: {artist} için önemli bir kayıt süreci başladı."
+                    fact2 = f"Kayıt: '{music_title}'." if music_title else _short(clean, 120)
+
+        facts = [_short(fact1, 135), _short(fact2, 120)]
+        intro = f"Bugün müzik tarihinde {artist}."
+        caption = (
+            f"{intro}\n\n{facts[0]} {facts[1]}\n\n"
+            "Oldies Radyo'da geçmişin en iyi şarkıları ve unutulmayan hikâyeleri yaşamaya devam ediyor. "
+            "#OldiesRadyo #MuzikTarihindeBugun"
+        )
+        return {
+            "date_label": _short(f"{date_text} • MÜZİK TARİHİNDE", 64),
+            "hook": _short(hook, 82),
+            "event_headline": _short(hook, 82),
+            "closing_headline": _short(
+                f"BUGÜN AÇ: {music_title}" if music_title else f"{artist} • OLDIES RADYO",
+                54,
+            ),
+            "facts": facts,
+            "caption": caption[:900],
+            "dj_script": _short(f"{intro} {facts[0]} {facts[1]}", 260),
+            "music_title": music_title,
+        }
+
     if kind == "births":
-        date_label = f"{date_text}'DE DO\u011eDU"
-        hook = f"Bug\u00fcn {artist}'\u0131 hat\u0131rl\u0131yoruz"
-        event_fact = f"{artist}, {event_date.year} y\u0131l\u0131nda bug\u00fcn do\u011fdu."
-    elif kind == "deaths":
-        date_label = f"{date_text}'DE HAYATINI KAYBETT\u0130"
-        hook = f"{artist}'\u0131n m\u00fczi\u011fi ya\u015famaya devam ediyor"
-        event_fact = f"{artist}, {event_date.year} y\u0131l\u0131nda bug\u00fcn hayat\u0131n\u0131 kaybetti."
+        date_label = f"{date_text}'DE DOĞDU"
+        hook = f"Bugün {artist}'ı hatırlıyoruz"
+        event_fact = f"{artist}, {event_date.year} yılında bugün doğdu."
+        intro = f"Bugün {artist}'ın doğum yıldönümü."
     else:
-        date_label = f"{date_text} \u2022 M\u00dcZ\u0130K TAR\u0130H\u0130NDE"
-        hook = f"{artist}: m\u00fczik tarihinde bug\u00fcn"
-        event_fact = f"{event_date.year} y\u0131l\u0131nda bug\u00fcn {artist} m\u00fczik tarihinde \u00f6nemli bir an ya\u015fad\u0131."
+        date_label = f"{date_text}'DE HAYATINI KAYBETTİ"
+        hook = f"{artist}'ın müziği yaşamaya devam ediyor"
+        event_fact = f"{artist}, {event_date.year} yılında bugün hayatını kaybetti."
+        intro = f"Bugün {artist}'ı müziğiyle anıyoruz."
+
     tr_facts = _sentences(tr_extract, 2)
     facts = [_short(event_fact, 110)]
-    facts.append(_short(tr_facts[0], 110) if tr_facts else _short(source_text, 110))
-    facts = (facts + ["M\u00fczi\u011fi ve etkisi ku\u015faklar boyunca dinlenmeye devam ediyor."])[:2]
-    if kind == "births":
-        intro = f"Bug\u00fcn {artist}'\u0131n do\u011fum y\u0131ld\u00f6n\u00fcm\u00fc."
-    elif kind == "deaths":
-        intro = f"Bug\u00fcn {artist}'\u0131 m\u00fczi\u011fiyle an\u0131yoruz."
-    else:
-        intro = f"Bug\u00fcn m\u00fczik tarihinde {artist} i\u00e7in \u00f6zel bir g\u00fcn."
+    facts.append(_short(tr_facts[0], 110) if tr_facts else "Oldies Radyo arşivinde bugünün sanatçısı.")
     caption = (
         f"{intro}\n\n{facts[0]} {facts[1]}\n\n"
-        "Oldies Radyo'da ge\u00e7mi\u015fin en iyi \u015fark\u0131lar\u0131 ve unutulmayan hik\u00e2yeleri "
-        "ya\u015famaya devam ediyor. #OldiesRadyo #MuzikTarihindeBugun"
+        "Oldies Radyo'da geçmişin en iyi şarkıları ve unutulmayan hikâyeleri yaşamaya devam ediyor. "
+        "#OldiesRadyo #MuzikTarihindeBugun"
     )
     return {
         "date_label": _short(date_label, 64),
         "hook": _short(hook, 80),
-        "closing_headline": _short(f"{artist} \u2022 UNUTULMAYAN M\u00dcZ\u0130K", 50),
+        "event_headline": _short(hook, 82),
+        "closing_headline": _short(f"{artist} • OLDIES RADYO", 50),
         "facts": facts,
         "caption": caption[:900],
         "dj_script": _short(f"{intro} {facts[0]} {facts[1]}", 260),
+        "music_title": "",
     }
 
 def score_candidate(candidate: dict, recent_artists: list[str]) -> dict:
@@ -427,7 +501,7 @@ def build_history_candidates(recent_artists: list[str], today: datetime | None =
                 "wikidata_qid": qid, "wikidata_verified": verified,
                 "sources": sources, "source_text": source_text, "tr_wikipedia_title": tr_title,
                 "image_search_queries": [artist, f"{artist} {year}", f"{artist} portrait"],
-                "instagram_music_title": "", "instagram_music_artist": artist,
+                "instagram_music_title": str(copy.get("music_title", "")), "instagram_music_artist": artist,
                 "instagram_music_clip_note": "Instagram m\u00fczik ar\u015fivinden konuyla ilgili 10-15 saniyelik b\u00f6l\u00fcm se\u00e7ilebilir.",
                 **copy,
             }
