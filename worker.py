@@ -129,28 +129,54 @@ def usable_image(page: dict) -> dict | None:
     }
 
 
-def image_priority(image: dict, artist: str) -> tuple[int, int, int, str]:
+def image_priority(image: dict, artist: str, event_year: int) -> tuple[int, int, int, int, str]:
     title = re.sub(r"^file:", "", str(image.get("title", "")), flags=re.I).casefold()
     artist_name = artist.casefold()
     group_terms = (" and ", " with ", " & ", " group", " band", " members", "family")
     group_penalty = sum(term in title for term in group_terms)
     exact_name = int(title.startswith(artist_name))
-    period_year = int(bool(re.search(r"\b(?:19[5-9]\d|200\d)\b", title)))
     portrait_shape = int(int(image.get("height", 0)) >= int(image.get("width", 0)) * 0.85)
-    return (-group_penalty, exact_name, period_year + portrait_shape, title)
+
+    years = [int(y) for y in re.findall(r"\b(19\d{2}|20\d{2})\b", title)]
+    if years:
+        distance = min(abs(y - event_year) for y in years)
+        if distance <= 2:
+            period_score = 6
+        elif distance <= 5:
+            period_score = 5
+        elif distance <= 10:
+            period_score = 3
+        elif distance <= 20:
+            period_score = 1
+        else:
+            period_score = -4
+    else:
+        period_score = 0
+
+    return (-group_penalty, period_score, exact_name, portrait_shape, title)
 
 
 def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path], list[dict]]:
     paths, credits, seen_titles, seen_hashes = [], [], set(), set()
     artist_query = re.sub(r"^the\s+", "", str(candidate["artist"]), flags=re.I).strip()
-    queries = [artist_query] + list(candidate.get("image_search_queries", [])[:3])
+    event_year = int(str(candidate.get("event_date", "0"))[:4] or 0)
+
+    # Search the event period first. General artist searches are fallbacks.
+    queries = [
+        f"{artist_query} {event_year}" if event_year else artist_query,
+        f"{artist_query} {max(1900, event_year - 2)}" if event_year else artist_query,
+        artist_query,
+        f"{artist_query} portrait",
+    ]
+
     for query in queries:
         choices = []
         for page in commons_search(str(query)):
             image = usable_image(page)
             if image and image["title"] not in seen_titles:
                 choices.append(image)
-        choices.sort(key=lambda image: image_priority(image, artist_query), reverse=True)
+        choices.sort(key=lambda image: image_priority(image, artist_query, event_year), reverse=True)
+
         for image in choices:
             response = requests.get(image["url"], headers={"User-Agent": USER_AGENT}, timeout=90)
             response.raise_for_status()
@@ -173,6 +199,7 @@ def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path
                 break
         if len(paths) == 3:
             break
+
     if len(paths) != 3:
         raise RuntimeError(f"Three different licensed artist photos were required; only {len(paths)} were found")
     return paths, credits
@@ -211,28 +238,51 @@ def add_gradient(canvas: Image.Image) -> None:
 
 
 def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, accent: str) -> None:
-    draw.rounded_rectangle((72, 1260, 1008, 1305), radius=16, fill=(204, 34, 43, 245))
-    draw.text((104, 1266), accent, font=font(27, True), fill=(255, 246, 221, 255))
-    title_font, title_lines = fit_text(draw, headline.upper(), 870, 88)
-    y = 1342
-    for line in title_lines:
-        draw.text((96, y), line, font=title_font, fill=(255, 248, 231, 255), stroke_width=1, stroke_fill=(0, 0, 0, 170))
-        y += title_font.size + 10
-    sub_font, sub_lines = fit_text(draw, subline, 870, 45, 32)
-    y += 12
+    # Editorial lower-third: restrained, readable and consistent across eras.
+    draw.rounded_rectangle((72, 1198, 1008, 1256), radius=22, fill=(12, 12, 15, 205))
+    accent_font = font(25, True)
+    draw.text((104, 1212), accent, font=accent_font, fill=(236, 193, 77, 255))
+
+    title_font, title_lines = fit_text(draw, headline.upper(), 880, 84, 46)
+    y = 1300
+    for line in title_lines[:3]:
+        draw.text(
+            (96, y), line, font=title_font,
+            fill=(255, 249, 236, 255),
+            stroke_width=2, stroke_fill=(0, 0, 0, 190),
+        )
+        y += title_font.size + 9
+
+    # Fine gold rule separates headline and detail.
+    y += 10
+    draw.rounded_rectangle((96, y, 306, y + 6), radius=3, fill=(236, 193, 77, 245))
+    y += 28
+
+    sub_font, sub_lines = fit_text(draw, subline, 872, 43, 31)
     for line in sub_lines[:3]:
-        draw.text((98, y), line, font=sub_font, fill=(232, 229, 222, 255))
-        y += sub_font.size + 8
-    draw.text((96, 1833), "OLDIES RADYO", font=font(30, True), fill=(232, 187, 61, 255))
-    draw.text((790, 1833), "@oldiesradyo", font=font(25), fill=(245, 245, 245, 235))
+        draw.text((98, y), line, font=sub_font, fill=(238, 235, 227, 255))
+        y += sub_font.size + 7
+
+    # Consistent brand signature, clear but not ad-like.
+    draw.line((96, 1810, 984, 1810), fill=(255, 255, 255, 95), width=2)
+    draw.text((96, 1830), "OLDIES RADYO", font=font(34, True), fill=(236, 193, 77, 255))
+    draw.text((790, 1837), "oldiesradyo.com", font=font(22), fill=(245, 245, 245, 230))
 
 
 def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Path]:
+    artist = str(candidate["artist"])
+    hook = str(candidate.get("event_headline") or candidate.get("hook") or artist)
+    facts = list(candidate.get("facts") or ["", ""])
+    while len(facts) < 2:
+        facts.append("")
+    closing = str(candidate.get("closing_headline") or f"{artist} • OLDIES RADYO")
+
     scenes = [
-        (str(candidate["artist"]), str(candidate["date_label"]), "BUGÃœN MÃœZÄ°K TARÄ°HÄ°NDE"),
-        (str(candidate["hook"]), str(candidate["facts"][0]), "BÄ°R DÃ–NEME DAMGA VURDU"),
-        (str(candidate["closing_headline"]), str(candidate["facts"][1]), "HATIRLIYORUZ â€¢ DÄ°NLÄ°YORUZ"),
+        (hook, str(candidate["date_label"]), "OLDIES RADYO • MÜZİK TARİHİNDE BUGÜN"),
+        (artist, str(facts[0]), "HİKÂYENİN DETAYI"),
+        (closing, str(facts[1]), "OLDIES RADYO • DİNLE • HATIRLA"),
     ]
+
     paths = []
     for index, (photo, content) in enumerate(zip(photos, scenes), start=1):
         canvas = cover_photo(photo).convert("RGBA")
@@ -247,13 +297,14 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Pa
 def render(scenes: list[Path], target: Path) -> None:
     inputs = []
     for scene in scenes:
-        inputs += ["-loop", "1", "-t", "6.5", "-i", str(scene)]
+        inputs += ["-loop", "1", "-t", "6.6", "-i", str(scene)]
+
     graph = (
-        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00045,1.075)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
-        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00040,1.07)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
-        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00045,1.075)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
-        "[a][b]xfade=transition=fade:duration=0.75:offset=5.75[x];"
-        "[x][c]xfade=transition=fade:duration=0.75:offset=11.5[v]"
+        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00050,1.08)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
+        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00036,1.065)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
+        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00046,1.075)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
+        "[a][b]xfade=transition=fade:duration=0.65:offset=5.75[x];"
+        "[x][c]xfade=transition=smoothleft:duration=0.70:offset=11.45[v]"
     )
     command = [
         "ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an",
