@@ -402,6 +402,42 @@ def publish_delivery_asset(candidate: dict, video: Path) -> str:
     print(f"Delivery asset ready: {public_url}")
     return public_url
 
+def proxy_draft_request(data: dict, bearer: str):
+    proxy_url = os.getenv("OLDIES_DRAFT_PROXY_URL", "").strip()
+    if not proxy_url:
+        return None
+    headers = {
+        "Authorization": f"Bearer {bearer}",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
+    }
+    response = None
+    for attempt in range(4):
+        response = requests.post(proxy_url, headers=headers, json=data, timeout=90)
+        if response.status_code < 400:
+            return response.json()
+        if response.status_code == 429:
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {}
+            if isinstance(error_payload, dict) and error_payload.get("code") == "daily_draft_limit":
+                print("WordPress daily draft limit already satisfied; no additional draft created.")
+                return {
+                    "success": True,
+                    "skipped": True,
+                    "reason": "daily_draft_limit",
+                    "message": str(error_payload.get("message", "Daily draft limit reached.")),
+                }
+        if response.status_code not in {429, 502, 503, 504} or attempt == 3:
+            break
+        delay = 10 * (2**attempt)
+        print(f"Draft proxy temporarily returned {response.status_code}; retrying in {delay}s")
+        time.sleep(delay)
+    raise RuntimeError(f"Draft proxy {response.status_code}: {response.text[:700]}")
+
+
 def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
     data = {
         "artist": candidate["artist"],
@@ -418,6 +454,9 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
     public_url = publish_delivery_asset(candidate, video)
     if public_url:
         data["video_url"] = public_url
+        proxied = proxy_draft_request(data, bearer)
+        if proxied is not None:
+            return proxied
         return wordpress_request("POST", "drafts", bearer, base_url, data=data)
     with video.open("rb") as handle:
         return wordpress_request("POST", "drafts", bearer, base_url, data=data, files={"reel_video": (video.name, handle, "video/mp4")})
