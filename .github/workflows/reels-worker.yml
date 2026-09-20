@@ -6,7 +6,7 @@ on:
     - cron: "0 9 * * *"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: oldies-reels-draft-worker
@@ -36,6 +36,11 @@ jobs:
           OLDIES_WP_BASE_URL: ${{ vars.OLDIES_WP_BASE_URL }}
           OPENAI_RESEARCH_MODEL: ${{ vars.OPENAI_RESEARCH_MODEL }}
           OPENAI_IMAGE_MODEL: ${{ vars.OPENAI_IMAGE_MODEL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
         run: python worker.py
       - name: Keep preview for seven days
         if: always()
