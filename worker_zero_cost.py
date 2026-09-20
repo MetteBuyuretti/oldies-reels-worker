@@ -220,7 +220,7 @@ def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, acce
         y += title_font.size + 10
     sub_font, sub_lines = fit_text(draw, subline, 870, 45, 32)
     y += 12
-    for line in sub_lines[:3]:
+    for line in sub_lines[:4]:
         draw.text((98, y), line, font=sub_font, fill=(232, 229, 222, 255))
         y += sub_font.size + 8
     draw.text((96, 1833), "OLDIES RADYO", font=font(30, True), fill=(232, 187, 61, 255))
