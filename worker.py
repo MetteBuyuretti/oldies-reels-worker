@@ -78,19 +78,34 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
     raise RuntimeError(f"WordPress {response.status_code}: {response.text[:700]}")
 
 
-def get_recent_artists(bearer: str, base_url: str) -> list[str]:
-    # Duplicate history is a quality hint, not a hard dependency.
-    # If WordPress temporarily returns HTML/empty content, continue safely.
+def get_draft_state(bearer: str, base_url: str) -> dict:
+    """Read the review queue once, before spending time on research/render."""
     try:
         data = wordpress_request("GET", "drafts", bearer, base_url)
     except Exception as exc:
-        print(f"Recent draft lookup unavailable; continuing without duplicate history: {exc}")
-        return []
-    return sorted({
+        print(f"Draft preflight unavailable; continuing safely: {exc}")
+        return {"recent_artists": [], "daily_limit_reached": False}
+
+    drafts = [item for item in data.get("drafts", []) if isinstance(item, dict)]
+    recent_artists = sorted({
         str(item.get("artist", "")).strip()
-        for item in data.get("drafts", [])
+        for item in drafts
         if item.get("artist")
     })[:50]
+
+    policy = data.get("content_policy") if isinstance(data.get("content_policy"), dict) else {}
+    try:
+        daily_limit = max(1, int(policy.get("maximum_daily_drafts", 1)))
+    except (TypeError, ValueError):
+        daily_limit = 1
+    utc_today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today_count = sum(
+        1 for item in drafts
+        if str(item.get("created_at", "")).startswith(utc_today)
+    )
+    reached = today_count >= daily_limit
+    print(f"Draft preflight: {today_count}/{daily_limit} draft(s) for {utc_today}")
+    return {"recent_artists": recent_artists, "daily_limit_reached": reached}
 
 
 def clean_meta(value) -> str:
@@ -465,7 +480,11 @@ def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
     today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
-    candidates = research_candidates(get_recent_artists(bearer, base_url), today=today)
+    draft_state = get_draft_state(bearer, base_url)
+    if draft_state["daily_limit_reached"]:
+        print("Daily DRAFT_REVIEW quota is already satisfied; exiting successfully without rendering another Reel.")
+        return
+    candidates = research_candidates(draft_state["recent_artists"], today=today)
     candidate = None
     photos, credits = [], []
     photo_errors = []
