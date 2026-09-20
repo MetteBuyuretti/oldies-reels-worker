@@ -41,6 +41,7 @@ jobs:
           GITHUB_REF_NAME: ${{ github.ref_name }}
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          OLDIES_DRAFT_PROXY_URL: https://35-209-227-152.sslip.io/v1/reels/draft-proxy
         run: python worker.py
       - name: Keep preview for seven days
         if: always()
