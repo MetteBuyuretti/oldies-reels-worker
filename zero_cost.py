@@ -237,7 +237,7 @@ def _sentences(text: str, limit: int = 2) -> list[str]:
 
 
 def _short(text: str, width: int) -> str:
-    return textwrap.shorten(re.sub(r"\s+", " ", str(text)).strip(), width=width, placeholder="Ã¢â‚¬Â¦")
+    return textwrap.shorten(re.sub(r"\s+", " ", str(text)).strip(), width=width, placeholder="...")
 
 
 def deterministic_copy(*, artist: str, kind: str, event_date: datetime, source_text: str, tr_extract: str) -> dict:
@@ -337,7 +337,7 @@ def build_history_candidates(recent_artists: list[str], today: datetime | None =
                 "sources": sources, "source_text": source_text, "tr_wikipedia_title": tr_title,
                 "image_search_queries": [artist, f"{artist} {year}", f"{artist} portrait"],
                 "instagram_music_title": "", "instagram_music_artist": artist,
-                "instagram_music_clip_note": "Instagram m\\u00fczik ar\\u015fivinden konuyla ilgili 10-15 saniyelik b\\u00f6l\\u00fcm se\\u00e7ilebilir.",
+                "instagram_music_clip_note": "Instagram m\u00fczik ar\u015fivinden konuyla ilgili 10-15 saniyelik b\u00f6l\u00fcm se\u00e7ilebilir.",
                 **copy,
             }
             score_candidate(candidate, recent_artists)
