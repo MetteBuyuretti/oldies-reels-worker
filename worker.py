@@ -265,7 +265,7 @@ def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, acce
     y += 28
 
     sub_font, sub_lines = fit_text(draw, subline, 872, 43, 31)
-    for line in sub_lines[:3]:
+    for line in sub_lines[:4]:
         draw.text((98, y), line, font=sub_font, fill=(238, 235, 227, 255))
         y += sub_font.size + 7
 
