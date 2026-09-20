@@ -1,6 +1,10 @@
-  #!/usr/bin/env python3
-"""Research, render and upload one approval-only Oldies Radyo Reels draft."""
+#!/usr/bin/env python3
+"""Create one zero-cost, approval-only Oldies Radyo Reels draft.
 
+The research path uses only Wikimedia/Wikidata/Wikipedia open data. No OpenAI
+or other paid model API is imported or called. Existing Commons -> FFmpeg ->
+WordPress DRAFT_REVIEW behavior is preserved.
+"""
 from __future__ import annotations
 
 import hashlib
@@ -14,23 +18,23 @@ import time
 from datetime import datetime, timezone
 from io import BytesIO
 from pathlib import Path
-from urllib.parse import urlparse
 
 import requests
-from openai import OpenAI
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
+
+from zero_cost import research_candidates
 
 OUTPUT = Path("output")
 WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 18
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
-USER_AGENT = "OldiesRadyoReelsWorker/2.0 (https://oldiesradyo.com)"
-SCORE_LIMITS = {
-    "date_relevance": 30,
-    "audience_fit": 25,
-    "source_confidence": 20,
-    "visual_strength": 15,
-    "freshness": 10,
-}
+USER_AGENT = "OldiesRadyoBot/1.0 (https://oldiesradyo.com; info@oldiesradyo.com)"
+MAX_VIDEO_BYTES = 100 * 1024 * 1024
+
+ALLOWED_LICENSE_MARKERS = (
+    "public domain", "cc0", "cc by", "cc-by", "cc by-sa", "cc-by-sa",
+    "creative commons attribution", "creative commons cc0",
+)
+FORBIDDEN_LICENSE_MARKERS = ("noncommercial", "no derivatives", "cc by-nc", "cc-by-nc", "cc by-nd", "cc-by-nd")
 
 
 def require_env(name: str) -> str:
@@ -41,13 +45,11 @@ def require_env(name: str) -> str:
 
 
 def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwargs):
-    endpoint = f"{base_url.rstrip('/')}/?rest_route=/oldies/v1/instagram/reels/{path.lstrip('/')}"
+    endpoint = f"{base_url.rstrip('/')}/wp-json/oldies/v1/instagram/reels/{path.lstrip('/')}"
     headers = kwargs.pop("headers", {})
-    headers.update({"Authorization": f"Bearer {bearer}", "Accept": "application/json"})
+    headers.update({"Authorization": f"Bearer {bearer}", "Accept": "application/json", "User-Agent": USER_AGENT})
     response = None
     for attempt in range(4):
-        # requests leaves uploaded file handles at EOF after an attempt. Rewind
-        # them so a retry after a temporary 429/5xx sends the real video again.
         for value in (kwargs.get("files") or {}).values():
             handle = value[1] if isinstance(value, tuple) and len(value) > 1 else value
             if hasattr(handle, "seek"):
@@ -55,6 +57,19 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
         response = requests.request(method, endpoint, headers=headers, timeout=180, **kwargs)
         if response.status_code < 400:
             return response.json()
+        if response.status_code == 429:
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {}
+            if isinstance(error_payload, dict) and error_payload.get("code") == "daily_draft_limit":
+                print("WordPress daily draft limit already satisfied; no additional draft created.")
+                return {
+                    "success": True,
+                    "skipped": True,
+                    "reason": "daily_draft_limit",
+                    "message": str(error_payload.get("message", "Daily draft limit reached.")),
+                }
         if response.status_code not in {429, 502, 503, 504} or attempt == 3:
             break
         delay = 15 * (2**attempt)
@@ -64,167 +79,30 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
 
 
 def get_recent_artists(bearer: str, base_url: str) -> list[str]:
-    data = wordpress_request("GET", "drafts", bearer, base_url)
-    return sorted({str(item.get("artist", "")).strip() for item in data.get("drafts", []) if item.get("artist")})[:30]
-
-
-def extract_json(text: str):
-    cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip(), flags=re.I | re.S)
+    # Duplicate history is a quality hint, not a hard dependency.
+    # If WordPress temporarily returns HTML/empty content, continue safely.
     try:
-        return json.loads(cleaned)
-    except json.JSONDecodeError:
-        start, end = cleaned.find("["), cleaned.rfind("]")
-        if start >= 0 and end > start:
-            return json.loads(cleaned[start : end + 1])
-        raise
-
-
-def valid_foreign_sources(values) -> list[str]:
-    result, hosts = [], set()
-    for value in values if isinstance(values, list) else []:
-        url = str(value).strip()
-        parsed = urlparse(url)
-        host = (parsed.hostname or "").lower()
-        if (
-            parsed.scheme != "https"
-            or not host
-            or host.endswith(".tr")
-            or host in {"commons.wikimedia.org", "upload.wikimedia.org"}
-            or host in hosts
-        ):
-            continue
-        hosts.add(host)
-        result.append(url)
-    return result
-
-
-def normalized_score(value) -> dict[str, int]:
-    value = value if isinstance(value, dict) else {}
-    return {key: max(0, min(limit, int(value.get(key, 0)))) for key, limit in SCORE_LIMITS.items()}
-
-
-def independently_verified(client: OpenAI, candidates: list[dict], today: datetime) -> list[dict]:
-    review_payload = [
-        {
-            "artist": item.get("artist"),
-            "topic": item.get("topic"),
-            "event_date": item.get("event_date"),
-            "hook": item.get("hook"),
-            "facts": item.get("facts"),
-            "sources": item.get("sources"),
-        }
-        for item in candidates
-    ]
-    prompt = f"""
-Bugün {today:%d %B %Y}. Aşağıdaki müzik-tarihi adaylarını bağımsız bir doğruluk
-kontrolünden geçir. Verilen yabancı kaynakları aç ve ayrıca web araması yap.
-Sanatçı, olay, gün, ay ve yıl iddiası açıkça doğrulanmıyorsa adayı reddet.
-Özellikle doğum tarihlerini resmi biyografi, Britannica, Grammy, Rock Hall,
-Billboard, AllMusic veya güvenilir gazete/arşiv kaynaklarıyla karşılaştır.
-Wikimedia Commons ve görsel sayfaları olay kanıtı değildir.
-
-Yalnızca JSON dizi döndür: artist, verified (true/false), reason.
-Şüphede kalırsan false yaz. Adaylar:
-{json.dumps(review_payload, ensure_ascii=False)}
-"""
-    response = client.responses.create(
-        model=os.getenv("OPENAI_RESEARCH_MODEL", "gpt-5.4"),
-        tools=[{"type": "web_search"}],
-        input=prompt,
-    )
-    verdicts = extract_json(response.output_text)
-    verdicts = verdicts if isinstance(verdicts, list) else []
-    approved = {
-        str(item.get("artist", "")).strip().casefold()
-        for item in verdicts if item.get("verified") is True
-    }
-    return [item for item in candidates if str(item.get("artist", "")).strip().casefold() in approved]
-
-
-def research_candidates(client: OpenAI, recent_artists: list[str]) -> list[dict]:
-    today = datetime.now(timezone.utc)
-    prompt = f"""
-Bugün {today:%d %B %Y}. Oldies Radyo'nun Türkçe Instagram Reels hesabı için
-"müzik tarihinde bugün" araştırması yap. 1950'ler-1990'lar pop, rock, soul ve
-disco kitlesine uygun 5 aday bul. Yalnızca geniş kitlelerce tanınan, kayda değer
-büyük sanatçı ve grupları seç. Daha az tanınan bir ismi sırf doğum veya ölüm
-yıldönümü bugüne denk geliyor diye seçme. Alternatif olarak Billboard, UK
-Official Charts veya başka büyük uluslararası listelerde 1 numara, önemli rekor,
-tarihî yükseliş ya da müzik tarihinde belirgin bir değişim yaratan liste
-olaylarını seç. Yalnızca yabancı, güvenilir HTTPS kaynakları
-kullan; Türkçe siteleri ve .tr alan adlarını kullanma. Her iddia için kaynak
-sayfası gerçekten o bilgiyi desteklesin. Şu sanatçıları tekrar etme:
-{', '.join(recent_artists) if recent_artists else 'yok'}.
-
-Yalnızca JSON dizi döndür. Her öğede şu alanlar olsun:
-artist, topic, event_date (YYYY-MM-DD), date_label (ör. "2 EYLÜL 1946'DA DOĞDU"),
-hook (en fazla 80 karakter; "Reels", "gönderi" gibi üretim dili kullanma),
-closing_headline (en fazla 50 karakter; konuya uygun doğal bir kapanış yaz,
-soru olmak zorunda değil),
-facts (en az 2 kısa Türkçe bilgi; her biri en fazla 110 karakter; metinde kaynak
-ve yayın adı anma, doğrulanmış bilgiyi doğrudan anlat), sources (iddianın tarihini açıkça
-doğrulayan en az 2 farklı alan adından tam URL; Commons ve görsel arşivlerini
-haber kaynağı sayma), caption (Türkçe, 80-900 karakter, sıcak ve doğal; en fazla
-5 hashtag. Her paylaşımı soruyla bitirme. Yalnızca gerçekten anlamlıysa soru sor;
-doğum veya ölüm yıldönümünde kısa bir anma ya da şarkı önerisiyle bitir),
-image_search_queries (Wikimedia Commons'ta sanatçının farklı dönem/ortamlardaki
-gerçek fotoğraflarını bulmak için İngilizce 3 farklı kısa arama; sadece sanatçı
-adı + yıl, konser, portre gibi sözcükler), instagram_music_title (Instagram
-uygulamasında aranacak gerçek şarkı), instagram_music_artist,
-instagram_music_clip_note (önerilen 10-15 saniyelik bölüm), score_breakdown:
-date_relevance 0-30, audience_fit 0-25, source_confidence 0-20,
-visual_strength 0-15, freshness 0-10.
-Olayın ay ve günü bugünün ay ve günüyle aynı olmalı. date_label olayın anlamını
-açıkça söylemeli; tarihi tek başına yazma. Sanatçı veya grup geniş kitlelerce
-tanınabilir olmalı
-ve Wikimedia Commons'ta en az üç farklı gerçek fotoğrafı bulunabilmeli. Uydurma
-bilgi verme.
-"""
-    response = client.responses.create(
-        model=os.getenv("OPENAI_RESEARCH_MODEL", "gpt-5.4"),
-        tools=[{"type": "web_search"}],
-        input=prompt,
-    )
-    candidates = extract_json(response.output_text)
-    accepted = []
-    for candidate in candidates if isinstance(candidates, list) else []:
-        candidate["sources"] = valid_foreign_sources(candidate.get("sources"))
-        candidate["score_breakdown"] = normalized_score(candidate.get("score_breakdown"))
-        candidate["score"] = sum(candidate["score_breakdown"].values())
-        facts = candidate.get("facts") if isinstance(candidate.get("facts"), list) else []
-        candidate["hook"] = textwrap.shorten(str(candidate.get("hook", "")), width=80, placeholder="…")
-        candidate["closing_headline"] = textwrap.shorten(
-            str(candidate.get("closing_headline", "MÜZİĞİ HÂLÂ BİZİMLE")), width=50, placeholder="…"
-        )
-        candidate["date_label"] = textwrap.shorten(str(candidate.get("date_label", "")), width=64, placeholder="…")
-        candidate["facts"] = [textwrap.shorten(str(fact), width=110, placeholder="…") for fact in facts[:2]]
-        facts = candidate["facts"]
-        queries = candidate.get("image_search_queries") if isinstance(candidate.get("image_search_queries"), list) else []
-        try:
-            event_date = datetime.strptime(str(candidate.get("event_date")), "%Y-%m-%d")
-        except ValueError:
-            continue
-        if (
-            event_date.strftime("%m-%d") == today.strftime("%m-%d")
-            and len(candidate["sources"]) >= 2
-            and len(facts) >= 2
-            and len(queries) >= 3
-            and candidate["score"] >= 80
-            and candidate["score_breakdown"]["audience_fit"] >= 22
-            and 80 <= len(str(candidate.get("caption", ""))) <= 900
-        ):
-            accepted.append(candidate)
-    if not accepted:
-        raise RuntimeError("No candidate passed the source and quality policy")
-    accepted = independently_verified(client, accepted, today)
-    if not accepted:
-        raise RuntimeError("No candidate passed the independent fact check")
-    return sorted(accepted, key=lambda item: item["score"], reverse=True)
+        data = wordpress_request("GET", "drafts", bearer, base_url)
+    except Exception as exc:
+        print(f"Recent draft lookup unavailable; continuing without duplicate history: {exc}")
+        return []
+    return sorted({
+        str(item.get("artist", "")).strip()
+        for item in data.get("drafts", [])
+        if item.get("artist")
+    })[:50]
 
 
 def clean_meta(value) -> str:
     raw = value.get("value", "") if isinstance(value, dict) else str(value or "")
     return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", raw))).strip()
+
+
+def license_allowed(license_name: str, usage_terms: str = "") -> bool:
+    value = f"{license_name} {usage_terms}".casefold()
+    if any(marker in value for marker in FORBIDDEN_LICENSE_MARKERS):
+        return False
+    return any(marker in value for marker in ALLOWED_LICENSE_MARKERS)
 
 
 def commons_search(query: str) -> list[dict]:
@@ -234,7 +112,7 @@ def commons_search(query: str) -> list[dict]:
         "generator": "search",
         "gsrsearch": f'intitle:"{query}" filetype:bitmap',
         "gsrnamespace": 6,
-        "gsrlimit": 20,
+        "gsrlimit": 25,
         "prop": "imageinfo",
         "iiprop": "url|size|mime|extmetadata",
         "iiurlwidth": 1800,
@@ -251,11 +129,16 @@ def usable_image(page: dict) -> dict | None:
     usage_terms = clean_meta(meta.get("UsageTerms"))
     if not str(info.get("mime", "")).startswith("image/"):
         return None
-    if max(int(info.get("width", 0)), int(info.get("height", 0))) < 320:
+    if max(int(info.get("width", 0)), int(info.get("height", 0))) < 1080:
+        return None
+    if not license_allowed(license_name, usage_terms):
+        return None
+    url = info.get("thumburl") or info.get("url", "")
+    if not str(url).startswith("https://"):
         return None
     return {
         "title": page.get("title", ""),
-        "url": info.get("thumburl") or info.get("url", ""),
+        "url": url,
         "description_url": info.get("descriptionurl", ""),
         "license": license_name or usage_terms,
         "creator": clean_meta(meta.get("Artist")) or "Unknown",
@@ -265,29 +148,54 @@ def usable_image(page: dict) -> dict | None:
     }
 
 
-def image_priority(image: dict, artist: str) -> tuple[int, int, int, str]:
-    """Prefer clearly named, solo-looking and useful period photographs."""
+def image_priority(image: dict, artist: str, event_year: int) -> tuple[int, int, int, int, str]:
     title = re.sub(r"^file:", "", str(image.get("title", "")), flags=re.I).casefold()
     artist_name = artist.casefold()
     group_terms = (" and ", " with ", " & ", " group", " band", " members", "family")
     group_penalty = sum(term in title for term in group_terms)
     exact_name = int(title.startswith(artist_name))
-    period_year = int(bool(re.search(r"\b(?:19[5-9]\d|200\d)\b", title)))
     portrait_shape = int(int(image.get("height", 0)) >= int(image.get("width", 0)) * 0.85)
-    return (-group_penalty, exact_name, period_year + portrait_shape, title)
+
+    years = [int(y) for y in re.findall(r"\b(19\d{2}|20\d{2})\b", title)]
+    if years:
+        distance = min(abs(y - event_year) for y in years)
+        if distance <= 2:
+            period_score = 6
+        elif distance <= 5:
+            period_score = 5
+        elif distance <= 10:
+            period_score = 3
+        elif distance <= 20:
+            period_score = 1
+        else:
+            period_score = -4
+    else:
+        period_score = 0
+
+    return (-group_penalty, period_score, exact_name, portrait_shape, title)
 
 
 def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path], list[dict]]:
     paths, credits, seen_titles, seen_hashes = [], [], set(), set()
     artist_query = re.sub(r"^the\s+", "", str(candidate["artist"]), flags=re.I).strip()
-    queries = [artist_query] + list(candidate["image_search_queries"][:3])
+    event_year = int(str(candidate.get("event_date", "0"))[:4] or 0)
+
+    # Search the event period first. General artist searches are fallbacks.
+    queries = [
+        f"{artist_query} {event_year}" if event_year else artist_query,
+        f"{artist_query} {max(1900, event_year - 2)}" if event_year else artist_query,
+        artist_query,
+        f"{artist_query} portrait",
+    ]
+
     for query in queries:
         choices = []
         for page in commons_search(str(query)):
             image = usable_image(page)
             if image and image["title"] not in seen_titles:
                 choices.append(image)
-        choices.sort(key=lambda image: image_priority(image, artist_query), reverse=True)
+        choices.sort(key=lambda image: image_priority(image, artist_query, event_year), reverse=True)
+
         for image in choices:
             response = requests.get(image["url"], headers={"User-Agent": USER_AGENT}, timeout=90)
             response.raise_for_status()
@@ -310,8 +218,9 @@ def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path
                 break
         if len(paths) == 3:
             break
+
     if len(paths) != 3:
-        raise RuntimeError(f"Three different artist photos were required; only {len(paths)} were found")
+        raise RuntimeError(f"Three different licensed artist photos were required; only {len(paths)} were found")
     return paths, credits
 
 
@@ -348,28 +257,51 @@ def add_gradient(canvas: Image.Image) -> None:
 
 
 def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, accent: str) -> None:
-    draw.rounded_rectangle((72, 1260, 1008, 1305), radius=16, fill=(204, 34, 43, 245))
-    draw.text((104, 1266), accent, font=font(27, True), fill=(255, 246, 221, 255))
-    title_font, title_lines = fit_text(draw, headline.upper(), 870, 88)
-    y = 1342
-    for line in title_lines:
-        draw.text((96, y), line, font=title_font, fill=(255, 248, 231, 255), stroke_width=1, stroke_fill=(0, 0, 0, 170))
-        y += title_font.size + 10
-    sub_font, sub_lines = fit_text(draw, subline, 870, 45, 32)
-    y += 12
-    for line in sub_lines[:3]:
-        draw.text((98, y), line, font=sub_font, fill=(232, 229, 222, 255))
-        y += sub_font.size + 8
-    draw.text((96, 1833), "OLDIES RADYO", font=font(30, True), fill=(232, 187, 61, 255))
-    draw.text((790, 1833), "@oldiesradyo", font=font(25), fill=(245, 245, 245, 235))
+    # Editorial lower-third: restrained, readable and consistent across eras.
+    draw.rounded_rectangle((72, 1198, 1008, 1256), radius=22, fill=(12, 12, 15, 205))
+    accent_font = font(25, True)
+    draw.text((104, 1212), accent, font=accent_font, fill=(236, 193, 77, 255))
+
+    title_font, title_lines = fit_text(draw, headline.upper(), 880, 84, 46)
+    y = 1300
+    for line in title_lines[:3]:
+        draw.text(
+            (96, y), line, font=title_font,
+            fill=(255, 249, 236, 255),
+            stroke_width=2, stroke_fill=(0, 0, 0, 190),
+        )
+        y += title_font.size + 9
+
+    # Fine gold rule separates headline and detail.
+    y += 10
+    draw.rounded_rectangle((96, y, 306, y + 6), radius=3, fill=(236, 193, 77, 245))
+    y += 28
+
+    sub_font, sub_lines = fit_text(draw, subline, 872, 43, 31)
+    for line in sub_lines[:4]:
+        draw.text((98, y), line, font=sub_font, fill=(238, 235, 227, 255))
+        y += sub_font.size + 7
+
+    # Consistent brand signature, clear but not ad-like.
+    draw.line((96, 1810, 984, 1810), fill=(255, 255, 255, 95), width=2)
+    draw.text((96, 1830), "OLDIES RADYO", font=font(34, True), fill=(236, 193, 77, 255))
+    draw.text((790, 1837), "oldiesradyo.com", font=font(22), fill=(245, 245, 245, 230))
 
 
 def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Path]:
+    artist = str(candidate["artist"])
+    hook = str(candidate.get("event_headline") or candidate.get("hook") or artist)
+    facts = list(candidate.get("facts") or ["", ""])
+    while len(facts) < 2:
+        facts.append("")
+    closing = str(candidate.get("closing_headline") or f"{artist} • OLDIES RADYO")
+
     scenes = [
-        (str(candidate["artist"]), str(candidate["date_label"]), "BUGÜN MÜZİK TARİHİNDE"),
-        (str(candidate["hook"]), str(candidate["facts"][0]), "BİR DÖNEME DAMGA VURDU"),
-        (str(candidate["closing_headline"]), str(candidate["facts"][1]), "HATIRLIYORUZ • DİNLİYORUZ"),
+        (hook, str(candidate["date_label"]), "OLDIES RADYO • MÜZİK TARİHİNDE BUGÜN"),
+        (artist, str(facts[0]), "HİKÂYENİN DETAYI"),
+        (closing, str(facts[1]), "OLDIES RADYO • DİNLE • HATIRLA"),
     ]
+
     paths = []
     for index, (photo, content) in enumerate(zip(photos, scenes), start=1):
         canvas = cover_photo(photo).convert("RGBA")
@@ -384,20 +316,126 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Pa
 def render(scenes: list[Path], target: Path) -> None:
     inputs = []
     for scene in scenes:
-        inputs += ["-loop", "1", "-t", "6.5", "-i", str(scene)]
+        inputs += ["-loop", "1", "-t", "6.6", "-i", str(scene)]
+
     graph = (
-        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00045,1.075)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
-        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00040,1.07)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
-        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00045,1.075)':d=195:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
-        "[a][b]xfade=transition=fade:duration=0.75:offset=5.75[x];"
-        "[x][c]xfade=transition=fade:duration=0.75:offset=11.5[v]"
+        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00050,1.08)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
+        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00036,1.065)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
+        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00046,1.075)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
+        "[a][b]xfade=transition=fade:duration=0.65:offset=5.75[x];"
+        "[x][c]xfade=transition=smoothleft:duration=0.70:offset=11.45[v]"
     )
     command = [
         "ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an",
         "-t", str(DURATION), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
-        "-crf", "19", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
+        "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
     ]
     subprocess.run(command, check=True)
+    if not target.exists() or target.stat().st_size <= 0 or target.stat().st_size > MAX_VIDEO_BYTES:
+        raise RuntimeError("Rendered MP4 failed size validation")
+
+
+
+def publish_delivery_asset(candidate: dict, video: Path) -> str:
+    """Upload the rendered MP4 as a public GitHub Release asset.
+
+    WordPress then receives only the HTTPS URL, avoiding large multipart
+    uploads through the WordPress.com REST edge.
+    """
+    token = os.getenv("GITHUB_TOKEN", "").strip()
+    repository = os.getenv("GITHUB_REPOSITORY", "").strip()
+    if not token or not repository:
+        return ""
+
+    api = f"https://api.github.com/repos/{repository}"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "oldies-reels-worker",
+    }
+    tag = "reels-delivery"
+    response = requests.get(f"{api}/releases/tags/{tag}", headers=headers, timeout=30)
+    if response.status_code == 404:
+        target = os.getenv("GITHUB_REF_NAME", "zero-cost-final-implementation").strip() or "zero-cost-final-implementation"
+        response = requests.post(
+            f"{api}/releases",
+            headers=headers,
+            json={
+                "tag_name": tag,
+                "target_commitish": target,
+                "name": "Oldies Reels Delivery",
+                "body": "Automated delivery assets for WordPress DRAFT_REVIEW. No live social publishing.",
+                "draft": False,
+                "prerelease": False,
+            },
+            timeout=30,
+        )
+    if response.status_code not in (200, 201):
+        raise RuntimeError(f"GitHub delivery release failed: {response.status_code} {response.text[:500]}")
+    release = response.json()
+
+    artist_slug = re.sub(r"[^a-z0-9]+", "-", str(candidate.get("artist", "")).lower()).strip("-")[:60] or "oldies"
+    event_date = re.sub(r"[^0-9-]", "", str(candidate.get("event_date", ""))) or "undated"
+    run_id = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ID", "")) or str(int(time.time()))
+    attempt = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ATTEMPT", "")) or "1"
+    asset_name = f"{event_date}-{artist_slug}-{run_id}-{attempt}.mp4"
+
+    upload_url = str(release.get("upload_url", "")).split("{", 1)[0]
+    if not upload_url:
+        raise RuntimeError("GitHub delivery release has no upload URL")
+    upload_headers = dict(headers)
+    upload_headers["Content-Type"] = "video/mp4"
+    with video.open("rb") as handle:
+        uploaded = requests.post(
+            upload_url,
+            headers=upload_headers,
+            params={"name": asset_name},
+            data=handle,
+            timeout=180,
+        )
+    if uploaded.status_code != 201:
+        raise RuntimeError(f"GitHub delivery asset upload failed: {uploaded.status_code} {uploaded.text[:500]}")
+    public_url = str(uploaded.json().get("browser_download_url", "")).strip()
+    if not public_url.startswith("https://"):
+        raise RuntimeError("GitHub delivery asset returned no public HTTPS URL")
+    print(f"Delivery asset ready: {public_url}")
+    return public_url
+
+def proxy_draft_request(data: dict, bearer: str):
+    proxy_url = os.getenv("OLDIES_DRAFT_PROXY_URL", "").strip()
+    if not proxy_url:
+        return None
+    headers = {
+        "Authorization": f"Bearer {bearer}",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
+    }
+    response = None
+    for attempt in range(4):
+        response = requests.post(proxy_url, headers=headers, json=data, timeout=90)
+        if response.status_code < 400:
+            return response.json()
+        if response.status_code == 429:
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {}
+            if isinstance(error_payload, dict) and error_payload.get("code") == "daily_draft_limit":
+                print("WordPress daily draft limit already satisfied; no additional draft created.")
+                return {
+                    "success": True,
+                    "skipped": True,
+                    "reason": "daily_draft_limit",
+                    "message": str(error_payload.get("message", "Daily draft limit reached.")),
+                }
+        if response.status_code not in {429, 502, 503, 504} or attempt == 3:
+            break
+        delay = 10 * (2**attempt)
+        print(f"Draft proxy temporarily returned {response.status_code}; retrying in {delay}s")
+        time.sleep(delay)
+    raise RuntimeError(f"Draft proxy {response.status_code}: {response.text[:700]}")
 
 
 def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
@@ -413,17 +451,24 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
         "audio_artist": str(candidate.get("instagram_music_artist", "")),
         "audio_clip_note": str(candidate.get("instagram_music_clip_note", "")),
     }
+    public_url = publish_delivery_asset(candidate, video)
+    if public_url:
+        data["video_url"] = public_url
+        proxied = proxy_draft_request(data, bearer)
+        if proxied is not None:
+            return proxied
+        return wordpress_request("POST", "drafts", bearer, base_url, data=data)
     with video.open("rb") as handle:
         return wordpress_request("POST", "drafts", bearer, base_url, data=data, files={"reel_video": (video.name, handle, "video/mp4")})
 
 
 def main() -> None:
-    api_key = require_env("OPENAI_API_KEY")
     bearer = require_env("OLDIES_WP_BEARER")
     base_url = require_env("OLDIES_WP_BASE_URL")
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    client = OpenAI(api_key=api_key)
-    candidates = research_candidates(client, get_recent_artists(bearer, base_url))
+    override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
+    today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
+    candidates = research_candidates(get_recent_artists(bearer, base_url), today=today)
     candidate = None
     photos, credits = [], []
     photo_errors = []
@@ -431,7 +476,7 @@ def main() -> None:
         for old_photo in OUTPUT.glob("photo-*.jpg"):
             old_photo.unlink()
         try:
-            print(f"Trying visual candidate: {option['artist']}")
+            print(f"Trying zero-cost visual candidate: {option['artist']} (score={option['score']})")
             photos, credits = download_commons_photos(option, OUTPUT)
             candidate = option
             break
@@ -439,14 +484,15 @@ def main() -> None:
             photo_errors.append(f"{option.get('artist', 'Unknown')}: {exc}")
             print(f"Skipping visual candidate: {photo_errors[-1]}")
     if candidate is None:
-        raise RuntimeError("No candidate had three usable photos. " + " | ".join(photo_errors))
+        raise RuntimeError("No zero-cost candidate had three usable licensed photos. " + " | ".join(photo_errors))
     candidate["image_credits"] = credits
+    candidate["pipeline"] = "zero-cost-v1"
     (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
     video = OUTPUT / "oldies-reels-draft.mp4"
     render(make_scenes(candidate, photos, OUTPUT), video)
     result = upload_draft(candidate, video, bearer, base_url)
     (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Created approval-only draft {result.get('draft', {}).get('id', '')}; no live post was made.")
+    print(f"Created approval-only zero-cost draft {result.get('draft', {}).get('id', '')}; no live post was made.")
 
 
 if __name__ == "__main__":
