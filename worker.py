@@ -66,7 +66,13 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
 
 
 def get_recent_artists(bearer: str, base_url: str) -> list[str]:
-    data = wordpress_request("GET", "drafts", bearer, base_url)
+    # Duplicate history is a quality hint, not a hard dependency.
+    # If WordPress temporarily returns HTML/empty content, continue safely.
+    try:
+        data = wordpress_request("GET", "drafts", bearer, base_url)
+    except Exception as exc:
+        print(f"Recent draft lookup unavailable; continuing without duplicate history: {exc}")
+        return []
     return sorted({
         str(item.get("artist", "")).strip()
         for item in data.get("drafts", [])
