@@ -57,6 +57,19 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
         response = requests.request(method, endpoint, headers=headers, timeout=180, **kwargs)
         if response.status_code < 400:
             return response.json()
+        if response.status_code == 429:
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {}
+            if isinstance(error_payload, dict) and error_payload.get("code") == "daily_draft_limit":
+                print("WordPress daily draft limit already satisfied; no additional draft created.")
+                return {
+                    "success": True,
+                    "skipped": True,
+                    "reason": "daily_draft_limit",
+                    "message": str(error_payload.get("message", "Daily draft limit reached.")),
+                }
         if response.status_code not in {429, 502, 503, 504} or attempt == 3:
             break
         delay = 15 * (2**attempt)
