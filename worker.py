@@ -45,9 +45,9 @@ def require_env(name: str) -> str:
 
 
 def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwargs):
-    endpoint = f"{base_url.rstrip('/')}/?rest_route=/oldies/v1/instagram/reels/{path.lstrip('/')}"
+    endpoint = f"{base_url.rstrip('/')}/wp-json/oldies/v1/instagram/reels/{path.lstrip('/')}"
     headers = kwargs.pop("headers", {})
-    headers.update({"Authorization": f"Bearer {bearer}", "Accept": "application/json"})
+    headers.update({"Authorization": f"Bearer {bearer}", "Accept": "application/json", "User-Agent": USER_AGENT})
     response = None
     for attempt in range(4):
         for value in (kwargs.get("files") or {}).values():
