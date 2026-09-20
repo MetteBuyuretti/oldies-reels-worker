@@ -131,7 +131,7 @@ def fetch_day_candidates(today: datetime, artists: dict[str, dict], lookup: dict
         if current not in buckets or not raw.lstrip().startswith("*"):
             continue
         clean = _strip_wikitext(raw)
-        m = re.match(r"(\d{1,4})\s*[â€“â€”-]\s*(.+)", clean)
+        m = re.match(r"(\d{1,4})\s*[-\u2013\u2014]\s*(.+)", clean)
         if not m:
             continue
         year = int(m.group(1))
@@ -237,38 +237,47 @@ def _sentences(text: str, limit: int = 2) -> list[str]:
 
 
 def _short(text: str, width: int) -> str:
-    return textwrap.shorten(re.sub(r"\s+", " ", str(text)).strip(), width=width, placeholder="â€¦")
+    return textwrap.shorten(re.sub(r"\s+", " ", str(text)).strip(), width=width, placeholder="Ã¢â‚¬Â¦")
 
 
 def deterministic_copy(*, artist: str, kind: str, event_date: datetime, source_text: str, tr_extract: str) -> dict:
-    month_names = ["", "OCAK", "ÅUBAT", "MART", "NÄ°SAN", "MAYIS", "HAZÄ°RAN", "TEMMUZ", "AÄUSTOS", "EYLÃœL", "EKÄ°M", "KASIM", "ARALIK"]
+    month_names = ["", "OCAK", "\u015eUBAT", "MART", "N\u0130SAN", "MAYIS", "HAZ\u0130RAN", "TEMMUZ", "A\u011eUSTOS", "EYL\u00dcL", "EK\u0130M", "KASIM", "ARALIK"]
     date_text = f"{event_date.day} {month_names[event_date.month]} {event_date.year}"
     if kind == "births":
-        date_label = f"{date_text}'DE DOÄDU"
-        hook = f"BugÃ¼n {artist}'Ä± hatÄ±rlÄ±yoruz"
-        event_fact = f"{artist}, {event_date.year} yÄ±lÄ±nda bugÃ¼n doÄŸdu."
+        date_label = f"{date_text}'DE DO\u011eDU"
+        hook = f"Bug\u00fcn {artist}'\u0131 hat\u0131rl\u0131yoruz"
+        event_fact = f"{artist}, {event_date.year} y\u0131l\u0131nda bug\u00fcn do\u011fdu."
     elif kind == "deaths":
-        date_label = f"{date_text}'DE HAYATINI KAYBETTÄ°"
-        hook = f"{artist}'Ä±n mÃ¼ziÄŸi yaÅŸamaya devam ediyor"
-        event_fact = f"{artist}, {event_date.year} yÄ±lÄ±nda bugÃ¼n hayatÄ±nÄ± kaybetti."
+        date_label = f"{date_text}'DE HAYATINI KAYBETT\u0130"
+        hook = f"{artist}'\u0131n m\u00fczi\u011fi ya\u015famaya devam ediyor"
+        event_fact = f"{artist}, {event_date.year} y\u0131l\u0131nda bug\u00fcn hayat\u0131n\u0131 kaybetti."
     else:
-        date_label = f"{date_text} â€¢ MÃœZÄ°K TARÄ°HÄ°NDE"
-        hook = f"{artist}: mÃ¼zik tarihinde bugÃ¼n"
-        event_fact = f"{event_date.year} yÄ±lÄ±nda bugÃ¼n {artist} mÃ¼zik tarihinde Ã¶nemli bir an yaÅŸadÄ±."
+        date_label = f"{date_text} \u2022 M\u00dcZ\u0130K TAR\u0130H\u0130NDE"
+        hook = f"{artist}: m\u00fczik tarihinde bug\u00fcn"
+        event_fact = f"{event_date.year} y\u0131l\u0131nda bug\u00fcn {artist} m\u00fczik tarihinde \u00f6nemli bir an ya\u015fad\u0131."
     tr_facts = _sentences(tr_extract, 2)
     facts = [_short(event_fact, 110)]
     facts.append(_short(tr_facts[0], 110) if tr_facts else _short(source_text, 110))
-    facts = (facts + ["MÃ¼ziÄŸi ve etkisi kuÅŸaklar boyunca dinlenmeye devam ediyor."])[:2]
-    intro = f"BugÃ¼n {artist}'Ä±n doÄŸum yÄ±ldÃ¶nÃ¼mÃ¼." if kind == "births" else (f"BugÃ¼n {artist}'Ä± mÃ¼ziÄŸiyle anÄ±yoruz." if kind == "deaths" else f"BugÃ¼n mÃ¼zik tarihinde {artist} iÃ§in Ã¶zel bir gÃ¼n.")
-    caption = f"{intro}\n\n{facts[0]} {facts[1]}\n\nOldies Radyo'da geÃ§miÅŸin en iyi ÅŸarkÄ±larÄ± ve unutulmayan hikÃ¢yeleri yaÅŸamaya devam ediyor. #OldiesRadyo #MusicHistory"
+    facts = (facts + ["M\u00fczi\u011fi ve etkisi ku\u015faklar boyunca dinlenmeye devam ediyor."])[:2]
+    if kind == "births":
+        intro = f"Bug\u00fcn {artist}'\u0131n do\u011fum y\u0131ld\u00f6n\u00fcm\u00fc."
+    elif kind == "deaths":
+        intro = f"Bug\u00fcn {artist}'\u0131 m\u00fczi\u011fiyle an\u0131yoruz."
+    else:
+        intro = f"Bug\u00fcn m\u00fczik tarihinde {artist} i\u00e7in \u00f6zel bir g\u00fcn."
+    caption = (
+        f"{intro}\n\n{facts[0]} {facts[1]}\n\n"
+        "Oldies Radyo'da ge\u00e7mi\u015fin en iyi \u015fark\u0131lar\u0131 ve unutulmayan hik\u00e2yeleri "
+        "ya\u015famaya devam ediyor. #OldiesRadyo #MuzikTarihindeBugun"
+    )
     return {
         "date_label": _short(date_label, 64),
         "hook": _short(hook, 80),
-        "closing_headline": _short(f"{artist} â€¢ UNUTULMAYAN MÃœZÄ°K", 50),
+        "closing_headline": _short(f"{artist} \u2022 UNUTULMAYAN M\u00dcZ\u0130K", 50),
         "facts": facts,
         "caption": caption[:900],
+        "dj_script": _short(f"{intro} {facts[0]} {facts[1]}", 260),
     }
-
 
 def score_candidate(candidate: dict, recent_artists: list[str]) -> dict:
     tier = int(candidate.get("tier", 3))
@@ -328,7 +337,7 @@ def build_history_candidates(recent_artists: list[str], today: datetime | None =
                 "sources": sources, "source_text": source_text, "tr_wikipedia_title": tr_title,
                 "image_search_queries": [artist, f"{artist} {year}", f"{artist} portrait"],
                 "instagram_music_title": "", "instagram_music_artist": artist,
-                "instagram_music_clip_note": "Instagram mÃ¼zik arÅŸivinden konuyla ilgili 10â€“15 saniyelik bÃ¶lÃ¼m seÃ§ilebilir.",
+                "instagram_music_clip_note": "Instagram m\\u00fczik ar\\u015fivinden konuyla ilgili 10-15 saniyelik b\\u00f6l\\u00fcm se\\u00e7ilebilir.",
                 **copy,
             }
             score_candidate(candidate, recent_artists)
