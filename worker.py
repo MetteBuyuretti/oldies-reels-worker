@@ -454,7 +454,7 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
     public_url = publish_delivery_asset(candidate, video)
     if public_url:
         data["video_url"] = public_url
-        return wordpress_request("POST", "drafts", bearer, base_url, data=data)
+        return wordpress_request("PUT", "drafts", bearer, base_url, data=data)
     with video.open("rb") as handle:
         return wordpress_request("POST", "drafts", bearer, base_url, data=data, files={"reel_video": (video.name, handle, "video/mp4")})
 
