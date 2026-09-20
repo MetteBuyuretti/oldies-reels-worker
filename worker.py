@@ -315,7 +315,7 @@ def render(scenes: list[Path], target: Path) -> None:
     command = [
         "ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an",
         "-t", str(DURATION), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
-        "-crf", "19", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
+        "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
     ]
     subprocess.run(command, check=True)
     if not target.exists() or target.stat().st_size <= 0 or target.stat().st_size > MAX_VIDEO_BYTES:
