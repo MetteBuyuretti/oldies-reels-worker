@@ -322,6 +322,73 @@ def render(scenes: list[Path], target: Path) -> None:
         raise RuntimeError("Rendered MP4 failed size validation")
 
 
+
+def publish_delivery_asset(candidate: dict, video: Path) -> str:
+    """Upload the rendered MP4 as a public GitHub Release asset.
+
+    WordPress then receives only the HTTPS URL, avoiding large multipart
+    uploads through the WordPress.com REST edge.
+    """
+    token = os.getenv("GITHUB_TOKEN", "").strip()
+    repository = os.getenv("GITHUB_REPOSITORY", "").strip()
+    if not token or not repository:
+        return ""
+
+    api = f"https://api.github.com/repos/{repository}"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "oldies-reels-worker",
+    }
+    tag = "reels-delivery"
+    response = requests.get(f"{api}/releases/tags/{tag}", headers=headers, timeout=30)
+    if response.status_code == 404:
+        target = os.getenv("GITHUB_REF_NAME", "zero-cost-final-implementation").strip() or "zero-cost-final-implementation"
+        response = requests.post(
+            f"{api}/releases",
+            headers=headers,
+            json={
+                "tag_name": tag,
+                "target_commitish": target,
+                "name": "Oldies Reels Delivery",
+                "body": "Automated delivery assets for WordPress DRAFT_REVIEW. No live social publishing.",
+                "draft": False,
+                "prerelease": False,
+            },
+            timeout=30,
+        )
+    if response.status_code not in (200, 201):
+        raise RuntimeError(f"GitHub delivery release failed: {response.status_code} {response.text[:500]}")
+    release = response.json()
+
+    artist_slug = re.sub(r"[^a-z0-9]+", "-", str(candidate.get("artist", "")).lower()).strip("-")[:60] or "oldies"
+    event_date = re.sub(r"[^0-9-]", "", str(candidate.get("event_date", ""))) or "undated"
+    run_id = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ID", "")) or str(int(time.time()))
+    attempt = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ATTEMPT", "")) or "1"
+    asset_name = f"{event_date}-{artist_slug}-{run_id}-{attempt}.mp4"
+
+    upload_url = str(release.get("upload_url", "")).split("{", 1)[0]
+    if not upload_url:
+        raise RuntimeError("GitHub delivery release has no upload URL")
+    upload_headers = dict(headers)
+    upload_headers["Content-Type"] = "video/mp4"
+    with video.open("rb") as handle:
+        uploaded = requests.post(
+            upload_url,
+            headers=upload_headers,
+            params={"name": asset_name},
+            data=handle,
+            timeout=180,
+        )
+    if uploaded.status_code != 201:
+        raise RuntimeError(f"GitHub delivery asset upload failed: {uploaded.status_code} {uploaded.text[:500]}")
+    public_url = str(uploaded.json().get("browser_download_url", "")).strip()
+    if not public_url.startswith("https://"):
+        raise RuntimeError("GitHub delivery asset returned no public HTTPS URL")
+    print(f"Delivery asset ready: {public_url}")
+    return public_url
+
 def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
     data = {
         "artist": candidate["artist"],
@@ -335,6 +402,10 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
         "audio_artist": str(candidate.get("instagram_music_artist", "")),
         "audio_clip_note": str(candidate.get("instagram_music_clip_note", "")),
     }
+    public_url = publish_delivery_asset(candidate, video)
+    if public_url:
+        data["video_url"] = public_url
+        return wordpress_request("POST", "drafts", bearer, base_url, data=data)
     with video.open("rb") as handle:
         return wordpress_request("POST", "drafts", bearer, base_url, data=data, files={"reel_video": (video.name, handle, "video/mp4")})
 
