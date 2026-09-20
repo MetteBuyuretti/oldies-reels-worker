@@ -47,7 +47,7 @@ def require_env(name: str) -> str:
 def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwargs):
     endpoint = f"{base_url.rstrip('/')}/wp-json/oldies/v1/instagram/reels/{path.lstrip('/')}"
     headers = kwargs.pop("headers", {})
-    headers.update({"Authorization": f"Bearer {bearer}", "Accept": "application/json", "User-Agent": USER_AGENT})
+    headers.update({"X-Oldies-Reels-Secret": bearer, "Accept": "application/json", "User-Agent": USER_AGENT})
     response = None
     for attempt in range(4):
         for value in (kwargs.get("files") or {}).values():
@@ -454,9 +454,6 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
     public_url = publish_delivery_asset(candidate, video)
     if public_url:
         data["video_url"] = public_url
-        proxied = proxy_draft_request(data, bearer)
-        if proxied is not None:
-            return proxied
         return wordpress_request("POST", "drafts", bearer, base_url, data=data)
     with video.open("rb") as handle:
         return wordpress_request("POST", "drafts", bearer, base_url, data=data, files={"reel_video": (video.name, handle, "video/mp4")})
