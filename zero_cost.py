@@ -333,12 +333,24 @@ def deterministic_copy(*, artist: str, kind: str, event_date: datetime, source_t
     date_text = f"{event_date.day} {month_names[event_date.month]} {event_date.year}"
 
     if kind == "events":
+        raw_source = str(source_text or "")
+        smart_title = ""
+        for pattern in (
+            r"\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+‘(.{2,100})’",
+            r"\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+“(.{2,100})”",
+        ):
+            match = re.search(pattern, raw_source, re.I)
+            if match:
+                smart_title = re.sub(r"\s+", " ", match.group(1)).strip()
+                break
+
         clean = (
-            str(source_text or "")
+            raw_source
             .replace("‘", "'").replace("’", "'")
             .replace("“", '"').replace("”", '"')
         )
-        titles = [re.sub(r"\s+", " ", x).strip() for x in re.findall(r"""['"]([^'"]{2,80})['"]""", clean)]
+        fallback_titles = [re.sub(r"\s+", " ", x).strip() for x in re.findall(r"""['"]([^'"]{2,80})['"]""", clean)]
+        titles = [smart_title] if smart_title else fallback_titles
         music_title = titles[0] if titles else ""
         hook = f"{artist.upper()} • MÜZİK TARİHİNDE BUGÜN"
         fact1 = f"{date_text}: {artist} için müzik tarihinde kayda geçen bir gelişme yaşandı."
