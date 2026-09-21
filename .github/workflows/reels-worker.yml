@@ -12,15 +12,20 @@ on:
         required: false
         default: false
         type: boolean
+      reels_language:
+        description: "Reels language: tr or en"
+        required: false
+        default: "tr"
+        type: string
       tts_enabled:
-        description: "Generate the English DJ voice automatically with Google Chirp 3 HD"
+        description: "Generate the matching DJ voice automatically with Google Chirp 3 HD"
         required: false
         default: true
         type: boolean
       tts_voice:
-        description: "Google Chirp 3 HD voice name"
+        description: "Optional Google Chirp 3 HD voice override"
         required: false
-        default: "en-AU-Chirp3-HD-Charon"
+        default: ""
         type: string
   schedule:
     - cron: "0 9 * * *"
@@ -67,9 +72,10 @@ jobs:
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
           OLDIES_VOICEOVER_URL: ${{ inputs.voiceover_url }}
           OLDIES_PREVIEW_ONLY: ${{ inputs.preview_only }}
+          OLDIES_REELS_LANGUAGE: ${{ inputs.reels_language || 'tr' }}
           OLDIES_TTS_ENABLED: ${{ github.event_name == 'schedule' && 'true' || (inputs.tts_enabled && 'true' || 'false') }}
-          OLDIES_TTS_VOICE: ${{ inputs.tts_voice || 'en-AU-Chirp3-HD-Charon' }}
-          OLDIES_TTS_LANGUAGE: "en-AU"
+          OLDIES_TTS_VOICE: ${{ inputs.tts_voice }}
+          OLDIES_TTS_LANGUAGE: ""
           OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
         run: python worker.py
       - name: Keep preview for seven days
