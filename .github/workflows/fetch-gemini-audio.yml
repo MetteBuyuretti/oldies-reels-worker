@@ -16,8 +16,10 @@ jobs:
         run: |
           mkdir -p out
           curl -fL "https://storage.googleapis.com/oldies-gemini-tts-preview-36507074949/oldies-gemini-flash-charon-tr.mp3" -o out/oldies-gemini-flash-charon-tr.mp3
+          curl -fL "https://storage.googleapis.com/oldies-gemini-tts-preview-36507074949/oldies-gemini-flash-fenrir-tr.mp3" -o out/oldies-gemini-flash-fenrir-tr.mp3
+          curl -fL "https://storage.googleapis.com/oldies-gemini-tts-preview-36507074949/oldies-gemini-flash-iapetus-tr.mp3" -o out/oldies-gemini-flash-iapetus-tr.mp3
       - uses: actions/upload-artifact@v4
         with:
-          name: gemini-flash-charon-tr
+          name: gemini-flash-triple-tr
           path: out/
           retention-days: 1
