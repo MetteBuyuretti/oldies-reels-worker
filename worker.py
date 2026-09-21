@@ -29,6 +29,7 @@ WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 18
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
 USER_AGENT = "OldiesRadyoBot/1.0 (https://oldiesradyo.com; info@oldiesradyo.com)"
 MAX_VIDEO_BYTES = 100 * 1024 * 1024
+MAX_VOICEOVER_BYTES = 20 * 1024 * 1024
 
 ALLOWED_LICENSE_MARKERS = (
     "public domain", "cc0", "cc by", "cc-by", "cc by-sa", "cc-by-sa",
@@ -328,7 +329,67 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Pa
     return paths
 
 
-def render(scenes: list[Path], target: Path) -> None:
+
+def download_voiceover(directory: Path) -> Path | None:
+    """Fetch an optional external voiceover without changing the zero-cost default path."""
+    url = os.getenv("OLDIES_VOICEOVER_URL", "").strip()
+    if not url:
+        return None
+    if not url.startswith("https://"):
+        raise RuntimeError("OLDIES_VOICEOVER_URL must use HTTPS")
+
+    response = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=90, stream=True)
+    response.raise_for_status()
+    content_type = str(response.headers.get("content-type", "")).split(";", 1)[0].strip().lower()
+    allowed_types = {
+        "audio/mpeg": ".mp3",
+        "audio/mp3": ".mp3",
+        "audio/wav": ".wav",
+        "audio/x-wav": ".wav",
+        "audio/mp4": ".m4a",
+        "audio/aac": ".aac",
+        "video/mp4": ".mp4",
+        "application/octet-stream": ".bin",
+    }
+    suffix = allowed_types.get(content_type)
+    if suffix is None:
+        raise RuntimeError(f"Unsupported voiceover content type: {content_type or 'unknown'}")
+
+    declared = response.headers.get("content-length")
+    if declared and int(declared) > MAX_VOICEOVER_BYTES:
+        raise RuntimeError("Voiceover exceeds 20 MB limit")
+
+    path = directory / f"voiceover-input{suffix}"
+    total = 0
+    with path.open("wb") as handle:
+        for chunk in response.iter_content(chunk_size=1024 * 256):
+            if not chunk:
+                continue
+            total += len(chunk)
+            if total > MAX_VOICEOVER_BYTES:
+                path.unlink(missing_ok=True)
+                raise RuntimeError("Voiceover exceeds 20 MB limit")
+            handle.write(chunk)
+
+    probe = subprocess.run(
+        [
+            "ffprobe", "-v", "error", "-select_streams", "a:0",
+            "-show_entries", "stream=codec_name",
+            "-of", "default=noprint_wrappers=1:nokey=1",
+            str(path),
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if probe.returncode != 0 or not probe.stdout.strip():
+        path.unlink(missing_ok=True)
+        raise RuntimeError("Voiceover URL did not contain a readable audio stream")
+
+    print(f"Voiceover ready: {path.name} ({total} bytes, codec={probe.stdout.strip()})")
+    return path
+
+
+def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> None:
     inputs = []
     for scene in scenes:
         inputs += ["-loop", "1", "-t", "6.6", "-i", str(scene)]
@@ -340,11 +401,30 @@ def render(scenes: list[Path], target: Path) -> None:
         "[a][b]xfade=transition=fade:duration=0.65:offset=5.75[x];"
         "[x][c]xfade=transition=smoothleft:duration=0.70:offset=11.45[v]"
     )
-    command = [
-        "ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an",
-        "-t", str(DURATION), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
-        "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k", "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
-    ]
+    if voiceover:
+        inputs += ["-i", str(voiceover)]
+        graph += (
+            ";[3:a]aformat=sample_rates=48000:channel_layouts=stereo,"
+            "highpass=f=70,lowpass=f=16000,"
+            "acompressor=threshold=-20dB:ratio=3:attack=10:release=120:makeup=2,"
+            "loudnorm=I=-16:TP=-1.0:LRA=7,apad[voice]"
+        )
+        command = [
+            "ffmpeg", "-y", *inputs, "-filter_complex", graph,
+            "-map", "[v]", "-map", "[voice]",
+            "-t", str(DURATION), "-r", str(FPS),
+            "-c:v", "libx264", "-preset", "medium",
+            "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k",
+            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
+            "-movflags", "+faststart", str(target),
+        ]
+    else:
+        command = [
+            "ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an",
+            "-t", str(DURATION), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
+            "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k",
+            "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
+        ]
     subprocess.run(command, check=True)
     if not target.exists() or target.stat().st_size <= 0 or target.stat().st_size > MAX_VIDEO_BYTES:
         raise RuntimeError("Rendered MP4 failed size validation")
@@ -503,9 +583,22 @@ def main() -> None:
         raise RuntimeError("No zero-cost candidate had three usable licensed photos. " + " | ".join(photo_errors))
     candidate["image_credits"] = credits
     candidate["pipeline"] = "zero-cost-v1"
+    voiceover = download_voiceover(OUTPUT)
+    candidate["voiceover"] = {
+        "enabled": bool(voiceover),
+        "source": "external_https" if voiceover else "none",
+    }
     (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
     video = OUTPUT / "oldies-reels-draft.mp4"
-    render(make_scenes(candidate, photos, OUTPUT), video)
+    render(make_scenes(candidate, photos, OUTPUT), video, voiceover=voiceover)
+
+    preview_only = os.getenv("OLDIES_PREVIEW_ONLY", "").strip().lower() in {"1", "true", "yes", "on"}
+    if preview_only:
+        result = {"success": True, "preview_only": True, "voiceover": bool(voiceover)}
+        (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+        print("Preview-only render completed; WordPress draft upload was intentionally skipped.")
+        return
+
     result = upload_draft(candidate, video, bearer, base_url)
     (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Created approval-only zero-cost draft {result.get('draft', {}).get('id', '')}; no live post was made.")
