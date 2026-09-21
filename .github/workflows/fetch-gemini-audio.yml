@@ -1,0 +1,23 @@
+name: Fetch Gemini Audio Preview
+
+on:
+  push:
+    branches:
+      - fetch-gemini-audio
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch preview
+        run: |
+          mkdir -p out
+          curl -fL "https://storage.googleapis.com/oldies-gemini-tts-preview-36507074949/oldies-gemini-flash-charon-tr.mp3" -o out/oldies-gemini-flash-charon-tr.mp3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gemini-flash-charon-tr
+          path: out/
+          retention-days: 1
