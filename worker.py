@@ -459,34 +459,41 @@ def apply_reel_language(candidate: dict, language: str) -> dict:
     return localized
 
 
-def build_turkish_dj_script(candidate: dict) -> str:
-    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
-    event_date = str(candidate.get("event_date", "")).strip()
-    year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
-    kind = str(candidate.get("kind", "events"))
+def build_turkish_dj_parts(candidate: dict) -> list[tuple[str, str]]:
+    """Return language-tagged speech parts so English titles are never read with Turkish phonetics."""
     title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+    facts = list(candidate.get("facts") or ["", ""])
+    while len(facts) < 2:
+        facts.append("")
 
-    if kind == "births":
-        script = (
-            f"Bugün {artist}'ın doğum yıldönümü. {year}'da bugün dünyaya geldi. "
-            "Müziğin altın yıllarından unutulmayan isimleri Oldies Radyo'da yaşamaya devam ediyor."
-        )
-    elif kind == "deaths":
-        script = (
-            f"Bugün {artist}'ı müziğiyle anıyoruz. {year}'da bugün aramızdan ayrıldı. "
-            "Şarkıları ve anıları Oldies Radyo'da yaşamaya devam ediyor."
-        )
-    elif title:
-        script = (
-            f"Bugün müzik tarihinde, {year}. {artist}, '{title}' ile unutulmaz bir sayfa açtı. "
-            "O günlerin büyük şarkıları ve hikâyeleri Oldies Radyo'da yaşamaya devam ediyor."
-        )
-    else:
-        script = (
-            f"Bugün müzik tarihinde, {year}. {artist} için unutulmaz bir gün. "
-            "Müziğin altın yıllarından bir hikâye daha, Oldies Radyo'da."
-        )
-    return re.sub(r"\s+", " ", script).strip()
+    spoken = re.sub(
+        r"\s+",
+        " ",
+        f"Bugün müzik tarihinde. {facts[0]} {facts[1]} Oldies Radyo.",
+    ).strip()
+
+    if not title:
+        return [("tr-TR", spoken)]
+
+    pattern = re.compile(r"['\"‘’“”]?" + re.escape(title) + r"['\"‘’“”]?", re.I)
+    match = pattern.search(spoken)
+    if not match:
+        return [("tr-TR", spoken)]
+
+    before = spoken[:match.start()].strip()
+    after = spoken[match.end():].strip()
+    parts: list[tuple[str, str]] = []
+    if before:
+        parts.append(("tr-TR", before))
+    parts.append(("en-AU", title))
+    if after:
+        parts.append(("tr-TR", after))
+    return parts
+
+
+def build_turkish_dj_script(candidate: dict) -> str:
+    return " ".join(text for _, text in build_turkish_dj_parts(candidate)).strip()
+
 
 
 def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Path]:
@@ -565,17 +572,75 @@ def build_english_dj_script(candidate: dict) -> str:
     return re.sub(r"\s+", " ", script).strip()
 
 
+def _google_tts_bytes(
+    *,
+    text: str,
+    language: str,
+    voice_name: str,
+    project: str,
+    token: str,
+) -> bytes:
+    response = requests.post(
+        "https://texttospeech.googleapis.com/v1/text:synthesize",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "x-goog-user-project": project,
+            "Content-Type": "application/json; charset=utf-8",
+            "User-Agent": USER_AGENT,
+        },
+        json={
+            "input": {"text": text},
+            "voice": {"languageCode": language, "name": voice_name},
+            "audioConfig": {"audioEncoding": "MP3"},
+        },
+        timeout=90,
+    )
+    if response.status_code >= 400:
+        raise RuntimeError(f"Google TTS {response.status_code}: {response.text[:700]}")
+    audio_content = str(response.json().get("audioContent", "")).strip()
+    if not audio_content:
+        raise RuntimeError("Google TTS returned no audio content")
+    return base64.b64decode(audio_content)
+
+
+def _join_tts_segments(paths: list[Path], target: Path) -> None:
+    if len(paths) == 1:
+        target.write_bytes(paths[0].read_bytes())
+        return
+
+    inputs: list[str] = []
+    filters: list[str] = []
+    labels: list[str] = []
+    for index, path in enumerate(paths):
+        inputs += ["-i", str(path)]
+        label = f"a{index}"
+        labels.append(f"[{label}]")
+        filters.append(
+            f"[{index}:a]aresample=48000,"
+            f"aformat=sample_fmts=fltp:channel_layouts=mono[{label}]"
+        )
+    graph = ";".join(filters) + ";" + "".join(labels) + f"concat=n={len(paths)}:v=0:a=1[out]"
+    subprocess.run(
+        [
+            "ffmpeg", "-y", *inputs,
+            "-filter_complex", graph,
+            "-map", "[out]",
+            "-c:a", "libmp3lame", "-b:a", "192k",
+            str(target),
+        ],
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
 def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
-    """Generate a language-matched DJ voice using Google Cloud Chirp 3 HD."""
+    """Generate a language-matched DJ voice; English titles inside TR links use an English voice."""
     enabled = os.getenv("OLDIES_TTS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
     if not enabled:
         return None
 
     mode = str(candidate.get("reels_language") or reel_language())
-    default_language = "en-AU" if mode == "en" else "tr-TR"
-    default_voice = "en-AU-Chirp3-HD-Charon" if mode == "en" else "tr-TR-Chirp3-HD-Charon"
-    language = os.getenv("OLDIES_TTS_LANGUAGE", "").strip() or default_language
-    voice_name = os.getenv("OLDIES_TTS_VOICE", "").strip() or default_voice
     project = os.getenv("OLDIES_GCP_PROJECT", "").strip()
     credentials, detected_project = google_auth_default(
         scopes=["https://www.googleapis.com/auth/cloud-platform"]
@@ -584,40 +649,49 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     project = project or str(detected_project or "").strip()
     if not project:
         raise RuntimeError("Google TTS is enabled but no Google Cloud project was resolved")
+    token = str(credentials.token)
 
-    script = build_english_dj_script(candidate) if mode == "en" else build_turkish_dj_script(candidate)
-    response = requests.post(
-        "https://texttospeech.googleapis.com/v1/text:synthesize",
-        headers={
-            "Authorization": f"Bearer {credentials.token}",
-            "x-goog-user-project": project,
-            "Content-Type": "application/json; charset=utf-8",
-            "User-Agent": USER_AGENT,
-        },
-        json={
-            "input": {"text": script},
-            "voice": {"languageCode": language, "name": voice_name},
-            "audioConfig": {"audioEncoding": "MP3"},
-        },
-        timeout=90,
-    )
-    if response.status_code >= 400:
-        raise RuntimeError(f"Google TTS {response.status_code}: {response.text[:700]}")
-    payload = response.json()
-    audio_content = str(payload.get("audioContent", "")).strip()
-    if not audio_content:
-        raise RuntimeError("Google TTS returned no audio content")
+    main_default_language = "en-AU" if mode == "en" else "tr-TR"
+    main_default_voice = "en-AU-Chirp3-HD-Charon" if mode == "en" else "tr-TR-Chirp3-HD-Charon"
+    main_language = os.getenv("OLDIES_TTS_LANGUAGE", "").strip() or main_default_language
+    main_voice = os.getenv("OLDIES_TTS_VOICE", "").strip() or main_default_voice
+    title_voice = os.getenv("OLDIES_TTS_TITLE_VOICE", "").strip() or "en-AU-Chirp3-HD-Charon"
+
+    if mode == "en":
+        parts = [("en-AU", build_english_dj_script(candidate))]
+    else:
+        parts = build_turkish_dj_parts(candidate)
+
+    segment_paths: list[Path] = []
+    for index, (segment_language, text) in enumerate(parts):
+        voice = title_voice if segment_language.startswith("en-") and mode == "tr" else main_voice
+        language = segment_language if segment_language.startswith("en-") and mode == "tr" else main_language
+        raw = _google_tts_bytes(
+            text=text,
+            language=language,
+            voice_name=voice,
+            project=project,
+            token=token,
+        )
+        segment = directory / f"voiceover-segment-{index}.mp3"
+        segment.write_bytes(raw)
+        segment_paths.append(segment)
 
     path = directory / "voiceover-google.mp3"
-    path.write_bytes(base64.b64decode(audio_content))
+    _join_tts_segments(segment_paths, path)
     if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
         raise RuntimeError("Generated Google voiceover failed size validation")
 
+    script = build_english_dj_script(candidate) if mode == "en" else build_turkish_dj_script(candidate)
     candidate["dj_script_en" if mode == "en" else "dj_script_tr"] = script
-    candidate["tts_voice"] = voice_name
-    candidate["tts_language"] = language
-    print(f"Google TTS ready: {voice_name} ({path.stat().st_size} bytes)")
+    candidate["tts_voice"] = main_voice
+    candidate["tts_language"] = main_language
+    if mode == "tr" and any(lang.startswith("en-") for lang, _ in parts):
+        candidate["tts_title_voice"] = title_voice
+        candidate["tts_title_language"] = "en-AU"
+    print(f"Google TTS ready: {main_voice} ({path.stat().st_size} bytes, segments={len(parts)})")
     return path
+
 
 
 def download_voiceover(directory: Path) -> Path | None:
