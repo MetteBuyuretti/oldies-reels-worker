@@ -518,6 +518,16 @@ def build_turkish_dj_script(candidate: dict) -> str:
     return " ".join(text for _, text in build_turkish_dj_parts(candidate)).strip()
 
 
+def turkish_genitive(name: str) -> str:
+    """Add a simple Turkish genitive suffix to proper names: Sinatra'nın, Elvis'in."""
+    clean = name.strip()
+    lowered = clean.casefold()
+    last_vowel = next((ch for ch in reversed(lowered) if ch in "aeıioöuü"), "a")
+    suffix = "ın" if last_vowel in "aı" else "in" if last_vowel in "ei" else "un" if last_vowel in "ou" else "ün"
+    buffer = "n" if lowered and lowered[-1] in "aeıioöuü" else ""
+    return f"{clean}'{buffer}{suffix}"
+
+
 def build_turkish_gemini_script(candidate: dict) -> str:
     """Natural 15-second Turkish DJ copy for expressive Gemini TTS."""
     artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
@@ -545,10 +555,14 @@ def build_turkish_gemini_script(candidate: dict) -> str:
         )
     if title and uk_no1:
         weeks_text = tr_numbers.get(weeks, str(weeks)) if weeks else ""
-        extra = f" Ve tam {weeks_text} hafta zirvede kaldı!" if weeks else ""
+        if weeks:
+            return (
+                f"{year}'ye gidiyoruz... {turkish_genitive(artist)} {title} albümü İngiltere'de zirveye çıktı. "
+                f"Tam {weeks_text} hafta bir numarada! Güzel hikâye... Oldies Radyo."
+            )
         return (
-            f"{year}'ye gidiyoruz... {artist}'ın {title} albümü İngiltere'de bir numaraya çıktı."
-            f"{extra} Güzel bir plak hikâyesi, değil mi? Oldies Radyo."
+            f"{year}'ye gidiyoruz... {turkish_genitive(artist)} {title} albümü İngiltere'de zirveye çıktı. "
+            "Güzel bir plak hikâyesi... Oldies Radyo."
         )
     if title:
         return (
