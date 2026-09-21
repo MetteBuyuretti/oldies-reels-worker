@@ -1,4 +1,4 @@
-name: Gemini Turkish DJ Audition
+name: Turkish DJ Voice Audition
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        voice: [Charon, Fenrir, Orus]
+        voice: [Fenrir, Iapetus, Orus]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -39,25 +39,20 @@ jobs:
           from google.auth.transport.requests import Request
 
           project=os.environ["GOOGLE_PROJECT"]
-          voice=os.environ["VOICE"]
+          short=os.environ["VOICE"]
+          voice=f"tr-TR-Chirp3-HD-{short}"
           creds,_=google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
           creds.refresh(Request())
 
-          prompt=(
-              "Türkçe konuşan deneyimli bir radyo DJ'i gibi oku. Ses sıcak, güler yüzlü ve hafif heyecanlı olsun; "
-              "dinleyiciyle birebir konuşuyormuş gibi doğal ve rahat davran. Reklam spikeri, haber spikeri ya da fragman sesi gibi olma. "
-              "Cümleleri fazla kusursuz ve mekanik bağlama; küçük doğal nefesler ve mikro duraklamalar bırak. "
-              "Frank Sinatra ve İngilizce albüm adı A Swingin' Affair ifadesini rahat ve doğal İngilizce telaffuz et, sonra Türkçeye akıcı biçimde dön. "
-              "Son iki kelime olan Oldies Radyo'yu bağırma veya sloganlaştırma; hafif gülümseyen, sıcak ve doğal bir kapanış gibi söyle."
-          )
           text=(
-              "1957'ye gidiyoruz. Frank Sinatra'nın A Swingin' Affair! albümü İngiltere'de bir numaraya çıktı "
-              "ve tam yedi hafta zirvede kaldı. Müzik tarihinden küçük ama güzel bir not... Oldies Radyo."
+              "1957'ye gidiyoruz... Frank Sinatra'nın A Swingin' Affair albümü, İngiltere'de bir numaraya çıktı. "
+              "Hem de tam yedi hafta zirvede kaldı! Güzel bir plak hikâyesi, değil mi? "
+              "Müzik tarihinden bir küçük not daha... Oldies Radyo."
           )
           body={
-              "input":{"prompt":prompt,"text":text},
-              "voice":{"languageCode":"tr-TR","name":voice,"modelName":"gemini-2.5-flash-tts"},
-              "audioConfig":{"audioEncoding":"MP3"}
+              "input":{"text":text},
+              "voice":{"languageCode":"tr-TR","name":voice},
+              "audioConfig":{"audioEncoding":"MP3","speakingRate":1.04}
           }
           r=requests.post(
               "https://texttospeech.googleapis.com/v1/text:synthesize",
@@ -73,7 +68,7 @@ jobs:
               print(r.text[:2000]); raise SystemExit(1)
           data=base64.b64decode(r.json()["audioContent"])
           os.makedirs("out",exist_ok=True)
-          open(f"out/turkish-dj-{voice.lower()}.mp3","wb").write(data)
+          open(f"out/turkish-dj-{short.lower()}.mp3","wb").write(data)
           PY
       - uses: actions/upload-artifact@v4
         if: always()
