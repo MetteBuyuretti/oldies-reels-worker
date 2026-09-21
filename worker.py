@@ -28,7 +28,7 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 from zero_cost import research_candidates
 
 OUTPUT = Path("output")
-WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 18
+WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 15
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
 USER_AGENT = "OldiesRadyoBot/1.0 (https://oldiesradyo.com; info@oldiesradyo.com)"
 MAX_VIDEO_BYTES = 100 * 1024 * 1024
@@ -307,6 +307,102 @@ def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, acce
     draw.text((790, 1837), "oldiesradyo.com", font=font(22), fill=(245, 245, 245, 230))
 
 
+
+def reel_language() -> str:
+    value = os.getenv("OLDIES_REELS_LANGUAGE", "tr").strip().lower()
+    if value not in {"tr", "en"}:
+        raise RuntimeError("OLDIES_REELS_LANGUAGE must be 'tr' or 'en'")
+    return value
+
+
+def english_display_copy(candidate: dict) -> dict:
+    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
+    event_date = str(candidate.get("event_date", "")).strip()
+    kind = str(candidate.get("kind", "events"))
+    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+    source = re.sub(r"\s+", " ", str(candidate.get("source_text", "")).strip())
+
+    try:
+        parsed = datetime.strptime(event_date, "%Y-%m-%d")
+        date_text = parsed.strftime("%b %d, %Y").upper()
+        year = parsed.strftime("%Y")
+    except ValueError:
+        date_text = event_date.upper()
+        year = event_date[:4]
+
+    if kind == "births":
+        hook = f"{artist} • BORN ON THIS DAY"
+        fact1 = f"{artist} was born on this day in {year}."
+        fact2 = "A voice from the golden years of music, remembered on Oldies Radyo."
+        closing = f"REMEMBER {artist}"
+    elif kind == "deaths":
+        hook = f"REMEMBERING {artist}"
+        fact1 = f"{artist} passed away on this day in {year}."
+        fact2 = "The music lives on — and so do the memories."
+        closing = f"{artist} • THE MUSIC LIVES ON"
+    else:
+        hook = f"{title} • ON THIS DAY" if title else f"{artist} • ON THIS DAY"
+        fact1 = (
+            f"{artist} made music history with '{title}' in {year}."
+            if title else f"{artist} made music history on this day in {year}."
+        )
+        fact2 = textwrap.shorten(source, width=118, placeholder="...") if source else "Another story from the golden years of music."
+        closing = f"PLAY TODAY: {title}" if title else f"{artist} • OLDIES RADYO"
+
+    caption = (
+        f"On this day in music history: {artist}. "
+        f"{fact1} {fact2}\n\n"
+        "More great records and the stories behind them on Oldies Radyo. "
+        "#OldiesRadyo #OnThisDayInMusic"
+    )
+    return {
+        "date_label": f"{date_text} • MUSIC HISTORY",
+        "hook": hook,
+        "event_headline": hook,
+        "closing_headline": closing,
+        "facts": [fact1, fact2],
+        "caption": caption[:900],
+    }
+
+
+def apply_reel_language(candidate: dict, language: str) -> dict:
+    localized = dict(candidate)
+    if language == "en":
+        localized.update(english_display_copy(candidate))
+    localized["reels_language"] = language
+    return localized
+
+
+def build_turkish_dj_script(candidate: dict) -> str:
+    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
+    event_date = str(candidate.get("event_date", "")).strip()
+    year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
+    kind = str(candidate.get("kind", "events"))
+    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+
+    if kind == "births":
+        script = (
+            f"Bugün {artist}'ın doğum yıldönümü. {year}'da bugün dünyaya geldi. "
+            "Müziğin altın yıllarından unutulmayan isimleri Oldies Radyo'da yaşamaya devam ediyor."
+        )
+    elif kind == "deaths":
+        script = (
+            f"Bugün {artist}'ı müziğiyle anıyoruz. {year}'da bugün aramızdan ayrıldı. "
+            "Şarkıları ve anıları Oldies Radyo'da yaşamaya devam ediyor."
+        )
+    elif title:
+        script = (
+            f"Bugün müzik tarihinde, {year}. {artist}, '{title}' ile unutulmaz bir sayfa açtı. "
+            "O günlerin büyük şarkıları ve hikâyeleri Oldies Radyo'da yaşamaya devam ediyor."
+        )
+    else:
+        script = (
+            f"Bugün müzik tarihinde, {year}. {artist} için unutulmaz bir gün. "
+            "Müziğin altın yıllarından bir hikâye daha, Oldies Radyo'da."
+        )
+    return re.sub(r"\s+", " ", script).strip()
+
+
 def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Path]:
     artist = str(candidate["artist"])
     hook = str(candidate.get("event_headline") or candidate.get("hook") or artist)
@@ -314,11 +410,25 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Pa
     while len(facts) < 2:
         facts.append("")
     closing = str(candidate.get("closing_headline") or f"{artist} • OLDIES RADYO")
+    language = str(candidate.get("reels_language", "tr"))
+
+    if language == "en":
+        accents = (
+            "OLDIES RADYO • ON THIS DAY IN MUSIC",
+            "THE STORY BEHIND THE RECORD",
+            "OLDIES RADYO • LISTEN • REMEMBER",
+        )
+    else:
+        accents = (
+            "OLDIES RADYO • MÜZİK TARİHİNDE BUGÜN",
+            "HİKÂYENİN DETAYI",
+            "OLDIES RADYO • DİNLE • HATIRLA",
+        )
 
     scenes = [
-        (hook, str(candidate["date_label"]), "OLDIES RADYO • MÜZİK TARİHİNDE BUGÜN"),
-        (artist, str(facts[0]), "HİKÂYENİN DETAYI"),
-        (closing, str(facts[1]), "OLDIES RADYO • DİNLE • HATIRLA"),
+        (hook, str(candidate["date_label"]), accents[0]),
+        (artist, str(facts[0]), accents[1]),
+        (closing, str(facts[1]), accents[2]),
     ]
 
     paths = []
@@ -345,34 +455,41 @@ def build_english_dj_script(candidate: dict) -> str:
     if kind == "births":
         script = (
             f"Born on this day in {year}: {artist}. "
-            "Another voice from the golden years of music, remembered here on Oldies Radyo."
+            "Another voice from the golden years of music, remembered here on Oldies Radyo. "
+            "And there's more great music ahead."
         )
     elif kind == "deaths":
         script = (
             f"Remembering {artist}, who left us on this day in {year}. "
-            "The music lives on — right here on Oldies Radyo."
+            "The music lives on — right here on Oldies Radyo. "
+            "And there's more great music ahead."
         )
     elif title:
         script = (
             f"On this day in {year}, {artist} made music history with '{title}'. "
-            "You're with Oldies Radyo — keeping the great records and their stories alive."
+            "You're with Oldies Radyo — keeping the great records and their stories alive. "
+            "And there's more great music ahead."
         )
     else:
         script = (
             f"On this day in {year}, {artist} made music history. "
-            "You're with Oldies Radyo — another story from the golden years of music."
+            "You're with Oldies Radyo — another story from the golden years of music. "
+            "And there's more great music ahead."
         )
     return re.sub(r"\s+", " ", script).strip()
 
 
 def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
-    """Generate an optional English DJ voice using Google Cloud Chirp 3 HD."""
+    """Generate a language-matched DJ voice using Google Cloud Chirp 3 HD."""
     enabled = os.getenv("OLDIES_TTS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
     if not enabled:
         return None
 
-    language = os.getenv("OLDIES_TTS_LANGUAGE", "en-AU").strip() or "en-AU"
-    voice_name = os.getenv("OLDIES_TTS_VOICE", "en-AU-Chirp3-HD-Charon").strip() or "en-AU-Chirp3-HD-Charon"
+    mode = str(candidate.get("reels_language") or reel_language())
+    default_language = "en-AU" if mode == "en" else "tr-TR"
+    default_voice = "en-AU-Chirp3-HD-Charon" if mode == "en" else "tr-TR-Chirp3-HD-Charon"
+    language = os.getenv("OLDIES_TTS_LANGUAGE", "").strip() or default_language
+    voice_name = os.getenv("OLDIES_TTS_VOICE", "").strip() or default_voice
     project = os.getenv("OLDIES_GCP_PROJECT", "").strip()
     credentials, detected_project = google_auth_default(
         scopes=["https://www.googleapis.com/auth/cloud-platform"]
@@ -382,7 +499,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     if not project:
         raise RuntimeError("Google TTS is enabled but no Google Cloud project was resolved")
 
-    script = build_english_dj_script(candidate)
+    script = build_english_dj_script(candidate) if mode == "en" else build_turkish_dj_script(candidate)
     response = requests.post(
         "https://texttospeech.googleapis.com/v1/text:synthesize",
         headers={
@@ -410,7 +527,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
         raise RuntimeError("Generated Google voiceover failed size validation")
 
-    candidate["dj_script_en"] = script
+    candidate["dj_script_en" if mode == "en" else "dj_script_tr"] = script
     candidate["tts_voice"] = voice_name
     candidate["tts_language"] = language
     print(f"Google TTS ready: {voice_name} ({path.stat().st_size} bytes)")
@@ -479,14 +596,14 @@ def download_voiceover(directory: Path) -> Path | None:
 def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> None:
     inputs = []
     for scene in scenes:
-        inputs += ["-loop", "1", "-t", "6.6", "-i", str(scene)]
+        inputs += ["-loop", "1", "-t", "5.5", "-i", str(scene)]
 
     graph = (
-        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00050,1.08)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
-        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00036,1.065)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
-        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00046,1.075)':d=198:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
-        "[a][b]xfade=transition=fade:duration=0.65:offset=5.75[x];"
-        "[x][c]xfade=transition=smoothleft:duration=0.70:offset=11.45[v]"
+        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00050,1.08)':d=165:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
+        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00036,1.065)':d=165:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
+        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00046,1.075)':d=165:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
+        "[a][b]xfade=transition=fade:duration=0.55:offset=4.95[x];"
+        "[x][c]xfade=transition=smoothleft:duration=0.55:offset=9.90[v]"
     )
     if voiceover:
         inputs += ["-i", str(voiceover)]
@@ -670,6 +787,7 @@ def main() -> None:
         raise RuntimeError("No zero-cost candidate had three usable licensed photos. " + " | ".join(photo_errors))
     candidate["image_credits"] = credits
     candidate["pipeline"] = "zero-cost-v1"
+    candidate = apply_reel_language(candidate, reel_language())
     voiceover = download_voiceover(OUTPUT)
     voiceover_source = "external_https" if voiceover else "none"
     if not voiceover:
@@ -689,6 +807,16 @@ def main() -> None:
         result = {"success": True, "preview_only": True, "voiceover": bool(voiceover)}
         (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
         print("Preview-only render completed; WordPress draft upload was intentionally skipped.")
+        return
+
+    if candidate.get("reels_language") == "en":
+        result = {
+            "success": True,
+            "facebook_global_ready": True,
+            "upload_skipped": "facebook_global_delivery_not_connected_in_this_worker",
+        }
+        (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+        print("English Global Reel rendered successfully; TR Instagram review upload was intentionally skipped.")
         return
 
     result = upload_draft(candidate, video, bearer, base_url)
