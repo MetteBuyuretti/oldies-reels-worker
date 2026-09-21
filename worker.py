@@ -518,6 +518,76 @@ def build_turkish_dj_script(candidate: dict) -> str:
     return " ".join(text for _, text in build_turkish_dj_parts(candidate)).strip()
 
 
+def turkish_genitive(name: str) -> str:
+    """Add a simple Turkish genitive suffix to proper names: Sinatra'nın, Elvis'in."""
+    clean = name.strip()
+    lowered = clean.casefold()
+    last_vowel = next((ch for ch in reversed(lowered) if ch in "aeıioöuü"), "a")
+    suffix = "ın" if last_vowel in "aı" else "in" if last_vowel in "ei" else "un" if last_vowel in "ou" else "ün"
+    buffer = "n" if lowered and lowered[-1] in "aeıioöuü" else ""
+    return f"{clean}'{buffer}{suffix}"
+
+
+def build_turkish_gemini_script(candidate: dict) -> str:
+    """Natural 15-second Turkish DJ copy for expressive Gemini TTS."""
+    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
+    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+    event_date = str(candidate.get("event_date", "")).strip()
+    year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
+    kind = str(candidate.get("kind", "events"))
+    weeks, uk_no1 = _event_chart_details(candidate)
+    tr_numbers = {
+        1: "bir", 2: "iki", 3: "üç", 4: "dört", 5: "beş",
+        6: "altı", 7: "yedi", 8: "sekiz", 9: "dokuz", 10: "on",
+    }
+
+    if kind == "births":
+        return (
+            f"{year}'ye gidiyoruz... {artist} bugün doğdu. "
+            "Müziğin altın yıllarından unutulmayan bir isim. "
+            "Güzel şarkılar, güzel anılar... Oldies Radyo."
+        )
+    if kind == "deaths":
+        return (
+            f"Bugün {artist}'ı müziğiyle hatırlıyoruz. "
+            f"{year}'da bugün aramızdan ayrıldı. "
+            "Ama o şarkılar hâlâ bizimle... Oldies Radyo."
+        )
+    if title and uk_no1:
+        weeks_text = tr_numbers.get(weeks, str(weeks)) if weeks else ""
+        if weeks:
+            return (
+                f"{year}'ye gidiyoruz... {turkish_genitive(artist)} {title} albümü İngiltere'de zirveye çıktı. "
+                f"Tam {weeks_text} hafta bir numarada! Güzel hikâye... Oldies Radyo."
+            )
+        return (
+            f"{year}'ye gidiyoruz... {turkish_genitive(artist)} {title} albümü İngiltere'de zirveye çıktı. "
+            "Güzel bir plak hikâyesi... Oldies Radyo."
+        )
+    if title:
+        return (
+            f"{year}'ye gidiyoruz... {artist} ve {title}. "
+            "Müzik tarihinden küçük ama güzel bir not. "
+            "O günlerin şarkıları hâlâ burada... Oldies Radyo."
+        )
+    return (
+        f"{year}'ye gidiyoruz... Bugün {artist} için müzik tarihinde özel bir gün. "
+        "Bir güzel hikâye daha, o yıllardan bugüne... Oldies Radyo."
+    )
+
+
+def turkish_gemini_style_prompt() -> str:
+    return (
+        "Türkçe konuşan deneyimli ve sevilen bir radyo DJ'i gibi oku. "
+        "Ses sıcak, içten, güler yüzlü ve canlı olsun; dinleyiciye güzel bir müzik anısını "
+        "heyecanla anlatıyormuş gibi konuş. Reklam spikeri, haber spikeri veya fragman sesi gibi olma. "
+        "Doğal iniş çıkışlar, küçük nefesler ve mikro duraklamalar bırak; metni kusursuz bir makine gibi okuma. "
+        "Sanatçı ve İngilizce şarkı ya da albüm adlarını rahat ve doğal İngilizce telaffuz et, sonra Türkçeye "
+        "aynı ses karakteriyle akıcı biçimde dön. Şaşırtıcı bir sayı veya başarı varsa keyifli, hafif bir heyecan ver. "
+        "Son iki kelime olan Oldies Radyo'yu slogan gibi bağırma; gülümseyen, sıcak ve doğal bir imza gibi bitir."
+    )
+
+
 
 def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Path]:
     artist = str(candidate["artist"])
@@ -626,6 +696,42 @@ def _google_tts_bytes(
     return base64.b64decode(audio_content)
 
 
+def _gemini_tts_bytes(
+    *,
+    text: str,
+    prompt: str,
+    language: str,
+    voice_name: str,
+    project: str,
+    token: str,
+) -> bytes:
+    response = requests.post(
+        "https://texttospeech.googleapis.com/v1/text:synthesize",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "x-goog-user-project": project,
+            "Content-Type": "application/json; charset=utf-8",
+            "User-Agent": USER_AGENT,
+        },
+        json={
+            "input": {"prompt": prompt, "text": text},
+            "voice": {
+                "languageCode": language,
+                "name": voice_name,
+                "modelName": "gemini-2.5-flash-tts",
+            },
+            "audioConfig": {"audioEncoding": "MP3"},
+        },
+        timeout=120,
+    )
+    if response.status_code >= 400:
+        raise RuntimeError(f"Gemini TTS {response.status_code}: {response.text[:700]}")
+    audio_content = str(response.json().get("audioContent", "")).strip()
+    if not audio_content:
+        raise RuntimeError("Gemini TTS returned no audio content")
+    return base64.b64decode(audio_content)
+
+
 def _join_tts_segments(paths: list[Path], target: Path) -> None:
     if len(paths) == 1:
         target.write_bytes(paths[0].read_bytes())
@@ -658,7 +764,7 @@ def _join_tts_segments(paths: list[Path], target: Path) -> None:
 
 
 def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
-    """Generate a language-matched DJ voice; English titles inside TR links use an English voice."""
+    """Use expressive Gemini Flash for Turkish; keep Chirp 3 HD as safe fallback."""
     enabled = os.getenv("OLDIES_TTS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
     if not enabled:
         return None
@@ -673,6 +779,37 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     if not project:
         raise RuntimeError("Google TTS is enabled but no Google Cloud project was resolved")
     token = str(credentials.token)
+
+    # Turkish: one expressive Gemini Flash request per Reel. This keeps cost predictable
+    # and lets the same voice naturally handle Turkish plus English artist/title names.
+    engine = os.getenv("OLDIES_TTS_ENGINE", "auto").strip().lower() or "auto"
+    fallback_enabled = os.getenv("OLDIES_TTS_FALLBACK", "true").strip().lower() in {"1", "true", "yes", "on"}
+    if mode == "tr" and engine in {"auto", "gemini", "gemini_flash"}:
+        gemini_voice = os.getenv("OLDIES_GEMINI_TTS_VOICE", "Charon").strip() or "Charon"
+        script = build_turkish_gemini_script(candidate)
+        try:
+            raw = _gemini_tts_bytes(
+                text=script,
+                prompt=turkish_gemini_style_prompt(),
+                language="tr-TR",
+                voice_name=gemini_voice,
+                project=project,
+                token=token,
+            )
+            path = directory / "voiceover-google.mp3"
+            path.write_bytes(raw)
+            if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
+                raise RuntimeError("Generated Gemini voiceover failed size validation")
+            candidate["dj_script_tr"] = script
+            candidate["tts_voice"] = gemini_voice
+            candidate["tts_language"] = "tr-TR"
+            candidate["tts_engine"] = "gemini-2.5-flash-tts"
+            print(f"Gemini Flash TTS ready: {gemini_voice} ({path.stat().st_size} bytes)")
+            return path
+        except Exception as exc:
+            if not fallback_enabled:
+                raise
+            print(f"Gemini Flash TTS unavailable; falling back to Chirp 3 HD: {exc}")
 
     main_default_language = "en-AU" if mode == "en" else "tr-TR"
     main_default_voice = "en-AU-Chirp3-HD-Charon" if mode == "en" else "tr-TR-Chirp3-HD-Charon"
@@ -709,10 +846,11 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     candidate["dj_script_en" if mode == "en" else "dj_script_tr"] = script
     candidate["tts_voice"] = main_voice
     candidate["tts_language"] = main_language
+    candidate["tts_engine"] = "chirp3-hd"
     if mode == "tr" and any(lang.startswith("en-") for lang, _ in parts):
         candidate["tts_title_voice"] = title_voice
         candidate["tts_title_language"] = "en-AU"
-    print(f"Google TTS ready: {main_voice} ({path.stat().st_size} bytes, segments={len(parts)})")
+    print(f"Chirp 3 HD ready: {main_voice} ({path.stat().st_size} bytes, segments={len(parts)})")
     return path
 
 
@@ -803,6 +941,7 @@ def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> N
             "-c:v", "libx264", "-preset", "medium",
             "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k",
             "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
+            "-ar", "48000", "-ac", "2",
             "-movflags", "+faststart", str(target),
         ]
     else:
@@ -976,7 +1115,7 @@ def main() -> None:
     if not voiceover:
         voiceover = synthesize_google_voice(candidate, OUTPUT)
         if voiceover:
-            voiceover_source = "google_chirp3"
+            voiceover_source = str(candidate.get("tts_engine") or "google_tts")
     candidate["voiceover"] = {
         "enabled": bool(voiceover),
         "source": voiceover_source,
