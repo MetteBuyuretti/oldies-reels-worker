@@ -277,12 +277,13 @@ def add_gradient(canvas: Image.Image) -> None:
 
 def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, accent: str) -> None:
     # Editorial lower-third: restrained, readable and consistent across eras.
-    draw.rounded_rectangle((72, 1198, 1008, 1256), radius=22, fill=(12, 12, 15, 205))
+    # Keep the bottom ~280 px clear for Instagram/Reels interface overlays.
+    draw.rounded_rectangle((72, 900, 1008, 958), radius=22, fill=(12, 12, 15, 205))
     accent_font = font(25, True)
-    draw.text((104, 1212), accent, font=accent_font, fill=(236, 193, 77, 255))
+    draw.text((104, 914), accent, font=accent_font, fill=(236, 193, 77, 255))
 
-    title_font, title_lines = fit_text(draw, headline.upper(), 880, 84, 46)
-    y = 1300
+    title_font, title_lines = fit_text(draw, headline.upper(), 880, 82, 44)
+    y = 1006
     for line in title_lines[:3]:
         draw.text(
             (96, y), line, font=title_font,
@@ -302,9 +303,9 @@ def draw_text_block(draw: ImageDraw.ImageDraw, headline: str, subline: str, acce
         y += sub_font.size + 7
 
     # Consistent brand signature, clear but not ad-like.
-    draw.line((96, 1810, 984, 1810), fill=(255, 255, 255, 95), width=2)
-    draw.text((96, 1830), "OLDIES RADYO", font=font(34, True), fill=(236, 193, 77, 255))
-    draw.text((790, 1837), "oldiesradyo.com", font=font(22), fill=(245, 245, 245, 230))
+    draw.line((96, 1600, 984, 1600), fill=(255, 255, 255, 95), width=2)
+    draw.text((96, 1620), "OLDIES RADYO", font=font(34, True), fill=(236, 193, 77, 255))
+    draw.text((790, 1627), "oldiesradyo.com", font=font(22), fill=(245, 245, 245, 230))
 
 
 
@@ -313,6 +314,90 @@ def reel_language() -> str:
     if value not in {"tr", "en"}:
         raise RuntimeError("OLDIES_REELS_LANGUAGE must be 'tr' or 'en'")
     return value
+
+
+def _number_word_to_int(word: str) -> int | None:
+    return {
+        "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+        "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+    }.get(word.casefold())
+
+
+def _event_chart_details(candidate: dict) -> tuple[int | None, bool]:
+    source = re.sub(r"\s+", " ", str(candidate.get("source_text", "")).strip())
+    weeks = None
+    for pattern in (
+        r"([a-z]+)-week run at No\.?1 in the UK",
+        r"first of ([a-z]+) consecutive weeks",
+        r"for ([a-z]+) consecutive weeks",
+    ):
+        match = re.search(pattern, source, re.I)
+        if match:
+            weeks = _number_word_to_int(match.group(1))
+            break
+    uk_no1 = bool(re.search(r"No\.?1 in the UK|number one in the UK", source, re.I))
+    return weeks, uk_no1
+
+
+def turkish_display_copy(candidate: dict) -> dict:
+    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
+    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+    event_date = str(candidate.get("event_date", "")).strip()
+    kind = str(candidate.get("kind", "events"))
+    original_facts = list(candidate.get("facts") or ["", ""])
+    while len(original_facts) < 2:
+        original_facts.append("")
+
+    try:
+        parsed = datetime.strptime(event_date, "%Y-%m-%d")
+        month_names = ["", "OCAK", "ŞUBAT", "MART", "NİSAN", "MAYIS", "HAZİRAN", "TEMMUZ", "AĞUSTOS", "EYLÜL", "EKİM", "KASIM", "ARALIK"]
+        date_text = f"{parsed.day} {month_names[parsed.month]} {parsed.year}"
+        year = str(parsed.year)
+    except ValueError:
+        date_text = event_date.upper()
+        year = event_date[:4]
+
+    weeks, uk_no1 = _event_chart_details(candidate)
+
+    if kind == "births":
+        hook = f"{artist.upper()} • {year}"
+        fact1 = f"{artist}, {year} yılında bugün doğdu."
+        fact2 = original_facts[1] or "Müziğiyle bir dönemin hafızasında yer etti."
+        closing = "MÜZİĞİN HAFIZASINDA"
+    elif kind == "deaths":
+        hook = f"{artist.upper()} • HATIRLIYORUZ"
+        fact1 = f"{artist}, {year} yılında bugün hayatını kaybetti."
+        fact2 = original_facts[1] or "Şarkıları yıllar sonra da dinlenmeye devam ediyor."
+        closing = "ŞARKILARI YAŞAMAYA DEVAM EDİYOR"
+    elif title and uk_no1:
+        hook = f"{artist.upper()} • {year}"
+        fact1 = f"'{title}', İngiltere listelerinde 1 numaraya çıktı."
+        fact2 = f"Zirvedeki yerini {weeks} hafta korudu." if weeks else "Liste zirvesine yerleşti."
+        closing = "MÜZİK TARİHİNDEN BİR SAYFA"
+    elif title:
+        hook = f"{artist.upper()} • {year}"
+        fact1 = original_facts[0] or f"{artist} için müzik tarihinde önemli bir gündü."
+        fact2 = original_facts[1] or f"Öne çıkan kayıt: '{title}'."
+        closing = "MÜZİK TARİHİNDEN BİR SAYFA"
+    else:
+        hook = f"{artist.upper()} • {year}"
+        fact1 = original_facts[0]
+        fact2 = original_facts[1]
+        closing = "MÜZİK TARİHİNDEN BİR SAYFA"
+
+    caption = (
+        f"Bugün müzik tarihinde: {artist}. {fact1} {fact2}\n\n"
+        "Müziğin altın yılları ve unutulmayan hikâyeler Oldies Radyo'da. "
+        "#OldiesRadyo #MuzikTarihindeBugun"
+    )
+    return {
+        "date_label": f"{date_text} • MÜZİK TARİHİNDE",
+        "hook": hook,
+        "event_headline": hook,
+        "closing_headline": closing,
+        "facts": [fact1, fact2],
+        "caption": caption[:900],
+    }
 
 
 def english_display_copy(candidate: dict) -> dict:
@@ -330,29 +415,37 @@ def english_display_copy(candidate: dict) -> dict:
         date_text = event_date.upper()
         year = event_date[:4]
 
+    weeks, uk_no1 = _event_chart_details(candidate)
+
     if kind == "births":
-        hook = f"{artist} • BORN ON THIS DAY"
+        hook = f"{artist.upper()} • {year}"
         fact1 = f"{artist} was born on this day in {year}."
-        fact2 = "A voice from the golden years of music, remembered on Oldies Radyo."
-        closing = f"REMEMBER {artist}"
+        fact2 = "A voice from the golden years, remembered on Oldies Radyo."
+        closing = "A NAME THAT STILL RESONATES"
     elif kind == "deaths":
-        hook = f"REMEMBERING {artist}"
+        hook = f"REMEMBERING {artist.upper()}"
         fact1 = f"{artist} passed away on this day in {year}."
-        fact2 = "The music lives on — and so do the memories."
-        closing = f"{artist} • THE MUSIC LIVES ON"
+        fact2 = "The records remain, and so do the memories."
+        closing = "THE MUSIC LIVES ON"
+    elif title and uk_no1:
+        hook = f"{artist.upper()} • {year}"
+        fact1 = f"'{title}' reached No.1 in the UK."
+        fact2 = f"It stayed on top for {weeks} consecutive weeks." if weeks else "It became a UK chart-topper."
+        closing = "A PAGE FROM MUSIC HISTORY"
+    elif title:
+        hook = f"{artist.upper()} • {year}"
+        fact1 = textwrap.shorten(source, width=116, placeholder="...") if source else f"{artist} made music history with '{title}'."
+        fact2 = f"One of the records remembered from {year}."
+        closing = "A PAGE FROM MUSIC HISTORY"
     else:
-        hook = f"{title} • ON THIS DAY" if title else f"{artist} • ON THIS DAY"
-        fact1 = (
-            f"{artist} made music history with '{title}' in {year}."
-            if title else f"{artist} made music history on this day in {year}."
-        )
-        fact2 = textwrap.shorten(source, width=118, placeholder="...") if source else "Another story from the golden years of music."
-        closing = f"PLAY TODAY: {title}" if title else f"{artist} • OLDIES RADYO"
+        hook = f"{artist.upper()} • {year}"
+        fact1 = textwrap.shorten(source, width=116, placeholder="...") if source else f"{artist} made music history on this day."
+        fact2 = "Another story from the golden years of music."
+        closing = "A PAGE FROM MUSIC HISTORY"
 
     caption = (
-        f"On this day in music history: {artist}. "
-        f"{fact1} {fact2}\n\n"
-        "More great records and the stories behind them on Oldies Radyo. "
+        f"On this day in music history: {artist}. {fact1} {fact2}\n\n"
+        "Great records, unforgettable names and the stories behind them — Oldies Radyo. "
         "#OldiesRadyo #OnThisDayInMusic"
     )
     return {
@@ -367,40 +460,63 @@ def english_display_copy(candidate: dict) -> dict:
 
 def apply_reel_language(candidate: dict, language: str) -> dict:
     localized = dict(candidate)
-    if language == "en":
-        localized.update(english_display_copy(candidate))
+    localized.update(english_display_copy(candidate) if language == "en" else turkish_display_copy(candidate))
     localized["reels_language"] = language
     return localized
 
 
-def build_turkish_dj_script(candidate: dict) -> str:
+def build_turkish_dj_parts(candidate: dict) -> list[tuple[str, str]]:
+    """Return language-tagged speech parts so English titles are never read with Turkish phonetics."""
     artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
+    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
     event_date = str(candidate.get("event_date", "")).strip()
     year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
-    kind = str(candidate.get("kind", "events"))
-    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+    weeks, uk_no1 = _event_chart_details(candidate)
 
-    if kind == "births":
-        script = (
-            f"Bugün {artist}'ın doğum yıldönümü. {year}'da bugün dünyaya geldi. "
-            "Müziğin altın yıllarından unutulmayan isimleri Oldies Radyo'da yaşamaya devam ediyor."
-        )
-    elif kind == "deaths":
-        script = (
-            f"Bugün {artist}'ı müziğiyle anıyoruz. {year}'da bugün aramızdan ayrıldı. "
-            "Şarkıları ve anıları Oldies Radyo'da yaşamaya devam ediyor."
-        )
-    elif title:
-        script = (
-            f"Bugün müzik tarihinde, {year}. {artist}, '{title}' ile unutulmaz bir sayfa açtı. "
-            "O günlerin büyük şarkıları ve hikâyeleri Oldies Radyo'da yaşamaya devam ediyor."
-        )
-    else:
-        script = (
-            f"Bugün müzik tarihinde, {year}. {artist} için unutulmaz bir gün. "
-            "Müziğin altın yıllarından bir hikâye daha, Oldies Radyo'da."
-        )
-    return re.sub(r"\s+", " ", script).strip()
+    tr_numbers = {
+        1: "bir", 2: "iki", 3: "üç", 4: "dört", 5: "beş",
+        6: "altı", 7: "yedi", 8: "sekiz", 9: "dokuz", 10: "on",
+    }
+
+    if title and uk_no1:
+        before = f"{year}'ye gidiyoruz. {artist} imzalı kayıt"
+        after = "İngiltere'de bir numaraya çıktı."
+        if weeks:
+            after += f" {tr_numbers.get(weeks, str(weeks)).capitalize()} hafta zirvede kaldı."
+        after += " Oldies Radyo."
+        return [("tr-TR", before), ("en-AU", title), ("tr-TR", after)]
+
+    facts = list(candidate.get("facts") or ["", ""])
+    while len(facts) < 2:
+        facts.append("")
+    spoken = re.sub(
+        r"\s+",
+        " ",
+        f"Bugün müzik tarihinde. {facts[0]} {facts[1]} Oldies Radyo.",
+    ).strip()
+
+    if not title:
+        return [("tr-TR", spoken)]
+
+    pattern = re.compile(r"['\"‘’“”]?" + re.escape(title) + r"['\"‘’“”]?", re.I)
+    match = pattern.search(spoken)
+    if not match:
+        return [("tr-TR", spoken)]
+
+    before = spoken[:match.start()].strip()
+    after = spoken[match.end():].strip()
+    parts: list[tuple[str, str]] = []
+    if before:
+        parts.append(("tr-TR", before))
+    parts.append(("en-AU", title))
+    if after:
+        parts.append(("tr-TR", after))
+    return parts
+
+
+def build_turkish_dj_script(candidate: dict) -> str:
+    return " ".join(text for _, text in build_turkish_dj_parts(candidate)).strip()
+
 
 
 def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Path]:
@@ -414,15 +530,15 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Pa
 
     if language == "en":
         accents = (
-            "OLDIES RADYO • ON THIS DAY IN MUSIC",
-            "THE STORY BEHIND THE RECORD",
-            "OLDIES RADYO • LISTEN • REMEMBER",
+            "ON THIS DAY IN MUSIC",
+            "THE STORY",
+            "OLDIES RADYO • MUSIC & MEMORIES",
         )
     else:
         accents = (
-            "OLDIES RADYO • MÜZİK TARİHİNDE BUGÜN",
-            "HİKÂYENİN DETAYI",
-            "OLDIES RADYO • DİNLE • HATIRLA",
+            "BUGÜN MÜZİK TARİHİNDE",
+            "O GÜN NE OLDU?",
+            "OLDIES RADYO • MÜZİĞİN HAFIZASI",
         )
 
     scenes = [
@@ -479,17 +595,75 @@ def build_english_dj_script(candidate: dict) -> str:
     return re.sub(r"\s+", " ", script).strip()
 
 
+def _google_tts_bytes(
+    *,
+    text: str,
+    language: str,
+    voice_name: str,
+    project: str,
+    token: str,
+) -> bytes:
+    response = requests.post(
+        "https://texttospeech.googleapis.com/v1/text:synthesize",
+        headers={
+            "Authorization": f"Bearer {token}",
+            "x-goog-user-project": project,
+            "Content-Type": "application/json; charset=utf-8",
+            "User-Agent": USER_AGENT,
+        },
+        json={
+            "input": {"text": text},
+            "voice": {"languageCode": language, "name": voice_name},
+            "audioConfig": {"audioEncoding": "MP3"},
+        },
+        timeout=90,
+    )
+    if response.status_code >= 400:
+        raise RuntimeError(f"Google TTS {response.status_code}: {response.text[:700]}")
+    audio_content = str(response.json().get("audioContent", "")).strip()
+    if not audio_content:
+        raise RuntimeError("Google TTS returned no audio content")
+    return base64.b64decode(audio_content)
+
+
+def _join_tts_segments(paths: list[Path], target: Path) -> None:
+    if len(paths) == 1:
+        target.write_bytes(paths[0].read_bytes())
+        return
+
+    inputs: list[str] = []
+    filters: list[str] = []
+    labels: list[str] = []
+    for index, path in enumerate(paths):
+        inputs += ["-i", str(path)]
+        label = f"a{index}"
+        labels.append(f"[{label}]")
+        filters.append(
+            f"[{index}:a]aresample=48000,"
+            f"aformat=sample_fmts=fltp:channel_layouts=mono[{label}]"
+        )
+    graph = ";".join(filters) + ";" + "".join(labels) + f"concat=n={len(paths)}:v=0:a=1[out]"
+    subprocess.run(
+        [
+            "ffmpeg", "-y", *inputs,
+            "-filter_complex", graph,
+            "-map", "[out]",
+            "-c:a", "libmp3lame", "-b:a", "192k",
+            str(target),
+        ],
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
 def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
-    """Generate a language-matched DJ voice using Google Cloud Chirp 3 HD."""
+    """Generate a language-matched DJ voice; English titles inside TR links use an English voice."""
     enabled = os.getenv("OLDIES_TTS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
     if not enabled:
         return None
 
     mode = str(candidate.get("reels_language") or reel_language())
-    default_language = "en-AU" if mode == "en" else "tr-TR"
-    default_voice = "en-AU-Chirp3-HD-Charon" if mode == "en" else "tr-TR-Chirp3-HD-Charon"
-    language = os.getenv("OLDIES_TTS_LANGUAGE", "").strip() or default_language
-    voice_name = os.getenv("OLDIES_TTS_VOICE", "").strip() or default_voice
     project = os.getenv("OLDIES_GCP_PROJECT", "").strip()
     credentials, detected_project = google_auth_default(
         scopes=["https://www.googleapis.com/auth/cloud-platform"]
@@ -498,40 +672,49 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     project = project or str(detected_project or "").strip()
     if not project:
         raise RuntimeError("Google TTS is enabled but no Google Cloud project was resolved")
+    token = str(credentials.token)
 
-    script = build_english_dj_script(candidate) if mode == "en" else build_turkish_dj_script(candidate)
-    response = requests.post(
-        "https://texttospeech.googleapis.com/v1/text:synthesize",
-        headers={
-            "Authorization": f"Bearer {credentials.token}",
-            "x-goog-user-project": project,
-            "Content-Type": "application/json; charset=utf-8",
-            "User-Agent": USER_AGENT,
-        },
-        json={
-            "input": {"text": script},
-            "voice": {"languageCode": language, "name": voice_name},
-            "audioConfig": {"audioEncoding": "MP3"},
-        },
-        timeout=90,
-    )
-    if response.status_code >= 400:
-        raise RuntimeError(f"Google TTS {response.status_code}: {response.text[:700]}")
-    payload = response.json()
-    audio_content = str(payload.get("audioContent", "")).strip()
-    if not audio_content:
-        raise RuntimeError("Google TTS returned no audio content")
+    main_default_language = "en-AU" if mode == "en" else "tr-TR"
+    main_default_voice = "en-AU-Chirp3-HD-Charon" if mode == "en" else "tr-TR-Chirp3-HD-Charon"
+    main_language = os.getenv("OLDIES_TTS_LANGUAGE", "").strip() or main_default_language
+    main_voice = os.getenv("OLDIES_TTS_VOICE", "").strip() or main_default_voice
+    title_voice = os.getenv("OLDIES_TTS_TITLE_VOICE", "").strip() or "en-AU-Chirp3-HD-Charon"
+
+    if mode == "en":
+        parts = [("en-AU", build_english_dj_script(candidate))]
+    else:
+        parts = build_turkish_dj_parts(candidate)
+
+    segment_paths: list[Path] = []
+    for index, (segment_language, text) in enumerate(parts):
+        voice = title_voice if segment_language.startswith("en-") and mode == "tr" else main_voice
+        language = segment_language if segment_language.startswith("en-") and mode == "tr" else main_language
+        raw = _google_tts_bytes(
+            text=text,
+            language=language,
+            voice_name=voice,
+            project=project,
+            token=token,
+        )
+        segment = directory / f"voiceover-segment-{index}.mp3"
+        segment.write_bytes(raw)
+        segment_paths.append(segment)
 
     path = directory / "voiceover-google.mp3"
-    path.write_bytes(base64.b64decode(audio_content))
+    _join_tts_segments(segment_paths, path)
     if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
         raise RuntimeError("Generated Google voiceover failed size validation")
 
+    script = build_english_dj_script(candidate) if mode == "en" else build_turkish_dj_script(candidate)
     candidate["dj_script_en" if mode == "en" else "dj_script_tr"] = script
-    candidate["tts_voice"] = voice_name
-    candidate["tts_language"] = language
-    print(f"Google TTS ready: {voice_name} ({path.stat().st_size} bytes)")
+    candidate["tts_voice"] = main_voice
+    candidate["tts_language"] = main_language
+    if mode == "tr" and any(lang.startswith("en-") for lang, _ in parts):
+        candidate["tts_title_voice"] = title_voice
+        candidate["tts_title_language"] = "en-AU"
+    print(f"Google TTS ready: {main_voice} ({path.stat().st_size} bytes, segments={len(parts)})")
     return path
+
 
 
 def download_voiceover(directory: Path) -> Path | None:
