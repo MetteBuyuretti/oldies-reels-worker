@@ -455,22 +455,26 @@ def build_english_dj_script(candidate: dict) -> str:
     if kind == "births":
         script = (
             f"Born on this day in {year}: {artist}. "
-            "Another voice from the golden years of music, remembered here on Oldies Radyo."
+            "Another voice from the golden years of music, remembered here on Oldies Radyo. "
+            "And there's more great music ahead."
         )
     elif kind == "deaths":
         script = (
             f"Remembering {artist}, who left us on this day in {year}. "
-            "The music lives on — right here on Oldies Radyo."
+            "The music lives on — right here on Oldies Radyo. "
+            "And there's more great music ahead."
         )
     elif title:
         script = (
             f"On this day in {year}, {artist} made music history with '{title}'. "
-            "You're with Oldies Radyo — keeping the great records and their stories alive."
+            "You're with Oldies Radyo — keeping the great records and their stories alive. "
+            "And there's more great music ahead."
         )
     else:
         script = (
             f"On this day in {year}, {artist} made music history. "
-            "You're with Oldies Radyo — another story from the golden years of music."
+            "You're with Oldies Radyo — another story from the golden years of music. "
+            "And there's more great music ahead."
         )
     return re.sub(r"\s+", " ", script).strip()
 
