@@ -2,6 +2,16 @@ name: Oldies Reels Draft Worker
 
 on:
   workflow_dispatch:
+    inputs:
+      voiceover_url:
+        description: "Optional HTTPS voiceover file (MP3/WAV/M4A/AAC/MP4)"
+        required: false
+        type: string
+      preview_only:
+        description: "Render artifact only; do not create a WordPress review draft"
+        required: false
+        default: false
+        type: boolean
   schedule:
     - cron: "0 9 * * *"
 
@@ -38,6 +48,8 @@ jobs:
           GITHUB_REF_NAME: ${{ github.ref_name }}
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          OLDIES_VOICEOVER_URL: ${{ inputs.voiceover_url }}
+          OLDIES_PREVIEW_ONLY: ${{ inputs.preview_only }}
         run: python worker.py
       - name: Keep preview for seven days
         if: always()
