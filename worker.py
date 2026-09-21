@@ -7,6 +7,7 @@ WordPress DRAFT_REVIEW behavior is preserved.
 """
 from __future__ import annotations
 
+import base64
 import hashlib
 import html
 import json
@@ -20,6 +21,8 @@ from io import BytesIO
 from pathlib import Path
 
 import requests
+from google.auth import default as google_auth_default
+from google.auth.transport.requests import Request as GoogleAuthRequest
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
 from zero_cost import research_candidates
@@ -330,6 +333,90 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Pa
 
 
 
+
+def build_english_dj_script(candidate: dict) -> str:
+    """Create a short factual English radio-DJ link from verified candidate fields."""
+    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
+    event_date = str(candidate.get("event_date", "")).strip()
+    year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
+    kind = str(candidate.get("kind", "events"))
+    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+
+    if kind == "births":
+        script = (
+            f"Born on this day in {year}: {artist}. "
+            "Another voice from the golden years of music, remembered here on Oldies Radyo."
+        )
+    elif kind == "deaths":
+        script = (
+            f"Remembering {artist}, who left us on this day in {year}. "
+            "The music lives on — right here on Oldies Radyo."
+        )
+    elif title:
+        script = (
+            f"On this day in {year}, {artist} made music history with '{title}'. "
+            "You're with Oldies Radyo — keeping the great records and their stories alive."
+        )
+    else:
+        script = (
+            f"On this day in {year}, {artist} made music history. "
+            "You're with Oldies Radyo — another story from the golden years of music."
+        )
+    return re.sub(r"\s+", " ", script).strip()
+
+
+def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
+    """Generate an optional English DJ voice using Google Cloud Chirp 3 HD."""
+    enabled = os.getenv("OLDIES_TTS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
+    if not enabled:
+        return None
+
+    language = os.getenv("OLDIES_TTS_LANGUAGE", "en-AU").strip() or "en-AU"
+    voice_name = os.getenv("OLDIES_TTS_VOICE", "en-AU-Chirp3-HD-Charon").strip() or "en-AU-Chirp3-HD-Charon"
+    project = os.getenv("OLDIES_GCP_PROJECT", "").strip()
+    credentials, detected_project = google_auth_default(
+        scopes=["https://www.googleapis.com/auth/cloud-platform"]
+    )
+    credentials.refresh(GoogleAuthRequest())
+    project = project or str(detected_project or "").strip()
+    if not project:
+        raise RuntimeError("Google TTS is enabled but no Google Cloud project was resolved")
+
+    script = build_english_dj_script(candidate)
+    response = requests.post(
+        "https://texttospeech.googleapis.com/v1/text:synthesize",
+        headers={
+            "Authorization": f"Bearer {credentials.token}",
+            "x-goog-user-project": project,
+            "Content-Type": "application/json; charset=utf-8",
+            "User-Agent": USER_AGENT,
+        },
+        json={
+            "input": {"text": script},
+            "voice": {"languageCode": language, "name": voice_name},
+            "audioConfig": {"audioEncoding": "MP3"},
+        },
+        timeout=90,
+    )
+    if response.status_code >= 400:
+        raise RuntimeError(f"Google TTS {response.status_code}: {response.text[:700]}")
+    payload = response.json()
+    audio_content = str(payload.get("audioContent", "")).strip()
+    if not audio_content:
+        raise RuntimeError("Google TTS returned no audio content")
+
+    path = directory / "voiceover-google.mp3"
+    path.write_bytes(base64.b64decode(audio_content))
+    if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
+        raise RuntimeError("Generated Google voiceover failed size validation")
+
+    candidate["dj_script_en"] = script
+    candidate["tts_voice"] = voice_name
+    candidate["tts_language"] = language
+    print(f"Google TTS ready: {voice_name} ({path.stat().st_size} bytes)")
+    return path
+
+
 def download_voiceover(directory: Path) -> Path | None:
     """Fetch an optional external voiceover without changing the zero-cost default path."""
     url = os.getenv("OLDIES_VOICEOVER_URL", "").strip()
@@ -584,9 +671,14 @@ def main() -> None:
     candidate["image_credits"] = credits
     candidate["pipeline"] = "zero-cost-v1"
     voiceover = download_voiceover(OUTPUT)
+    voiceover_source = "external_https" if voiceover else "none"
+    if not voiceover:
+        voiceover = synthesize_google_voice(candidate, OUTPUT)
+        if voiceover:
+            voiceover_source = "google_chirp3"
     candidate["voiceover"] = {
         "enabled": bool(voiceover),
-        "source": "external_https" if voiceover else "none",
+        "source": voiceover_source,
     }
     (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
     video = OUTPUT / "oldies-reels-draft.mp4"
