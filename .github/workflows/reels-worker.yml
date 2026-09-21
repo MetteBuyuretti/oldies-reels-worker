@@ -2,11 +2,32 @@ name: Oldies Reels Draft Worker
 
 on:
   workflow_dispatch:
+    inputs:
+      voiceover_url:
+        description: "Optional HTTPS voiceover file (MP3/WAV/M4A/AAC/MP4)"
+        required: false
+        type: string
+      preview_only:
+        description: "Render artifact only; do not create a WordPress review draft"
+        required: false
+        default: false
+        type: boolean
+      tts_enabled:
+        description: "Generate the English DJ voice automatically with Google Chirp 3 HD"
+        required: false
+        default: true
+        type: boolean
+      tts_voice:
+        description: "Google Chirp 3 HD voice name"
+        required: false
+        default: "en-AU-Chirp3-HD-Charon"
+        type: string
   schedule:
     - cron: "0 9 * * *"
 
 permissions:
   contents: write
+  id-token: write
 
 concurrency:
   group: oldies-reels-draft-worker
@@ -19,6 +40,12 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/36507074949/locations/global/workloadIdentityPools/github-oldies/providers/github-oldies-reels"
+          service_account: "oldies-reels-tts@project-8af3c2f9-bd84-4afe-b8a.iam.gserviceaccount.com"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -38,6 +65,12 @@ jobs:
           GITHUB_REF_NAME: ${{ github.ref_name }}
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          OLDIES_VOICEOVER_URL: ${{ inputs.voiceover_url }}
+          OLDIES_PREVIEW_ONLY: ${{ inputs.preview_only }}
+          OLDIES_TTS_ENABLED: ${{ github.event_name == 'schedule' && 'true' || (inputs.tts_enabled && 'true' || 'false') }}
+          OLDIES_TTS_VOICE: ${{ inputs.tts_voice || 'en-AU-Chirp3-HD-Charon' }}
+          OLDIES_TTS_LANGUAGE: "en-AU"
+          OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
         run: python worker.py
       - name: Keep preview for seven days
         if: always()
