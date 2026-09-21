@@ -479,11 +479,11 @@ def build_turkish_dj_parts(candidate: dict) -> list[tuple[str, str]]:
     }
 
     if title and uk_no1:
-        before = f"Bugün müzik tarihinde {year}'ye gidiyoruz. {artist} imzalı kayıt"
-        after = "İngiltere listelerinde bir numaraya çıktı."
+        before = f"{year}'ye gidiyoruz. {artist} imzalı kayıt"
+        after = "İngiltere'de bir numaraya çıktı."
         if weeks:
-            after += f" Zirvede {tr_numbers.get(weeks, str(weeks))} hafta kaldı."
-        after += " Oldies Radyo'da müzik tarihinden bir sayfa daha."
+            after += f" {tr_numbers.get(weeks, str(weeks)).capitalize()} hafta zirvede kaldı."
+        after += " Oldies Radyo."
         return [("tr-TR", before), ("en-AU", title), ("tr-TR", after)]
 
     facts = list(candidate.get("facts") or ["", ""])
