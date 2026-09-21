@@ -809,6 +809,16 @@ def main() -> None:
         print("Preview-only render completed; WordPress draft upload was intentionally skipped.")
         return
 
+    if candidate.get("reels_language") == "en":
+        result = {
+            "success": True,
+            "facebook_global_ready": True,
+            "upload_skipped": "facebook_global_delivery_not_connected_in_this_worker",
+        }
+        (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+        print("English Global Reel rendered successfully; TR Instagram review upload was intentionally skipped.")
+        return
+
     result = upload_draft(candidate, video, bearer, base_url)
     (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Created approval-only zero-cost draft {result.get('draft', {}).get('id', '')}; no live post was made.")
