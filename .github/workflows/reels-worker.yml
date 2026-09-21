@@ -1,6 +1,9 @@
 name: Oldies Reels Draft Worker
 
 on:
+  push:
+    branches:
+      - voiceover-pilot
   workflow_dispatch:
     inputs:
       voiceover_url:
@@ -35,7 +38,7 @@ concurrency:
 
 jobs:
   create-draft:
-    if: github.event_name == 'workflow_dispatch' || vars.REELS_AUTOMATION_ENABLED == 'true'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || vars.REELS_AUTOMATION_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -66,8 +69,8 @@ jobs:
           GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
           OLDIES_VOICEOVER_URL: ${{ inputs.voiceover_url }}
-          OLDIES_PREVIEW_ONLY: ${{ inputs.preview_only }}
-          OLDIES_TTS_ENABLED: ${{ github.event_name == 'schedule' && 'true' || (inputs.tts_enabled && 'true' || 'false') }}
+          OLDIES_PREVIEW_ONLY: ${{ github.event_name == 'push' && 'true' || inputs.preview_only }}
+          OLDIES_TTS_ENABLED: ${{ github.event_name == 'push' && 'true' || (github.event_name == 'schedule' && 'true' || (inputs.tts_enabled && 'true' || 'false')) }}
           OLDIES_TTS_VOICE: ${{ inputs.tts_voice || 'en-AU-Chirp3-HD-Charon' }}
           OLDIES_TTS_LANGUAGE: "en-AU"
           OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
