@@ -1,0 +1,84 @@
+name: Gemini Turkish DJ Audition
+
+on:
+  push:
+    branches:
+      - gemini-tts-natural-dj
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  audition:
+    strategy:
+      fail-fast: false
+      matrix:
+        voice: [Charon, Fenrir, Orus]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/36507074949/locations/global/workloadIdentityPools/github-oldies/providers/github-oldies-reels"
+          service_account: "oldies-reels-tts@project-8af3c2f9-bd84-4afe-b8a.iam.gserviceaccount.com"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate Turkish DJ audition
+        env:
+          GOOGLE_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
+          VOICE: ${{ matrix.voice }}
+        run: |
+          pip install requests google-auth
+          python - <<'PY'
+          import os, base64, requests
+          import google.auth
+          from google.auth.transport.requests import Request
+
+          project=os.environ["GOOGLE_PROJECT"]
+          voice=os.environ["VOICE"]
+          creds,_=google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+          creds.refresh(Request())
+
+          prompt=(
+              "Türkçe konuşan deneyimli bir radyo DJ'i gibi oku. Ses sıcak, güler yüzlü ve hafif heyecanlı olsun; "
+              "dinleyiciyle birebir konuşuyormuş gibi doğal ve rahat davran. Reklam spikeri, haber spikeri ya da fragman sesi gibi olma. "
+              "Cümleleri fazla kusursuz ve mekanik bağlama; küçük doğal nefesler ve mikro duraklamalar bırak. "
+              "Frank Sinatra ve İngilizce albüm adı A Swingin' Affair ifadesini rahat ve doğal İngilizce telaffuz et, sonra Türkçeye akıcı biçimde dön. "
+              "Son iki kelime olan Oldies Radyo'yu bağırma veya sloganlaştırma; hafif gülümseyen, sıcak ve doğal bir kapanış gibi söyle."
+          )
+          text=(
+              "1957'ye gidiyoruz. Frank Sinatra'nın A Swingin' Affair! albümü İngiltere'de bir numaraya çıktı "
+              "ve tam yedi hafta zirvede kaldı. Müzik tarihinden küçük ama güzel bir not... Oldies Radyo."
+          )
+          body={
+              "input":{"prompt":prompt,"text":text},
+              "voice":{"languageCode":"tr-TR","name":voice,"modelName":"gemini-2.5-flash-tts"},
+              "audioConfig":{"audioEncoding":"MP3"}
+          }
+          r=requests.post(
+              "https://texttospeech.googleapis.com/v1/text:synthesize",
+              headers={
+                  "Authorization":f"Bearer {creds.token}",
+                  "x-goog-user-project":project,
+                  "Content-Type":"application/json",
+              },
+              json=body,timeout=120
+          )
+          print("STATUS",r.status_code)
+          if r.status_code>=400:
+              print(r.text[:2000]); raise SystemExit(1)
+          data=base64.b64decode(r.json()["audioContent"])
+          os.makedirs("out",exist_ok=True)
+          open(f"out/turkish-dj-{voice.lower()}.mp3","wb").write(data)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: turkish-dj-${{ matrix.voice }}
+          path: out/
+          retention-days: 3
+          if-no-files-found: ignore
