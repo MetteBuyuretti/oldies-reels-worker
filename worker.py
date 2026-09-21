@@ -528,8 +528,27 @@ def turkish_genitive(name: str) -> str:
     return f"{clean}'{buffer}{suffix}"
 
 
+def _turkish_record_noun(candidate: dict) -> str:
+    source = re.sub(r"\s+", " ", str(candidate.get("source_text", "")).strip()).casefold()
+    if "album" in source or "lp" in source:
+        return "albümü"
+    if "single" in source or "song" in source:
+        return "şarkısı"
+    return "kaydı"
+
+
+def _turkish_period_context(year: str, artist: str) -> str:
+    try:
+        numeric_year = int(year)
+    except (TypeError, ValueError):
+        return ""
+    if 1955 <= numeric_year <= 1962:
+        return f"Rock'n roll döneminde, {artist} için büyük başarı."
+    return ""
+
+
 def build_turkish_gemini_script(candidate: dict) -> str:
-    """Natural 15-second Turkish DJ copy for expressive Gemini TTS."""
+    """Short, factual Turkish DJ copy: event, standout detail, context, natural sign-off."""
     artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
     title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
     event_date = str(candidate.get("event_date", "")).strip()
@@ -543,43 +562,52 @@ def build_turkish_gemini_script(candidate: dict) -> str:
 
     if kind == "births":
         return (
-            f"{year}'ye gidiyoruz... {artist} bugün doğdu. "
-            "Müziğin altın yıllarından unutulmayan bir isim. "
-            "Güzel şarkılar, güzel anılar... Oldies Radyo."
+            f"{year}... {artist} bugün doğdu. "
+            "Sonrası müzik tarihi. Oldies Radyo."
         )
+
     if kind == "deaths":
         return (
-            f"Bugün {artist}'ı müziğiyle hatırlıyoruz. "
+            f"Bugün {artist}'ı hatırlıyoruz. "
             f"{year}'da bugün aramızdan ayrıldı. "
-            "Ama o şarkılar hâlâ bizimle... Oldies Radyo."
+            "Şarkıları hâlâ bizimle... Oldies Radyo."
         )
+
     if title and uk_no1:
+        noun = _turkish_record_noun(candidate)
         weeks_text = tr_numbers.get(weeks, str(weeks)) if weeks else ""
+        context = _turkish_period_context(year, artist)
         if weeks:
-            return (
-                f"{year}'ye gidiyoruz... {turkish_genitive(artist)} {title} albümü İngiltere'de zirveye çıktı. "
-                f"Tam {weeks_text} hafta bir numarada! Güzel hikâye... Oldies Radyo."
+            script = (
+                f"{year}... {turkish_genitive(artist)} {title} {noun} İngiltere'de bir numara. "
+                f"Üstelik {weeks_text} hafta boyunca. "
             )
-        return (
-            f"{year}'ye gidiyoruz... {turkish_genitive(artist)} {title} albümü İngiltere'de zirveye çıktı. "
-            "Güzel bir plak hikâyesi... Oldies Radyo."
-        )
+        else:
+            script = (
+                f"{year}... {turkish_genitive(artist)} {title} {noun} İngiltere'de bir numara. "
+            )
+        if context:
+            script += context + " "
+        return script + "Oldies Radyo."
+
     if title:
+        noun = _turkish_record_noun(candidate)
         return (
-            f"{year}'ye gidiyoruz... {artist} ve {title}. "
-            "Müzik tarihinden küçük ama güzel bir not. "
-            "O günlerin şarkıları hâlâ burada... Oldies Radyo."
+            f"{year}... {artist}. {title} {noun}. "
+            "O günün kaydı, bugünün hatırası... Oldies Radyo."
         )
+
     return (
-        f"{year}'ye gidiyoruz... Bugün {artist} için müzik tarihinde özel bir gün. "
-        "Bir güzel hikâye daha, o yıllardan bugüne... Oldies Radyo."
+        f"{year}... Bugün {artist} için müzik tarihinde önemli bir gün. "
+        "Kısa bir not, iyi bir şarkı... Oldies Radyo."
     )
+
 
 
 def turkish_gemini_style_prompt() -> str:
     return (
         "Türkçe konuşan deneyimli ve sevilen bir radyo DJ'i gibi oku. "
-        "Ses sıcak, içten, güler yüzlü ve canlı olsun; dinleyiciye güzel bir müzik anısını "
+        "Ses sıcak, içten, güler yüzlü ve canlı olsun; dinleyiciye sevdiği bir plağın ilginç bir ayrıntısını "
         "heyecanla anlatıyormuş gibi konuş. Reklam spikeri, haber spikeri veya fragman sesi gibi olma. "
         "Doğal iniş çıkışlar, küçük nefesler ve mikro duraklamalar bırak; metni kusursuz bir makine gibi okuma. "
         "Sanatçı ve İngilizce şarkı ya da albüm adlarını rahat ve doğal İngilizce telaffuz et, sonra Türkçeye "
