@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        voice: [Fenrir, Iapetus, Orus]
+        voice: [Charon, Fenrir, Iapetus]
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -32,63 +32,51 @@ jobs:
           GOOGLE_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
           VOICE: ${{ matrix.voice }}
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
           pip install requests google-auth
           python - <<'PY'
-          import os, base64, requests, subprocess
+          import os, base64, requests
           import google.auth
           from google.auth.transport.requests import Request
 
           project=os.environ["GOOGLE_PROJECT"]
-          short=os.environ["VOICE"]
+          voice=os.environ["VOICE"]
           creds,_=google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
           creds.refresh(Request())
 
-          parts=[
-              ("tr-TR", f"tr-TR-Chirp3-HD-{short}", "1957'ye gidiyoruz... Frank Sinatra'nın"),
-              ("en-AU", f"en-AU-Chirp3-HD-{short}", "A Swingin' Affair!"),
-              ("tr-TR", f"tr-TR-Chirp3-HD-{short}", "albümü İngiltere'de bir numaraya çıktı. Tam yedi hafta zirvede kaldı! Güzel bir plak hikâyesi, değil mi? Müzik tarihinden küçük bir not daha... Oldies Radyo."),
-          ]
-
+          prompt=(
+              "Türkçe konuşan deneyimli ve sevilen bir radyo DJ'i gibi oku. "
+              "Sesin sıcak, içten, güler yüzlü ve önceki denemelerden belirgin biçimde daha canlı olsun. "
+              "Dinleyiciye güzel bir müzik anısını heyecanla anlatıyormuşsun gibi konuş; ama kesinlikle reklam spikeri, haber spikeri veya fragman sesi olma. "
+              "Cümlelerde küçük doğal iniş çıkışlar, mikro duraklamalar ve hafif bir gülümseme duyulsun. "
+              "Frank Sinatra ve A Swingin' Affair ifadesini rahat, doğal İngilizce telaffuz et; Türkçeye dönerken ses karakterini değiştirme. "
+              "Yedi hafta ifadesinde hafif şaşkın ve keyifli bir vurgu yap. "
+              "Son cümlede Oldies Radyo'yu slogan gibi bağırma; sıcak, samimi, kendiliğinden gelen bir imza gibi bırak."
+          )
+          text=(
+              "1957'ye gidiyoruz... Frank Sinatra'nın A Swingin' Affair albümü İngiltere'de bir numaraya çıktı. "
+              "Ve tam yedi hafta zirvede kaldı! Güzel bir plak hikâyesi, değil mi? "
+              "Müzik tarihinden küçük bir not daha... Oldies Radyo."
+          )
+          body={
+              "input":{"prompt":prompt,"text":text},
+              "voice":{"languageCode":"tr-TR","name":voice,"modelName":"gemini-2.5-flash-tts"},
+              "audioConfig":{"audioEncoding":"MP3"}
+          }
+          r=requests.post(
+              "https://texttospeech.googleapis.com/v1/text:synthesize",
+              headers={
+                  "Authorization":f"Bearer {creds.token}",
+                  "x-goog-user-project":project,
+                  "Content-Type":"application/json",
+              },
+              json=body,timeout=120
+          )
+          print("STATUS",r.status_code)
+          if r.status_code>=400:
+              print(r.text[:3000]); raise SystemExit(1)
+          data=base64.b64decode(r.json()["audioContent"])
           os.makedirs("out",exist_ok=True)
-          files=[]
-          for i,(lang,voice,text) in enumerate(parts):
-              body={
-                  "input":{"text":text},
-                  "voice":{"languageCode":lang,"name":voice},
-                  "audioConfig":{"audioEncoding":"MP3","speakingRate":1.05}
-              }
-              r=requests.post(
-                  "https://texttospeech.googleapis.com/v1/text:synthesize",
-                  headers={
-                      "Authorization":f"Bearer {creds.token}",
-                      "x-goog-user-project":project,
-                      "Content-Type":"application/json",
-                  },
-                  json=body,timeout=120
-              )
-              print(i,lang,voice,"STATUS",r.status_code)
-              if r.status_code>=400:
-                  print(r.text[:2000]); raise SystemExit(1)
-              path=f"out/seg-{i}.mp3"
-              open(path,"wb").write(base64.b64decode(r.json()["audioContent"]))
-              files.append(path)
-
-          target=f"out/turkish-dj-{short.lower()}.mp3"
-          cmd=["ffmpeg","-y"]
-          for p in files:
-              cmd += ["-i",p]
-          cmd += [
-              "-filter_complex",
-              "[0:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=mono[a0];"
-              "[1:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=mono[a1];"
-              "[2:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=mono[a2];"
-              "[a0][a1][a2]concat=n=3:v=0:a=1[out]",
-              "-map","[out]","-c:a","libmp3lame","-b:a","192k",target
-          ]
-          subprocess.run(cmd,check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
-          for p in files: os.remove(p)
+          open(f"out/gemini-flash-dj-{voice.lower()}.mp3","wb").write(data)
           PY
       - uses: actions/upload-artifact@v4
         if: always()
