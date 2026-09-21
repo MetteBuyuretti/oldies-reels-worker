@@ -62,9 +62,24 @@ jobs:
               print("No reels-delivery release exists; nothing to clean.")
               sys.exit(0)
 
+          release_id = release.get("id")
+          if not release_id:
+              raise RuntimeError("reels-delivery release returned no id")
+
+          assets = []
+          page = 1
+          while True:
+              batch = request(
+                  f"https://api.github.com/repos/{repo}/releases/{release_id}/assets?per_page=100&page={page}"
+              ) or []
+              assets.extend(batch)
+              if len(batch) < 100:
+                  break
+              page += 1
+
           deleted = 0
           kept = 0
-          for asset in release.get("assets", []):
+          for asset in assets:
               name = str(asset.get("name", ""))
               if not name.lower().endswith(".mp4"):
                   kept += 1
