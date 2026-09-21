@@ -326,9 +326,15 @@ def _number_word_to_int(word: str) -> int | None:
 def _event_chart_details(candidate: dict) -> tuple[int | None, bool]:
     source = re.sub(r"\s+", " ", str(candidate.get("source_text", "")).strip())
     weeks = None
-    match = re.search(r"([a-z]+)-week run at No\.?1 in the UK", source, re.I)
-    if match:
-        weeks = _number_word_to_int(match.group(1))
+    for pattern in (
+        r"([a-z]+)-week run at No\.?1 in the UK",
+        r"first of ([a-z]+) consecutive weeks",
+        r"for ([a-z]+) consecutive weeks",
+    ):
+        match = re.search(pattern, source, re.I)
+        if match:
+            weeks = _number_word_to_int(match.group(1))
+            break
     uk_no1 = bool(re.search(r"No\.?1 in the UK|number one in the UK", source, re.I))
     return weeks, uk_no1
 
@@ -461,11 +467,28 @@ def apply_reel_language(candidate: dict, language: str) -> dict:
 
 def build_turkish_dj_parts(candidate: dict) -> list[tuple[str, str]]:
     """Return language-tagged speech parts so English titles are never read with Turkish phonetics."""
+    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
     title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+    event_date = str(candidate.get("event_date", "")).strip()
+    year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
+    weeks, uk_no1 = _event_chart_details(candidate)
+
+    tr_numbers = {
+        1: "bir", 2: "iki", 3: "üç", 4: "dört", 5: "beş",
+        6: "altı", 7: "yedi", 8: "sekiz", 9: "dokuz", 10: "on",
+    }
+
+    if title and uk_no1:
+        before = f"Bugün müzik tarihinde {year}'ye gidiyoruz. {artist} imzalı kayıt"
+        after = "İngiltere listelerinde bir numaraya çıktı."
+        if weeks:
+            after += f" Zirvede {tr_numbers.get(weeks, str(weeks))} hafta kaldı."
+        after += " Oldies Radyo'da müzik tarihinden bir sayfa daha."
+        return [("tr-TR", before), ("en-AU", title), ("tr-TR", after)]
+
     facts = list(candidate.get("facts") or ["", ""])
     while len(facts) < 2:
         facts.append("")
-
     spoken = re.sub(
         r"\s+",
         " ",
