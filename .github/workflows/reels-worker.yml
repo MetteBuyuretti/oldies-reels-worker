@@ -18,12 +18,17 @@ on:
         default: "tr"
         type: string
       tts_enabled:
-        description: "Generate the matching DJ voice automatically with Google Chirp 3 HD"
+        description: "Generate the matching DJ voice automatically"
         required: false
         default: true
         type: boolean
+      gemini_tts_voice:
+        description: "Turkish Gemini Flash voice (Charon/Fenrir/Iapetus)"
+        required: false
+        default: "Charon"
+        type: string
       tts_voice:
-        description: "Optional Google Chirp 3 HD voice override"
+        description: "Optional Chirp 3 HD fallback / English voice override"
         required: false
         default: ""
         type: string
@@ -74,6 +79,9 @@ jobs:
           OLDIES_PREVIEW_ONLY: ${{ inputs.preview_only }}
           OLDIES_REELS_LANGUAGE: ${{ inputs.reels_language || 'tr' }}
           OLDIES_TTS_ENABLED: ${{ github.event_name == 'schedule' && 'true' || (inputs.tts_enabled && 'true' || 'false') }}
+          OLDIES_TTS_ENGINE: "auto"
+          OLDIES_GEMINI_TTS_VOICE: ${{ inputs.gemini_tts_voice || 'Charon' }}
+          OLDIES_TTS_FALLBACK: "true"
           OLDIES_TTS_VOICE: ${{ inputs.tts_voice }}
           OLDIES_TTS_LANGUAGE: ""
           OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
