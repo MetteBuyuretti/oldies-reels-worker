@@ -542,8 +542,8 @@ def _turkish_period_context(year: str, artist: str) -> str:
         numeric_year = int(year)
     except (TypeError, ValueError):
         return ""
-    if 1955 <= numeric_year <= 1962:
-        return f"Rock'n roll döneminde, {artist} için büyük başarı."
+    if 1955 <= numeric_year <= 1962 and "sinatra" in artist.casefold():
+        return "Rock'n roll döneminde, Sinatra için büyük başarı."
     return ""
 
 
