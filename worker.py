@@ -1213,8 +1213,9 @@ def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
     today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
+    language = reel_language()
     draft_state = get_draft_state(bearer, base_url)
-    if draft_state["daily_limit_reached"]:
+    if language == "tr" and draft_state["daily_limit_reached"]:
         print("Daily DRAFT_REVIEW quota is already satisfied; exiting successfully without rendering another Reel.")
         return
     candidates = research_candidates(draft_state["recent_artists"], today=today)
@@ -1236,7 +1237,7 @@ def main() -> None:
         raise RuntimeError("No zero-cost candidate had three usable licensed photos. " + " | ".join(photo_errors))
     candidate["image_credits"] = credits
     candidate["pipeline"] = "zero-cost-v1"
-    candidate = apply_reel_language(candidate, reel_language())
+    candidate = apply_reel_language(candidate, language)
     voiceover = download_voiceover(OUTPUT)
     voiceover_source = "external_https" if voiceover else "none"
     if not voiceover:
@@ -1259,13 +1260,10 @@ def main() -> None:
         return
 
     if candidate.get("reels_language") == "en":
-        result = {
-            "success": True,
-            "facebook_global_ready": True,
-            "upload_skipped": "facebook_global_delivery_not_connected_in_this_worker",
-        }
+        facebook_dry_run = os.getenv("OLDIES_FACEBOOK_GLOBAL_DRY_RUN", "true").strip().lower() in {"1", "true", "yes", "on"}
+        result = facebook_global_publish(candidate, video, bearer, base_url, dry_run=facebook_dry_run)
         (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-        print("English Global Reel rendered successfully; TR Instagram review upload was intentionally skipped.")
+        print(f"Facebook Global delivery completed (dry_run={facebook_dry_run}, duplicate={bool(result.get('duplicate'))}).")
         return
 
     result = upload_draft(candidate, video, bearer, base_url)
