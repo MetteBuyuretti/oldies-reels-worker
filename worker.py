@@ -985,6 +985,46 @@ def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> N
 
 
 
+
+def cleanup_delivery_assets(api: str, headers: dict, release: dict, retention_days: int = 10) -> None:
+    """Delete public delivery assets older than the retention window."""
+    release_id = release.get("id")
+    if not release_id:
+        return
+    response = requests.get(
+        f"{api}/releases/{release_id}/assets",
+        headers=headers,
+        params={"per_page": 100},
+        timeout=30,
+    )
+    if response.status_code != 200:
+        print(f"Delivery cleanup skipped: GitHub returned {response.status_code}")
+        return
+
+    cutoff = time.time() - max(1, retention_days) * 86400
+    deleted = 0
+    assets = response.json()
+    for asset in assets if isinstance(assets, list) else []:
+        created_at = str(asset.get("created_at", ""))
+        asset_id = asset.get("id")
+        if not created_at or not asset_id:
+            continue
+        try:
+            created_ts = datetime.fromisoformat(created_at.replace("Z", "+00:00")).timestamp()
+        except ValueError:
+            continue
+        if created_ts >= cutoff:
+            continue
+        deleted_response = requests.delete(
+            f"{api}/releases/assets/{asset_id}",
+            headers=headers,
+            timeout=30,
+        )
+        if deleted_response.status_code == 204:
+            deleted += 1
+    print(f"Delivery cleanup: removed {deleted} asset(s) older than {retention_days} days")
+
+
 def publish_delivery_asset(candidate: dict, video: Path) -> str:
     """Upload the rendered MP4 as a public GitHub Release asset.
 
@@ -1023,12 +1063,13 @@ def publish_delivery_asset(candidate: dict, video: Path) -> str:
     if response.status_code not in (200, 201):
         raise RuntimeError(f"GitHub delivery release failed: {response.status_code} {response.text[:500]}")
     release = response.json()
+    cleanup_delivery_assets(api, headers, release, retention_days=10)
 
     artist_slug = re.sub(r"[^a-z0-9]+", "-", str(candidate.get("artist", "")).lower()).strip("-")[:60] or "oldies"
     event_date = re.sub(r"[^0-9-]", "", str(candidate.get("event_date", ""))) or "undated"
     run_id = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ID", "")) or str(int(time.time()))
     attempt = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ATTEMPT", "")) or "1"
-    asset_name = f"{event_date}-{artist_slug}-{run_id}-{attempt}.mp4"
+    language = re.sub(r"[^a-z]", "", str(candidate.get("reels_language", "tr")).lower()) or "tr"\n    asset_name = f"{event_date}-{artist_slug}-{language}-{run_id}-{attempt}.mp4"
 
     upload_url = str(release.get("upload_url", "")).split("{", 1)[0]
     if not upload_url:
