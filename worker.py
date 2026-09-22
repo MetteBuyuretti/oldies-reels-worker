@@ -1069,7 +1069,8 @@ def publish_delivery_asset(candidate: dict, video: Path) -> str:
     event_date = re.sub(r"[^0-9-]", "", str(candidate.get("event_date", ""))) or "undated"
     run_id = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ID", "")) or str(int(time.time()))
     attempt = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ATTEMPT", "")) or "1"
-    language = re.sub(r"[^a-z]", "", str(candidate.get("reels_language", "tr")).lower()) or "tr"\n    asset_name = f"{event_date}-{artist_slug}-{language}-{run_id}-{attempt}.mp4"
+    language = re.sub(r"[^a-z]", "", str(candidate.get("reels_language", "tr")).lower()) or "tr"
+    asset_name = f"{event_date}-{artist_slug}-{language}-{run_id}-{attempt}.mp4"
 
     upload_url = str(release.get("upload_url", "")).split("{", 1)[0]
     if not upload_url:
