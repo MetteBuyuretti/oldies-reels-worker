@@ -985,6 +985,46 @@ def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> N
 
 
 
+
+def cleanup_delivery_assets(api: str, headers: dict, release: dict, retention_days: int = 10) -> None:
+    """Delete public delivery assets older than the retention window."""
+    release_id = release.get("id")
+    if not release_id:
+        return
+    response = requests.get(
+        f"{api}/releases/{release_id}/assets",
+        headers=headers,
+        params={"per_page": 100},
+        timeout=30,
+    )
+    if response.status_code != 200:
+        print(f"Delivery cleanup skipped: GitHub returned {response.status_code}")
+        return
+
+    cutoff = time.time() - max(1, retention_days) * 86400
+    deleted = 0
+    assets = response.json()
+    for asset in assets if isinstance(assets, list) else []:
+        created_at = str(asset.get("created_at", ""))
+        asset_id = asset.get("id")
+        if not created_at or not asset_id:
+            continue
+        try:
+            created_ts = datetime.fromisoformat(created_at.replace("Z", "+00:00")).timestamp()
+        except ValueError:
+            continue
+        if created_ts >= cutoff:
+            continue
+        deleted_response = requests.delete(
+            f"{api}/releases/assets/{asset_id}",
+            headers=headers,
+            timeout=30,
+        )
+        if deleted_response.status_code == 204:
+            deleted += 1
+    print(f"Delivery cleanup: removed {deleted} asset(s) older than {retention_days} days")
+
+
 def publish_delivery_asset(candidate: dict, video: Path) -> str:
     """Upload the rendered MP4 as a public GitHub Release asset.
 
@@ -1023,12 +1063,14 @@ def publish_delivery_asset(candidate: dict, video: Path) -> str:
     if response.status_code not in (200, 201):
         raise RuntimeError(f"GitHub delivery release failed: {response.status_code} {response.text[:500]}")
     release = response.json()
+    cleanup_delivery_assets(api, headers, release, retention_days=10)
 
     artist_slug = re.sub(r"[^a-z0-9]+", "-", str(candidate.get("artist", "")).lower()).strip("-")[:60] or "oldies"
     event_date = re.sub(r"[^0-9-]", "", str(candidate.get("event_date", ""))) or "undated"
     run_id = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ID", "")) or str(int(time.time()))
     attempt = re.sub(r"[^0-9]", "", os.getenv("GITHUB_RUN_ATTEMPT", "")) or "1"
-    asset_name = f"{event_date}-{artist_slug}-{run_id}-{attempt}.mp4"
+    language = re.sub(r"[^a-z]", "", str(candidate.get("reels_language", "tr")).lower()) or "tr"
+    asset_name = f"{event_date}-{artist_slug}-{language}-{run_id}-{attempt}.mp4"
 
     upload_url = str(release.get("upload_url", "")).split("{", 1)[0]
     if not upload_url:
@@ -1050,6 +1092,64 @@ def publish_delivery_asset(candidate: dict, video: Path) -> str:
         raise RuntimeError("GitHub delivery asset returned no public HTTPS URL")
     print(f"Delivery asset ready: {public_url}")
     return public_url
+
+def facebook_global_publish(candidate: dict, video: Path, bearer: str, base_url: str, dry_run: bool = True) -> dict:
+    """Validate or publish one rendered English Reel through the isolated Facebook Global companion."""
+    public_url = publish_delivery_asset(candidate, video)
+    if not public_url:
+        raise RuntimeError("Facebook Global requires a public GitHub delivery URL")
+
+    digest = hashlib.sha256()
+    with video.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+
+    artist_slug = re.sub(r"[^a-z0-9]+", "-", str(candidate.get("artist", "")).lower()).strip("-")[:60] or "oldies"
+    event_date = re.sub(r"[^0-9-]", "", str(candidate.get("event_date", ""))) or "undated"
+    content_id = f"music-history-{event_date}-{artist_slug}-en"
+    endpoint = f"{base_url.rstrip('/')}/wp-json/oldies-global/v1/publish-url"
+    payload = {
+        "content_id": content_id,
+        "video_url": public_url,
+        "sha256": digest.hexdigest(),
+        "caption": str(candidate.get("caption", "")),
+        "title": str(candidate.get("event_headline") or candidate.get("hook") or candidate.get("artist") or "Oldies Radyo"),
+        "dry_run": bool(dry_run),
+    }
+    headers = {
+        "X-Oldies-Reels-Secret": bearer,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
+    }
+
+    response = None
+    for attempt in range(4):
+        response = requests.post(endpoint, headers=headers, json=payload, timeout=180)
+        if response.status_code < 400:
+            result = response.json()
+            result["delivery_url"] = public_url
+            return result
+        if response.status_code == 409:
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {}
+            if isinstance(error_payload, dict) and error_payload.get("code") == "duplicate_content":
+                return {
+                    "success": True,
+                    "duplicate": True,
+                    "content_id": content_id,
+                    "delivery_url": public_url,
+                }
+        if response.status_code not in {429, 502, 503, 504} or attempt == 3:
+            break
+        delay = 10 * (2**attempt)
+        print(f"Facebook Global temporarily returned {response.status_code}; retrying in {delay}s")
+        time.sleep(delay)
+
+    raise RuntimeError(f"Facebook Global {response.status_code}: {response.text[:700]}")
+
 
 def proxy_draft_request(data: dict, bearer: str):
     proxy_url = os.getenv("OLDIES_DRAFT_PROXY_URL", "").strip()
@@ -1114,8 +1214,9 @@ def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
     today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
+    language = reel_language()
     draft_state = get_draft_state(bearer, base_url)
-    if draft_state["daily_limit_reached"]:
+    if language == "tr" and draft_state["daily_limit_reached"]:
         print("Daily DRAFT_REVIEW quota is already satisfied; exiting successfully without rendering another Reel.")
         return
     candidates = research_candidates(draft_state["recent_artists"], today=today)
@@ -1137,7 +1238,7 @@ def main() -> None:
         raise RuntimeError("No zero-cost candidate had three usable licensed photos. " + " | ".join(photo_errors))
     candidate["image_credits"] = credits
     candidate["pipeline"] = "zero-cost-v1"
-    candidate = apply_reel_language(candidate, reel_language())
+    candidate = apply_reel_language(candidate, language)
     voiceover = download_voiceover(OUTPUT)
     voiceover_source = "external_https" if voiceover else "none"
     if not voiceover:
@@ -1160,13 +1261,10 @@ def main() -> None:
         return
 
     if candidate.get("reels_language") == "en":
-        result = {
-            "success": True,
-            "facebook_global_ready": True,
-            "upload_skipped": "facebook_global_delivery_not_connected_in_this_worker",
-        }
+        facebook_dry_run = os.getenv("OLDIES_FACEBOOK_GLOBAL_DRY_RUN", "true").strip().lower() in {"1", "true", "yes", "on"}
+        result = facebook_global_publish(candidate, video, bearer, base_url, dry_run=facebook_dry_run)
         (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-        print("English Global Reel rendered successfully; TR Instagram review upload was intentionally skipped.")
+        print(f"Facebook Global delivery completed (dry_run={facebook_dry_run}, duplicate={bool(result.get('duplicate'))}).")
         return
 
     result = upload_draft(candidate, video, bearer, base_url)
