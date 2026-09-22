@@ -338,6 +338,8 @@ def deterministic_copy(*, artist: str, kind: str, event_date: datetime, source_t
         for pattern in (
             r"\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+‘(.{2,100})’",
             r"\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+“(.{2,100})”",
+            r'\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+"([^"]{2,100})"',
+            r"\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+'(.{2,100})'(?=\s|[.,;:!?]|$)",
         ):
             match = re.search(pattern, raw_source, re.I)
             if match:
