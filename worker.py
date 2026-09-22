@@ -1092,6 +1092,64 @@ def publish_delivery_asset(candidate: dict, video: Path) -> str:
     print(f"Delivery asset ready: {public_url}")
     return public_url
 
+def facebook_global_publish(candidate: dict, video: Path, bearer: str, base_url: str, dry_run: bool = True) -> dict:
+    """Validate or publish one rendered English Reel through the isolated Facebook Global companion."""
+    public_url = publish_delivery_asset(candidate, video)
+    if not public_url:
+        raise RuntimeError("Facebook Global requires a public GitHub delivery URL")
+
+    digest = hashlib.sha256()
+    with video.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+
+    artist_slug = re.sub(r"[^a-z0-9]+", "-", str(candidate.get("artist", "")).lower()).strip("-")[:60] or "oldies"
+    event_date = re.sub(r"[^0-9-]", "", str(candidate.get("event_date", ""))) or "undated"
+    content_id = f"music-history-{event_date}-{artist_slug}-en"
+    endpoint = f"{base_url.rstrip('/')}/wp-json/oldies-global/v1/publish-url"
+    payload = {
+        "content_id": content_id,
+        "video_url": public_url,
+        "sha256": digest.hexdigest(),
+        "caption": str(candidate.get("caption", "")),
+        "title": str(candidate.get("event_headline") or candidate.get("hook") or candidate.get("artist") or "Oldies Radyo"),
+        "dry_run": bool(dry_run),
+    }
+    headers = {
+        "X-Oldies-Reels-Secret": bearer,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
+    }
+
+    response = None
+    for attempt in range(4):
+        response = requests.post(endpoint, headers=headers, json=payload, timeout=180)
+        if response.status_code < 400:
+            result = response.json()
+            result["delivery_url"] = public_url
+            return result
+        if response.status_code == 409:
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {}
+            if isinstance(error_payload, dict) and error_payload.get("code") == "duplicate_content":
+                return {
+                    "success": True,
+                    "duplicate": True,
+                    "content_id": content_id,
+                    "delivery_url": public_url,
+                }
+        if response.status_code not in {429, 502, 503, 504} or attempt == 3:
+            break
+        delay = 10 * (2**attempt)
+        print(f"Facebook Global temporarily returned {response.status_code}; retrying in {delay}s")
+        time.sleep(delay)
+
+    raise RuntimeError(f"Facebook Global {response.status_code}: {response.text[:700]}")
+
+
 def proxy_draft_request(data: dict, bearer: str):
     proxy_url = os.getenv("OLDIES_DRAFT_PROXY_URL", "").strip()
     if not proxy_url:
