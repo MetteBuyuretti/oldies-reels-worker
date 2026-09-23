@@ -1108,14 +1108,68 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
         return wordpress_request("POST", "drafts", bearer, base_url, data=data, files={"reel_video": (video.name, handle, "video/mp4")})
 
 
+def publish_facebook_global(candidate: dict, video: Path, bearer: str, base_url: str) -> dict:
+    """Deliver one rendered English Reel to the isolated Facebook Global companion."""
+    public_url = publish_delivery_asset(candidate, video)
+    if not public_url:
+        raise RuntimeError("Facebook Global delivery requires the GitHub reels-delivery asset")
+
+    digest = hashlib.sha256(video.read_bytes()).hexdigest()
+    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
+    artist_slug = re.sub(r"[^a-z0-9]+", "-", artist.casefold()).strip("-")[:48] or "oldies"
+    event_date = re.sub(r"[^0-9-]", "", str(candidate.get("event_date", ""))) or "undated"
+    topic_seed = f"{candidate.get('topic', '')}|{candidate.get('event_date', '')}|{artist}"
+    topic_key = hashlib.sha256(topic_seed.encode("utf-8")).hexdigest()[:10]
+    content_id = f"global-en-{event_date}-{artist_slug}-{topic_key}"[:180]
+
+    title = re.sub(
+        r"\s+",
+        " ",
+        str(candidate.get("event_headline") or candidate.get("hook") or artist or "Oldies Radyo Music History"),
+    ).strip()[:120]
+    caption = str(candidate.get("caption", "")).strip()
+    if "oldiesradyo.com/en/" not in caption:
+        caption = (caption + "\n\nMore music history: oldiesradyo.com/en/").strip()
+
+    endpoint = f"{base_url.rstrip('/')}/wp-json/oldies-global/v1/publish-url"
+    headers = {
+        "Authorization": f"Bearer {bearer}",
+        "X-Oldies-Reels-Secret": bearer,
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
+    }
+    payload = {
+        "content_id": content_id,
+        "video_url": public_url,
+        "sha256": digest,
+        "caption": caption,
+        "title": title,
+        "dry_run": False,
+    }
+    response = requests.post(endpoint, headers=headers, json=payload, timeout=240)
+    if response.status_code >= 400:
+        raise RuntimeError(f"Facebook Global publish {response.status_code}: {response.text[:700]}")
+    try:
+        result = response.json()
+    except Exception as exc:
+        raise RuntimeError(f"Facebook Global returned invalid JSON: {response.text[:500]}") from exc
+    if not isinstance(result, dict) or not result.get("success"):
+        raise RuntimeError(f"Facebook Global publish did not confirm success: {str(result)[:700]}")
+    result["delivery_url"] = public_url
+    result["content_id"] = content_id
+    return result
+
+
 def main() -> None:
     bearer = require_env("OLDIES_WP_BEARER")
     base_url = require_env("OLDIES_WP_BASE_URL")
     OUTPUT.mkdir(parents=True, exist_ok=True)
+    language = reel_language()
     override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
     today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
     draft_state = get_draft_state(bearer, base_url)
-    if draft_state["daily_limit_reached"]:
+    if language != "en" and draft_state["daily_limit_reached"]:
         print("Daily DRAFT_REVIEW quota is already satisfied; exiting successfully without rendering another Reel.")
         return
     candidates = research_candidates(draft_state["recent_artists"], today=today)
@@ -1137,7 +1191,7 @@ def main() -> None:
         raise RuntimeError("No zero-cost candidate had three usable licensed photos. " + " | ".join(photo_errors))
     candidate["image_credits"] = credits
     candidate["pipeline"] = "zero-cost-v1"
-    candidate = apply_reel_language(candidate, reel_language())
+    candidate = apply_reel_language(candidate, language)
     voiceover = download_voiceover(OUTPUT)
     voiceover_source = "external_https" if voiceover else "none"
     if not voiceover:
@@ -1160,13 +1214,9 @@ def main() -> None:
         return
 
     if candidate.get("reels_language") == "en":
-        result = {
-            "success": True,
-            "facebook_global_ready": True,
-            "upload_skipped": "facebook_global_delivery_not_connected_in_this_worker",
-        }
+        result = publish_facebook_global(candidate, video, bearer, base_url)
         (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-        print("English Global Reel rendered successfully; TR Instagram review upload was intentionally skipped.")
+        print(f"Published English Global Reel to Facebook: {result.get('video_id') or result.get('post_id') or 'success'}")
         return
 
     result = upload_draft(candidate, video, bearer, base_url)
