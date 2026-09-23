@@ -1,0 +1,56 @@
+name: Oldies English Facebook Reel
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 11 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: oldies-english-facebook-reel
+  cancel-in-progress: false
+
+jobs:
+  publish-facebook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install renderer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create and publish one English Facebook Reel
+        env:
+          OLDIES_WP_BEARER: ${{ secrets.OLDIES_WP_BEARER }}
+          OLDIES_WP_BASE_URL: ${{ vars.OLDIES_WP_BASE_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+          OLDIES_PREVIEW_ONLY: "false"
+          OLDIES_REELS_LANGUAGE: "en"
+          OLDIES_TTS_ENABLED: "false"
+          OLDIES_TTS_FALLBACK: "false"
+        run: python worker.py
+
+      - name: Keep audit files for seven days
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oldies-english-facebook-reel
+          path: output/
+          retention-days: 7
+          if-no-files-found: ignore
