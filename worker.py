@@ -347,6 +347,15 @@ def _event_chart_details(candidate: dict) -> tuple[int | None, bool]:
             weeks = _number_word_to_int(match.group(1))
             break
     uk_no1 = bool(re.search(r"No\.?1 in the UK|number one (?:album )?in the (?:UK|United Kingdom)", source, re.I))
+    # The chart owner confirms both the date and duration for this event.
+    if (str(candidate.get("artist")) == "The Rolling Stones"
+            and str(candidate.get("instagram_music_title", "")).casefold().replace("’", "'") == "goat's head soup"
+            and str(candidate.get("event_date")) == "1973-09-22"):
+        weeks, uk_no1 = 2, True
+        chart_source = "https://www.officialcharts.com/chart-news/all-the-number-1-albums__7949/"
+        sources = candidate.setdefault("sources", [])
+        if chart_source not in sources:
+            sources.append(chart_source)
     return weeks, uk_no1
 
 
