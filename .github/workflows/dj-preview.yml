@@ -48,3 +48,5 @@ jobs:
           if-no-files-found: ignore
 
 # Verify chart-backed closing fact and timing.
+
+# Audit filtered images and timed narration.
