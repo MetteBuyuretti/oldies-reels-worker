@@ -27,8 +27,8 @@ class AnnouncerTests(unittest.TestCase):
         )
         spoken = worker.build_turkish_gemini_script(item)
         self.assertIn("Yirmi üç Eylül bin dokuz yüz yetmiş dört", spoken)
-        self.assertIn("daha sonra", spoken)
-        self.assertIn("ilk solo birinciliğini", spoken)
+        self.assertIn("sonra", spoken)
+        self.assertIn("ilk solo bir numarası", spoken)
         self.assertNotIn("Oldies Radyo", spoken)
         self.assertNotIn("1974", spoken)
 
