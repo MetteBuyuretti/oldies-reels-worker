@@ -54,6 +54,11 @@ def normalize(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", text).strip()
 
 
+def artist_page_title(artist: str) -> str:
+    """Resolve ambiguous artist names before attaching Wikipedia/Wikidata evidence."""
+    return {"Eagles": "Eagles (band)"}.get(artist, artist)
+
+
 def load_catalog(path: Path = CATALOG_PATH) -> tuple[dict[str, dict], dict[str, str]]:
     raw = json.loads(path.read_text(encoding="utf-8"))
     aliases = raw.get("aliases", {})
@@ -140,12 +145,12 @@ def fetch_day_candidates(today: datetime, artists: dict[str, dict], lookup: dict
         if not artist:
             continue
         try:
-            page = _page_metadata(artist, session=session)
+            page = _page_metadata(artist_page_title(artist), session=session)
         except requests.RequestException:
             page = {
-                "title": artist,
+                "title": artist_page_title(artist),
                 "wikibase_item": "",
-                "content_urls": {"desktop": {"page": f"https://en.wikipedia.org/wiki/{quote(artist.replace(' ', '_'))}"}},
+                "content_urls": {"desktop": {"page": f"https://en.wikipedia.org/wiki/{quote(artist_page_title(artist).replace(' ', '_'))}"}},
             }
         buckets[current].append({"year": year, "text": m.group(2), "pages": [page]})
     return buckets
@@ -222,12 +227,12 @@ def fetch_music_history_candidates(today: datetime, artists: dict[str, dict], lo
                 continue
             seen.add(key)
             try:
-                page = _page_metadata(artist, session=session)
+                page = _page_metadata(artist_page_title(artist), session=session)
             except requests.RequestException:
                 page = {
-                    "title": artist,
+                    "title": artist_page_title(artist),
                     "wikibase_item": "",
-                    "content_urls": {"desktop": {"page": f"https://en.wikipedia.org/wiki/{quote(artist.replace(' ', '_'))}"}},
+                    "content_urls": {"desktop": {"page": f"https://en.wikipedia.org/wiki/{quote(artist_page_title(artist).replace(' ', '_'))}"}},
                 }
             results.append({
                 "year": year,
