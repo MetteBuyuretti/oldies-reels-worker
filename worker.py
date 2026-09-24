@@ -194,6 +194,17 @@ def image_priority(image: dict, artist: str, event_year: int) -> tuple[int, int,
     return (-group_penalty, period_score, exact_name, portrait_shape, title)
 
 
+def image_matches_artist(image: dict, artist: str) -> bool:
+    """Require explicit music context for names that also label unrelated subjects."""
+    title = str(image.get("title", "")).casefold()
+    if artist == "Eagles":
+        return bool(
+            re.search(r"\beagles\b", title)
+            and re.search(r"\b(?:band|concert|musicians|rock group|on stage)\b", title)
+        )
+    return True
+
+
 def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path], list[dict]]:
     paths, credits, seen_titles, seen_hashes = [], [], set(), set()
     artist_query = re.sub(r"^the\s+", "", str(candidate["artist"]), flags=re.I).strip()
@@ -211,7 +222,7 @@ def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path
         choices = []
         for page in commons_search(str(query)):
             image = usable_image(page)
-            if image and image["title"] not in seen_titles:
+            if image and image["title"] not in seen_titles and image_matches_artist(image, str(candidate["artist"])):
                 choices.append(image)
         choices.sort(key=lambda image: image_priority(image, artist_query, event_year), reverse=True)
 
