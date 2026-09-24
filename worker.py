@@ -616,7 +616,7 @@ def build_turkish_gemini_script(candidate: dict) -> str:
         object_noun = "şarkısını" if noun == "şarkısı" else "albümünü"
         event = f"{date}. {artist}, '{title}' {object_noun} yayımladı."
         if artist == "John Lennon" and re.search(r"first solo No\.?1 single in the US", source, re.I):
-            return event + " Şarkı daha sonra ABD'de Lennon'a ilk solo birinciliğini getirdi."
+            return event + " Şarkı, ona daha sonra ABD'deki ilk solo birinciliğini getirdi."
         raise VoiceoverQualityError("Release has no verified consequence for the story")
 
     raise VoiceoverQualityError("Event cannot be told accurately from the available facts")
@@ -625,14 +625,9 @@ def build_turkish_gemini_script(candidate: dict) -> str:
 
 def turkish_gemini_style_prompt() -> str:
     return (
-        "Türkçe konuşan deneyimli ve sevilen bir radyo DJ'i gibi oku. "
-        "Ses sıcak, içten, güler yüzlü ve canlı olsun; dinleyiciye sevdiği bir plağın ilginç bir ayrıntısını "
-        "heyecanla anlatıyormuş gibi konuş. Reklam spikeri, haber spikeri veya fragman sesi gibi olma. "
-        "Doğal iniş çıkışlar, küçük nefesler ve mikro duraklamalar bırak; metni kusursuz bir makine gibi okuma. "
-        "Sanatçı ve İngilizce şarkı ya da albüm adlarını rahat ve doğal İngilizce telaffuz et, sonra Türkçeye "
-        "aynı ses karakteriyle akıcı biçimde dön. Şaşırtıcı bir sayı veya başarı varsa keyifli, hafif bir heyecan ver. "
-        "Bu yalnızca ana hikâyedir; sonuna marka adı veya çağrı ekleme. Cümleleri sıcak ve anlaşılır bir ritimle "
-        "yaklaşık dokuz-on saniyede anlat; acele etme, küçük doğal duraklamalar bırak."
+        "Verilen metni aynen, yalnızca bir kez oku; yeni sözcük veya cümle ekleme. "
+        "Sıcak, doğal Türkçe radyo DJ'i sesi. İngilizce şarkı adını doğal söyle. "
+        "Anlaşılır hızda, yaklaşık dokuz-on saniye; dramatik duraksama yapma."
     )
 
 
@@ -857,11 +852,11 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
             clips = [
                 ("story", script, turkish_gemini_style_prompt()),
                 ("station", "Oldies Radyo.",
-                 "Aynı sıcak radyo DJ'i sesiyle, istasyon adını tek başına ve güvenle söyle. "
-                 "Bir reklam sloganı gibi bağırma. Sadece verilen iki kelimeyi oku."),
+                 "Yalnızca 'Oldies Radyo' de, bir kez. Sıcak DJ istasyon imzası; "
+                 "yaklaşık bir buçuk saniye. Başka hiçbir şey söyleme."),
                 ("cta", "Dinle, beğen, paylaş.",
-                 "Aynı sıcak radyo DJ'i sesiyle kısa kapanışı oku. Dinle, beğen, sonra son "
-                 "'paylaş' sözcüğüne doğal ve belirgin bir vurgu ver. Acele etme, bağırma."),
+                 "Yalnızca 'Dinle, beğen, paylaş' de, bir kez. Sıcak DJ tonu; "
+                 "son 'paylaş' sözcüğünü doğal vurgula. Yaklaşık iki buçuk saniye. Ek söz söyleme."),
             ]
             parts = []
             for name, words, prompt in clips:
