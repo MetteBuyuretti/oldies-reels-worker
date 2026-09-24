@@ -39,7 +39,7 @@ jobs:
           OLDIES_PREVIEW_ARTIST: "John Lennon"
           OLDIES_REELS_LANGUAGE: "tr"
           OLDIES_TTS_ENABLED: "true"
-          OLDIES_TTS_ENGINE: "gemini"
+          OLDIES_TTS_ENGINE: "chirp_dj"
           OLDIES_GEMINI_TTS_VOICE: "Charon"
           OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
         run: python worker.py
