@@ -50,3 +50,5 @@ jobs:
           path: output/
           retention-days: 7
           if-no-files-found: ignore
+
+# Retry with concise exact-text DJ prompts.
