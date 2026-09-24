@@ -1228,13 +1228,19 @@ def main() -> None:
     base_url = require_env("OLDIES_WP_BASE_URL")
     OUTPUT.mkdir(parents=True, exist_ok=True)
     language = reel_language()
+    preview_only = os.getenv("OLDIES_PREVIEW_ONLY", "").strip().lower() in {"1", "true", "yes", "on"}
     override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
     today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
-    draft_state = get_draft_state(bearer, base_url)
+    draft_state = {"daily_limit_reached": False, "recent_artists": []} if preview_only else get_draft_state(bearer, base_url)
     if language != "en" and draft_state["daily_limit_reached"]:
         print("Daily DRAFT_REVIEW quota is already satisfied; exiting successfully without rendering another Reel.")
         return
     candidates = research_candidates(draft_state["recent_artists"], today=today)
+    preview_artist = os.getenv("OLDIES_PREVIEW_ARTIST", "").strip().casefold()
+    if preview_only and preview_artist:
+        candidates = [option for option in candidates if str(option.get("artist", "")).casefold() == preview_artist]
+        if not candidates:
+            raise VoiceoverQualityError(f"No candidate found for preview artist: {preview_artist}")
     candidate = None
     photos, credits = [], []
     photo_errors = []
@@ -1274,7 +1280,6 @@ def main() -> None:
     video = OUTPUT / "oldies-reels-draft.mp4"
     render(make_scenes(candidate, photos, OUTPUT), video, voiceover=voiceover)
 
-    preview_only = os.getenv("OLDIES_PREVIEW_ONLY", "").strip().lower() in {"1", "true", "yes", "on"}
     if preview_only:
         result = {"success": True, "preview_only": True, "voiceover": bool(voiceover)}
         (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
