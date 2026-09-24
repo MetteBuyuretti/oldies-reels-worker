@@ -863,6 +863,17 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         path = directory / "voiceover-google.mp3"
         path.write_bytes(raw)
         duration = _audio_duration(path)
+        if 13.0 <= duration < 14.25:
+            # Preserve the DJ's pauses and pitch while using the final second
+            # of the fixed-length reel instead of padding it with dead air.
+            expanded = directory / "voiceover-chirp-timed.mp3"
+            subprocess.run([
+                "ffmpeg", "-y", "-loglevel", "error", "-i", str(path),
+                "-af", f"atempo={duration / 14.45:.5f}", "-c:a", "libmp3lame",
+                "-q:a", "3", str(expanded),
+            ], check=True)
+            expanded.replace(path)
+            duration = _audio_duration(path)
         if not 11.5 <= duration <= 14.7:
             raise VoiceoverQualityError(f"Chirp DJ narration does not fit 15 seconds: {duration:.1f}s")
         candidate["dj_script_tr"] = script + " [duraklama] Oldies Radyo. [duraklama] Dinle, beğen, paylaş."
