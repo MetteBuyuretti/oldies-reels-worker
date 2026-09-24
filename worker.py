@@ -335,7 +335,7 @@ def _event_chart_details(candidate: dict) -> tuple[int | None, bool]:
         if match:
             weeks = _number_word_to_int(match.group(1))
             break
-    uk_no1 = bool(re.search(r"No\.?1 in the UK|number one in the UK", source, re.I))
+    uk_no1 = bool(re.search(r"No\.?1 in the UK|number one (?:album )?in the (?:UK|United Kingdom)", source, re.I))
     return weeks, uk_no1
 
 
@@ -371,8 +371,16 @@ def turkish_display_copy(candidate: dict) -> dict:
         closing = "ŞARKILARI YAŞAMAYA DEVAM EDİYOR"
     elif title and uk_no1:
         hook = f"{artist.upper()} • {year}"
-        fact1 = f"'{title}', İngiltere listelerinde 1 numaraya çıktı."
+        fact1 = f"'{title}' {_turkish_record_noun(candidate)}, İngiltere listelerinde 1 numaraya çıktı."
         fact2 = f"Zirvedeki yerini {weeks} hafta korudu." if weeks else "Liste zirvesine yerleşti."
+        closing = "MÜZİK TARİHİNDEN BİR SAYFA"
+    elif title and re.search(r"\breleased\b", str(candidate.get("source_text", "")), re.I):
+        hook = f"{artist.upper()} • {year}"
+        object_noun = "şarkısını" if _turkish_record_noun(candidate) == "şarkısı" else "albümünü"
+        fact1 = f"{date_text}: {artist}, '{title}' {object_noun} yayımladı."
+        fact2 = ("Şarkı daha sonra ABD'de Lennon'a ilk solo liste birinciliğini getirdi."
+                 if artist == "John Lennon" and re.search(r"first solo No\.?1 single in the US", str(candidate.get("source_text", "")), re.I)
+                 else original_facts[1])
         closing = "MÜZİK TARİHİNDEN BİR SAYFA"
     elif title:
         hook = f"{artist.upper()} • {year}"
@@ -547,60 +555,71 @@ def _turkish_period_context(year: str, artist: str) -> str:
     return ""
 
 
+class VoiceoverQualityError(RuntimeError):
+    """A draft must not be delivered when its story or timing is unusable."""
+
+
+def _turkish_number(value: int) -> str:
+    ones = ["", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"]
+    tens = ["", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"]
+    if value < 10:
+        return ones[value] or "sıfır"
+    if value < 100:
+        return " ".join(part for part in (tens[value // 10], ones[value % 10]) if part)
+    if value < 1000:
+        return " ".join(part for part in (
+            ("yüz" if value // 100 == 1 else ones[value // 100] + " yüz"),
+            _turkish_number(value % 100) if value % 100 else "",
+        ) if part)
+    if value < 10000:
+        return " ".join(part for part in (
+            ("bin" if value // 1000 == 1 else ones[value // 1000] + " bin"),
+            _turkish_number(value % 1000) if value % 1000 else "",
+        ) if part)
+    raise VoiceoverQualityError("Unsupported year in Turkish announcement")
+
+
+def _spoken_turkish_date(event_date: str) -> str:
+    try:
+        date = datetime.strptime(event_date, "%Y-%m-%d")
+    except ValueError as exc:
+        raise VoiceoverQualityError("Event date is missing or invalid") from exc
+    months = ["", "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
+    return f"{_turkish_number(date.day).capitalize()} {months[date.month]} {_turkish_number(date.year)}"
+
+
 def build_turkish_gemini_script(candidate: dict) -> str:
-    """Short, factual Turkish DJ copy: event, standout detail, context, natural sign-off."""
+    """Main story only; station ID and CTA are produced as separate audio clips."""
     artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
     title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
-    event_date = str(candidate.get("event_date", "")).strip()
-    year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
+    date = _spoken_turkish_date(str(candidate.get("event_date", "")).strip())
+    source = re.sub(r"\s+", " ", str(candidate.get("source_text", "")).strip())
     kind = str(candidate.get("kind", "events"))
     weeks, uk_no1 = _event_chart_details(candidate)
-    tr_numbers = {
-        1: "bir", 2: "iki", 3: "üç", 4: "dört", 5: "beş",
-        6: "altı", 7: "yedi", 8: "sekiz", 9: "dokuz", 10: "on",
-    }
-
     if kind == "births":
-        return (
-            f"{year}... {artist} bugün doğdu. "
-            "Sonrası müzik tarihi. Oldies Radyo."
-        )
-
+        raise VoiceoverQualityError("Birth anniversary needs a verified story, not a generic announcement")
     if kind == "deaths":
-        return (
-            f"Bugün {artist}'ı hatırlıyoruz. "
-            f"{year}'da bugün aramızdan ayrıldı. "
-            "Şarkıları hâlâ bizimle... Oldies Radyo."
-        )
-
+        raise VoiceoverQualityError("Death anniversary needs a verified story, not a generic announcement")
     if title and uk_no1:
         noun = _turkish_record_noun(candidate)
-        weeks_text = tr_numbers.get(weeks, str(weeks)) if weeks else ""
-        context = _turkish_period_context(year, artist)
-        if weeks:
-            script = (
-                f"{year}... {turkish_genitive(artist)} {title} {noun} İngiltere'de bir numara. "
-                f"Üstelik {weeks_text} hafta boyunca. "
-            )
-        else:
-            script = (
-                f"{year}... {turkish_genitive(artist)} {title} {noun} İngiltere'de bir numara. "
-            )
-        if context:
-            script += context + " "
-        return script + "Oldies Radyo."
+        if noun == "kaydı":
+            raise VoiceoverQualityError("Chart item type is ambiguous")
+        result = f" Zirvede {_turkish_number(weeks)} hafta kaldı." if weeks else ""
+        return f"{date}. {artist} imzalı '{title}' {noun} İngiltere'de bir numaraya çıktı.{result}"
 
-    if title:
+    if title and re.search(r"\breleased\b", source, re.I):
         noun = _turkish_record_noun(candidate)
-        return (
-            f"{year}... {artist}. {title} {noun}. "
-            "O günün kaydı, bugünün hatırası... Oldies Radyo."
-        )
+        if noun == "kaydı":
+            noun = "şarkısı" if re.search(r"\bsingle\b|\bsong\b", source, re.I) else "albümü" if re.search(r"\balbum\b", source, re.I) else ""
+        if not noun:
+            raise VoiceoverQualityError("Released item type is ambiguous")
+        object_noun = "şarkısını" if noun == "şarkısı" else "albümünü"
+        event = f"{date}. {artist}, '{title}' {object_noun} yayımladı."
+        if artist == "John Lennon" and re.search(r"first solo No\.?1 single in the US", source, re.I):
+            return event + " Şarkı daha sonra ABD'de Lennon'a ilk solo birinciliğini getirdi."
+        raise VoiceoverQualityError("Release has no verified consequence for the story")
 
-    return (
-        f"{year}... Bugün {artist} için müzik tarihinde önemli bir gün. "
-        "Kısa bir not, iyi bir şarkı... Oldies Radyo."
-    )
+    raise VoiceoverQualityError("Event cannot be told accurately from the available facts")
 
 
 
@@ -612,7 +631,8 @@ def turkish_gemini_style_prompt() -> str:
         "Doğal iniş çıkışlar, küçük nefesler ve mikro duraklamalar bırak; metni kusursuz bir makine gibi okuma. "
         "Sanatçı ve İngilizce şarkı ya da albüm adlarını rahat ve doğal İngilizce telaffuz et, sonra Türkçeye "
         "aynı ses karakteriyle akıcı biçimde dön. Şaşırtıcı bir sayı veya başarı varsa keyifli, hafif bir heyecan ver. "
-        "Son iki kelime olan Oldies Radyo'yu slogan gibi bağırma; gülümseyen, sıcak ve doğal bir imza gibi bitir."
+        "Bu yalnızca ana hikâyedir; sonuna marka adı veya çağrı ekleme. Cümleleri sıcak ve anlaşılır bir ritimle "
+        "yaklaşık dokuz-on saniyede anlat; acele etme, küçük doğal duraklamalar bırak."
     )
 
 
@@ -791,8 +811,26 @@ def _join_tts_segments(paths: list[Path], target: Path) -> None:
     )
 
 
+def _audio_duration(path: Path) -> float:
+    probe = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
+        check=True, capture_output=True, text=True,
+    )
+    return float(probe.stdout.strip())
+
+
+def _silence_mp3(directory: Path, name: str, seconds: float) -> Path:
+    target = directory / name
+    subprocess.run(
+        ["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono", "-t", str(seconds),
+         "-c:a", "libmp3lame", "-b:a", "192k", str(target)],
+        check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+    )
+    return target
+
+
 def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
-    """Use expressive Gemini Flash for Turkish; keep Chirp 3 HD as safe fallback."""
+    """Use a quality-gated Gemini DJ read for Turkish; keep Chirp for English."""
     enabled = os.getenv("OLDIES_TTS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
     if not enabled:
         return None
@@ -808,36 +846,60 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         raise RuntimeError("Google TTS is enabled but no Google Cloud project was resolved")
     token = str(credentials.token)
 
-    # Turkish: one expressive Gemini Flash request per Reel. This keeps cost predictable
-    # and lets the same voice naturally handle Turkish plus English artist/title names.
+    # Separate the story, station name and CTA so the signature is not read as
+    # one uninterrupted continuation of the factual announcement.
     engine = os.getenv("OLDIES_TTS_ENGINE", "auto").strip().lower() or "auto"
     fallback_enabled = os.getenv("OLDIES_TTS_FALLBACK", "true").strip().lower() in {"1", "true", "yes", "on"}
     if mode == "tr" and engine in {"auto", "gemini", "gemini_flash"}:
         gemini_voice = os.getenv("OLDIES_GEMINI_TTS_VOICE", "Charon").strip() or "Charon"
         script = build_turkish_gemini_script(candidate)
         try:
-            raw = _gemini_tts_bytes(
-                text=script,
-                prompt=turkish_gemini_style_prompt(),
-                language="tr-TR",
-                voice_name=gemini_voice,
-                project=project,
-                token=token,
-            )
+            clips = [
+                ("story", script, turkish_gemini_style_prompt()),
+                ("station", "Oldies Radyo.",
+                 "Aynı sıcak radyo DJ'i sesiyle, istasyon adını tek başına ve güvenle söyle. "
+                 "Bir reklam sloganı gibi bağırma. Sadece verilen iki kelimeyi oku."),
+                ("cta", "Dinle, beğen, paylaş.",
+                 "Aynı sıcak radyo DJ'i sesiyle kısa kapanışı oku. Dinle, beğen, sonra son "
+                 "'paylaş' sözcüğüne doğal ve belirgin bir vurgu ver. Acele etme, bağırma."),
+            ]
+            parts = []
+            for name, words, prompt in clips:
+                raw = _gemini_tts_bytes(
+                    text=words, prompt=prompt, language="tr-TR",
+                    voice_name=gemini_voice, project=project, token=token,
+                )
+                part = directory / f"voiceover-{name}.mp3"
+                part.write_bytes(raw)
+                parts.append(part)
+            story_duration = _audio_duration(parts[0])
+            if not 7.5 <= story_duration <= 10.7:
+                raise VoiceoverQualityError(f"Story pacing outside 15-second Reel: {story_duration:.1f}s")
             path = directory / "voiceover-google.mp3"
-            path.write_bytes(raw)
+            pause_after_story = _silence_mp3(directory, "pause-after-story.mp3", 0.9)
+            pause_after_station = _silence_mp3(directory, "pause-after-station.mp3", 0.35)
+            _join_tts_segments([parts[0], pause_after_story, parts[1], pause_after_station, parts[2]], path)
             if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
                 raise RuntimeError("Generated Gemini voiceover failed size validation")
-            candidate["dj_script_tr"] = script
+            total_duration = _audio_duration(path)
+            if not 12.0 <= total_duration <= 14.7:
+                raise VoiceoverQualityError(f"Voiceover does not use 15 seconds naturally: {total_duration:.1f}s")
+            candidate["dj_script_tr"] = script + " [duraklama] Oldies Radyo. [duraklama] Dinle, beğen, paylaş."
+            candidate["voiceover_duration_seconds"] = round(total_duration, 2)
             candidate["tts_voice"] = gemini_voice
             candidate["tts_language"] = "tr-TR"
             candidate["tts_engine"] = "gemini-2.5-flash-tts"
             print(f"Gemini Flash TTS ready: {gemini_voice} ({path.stat().st_size} bytes)")
             return path
+        except VoiceoverQualityError:
+            raise
         except Exception as exc:
-            if not fallback_enabled:
+            if not fallback_enabled or mode == "tr":
                 raise
             print(f"Gemini Flash TTS unavailable; falling back to Chirp 3 HD: {exc}")
+
+    if mode == "tr":
+        raise VoiceoverQualityError("Turkish drafts require the segmented Gemini DJ voice")
 
     main_default_language = "en-AU" if mode == "en" else "tr-TR"
     main_default_voice = "en-AU-Chirp3-HD-Charon" if mode == "en" else "tr-TR-Chirp3-HD-Charon"
@@ -1177,6 +1239,12 @@ def main() -> None:
     photos, credits = [], []
     photo_errors = []
     for option in candidates:
+        if language == "tr":
+            try:
+                build_turkish_gemini_script(option)
+            except VoiceoverQualityError as exc:
+                print(f"Skipping unsupported story for {option['artist']}: {exc}")
+                continue
         for old_photo in OUTPUT.glob("photo-*.jpg"):
             old_photo.unlink()
         try:
