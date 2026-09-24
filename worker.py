@@ -858,7 +858,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         )
         raw = _google_tts_bytes(
             text=ssml, language="tr-TR", voice_name="tr-TR-Chirp3-HD-Charon",
-            project=project, token=token, ssml=True, speaking_rate=1.12,
+            project=project, token=token, ssml=True, speaking_rate=1.21,
         )
         path = directory / "voiceover-google.mp3"
         path.write_bytes(raw)
