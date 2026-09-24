@@ -54,6 +54,9 @@ class AnnouncerTests(unittest.TestCase):
         self.assertEqual(artist_page_title("Eagles"), "Eagles (band)")
         self.assertFalse(worker.image_matches_artist({"title": "Eagles Castle"}, "Eagles"))
         self.assertTrue(worker.image_matches_artist({"title": "Eagles band live in concert"}, "Eagles"))
+        self.assertFalse(worker.image_matches_artist({"title": "Bootleg LP Rolling Stones 1969"}, "The Rolling Stones", "Goat’s Head Soup"))
+        self.assertFalse(worker.image_matches_artist({"title": "A Rolling Stones crowd - 1976"}, "The Rolling Stones", "Goat’s Head Soup"))
+        self.assertTrue(worker.image_matches_artist({"title": "Rolling Stones 1971"}, "The Rolling Stones", "Goat’s Head Soup"))
 
     def test_station_and_cta_have_real_pauses(self):
         with tempfile.TemporaryDirectory() as temp:
