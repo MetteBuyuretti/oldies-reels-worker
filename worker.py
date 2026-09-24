@@ -194,9 +194,15 @@ def image_priority(image: dict, artist: str, event_year: int) -> tuple[int, int,
     return (-group_penalty, period_score, exact_name, portrait_shape, title)
 
 
-def image_matches_artist(image: dict, artist: str) -> bool:
+def image_matches_artist(image: dict, artist: str, music_title: str = "") -> bool:
     """Require explicit music context for names that also label unrelated subjects."""
     title = str(image.get("title", "")).casefold()
+    if re.search(r"\b(?:bootleg|crowd|audience)\b", title):
+        return False
+    if music_title and re.search(r"\b(?:album|single|lp|vinyl|record|sleeve|cover)\b", title):
+        normalized = lambda value: re.sub(r"[^a-z0-9]+", " ", value.casefold()).strip()
+        if normalized(music_title) not in normalized(title):
+            return False
     if artist == "Eagles":
         return bool(
             re.search(r"\beagles\b", title)
@@ -222,7 +228,8 @@ def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path
         choices = []
         for page in commons_search(str(query)):
             image = usable_image(page)
-            if image and image["title"] not in seen_titles and image_matches_artist(image, str(candidate["artist"])):
+            if (image and image["title"] not in seen_titles
+                    and image_matches_artist(image, str(candidate["artist"]), str(candidate.get("instagram_music_title", "")))):
                 choices.append(image)
         choices.sort(key=lambda image: image_priority(image, artist_query, event_year), reverse=True)
 
@@ -883,7 +890,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         path = directory / "voiceover-google.mp3"
         path.write_bytes(raw)
         duration = _audio_duration(path)
-        if 13.0 <= duration < 14.25:
+        if 12.0 <= duration < 14.25:
             # Preserve the DJ's pauses and pitch while using the final second
             # of the fixed-length reel instead of padding it with dead air.
             expanded = directory / "voiceover-chirp-timed.mp3"
