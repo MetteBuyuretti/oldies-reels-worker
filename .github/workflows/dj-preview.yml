@@ -46,3 +46,5 @@ jobs:
           path: output/
           retention-days: 7
           if-no-files-found: ignore
+
+# Verify chart-backed closing fact and timing.
