@@ -41,6 +41,8 @@ class AnnouncerTests(unittest.TestCase):
         self.assertEqual(item["instagram_music_title"], "Goat’s Head Soup")
         spoken = worker.build_turkish_gemini_script(item)
         self.assertIn("'Goat’s Head Soup' albümü", spoken)
+        self.assertIn("Zirvede iki hafta kaldı", spoken)
+        self.assertTrue(any("officialcharts.com" in source for source in item["sources"]))
         self.assertNotIn("'Goat'", spoken)
 
     def test_unsupported_story_is_rejected(self):
