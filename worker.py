@@ -715,6 +715,8 @@ def _google_tts_bytes(
     voice_name: str,
     project: str,
     token: str,
+    ssml: bool = False,
+    speaking_rate: float = 1.0,
 ) -> bytes:
     response = requests.post(
         "https://texttospeech.googleapis.com/v1/text:synthesize",
@@ -725,9 +727,9 @@ def _google_tts_bytes(
             "User-Agent": USER_AGENT,
         },
         json={
-            "input": {"text": text},
+            "input": {"ssml" if ssml else "text": text},
             "voice": {"languageCode": language, "name": voice_name},
-            "audioConfig": {"audioEncoding": "MP3"},
+            "audioConfig": {"audioEncoding": "MP3", "speakingRate": speaking_rate},
         },
         timeout=90,
     )
@@ -845,6 +847,30 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     # one uninterrupted continuation of the factual announcement.
     engine = os.getenv("OLDIES_TTS_ENGINE", "auto").strip().lower() or "auto"
     fallback_enabled = os.getenv("OLDIES_TTS_FALLBACK", "true").strip().lower() in {"1", "true", "yes", "on"}
+    if mode == "tr" and engine == "chirp_dj":
+        script = build_turkish_gemini_script(candidate)
+        # SSML makes the station break and final-word emphasis explicit.
+        ssml = (
+            f"<speak>{html.escape(script)}"
+            '<break time="900ms"/>Oldies Radyo.'
+            '<break time="350ms"/>Dinle, beğen, '
+            '<prosody rate="90%">paylaş</prosody>.</speak>'
+        )
+        raw = _google_tts_bytes(
+            text=ssml, language="tr-TR", voice_name="tr-TR-Chirp3-HD-Charon",
+            project=project, token=token, ssml=True, speaking_rate=0.98,
+        )
+        path = directory / "voiceover-google.mp3"
+        path.write_bytes(raw)
+        duration = _audio_duration(path)
+        if not 11.5 <= duration <= 14.7:
+            raise VoiceoverQualityError(f"Chirp DJ narration does not fit 15 seconds: {duration:.1f}s")
+        candidate["dj_script_tr"] = script + " [duraklama] Oldies Radyo. [duraklama] Dinle, beğen, paylaş."
+        candidate["voiceover_duration_seconds"] = round(duration, 2)
+        candidate["tts_voice"] = "tr-TR-Chirp3-HD-Charon"
+        candidate["tts_language"] = "tr-TR"
+        candidate["tts_engine"] = "chirp3-hd-dj-ssml"
+        return path
     if mode == "tr" and engine in {"auto", "gemini", "gemini_flash"}:
         gemini_voice = os.getenv("OLDIES_GEMINI_TTS_VOICE", "Charon").strip() or "Charon"
         script = build_turkish_gemini_script(candidate)
