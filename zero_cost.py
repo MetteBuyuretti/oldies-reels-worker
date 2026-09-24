@@ -336,6 +336,7 @@ def deterministic_copy(*, artist: str, kind: str, event_date: datetime, source_t
         raw_source = str(source_text or "")
         smart_title = ""
         for pattern in (
+            r"\btitled\s+‘(.{2,100}?)’(?=\s|[.,;:!?]|$)",
             r"\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+‘(.{2,100})’",
             r"\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+“(.{2,100})”",
             r'\b(?:soundtrack\s+album|studio\s+album|album|single|song|record)\s+"([^"]{2,100})"',
@@ -351,7 +352,12 @@ def deterministic_copy(*, artist: str, kind: str, event_date: datetime, source_t
             .replace("‘", "'").replace("’", "'")
             .replace("“", '"').replace("”", '"')
         )
-        fallback_titles = [re.sub(r"\s+", " ", x).strip() for x in re.findall(r"""['"]([^'"]{2,80})['"]""", clean)]
+        # Preserve apostrophes inside titles, e.g. Goat's Head Soup.
+        fallback_titles = [
+            re.sub(r"\s+", " ", x).strip()
+            for x in re.findall(r"[‘“](.{2,80})[’”](?=\s+(?:by|from|on|was|which)\b|[.,;:!?]|$)", raw_source, re.I)
+        ]
+        fallback_titles += [re.sub(r"\s+", " ", x).strip() for x in re.findall(r"""(?<!\w)['"]([^'"]{2,80})['"](?!\w)""", clean)]
         titles = [smart_title] if smart_title else fallback_titles
         music_title = titles[0] if titles else ""
         hook = f"{artist.upper()} • MÜZİK TARİHİNDE BUGÜN"
