@@ -6,7 +6,7 @@ import tempfile
 import unittest
 
 import worker
-from zero_cost import deterministic_copy
+from zero_cost import artist_page_title, deterministic_copy
 
 
 class AnnouncerTests(unittest.TestCase):
@@ -47,6 +47,11 @@ class AnnouncerTests(unittest.TestCase):
         item = self.candidate("Eagles", "1979-09-24", "Eagles made music history.")
         with self.assertRaises(worker.VoiceoverQualityError):
             worker.build_turkish_gemini_script(item)
+
+    def test_eagles_bird_and_castle_cannot_be_band_sources(self):
+        self.assertEqual(artist_page_title("Eagles"), "Eagles (band)")
+        self.assertFalse(worker.image_matches_artist({"title": "Eagles Castle"}, "Eagles"))
+        self.assertTrue(worker.image_matches_artist({"title": "Eagles band live in concert"}, "Eagles"))
 
     def test_station_and_cta_have_real_pauses(self):
         with tempfile.TemporaryDirectory() as temp:
