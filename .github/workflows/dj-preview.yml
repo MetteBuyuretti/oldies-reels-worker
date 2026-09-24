@@ -51,4 +51,4 @@ jobs:
           retention-days: 7
           if-no-files-found: ignore
 
-# Preview shorter verified story at a measured 1.12 speaking rate.
+# Preview complete DJ copy at a measured 1.21 speaking rate.
