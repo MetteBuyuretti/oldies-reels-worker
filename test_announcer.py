@@ -28,9 +28,14 @@ class AnnouncerTests(unittest.TestCase):
         spoken = worker.build_turkish_gemini_script(item)
         self.assertIn("Yirmi üç Eylül bin dokuz yüz yetmiş dört", spoken)
         self.assertIn("sonra", spoken)
-        self.assertIn("ilk solo bir numarası", spoken)
+        self.assertIn("ilk solo liste birincisi", spoken)
+        self.assertIn("John Lennon,", spoken)
+        self.assertNotIn("Lennon\u0027ın", spoken)
         self.assertNotIn("Oldies Radyo", spoken)
         self.assertNotIn("1974", spoken)
+        prompt = worker.turkish_gemini_style_prompt(item)
+        self.assertIn("Whatever Gets You thru the Night", prompt)
+        self.assertIn("haber spikeri tonundan", prompt)
 
     def test_album_apostrophe_and_type_are_preserved(self):
         item = self.candidate(
