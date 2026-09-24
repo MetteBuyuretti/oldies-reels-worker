@@ -616,7 +616,7 @@ def build_turkish_gemini_script(candidate: dict) -> str:
         object_noun = "şarkısını" if noun == "şarkısı" else "albümünü"
         event = f"{date}. {artist}, '{title}' {object_noun} yayımladı."
         if artist == "John Lennon" and re.search(r"first solo No\.?1 single in the US", source, re.I):
-            return event + " Şarkı, ona daha sonra ABD'deki ilk solo birinciliğini getirdi."
+            return f"{date}. {artist}'ın '{title}' şarkısı çıktı; sonra ABD'de ilk solo bir numarası oldu."
         raise VoiceoverQualityError("Release has no verified consequence for the story")
 
     raise VoiceoverQualityError("Event cannot be told accurately from the available facts")
@@ -858,7 +858,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         )
         raw = _google_tts_bytes(
             text=ssml, language="tr-TR", voice_name="tr-TR-Chirp3-HD-Charon",
-            project=project, token=token, ssml=True, speaking_rate=0.98,
+            project=project, token=token, ssml=True, speaking_rate=1.12,
         )
         path = directory / "voiceover-google.mp3"
         path.write_bytes(raw)
