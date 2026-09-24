@@ -643,18 +643,32 @@ def build_turkish_gemini_script(candidate: dict) -> str:
         object_noun = "şarkısını" if noun == "şarkısı" else "albümünü"
         event = f"{date}. {artist}, '{title}' {object_noun} yayımladı."
         if artist == "John Lennon" and re.search(r"first solo No\.?1 single in the US", source, re.I):
-            return f"{date}. {artist}'ın '{title}' şarkısı çıktı; sonra ABD'de ilk solo bir numarası oldu."
+            return (f"{event} "
+                    "Bu şarkı, daha sonra ABD'de onun ilk solo liste birincisi oldu.")
         raise VoiceoverQualityError("Release has no verified consequence for the story")
 
     raise VoiceoverQualityError("Event cannot be told accurately from the available facts")
 
 
 
-def turkish_gemini_style_prompt() -> str:
+def turkish_gemini_style_prompt(candidate: dict) -> str:
+    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
+    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
+    pronunciation = (
+        f"{artist} adının sonuna Türkçe ek veya fazladan bir hece getirme. "
+        if artist else ""
+    )
+    if title:
+        pronunciation += (
+            f"İngilizce şarkı veya albüm adını kendi dilindeki telaffuzuyla "
+            f"bir bütün olarak söyle: {title}. Türkçeye dönerken cümleyi doğal sürdür. "
+        )
     return (
         "Verilen metni aynen, yalnızca bir kez oku; yeni sözcük veya cümle ekleme. "
-        "Sıcak, doğal Türkçe radyo DJ'i sesi. İngilizce şarkı adını doğal söyle. "
-        "Anlaşılır hızda, yaklaşık dokuz-on saniye; dramatik duraksama yapma."
+        "Deneyimli, sıcak ve canlı bir Türkçe radyo DJ'i gibi dinleyiciye anlat; "
+        "haber spikeri tonundan ve tekdüze okumadan kaçın. Türkçe cümleleri doğal "
+        f"vurgu ve gramerle söyle. {pronunciation}"
+        "Anlaşılır, canlı tempoda yaklaşık dokuz-on saniye; acele edip kelimeleri yutma."
     )
 
 
@@ -914,7 +928,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         script = build_turkish_gemini_script(candidate)
         try:
             clips = [
-                ("story", script, turkish_gemini_style_prompt()),
+                ("story", script, turkish_gemini_style_prompt(candidate))
                 ("station", "Oldies Radyo.",
                  "Yalnızca 'Oldies Radyo' de, bir kez. Sıcak DJ istasyon imzası; "
                  "yaklaşık bir buçuk saniye. Başka hiçbir şey söyleme."),
