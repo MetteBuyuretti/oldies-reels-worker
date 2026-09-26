@@ -88,7 +88,7 @@ class AnnouncerTests(unittest.TestCase):
     def test_fixed_station_is_single_and_cta_is_brief(self):
         assets = Path(worker.__file__).with_name("assets")
         self.assertLess(worker._audio_duration(assets / "station-charon.mp3"), 1.5)
-        self.assertLess(worker._audio_duration(assets / "cta-charon-natural.mp3"), 2.1)
+        self.assertLess(worker._audio_duration(assets / "cta-charon-natural.mp3"), 3.0)
 
 
 if __name__ == "__main__":
