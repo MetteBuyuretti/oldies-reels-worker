@@ -85,6 +85,11 @@ class AnnouncerTests(unittest.TestCase):
             ], output)
             self.assertAlmostEqual(worker._audio_duration(output), 12.75, delta=0.15)
 
+    def test_fixed_station_is_single_and_cta_is_brief(self):
+        assets = Path(worker.__file__).with_name("assets")
+        self.assertLess(worker._audio_duration(assets / "station-charon.mp3"), 1.5)
+        self.assertLess(worker._audio_duration(assets / "cta-charon-fast.mp3"), 1.9)
+
 
 if __name__ == "__main__":
     unittest.main()
