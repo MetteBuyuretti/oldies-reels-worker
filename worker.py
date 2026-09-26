@@ -928,7 +928,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         script = build_turkish_gemini_script(candidate)
         try:
             clips = [
-                ("story", script, turkish_gemini_style_prompt(candidate))
+                ("story", script, turkish_gemini_style_prompt(candidate)),
                 ("station", "Oldies Radyo.",
                  "Yalnızca 'Oldies Radyo' de, bir kez. Sıcak DJ istasyon imzası; "
                  "yaklaşık bir buçuk saniye. Başka hiçbir şey söyleme."),
