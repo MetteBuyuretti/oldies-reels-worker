@@ -44,7 +44,9 @@ def main() -> None:
          "Oldies sözcüğünü 'Oldiiz' diye söyle. Haber spikeri tonu kullanma."),
         ("cta", "Dinle, beğen, paylaş.",
          "Sıcak bir Türk radyo DJ'i gibi yalnızca 'Dinle, beğen, paylaş' de. "
-         "Üç davetin her birini anlaşılır söyle; 'paylaş' sözcüğünde doğal vurgu yap."),
+         "Üç sözcüğü tek nefeste, akıcı günlük konuşma temposuyla söyle. "
+         "Virgüllerde uzun durma, hiçbir kelimeyi uzatma veya dramatik vurgulama. "
+         "Gülümseyen, sade bir kapanış olsun; yaklaşık iki saniye."),
     ]
     results = {"script": story, "source": SOURCE, "voices": {}}
     errors = []

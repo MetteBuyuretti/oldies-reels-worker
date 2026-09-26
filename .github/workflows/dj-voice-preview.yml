@@ -32,7 +32,7 @@ jobs:
       - name: Generate two isolated voice auditions
         env:
           OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
-          OLDIES_PREVIEW_VOICES: "Charon,Fenrir"
+          OLDIES_PREVIEW_VOICES: "Charon"
         run: python preview_voice.py
       - name: Keep the audio for review
         if: always()
