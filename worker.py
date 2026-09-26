@@ -945,9 +945,10 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
             story_raw = directory / "voiceover-story-raw.mp3"
             story_raw.write_bytes(raw)
             story_duration = _audio_duration(story_raw)
-            rate = story_duration / 10.35
-            if not 0.92 <= rate <= 1.55:
-                raise VoiceoverQualityError(f"Story cannot fill a 15-second Reel naturally: {story_duration:.1f}s")
+            if not 11.0 <= story_duration <= 24.0:
+                raise VoiceoverQualityError(f"Story cannot fill a natural Reel: {story_duration:.1f}s")
+            # A gentle increase only. Faster readings sounded like a machine gun.
+            rate = min(1.15, max(1.0, story_duration / 13.8))
             story = directory / "voiceover-story.mp3"
             subprocess.run([
                 "ffmpeg", "-y", "-loglevel", "error", "-i", str(story_raw),
@@ -955,7 +956,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
             ], check=True)
             signature = Path(__file__).with_name("assets")
             station = signature / "station-charon.mp3"
-            cta = signature / "cta-charon-fast.mp3"
+            cta = signature / "cta-charon-natural.mp3"
             if not station.is_file() or not cta.is_file():
                 raise VoiceoverQualityError("DJ station and closing clips are missing")
             path = directory / "voiceover-google.mp3"
@@ -965,8 +966,8 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
             if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
                 raise RuntimeError("Generated Gemini voiceover failed size validation")
             total_duration = _audio_duration(path)
-            if not 13.5 <= total_duration <= 14.7:
-                raise VoiceoverQualityError(f"Voiceover does not fit the 15-second Reel: {total_duration:.1f}s")
+            if not 15.0 <= total_duration <= 29.3:
+                raise VoiceoverQualityError(f"Voiceover does not fit a 15–30-second Reel: {total_duration:.1f}s")
             candidate["dj_script_tr"] = script + " [duraklama] Oldies Radyo. [duraklama] Dinle, beğen, paylaş."
             candidate["voiceover_duration_seconds"] = round(total_duration, 2)
             candidate["tts_voice"] = gemini_voice
