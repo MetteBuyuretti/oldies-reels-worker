@@ -12,6 +12,16 @@ on:
         required: false
         default: false
         type: boolean
+      history_date:
+        description: "Optional YYYY-MM-DD history date for a preview"
+        required: false
+        default: ""
+        type: string
+      preview_artist:
+        description: "Optional artist name to focus a preview"
+        required: false
+        default: ""
+        type: string
       reels_language:
         description: "Reels language: tr or en"
         required: false
@@ -77,6 +87,8 @@ jobs:
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
           OLDIES_VOICEOVER_URL: ${{ inputs.voiceover_url }}
           OLDIES_PREVIEW_ONLY: ${{ inputs.preview_only }}
+          OLDIES_ZERO_COST_DATE: ${{ inputs.history_date }}
+          OLDIES_PREVIEW_ARTIST: ${{ inputs.preview_artist }}
           OLDIES_REELS_LANGUAGE: ${{ inputs.reels_language || 'tr' }}
           OLDIES_TTS_ENABLED: ${{ github.event_name == 'schedule' && 'true' || (inputs.tts_enabled && 'true' || 'false') }}
           OLDIES_TTS_ENGINE: "auto"
@@ -94,4 +106,3 @@ jobs:
           path: output/
           retention-days: 7
           if-no-files-found: ignore
-
