@@ -11,6 +11,7 @@ import base64
 import hashlib
 import html
 import json
+import math
 import os
 import re
 import subprocess
@@ -946,8 +947,8 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
                 part.write_bytes(raw)
                 parts.append(part)
             story_duration = _audio_duration(parts[0])
-            if not 7.5 <= story_duration <= 10.7:
-                raise VoiceoverQualityError(f"Story pacing outside 15-second Reel: {story_duration:.1f}s")
+            if not 7.5 <= story_duration <= 19.0:
+                raise VoiceoverQualityError(f"Story pacing outside natural Reel range: {story_duration:.1f}s")
             path = directory / "voiceover-google.mp3"
             pause_after_story = _silence_mp3(directory, "pause-after-story.mp3", 0.9)
             pause_after_station = _silence_mp3(directory, "pause-after-station.mp3", 0.35)
@@ -955,8 +956,8 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
             if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
                 raise RuntimeError("Generated Gemini voiceover failed size validation")
             total_duration = _audio_duration(path)
-            if not 12.0 <= total_duration <= 14.7:
-                raise VoiceoverQualityError(f"Voiceover does not use 15 seconds naturally: {total_duration:.1f}s")
+            if not 15.0 <= total_duration <= 29.3:
+                raise VoiceoverQualityError(f"Voiceover duration outside 15–30-second Reel range: {total_duration:.1f}s")
             candidate["dj_script_tr"] = script + " [duraklama] Oldies Radyo. [duraklama] Dinle, beğen, paylaş."
             candidate["voiceover_duration_seconds"] = round(total_duration, 2)
             candidate["tts_voice"] = gemini_voice
@@ -1078,16 +1079,22 @@ def download_voiceover(directory: Path) -> Path | None:
 
 
 def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> None:
+    # Keep the full DJ read and its ending. Silent Reels remain 15 seconds.
+    duration = max(DURATION, math.ceil(_audio_duration(voiceover) + 0.55)) if voiceover else DURATION
+    scene_seconds = (duration + 1.10) / 3
+    frames = math.ceil(scene_seconds * FPS)
+    transition_one = scene_seconds - 0.55
+    transition_two = 2 * transition_one
     inputs = []
     for scene in scenes:
-        inputs += ["-loop", "1", "-t", "5.5", "-i", str(scene)]
+        inputs += ["-loop", "1", "-t", f"{scene_seconds:.3f}", "-i", str(scene)]
 
     graph = (
-        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00050,1.08)':d=165:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
-        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00036,1.065)':d=165:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
-        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00046,1.075)':d=165:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
-        "[a][b]xfade=transition=fade:duration=0.55:offset=4.95[x];"
-        "[x][c]xfade=transition=smoothleft:duration=0.55:offset=9.90[v]"
+        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00050,1.08)':d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
+        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00036,1.065)':d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
+        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00046,1.075)':d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
+        f"[a][b]xfade=transition=fade:duration=0.55:offset={transition_one:.3f}[x];"
+        f"[x][c]xfade=transition=smoothleft:duration=0.55:offset={transition_two:.3f}[v]"
     )
     if voiceover:
         inputs += ["-i", str(voiceover)]
@@ -1100,7 +1107,7 @@ def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> N
         command = [
             "ffmpeg", "-y", *inputs, "-filter_complex", graph,
             "-map", "[v]", "-map", "[voice]",
-            "-t", str(DURATION), "-r", str(FPS),
+            "-t", str(duration), "-r", str(FPS),
             "-c:v", "libx264", "-preset", "medium",
             "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k",
             "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
@@ -1110,7 +1117,7 @@ def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> N
     else:
         command = [
             "ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an",
-            "-t", str(DURATION), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
+            "-t", str(duration), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
             "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k",
             "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
         ]
