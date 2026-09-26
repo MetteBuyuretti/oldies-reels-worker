@@ -1,5 +1,5 @@
 """Regression checks for Turkish Reels facts and DJ copy."""
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 import subprocess
 import tempfile
@@ -10,6 +10,11 @@ from zero_cost import artist_page_title, deterministic_copy
 
 
 class AnnouncerTests(unittest.TestCase):
+    def test_female_voice_is_one_day_in_four(self):
+        days = [date(2026, 9, 26) + timedelta(days=i) for i in range(12)]
+        voices = [worker.scheduled_turkish_voice(day) for day in days]
+        self.assertEqual(voices.count("Callirrhoe"), 3)
+        self.assertEqual(voices.count("Charon"), 9)
     def candidate(self, artist, date, source):
         copy = deterministic_copy(
             artist=artist, kind="events",
