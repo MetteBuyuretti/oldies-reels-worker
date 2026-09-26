@@ -17,7 +17,7 @@ import re
 import subprocess
 import textwrap
 import time
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from io import BytesIO
 from pathlib import Path
 
@@ -41,6 +41,11 @@ JOHN_LENNON_APPROVED_SCRIPT = (
     "Şarkı, Lennon için ABD'deki ilk solo liste birinciliğini getirdi. "
     "Oldies Radyo. Dinle, beğen, paylaş."
 )
+
+
+def scheduled_turkish_voice(day: date) -> str:
+    """Include one female DJ day in each four-day cycle."""
+    return "Callirrhoe" if day.toordinal() % 4 == 0 else "Charon"
 
 ALLOWED_LICENSE_MARKERS = (
     "public domain", "cc0", "cc by", "cc-by", "cc by-sa", "cc-by-sa",
@@ -941,9 +946,13 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         candidate["tts_engine"] = "chirp3-hd-dj-ssml"
         return path
     if mode == "tr" and engine in {"auto", "gemini", "gemini_flash"}:
-        gemini_voice = os.getenv("OLDIES_GEMINI_TTS_VOICE", "Charon").strip() or "Charon"
-        if gemini_voice != "Charon":
-            raise VoiceoverQualityError("Approved Turkish DJ voice is Charon")
+        configured_voice = os.getenv("OLDIES_GEMINI_TTS_VOICE", "Charon").strip() or "Charon"
+        gemini_voice = (
+            scheduled_turkish_voice(datetime.now(timezone.utc).date())
+            if configured_voice == "auto" else configured_voice
+        )
+        if gemini_voice not in {"Charon", "Callirrhoe"}:
+            raise VoiceoverQualityError("Turkish DJ voice must be Charon or Callirrhoe")
         script = build_turkish_gemini_script(candidate)
         try:
             path = directory / "voiceover-google.mp3"
@@ -960,6 +969,7 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
                 path.write_bytes(approved.read_bytes())
                 full_script = JOHN_LENNON_APPROVED_SCRIPT
                 engine_name = "gemini-2.5-pro-tts-approved-john-lennon"
+                gemini_voice = "Charon"  # This exact approved take is always the male voice.
             else:
                 full_script = f"{script} Oldies Radyo. Dinle, beğen, paylaş."
                 style = (
