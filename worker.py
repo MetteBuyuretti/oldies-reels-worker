@@ -644,6 +644,14 @@ def build_turkish_gemini_script(candidate: dict) -> str:
         object_noun = "şarkısını" if noun == "şarkısı" else "albümünü"
         event = f"{date}. {artist}, '{title}' {object_noun} yayımladı."
         if artist == "John Lennon" and re.search(r"first solo No\.?1 single in the US", source, re.I):
+            if (str(candidate.get("event_date")) == "1974-09-23"
+                    and title.casefold() == "whatever gets you thru the night"):
+                official = "https://www.johnlennon.com/music/singles/whatever-gets-you-thru-the-night/"
+                sources = candidate.setdefault("sources", [])
+                if official not in sources:
+                    sources.append(official)
+                return (f"{event} Elton John piyanoda ve geri vokalde ona eşlik etti. "
+                        "Şarkı, daha sonra Lennon için ABD'deki ilk solo liste birinciliğini getirdi.")
             return (f"{event} "
                     "Bu şarkı, daha sonra ABD'de onun ilk solo liste birincisi oldu.")
         raise VoiceoverQualityError("Release has no verified consequence for the story")
