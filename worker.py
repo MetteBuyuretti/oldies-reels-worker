@@ -44,8 +44,12 @@ JOHN_LENNON_APPROVED_SCRIPT = (
 
 
 def scheduled_turkish_voice(day: date) -> str:
-    """Include one female DJ day in each four-day cycle."""
-    return "Callirrhoe" if day.toordinal() % 4 == 0 else "Charon"
+    """Use each female DJ voice once per six scheduled days."""
+    first_female_day = date(2026, 9, 29)
+    if day < first_female_day:
+        return "Charon"
+    cycle_day = (day - first_female_day).days % 6
+    return {0: "Callirrhoe", 3: "Aoede"}.get(cycle_day, "Charon")
 
 ALLOWED_LICENSE_MARKERS = (
     "public domain", "cc0", "cc by", "cc-by", "cc by-sa", "cc-by-sa",
@@ -951,8 +955,8 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
             scheduled_turkish_voice(datetime.now(timezone.utc).date())
             if configured_voice == "auto" else configured_voice
         )
-        if gemini_voice not in {"Charon", "Callirrhoe"}:
-            raise VoiceoverQualityError("Turkish DJ voice must be Charon or Callirrhoe")
+        if gemini_voice not in {"Charon", "Callirrhoe", "Aoede"}:
+            raise VoiceoverQualityError("Turkish DJ voice must be Charon, Callirrhoe or Aoede")
         script = build_turkish_gemini_script(candidate)
         try:
             path = directory / "voiceover-google.mp3"

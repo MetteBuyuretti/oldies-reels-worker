@@ -33,7 +33,7 @@ on:
         default: true
         type: boolean
       gemini_tts_voice:
-        description: "Turkish Gemini Flash voice (Charon/Fenrir/Iapetus)"
+        description: "Turkish Gemini Pro DJ voice: Charon, Callirrhoe or Aoede"
         required: false
         default: "Charon"
         type: string
