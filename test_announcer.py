@@ -10,11 +10,15 @@ from zero_cost import artist_page_title, deterministic_copy
 
 
 class AnnouncerTests(unittest.TestCase):
-    def test_female_voice_is_one_day_in_four(self):
-        days = [date(2026, 9, 26) + timedelta(days=i) for i in range(12)]
+    def test_each_female_voice_is_one_day_in_six(self):
+        days = [date(2026, 9, 29) + timedelta(days=i) for i in range(18)]
         voices = [worker.scheduled_turkish_voice(day) for day in days]
         self.assertEqual(voices.count("Callirrhoe"), 3)
-        self.assertEqual(voices.count("Charon"), 9)
+        self.assertEqual(voices.count("Aoede"), 3)
+        self.assertEqual(voices.count("Charon"), 12)
+        self.assertEqual(worker.scheduled_turkish_voice(date(2026, 9, 26)), "Charon")
+        self.assertEqual(worker.scheduled_turkish_voice(date(2026, 10, 2)), "Aoede")
+
     def candidate(self, artist, date, source):
         copy = deterministic_copy(
             artist=artist, kind="events",
