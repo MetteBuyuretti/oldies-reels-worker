@@ -92,7 +92,7 @@ jobs:
           OLDIES_REELS_LANGUAGE: ${{ inputs.reels_language || 'tr' }}
           OLDIES_TTS_ENABLED: ${{ github.event_name == 'schedule' && 'true' || (inputs.tts_enabled && 'true' || 'false') }}
           OLDIES_TTS_ENGINE: "auto"
-          OLDIES_GEMINI_TTS_VOICE: ${{ inputs.gemini_tts_voice || 'Charon' }}
+          OLDIES_GEMINI_TTS_VOICE: ${{ github.event_name == 'schedule' && 'auto' || (inputs.gemini_tts_voice || 'Charon') }}
           OLDIES_TTS_FALLBACK: "true"
           OLDIES_TTS_VOICE: ${{ inputs.tts_voice }}
           OLDIES_TTS_LANGUAGE: ""
