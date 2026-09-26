@@ -34,6 +34,13 @@ COMMONS_API = "https://commons.wikimedia.org/w/api.php"
 USER_AGENT = "OldiesRadyoBot/1.0 (https://oldiesradyo.com; info@oldiesradyo.com)"
 MAX_VIDEO_BYTES = 100 * 1024 * 1024
 MAX_VOICEOVER_BYTES = 20 * 1024 * 1024
+JOHN_LENNON_APPROVED_SCRIPT = (
+    "23 Eylül bin dokuz yüz yetmiş dört. John Lennon, "
+    "'Whatever Gets You Thru the Night' şarkısını yayımladı. "
+    "Elton John piyanoda ve geri vokalde ona eşlik etti. "
+    "Şarkı, Lennon için ABD'deki ilk solo liste birinciliğini getirdi. "
+    "Oldies Radyo. Dinle, beğen, paylaş."
+)
 
 ALLOWED_LICENSE_MARKERS = (
     "public domain", "cc0", "cc by", "cc-by", "cc by-sa", "cc-by-sa",
@@ -799,6 +806,7 @@ def _gemini_tts_bytes(
     voice_name: str,
     project: str,
     token: str,
+    model_name: str = "gemini-2.5-pro-tts",
 ) -> bytes:
     response = requests.post(
         "https://texttospeech.googleapis.com/v1/text:synthesize",
@@ -813,7 +821,7 @@ def _gemini_tts_bytes(
             "voice": {
                 "languageCode": language,
                 "name": voice_name,
-                "modelName": "gemini-2.5-flash-tts",
+                "modelName": model_name,
             },
             "audioConfig": {"audioEncoding": "MP3"},
         },
@@ -935,45 +943,50 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     if mode == "tr" and engine in {"auto", "gemini", "gemini_flash"}:
         gemini_voice = os.getenv("OLDIES_GEMINI_TTS_VOICE", "Charon").strip() or "Charon"
         if gemini_voice != "Charon":
-            raise VoiceoverQualityError("Turkish DJ signature is matched to the Charon voice")
+            raise VoiceoverQualityError("Approved Turkish DJ voice is Charon")
         script = build_turkish_gemini_script(candidate)
         try:
-            raw = _gemini_tts_bytes(
-                text=script, prompt=turkish_gemini_style_prompt(candidate),
-                language="tr-TR", voice_name=gemini_voice, project=project, token=token,
-            )
-            story_raw = directory / "voiceover-story-raw.mp3"
-            story_raw.write_bytes(raw)
-            story_duration = _audio_duration(story_raw)
-            if not 11.0 <= story_duration <= 24.0:
-                raise VoiceoverQualityError(f"Story cannot fill a natural Reel: {story_duration:.1f}s")
-            # A gentle increase only. Faster readings sounded like a machine gun.
-            rate = min(1.15, max(1.0, story_duration / 13.8))
-            story = directory / "voiceover-story.mp3"
-            subprocess.run([
-                "ffmpeg", "-y", "-loglevel", "error", "-i", str(story_raw),
-                "-af", f"atempo={rate:.5f}", "-c:a", "libmp3lame", "-b:a", "192k", str(story),
-            ], check=True)
-            signature = Path(__file__).with_name("assets")
-            station = signature / "station-charon.mp3"
-            cta = signature / "cta-charon-natural.mp3"
-            if not station.is_file() or not cta.is_file():
-                raise VoiceoverQualityError("DJ station and closing clips are missing")
             path = directory / "voiceover-google.mp3"
-            pause_after_story = _silence_mp3(directory, "pause-after-story.mp3", 0.8)
-            pause_after_station = _silence_mp3(directory, "pause-after-station.mp3", 0.25)
-            _join_tts_segments([story, pause_after_story, station, pause_after_station, cta], path)
+            approved_event = (
+                str(candidate.get("artist")) == "John Lennon"
+                and str(candidate.get("event_date")) == "1974-09-23"
+                and str(candidate.get("instagram_music_title", "")).casefold()
+                == "whatever gets you thru the night"
+            )
+            if approved_event:
+                approved = Path(__file__).with_name("assets") / "john-lennon-pro-one-take.mp3"
+                if not approved.is_file():
+                    raise VoiceoverQualityError("Approved John Lennon recording is missing")
+                path.write_bytes(approved.read_bytes())
+                full_script = JOHN_LENNON_APPROVED_SCRIPT
+                engine_name = "gemini-2.5-pro-tts-approved-john-lennon"
+            else:
+                full_script = f"{script} Oldies Radyo. Dinle, beğen, paylaş."
+                style = (
+                    turkish_gemini_style_prompt(candidate) + " "
+                    "Read the full script in one continuous take. After the story, pause briefly. "
+                    "Say Oldies briefly as Oldiiz without stretching vowels. "
+                    "Say Dinle, beğen, paylaş in a friendly conversational tone at even volume; "
+                    "never shout or elongate the last word. Read the date exactly as written."
+                )
+                raw = _gemini_tts_bytes(
+                    text=full_script, prompt=style, language="tr-TR",
+                    voice_name=gemini_voice, project=project, token=token,
+                    model_name="gemini-2.5-pro-tts",
+                )
+                path.write_bytes(raw)
+                engine_name = "gemini-2.5-pro-tts-one-take"
             if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
-                raise RuntimeError("Generated Gemini voiceover failed size validation")
+                raise RuntimeError("DJ voiceover failed size validation")
             total_duration = _audio_duration(path)
             if not 15.0 <= total_duration <= 29.3:
                 raise VoiceoverQualityError(f"Voiceover does not fit a 15–30-second Reel: {total_duration:.1f}s")
-            candidate["dj_script_tr"] = script + " [duraklama] Oldies Radyo. [duraklama] Dinle, beğen, paylaş."
+            candidate["dj_script_tr"] = full_script
             candidate["voiceover_duration_seconds"] = round(total_duration, 2)
             candidate["tts_voice"] = gemini_voice
             candidate["tts_language"] = "tr-TR"
-            candidate["tts_engine"] = "gemini-2.5-flash-tts-charon-dj"
-            print(f"Gemini Flash TTS ready: {gemini_voice} ({path.stat().st_size} bytes)")
+            candidate["tts_engine"] = engine_name
+            print(f"DJ full-take TTS ready: {gemini_voice} ({path.stat().st_size} bytes)")
             return path
         except VoiceoverQualityError:
             raise

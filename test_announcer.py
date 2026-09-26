@@ -85,10 +85,11 @@ class AnnouncerTests(unittest.TestCase):
             ], output)
             self.assertAlmostEqual(worker._audio_duration(output), 12.75, delta=0.15)
 
-    def test_fixed_station_is_single_and_cta_is_brief(self):
+    def test_approved_lennon_read_is_full_length(self):
         assets = Path(worker.__file__).with_name("assets")
-        self.assertLess(worker._audio_duration(assets / "station-charon.mp3"), 1.5)
-        self.assertLess(worker._audio_duration(assets / "cta-charon-natural.mp3"), 3.0)
+        duration = worker._audio_duration(assets / "john-lennon-pro-one-take.mp3")
+        self.assertGreater(duration, 18.0)
+        self.assertLess(duration, 20.0)
 
 
 if __name__ == "__main__":
