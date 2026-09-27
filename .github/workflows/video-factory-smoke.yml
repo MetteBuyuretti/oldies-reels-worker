@@ -1,0 +1,80 @@
+name: Video Factory V1 Smoke Test
+
+on:
+  push:
+    branches:
+      - video-factory-v1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: video-factory-v1-smoke
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/36507074949/locations/global/workloadIdentityPools/github-oldies/providers/github-oldies-reels"
+          service_account: "oldies-reels-tts@project-8af3c2f9-bd84-4afe-b8a.iam.gserviceaccount.com"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile
+        run: python -m py_compile worker.py zero_cost.py video_factory.py
+      - name: Render real voiceover smoke test
+        env:
+          OLDIES_WP_BEARER: ${{ secrets.OLDIES_WP_BEARER }}
+          OLDIES_WP_BASE_URL: ${{ vars.OLDIES_WP_BASE_URL }}
+          OLDIES_PREVIEW_ONLY: "true"
+          OLDIES_ZERO_COST_DATE: "2026-09-23"
+          OLDIES_PREVIEW_ARTIST: "John Lennon"
+          OLDIES_REELS_LANGUAGE: "tr"
+          OLDIES_TTS_ENABLED: "true"
+          OLDIES_TTS_ENGINE: "auto"
+          OLDIES_GEMINI_TTS_VOICE: "Charon"
+          OLDIES_TTS_FALLBACK: "true"
+          OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
+        run: python worker.py
+      - name: Validate factory outputs
+        run: |
+          test -s output/oldies-reels-draft.mp4
+          test -s output/timeline.json
+          test -s output/timeline.csv
+          test -s output/captions.srt
+          test -s output/capcut-package/IMPORT.txt
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("output/content.json").read_text(encoding="utf-8"))
+          timeline=json.loads(Path("output/timeline.json").read_text(encoding="utf-8"))
+          assert data["video_factory"]["enabled"] is True
+          assert 4 <= len(timeline) <= 12
+          assert abs(timeline[0]["start"]) < 0.01
+          assert all(float(x["end"]) > float(x["start"]) for x in timeline)
+          print("VIDEO_FACTORY_PASS", len(timeline), "scenes")
+          PY
+      - name: Upload smoke artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: video-factory-v1-smoke
+          path: output/
+          retention-days: 7
+          if-no-files-found: ignore
