@@ -27,6 +27,7 @@ from google.auth.transport.requests import Request as GoogleAuthRequest
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
 from zero_cost import research_candidates
+from video_factory import build_timeline, export_capcut_package, render_timeline, write_timeline_files
 
 OUTPUT = Path("output")
 WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 15
@@ -737,6 +738,33 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path) -> list[Pa
     return paths
 
 
+def make_timeline_scenes(candidate: dict, photos: list[Path], timeline: list[dict], directory: Path) -> list[Path]:
+    """Build one visual beat per voiceover timing while preserving the approved design language."""
+    artist = str(candidate.get("artist", "Oldies Radyo")).strip() or "Oldies Radyo"
+    title = str(candidate.get("instagram_music_title", "")).strip()
+    language = str(candidate.get("reels_language", "tr"))
+    paths: list[Path] = []
+    for index, item in enumerate(timeline, start=1):
+        photo = photos[(index - 1) % len(photos)]
+        canvas = cover_photo(photo).convert("RGBA")
+        add_gradient(canvas)
+        if language == "en":
+            accent = "ON THIS DAY IN MUSIC" if index == 1 else ("OLDIES RADYO • MUSIC & MEMORIES" if index == len(timeline) else "THE STORY")
+        else:
+            accent = "BUGÜN MÜZİK TARİHİNDE" if index == 1 else ("OLDIES RADYO • DİNLE • BEĞEN • PAYLAŞ" if index == len(timeline) else "HİKÂYE DEVAM EDİYOR")
+        if index == 1:
+            headline = str(candidate.get("event_headline") or candidate.get("hook") or artist)
+        elif title and index % 2 == 0:
+            headline = title
+        else:
+            headline = artist
+        subline = textwrap.shorten(str(item.get("text", "")), width=150, placeholder="…")
+        draw_text_block(ImageDraw.Draw(canvas), headline, subline, accent)
+        path = directory / f"timeline-scene-{index:02d}.jpg"
+        canvas.convert("RGB").save(path, "JPEG", quality=95, optimize=True)
+        paths.append(path)
+    return paths
+
 
 
 def build_english_dj_script(candidate: dict) -> str:
@@ -1393,9 +1421,46 @@ def main() -> None:
         "enabled": bool(voiceover),
         "source": voiceover_source,
     }
-    (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
+
     video = OUTPUT / "oldies-reels-draft.mp4"
-    render(make_scenes(candidate, photos, OUTPUT), video, voiceover=voiceover)
+    if voiceover:
+        script_key = "dj_script_en" if language == "en" else "dj_script_tr"
+        script = str(candidate.get(script_key, "")).strip()
+        if not script:
+            script = build_english_dj_script(candidate) if language == "en" else build_turkish_gemini_script(candidate)
+        timeline = build_timeline(script, voiceover)
+        timeline_scenes = make_timeline_scenes(candidate, photos, timeline, OUTPUT)
+        write_timeline_files(timeline, OUTPUT)
+        export_capcut_package(
+            timeline=timeline,
+            voiceover=voiceover,
+            scenes=timeline_scenes,
+            output_dir=OUTPUT,
+        )
+        candidate["video_factory"] = {
+            "enabled": True,
+            "version": "v1",
+            "scene_count": len(timeline),
+            "timestamp_source": "voiceover_duration+natural_pauses",
+            "capcut_package": "capcut-package/",
+            "captions": "captions.srt",
+            "timeline": "timeline.json",
+        }
+        render_timeline(
+            scenes=timeline_scenes,
+            timeline=timeline,
+            target=video,
+            voiceover=voiceover,
+            width=WIDTH,
+            height=HEIGHT,
+            fps=FPS,
+            max_video_bytes=MAX_VIDEO_BYTES,
+        )
+    else:
+        candidate["video_factory"] = {"enabled": False, "reason": "no_voiceover"}
+        render(make_scenes(candidate, photos, OUTPUT), video, voiceover=None)
+
+    (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
 
     if preview_only:
         result = {"success": True, "preview_only": True, "voiceover": bool(voiceover)}
