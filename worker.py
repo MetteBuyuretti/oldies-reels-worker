@@ -79,6 +79,19 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
         response = requests.request(method, endpoint, headers=headers, timeout=180, **kwargs)
         if response.status_code < 400:
             return response.json()
+        if response.status_code == 409:
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {}
+            if isinstance(error_payload, dict) and error_payload.get("code") == "duplicate_draft":
+                print("WordPress draft already exists; treating retry as idempotent success.")
+                return {
+                    "success": True,
+                    "skipped": True,
+                    "reason": "duplicate_draft",
+                    "message": str(error_payload.get("message", "Duplicate draft already exists.")),
+                }
         if response.status_code == 429:
             try:
                 error_payload = response.json()
@@ -1273,6 +1286,19 @@ def proxy_draft_request(data: dict, bearer: str):
         response = requests.post(proxy_url, headers=headers, json=data, timeout=90)
         if response.status_code < 400:
             return response.json()
+        if response.status_code == 409:
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {}
+            if isinstance(error_payload, dict) and error_payload.get("code") == "duplicate_draft":
+                print("WordPress draft already exists; treating retry as idempotent success.")
+                return {
+                    "success": True,
+                    "skipped": True,
+                    "reason": "duplicate_draft",
+                    "message": str(error_payload.get("message", "Duplicate draft already exists.")),
+                }
         if response.status_code == 429:
             try:
                 error_payload = response.json()
