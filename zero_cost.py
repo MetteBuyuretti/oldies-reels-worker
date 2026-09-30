@@ -260,15 +260,28 @@ def match_artist(item: dict, artists: dict[str, dict], lookup: dict[str, str]) -
 
 
 def _page_for_artist(item: dict, artist: str) -> dict:
-    target = normalize(artist)
+    """Pick evidence for the canonical artist page and fail closed on mismatches."""
+    canonical_target = normalize(artist_page_title(artist))
+    artist_target = normalize(artist)
     pages = item.get("pages") or []
+
     for page in pages:
-        if normalize(page.get("title", "")) == target:
+        if normalize(page.get("title", "")) == canonical_target:
+            return page
+    if canonical_target != artist_target:
+        for page in pages:
+            if canonical_target in normalize(page.get("title", "")):
+                return page
+
+    for page in pages:
+        if normalize(page.get("title", "")) == artist_target:
             return page
     for page in pages:
-        if target in normalize(page.get("title", "")):
+        if artist_target in normalize(page.get("title", "")):
             return page
-    return pages[0] if pages else {}
+
+    # Never attach the first arbitrary page as artist evidence.
+    return {}
 
 
 def _qid_from_page(page: dict) -> str:
