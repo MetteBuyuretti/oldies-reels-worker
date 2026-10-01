@@ -10,8 +10,7 @@ from retention_policy import retention_decision
 
 def main():
     repo = os.environ['REPOSITORY']
-    headers = {'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
-               'Accept': 'application/vnd.github+json',
+    headers = {'Accept': 'application/vnd.github+json',
                'X-GitHub-Api-Version': '2022-11-28',
                'User-Agent': 'oldies-reels-retention-audit'}
 
@@ -24,14 +23,20 @@ def main():
             if exc.code == 404:
                 return None
             raise RuntimeError('GitHub inventory HTTP ' + str(exc.code)) from None
+        except (urllib.error.URLError, TimeoutError):
+            raise RuntimeError('GitHub inventory read failed; no remote writes attempted') from None
 
     release = read(f'https://api.github.com/repos/{repo}/releases/tags/reels-delivery')
     if not release:
         print('No delivery release; nothing to inventory.')
         return
+    if not isinstance(release, dict) or not release.get('id'):
+        raise RuntimeError('GitHub inventory invalid release metadata')
     page, count = 1, 0
     while True:
         assets = read(f'https://api.github.com/repos/{repo}/releases/{release["id"]}/assets?per_page=100&page={page}') or []
+        if not isinstance(assets, list) or any(not isinstance(asset, dict) for asset in assets):
+            raise RuntimeError('GitHub inventory invalid asset metadata')
         for asset in assets:
             if str(asset.get('name', '')).lower().endswith('.mp4'):
                 # No trusted WP acknowledgement means preserve recovery data.

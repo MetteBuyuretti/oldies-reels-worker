@@ -1,6 +1,8 @@
 # Conservative release retention — Issue 16
 
-The previous workflow deleted every delivery MP4 older than ten days regardless of WordPress receipt or editorial status. This PR replaces that with a read-only inventory and reduces its permission to contents:read. The daily schedule stays at 03:35 UTC. There is no DELETE request or cleanup activation switch.
+The previous workflow deleted every delivery MP4 older than ten days regardless of WordPress receipt or editorial status. This PR replaces that with a read-only inventory. The daily schedule stays at 03:35 UTC. There is no deletion request or cleanup activation switch.
+
+The repository is public. Both workflows use permissions:{} and anonymous Git/API reads; no contents permission, credential persistence or GITHUB_TOKEN is passed to the inventory. Anonymous Git fetch checks out the exact workflow commit. This would need a separately reviewed read credential if repository visibility changes. API throttling/read errors fail the inventory without any remote mutation.
 
 Retention decisions preserve DRAFT_REVIEW, READY_FOR_EDITS and BLOCKED forever until explicit editorial resolution. PUBLISHED needs verified Instagram media ID and final URL, a matching asset receipt and a verified recoverable backup before REVIEW_ONLY. REJECTED, ARCHIVED and LEGACY_TEST also require backup before review. Age and successful delivery alone are not permission to delete. Unknown or interrupted delivery always preserves the artifact. Repeated inventory is deterministic.
 
@@ -16,6 +18,6 @@ WordPress seven-day record removal and fifty-record truncation require a separat
 
 ## Validation
 
-python -m unittest -v test_retention_policy
+python -m unittest -v test_retention_policy test_cleanup_inventory
 
-11 offline test methods cover interrupted upload/acknowledgement, timeout after possible WP acceptance, stale undelivered MP4, old delivered active drafts, all requested statuses, verified publication, missing backup, identity mismatch, repeated cleanup and invalid/future timestamps. No live workflows were dispatched, no credentials read, and no artifacts deleted.
+17 offline test methods cover interrupted upload/acknowledgement, timeout after possible WP acceptance, stale undelivered MP4, old delivered active drafts, all requested statuses, verified publication, missing backup, identity mismatch, repeated cleanup, invalid/future timestamps, GET-only anonymous inventory, pagination, absent release and sanitized/fail-closed read errors. PR CI runs tests only. No live workflows were dispatched, no credentials read, and no artifacts deleted by these changes.
