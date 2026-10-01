@@ -18,6 +18,7 @@ import subprocess
 import textwrap
 import time
 from datetime import date, datetime, timezone
+from email.utils import parsedate_to_datetime
 from io import BytesIO
 from pathlib import Path
 
@@ -66,6 +67,26 @@ def require_env(name: str) -> str:
     return value
 
 
+def _retry_delay(response, attempt: int, base_delay: int) -> float:
+    delay = base_delay * (2 ** attempt)
+    raw = str(getattr(response, 'headers', {}).get('Retry-After', '')).strip()
+    if raw:
+        try:
+            requested = float(raw) if raw.isdigit() else (parsedate_to_datetime(raw) - datetime.now(timezone.utc)).total_seconds()
+            delay = max(delay, requested)
+        except (TypeError, ValueError, OverflowError):
+            pass
+    if delay > 300:
+        raise RuntimeError('RATE_LIMIT_DEFERRED: retry after server cooldown; no early retry')
+    return delay
+
+
+def _unknown_delivery(exc):
+    # A lost acknowledgement may mean WP already accepted the draft. Preserve
+    # the artifact and reconcile before retrying; never expose exception URLs.
+    raise RuntimeError('UNKNOWN_REMOTE_RESULT: preserve artifact and reconcile WordPress acknowledgement before retry') from None
+
+
 def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwargs):
     endpoint = f"{base_url.rstrip('/')}/wp-json/oldies/v1/instagram/reels/{path.lstrip('/')}"
     headers = kwargs.pop("headers", {})
@@ -76,10 +97,13 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
             handle = value[1] if isinstance(value, tuple) and len(value) > 1 else value
             if hasattr(handle, "seek"):
                 handle.seek(0)
-        response = requests.request(method, endpoint, headers=headers, timeout=180, **kwargs)
+        try:
+            response = requests.request(method, endpoint, headers=headers, timeout=180, **kwargs)
+        except requests.RequestException as exc:
+            _unknown_delivery(exc)
         if response.status_code < 400:
             return response.json()
-        if response.status_code == 409:
+        if response.status_code == 409 and method.upper() in {"PUT", "POST"} and path.strip("/") == "drafts":
             try:
                 error_payload = response.json()
             except Exception:
@@ -90,7 +114,7 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
                     "success": True,
                     "skipped": True,
                     "reason": "duplicate_draft",
-                    "message": str(error_payload.get("message", "Duplicate draft already exists.")),
+                    "message": "Duplicate draft already exists.",
                 }
         if response.status_code == 429:
             try:
@@ -103,14 +127,14 @@ def wordpress_request(method: str, path: str, bearer: str, base_url: str, **kwar
                     "success": True,
                     "skipped": True,
                     "reason": "daily_draft_limit",
-                    "message": str(error_payload.get("message", "Daily draft limit reached.")),
+                    "message": "Daily draft limit reached.",
                 }
         if response.status_code not in {429, 502, 503, 504} or attempt == 3:
             break
-        delay = 15 * (2**attempt)
+        delay = _retry_delay(response, attempt, 15)
         print(f"WordPress temporarily returned {response.status_code}; retrying in {delay}s")
         time.sleep(delay)
-    raise RuntimeError(f"WordPress {response.status_code}: {response.text[:700]}")
+    raise RuntimeError(f"WordPress delivery HTTP {response.status_code}; remote body omitted")
 
 
 def get_draft_state(bearer: str, base_url: str) -> dict:
@@ -1283,7 +1307,10 @@ def proxy_draft_request(data: dict, bearer: str):
     }
     response = None
     for attempt in range(4):
-        response = requests.post(proxy_url, headers=headers, json=data, timeout=90)
+        try:
+            response = requests.post(proxy_url, headers=headers, json=data, timeout=90)
+        except requests.RequestException as exc:
+            _unknown_delivery(exc)
         if response.status_code < 400:
             return response.json()
         if response.status_code == 409:
@@ -1297,7 +1324,7 @@ def proxy_draft_request(data: dict, bearer: str):
                     "success": True,
                     "skipped": True,
                     "reason": "duplicate_draft",
-                    "message": str(error_payload.get("message", "Duplicate draft already exists.")),
+                    "message": "Duplicate draft already exists.",
                 }
         if response.status_code == 429:
             try:
@@ -1310,14 +1337,14 @@ def proxy_draft_request(data: dict, bearer: str):
                     "success": True,
                     "skipped": True,
                     "reason": "daily_draft_limit",
-                    "message": str(error_payload.get("message", "Daily draft limit reached.")),
+                    "message": "Daily draft limit reached.",
                 }
         if response.status_code not in {429, 502, 503, 504} or attempt == 3:
             break
-        delay = 10 * (2**attempt)
+        delay = _retry_delay(response, attempt, 10)
         print(f"Draft proxy temporarily returned {response.status_code}; retrying in {delay}s")
         time.sleep(delay)
-    raise RuntimeError(f"Draft proxy {response.status_code}: {response.text[:700]}")
+    raise RuntimeError(f"Draft proxy delivery HTTP {response.status_code}; remote body omitted")
 
 
 def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
