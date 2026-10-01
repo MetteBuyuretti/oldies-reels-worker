@@ -1,22 +1,23 @@
-name: Oldies Reels Storage Cleanup
+name: Read-only retention tests
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "35 3 * * *"
+  pull_request:
+    paths:
+      - ".github/workflows/reels-cleanup.yml"
+      - ".github/workflows/retention-tests.yml"
+      - "cleanup_inventory.py"
+      - "retention_policy.py"
+      - "test_cleanup_inventory.py"
+      - "test_retention_policy.py"
 
 permissions: {}
 
-concurrency:
-  group: oldies-reels-retention-inventory
-  cancel-in-progress: false
-
 jobs:
-  cleanup:
+  unit-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
-      - name: Read public repository at the workflow commit
+      - name: Read public repository at the PR commit
         env:
           REPOSITORY: ${{ github.repository }}
           WORKFLOW_SHA: ${{ github.sha }}
@@ -29,9 +30,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate conservative retention policy
-        run: python -m unittest -v test_retention_policy test_cleanup_inventory
-      - name: Inventory delivery MP4s without deleting or mutating them
+      - run: python -m unittest -v test_retention_policy test_cleanup_inventory
+      - name: Verify live public inventory with read-only requests
         env:
           REPOSITORY: ${{ github.repository }}
         run: python cleanup_inventory.py
