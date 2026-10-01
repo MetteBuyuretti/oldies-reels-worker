@@ -1,0 +1,23 @@
+name: Entity validation tests
+on:
+  pull_request:
+    paths:
+      - "zero_cost.py"
+      - "test_zero_cost.py"
+      - "test_entity_audit.py"
+      - ".github/workflows/entity-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m unittest -v test_zero_cost test_entity_audit

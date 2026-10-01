@@ -54,9 +54,24 @@ def normalize(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", text).strip()
 
 
+# Canonical Wikimedia identities verified 2026-10-01. Identity is background
+# evidence, never independent proof of the date/event in a discovery article.
+ARTIST_IDENTITIES = {'Eagles': ('Eagles (band)', 'Q189635'), 'Queen': ('Queen (band)', 'Q15862'), 'Chicago': ('Chicago (band)', 'Q371938'), 'America': ('America (band)', 'Q126852'), 'Genesis': ('Genesis (band)', 'Q151012'), 'Boston': ('Boston (band)', 'Q204289'), 'Journey': ('Journey (band)', 'Q464749'), 'Europe': ('Europe (band)', 'Q185144'), 'Kansas': ('Kansas (band)', 'Q204328'), 'Traffic': ('Traffic (band)', 'Q1048439'), 'Bread': ('Bread (band)', 'Q903536'), 'Cream': ('Cream (band)', 'Q203736'), 'Kiss': ('Kiss (band)', 'Q124179'), 'Yes': ('Yes (band)', 'Q184386'), 'Rush': ('Rush (band)', 'Q203871'), 'The Police': ('The Police', 'Q178095')}
+
+
+def _artist_identity(artist: str) -> tuple[str, str]:
+    target = normalize(artist)
+    if target == 'the eagles':
+        target = 'eagles'
+    for name, identity in ARTIST_IDENTITIES.items():
+        if normalize(name) == target:
+            return identity
+    return (str(artist).strip(), '')
+
+
 def artist_page_title(artist: str) -> str:
-    """Resolve ambiguous artist names before attaching Wikipedia/Wikidata evidence."""
-    return {"Eagles": "Eagles (band)"}.get(artist, artist)
+    """Resolve ambiguous artists to their exact canonical Wikipedia page."""
+    return _artist_identity(artist)[0]
 
 
 def load_catalog(path: Path = CATALOG_PATH) -> tuple[dict[str, dict], dict[str, str]]:
@@ -260,27 +275,14 @@ def match_artist(item: dict, artists: dict[str, dict], lookup: dict[str, str]) -
 
 
 def _page_for_artist(item: dict, artist: str) -> dict:
-    """Pick evidence for the canonical artist page and fail closed on mismatches."""
-    canonical_target = normalize(artist_page_title(artist))
-    artist_target = normalize(artist)
-    pages = item.get("pages") or []
-
-    for page in pages:
-        if normalize(page.get("title", "")) == canonical_target:
-            return page
-    if canonical_target != artist_target:
-        for page in pages:
-            if canonical_target in normalize(page.get("title", "")):
-                return page
-
-    for page in pages:
-        if normalize(page.get("title", "")) == artist_target:
-            return page
-    for page in pages:
-        if artist_target in normalize(page.get("title", "")):
-            return page
-
-    # Never attach the first arbitrary page as artist evidence.
+    """Require exact page identity; substring matches can be unrelated works."""
+    title, expected_qid = _artist_identity(artist)
+    for page in item.get('pages') or []:
+        if not isinstance(page, dict) or normalize(page.get('title', '')) != normalize(title):
+            continue
+        if expected_qid and _qid_from_page(page) != expected_qid:
+            continue
+        return page
     return {}
 
 
@@ -513,6 +515,9 @@ def build_history_candidates(recent_artists: list[str], today: datetime | None =
                 continue
             event_date = datetime(year, today.month, today.day, tzinfo=timezone.utc)
             page = _page_for_artist(item, artist)
+            if not page:
+                print(f"Skipping source identity mismatch: {artist}")
+                continue
             qid = _qid_from_page(page)
             entity, verified = {}, False
             if qid:
