@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-02T16:41:00+03:00",
+  "updated_at": "2026-10-02T23:28:30.127Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -39,6 +39,17 @@
       "next_step": "Mevcut jingle çıktıları ve otomasyon kodunu kontrol et; son güvenli aşamayı belirle.",
       "last_checkpoint": null,
       "note": "Bağlantı kesintisinde miks veya render baştan başlamadan önce mevcut dosyaları kontrol et."
+    },
+    {
+      "id": "oldies-revenue-live-20261002",
+      "title": "Oldies Implementation Pack → canlı gelir sistemi",
+      "status": "checkpointed",
+      "completed_units": [
+        "shopier-cta-live-qa"
+      ],
+      "next_step": "Mevcut 4397/4398 TR/EN hizmet taslaklarını profesyonelleştir; gerçek demo ve teklif CTA’larını ekle.",
+      "last_checkpoint": "2026-10-02T23:28:30.127Z",
+      "note": "part-001.md kaydedildi. Shopier 4 CTA canlı düzeltildi. Yeni ücretli servis/reklam yok. Windsor/Google: oldiesradyo@gmail.com, mevcut workspace."
     }
   ]
 }
