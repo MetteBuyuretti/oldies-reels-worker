@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "policy": "checkpoint-before-next-unit",
+  "default_chunk_minutes": "10-20",
+  "updated_at": "2026-10-02T16:41:00+03:00",
+  "tasks": [
+    {
+      "id": "europe-1960s-singers",
+      "title": "1960'larda Avrupa ülkelerinin 10 ünlü/önemli şarkıcısı",
+      "status": "needs_reconcile",
+      "completed_units": [],
+      "next_step": "Mevcut çıktıları kontrol et; tamamlanmış ülkeleri işaretle ve ilk eksik ülkeden devam et.",
+      "last_checkpoint": null,
+      "note": "Yunanistan referans sayfasıdır; yeniden üretme. Çok ülkeli çalışma ülke başına checkpoint kullanmalıdır."
+    },
+    {
+      "id": "1980s-radio-100-qa",
+      "title": "1980'ler radyo dosyası — 100 soru / 100 cevap",
+      "status": "queued",
+      "completed_units": [],
+      "next_step": "001-020 paketini araştır ve kalıcı çıktı olarak kaydet.",
+      "last_checkpoint": null,
+      "note": "Ağırlık müzik; sinema, moda, kültür ve ilginç başarılar destekleyici başlıklardır. Paketler 20 soru/cevaptır."
+    },
+    {
+      "id": "command-center-social",
+      "title": "Ana Kumanda — Tumblr / Pinterest / sosyal otomasyon",
+      "status": "needs_reconcile",
+      "completed_units": [],
+      "next_step": "Mevcut repo, çalışan otomasyonlar ve son canlı durumla uzlaştır; eksik parçadan devam et.",
+      "last_checkpoint": null,
+      "note": "Canlı çalışan otomasyonu bozma; yayınlama veya geri döndürülemez işlem öncesi mevcut yetkilendirmeyi kontrol et."
+    },
+    {
+      "id": "jingle-system",
+      "title": "Oldies Radyo Jingle üretim sistemi",
+      "status": "needs_reconcile",
+      "completed_units": [],
+      "next_step": "Mevcut jingle çıktıları ve otomasyon kodunu kontrol et; son güvenli aşamayı belirle.",
+      "last_checkpoint": null,
+      "note": "Bağlantı kesintisinde miks veya render baştan başlamadan önce mevcut dosyaları kontrol et."
+    }
+  ]
+}
