@@ -2,6 +2,20 @@
 
 Bu işçi her gün 12:00 Europe/Istanbul saatine karşılık gelen 09:00 UTC'de çalışır. Yabancı kaynaklarla müzik tarihinde bugün araştırması yapar, en iyi adayı kalite puanıyla seçer, özgün 9:16 sessiz MP4 üretir ve WordPress'teki **inceleme kuyruğuna** yükler. Ayrıca Instagram uygulamasında seçilecek gerçek şarkıyı ve önerilen 10–15 saniyelik bölümü kaydeder. Instagram'a doğrudan yayın yapamaz.
 
+## Uzun Work görevleri — kesinti güvenliği
+
+Bu repo aynı zamanda Oldies Radyo'nun uzun AI/Work görevleri için kalıcı checkpoint merkezi olarak kullanılır.
+
+Uzun veya çok aşamalı bir işe başlamadan önce:
+
+1. `AGENTS.md` dosyasını oku.
+2. `control-center/work-state.json` içindeki görevin durumunu kontrol et.
+3. Tamamlanmış parçaları tekrar yapma.
+4. İlk eksik parçadan devam et.
+5. Her anlamlı parçadan sonra çıktıyı kaydet ve checkpoint güncelle.
+
+Detay: `control-center/WORK_CONTINUITY_PROTOCOL.md`
+
 ## GitHub ayarları
 
 Repository secrets:
