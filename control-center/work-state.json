@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-03T03:06:46.642Z",
+  "updated_at": "2026-10-03T22:44:20.901Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -73,11 +73,15 @@
         "HFCM-root-cause",
         "published-content-inventory",
         "protection-code-local-tests",
-        "durable-deployment-package"
+        "durable-deployment-package",
+        "live-priority-metadata-recheck",
+        "live-http-img-and-reciprocal-pair-verification",
+        "frontend-module-and-en-archive-404-evidence",
+        "verifier-0.1.1-29-PHP-tests"
       ],
-      "last_checkpoint": "2026-10-03T03:06:46.642Z",
-      "next_step": "Owner approval for browser fallback is needed. Then inspect PHP/HFCM source, apply source gates, test staging, deploy native query/guard and verify daily audit.",
-      "note": "Package/test details in part-003-code-test-checkpoint.md. 30 posts/1130 pages read; 13 legacy missing images/Uncategorized. No live plugin/nightly audit/menu/player modifications. Browser not initialized."
+      "last_checkpoint": "2026-10-03T22:44:20.901Z",
+      "next_step": "Get explicit browser fallback approval. Then inspect and back up PHP theme/HFCM and Ana Kumanda source; stage native integration, repair EN Research archive routing and TR/EN module sources; deploy and complete native audit.",
+      "note": "part-004 saved. No live mutation in this continuation. 8 priority URLs/images/pairs healthy; EN archive 404; EN native Research strip still TR. Updated saved package v0.1.1, 29 PHP + 7 JS checks. No live guard/cron/panel install. Browser not initialized."
     }
   ]
 }
