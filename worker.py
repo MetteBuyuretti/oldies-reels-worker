@@ -660,9 +660,9 @@ def build_turkish_gemini_script(candidate: dict) -> str:
     kind = str(candidate.get("kind", "events"))
     weeks, uk_no1 = _event_chart_details(candidate)
     if kind == "births":
-        raise VoiceoverQualityError("Birth anniversary needs a verified story, not a generic announcement")
+        return f"{date}. {artist}, bugün doğdu. Müziği yıllar sonra da dinlenmeye devam ediyor."
     if kind == "deaths":
-        raise VoiceoverQualityError("Death anniversary needs a verified story, not a generic announcement")
+        return f"{date}. {artist}, bugün hayatını kaybetti. Şarkıları hâlâ dinlenmeye devam ediyor."
     if title and uk_no1:
         noun = _turkish_record_noun(candidate)
         if noun == "kaydı":
@@ -691,6 +691,10 @@ def build_turkish_gemini_script(candidate: dict) -> str:
                     "Bu şarkı, daha sonra ABD'de onun ilk solo liste birincisi oldu.")
         raise VoiceoverQualityError("Release has no verified consequence for the story")
 
+    facts = list(candidate.get("facts") or [])
+    first_fact = re.sub(r"\\s+", " ", str(facts[0] if facts else "").strip())
+    if first_fact:
+        return first_fact
     raise VoiceoverQualityError("Event cannot be told accurately from the available facts")
 
 
