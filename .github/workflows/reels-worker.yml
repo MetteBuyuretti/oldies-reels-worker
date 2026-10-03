@@ -42,6 +42,10 @@ on:
         required: false
         default: ""
         type: string
+  push:
+    branches: [main]
+    paths:
+      - ".github/manual-reels-trigger"
   schedule:
     - cron: "0 9 * * *"
 
