@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-03T02:47:03.690Z",
+  "updated_at": "2026-10-03T02:50:17.848Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -68,11 +68,13 @@
       "status": "checkpointed",
       "completed_units": [
         "priority-content-audit",
-        "pre-change-backup"
+        "pre-change-backup",
+        "EN-canonical-research-filing",
+        "HFCM-root-cause"
       ],
-      "last_checkpoint": "2026-10-03T02:47:03.690Z",
-      "next_step": "Inspect frontend module output and category languages; add validated canonical EN research categories; prepare native protection plugin.",
-      "note": "Four TR priority posts already have featured images. EN Greece and under-50 research use separate research-en term. PHP theme source and custom-plugin deployment are not exposed by current connectors. No menu/player changes."
+      "last_checkpoint": "2026-10-03T02:50:17.848Z",
+      "next_step": "Prepare and test protection plugin + exact HFCM replacement, then request browser fallback for native custom-plugin upload/source inspection.",
+      "note": "4343 and 4286 now include 786982547; old term retained. HFCM #1 hardcodes two TR cards and runs on EN too. Custom upload and PHP source reading unavailable in connectors."
     }
   ]
 }
