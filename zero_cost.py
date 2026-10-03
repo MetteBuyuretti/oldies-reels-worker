@@ -531,7 +531,7 @@ def build_history_candidates(recent_artists: list[str], today: datetime | None =
                 **copy,
             }
             score_candidate(candidate, recent_artists)
-            if candidate["score"] >= 80 and candidate["score_breakdown"]["audience_fit"] >= 22:
+            if candidate["score"] >= 80 and candidate["score_breakdown"]["audience_fit"] >= 18:
                 candidates.append(candidate)
     candidates.sort(key=lambda c: (c["score"], c["wikidata_verified"], -c["tier"]), reverse=True)
     return candidates
