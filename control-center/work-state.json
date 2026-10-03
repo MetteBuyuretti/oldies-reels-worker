@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-02T23:30:34.955Z",
+  "updated_at": "2026-10-03T02:47:03.690Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -61,6 +61,18 @@
       "last_checkpoint": "2026-10-02T23:30:34.959Z",
       "next_step": "Ülke ve kullanım matrisleri, maliyet hesapları, relay sözleşmesi ve nihai raporu tamamla.",
       "note": "work-output/global-music-licensing/part-001-provider-findings.md kaydedildi. Canlı yayın değişikliği veya satın alma yapılmadı."
+    },
+    {
+      "id": "site-integrity-20261003",
+      "title": "Oldies Radyo Site Integrity / Editorial Control",
+      "status": "checkpointed",
+      "completed_units": [
+        "priority-content-audit",
+        "pre-change-backup"
+      ],
+      "last_checkpoint": "2026-10-03T02:47:03.690Z",
+      "next_step": "Inspect frontend module output and category languages; add validated canonical EN research categories; prepare native protection plugin.",
+      "note": "Four TR priority posts already have featured images. EN Greece and under-50 research use separate research-en term. PHP theme source and custom-plugin deployment are not exposed by current connectors. No menu/player changes."
     }
   ]
 }
