@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-03T23:10:52.854Z",
+  "updated_at": "2026-10-03T23:20:07.818Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -78,10 +78,12 @@
         "live-http-img-and-reciprocal-pair-verification",
         "frontend-module-and-en-archive-404-evidence",
         "verifier-0.1.1-29-PHP-tests",
-        "live-source-backup-and-root-cause"
+        "live-source-backup-and-root-cause",
+        "source-grounded-020-and-46-tests",
+        "persistent-preinstall-rollback-package"
       ],
-      "last_checkpoint": "2026-10-03T23:10:52.854Z",
-      "next_step": "Test source-grounded module/menu guards, save rollback package, deploy safely and complete native audit.",
+      "last_checkpoint": "2026-10-03T23:20:07.818Z",
+      "next_step": "Install reviewed v0.2.0 plugin, run full native audit and verify frontend.",
       "note": "Browser fallback authorized; signed-in WP. Read-only source audit 005 saved. Hardcoded header plus Revenue CTA menu injection confirmed; no menu rename."
     }
   ]
