@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-03T23:20:07.818Z",
+  "updated_at": "2026-10-03T23:23:57.468Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -65,7 +65,7 @@
     {
       "id": "site-integrity-20261003",
       "title": "Oldies Radyo Site Integrity / Editorial Control",
-      "status": "in_progress",
+      "status": "awaiting_approval",
       "completed_units": [
         "priority-content-audit",
         "pre-change-backup",
@@ -82,9 +82,9 @@
         "source-grounded-020-and-46-tests",
         "persistent-preinstall-rollback-package"
       ],
-      "last_checkpoint": "2026-10-03T23:20:07.818Z",
-      "next_step": "Install reviewed v0.2.0 plugin, run full native audit and verify frontend.",
-      "note": "Browser fallback authorized; signed-in WP. Read-only source audit 005 saved. Hardcoded header plus Revenue CTA menu injection confirmed; no menu rename."
+      "last_checkpoint": "2026-10-03T23:23:57.468Z",
+      "next_step": "After action-time custom-plugin install/activation approval, install v0.2.0 from prepared upload form, verify frontend and complete native scan.",
+      "note": "Package v3 and approval screen saved; 46 PHP tests/lint PASS. No live integrity plugin/cron/module guard activated yet. Browser policy requires exact installation approval; no login needed."
     }
   ]
 }
