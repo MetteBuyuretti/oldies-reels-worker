@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-03T02:50:17.848Z",
+  "updated_at": "2026-10-03T03:06:46.642Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -65,16 +65,19 @@
     {
       "id": "site-integrity-20261003",
       "title": "Oldies Radyo Site Integrity / Editorial Control",
-      "status": "checkpointed",
+      "status": "blocked",
       "completed_units": [
         "priority-content-audit",
         "pre-change-backup",
         "EN-canonical-research-filing",
-        "HFCM-root-cause"
+        "HFCM-root-cause",
+        "published-content-inventory",
+        "protection-code-local-tests",
+        "durable-deployment-package"
       ],
-      "last_checkpoint": "2026-10-03T02:50:17.848Z",
-      "next_step": "Prepare and test protection plugin + exact HFCM replacement, then request browser fallback for native custom-plugin upload/source inspection.",
-      "note": "4343 and 4286 now include 786982547; old term retained. HFCM #1 hardcodes two TR cards and runs on EN too. Custom upload and PHP source reading unavailable in connectors."
+      "last_checkpoint": "2026-10-03T03:06:46.642Z",
+      "next_step": "Owner approval for browser fallback is needed. Then inspect PHP/HFCM source, apply source gates, test staging, deploy native query/guard and verify daily audit.",
+      "note": "Package/test details in part-003-code-test-checkpoint.md. 30 posts/1130 pages read; 13 legacy missing images/Uncategorized. No live plugin/nightly audit/menu/player modifications. Browser not initialized."
     }
   ]
 }
