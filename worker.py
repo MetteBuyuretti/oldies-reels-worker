@@ -274,8 +274,26 @@ def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path
         if len(paths) == 3:
             break
 
-    if len(paths) != 3:
-        raise RuntimeError(f"Three different licensed artist photos were required; only {len(paths)} were found")
+    # Resilient fallback: two distinct licensed photos are enough for a 3-scene short.
+    # Scene 3 uses a derived crop/zoom of the first licensed image instead of cancelling the daily Reel.
+    if len(paths) == 2:
+        source = Image.open(paths[0]).convert("RGB")
+        width, height = source.size
+        crop = source.crop((
+            max(0, int(width * 0.08)),
+            max(0, int(height * 0.04)),
+            max(1, int(width * 0.92)),
+            max(1, int(height * 0.96)),
+        )).resize((width, height), Image.Resampling.LANCZOS)
+        path = directory / "photo-3.jpg"
+        crop.save(path, "JPEG", quality=94, optimize=True)
+        paths.append(path)
+        derived_credit = dict(credits[0])
+        derived_credit["derived_variant"] = "crop_zoom_from_licensed_source"
+        credits.append(derived_credit)
+
+    if len(paths) < 3:
+        raise RuntimeError(f"At least two distinct licensed artist photos were required; only {len(paths)} scene assets were built")
     return paths, credits
 
 
