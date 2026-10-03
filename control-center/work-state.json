@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-03T22:44:20.901Z",
+  "updated_at": "2026-10-03T23:10:52.854Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -65,7 +65,7 @@
     {
       "id": "site-integrity-20261003",
       "title": "Oldies Radyo Site Integrity / Editorial Control",
-      "status": "blocked",
+      "status": "in_progress",
       "completed_units": [
         "priority-content-audit",
         "pre-change-backup",
@@ -77,11 +77,12 @@
         "live-priority-metadata-recheck",
         "live-http-img-and-reciprocal-pair-verification",
         "frontend-module-and-en-archive-404-evidence",
-        "verifier-0.1.1-29-PHP-tests"
+        "verifier-0.1.1-29-PHP-tests",
+        "live-source-backup-and-root-cause"
       ],
-      "last_checkpoint": "2026-10-03T22:44:20.901Z",
-      "next_step": "Get explicit browser fallback approval. Then inspect and back up PHP theme/HFCM and Ana Kumanda source; stage native integration, repair EN Research archive routing and TR/EN module sources; deploy and complete native audit.",
-      "note": "part-004 saved. No live mutation in this continuation. 8 priority URLs/images/pairs healthy; EN archive 404; EN native Research strip still TR. Updated saved package v0.1.1, 29 PHP + 7 JS checks. No live guard/cron/panel install. Browser not initialized."
+      "last_checkpoint": "2026-10-03T23:10:52.854Z",
+      "next_step": "Test source-grounded module/menu guards, save rollback package, deploy safely and complete native audit.",
+      "note": "Browser fallback authorized; signed-in WP. Read-only source audit 005 saved. Hardcoded header plus Revenue CTA menu injection confirmed; no menu rename."
     }
   ]
 }
