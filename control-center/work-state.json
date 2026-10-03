@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-03T23:23:57.468Z",
+  "updated_at": "2026-10-03T23:56:08.201Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -65,7 +65,7 @@
     {
       "id": "site-integrity-20261003",
       "title": "Oldies Radyo Site Integrity / Editorial Control",
-      "status": "awaiting_approval",
+      "status": "in_progress",
       "completed_units": [
         "priority-content-audit",
         "pre-change-backup",
@@ -80,11 +80,12 @@
         "verifier-0.1.1-29-PHP-tests",
         "live-source-backup-and-root-cause",
         "source-grounded-020-and-46-tests",
-        "persistent-preinstall-rollback-package"
+        "persistent-preinstall-rollback-package",
+        "live-plugin-020-installed-activated"
       ],
-      "last_checkpoint": "2026-10-03T23:23:57.468Z",
-      "next_step": "After action-time custom-plugin install/activation approval, install v0.2.0 from prepared upload form, verify frontend and complete native scan.",
-      "note": "Package v3 and approval screen saved; 46 PHP tests/lint PASS. No live integrity plugin/cron/module guard activated yet. Browser policy requires exact installation approval; no login needed."
+      "last_checkpoint": "2026-10-03T23:56:08.201Z",
+      "next_step": "Verify TR/EN homepage/archive/menu, complete native audit and confirm schedule/guards.",
+      "note": "Explicit custom-plugin installation approval received. WP UI confirms active v0.2.0 and Ana Kumanda Site Integrity link; checkpoint008 saved."
     }
   ]
 }
