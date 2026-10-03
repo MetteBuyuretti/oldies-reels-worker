@@ -1,0 +1,800 @@
+{
+  "captured_at": "2026-10-03T02:47:02.295Z",
+  "site": "https://oldiesradyo.com",
+  "posts": [
+    {
+      "id": 4308,
+      "title": "1960’larda Yunanistan Pop ve Rock Dünyası",
+      "modified": "2026-09-28T06:03:55",
+      "status": "publish",
+      "categories": [
+        786978342
+      ],
+      "featured_media": 4307,
+      "link": "https://oldiesradyo.com/2026/09/28/1960larda-yunanistan-pop-rock-roll-10-sanatci/"
+    },
+    {
+      "id": 4457,
+      "title": "1960’larda Belçika’nın 10 Ünlü Şarkıcısı ve Grubu",
+      "modified": "2026-10-02T18:25:20",
+      "status": "publish",
+      "categories": [
+        786978342
+      ],
+      "featured_media": 4402,
+      "link": "https://oldiesradyo.com/2026/10/02/1960larda-belcika-10-unlu-sarkici/"
+    },
+    {
+      "id": 4274,
+      "title": "50 Yaşını Göremeden Ölen Rock Yıldızları: Elvis’ten Cobain’e",
+      "modified": "2026-09-28T05:31:41",
+      "status": "publish",
+      "categories": [
+        786978342,
+        786935114
+      ],
+      "featured_media": 4288,
+      "link": "https://oldiesradyo.com/2026/09/25/50-yasini-goremeden-olen-rock-yildizlari/"
+    },
+    {
+      "id": 4300,
+      "title": "Ağustos 2026’da Müzik Efsaneleri: Dolly Parton, Frank Beard ve Ayın Haberleri",
+      "modified": "2026-09-27T06:16:20",
+      "status": "publish",
+      "categories": [
+        786935112
+      ],
+      "featured_media": 4299,
+      "link": "https://oldiesradyo.com/2026/09/27/agustos-2026-muzik-efsaneleri-aylik-haber/"
+    },
+    {
+      "id": 4343,
+      "title": "Pop and Rock in 1960s Greece: 10 Famous Singers",
+      "modified": "2026-09-28T06:27:41",
+      "status": "publish",
+      "categories": [
+        786978945
+      ],
+      "featured_media": 4307,
+      "link": "https://oldiesradyo.com/en/2026/09/28/1960s-greece-pop-rock-10-famous-singers/"
+    },
+    {
+      "id": 4286,
+      "title": "Rock Stars Who Died Before 50: From Elvis to Cobain",
+      "modified": "2026-09-26T06:51:38",
+      "status": "publish",
+      "categories": [
+        786978945
+      ],
+      "featured_media": 4288,
+      "link": "https://oldiesradyo.com/en/2026/09/26/rock-stars-who-died-before-50/"
+    },
+    {
+      "id": 4301,
+      "title": "August 2026 Music Legends: Dolly Parton, Frank Beard and the Month in Review",
+      "modified": "2026-09-27T06:16:22",
+      "status": "publish",
+      "categories": [
+        786935904
+      ],
+      "featured_media": 4299,
+      "link": "https://oldiesradyo.com/en/2026/09/27/august-2026-music-legends-monthly-news/"
+    },
+    {
+      "id": 4458,
+      "title": "10 Famous Belgian Singers and Bands of the 1960s",
+      "modified": "2026-10-03T04:51:11",
+      "status": "publish",
+      "categories": [
+        786982547
+      ],
+      "featured_media": 4402,
+      "link": "https://oldiesradyo.com/en/2026/10/02/1960s-belgian-singers/"
+    }
+  ],
+  "menus": {
+    "tr": [
+      {
+        "id": 1458,
+        "title": {
+          "rendered": "Ana Sayfa"
+        },
+        "url": "https://oldiesradyo.com/",
+        "type": "custom",
+        "type_label": "Özel bağlantı",
+        "object": "custom",
+        "object_id": 1458,
+        "parent": 0,
+        "menu_order": 1,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 901,
+        "title": {
+          "rendered": "Müzik Tarihi"
+        },
+        "url": "https://oldiesradyo.com/populer-muzik-tarihi/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 900,
+        "parent": 0,
+        "menu_order": 2,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 147,
+        "title": {
+          "rendered": "1950’ler"
+        },
+        "url": "https://oldiesradyo.com/1950ler/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 145,
+        "parent": 901,
+        "menu_order": 3,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 151,
+        "title": {
+          "rendered": "1960’lar"
+        },
+        "url": "https://oldiesradyo.com/1960lar/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 149,
+        "parent": 901,
+        "menu_order": 4,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 834,
+        "title": {
+          "rendered": "1970’ler"
+        },
+        "url": "https://oldiesradyo.com/1970ler/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 833,
+        "parent": 901,
+        "menu_order": 5,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 836,
+        "title": {
+          "rendered": "1980’ler"
+        },
+        "url": "https://oldiesradyo.com/1980lar/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 835,
+        "parent": 901,
+        "menu_order": 6,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 838,
+        "title": {
+          "rendered": "1990’lar"
+        },
+        "url": "https://oldiesradyo.com/1990lar/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 837,
+        "parent": 901,
+        "menu_order": 7,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 631,
+        "title": {
+          "rendered": "Müzik Haberleri"
+        },
+        "url": "https://oldiesradyo.com/muzik-haberleri/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 630,
+        "parent": 0,
+        "menu_order": 8,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 635,
+        "title": {
+          "rendered": "Özel Dosyalar"
+        },
+        "url": "https://oldiesradyo.com/ozel-dosyalar/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 634,
+        "parent": 901,
+        "menu_order": 10,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 1460,
+        "title": {
+          "rendered": "Podcast"
+        },
+        "url": "https://oldiesradyo.com/radyo-podcastler/",
+        "type": "custom",
+        "type_label": "Özel bağlantı",
+        "object": "custom",
+        "object_id": 1460,
+        "parent": 0,
+        "menu_order": 11,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 1391,
+        "title": {
+          "rendered": "Oldies Dükkan"
+        },
+        "url": "https://oldiesradyo.com/oldies-dukkan/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1390,
+        "parent": 0,
+        "menu_order": 12,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 1150,
+        "title": {
+          "rendered": "Uygulamalar"
+        },
+        "url": "https://oldiesradyo.com/android-uygulamasi/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1149,
+        "parent": 0,
+        "menu_order": 13,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 1393,
+        "title": {
+          "rendered": "iPhone"
+        },
+        "url": "https://oldiesradyo.com/iphone-uygulamasi/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1392,
+        "parent": 1150,
+        "menu_order": 14,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 639,
+        "title": {
+          "rendered": "DJ Mete"
+        },
+        "url": "https://oldiesradyo.com/oldiesdj/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 638,
+        "parent": 0,
+        "menu_order": 15,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 641,
+        "title": {
+          "rendered": "İletişim"
+        },
+        "url": "https://oldiesradyo.com/iletisim/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 640,
+        "parent": 0,
+        "menu_order": 16,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      },
+      {
+        "id": 1461,
+        "title": {
+          "rendered": "Hakkımızda"
+        },
+        "url": "https://oldiesradyo.com/hakkimizda/",
+        "type": "custom",
+        "type_label": "Özel bağlantı",
+        "object": "custom",
+        "object_id": 1461,
+        "parent": 0,
+        "menu_order": 17,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 37970065
+      }
+    ],
+    "en": [
+      {
+        "id": 3470,
+        "title": {
+          "rendered": "Home"
+        },
+        "url": "https://oldiesradyo.com/en/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1690,
+        "parent": 0,
+        "menu_order": 1,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3472,
+        "title": {
+          "rendered": "1950s"
+        },
+        "url": "https://oldiesradyo.com/en/1950s/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1695,
+        "parent": 0,
+        "menu_order": 2,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3473,
+        "title": {
+          "rendered": "1960s"
+        },
+        "url": "https://oldiesradyo.com/en/1960s/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1710,
+        "parent": 0,
+        "menu_order": 3,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3474,
+        "title": {
+          "rendered": "1970s"
+        },
+        "url": "https://oldiesradyo.com/en/1970s/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1711,
+        "parent": 0,
+        "menu_order": 4,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3475,
+        "title": {
+          "rendered": "1980s"
+        },
+        "url": "https://oldiesradyo.com/en/1980s/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1696,
+        "parent": 0,
+        "menu_order": 5,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3476,
+        "title": {
+          "rendered": "1990s"
+        },
+        "url": "https://oldiesradyo.com/en/1990s/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1712,
+        "parent": 0,
+        "menu_order": 6,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3477,
+        "title": {
+          "rendered": "Oldies Music News: Classic Artists, Reissues and Tours"
+        },
+        "url": "https://oldiesradyo.com/en/music-news/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1714,
+        "parent": 0,
+        "menu_order": 7,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3478,
+        "title": {
+          "rendered": "Features"
+        },
+        "url": "https://oldiesradyo.com/en/features/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1716,
+        "parent": 0,
+        "menu_order": 8,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3479,
+        "title": {
+          "rendered": "Live Radio"
+        },
+        "url": "https://oldiesradyo.com/en/live-radio/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1694,
+        "parent": 0,
+        "menu_order": 9,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3480,
+        "title": {
+          "rendered": "DJ Mete"
+        },
+        "url": "https://oldiesradyo.com/en/dj-mete/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1697,
+        "parent": 0,
+        "menu_order": 10,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3481,
+        "title": {
+          "rendered": "Shop"
+        },
+        "url": "https://oldiesradyo.com/en/shop/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1717,
+        "parent": 0,
+        "menu_order": 11,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3482,
+        "title": {
+          "rendered": "About"
+        },
+        "url": "https://oldiesradyo.com/en/about/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1713,
+        "parent": 0,
+        "menu_order": 12,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3483,
+        "title": {
+          "rendered": "Contact"
+        },
+        "url": "https://oldiesradyo.com/en/contact/",
+        "type": "post_type",
+        "type_label": "Sayfa",
+        "object": "page",
+        "object_id": 1718,
+        "parent": 0,
+        "menu_order": 13,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      },
+      {
+        "id": 3484,
+        "title": {
+          "rendered": "Türkçe"
+        },
+        "url": "https://oldiesradyo.com/",
+        "type": "custom",
+        "type_label": "Özel bağlantı",
+        "object": "custom",
+        "object_id": 3484,
+        "parent": 0,
+        "menu_order": 14,
+        "status": "publish",
+        "attr_title": "",
+        "description": "",
+        "classes": [
+          ""
+        ],
+        "target": "",
+        "menus": 786936682
+      }
+    ]
+  },
+  "settings": {
+    "success": true,
+    "site_info": {
+      "blog_id": 14144069,
+      "site_url": "https://oldiesradyo.com",
+      "site_name": "Oldies Radyo",
+      "is_private": false
+    },
+    "general": {
+      "admin_email": "oldiesradyo@gmail.com",
+      "blogdescription": "1950’lerden 1990’lara Müzik Tarihi ve Canlı Radyo Yayını",
+      "blogname": "Oldies Radyo",
+      "comment_registration": false,
+      "date_format": "d/m/Y",
+      "default_role": "subscriber",
+      "gmt_offset": 3,
+      "home": "https://oldiesradyo.com",
+      "language": "tr_TR",
+      "siteurl": "https://oldiesradyo.com",
+      "start_of_week": 0,
+      "time_format": "H:i",
+      "timezone_string": "Europe/Istanbul",
+      "users_can_register": false
+    },
+    "reading": {
+      "blog_charset": "UTF-8",
+      "gzipcompression": false,
+      "page_on_front": 435,
+      "page_for_posts": 0,
+      "posts_per_page": 10,
+      "posts_per_rss": 10,
+      "rss_language": "en",
+      "rss_use_excerpt": false,
+      "show_on_front": "page"
+    },
+    "permalinks": {
+      "category_base": "",
+      "permalink_structure": "/%year%/%monthnum%/%day%/%postname%/",
+      "tag_base": ""
+    }
+  },
+  "active_theme": [
+    {
+      "stylesheet": "oldies-radyo-1950s-theme",
+      "name": {
+        "raw": "Oldies Radyo v7.3.7.1",
+        "rendered": "Oldies Radyo v7.3.7.1"
+      },
+      "description": {
+        "raw": "Oldies Radyo için dergi ana sayfası, kaynaklı 1950’ler–1990’lar müzik arşivi, özel araştırmalar, müzik haberleri, Oldies DJ Mete Buyuran, Radyo Instagram ve dönem kapıları.",
+        "rendered": "Oldies Radyo için dergi ana sayfası, kaynaklı 1950’ler–1990’lar müzik arşivi, özel araştırmalar, müzik haberleri, Oldies DJ Mete Buyuran, Radyo Instagram ve dönem kapıları."
+      },
+      "author": {
+        "raw": "Oldies Radyo",
+        "rendered": "Oldies Radyo"
+      },
+      "tags": {
+        "raw": [],
+        "rendered": ""
+      },
+      "status": "active",
+      "theme_uri": {
+        "raw": "https://oldiesradyo.com",
+        "rendered": "https://oldiesradyo.com"
+      },
+      "is_block_theme": false,
+      "global_styles_id": 576
+    }
+  ]
+}
