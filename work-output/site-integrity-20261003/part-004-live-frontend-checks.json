@@ -1,0 +1,290 @@
+{
+  "captured_at": "2026-10-03T22:38:43.985313+00:00",
+  "mode": "read_only_no_browser_no_mutations",
+  "scope": "8 priority records; homepage, features and research archives",
+  "records": {
+    "4308": {
+      "url": "https://oldiesradyo.com/2026/09/28/1960larda-yunanistan-pop-rock-roll-10-sanatci/",
+      "final_url": "https://oldiesradyo.com/2026/09/28/1960larda-yunanistan-pop-rock-roll-10-sanatci/",
+      "status": 200,
+      "sha256": "c43ec7b7d187798723fe3b4a2f86d8cbcc14d35e0645b60ac7eea57a2a84b705",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "4457": {
+      "url": "https://oldiesradyo.com/2026/10/02/1960larda-belcika-10-unlu-sarkici/",
+      "final_url": "https://oldiesradyo.com/2026/10/02/1960larda-belcika-10-unlu-sarkici/",
+      "status": 200,
+      "sha256": "635c453cf29611fe2d03778fe3d51ccd7eeeaffe57f04adea483e399251cf951",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "4274": {
+      "url": "https://oldiesradyo.com/2026/09/25/50-yasini-goremeden-olen-rock-yildizlari/",
+      "final_url": "https://oldiesradyo.com/2026/09/25/50-yasini-goremeden-olen-rock-yildizlari/",
+      "status": 200,
+      "sha256": "a8c38f020bca0997c9a2c3f3cd0110260bafe0d0016ba9d039b03c0db8ecafef",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "4300": {
+      "url": "https://oldiesradyo.com/2026/09/27/agustos-2026-muzik-efsaneleri-aylik-haber/",
+      "final_url": "https://oldiesradyo.com/2026/09/27/agustos-2026-muzik-efsaneleri-aylik-haber/",
+      "status": 200,
+      "sha256": "07c65c28ab40613b9d84c91fc94f70971bea77328839613d7f226704df2b1153",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "4343": {
+      "url": "https://oldiesradyo.com/en/2026/09/28/1960s-greece-pop-rock-10-famous-singers/",
+      "final_url": "https://oldiesradyo.com/en/2026/09/28/1960s-greece-pop-rock-10-famous-singers/",
+      "status": 200,
+      "sha256": "cf3a021ba1a27974e5e25eb436b56b9cc50683e35106d3571765ab18f5210db3",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "4458": {
+      "url": "https://oldiesradyo.com/en/2026/10/02/1960s-belgian-singers/",
+      "final_url": "https://oldiesradyo.com/en/2026/10/02/1960s-belgian-singers/",
+      "status": 200,
+      "sha256": "e62738007521bcf224b8366213c9e918882aad7df6d6f536afcdadbbbbd44544",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "4286": {
+      "url": "https://oldiesradyo.com/en/2026/09/26/rock-stars-who-died-before-50/",
+      "final_url": "https://oldiesradyo.com/en/2026/09/26/rock-stars-who-died-before-50/",
+      "status": 200,
+      "sha256": "486f1c7bc608d1992c87f8b46fecb3ad84ea0864d99f48742d4b989237eb8680",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "4301": {
+      "url": "https://oldiesradyo.com/en/2026/09/27/august-2026-music-legends-monthly-news/",
+      "final_url": "https://oldiesradyo.com/en/2026/09/27/august-2026-music-legends-monthly-news/",
+      "status": 200,
+      "sha256": "c7e0be7759b7554c11189441a1e0da07c84ed6099161559559bbe1130832521c",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "home_tr": {
+      "url": "https://oldiesradyo.com/",
+      "final_url": "https://oldiesradyo.com/",
+      "status": 200,
+      "sha256": "c6a1ad458b73c9f7ea9c6b55eab15d633f9e54995d369ac85650aa1a98d4ec5a",
+      "x_robots_tag": null,
+      "wp_total": null,
+      "snippet_1_found": true,
+      "snippet_1_sha256": "579509ff2dfb646ee0d4b8853fd8ef126f1406e02e32319ae13ef6dad1186c5f",
+      "header_menu": [
+        "<a href=\"https://oldiesradyo.com/\">Ana Sayfa</a><a href=\"https://oldiesradyo.com/populer-muzik-tarihi/\">Popüler Müzik Tarihi</a><a href=\"https://oldiesradyo.com/muzik-haberleri/\">Yeni Haberler</a><a href=\"https://oldiesradyo.com/ozel-dosyalar/\">Özel Dosyalar</a><a href=\"https://oldiesradyo.com/oldiesdj/\">Oldies DJ</a><a href=\"https://oldiesradyo.com/mete-hizmetler/\">Hizmetler</a><a href=\"https://oldiesradyo.com/hakkimizda/\">Hakkımızda</a><a href=\"https://oldiesradyo.com/oldies-dukkan/\">Dükkan</a><a href=\"https://oldiesradyo.com/iletisim/\">İletişim</a>"
+      ],
+      "server_research_module_count": 0,
+      "server_research_module_links": [],
+      "legacy_hfcm_script_found": true
+    },
+    "home_en": {
+      "url": "https://oldiesradyo.com/en/",
+      "final_url": "https://oldiesradyo.com/en/",
+      "status": 200,
+      "sha256": "1d6191614af26e58ee5b046c457bbfc62b649c7ff42c8ec0732e1be09427e99a",
+      "x_robots_tag": null,
+      "wp_total": null,
+      "snippet_1_found": true,
+      "snippet_1_sha256": "579509ff2dfb646ee0d4b8853fd8ef126f1406e02e32319ae13ef6dad1186c5f",
+      "header_menu": [],
+      "server_research_module_count": 1,
+      "server_research_module_links": [
+        "https://oldiesradyo.com/category/ozel-dosyalar/arastirmalar/",
+        "https://oldiesradyo.com/2026/09/25/50-yasini-goremeden-olen-rock-yildizlari/",
+        "https://oldiesradyo.com/2026/09/28/1960larda-yunanistan-pop-rock-roll-10-sanatci/"
+      ],
+      "legacy_hfcm_script_found": true
+    },
+    "features_tr": {
+      "url": "https://oldiesradyo.com/ozel-dosyalar/",
+      "final_url": "https://oldiesradyo.com/ozel-dosyalar/",
+      "status": 200,
+      "sha256": "ef27245c82931f56312bda8bb72f5c047021ca9dc52bd8ce56ac98dc3e16e70c",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "features_en": {
+      "url": "https://oldiesradyo.com/en/features/",
+      "final_url": "https://oldiesradyo.com/en/features/",
+      "status": 200,
+      "sha256": "3cd3262426ec75f155e4ac2f26de159c998c4c73f727121111a7fa084d73171f",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "categories": {
+      "url": "https://oldiesradyo.com/wp-json/wp/v2/categories?per_page=100",
+      "final_url": "https://oldiesradyo.com/wp-json/wp/v2/categories?per_page=100",
+      "status": 200,
+      "sha256": "226beb33173bafa01cdc05fa65ce55e0b6b8c49bf609bf44ead6bc92ec9093c6",
+      "x_robots_tag": "noindex",
+      "wp_total": "16"
+    },
+    "pages_total": {
+      "url": "https://oldiesradyo.com/wp-json/wp/v2/pages?per_page=1&_fields=id",
+      "final_url": "https://oldiesradyo.com/wp-json/wp/v2/pages?per_page=1&_fields=id",
+      "status": 200,
+      "sha256": "103414968b70521292cd1fc1cfda75966163d7902f1a6a4fba573692ec250526",
+      "x_robots_tag": "noindex",
+      "wp_total": "1130"
+    },
+    "endpoint": {
+      "url": "https://oldiesradyo.com/wp-json/oldies-integrity/v1/research?lang=tr",
+      "error": "HTTP Error 404: Not Found",
+      "status": 404
+    },
+    "media_4288": {
+      "url": "https://oldiesradyo.com/wp-json/wp/v2/media/4288?_fields=id,source_url",
+      "final_url": "https://oldiesradyo.com/wp-json/wp/v2/media/4288?_fields=id,source_url",
+      "status": 200,
+      "sha256": "77980c2d3b17b5ad755e7d164aff5b3e608019913380bc5dc25485cb854b9824",
+      "x_robots_tag": "noindex",
+      "wp_total": null
+    },
+    "media_4299": {
+      "url": "https://oldiesradyo.com/wp-json/wp/v2/media/4299?_fields=id,source_url",
+      "final_url": "https://oldiesradyo.com/wp-json/wp/v2/media/4299?_fields=id,source_url",
+      "status": 200,
+      "sha256": "3fd29bb163b9d3f22898b4d9211254e2c80800151339408981a0fa1705f16e8c",
+      "x_robots_tag": "noindex",
+      "wp_total": null
+    },
+    "media_4307": {
+      "url": "https://oldiesradyo.com/wp-json/wp/v2/media/4307?_fields=id,source_url",
+      "final_url": "https://oldiesradyo.com/wp-json/wp/v2/media/4307?_fields=id,source_url",
+      "status": 200,
+      "sha256": "61ec8e66aa1ff5c8758d9b37e2a4c683113ac75265c6ecc1a4e950f6e9ab67c7",
+      "x_robots_tag": "noindex",
+      "wp_total": null
+    },
+    "media_4402": {
+      "url": "https://oldiesradyo.com/wp-json/wp/v2/media/4402?_fields=id,source_url",
+      "final_url": "https://oldiesradyo.com/wp-json/wp/v2/media/4402?_fields=id,source_url",
+      "status": 200,
+      "sha256": "67cb58da13c17d2cffdf8f33766624231f771890c51e16b5d63de7c5307ad5c0",
+      "x_robots_tag": "noindex",
+      "wp_total": null
+    },
+    "category_786978342": {
+      "url": "https://oldiesradyo.com/category/ozel-dosyalar/arastirmalar/",
+      "final_url": "https://oldiesradyo.com/category/ozel-dosyalar/arastirmalar/",
+      "status": 200,
+      "sha256": "d2dcfcfebd1189fca3962e38f91a0d6f6666e2d9fc8a35ee13c183c09389127e",
+      "x_robots_tag": null,
+      "wp_total": null
+    },
+    "category_786982547": {
+      "url": "https://oldiesradyo.com/en/category/ozel-dosyalar-en/arastirmalar-en/",
+      "error": "HTTP Error 404: Not Found",
+      "status": 404
+    }
+  },
+  "priority_checks": [
+    {
+      "id": 4308,
+      "language": "tr",
+      "http_status": 200,
+      "featured_media": 4307,
+      "featured_image_in_img_tag": true,
+      "homepage_server_anchor": false,
+      "features_server_anchor": false,
+      "noindex": false,
+      "research_archive_anchor": true,
+      "homepage_research_module_anchor": false
+    },
+    {
+      "id": 4457,
+      "language": "tr",
+      "http_status": 200,
+      "featured_media": 4402,
+      "featured_image_in_img_tag": true,
+      "homepage_server_anchor": false,
+      "features_server_anchor": false,
+      "noindex": false,
+      "research_archive_anchor": false,
+      "homepage_research_module_anchor": false
+    },
+    {
+      "id": 4274,
+      "language": "tr",
+      "http_status": 200,
+      "featured_media": 4288,
+      "featured_image_in_img_tag": true,
+      "homepage_server_anchor": false,
+      "features_server_anchor": false,
+      "noindex": false,
+      "research_archive_anchor": false,
+      "homepage_research_module_anchor": false
+    },
+    {
+      "id": 4300,
+      "language": "tr",
+      "http_status": 200,
+      "featured_media": 4299,
+      "featured_image_in_img_tag": true,
+      "homepage_server_anchor": true,
+      "features_server_anchor": false,
+      "noindex": false,
+      "homepage_research_module_anchor": false
+    },
+    {
+      "id": 4343,
+      "language": "en",
+      "http_status": 200,
+      "featured_media": 4307,
+      "featured_image_in_img_tag": true,
+      "homepage_server_anchor": true,
+      "features_server_anchor": false,
+      "noindex": false,
+      "research_archive_anchor": false,
+      "homepage_research_module_anchor": false
+    },
+    {
+      "id": 4458,
+      "language": "en",
+      "http_status": 200,
+      "featured_media": 4402,
+      "featured_image_in_img_tag": true,
+      "homepage_server_anchor": true,
+      "features_server_anchor": false,
+      "noindex": false,
+      "research_archive_anchor": false,
+      "homepage_research_module_anchor": false
+    },
+    {
+      "id": 4286,
+      "language": "en",
+      "http_status": 200,
+      "featured_media": 4288,
+      "featured_image_in_img_tag": true,
+      "homepage_server_anchor": true,
+      "features_server_anchor": false,
+      "noindex": false,
+      "research_archive_anchor": false,
+      "homepage_research_module_anchor": false
+    },
+    {
+      "id": 4301,
+      "language": "en",
+      "http_status": 200,
+      "featured_media": 4299,
+      "featured_image_in_img_tag": true,
+      "homepage_server_anchor": true,
+      "features_server_anchor": false,
+      "noindex": false,
+      "homepage_research_module_anchor": false
+    }
+  ],
+  "limitations": [
+    "No full-corpus Polylang pairing claim.",
+    "No frontend JavaScript execution or visual QA.",
+    "No theme/PHP source inspection or live deployment.",
+    "No actual Google indexing status claim.",
+    "Category archive renders full article bodies; missing self-links alone do not establish an orphan."
+  ]
+}
