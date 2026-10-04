@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T00:32:15.907Z",
+  "updated_at": "2026-10-04T02:29:00.403Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -93,6 +93,20 @@
       "last_checkpoint": "2026-10-04T00:32:15.907Z",
       "next_step": "Installed system is active. Use daily dashboard/610-record editorial queue; service label rename awaits owner approval; separately review radio landing-page player visibility.",
       "note": "Checkpoint010 saved. Activev0.2.1, menusLOCKED/HEALTHY, priority8/8pass,1160 native scan47.4% with568template reviews (not sitewide frontend health), artifactversion4. Do not reinstall or auto-edit bodies."
+    },
+    {
+      "id": "facebook-en-failure-37121370256",
+      "title": "English Facebook Reel — 37121370256 failure diagnosis",
+      "status": "done",
+      "completed_units": [
+        "exact-run-job-log-audit",
+        "publish-endpoint-source-confirmation",
+        "artifact-retention-check",
+        "durable-diagnosis-report"
+      ],
+      "last_checkpoint": "2026-10-04T02:29:00.403Z",
+      "next_step": "Reconnect the Global/English Facebook Page token in the WordPress companion; verify token and destination read-only/dry-run before any separately authorized live retry.",
+      "note": "Diagnosis complete: HTTP400 fb_token_check reports session invalid because user logged out. Render and delivery succeeded; no Facebook success confirmed. Runtime/secrets/schedule unchanged, no live retry. Evidence in work-output/facebook-en-failure-37121370256/part-001-diagnosis.md."
     }
   ]
 }
