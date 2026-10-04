@@ -1,4 +1,4 @@
-"""Resumable public Oldies Radyo audit. GET only; four workers; no site writes."""
+"""Resumable public Oldies Radyo audit. GET only; bounded workers; no site writes."""
 import argparse, concurrent.futures as cf, csv, hashlib, json, re, time
 import urllib.request, urllib.error, urllib.parse, xml.etree.ElementTree as ET
 import subprocess, tempfile
@@ -71,6 +71,9 @@ def audit(url):
     status,final,headers,body,elapsed=get(url)
     (OUT/'responses').mkdir(exist_ok=True)
     (OUT/'responses'/(hashlib.sha256(url.encode()).hexdigest()+'.json')).write_text(json.dumps({'url':url,'status':status,'final_url':final,'headers':headers,'elapsed_seconds':elapsed}))
+    return parse_response(url,status,final,headers,body,elapsed)
+
+def parse_response(url,status,final,headers,body,elapsed):
     r={'url':url,'status':status,'final_url':final,'elapsed_seconds':round(elapsed,3),'bytes':len(body),'content_type':headers.get('Content-Type',headers.get('content-type','')),'x_robots_tag':headers.get('X-Robots-Tag',headers.get('x-robots-tag','')),'checked_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
     if status is None:
         r['error']=body.decode(); return r
@@ -99,7 +102,7 @@ def audit(url):
     except Exception as e: r['parse_error']=str(e)
     return r
 
-def crawl():
+def crawl(retry_errors=False):
     urls=json.loads((OUT/'all-urls.json').read_text())
     log=OUT/'live-results.jsonl';done={}
     if log.exists():
@@ -107,17 +110,18 @@ def crawl():
             try:
                 x=json.loads(line);done[x['url']]=x
             except ValueError: pass
-    pending=[u for u in urls if u not in done]
-    with cf.ThreadPoolExecutor(max_workers=6) as pool,log.open('a') as f:
+    pending=[u for u in urls if u not in done or (retry_errors and done[u]['status'] is None)]
+    with cf.ThreadPoolExecutor(max_workers=2 if retry_errors else 6) as pool:
         futures={pool.submit(audit,u):u for u in pending}
         for i,future in enumerate(cf.as_completed(futures),1):
             try:r=future.result()
             except Exception as e:r={'url':futures[future],'status':None,'error':str(e),'content_type':''}
-            f.write(json.dumps(r,ensure_ascii=False)+'\n');f.flush();done[r['url']]=r
+            done[r['url']]=r
+            log.write_text(''.join(json.dumps(x,ensure_ascii=False)+'\n' for x in done.values()))
             if i%50==0: print(f'crawl {len(done)}/{len(urls)}',flush=True)
     summary={'checked':len(done),'statuses':dict(Counter(str(r['status']) for r in done.values())),'languages':dict(Counter(r.get('html_lang','') for r in done.values())),'duplicate_description':sum(len(r.get('descriptions',[]))>1 for r in done.values()),'missing_canonical':sum(r['status']==200 and 'html' in r['content_type'] and not r.get('canonical') for r in done.values())}
     (OUT/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2));print(json.dumps(summary),flush=True)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('phase',choices=['inventory','crawl']);args=p.parse_args()
-    inventory() if args.phase=='inventory' else crawl()
+    p=argparse.ArgumentParser();p.add_argument('phase',choices=['inventory','crawl']);p.add_argument('--retry-errors',action='store_true');args=p.parse_args()
+    inventory() if args.phase=='inventory' else crawl(args.retry_errors)
