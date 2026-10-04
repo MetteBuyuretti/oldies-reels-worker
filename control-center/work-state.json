@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T20:13:23.767Z",
+  "updated_at": "2026-10-04T20:41:48.805Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -151,11 +151,16 @@
         "batch-005-10-existing-EN-pages-expanded-and-published",
         "batch-005-263-source-paragraphs-preserved",
         "batch-005-native20-frontend10-bidirectional10-links24-QA",
-        "checkpoint008-full-translations50"
+        "checkpoint008-full-translations50",
+        "batch-006-10-full-1960s-features-published",
+        "batch-006-all330-paragraphs-and-source-images-preserved",
+        "batch-006-existing-media-reused-with-credit-and-layout-verified",
+        "batch-006-native20-frontend10-bidirectional10-and29-links-QA",
+        "checkpoint009-full-translations60"
       ],
-      "last_checkpoint": "2026-10-04T20:13:23.767Z",
-      "next_step": "Batch006 TR840–849: Beatles, Rolling Stones, Who, Kinks, Animals, Hollies, Zombies, Yardbirds, Beach Boys and Bob Dylan. Existing EN1867–1876: expand in place, preserve all sections/images and URLs. Published TR613 EN554;59 unpaired;470 short candidates. Do not repeat completed50 full translations or five published news drafts.",
-      "note": "Checkpoint008;this continuation30 full artist expansions+5 existing EN news drafts reviewed/published. Total50 full translations. Batch005 10/10 HTTP200,20 native pairs,10 live bidirectional switches,24 links/images pass. Four category labels locked; duplicate description tags/shared news footer labels and actual mobile viewport QA open. TR/global theme unchanged."
+      "last_checkpoint": "2026-10-04T20:41:48.805Z",
+      "next_step": "Batch007 TR850–859 existing EN1927–1936:Byrds,Simon&Garfunkel,Doors,Hendrix,Supremes,Temptations,MarvinGaye,ArethaFranklin,JamesBrown,OtisRedding. Expand existing EN records after reading current content/source sections. TR613 EN554;59unpaired;460short candidates. Do not repeat60completed full translations or five reviewed news.",
+      "note": "Checkpoint009:this continuation40full artist translations+5reviewed ENnews;total60full translations. Batch00610/10frontends,20nativepairs,10livebidirectional switches,29links/imagespass. All330sourceparagraphs andsourceimagesretained;existinglicensed Beatles/Stones media reused. Fourcategorylabelslocked;duplicate-description/sharednewsfooter/mobileviewportQAopen;TR/globalthemeunchanged."
     }
   ]
 }
