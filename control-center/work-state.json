@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T18:57:56.646Z",
+  "updated_at": "2026-10-04T19:07:54.903Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -115,7 +115,7 @@
     {
       "id": "tr-en-parity-20261004",
       "title": "TR → EN eksik içerik çeviri ve eşitleme",
-      "status": "in_progress",
+      "status": "checkpointed",
       "completed_units": [
         "access-verified",
         "all-1195-admin-inventory",
@@ -133,11 +133,16 @@
         "complete-20-EN-payloads-durable",
         "checkpoint004-environment-interruption",
         "environment-restored-source-scan-resumed",
-        "batch-003-10-source-grounded-full-translations-prepared"
+        "batch-003-10-source-grounded-full-translations-prepared",
+        "batch-003-10-live-full-translations",
+        "batch-003-10-featured-images-from-existing-site-assets",
+        "batch-003-native20-and-frontend10-QA",
+        "batch-003-22-link-image-QA",
+        "all-613-TR-source-frontends-scanned"
       ],
-      "last_checkpoint": "2026-10-04T18:57:56.646Z",
-      "next_step": "Apply and QA batch003: TR618,620,621,626,777,778,779,780,781,782. Source frontend scanner6threads running; persist scan metrics before batch004.",
-      "note": "20 earlier complete translations preserved. 10 full batch003payloads prepared (all269 paragraphs preserved; EN963–1113words vs TR802–876). Before-change snapshots saved. Existing EN URLs unchanged. Source date notes for Wanda/Gene/Eddie. No batch003page writes confirmed yet."
+      "last_checkpoint": "2026-10-04T19:07:54.903Z",
+      "next_step": "Continue batch004 PriorityA; inspect5existingENdrafts andTR422 provenance. Native inventoryneeds30-completedreconciliation. Rebuild existing operation artifactexpectedversion1including batches002/003and613scan.",
+      "note": "30fulltranslationslive,4pairfixes,30SEOupdates. TR613/EN549,59unpaired+5ENdraft=64coveragegaps. Batch003all269paragraphs preserved963–1113ENwords;10featuredmediafromexactsiteassets. 613sourceHTTPchecks0errors. DuplicateENmetadescriptiontagsinheritedtheme+Jetpackrecorded;main themeunchanged. Mobileviewportunavailable;desktopQApassed. Categories3locked."
     }
   ]
 }
