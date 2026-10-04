@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T19:07:54.903Z",
+  "updated_at": "2026-10-04T19:34:52.672Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -138,11 +138,14 @@
         "batch-003-10-featured-images-from-existing-site-assets",
         "batch-003-native20-and-frontend10-QA",
         "batch-003-22-link-image-QA",
-        "all-613-TR-source-frontends-scanned"
+        "all-613-TR-source-frontends-scanned",
+        "batch-004-10-source-grounded-full-translations",
+        "batch-004-10-live-full-translations",
+        "batch-004-native20-frontend10-and22-links-QA"
       ],
-      "last_checkpoint": "2026-10-04T19:07:54.903Z",
-      "next_step": "Continue batch004 PriorityA; inspect5existingENdrafts andTR422 provenance. Native inventoryneeds30-completedreconciliation. Rebuild existing operation artifactexpectedversion1including batches002/003and613scan.",
-      "note": "30fulltranslationslive,4pairfixes,30SEOupdates. TR613/EN549,59unpaired+5ENdraft=64coveragegaps. Batch003all269paragraphs preserved963–1113ENwords;10featuredmediafromexactsiteassets. 613sourceHTTPchecks0errors. DuplicateENmetadescriptiontagsinheritedtheme+Jetpackrecorded;main themeunchanged. Mobileviewportunavailable;desktopQApassed. Categories3locked."
+      "last_checkpoint": "2026-10-04T19:34:52.672Z",
+      "next_step": "Publish eligible five existing EN news drafts after source, category, image and SEO review. Finish the English frontend screening; continue Priority A with TR798 Les Paul & Mary Ford onward. Rebuild the existing operation archive including all batches and scans.",
+      "note": "40 full translations live (38 expanded existing + 2 new), 4 earlier pair fixes, 40 SEO updates. Published TR613 / EN549; 59 unpaired + 5 EN drafts = 64 coverage gaps. Batch004 preserved 265 paragraphs, ten existing portraits registered as featured media, 20 related links. QA: 10/10 HTTP/body/canonical checks, native20 correct, 22 links/images HTTP200. Theme duplicate meta descriptions and Turkish shared footer/header labels remain recorded; global theme unchanged. Three category labels locked."
     }
   ]
 }
