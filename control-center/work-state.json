@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T14:15:56.281Z",
+  "updated_at": "2026-10-04T14:58:38.096Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -115,7 +115,7 @@
     {
       "id": "tr-en-parity-20261004",
       "title": "TR → EN eksik içerik çeviri ve eşitleme",
-      "status": "in_progress",
+      "status": "blocked",
       "completed_units": [
         "access-verified",
         "all-1195-admin-inventory",
@@ -125,11 +125,17 @@
         "batch-001-frontend-polylang-32-link-image-checks",
         "batch-002-10-live-translations",
         "batch-002-html-and-15-link-image-checks",
-        "fresh-native-1162-published-audit"
+        "fresh-native-1162-published-audit",
+        "all-632-TR-native-polylang-map",
+        "published-A541-B50-C22-priority-inventory",
+        "four-wrong-polylang-source-associations-fixed",
+        "two-new-page-inbound-links-stored",
+        "complete-20-EN-payloads-durable",
+        "checkpoint004-environment-interruption"
       ],
-      "last_checkpoint": "2026-10-04T14:15:56.281Z",
-      "next_step": "Finish per-TR Polylang map and A/B/C queue; next missing Priority A features/dossiers.",
-      "note": "20 translations live, 2 wrong pairs fixed. Fresh audit 1162 published, missing59, broken0. Next content queue must distinguish empty legacy pages from genuine missing English and review source errors."
+      "last_checkpoint": "2026-10-04T14:58:38.096Z",
+      "next_step": "Restore disconnected execution/browser environment; resume cached613-TR frontend scanner (last confirmed450/613, session41889) and inspect metrics. Next PriorityA batch:618,620,621,626,777,778,779,780,781,782; compare existing EN first. Rebuild/replace operation artifact version1 after QA. Do not repeat20 completed translations.",
+      "note": "Checkpoint004 and complete payload JSONs saved. TR613/EN549 published,59unpaired+5ENdraft=64published coverage gaps.20full translations live,4wrong pairs fixed,20SEO updates. A541/B50/C22published.525paired bodies still await editorial comparison. Category3labels blocked by installed architecture lock. Execution/browser409environment_offline; WordPress/GitHub connect. No unverified batch3 writes."
     }
   ]
 }
