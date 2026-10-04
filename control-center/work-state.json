@@ -156,11 +156,15 @@
         "batch-006-all330-paragraphs-and-source-images-preserved",
         "batch-006-existing-media-reused-with-credit-and-layout-verified",
         "batch-006-native20-frontend10-bidirectional10-and29-links-QA",
-        "checkpoint009-full-translations60"
+        "checkpoint009-full-translations60",
+        "batch-007-10-full-features-published",
+        "batch-007-all336-source-paragraphs-and44-images-retained",
+        "batch-007-native20-frontend10-bidirectional10-and27-links-QA",
+        "checkpoint010-full-translations70"
       ],
-      "last_checkpoint": "2026-10-04T20:41:48.805Z",
-      "next_step": "Batch007 TR850–859 existing EN1927–1936:Byrds,Simon&Garfunkel,Doors,Hendrix,Supremes,Temptations,MarvinGaye,ArethaFranklin,JamesBrown,OtisRedding. Expand existing EN records after reading current content/source sections. TR613 EN554;59unpaired;460short candidates. Do not repeat60completed full translations or five reviewed news.",
-      "note": "Checkpoint009:this continuation40full artist translations+5reviewed ENnews;total60full translations. Batch00610/10frontends,20nativepairs,10livebidirectional switches,29links/imagespass. All330sourceparagraphs andsourceimagesretained;existinglicensed Beatles/Stones media reused. Fourcategorylabelslocked;duplicate-description/sharednewsfooter/mobileviewportQAopen;TR/globalthemeunchanged."
+      "last_checkpoint": "2026-10-04T21:15:20.669Z",
+      "next_step": "Batch008 queue:TR860–864→EN1937–1941 five remaining1960s artist features, then TR866–870→EN1942–1946 five music-style histories. Fresh native reads and full source review. TR613 EN554;59unpaired;450short-EN review candidates;70full translations complete;five existing news reviewed. No background worker.",
+      "note": "Checkpoint010: ten additional source-grounded full translations in status follow-up; total70. All336 source paragraphs retained,10EN pages/20native language records/10live switches/27internal links and images pass. Four taxonomy labels architecture-locked;3 source holds;duplicate-description/news-footer/mobile viewport QA pending. ExistingENURLs/TR/globaltheme preserved."
     }
   ]
 }
