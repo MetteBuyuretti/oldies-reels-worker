@@ -1,13 +1,22 @@
 {
   "schema_version": 1,
   "task": "global-growth-operation",
-  "status": "checkpointed",
+  "status": "checkpoint-002-complete",
   "completed_units": [
     "prior-checkpoint-reconciled",
-    "public-inventory-and-private-gsc-baseline",
-    "three-english-excerpts-live-verified"
+    "full-public-url-inventory-and-live-response-verification",
+    "private-target-market-gsc-baseline",
+    "three-english-excerpts-live-verified",
+    "alphaville-primary-source-section-and-three-internal-links-live-verified",
+    "observed-language-link-targets-verified-with-one-unresolved-request",
+    "fifteen-social-utm-drafts-prepared-not-published"
   ],
-  "last_checkpoint": "2026-10-04T04:20:17.228Z",
-  "next_step": "Finish live URL crawl, then source-verified language/link/canonical P1 checks.",
-  "note": "Dedicated public task state contains no private analytics, credentials, account identifiers or unrelated tasks. Central state update was blocked by automated approval review; detailed evidence is retained privately."
+  "last_checkpoint": "2026-10-04T04:50:22.712Z",
+  "next_step": "Verify active SEO output and language-switcher owners, then apply bounded reversible P1 repairs.",
+  "private_evidence": "Oldies_Global_Growth_Checkpoint_02 and dated continuation bundle; never commit account identifiers or private analytics.",
+  "constraints": {
+    "social_publication": "Existing restrictions preserved; drafts only.",
+    "site_integrity": "Reuse v0.2.1; no reinstall.",
+    "central_state": "Blocked by automated approval review; do not republish private records."
+  }
 }
