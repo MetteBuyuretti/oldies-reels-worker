@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T13:21:58.141Z",
+  "updated_at": "2026-10-04T13:55:41.018Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -120,11 +120,13 @@
         "access-verified",
         "all-1195-admin-inventory",
         "all-1160-published-bodies",
-        "120-native-polylang-checks"
+        "120-native-polylang-checks",
+        "batch-001-10-live-translations",
+        "batch-001-frontend-polylang-32-link-image-checks"
       ],
-      "last_checkpoint": "2026-10-04T13:21:58.141Z",
-      "next_step": "Reconcile existing native audit, review template-rendered source pages and apply first Priority A batch.",
-      "note": "part-001-access-inventory.md persisted. Europe weekly scheduled pairs already exist; preserve schedules. Never rewrite TR originals or good EN pages."
+      "last_checkpoint": "2026-10-04T13:55:41.018Z",
+      "next_step": "Batch 002: full 1950s artist dossiers; review Kylie/Radiohead sources and category-lock items separately.",
+      "note": "10 live translations (8 updates +2 new), 2 wrong pairs repaired; part-002-batch-001.md. Category-label changes blocked by architecture lock; no bypass. Existing English URLs and TR content preserved."
     }
   ]
 }
