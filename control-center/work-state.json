@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T19:34:52.672Z",
+  "updated_at": "2026-10-04T19:50:04.947Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -115,7 +115,7 @@
     {
       "id": "tr-en-parity-20261004",
       "title": "TR → EN eksik içerik çeviri ve eşitleme",
-      "status": "checkpointed",
+      "status": "in_progress",
       "completed_units": [
         "access-verified",
         "all-1195-admin-inventory",
@@ -141,11 +141,16 @@
         "all-613-TR-source-frontends-scanned",
         "batch-004-10-source-grounded-full-translations",
         "batch-004-10-live-full-translations",
-        "batch-004-native20-frontend10-and22-links-QA"
+        "batch-004-native20-frontend10-and22-links-QA",
+        "five-existing-EN-news-drafts-reviewed-and-published",
+        "five-news-frontend-and-ten-native-pair-QA",
+        "two-TR-news-category-assignments-corrected",
+        "all-554-current-EN-frontends-screened",
+        "checkpoint007-operation-archive-version2"
       ],
-      "last_checkpoint": "2026-10-04T19:34:52.672Z",
-      "next_step": "Publish eligible five existing EN news drafts after source, category, image and SEO review. Finish the English frontend screening; continue Priority A with TR798 Les Paul & Mary Ford onward. Rebuild the existing operation archive including all batches and scans.",
-      "note": "40 full translations live (38 expanded existing + 2 new), 4 earlier pair fixes, 40 SEO updates. Published TR613 / EN549; 59 unpaired + 5 EN drafts = 64 coverage gaps. Batch004 preserved 265 paragraphs, ten existing portraits registered as featured media, 20 related links. QA: 10/10 HTTP/body/canonical checks, native20 correct, 22 links/images HTTP200. Theme duplicate meta descriptions and Turkish shared footer/header labels remain recorded; global theme unchanged. Three category labels locked."
+      "last_checkpoint": "2026-10-04T19:50:04.947Z",
+      "next_step": "Batch005: TR798/799/800/801/802/803/804/812/813/821 existing English artist pages. Existing published TR613 EN554; 59 unpaired; 480 short EN candidates require section-level review. Continue without repeating completed40 translations or five reviewed news.",
+      "note": "Checkpoint007 durable; 40 full translations, plus five reviewed EN news drafts now published. This continuation:20 full artist expansions+5 news SEO/publication. Full TR613 and EN554 frontend scan complete. Four EN category label renames architecture-locked; correct existing EN language categories assigned. Shared news footer/share labels and duplicate meta-description tags remain open. Original TR content/URLs and global theme unchanged."
     }
   ]
 }
