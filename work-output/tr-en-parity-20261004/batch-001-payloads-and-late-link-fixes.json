@@ -1,0 +1,716 @@
+{
+  "timestamp": "2026-10-04T14:55:50.836Z",
+  "pair_fixes": [
+    {
+      "tr_id": 3518,
+      "en_id": 2454,
+      "old_tr_id": 1193
+    },
+    {
+      "tr_id": 3520,
+      "en_id": 2467,
+      "old_tr_id": 1210
+    },
+    {
+      "tr_id": 3519,
+      "en_id": 2455,
+      "old_tr_id": 1195
+    },
+    {
+      "tr_id": 3521,
+      "en_id": 2489,
+      "old_tr_id": 1235
+    }
+  ],
+  "late_pair_verification": [
+    {
+      "id": 3519,
+      "result": {
+        "success": true,
+        "data": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"id\":3519,\"post_type\":\"page\",\"status\":\"publish\",\"title\":\"Kylie Minogue \\u2014 1980\\u2019ler Kariyeri\",\"language\":\"tr\",\"translations\":{\"tr\":3519,\"en\":2455}}"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "id": 3519,
+            "post_type": "page",
+            "status": "publish",
+            "title": "Kylie Minogue — 1980’ler Kariyeri",
+            "language": "tr",
+            "translations": {
+              "tr": 3519,
+              "en": 2455
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 2455,
+      "result": {
+        "success": true,
+        "data": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"id\":2455,\"post_type\":\"page\",\"status\":\"publish\",\"title\":\"Kylie Minogue \\u2014 1980s Career\",\"language\":\"en\",\"translations\":{\"en\":2455,\"tr\":3519}}"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "id": 2455,
+            "post_type": "page",
+            "status": "publish",
+            "title": "Kylie Minogue — 1980s Career",
+            "language": "en",
+            "translations": {
+              "en": 2455,
+              "tr": 3519
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 1195,
+      "result": {
+        "success": true,
+        "data": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"id\":1195,\"post_type\":\"page\",\"status\":\"publish\",\"title\":\"Kylie Minogue \\u2014 1980\\u2019ler Kariyeri\",\"language\":\"tr\",\"translations\":{\"tr\":1195}}"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "id": 1195,
+            "post_type": "page",
+            "status": "publish",
+            "title": "Kylie Minogue — 1980’ler Kariyeri",
+            "language": "tr",
+            "translations": {
+              "tr": 1195
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 3521,
+      "result": {
+        "success": true,
+        "data": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"id\":3521,\"post_type\":\"page\",\"status\":\"publish\",\"title\":\"Radiohead \\u2014 1990\\u2019lar Kariyeri\",\"language\":\"tr\",\"translations\":{\"tr\":3521,\"en\":2489}}"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "id": 3521,
+            "post_type": "page",
+            "status": "publish",
+            "title": "Radiohead — 1990’lar Kariyeri",
+            "language": "tr",
+            "translations": {
+              "tr": 3521,
+              "en": 2489
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 2489,
+      "result": {
+        "success": true,
+        "data": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"id\":2489,\"post_type\":\"page\",\"status\":\"publish\",\"title\":\"Radiohead \\u2014 1990s Career\",\"language\":\"en\",\"translations\":{\"en\":2489,\"tr\":3521}}"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "id": 2489,
+            "post_type": "page",
+            "status": "publish",
+            "title": "Radiohead — 1990s Career",
+            "language": "en",
+            "translations": {
+              "en": 2489,
+              "tr": 3521
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 1235,
+      "result": {
+        "success": true,
+        "data": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\"id\":1235,\"post_type\":\"page\",\"status\":\"publish\",\"title\":\"Radiohead \\u2014 1990\\u2019lar Kariyeri\",\"language\":\"tr\",\"translations\":{\"tr\":1235}}"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "id": 1235,
+            "post_type": "page",
+            "status": "publish",
+            "title": "Radiohead — 1990’lar Kariyeri",
+            "language": "tr",
+            "translations": {
+              "tr": 1235
+            }
+          }
+        }
+      }
+    }
+  ],
+  "inbound_link_edits": [
+    {
+      "id": 1716,
+      "before": {
+        "id": 1716,
+        "modified": "2026-08-31T00:49:50",
+        "link": "https://oldiesradyo.com/en/features/",
+        "title": "Features",
+        "content": "<!-- wp:heading {\"level\":1} --><h1>Features</h1><!-- /wp:heading -->\n<!-- wp:paragraph --><p>Some music stories deserve more than a quick headline.</p><!-- /wp:paragraph -->\n<!-- wp:paragraph --><p>Oldies Radyo Features goes deeper into artists, albums, scenes, cultural moments and the strange little details that make music history worth revisiting.</p><!-- /wp:paragraph -->\n<!-- wp:paragraph --><p>From the birth of rock ’n’ roll to synth-pop, soul, disco, Britpop and beyond, these longer reads are made for listeners who enjoy the story almost as much as the song.</p><!-- /wp:paragraph -->"
+      },
+      "write": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"data\":{\"id\":1716,\"status\":\"publish\",\"link\":\"https:\\/\\/oldiesradyo.com\\/en\\/features\\/\"}}"
+          }
+        ],
+        "structuredContent": {
+          "data": {
+            "id": 1716,
+            "status": "publish",
+            "link": "https://oldiesradyo.com/en/features/"
+          }
+        },
+        "isError": false
+      }
+    },
+    {
+      "id": 2143,
+      "before": {
+        "id": 2143,
+        "modified": "2026-08-31T00:53:28",
+        "link": "https://oldiesradyo.com/en/1970s/avrupa-pop-eurovision/",
+        "title": "European Pop, ABBA and Eurovision",
+        "content": "<!-- wp:heading {\"level\":1} --><h1>European Pop, ABBA and Eurovision</h1><!-- /wp:heading -->\n<!-- wp:paragraph --><p>European pop in the 1970s became increasingly international. Eurovision, television and cross-border record distribution helped artists reach audiences far beyond their home countries.</p><!-- /wp:paragraph -->\n<!-- wp:heading --><h2>ABBA changes the scale</h2><!-- /wp:heading -->\n<!-- wp:paragraph --><p>ABBA’s 1974 Eurovision victory with “Waterloo” demonstrated that a European act could use the contest as a launchpad toward long-term global pop dominance.</p><!-- /wp:paragraph -->\n<!-- wp:heading --><h2>Euro-disco and producer-led pop</h2><!-- /wp:heading -->\n<!-- wp:paragraph --><p>Boney M., Giorgio Moroder’s productions and other continental acts helped build a more studio-centered European dance-pop tradition that would feed directly into the 1980s.</p><!-- /wp:paragraph -->\n<!-- wp:heading --><h2>Why it matters</h2><!-- /wp:heading -->\n<!-- wp:paragraph --><p>The decade helped establish Europe as a major exporter of polished pop and dance music rather than a secondary market for British and American trends.</p><!-- /wp:paragraph -->"
+      },
+      "write": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"data\":{\"id\":2143,\"status\":\"publish\",\"link\":\"https:\\/\\/oldiesradyo.com\\/en\\/1970s\\/avrupa-pop-eurovision\\/\"}}"
+          }
+        ],
+        "structuredContent": {
+          "data": {
+            "id": 2143,
+            "status": "publish",
+            "link": "https://oldiesradyo.com/en/1970s/avrupa-pop-eurovision/"
+          }
+        },
+        "isError": false
+      }
+    }
+  ],
+  "completed": [
+    {
+      "tr_id": 612,
+      "en_id": 1744,
+      "title": "Elvis Presley in the 1950s",
+      "id": 1744,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/1950s/elvis-presley/",
+      "content_exact": true,
+      "source_words": 1131,
+      "english_words": 1321,
+      "paragraphs": 29,
+      "featured_media": 4568
+    },
+    {
+      "tr_id": 613,
+      "en_id": 1745,
+      "title": "Chuck Berry in the 1950s",
+      "id": 1745,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/1950s/chuck-berry/",
+      "featured_media": 4569,
+      "meta": {
+        "_coblocks_attr": "",
+        "_coblocks_dimensions": "",
+        "_coblocks_responsive_height": "",
+        "_coblocks_accordion_ie_support": "",
+        "advanced_seo_description": "Chuck Berry in the 1950s: Maybellene, Johnny B. Goode, Chess Records, his guitar style and teenage storytelling, with a selected listening guide.",
+        "jetpack_seo_html_title": "Chuck Berry in the 1950s | Oldies Radyo",
+        "jetpack_seo_noindex": false,
+        "jetpack_seo_schema_type": "",
+        "_wpcom_ai_launchpad_about_page": false,
+        "_wpcom_ai_launchpad_gallery_page": false,
+        "_wpcom_ai_launchpad_contact_page": false,
+        "_wpcom_ai_launchpad_events_page": false,
+        "_wpcom_ai_launchpad_video_page": false,
+        "_wpcom_ai_launchpad_portfolio_piece": false,
+        "footnotes": "",
+        "oldies_polylang_pair_en_id": 0,
+        "oldies_polylang_pair_result": "",
+        "oldies_polylang_repair_en_id": 0,
+        "oldies_polylang_repair_result": ""
+      },
+      "content_exact": true,
+      "source_words": 1034,
+      "english_words": 1208,
+      "paragraphs": 28
+    },
+    {
+      "tr_id": 614,
+      "en_id": 1746,
+      "title": "Little Richard in the 1950s",
+      "id": 1746,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/1950s/little-richard/",
+      "featured_media": 4570,
+      "meta": {
+        "_coblocks_attr": "",
+        "_coblocks_dimensions": "",
+        "_coblocks_responsive_height": "",
+        "_coblocks_accordion_ie_support": "",
+        "advanced_seo_description": "Little Richard in the 1950s: Specialty Records, Tutti Frutti, gospel roots, New Orleans musicians and his influence on sound and stage performance.",
+        "jetpack_seo_html_title": "Little Richard in the 1950s | Oldies Radyo",
+        "jetpack_seo_noindex": false,
+        "jetpack_seo_schema_type": "",
+        "_wpcom_ai_launchpad_about_page": false,
+        "_wpcom_ai_launchpad_gallery_page": false,
+        "_wpcom_ai_launchpad_contact_page": false,
+        "_wpcom_ai_launchpad_events_page": false,
+        "_wpcom_ai_launchpad_video_page": false,
+        "_wpcom_ai_launchpad_portfolio_piece": false,
+        "footnotes": "",
+        "oldies_polylang_pair_en_id": 0,
+        "oldies_polylang_pair_result": "",
+        "oldies_polylang_repair_en_id": 0,
+        "oldies_polylang_repair_result": ""
+      },
+      "content_exact": true,
+      "source_words": 953,
+      "english_words": 1115,
+      "paragraphs": 28
+    },
+    {
+      "tr_id": 615,
+      "en_id": 1747,
+      "title": "Fats Domino in the 1950s",
+      "id": 1747,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/1950s/fats-domino/",
+      "featured_media": 4571,
+      "meta": {
+        "_coblocks_attr": "",
+        "_coblocks_dimensions": "",
+        "_coblocks_responsive_height": "",
+        "_coblocks_accordion_ie_support": "",
+        "advanced_seo_description": "Fats Domino in the 1950s: New Orleans R&B, Dave Bartholomew, Blueberry Hill and the piano-led sound that helped shape rock ’n’ roll.",
+        "jetpack_seo_html_title": "Fats Domino in the 1950s | Oldies Radyo",
+        "jetpack_seo_noindex": false,
+        "jetpack_seo_schema_type": "",
+        "_wpcom_ai_launchpad_about_page": false,
+        "_wpcom_ai_launchpad_gallery_page": false,
+        "_wpcom_ai_launchpad_contact_page": false,
+        "_wpcom_ai_launchpad_events_page": false,
+        "_wpcom_ai_launchpad_video_page": false,
+        "_wpcom_ai_launchpad_portfolio_piece": false,
+        "footnotes": "",
+        "oldies_polylang_pair_en_id": 0,
+        "oldies_polylang_pair_result": "",
+        "oldies_polylang_repair_en_id": 0,
+        "oldies_polylang_repair_result": ""
+      },
+      "content_exact": true,
+      "source_words": 901,
+      "english_words": 1046,
+      "paragraphs": 27
+    },
+    {
+      "tr_id": 617,
+      "en_id": 1749,
+      "title": "Buddy Holly in the 1950s",
+      "id": 1749,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/1950s/buddy-holly/",
+      "featured_media": 4572,
+      "meta": {
+        "_coblocks_attr": "",
+        "_coblocks_dimensions": "",
+        "_coblocks_responsive_height": "",
+        "_coblocks_accordion_ie_support": "",
+        "advanced_seo_description": "Buddy Holly in the 1950s: the Crickets, Norman Petty, That’ll Be the Day and the songwriting and studio approach that helped shape the modern rock band.",
+        "jetpack_seo_html_title": "Buddy Holly in the 1950s | Oldies Radyo",
+        "jetpack_seo_noindex": false,
+        "jetpack_seo_schema_type": "",
+        "_wpcom_ai_launchpad_about_page": false,
+        "_wpcom_ai_launchpad_gallery_page": false,
+        "_wpcom_ai_launchpad_contact_page": false,
+        "_wpcom_ai_launchpad_events_page": false,
+        "_wpcom_ai_launchpad_video_page": false,
+        "_wpcom_ai_launchpad_portfolio_piece": false,
+        "footnotes": "",
+        "oldies_polylang_pair_en_id": 0,
+        "oldies_polylang_pair_result": "",
+        "oldies_polylang_repair_en_id": 0,
+        "oldies_polylang_repair_result": ""
+      },
+      "content_exact": true,
+      "source_words": 868,
+      "english_words": 1013,
+      "paragraphs": 27
+    },
+    {
+      "tr_id": 776,
+      "en_id": 1771,
+      "title": "Jerry Lee Lewis in the 1950s",
+      "id": 1771,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/1950s/jerry-lee-lewis/",
+      "featured_media": 4573,
+      "meta": {
+        "_coblocks_attr": "",
+        "_coblocks_dimensions": "",
+        "_coblocks_responsive_height": "",
+        "_coblocks_accordion_ie_support": "",
+        "advanced_seo_description": "Jerry Lee Lewis in the 1950s: Sun Records, Great Balls of Fire, explosive piano performance and the controversy that interrupted his early career.",
+        "jetpack_seo_html_title": "Jerry Lee Lewis in the 1950s | Oldies Radyo",
+        "jetpack_seo_noindex": false,
+        "jetpack_seo_schema_type": "",
+        "_wpcom_ai_launchpad_about_page": false,
+        "_wpcom_ai_launchpad_gallery_page": false,
+        "_wpcom_ai_launchpad_contact_page": false,
+        "_wpcom_ai_launchpad_events_page": false,
+        "_wpcom_ai_launchpad_video_page": false,
+        "_wpcom_ai_launchpad_portfolio_piece": false,
+        "footnotes": "",
+        "oldies_polylang_pair_en_id": 0,
+        "oldies_polylang_pair_result": "",
+        "oldies_polylang_repair_en_id": 0,
+        "oldies_polylang_repair_result": ""
+      },
+      "content_exact": true,
+      "source_words": 846,
+      "english_words": 979,
+      "paragraphs": 26
+    },
+    {
+      "tr_id": 3518,
+      "en_id": 2454,
+      "title": "Kim Wilde in the 1980s",
+      "id": 2454,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/1980s/kim-wilde/",
+      "featured_media": 4574,
+      "content_exact": true,
+      "source_words": 616,
+      "english_words": 714,
+      "paragraphs": 17
+    },
+    {
+      "tr_id": 3520,
+      "en_id": 2467,
+      "title": "Bon Jovi in the 1980s",
+      "id": 2467,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/1980s/bon-jovi/",
+      "featured_media": 4575,
+      "content_exact": true,
+      "source_words": 634,
+      "english_words": 761,
+      "paragraphs": 17
+    },
+    {
+      "tr_id": 808,
+      "en_id": 4585,
+      "title": "Massiel’s 1968 Eurovision Victory and Her Refusal to Honour Franco",
+      "id": 4585,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/massiel-franco-eurovision-1968/",
+      "content_exact": true,
+      "source_words": 317,
+      "english_words": 394,
+      "paragraphs": 8,
+      "featured_media": 4430
+    },
+    {
+      "tr_id": 900,
+      "en_id": 4586,
+      "title": "Popular Music History: The 1950s to the 1990s",
+      "id": 4586,
+      "status": "publish",
+      "link": "https://oldiesradyo.com/en/music-history/",
+      "content_exact": true,
+      "source_words": 123,
+      "english_words": 145,
+      "paragraphs": 6,
+      "featured_media": 534
+    }
+  ],
+  "payloads": [
+    {
+      "tr_id": 612,
+      "en_id": 1744,
+      "title": "Elvis Presley in the 1950s",
+      "slug": null,
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-612.html",
+      "excerpt": "Elvis Presley in the 1950s: Sun Records, the RCA breakthrough, his sound, stage identity and lasting influence, with an illustrated listening guide.",
+      "meta": {
+        "jetpack_seo_html_title": "Elvis Presley in the 1950s | Oldies Radyo",
+        "advanced_seo_description": "Elvis Presley in the 1950s: Sun Records, the RCA breakthrough, his sound, stage identity and lasting influence, with an illustrated listening guide."
+      },
+      "source_words": 1131,
+      "english_words": 1321,
+      "source_paragraphs": 29,
+      "translated_paragraphs": 29,
+      "images": 4,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/",
+        "https://oldiesradyo.com/en/1950s/1950s-music-styles/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"artist-dossier-page oldies-en-translated\">\n<section class=\"page-hero artist-hero artist-hero-elvis\"><div class=\"wrap\"><div class=\"kicker\">1950s • ARTIST FEATURE</div><h2>Elvis Presley</h2><p class=\"intro\">Rock ’n’ Roll / Rockabilly</p></div></section>\n<section><article class=\"wrap article narrow artist-dossier\">\n<div class=\"artist-intro-layout\">\n<figure class=\"editorial-figure artist-feature artist-feature-compact\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/artists/elvis-presley.webp\" alt=\"Elvis Presley — 1950s career and music archive\"><figcaption>Elvis Presley, 1956 publicity portrait. Source: Wikimedia Commons / public domain.</figcaption></figure>\n<div class=\"artist-intro-copy\"><div class=\"kicker\">MEET THE ARTIST</div><p class=\"lead\">In 1954, Elvis Presley brought blues, country, gospel and R&amp;B into the same performance, announcing more than a new star: he helped usher in a new cultural age. His stage energy and television exposure carried rock ’n’ roll to the centre of mass youth culture.</p><p>Elvis’s importance does not depend on being “first.” By combining different musical traditions with a powerful personality and a modern understanding of media, he changed what a rock star could be. His spare Sun Records recordings, national breakthrough in 1956 and succession of hits that year made him an emblem of the decade.</p></div>\n</div>\n<aside class=\"artist-editorial-intro\"><div class=\"kicker\">AN INTRODUCTION FROM OLDIES RADYO</div><p>It is easy to describe Elvis simply as the King of Rock ’n’ Roll. The more interesting challenge is to hear, within the same song, both a shy young man from Memphis and the performer who could change the temperature of an entire room. This feature follows the way those two versions of Elvis became one.</p></aside>\n<section class=\"article-section\"><h2>Where did the sound come from?</h2><p>Growing up in Tupelo, Elvis Aaron Presley heard gospel around his family, local country broadcasts and rhythm and blues records coming from Black radio stations in Memphis. When his family moved to Memphis in 1948, Beale Street, church music, country programmes and independent record shops expanded his musical world.</p><p>His first private recordings at Sun Studio in 1953 did not launch a professional career. Sam Phillips, however, remembered the country-and-blues combination in Presley’s voice. During a rehearsal with Scotty Moore and Bill Black on 5 July 1954, a brisk, loose, rhythmically assured version of Arthur “Big Boy” Crudup’s “That’s All Right” emerged. A new musical formula had taken shape.</p></section>\n<section class=\"article-section\"><h2>The years that changed the course</h2><p>Sun recordings such as “Blue Moon of Kentucky,” “Good Rockin’ Tonight,” “Mystery Train” and “Baby Let’s Play House” showed how porous the boundary between country and R&amp;B had become for young listeners. The Louisiana Hayride, regional radio and intensive touring made Elvis the South’s new star.</p><p>His career exploded nationally after RCA Victor bought his contract late in 1955. “Heartbreak Hotel,” “Hound Dog,” “Don’t Be Cruel” and “Love Me Tender” made 1956 Elvis’s year. Television appearances turned his movements into a controversy, which only strengthened the younger generation’s bond with him. “Jailhouse Rock” in 1957 became another emblem of the extraordinarily productive period that lasted until his army induction in 1958.</p></section>\n<section class=\"story-image-gallery artist-identity-gallery\"><div class=\"story-gallery-heading\"><div><div class=\"kicker\">VISUAL ARCHIVE</div><h2>Elvis Presley: a changing stage personality</h2></div><p>Every image in this gallery shows Elvis himself. Pictures from different decades are placed together to illustrate changes in his career and stage identity.</p></div><div class=\"story-gallery-grid story-gallery-count-3\"><figure><img loading=\"lazy\" decoding=\"async\" src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/artists/elvis-presley.webp\" alt=\"Elvis Presley — 1950s career and music archive\"><figcaption>Elvis Presley — archive image from the 1950s artist feature.</figcaption></figure><figure><img loading=\"lazy\" decoding=\"async\" src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/sixties-artists/elvis-presley.webp\" alt=\"Elvis Presley — 1960s career and music archive\"><figcaption>Elvis Presley — archive image from the 1960s artist feature.</figcaption></figure><figure><img loading=\"lazy\" decoding=\"async\" src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/seventies-artists/elvis-presley.webp\" alt=\"Elvis Presley — 1970s career and music archive\"><figcaption>Elvis Presley — archive image from the 1970s artist feature.</figcaption></figure></div></section><section class=\"article-section\"><h2>What made the sound instantly recognisable?</h2><p>Space and tension matter more than grand orchestration in Elvis’s early records. Scotty Moore’s guitar moved between blues and country; Bill Black’s slap bass and Presley’s rhythmically alert voice made the small group sound larger than it was. Drums, Jordanaires harmonies, piano and broader arrangements arrived in the RCA years, but the voice’s dramatic flexibility remained central.</p><p>Gospel-like warmth in the ballads, blues-derived accents in faster songs and the natural storytelling of country stood side by side in the same repertoire. That range made him a meeting point for postwar American music rather than a representative of a single genre.</p></section>\n<section class=\"article-section\"><h2>The world behind the stage</h2><p>Elvis’s success cannot be separated from the debate over sounds developed by Black musicians being carried into the white mainstream market. A sound historical assessment recognises the Black blues, gospel and R&amp;B sources openly, while also acknowledging how Presley transformed that material through his distinctive voice and media personality.</p><p>In the 1950s, television, cinema, radio, the 45 rpm single and the youth press converged around one star on an unprecedented scale. Elvis was one of the figures who helped shape this new media order, as well as a product of it.</p></section>\n<section class=\"article-section\"><h2>Turning points</h2><p>Elvis’s 1950s career is best understood as two distinct, complementary phases. At Sun Records, his recordings with Scotty Moore and Bill Black showed how a small group could dissolve the boundary between blues and country. The move to RCA brought television, films, national tours and a large distribution network into play. His rapid rise in 1956 was about more than hit after hit: a new kind of star emerged around teenage behaviour, body language, fashion and generational conflict. Army service abruptly interrupted that first great period in 1958, but by then he had established lasting standards for how rock ’n’ roll looked and sounded.</p></section><section class=\"article-section artist-highlight-section\"><h2>Inside the studio</h2><p>Producers, studios and accompanying musicians played a substantial part in Elvis’s recordings. Sun’s slapback echo, Moore’s blues-and-country guitar, Black’s agile double bass and D. J. Fontana’s increasingly forceful drums formed the backbone of the early sound. At RCA, Jordanaires vocals, pianists including Floyd Cramer and Shorty Long, larger studio ensembles and film songs broadened the repertoire. That expansion sometimes softened the spare tension of the first records. Yet “Heartbreak Hotel,” “Jailhouse Rock” and “One Night” showed that Elvis’s dramatic interpretive power could survive a larger production.</p></section><section class=\"article-section\"><h2>Who carried the influence forward?</h2><p>An account of Elvis’s legacy is incomplete if it makes the Black and white musical traditions that preceded him invisible. Understanding his historical importance requires remembering the social conditions in which those sources developed, alongside his extraordinary ability to bring blues, gospel, country and pop repertoire to a wide audience. From the Beatles to Bruce Springsteen, and from glam rock to punk, many artists responded to his model of stardom: some imitated it and others challenged it. Elvis consequently stands as a figure who changed the relationship between artist, media and audience in modern popular culture.</p></section>\n<aside class=\"artist-listening-note\"><div class=\"kicker\">AN OLDIES RADYO LISTENING NOTE</div><h2>Getting to know Elvis Presley</h2><p>Begin with <strong>“That’s All Right”</strong>: the opening of the Sun era, with blues, country and small-group energy in a new balance. Move on to <strong>“Heartbreak Hotel”</strong> to hear another shade of his career. Finally, <strong>“Jailhouse Rock”</strong> shows where this 1950s listening route leads.</p><p class=\"artist-listening-note-small\">The aim is to hear how the voice, interpretation and artistic personality changed over time, rather than rush through a list of hits.</p></aside><section class=\"artist-recordings\"><div class=\"kicker\">SELECTED RECORDINGS</div><h2>A listening guide to the 1950s</h2><p class=\"track-intro\">This is a listening guide rather than a greatest-hits ranking, with starting points chosen to trace the artist’s development, range and place in music history across the decade.</p><div class=\"recording-list\">\n<article class=\"recording-item\"><span>1954</span><div><h3>That’s All Right</h3><p>The beginning of the Sun era: a new balance of blues, country and small-group energy.</p></div></article><article class=\"recording-item\"><span>1955</span><div><h3>Mystery Train</h3><p>A high point of early rockabilly, driven by Scotty Moore’s guitar and Bill Black’s slap bass.</p></div></article><article class=\"recording-item\"><span>1956</span><div><h3>Heartbreak Hotel</h3><p>The dark, spacious, dramatic hit that opened the RCA era.</p></div></article><article class=\"recording-item\"><span>1956</span><div><h3>Hound Dog / Don’t Be Cruel</h3><p>Two of the decade’s most familiar recordings on opposite sides of the same 45.</p></div></article><article class=\"recording-item\"><span>1957</span><div><h3>Jailhouse Rock</h3><p>A meeting of film, choreography, hard-edged guitar and youth culture.</p></div></article></div></section>\n\n<section class=\"article-section artist-legacy\"><h2>The legacy in music history</h2><p>He joined the grit of blues, the feeling of gospel and country storytelling in a single voice.</p><p>The identity Elvis Presley established in the 1950s lived on through later reinterpretations of his repertoire, imitations of his stage approach and direct influences on musicians. Oldies Radyo approaches him here as a creative participant in the transformation of popular music, as well as a familiar figure from its past.</p></section>\n\n<div class=\"article-sources\"><div class=\"kicker\">SOURCES AND ARCHIVES</div><ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://rockhall.com/inductees/elvis-presley/\">Rock &amp; Roll Hall of Fame – Elvis Presley</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.elvisthemusic.com/\">Elvis Presley official music website</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://sunrecords.com/history/\">Sun Records – History</a></li></ul><p class=\"source-note\">The original Oldies Radyo feature was researched and written by comparing international institutional sources and archives. This English translation retains its source references.</p></div>\n\n<div class=\"next-links\"><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/\"><div class=\"card-body\"><h3>All artists</h3><p>Return to the rock ’n’ roll, R&amp;B, country, gospel, jazz and pop worlds of the 1950s.</p></div></a><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/1950s-music-styles/\"><div class=\"card-body\"><h3>1950s music styles</h3><p>Explore the artist’s historical and musical setting in greater detail.</p></div></a></div>\n</article></section></div>\n\n<!-- /wp:html -->",
+      "featured_media": 4568
+    },
+    {
+      "tr_id": 613,
+      "en_id": 1745,
+      "title": "Chuck Berry in the 1950s",
+      "slug": null,
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-613.html",
+      "excerpt": "Chuck Berry in the 1950s: Maybellene, Johnny B. Goode, Chess Records, his guitar style and teenage storytelling, with a selected listening guide.",
+      "meta": {
+        "jetpack_seo_html_title": "Chuck Berry in the 1950s | Oldies Radyo",
+        "advanced_seo_description": "Chuck Berry in the 1950s: Maybellene, Johnny B. Goode, Chess Records, his guitar style and teenage storytelling, with a selected listening guide."
+      },
+      "source_words": 1034,
+      "english_words": 1208,
+      "source_paragraphs": 28,
+      "translated_paragraphs": 28,
+      "images": 1,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/",
+        "https://oldiesradyo.com/en/1950s/1950s-music-styles/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"artist-dossier-page oldies-en-translated\">\n<section class=\"page-hero artist-hero\"><div class=\"wrap\"><div class=\"kicker\">1950s • ARTIST FEATURE</div><h2>Chuck Berry</h2><p class=\"intro\">Rock ’n’ Roll / R&amp;B</p></div></section>\n<section><article class=\"wrap article narrow artist-dossier\">\n<div class=\"artist-intro-layout\">\n<figure class=\"editorial-figure artist-feature artist-feature-compact\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/artists/chuck-berry.webp\" alt=\"Chuck Berry — 1950s career and music archive\"><figcaption>Chuck Berry: career, recordings and musical identity in the 1950s.</figcaption></figure>\n<div class=\"artist-intro-copy\"><div class=\"kicker\">MEET THE ARTIST</div><p class=\"lead\">Chuck Berry was a founding figure who joined the language of rock guitar to the everyday details of teenage life. Cars, school, dancing and youthful ambitions became part of rock ’n’ roll’s shared vocabulary in his songs.</p><p>He brought country, blues and R&amp;B influences together through a distinctive guitar technique. His songwriting structures and narrative voice, as much as his stage moves, became direct models for later generations of rock bands.</p></div>\n</div>\n<aside class=\"artist-editorial-intro\"><div class=\"kicker\">AN INTRODUCTION FROM OLDIES RADYO</div><p>Chuck Berry was more than a guitar riff. He turned school corridors, cars, radio and the teenage urge to get away into three-minute films. Listening to him reveals how the language of youth was written, alongside the vocabulary of rock guitar.</p></aside>\n<section class=\"article-section\"><h2>Where did the sound come from?</h2><p>Charles Edward Anderson Berry grew up in St. Louis’s middle-class Black community. Church music, blues, swing and Nat King Cole’s clear vocal style were early influences. By the time he joined pianist Johnnie Johnson’s band in the early 1950s, his repertoire included country and hillbilly songs as well as blues. White audiences’ response to the country material encouraged his idea of bringing the language of two markets together.</p><p>A trip to Chicago and a meeting with Muddy Waters in 1955 changed his career. Waters directed him to Chess Records, where Berry rebuilt the country standard “Ida Red” around his own rhythmic approach and a story about cars. Released as “Maybellene,” the record topped the R&amp;B chart and also became a substantial pop hit.</p></section>\n<section class=\"article-section\"><h2>The years that changed the course</h2><p>“Roll Over Beethoven,” “School Day,” “Rock and Roll Music,” “Sweet Little Sixteen,” “Johnny B. Goode” and “Carol” show how Berry established a foundational rock ’n’ roll repertoire within a few years. His songs did more than get people dancing: through schools, cars, jukeboxes, concerts, parental pressure and teenage desires, they described postwar youth’s daily life.</p><p>Berry’s 1950s work united composer, guitarist, singer and stage performer in one person. Chess’s tight rhythm section, Johnnie Johnson’s piano and contributions from musicians such as Willie Dixon strengthened the records. The songs sound short and economical, yet their guitar openings, placement of syllables and narrative structures are carefully shaped.</p></section>\n<section class=\"article-section\"><h2>What made the sound instantly recognisable?</h2><p>Berry’s guitar vocabulary combined T-Bone Walker’s double-stop phrases, blues riffs and country’s crisp articulation. The opening bars of many songs became something like an alphabet for subsequent rock guitarists. His solos were concise, effective phrases that advanced the song’s rhythm and melody, rather than extended displays of virtuosity.</p><p>His clear diction and storytelling retain echoes of Nat King Cole. In a racially segregated market, Berry made his characters as broadly recognisable as possible as teenage figures. That strategy helped him reach a large pop audience without erasing his Black R&amp;B roots.</p></section>\n<section class=\"article-section\"><h2>The world behind the stage</h2><p>Chuck Berry rose to prominence while racial segregation persisted in America. A Black songwriter describing white teenagers’ lives so precisely, and reaching the centre of the pop market through his own songs, represented a historical turning point. Royalty, credit and promotion systems nevertheless continued to work against Black artists.</p><p>The legal proceedings that began in 1959 and the subsequent prison term interrupted his career’s first great momentum. Yet the catalogue he built between 1955 and 1959 became a fundamental resource for the Beatles, the Rolling Stones, the Beach Boys, Bob Dylan and countless guitar bands.</p></section>\n<section class=\"article-section\"><h2>Turning points</h2><p>Berry’s decisive turning point came in 1955 when Muddy Waters directed him to Chess Records and he recorded “Maybellene.” Starting from “Ida Red,” it joined a story of a car chase and jealousy to hard-edged guitar, reaching both R&amp;B and pop listeners. “Roll Over Beethoven,” “School Day,” “Sweet Little Sixteen” and “Johnny B. Goode” followed as chapters in a shared teenage world, as well as individual hits. School, dance halls, cars, radio and dreams of earning money became central rock ’n’ roll subjects. His legal difficulties late in the decade interrupted his rise, but the repertoire had already become a textbook for the genre.</p></section><section class=\"article-section artist-highlight-section\"><h2>Inside the studio</h2><p>Berry’s recordings often sound simple, but that simplicity reflects considerable rhythmic intelligence. Johnnie Johnson’s piano, Willie Dixon’s bass, the backbeat of drummers including Fred Below and Jasper Thomas, and Chess’s dry, direct studio sound gave the guitar phrases room. The double-stop openings came from blues, while the clarity of the song structures and deliberately precise vocals addressed a wider pop audience. Every element moves the story forward: the opening riff introduces the character, the short solo raises the tension and the last verse puts the young listener back on the dance floor.</p></section><section class=\"article-section\"><h2>Who carried the influence forward?</h2><p>Berry’s influence is plainly audible in rock bands’ core repertoire. The Beatles, Rolling Stones, Beach Boys, Animals and countless garage bands learned guitar vocabulary and concise storytelling by playing his songs. His legacy reaches beyond riffs. As an adult Black songwriter, he described Black and white teenagers’ shared dreams with exceptional sharpness, helping establish rock ’n’ roll’s youthful identity. His songs show that the genre was a new literary language for everyday life, as well as a rhythmic innovation.</p></section>\n<aside class=\"artist-listening-note\"><div class=\"kicker\">AN OLDIES RADYO LISTENING NOTE</div><h2>Getting to know Chuck Berry</h2><p>Begin with <strong>“Maybellene”</strong>, which turned the country standard “Ida Red” into a rock ’n’ roll story of a car chase, jealousy and hard-edged guitar. Continue with <strong>“School Day”</strong> to hear another shade of his career. Finally, <strong>“Johnny B. Goode”</strong> shows where this 1950s listening route leads.</p><p class=\"artist-listening-note-small\">The aim is to hear how the voice, interpretation and artistic personality changed over time, rather than rush through a list of hits.</p></aside><section class=\"artist-recordings\"><div class=\"kicker\">SELECTED RECORDINGS</div><h2>A listening guide to the 1950s</h2><p class=\"track-intro\">This is a listening guide rather than a greatest-hits ranking, with starting points chosen to trace the artist’s development, range and place in music history across the decade.</p><div class=\"recording-list\">\n<article class=\"recording-item\"><span>1955</span><div><h3>Maybellene</h3><p>A rock ’n’ roll transformation of “Ida Red,” driven by a car chase, jealousy and hard-edged guitar.</p></div></article><article class=\"recording-item\"><span>1956</span><div><h3>Roll Over Beethoven</h3><p>A manifesto in which the new youth music challenges older cultural authority.</p></div></article><article class=\"recording-item\"><span>1957</span><div><h3>School Day</h3><p>A vivid account of a teenage day, from school to the jukebox.</p></div></article><article class=\"recording-item\"><span>1957</span><div><h3>Rock and Roll Music</h3><p>A defining record that describes the genre’s rhythm and purpose in its own name.</p></div></article><article class=\"recording-item\"><span>1958</span><div><h3>Johnny B. Goode</h3><p>It turned the dream of becoming a musician into a universal rock myth.</p></div></article></div></section>\n\n<section class=\"article-section artist-legacy\"><h2>The legacy in music history</h2><p>He gave rock ’n’ roll both a guitar backbone and a teenage narrative.</p><p>The identity Chuck Berry established in the 1950s lived on through later reinterpretations of his repertoire, imitations of his stage approach and direct influences on musicians. Oldies Radyo approaches him here as a creative participant in the transformation of popular music, as well as a familiar figure from its past.</p></section>\n\n<div class=\"article-sources\"><div class=\"kicker\">SOURCES AND ARCHIVES</div><ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.chuckberry.com/biography\">Chuck Berry official biography</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://rockhall.com/inductees/chuck-berry/\">Rock &amp; Roll Hall of Fame – Chuck Berry</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.chessrecords.com/artist/chuck-berry/\">Chess Records – Chuck Berry</a></li></ul><p class=\"source-note\">The original Oldies Radyo feature was researched and written by comparing international institutional sources and archives. This English translation retains its source references.</p></div>\n\n<div class=\"next-links\"><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/\"><div class=\"card-body\"><h3>All artists</h3><p>Return to the rock ’n’ roll, R&amp;B, country, gospel, jazz and pop worlds of the 1950s.</p></div></a><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/1950s-music-styles/\"><div class=\"card-body\"><h3>1950s music styles</h3><p>Explore the artist’s historical and musical setting in greater detail.</p></div></a></div>\n</article></section></div>\n\n<!-- /wp:html -->",
+      "featured_media": 4569
+    },
+    {
+      "tr_id": 614,
+      "en_id": 1746,
+      "title": "Little Richard in the 1950s",
+      "slug": null,
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-614.html",
+      "excerpt": "Little Richard in the 1950s: Specialty Records, Tutti Frutti, gospel roots, New Orleans musicians and his influence on sound and stage performance.",
+      "meta": {
+        "jetpack_seo_html_title": "Little Richard in the 1950s | Oldies Radyo",
+        "advanced_seo_description": "Little Richard in the 1950s: Specialty Records, Tutti Frutti, gospel roots, New Orleans musicians and his influence on sound and stage performance."
+      },
+      "source_words": 953,
+      "english_words": 1115,
+      "source_paragraphs": 28,
+      "translated_paragraphs": 28,
+      "images": 1,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/",
+        "https://oldiesradyo.com/en/1950s/1950s-music-styles/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"artist-dossier-page oldies-en-translated\">\n<section class=\"page-hero artist-hero\"><div class=\"wrap\"><div class=\"kicker\">1950s • ARTIST FEATURE</div><h2>Little Richard</h2><p class=\"intro\">Rock ’n’ Roll / Gospel</p></div></section>\n<section><article class=\"wrap article narrow artist-dossier\">\n<div class=\"artist-intro-layout\">\n<figure class=\"editorial-figure artist-feature artist-feature-compact\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/artists/little-richard.webp\" alt=\"Little Richard — 1950s career and music archive\"><figcaption>Little Richard: career, recordings and musical identity in the 1950s.</figcaption></figure>\n<div class=\"artist-intro-copy\"><div class=\"kicker\">MEET THE ARTIST</div><p class=\"lead\">With thunderous piano, a voice rising into screams and boundless stage energy, Little Richard became one of the 1950s’ most disruptive figures. He brought gospel’s intense emotion and call-and-response structures into rock ’n’ roll’s explosive rhythm.</p><p>Little Richard’s influence reaches beyond his hit recordings to the possibilities he opened for how a rock star could look and behave. His flamboyant personality, theatricality and unruly energy shaped later rock, soul and glam culture.</p></div>\n</div>\n<aside class=\"artist-editorial-intro\"><div class=\"kicker\">AN INTRODUCTION FROM OLDIES RADYO</div><p>When Little Richard took the microphone, the song did more than start: the room changed. His attacking piano, gospel-derived cries and extravagant stage personality showed how rock ’n’ roll could be a form of liberation as well as music.</p></aside>\n<section class=\"article-section\"><h2>Where did the sound come from?</h2><p>Richard Wayne Penniman grew up in a large, religious family in Macon, Georgia. Pentecostal church traditions, gospel soloists’ cries and the theatrical language of travelling shows came together early in his personality. Sister Rosetta Tharpe inviting him on stage as a teenager was one of his first powerful encounters with professional music.</p><p>His first records stayed within blues and R&amp;B conventions. The breakthrough came during a 1955 Specialty Records session in New Orleans. On a break, producer Bumps Blackwell found the energy he wanted in the club song “Tutti Frutti,” which Richard performed at the piano. The lyrics were reshaped for radio, but the performance’s fire remained.</p></section>\n<section class=\"article-section\"><h2>The years that changed the course</h2><p>“Tutti Frutti,” “Long Tall Sally,” “Rip It Up,” “Lucille,” “Good Golly, Miss Molly” and “Keep A-Knockin’” followed in quick succession. New Orleans studio musicians, particularly drummer Earl Palmer and saxophonist Lee Allen, were crucial to the records’ force. Richard’s piano attacks worked as part of the rhythm section, while his voice pushed at the recording’s limits.</p><p>In 1957, he said he had experienced a religious crisis while touring and left rock ’n’ roll for gospel, bringing the first period to an abrupt close. The decision interrupted his commercial momentum, but those few years of recordings had already become foundational works of the genre.</p></section>\n<section class=\"article-section\"><h2>What made the sound instantly recognisable?</h2><p>Little Richard’s voice joined a gospel preacher’s mounting fervour to blues shouting and rhythm and blues’ dance pulse. The famous nonsense opening of “Tutti Frutti” creates a physical explosion more than a literal meaning. Falsetto leaps, screams and rhythmic accents are inseparable from the melody.</p><p>The pompadour, make-up, bright clothes and theatrical identity that challenged gender conventions were radical in the conservative 1950s. They opened the way for much of the visual daring later associated with soul, glam rock, funk and pop stardom.</p></section>\n<section class=\"article-section\"><h2>The world behind the stage</h2><p>White artists’ softer covers carrying Little Richard’s songs into the pop market reveal the decade’s racial music economy. The raw force of the original recordings left a lasting mark on young listeners and musicians.</p><p>His influence, stretching from Paul McCartney and James Brown to Otis Redding, David Bowie and Prince, lies in the idea of the stage as a space of freedom, as well as in vocal technique.</p></section>\n<section class=\"article-section\"><h2>Turning points</h2><p>The 1955 New Orleans sessions for Specialty Records transformed Little Richard’s career. The studio reshaping of “Tutti Frutti,” followed by “Long Tall Sally,” “Rip It Up,” “Ready Teddy” and “Lucille,” made him one of rock ’n’ roll’s most recognisable voices within a few years. The rise rested on his make-up, towering hair, brilliant clothes and convention-challenging stage presence as well as powerful hits. His abrupt departure for religious life in 1957 kept that first period short, but it left an extraordinarily concentrated legacy for subsequent decades of stage performance.</p></section><section class=\"article-section artist-highlight-section\"><h2>Inside the studio</h2><p>Richard Penniman’s recorded sound was built with outstanding New Orleans R&amp;B musicians. Earl Palmer’s drums, Lee Allen’s tenor saxophone, Alvin Tyler’s baritone saxophone and Richard’s boogie-based piano turned each record into a small explosion. The vocal screams were extensions of gospel preaching, sacred call-and-response and blues shouting under tight control. Specialty’s Art Rupe and arranger Bumps Blackwell compressed his stage energy into the two- or three-minute 45 rpm single. For all its ferocity, the result was highly organised, with carefully placed pauses and surges.</p></section><section class=\"article-section\"><h2>Who carried the influence forward?</h2><p>Little Richard showed that sound and image could not be treated separately in rock. James Brown, Otis Redding, the Beatles, the Rolling Stones, David Bowie, Prince and many others drew on his vocal attack, flamboyant identity or freedom on stage. A Black Southerner who openly defied prevailing norms entering mainstream culture was transformative in itself. His repeated insistence that his contribution had long been underestimated also kept him central to debates about race, royalties and visibility in rock history.</p></section>\n<aside class=\"artist-listening-note\"><div class=\"kicker\">AN OLDIES RADYO LISTENING NOTE</div><h2>Getting to know Little Richard</h2><p>Begin with <strong>“Tutti Frutti”</strong>, a founding record in which piano, voice and rhythm explode together. Continue with <strong>“Rip It Up”</strong> for another shade of his career. Finally, <strong>“Good Golly, Miss Molly”</strong> shows where this 1950s listening route leads.</p><p class=\"artist-listening-note-small\">The aim is to hear how the voice, interpretation and artistic personality changed over time, rather than rush through a list of hits.</p></aside><section class=\"artist-recordings\"><div class=\"kicker\">SELECTED RECORDINGS</div><h2>A listening guide to the 1950s</h2><p class=\"track-intro\">This is a listening guide rather than a greatest-hits ranking, with starting points chosen to trace the artist’s development, range and place in music history across the decade.</p><div class=\"recording-list\">\n<article class=\"recording-item\"><span>1955</span><div><h3>Tutti Frutti</h3><p>A founding record in which piano, voice and rhythm explode together.</p></div></article><article class=\"recording-item\"><span>1956</span><div><h3>Long Tall Sally</h3><p>A masterful combination of speed, densely packed lyrics and vocal control.</p></div></article><article class=\"recording-item\"><span>1956</span><div><h3>Rip It Up</h3><p>A celebration of teenage weekend freedom, with a powerful backbeat.</p></div></article><article class=\"recording-item\"><span>1957</span><div><h3>Lucille</h3><p>Its heavier riff and dramatic vocal call point towards later hard rock.</p></div></article><article class=\"recording-item\"><span>1958</span><div><h3>Good Golly, Miss Molly</h3><p>A hit that brings Little Richard’s stage energy directly into the studio.</p></div></article></div></section>\n\n<section class=\"article-section artist-legacy\"><h2>The legacy in music history</h2><p>He expanded rock ’n’ roll’s possibilities through sound, image and courage on stage.</p><p>The identity Little Richard established in the 1950s lived on through later reinterpretations of his repertoire, imitations of his stage approach and direct influences on musicians. Oldies Radyo approaches him here as a creative participant in the transformation of popular music, as well as a familiar figure from its past.</p></section>\n\n<div class=\"article-sources\"><div class=\"kicker\">SOURCES AND ARCHIVES</div><ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://rockhall.com/inductees/little-richard/\">Rock &amp; Roll Hall of Fame – Little Richard</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.si.edu/spotlight/african-american-music\">Smithsonian – African American Music</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://rockhall.com/inductees/art-rupe/\">Art Rupe / Specialty Records – Rock Hall</a></li></ul><p class=\"source-note\">The original Oldies Radyo feature was researched and written by comparing international institutional sources and archives. This English translation retains its source references.</p></div>\n\n<div class=\"next-links\"><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/\"><div class=\"card-body\"><h3>All artists</h3><p>Return to the rock ’n’ roll, R&amp;B, country, gospel, jazz and pop worlds of the 1950s.</p></div></a><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/1950s-music-styles/\"><div class=\"card-body\"><h3>1950s music styles</h3><p>Explore the artist’s historical and musical setting in greater detail.</p></div></a></div>\n</article></section></div>\n\n<!-- /wp:html -->",
+      "featured_media": 4570
+    },
+    {
+      "tr_id": 615,
+      "en_id": 1747,
+      "title": "Fats Domino in the 1950s",
+      "slug": null,
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-615.html",
+      "excerpt": "Fats Domino in the 1950s: New Orleans R&B, Dave Bartholomew, Blueberry Hill and the piano-led sound that helped shape rock ’n’ roll.",
+      "meta": {
+        "jetpack_seo_html_title": "Fats Domino in the 1950s | Oldies Radyo",
+        "advanced_seo_description": "Fats Domino in the 1950s: New Orleans R&B, Dave Bartholomew, Blueberry Hill and the piano-led sound that helped shape rock ’n’ roll."
+      },
+      "source_words": 901,
+      "english_words": 1046,
+      "source_paragraphs": 27,
+      "translated_paragraphs": 27,
+      "images": 1,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/",
+        "https://oldiesradyo.com/en/1950s/1950s-music-styles/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"artist-dossier-page oldies-en-translated\">\n<section class=\"page-hero artist-hero\"><div class=\"wrap\"><div class=\"kicker\">1950s • ARTIST FEATURE</div><h2>Fats Domino</h2><p class=\"intro\">New Orleans R&amp;B</p></div></section>\n<section><article class=\"wrap article narrow artist-dossier\">\n<div class=\"artist-intro-layout\">\n<figure class=\"editorial-figure artist-feature artist-feature-compact\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/artists/fats-domino.webp\" alt=\"Fats Domino — 1950s career and music archive\"><figcaption>Fats Domino: career, recordings and musical identity in the 1950s.</figcaption></figure>\n<div class=\"artist-intro-copy\"><div class=\"kicker\">MEET THE ARTIST</div><p class=\"lead\">Fats Domino brought New Orleans rhythm and blues’ warm piano patterns and relaxed vocals to a broad audience. As rock ’n’ roll rose under a new name, he showed that his sound was already one of its foundations.</p><p>His boogie-woogie piano, strong but supple rhythm and engaging stage personality reached both R&amp;B and pop listeners. His success also demonstrated that rock ’n’ roll was more than a guitar-centred music.</p></div>\n</div>\n<aside class=\"artist-editorial-intro\"><div class=\"kicker\">AN INTRODUCTION FROM OLDIES RADYO</div><p>In Fats Domino’s music, the revolution arrives through a rolling piano and a smile that appears on your face, rather than sheer noise. He carried New Orleans rhythm into millions of homes without needing to harden his voice or pretend to be somebody else.</p></aside>\n<section class=\"article-section\"><h2>Where did the sound come from?</h2><p>Antoine “Fats” Domino grew up in New Orleans’s working-class Creole community and began playing piano young. The city’s Professor Longhair, Champion Jack Dupree and boogie-woogie traditions shaped his left-hand rhythm. His partnership with trumpeter and producer Dave Bartholomew began in 1949 and became one of popular music’s most productive teams throughout the 1950s.</p><p>His first major record, “The Fat Man,” was released late in 1949 and became a substantial R&amp;B success in 1950. Its heavy backbeat, rolling piano and Domino’s warm voice make it a foundational example of early rock ’n’ roll.</p></section>\n<section class=\"article-section\"><h2>The years that changed the course</h2><p>Domino was a regular presence on the R&amp;B charts in the first half of the 1950s. “Ain’t That a Shame” crossing into the pop market in 1955, followed by “I’m in Love Again,” “Blueberry Hill,” “Blue Monday” and “I’m Walkin’,” made him one of the period’s biggest-selling recording artists.</p><p>Although Pat Boone’s cover of “Ain’t That a Shame” rose more quickly on white pop radio, Domino’s original remained the enduring interpretation. His calm personality and smiling stage presence brought the music’s powerful rhythm to large audiences without presenting it as threatening.</p></section>\n<section class=\"article-section\"><h2>What made the sound instantly recognisable?</h2><p>Domino’s piano rests on New Orleans’s triplet-based rhythmic feel. His left hand sets a steady walking pattern while the right supplies short melodic responses. Combined with drums and saxophones, this approach became familiar in later rock ballads and New Orleans R&amp;B.</p><p>A French-Creole accent, a trace of sadness and an unhurried delivery make his voice immediately recognisable. Domino showed that rhythm could be powerful without shouting, and that rock ’n’ roll had a warm, melodic face.</p></section>\n<section class=\"article-section\"><h2>The world behind the stage</h2><p>Fats Domino deserves a central place in accounts of rock ’n’ roll that are sometimes drawn too narrowly. His sustained chart success in the 1950s showed a Black New Orleans artist translating a regional style into an international pop language.</p></section>\n<section class=\"article-section\"><h2>Turning points</h2><p>Domino’s rise began with “The Fat Man,” recorded with Dave Bartholomew in 1949. Its major success in 1950 signalled New Orleans R&amp;B’s entry into a new era. During the Imperial Records years, they established remarkable consistency through “Ain’t That a Shame,” “I’m in Love Again,” “Blueberry Hill,” “Blue Monday” and “I’m Walkin’.” His success showed that the rock ’n’ roll explosion was more than a sudden, temporary teenage fashion: a language developed over years in postwar R&amp;B had become nationally visible. His quiet personality also offered a different kind of durability from the decade’s scandal-driven narratives of stardom.</p></section><section class=\"article-section artist-highlight-section\"><h2>Inside the studio</h2><p>His recordings are built on the subtleties of New Orleans rhythm. Repeated left-hand boogie figures, right-hand triplets, Earl Palmer’s emphasis on the second and fourth beats, short saxophone responses and Domino’s lightly Creole-accented voice work together. Cosimo Matassa’s J&amp;M studio, with its small room and live recording approach, was one of the sound’s centres. Bartholomew was not just a producer but a songwriter, trumpeter, arranger and musical partner. Their work is an early, successful example of a lasting creative partnership between artist and producer.</p></section><section class=\"article-section\"><h2>Who carried the influence forward?</h2><p>Domino’s records, heard by millions, played a fundamental part in Black R&amp;B crossing into the pop market. The Beatles and other British musicians added his songs to their repertoire, while Jamaican ska and early reggae pianists absorbed New Orleans patterns. His legacy also shows why rock history cannot be explained through aggressive rebellion alone. Joy, community and an easy invitation to dance were as foundational as shocking stage gestures.</p></section>\n<aside class=\"artist-listening-note\"><div class=\"kicker\">AN OLDIES RADYO LISTENING NOTE</div><h2>Getting to know Fats Domino</h2><p>Begin with <strong>“The Fat Man”</strong>, a defining record in New Orleans R&amp;B’s transformation into early rock ’n’ roll. Continue with <strong>“Blueberry Hill”</strong> for another shade of his career. Finally, <strong>“I’m Walkin’”</strong> shows where this 1950s listening route leads.</p><p class=\"artist-listening-note-small\">The aim is to hear how the voice, interpretation and artistic personality changed over time, rather than rush through a list of hits.</p></aside><section class=\"artist-recordings\"><div class=\"kicker\">SELECTED RECORDINGS</div><h2>A listening guide to the 1950s</h2><p class=\"track-intro\">This is a listening guide rather than a greatest-hits ranking, with starting points chosen to trace the artist’s development, range and place in music history across the decade.</p><div class=\"recording-list\">\n<article class=\"recording-item\"><span>1949/1950</span><div><h3>The Fat Man</h3><p>A defining record in New Orleans R&amp;B’s transformation into early rock ’n’ roll.</p></div></article><article class=\"recording-item\"><span>1955</span><div><h3>Ain’t That a Shame</h3><p>An emblem of the major move from R&amp;B into the pop market.</p></div></article><article class=\"recording-item\"><span>1956</span><div><h3>Blueberry Hill</h3><p>An old standard becomes Domino’s personal, timeless interpretation.</p></div></article><article class=\"recording-item\"><span>1956</span><div><h3>Blue Monday</h3><p>The working week’s fatigue, told through New Orleans rhythm.</p></div></article><article class=\"recording-item\"><span>1957</span><div><h3>I’m Walkin’</h3><p>A harder, faster and more stripped-down rock ’n’ roll performance.</p></div></article></div></section>\n\n<section class=\"article-section artist-legacy\"><h2>The legacy in music history</h2><p>He made piano one of rock ’n’ roll’s central instruments.</p><p>The identity Fats Domino established in the 1950s lived on through later reinterpretations of his repertoire, imitations of his stage approach and direct influences on musicians. Oldies Radyo approaches him here as a creative participant in the transformation of popular music, as well as a familiar figure from its past.</p></section>\n\n<div class=\"article-sources\"><div class=\"kicker\">SOURCES AND ARCHIVES</div><ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://rockhall.com/inductees/fats-domino/\">Rock &amp; Roll Hall of Fame – Fats Domino</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://folklife.si.edu/magazine/freedom-sounds-tell-it-like-it-is-a-history-of-rhythm-and-blues\">Smithsonian — history of rhythm and blues</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://timeline.carnegiehall.org/genres/rhythm-blues\">Carnegie Hall — rhythm and blues timeline</a></li></ul><p class=\"source-note\">The original Oldies Radyo feature was researched and written by comparing international institutional sources and archives. This English translation retains its source references.</p></div>\n\n<div class=\"next-links\"><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/\"><div class=\"card-body\"><h3>All artists</h3><p>Return to the rock ’n’ roll, R&amp;B, country, gospel, jazz and pop worlds of the 1950s.</p></div></a><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/1950s-music-styles/\"><div class=\"card-body\"><h3>1950s music styles</h3><p>Explore the artist’s historical and musical setting in greater detail.</p></div></a></div>\n</article></section></div>\n\n<!-- /wp:html -->",
+      "featured_media": 4571
+    },
+    {
+      "tr_id": 617,
+      "en_id": 1749,
+      "title": "Buddy Holly in the 1950s",
+      "slug": null,
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-617.html",
+      "excerpt": "Buddy Holly in the 1950s: the Crickets, Norman Petty, That’ll Be the Day and the songwriting and studio approach that helped shape the modern rock band.",
+      "meta": {
+        "jetpack_seo_html_title": "Buddy Holly in the 1950s | Oldies Radyo",
+        "advanced_seo_description": "Buddy Holly in the 1950s: the Crickets, Norman Petty, That’ll Be the Day and the songwriting and studio approach that helped shape the modern rock band."
+      },
+      "source_words": 868,
+      "english_words": 1013,
+      "source_paragraphs": 27,
+      "translated_paragraphs": 27,
+      "images": 1,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/",
+        "https://oldiesradyo.com/en/1950s/1950s-music-styles/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"artist-dossier-page oldies-en-translated\">\n<section class=\"page-hero artist-hero\"><div class=\"wrap\"><div class=\"kicker\">1950s • ARTIST FEATURE</div><h2>Buddy Holly</h2><p class=\"intro\">Rock ’n’ Roll / Songwriter</p></div></section>\n<section><article class=\"wrap article narrow artist-dossier\">\n<div class=\"artist-intro-layout\">\n<figure class=\"editorial-figure artist-feature artist-feature-compact\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/artists/buddy-holly.webp\" alt=\"Buddy Holly — 1950s career and music archive\"><figcaption>Buddy Holly: career, recordings and musical identity in the 1950s.</figcaption></figure>\n<div class=\"artist-intro-copy\"><div class=\"kicker\">MEET THE ARTIST</div><p class=\"lead\">As a young musician writing his own songs, playing guitar and working within a band, Buddy Holly helped establish the modern rock-group model. Despite a short career, his melodic sensitivity and studio approach had an enormous influence.</p><p>The structure he developed with the Crickets became a direct example for later British and American bands. His plain appearance, intimate singing and innovative recording techniques showed that a rock star could be more than a rebel.</p></div>\n</div>\n<aside class=\"artist-editorial-intro\"><div class=\"kicker\">AN INTRODUCTION FROM OLDIES RADYO</div><p>The most striking thing about Buddy Holly’s story is how much influence he packed into a few intense years. This bespectacled, quietly unassuming young musician was an early major example of the modern bandleader who wrote songs, played guitar and thought carefully about constructing sound in the studio.</p></aside>\n<section class=\"article-section\"><h2>Where did the sound come from?</h2><p>Charles Hardin Holley grew up in Lubbock, Texas, surrounded by country, bluegrass and gospel. With his childhood friend Bob Montgomery, he performed country duets on local radio. Seeing Elvis Presley live in 1955 redirected Holly’s ideas about rhythm and performance towards rock ’n’ roll.</p><p>His first Nashville recordings for Decca did not fully express his personality. The definitive version of “That’ll Be the Day” emerged when he began working more freely with the Crickets at producer Norman Petty’s studio in Clovis, New Mexico.</p></section>\n<section class=\"article-section\"><h2>The years that changed the course</h2><p>In 1957, “That’ll Be the Day” delivered the breakthrough associated with both the band’s identity and Holly’s solo career. “Peggy Sue,” “Oh, Boy!,” “Maybe Baby” and “Rave On” followed quickly. Singing his own compositions, playing guitar and maintaining a recognisable group identity offered a direct model for later rock bands.</p><p>His move to New York in 1958 and experiments with strings and instruments such as the celesta showed that Holly wanted to move beyond rockabilly conventions. The plane crash on 3 February 1959 cut that development short.</p></section>\n<section class=\"article-section\"><h2>What made the sound instantly recognisable?</h2><p>Holly’s clean, Stratocaster-centred guitar tone, rhythmic chords and short solos became fundamental tools of modern pop-rock arrangements. His hiccup-like vocal accents and slight vulnerability expressed a youthful intimacy different from more imposing stage styles.</p><p>Overdubbing, echo and unusual instruments at Norman Petty’s studio helped the recordings move beyond small-group limitations. The Crickets’ influence on the Beatles’ name shows that the impact reached beyond the music itself.</p></section>\n<section class=\"article-section\"><h2>The world behind the stage</h2><p>Buddy Holly moved the 1950s rock star beyond the pattern of a rebellious body and a huge voice. His glasses, slender frame and songwriting identity showed that an ordinary-looking young person could take centre stage with his own songs.</p></section>\n<section class=\"article-section\"><h2>Turning points</h2><p>Holly’s initial Decca sessions in Nashville did not quite give him the sound he wanted. The real change came when he began working with the Crickets at Norman Petty’s Clovis studio. “That’ll Be the Day” succeeded in 1957; “Peggy Sue,” “Oh, Boy!,” “Maybe Baby” and “Rave On” soon established him among his generation’s leading songwriters. Records issued under his own name and the Crickets’ name through different label arrangements also reflected the period’s contractual complexities. The move to New York in 1958 pointed towards wider ambitions in orchestration and production, tragically interrupted by the 1959 plane crash.</p></section><section class=\"article-section artist-highlight-section\"><h2>Inside the studio</h2><p>Holly’s studio work shows how small details can transform a pop record. Jerry Allison’s dynamic drum effect on “Peggy Sue,” layered guitars, celesta, doubled vocals and a relaxed, almost home-studio atmosphere were innovative for the time. His Fender Stratocaster also made a strong visual impression on young guitarists. His songs often contain melodic turns beyond a simple three-chord formula, while the stuttering vocal accents turn vulnerability into a rhythmic signature.</p></section><section class=\"article-section\"><h2>Who carried the influence forward?</h2><p>British beat groups drew directly on Holly and the Crickets, including their influence on the Beatles’ name and the two-guitars, bass-and-drums format. Bob Dylan recalled seeing him perform, and the Rolling Stones secured an early hit with “Not Fade Away.” Holly’s enduring model was the young musician who wrote songs, played an instrument, participated in studio decisions and built a band identity. That model helped open the way to the songwriting groups of the 1960s.</p></section>\n<aside class=\"artist-listening-note\"><div class=\"kicker\">AN OLDIES RADYO LISTENING NOTE</div><h2>Getting to know Buddy Holly</h2><p>Begin with <strong>“That’ll Be the Day”</strong>, the breakthrough that introduced the Crickets’ model internationally. Continue with <strong>“Oh, Boy!”</strong> for another shade of his career. Finally, <strong>“It Doesn’t Matter Anymore”</strong> shows where this 1950s listening route leads.</p><p class=\"artist-listening-note-small\">The aim is to hear how the voice, interpretation and artistic personality changed over time, rather than rush through a list of hits.</p></aside><section class=\"artist-recordings\"><div class=\"kicker\">SELECTED RECORDINGS</div><h2>A listening guide to the 1950s</h2><p class=\"track-intro\">This is a listening guide rather than a greatest-hits ranking, with starting points chosen to trace the artist’s development, range and place in music history across the decade.</p><div class=\"recording-list\">\n<article class=\"recording-item\"><span>1957</span><div><h3>That’ll Be the Day</h3><p>The breakthrough that introduced the Crickets’ model internationally.</p></div></article><article class=\"recording-item\"><span>1957</span><div><h3>Peggy Sue</h3><p>A demonstration of studio ingenuity through drum dynamics and vocal accents.</p></div></article><article class=\"recording-item\"><span>1957</span><div><h3>Oh, Boy!</h3><p>A balanced meeting of country harmony and rock tempo.</p></div></article><article class=\"recording-item\"><span>1958</span><div><h3>Rave On</h3><p>Brief, exuberant, melodic rock ’n’ roll.</p></div></article><article class=\"recording-item\"><span>1959</span><div><h3>It Doesn’t Matter Anymore</h3><p>The string arrangement reveals Holly’s expanding pop ambitions.</p></div></article></div></section>\n\n<section class=\"article-section artist-legacy\"><h2>The legacy in music history</h2><p>He brought the roles of songwriter, guitarist and bandleader together.</p><p>The identity Buddy Holly established in the 1950s lived on through later reinterpretations of his repertoire, imitations of his stage approach and direct influences on musicians. Oldies Radyo approaches him here as a creative participant in the transformation of popular music, as well as a familiar figure from its past.</p></section>\n\n<div class=\"article-sources\"><div class=\"kicker\">SOURCES AND ARCHIVES</div><ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://rockhall.com/inductees/buddy-holly/\">Rock &amp; Roll Hall of Fame – Buddy Holly</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://ci.lubbock.tx.us/departments/buddy-holly-center\">Buddy Holly Center – City of Lubbock</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.loc.gov/programs/national-recording-preservation-board/recording-registry/\">Library of Congress – National Recording Registry</a></li></ul><p class=\"source-note\">The original Oldies Radyo feature was researched and written by comparing international institutional sources and archives. This English translation retains its source references.</p></div>\n\n<div class=\"next-links\"><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/\"><div class=\"card-body\"><h3>All artists</h3><p>Return to the rock ’n’ roll, R&amp;B, country, gospel, jazz and pop worlds of the 1950s.</p></div></a><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/1950s-music-styles/\"><div class=\"card-body\"><h3>1950s music styles</h3><p>Explore the artist’s historical and musical setting in greater detail.</p></div></a></div>\n</article></section></div>\n\n<!-- /wp:html -->",
+      "featured_media": 4572
+    },
+    {
+      "tr_id": 776,
+      "en_id": 1771,
+      "title": "Jerry Lee Lewis in the 1950s",
+      "slug": null,
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-776.html",
+      "excerpt": "Jerry Lee Lewis in the 1950s: Sun Records, Great Balls of Fire, explosive piano performance and the controversy that interrupted his early career.",
+      "meta": {
+        "jetpack_seo_html_title": "Jerry Lee Lewis in the 1950s | Oldies Radyo",
+        "advanced_seo_description": "Jerry Lee Lewis in the 1950s: Sun Records, Great Balls of Fire, explosive piano performance and the controversy that interrupted his early career."
+      },
+      "source_words": 846,
+      "english_words": 979,
+      "source_paragraphs": 26,
+      "translated_paragraphs": 26,
+      "images": 1,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/",
+        "https://oldiesradyo.com/en/1950s/1950s-music-styles/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"artist-dossier-page oldies-en-translated\">\n<section class=\"page-hero artist-hero\"><div class=\"wrap\"><div class=\"kicker\">1950s • ARTIST FEATURE</div><h2>Jerry Lee Lewis</h2><p class=\"intro\">Rock ’n’ Roll / Piano</p></div></section>\n<section><article class=\"wrap article narrow artist-dossier\">\n<div class=\"artist-intro-layout\">\n<figure class=\"editorial-figure artist-feature artist-feature-compact\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/artists/jerry-lee-lewis.webp\" alt=\"Jerry Lee Lewis — 1950s career and music archive\"><figcaption>Jerry Lee Lewis: career, recordings and musical identity in the 1950s.</figcaption></figure>\n<div class=\"artist-intro-copy\"><div class=\"kicker\">MEET THE ARTIST</div><p class=\"lead\">Using piano like a percussion instrument, Jerry Lee Lewis became one of rock ’n’ roll’s most uninhibited and theatrical performers.</p><p>His Sun Records recordings transformed country, gospel and boogie-woogie influences into performances under high tension. “Whole Lotta Shakin’ Goin’ On” and “Great Balls of Fire” sum up that explosive style.</p></div>\n</div>\n<aside class=\"artist-editorial-intro\"><div class=\"kicker\">AN INTRODUCTION FROM OLDIES RADYO</div><p>Jerry Lee Lewis’s piano becomes the song’s fighting, laughing, blazing leading character, far removed from an instrument to be heard politely from a chair. His music’s overflowing energy and the personal decisions that overshadowed his career each deserve discussion on their own terms.</p></aside>\n<section class=\"article-section\"><h2>Where did the sound come from?</h2><p>Lewis grew up in Ferriday, Louisiana. His family encouraged his piano talent; church music, country, boogie-woogie and rhythms heard in the area’s Black juke joints came together in his playing. A brief spell at a religious school did not resolve the tension between sacred music and secular repertoire that stayed with him.</p><p>In 1956 he went to Memphis to audition for Sun Records. His first record, “Crazy Arms,” attracted attention. That year’s informal Million Dollar Quartet session with Elvis Presley, Carl Perkins and Johnny Cash documented the concentration of talent around Sun.</p></section>\n<section class=\"article-section\"><h2>The years that changed the course</h2><p>“Whole Lotta Shakin’ Goin’ On” became a major hit in 1957, helped by television performances. “Great Balls of Fire,” “Breathless” and “High School Confidential” made Lewis one of piano-led rock ’n’ roll’s biggest stars.</p><p>During his 1958 British tour, the revelation of his marriage to his 13-year-old cousin, Myra Gale Brown, caused a major scandal. The tour was cancelled and access to radio and concert stages narrowed severely. Lewis continued recording but lost his mainstream momentum at the decade’s end.</p></section>\n<section class=\"article-section\"><h2>What made the sound instantly recognisable?</h2><p>His left hand drives boogie-woogie bass patterns and hard chords, while the right creates gospel-like broken arpeggios, glissandos and percussive attacks. The piano became the physical centre of a stage spectacle, an instrument he could play standing over it.</p><p>A country nasal tone, a preacher’s rising intensity and an ironic ease coexist in his voice. Many of the songs carry a tension between control and excess, the same boundary on which his stage personality lived.</p></section>\n<section class=\"article-section\"><h2>The world behind the stage</h2><p>Lewis’s story reveals a clash between rock ’n’ roll’s liberating energy and the 1950s’ moral and media boundaries. His musical innovations warrant their own assessment, alongside critical scrutiny of the inequalities of age and power in his private life.</p></section>\n<section class=\"article-section\"><h2>Turning points</h2><p>Lewis arrived in Memphis from Louisiana’s gospel, country and boogie-woogie world to audition for Sun. After participating in Carl Perkins’s “Matchbox” session and the Million Dollar Quartet gathering, he broke through in 1957 with “Whole Lotta Shakin’ Goin’ On” and “Great Balls of Fire.” Playing standing up, pushing away the stool and sometimes using his foot made the piano central to the stage show. The disclosure of his marriage to his young cousin during the 1958 British tour caused an international scandal, cancelled concerts and seriously damaged his pop career.</p></section><section class=\"article-section artist-highlight-section\"><h2>Inside the studio</h2><p>His piano language joins left-hand boogie bass and right-hand gospel chords through aggressive repetition. Sun’s spare studio sound, J. M. Van Eaton’s drums and Roland Janes’s guitar gave the piano room. His voice moves between speech, laughter, screams and melodic singing. The internal conflict between religious training and secular songs could be heard even in sessions, lending recordings such as “Great Balls of Fire” both humour and a sense of danger.</p></section><section class=\"article-section\"><h2>Who carried the influence forward?</h2><p>Assessing Lewis’s 1950s legacy requires acknowledging both musical innovation and the controversy surrounding his conduct. He established a powerful model of piano-centred rock performance that influenced Elton John, Leon Russell and many others. His marriage to a child and later allegations of violence also demand a critical approach to romanticised accounts of rock legends. The music’s energy endures, but a historical account should keep the ethical questions in view.</p></section>\n<aside class=\"artist-listening-note\"><div class=\"kicker\">AN OLDIES RADYO LISTENING NOTE</div><h2>Getting to know Jerry Lee Lewis</h2><p>Begin with <strong>“Whole Lotta Shakin’ Goin’ On”</strong>, the great explosion of piano-led rock ’n’ roll. Continue with <strong>“Great Balls of Fire”</strong> for another shade of his career. Finally, <strong>“High School Confidential”</strong> shows where this 1950s listening route leads.</p><p class=\"artist-listening-note-small\">The aim is to hear how the voice, interpretation and artistic personality changed over time, rather than rush through a list of hits.</p></aside><section class=\"artist-recordings\"><div class=\"kicker\">SELECTED RECORDINGS</div><h2>A listening guide to the 1950s</h2><p class=\"track-intro\">This is a listening guide rather than a greatest-hits ranking, with starting points chosen to trace the artist’s development, range and place in music history across the decade.</p><div class=\"recording-list\">\n<article class=\"recording-item\"><span>1957</span><div><h3>Whole Lotta Shakin’ Goin’ On</h3><p>The great explosion of piano-led rock ’n’ roll.</p></div></article><article class=\"recording-item\"><span>1957</span><div><h3>Great Balls of Fire</h3><p>Gospel chords, sexual energy and a concise pop form brought together.</p></div></article><article class=\"recording-item\"><span>1958</span><div><h3>Breathless</h3><p>Relentlessly advancing rhythm and vocal tension.</p></div></article><article class=\"recording-item\"><span>1958</span><div><h3>High School Confidential</h3><p>A hard-driving piano classic for film and the teenage market.</p></div></article></div></section>\n\n<section class=\"article-section artist-legacy\"><h2>The legacy in music history</h2><p>He radically changed the limits of a rock pianist’s stage performance.</p><p>The identity Jerry Lee Lewis established in the 1950s lived on through later reinterpretations of his repertoire, imitations of his stage approach and direct influences on musicians. Oldies Radyo approaches him here as a creative participant in the transformation of popular music, as well as a familiar figure from its past.</p></section>\n\n<div class=\"article-sources\"><div class=\"kicker\">SOURCES AND ARCHIVES</div><ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://rockhall.com/inductees/jerry-lee-lewis/\">Rock &amp; Roll Hall of Fame – Jerry Lee Lewis</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://sunrecords.com/artists/jerry-lee-lewis/\">Sun Records – Jerry Lee Lewis</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.britannica.com/biography/Jerry-Lee-Lewis\">Britannica – Jerry Lee Lewis</a></li></ul><p class=\"source-note\">The original Oldies Radyo feature was researched and written by comparing international institutional sources and archives. This English translation retains its source references.</p></div>\n\n<div class=\"next-links\"><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/leading-artists-of-the-1950s/\"><div class=\"card-body\"><h3>All artists</h3><p>Return to the rock ’n’ roll, R&amp;B, country, gospel, jazz and pop worlds of the 1950s.</p></div></a><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1950s/1950s-music-styles/\"><div class=\"card-body\"><h3>1950s music styles</h3><p>Explore the artist’s historical and musical setting in greater detail.</p></div></a></div>\n</article></section></div>\n\n<!-- /wp:html -->",
+      "featured_media": 4573
+    },
+    {
+      "tr_id": 3518,
+      "en_id": 2454,
+      "title": "Kim Wilde in the 1980s",
+      "slug": null,
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-3518.html",
+      "excerpt": "Kim Wilde in the 1980s: Kids in America, darker synth-pop, Another Step and her evolving pop identity, with albums, songs and archive sources.",
+      "meta": {
+        "jetpack_seo_html_title": "Kim Wilde in the 1980s | Oldies Radyo",
+        "advanced_seo_description": "Kim Wilde in the 1980s: Kids in America, darker synth-pop, Another Step and her evolving pop identity, with albums, songs and archive sources."
+      },
+      "source_words": 616,
+      "english_words": 714,
+      "source_paragraphs": 17,
+      "translated_paragraphs": 17,
+      "images": 1,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1980s/1980s-artists/",
+        "https://oldiesradyo.com/en/1980s/billy-joel/",
+        "https://oldiesradyo.com/en/1980s/1980s-artists/",
+        "https://oldiesradyo.com/en/1980s/kylie-minogue/",
+        "https://oldiesradyo.com/en/1980s/1980s-artists/",
+        "https://oldiesradyo.com/en/1980s/1980s-music-styles/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"late-artist-profile-page oldies-en-translated\">\n <section class=\"page-hero late-artist-profile-hero has-artist-photo\">\n  <div class=\"wrap late-artist-profile-hero-grid\">\n   <div class=\"late-artist-hero-copy\">\n    <div class=\"kicker\">1980s • ARTIST CAREER FEATURE</div>\n    <h2>Kim Wilde</h2>\n    <h2>1980s career</h2>\n    <p class=\"intro\">Beginning with “Kids in America,” Kim Wilde brought new wave guitars into electronic pop. She built a consistently strong European chart repertoire while retaining a poised, self-contained stage presence.</p>\n   </div>\n      <figure class=\"late-artist-hero-photo\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/late-artists/1980/kim-wilde.webp\" alt=\"Kim Wilde — 1980s career and music archive\" loading=\"eager\" fetchpriority=\"high\" style=\"object-position:center 20%\"></figure>\n     </div>\n </section>\n  <div class=\"late-artist-photo-credit\"><div class=\"wrap\">Photo: <a target=\"_blank\" rel=\"noopener\" href=\"https://commons.wikimedia.org/wiki/File:2018_Kim_Wilde_-_by_2eight_-_DSC2323.jpg\">Stefan Brending (2eight) — Kim Wilde, 2018</a> <span>• CC BY-SA 3.0 DE • Resized and compressed for the web.</span></div></div>\n  <section>\n  <article class=\"wrap article narrow late-artist-dossier\">\n   <nav class=\"artist-profile-meta\" aria-label=\"Dosya bilgileri\">\n    <span>1980–1989</span>\n    <span>Pop, songwriting and international charts</span>\n    <a href=\"https://oldiesradyo.com/en/1980s/1980s-artists/\">All 1980s artists</a>\n   </nav>\n\n   <nav class=\"artist-story-roadmap\" aria-label=\"Sanatçı hikâyesi anahtar noktaları\"><strong>Key points</strong><div><a href=\"#artist-story-1\">Background</a><a href=\"#artist-albums\">Albums</a><a href=\"#artist-story-3\">Songs</a><a href=\"#artist-story-4\">Stage</a><a href=\"#artist-story-5\">Legacy</a></div></nav>   <section class=\"artist-fact-panel\" id=\"artist-facts\" aria-label=\"Sanatçı dosyası kısa bilgileri\"><div class=\"kicker\">AT A GLANCE</div><div class=\"artist-fact-grid\"><div><span>Feature focus</span><strong>1980–1989</strong></div><div><span>Selected career years</span><strong>1981–1988 selection</strong></div><div><span>Musical setting</span><strong>Pop, songwriting and international charts</strong></div><div><span>Feature format</span><strong>Full-length feature</strong></div></div></section>\n      <section class=\"artist-story-sequence\"><div class=\"kicker\">THE STORY IN DETAIL</div><h2>Kim Wilde • 1980–1989</h2><section class=\"artist-story-chapter\" id=\"artist-story-1\"><span>01</span><div><h3>The beginning of the decade</h3><p>When Kim Wilde arrived with “Kids in America” in 1981, its opening synthesizer pulses announced a new British pop star almost instantly. Songwriting and production support from her father, Marty Wilde, and her brother, Ricky Wilde, gave her a formidable family creative team. But the cool, slightly detached voice at the centre of the record was Kim’s own. Looking at American youth culture from across the Atlantic, the song joined European new wave energy to an irresistible pop chorus.</p></div></section><section class=\"artist-story-chapter\" id=\"artist-story-2\"><span>02</span><div><h3>A changing album career</h3><p>“Chequered Love” and “Water on Glass,” both on her debut album, showed that Kim Wilde had more to offer than one enormous single. Ricky Wilde’s synthesizer and guitar arrangements created a sound that was sharp-edged yet melodic, while Kim conveyed youthful restlessness without overplaying the drama. Her black-and-white clothes and short blonde hair also suggested a simpler identity than the decade’s more flamboyant pop images.</p></div></section><section class=\"artist-story-chapter\" id=\"artist-story-3\"><span>03</span><div><h3>The world behind the songs</h3><p><em>Select</em> and <em>Catch as Catch Can</em> explored darker electronic colours. “Cambodia” placed the shadows of war and disappearance inside a cinematic synthesizer arrangement, while “View from a Bridge” foregrounded dramatic storytelling. These records showed how unexpectedly dark the Wilde family could make the atmosphere of a three-minute pop song.</p></div></section><section class=\"artist-story-chapter\" id=\"artist-story-4\"><span>04</span><div><h3>Performance, videos and turning points</h3><p>The 1986 album <em>Another Step</em> opened a second major international chapter. The Supremes classic “You Keep Me Hangin’ On” was rebuilt around hard electronic drums and forceful guitars. Kim’s more assertive vocal made it a hit belonging to the 1980s in its own right, rather than an exercise in nostalgia. The next album era, including “You Came” and “Never Trust a Stranger,” developed a more mature, glossy, dance-oriented pop sound.</p></div></section><section class=\"artist-story-chapter\" id=\"artist-story-5\"><span>05</span><div><h3>Why the legacy endures</h3><p>When Kim Wilde comes on Oldies Radyo, the opening seconds of “Kids in America” still carry that same charge of youthful electricity. Listen across the full repertoire, though, and darker stories, European synth-pop atmospheres and the growth of a commanding interpreter emerge as well. Her 1980s career reveals a pop journey that kept changing behind an instantly recognisable image, without ever losing its melodic instinct.</p></div></section></section>   <section class=\"artist-album-shelf\" id=\"artist-albums\"><div><div class=\"kicker\">ALBUMS</div><h2>Key albums in this feature</h2><p>This small album shelf helps you follow the records discussed in the story.</p></div><div class=\"artist-album-tags\"><span>Select</span><span>Catch as Catch Can</span><span>Another Step</span></div></section>   \n      <section class=\"artist-recordings late-artist-recordings\" id=\"artist-listening-route\">\n    <div class=\"kicker\">A SELECTED LISTENING ROUTE</div>\n    <h2>Starting points from the 1980s</h2>\n    <p class=\"track-intro\">This is a listening route rather than a greatest-hits ranking: a few starting points for hearing how the artist’s work developed across the decade.</p>\n    <div class=\"recording-list\">\n          <article class=\"recording-item\"><span>01</span><div><h3>Kids in America — 1981</h3><p>Kim Wilde — selections from her 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>02</span><div><h3>Chequered Love — 1981</h3><p>Kim Wilde — selections from her 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>03</span><div><h3>Cambodia — 1981</h3><p>Kim Wilde — selections from her 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>04</span><div><h3>View from a Bridge — 1982</h3><p>Kim Wilde — selections from her 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>05</span><div><h3>You Keep Me Hangin’ On — 1986</h3><p>Kim Wilde — selections from her 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>06</span><div><h3>You Came — 1988</h3><p>Kim Wilde — selections from her 1980–1989 career</p></div></article>\n         </div>\n   </section>\n   \n   <div class=\"article-sources\">\n    <div class=\"kicker\">SOURCES AND ARCHIVES</div>\n    <ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.kimwilde.com/\">Kim Wilde official website</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.wilde-life.com/encyclopedia/another-step/\">Wilde Life archive — Another Step</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.cherryred.co.uk/artist/kim-wilde/\">Cherry Red Records — Kim Wilde album archive</a></li></ul>\n    <p class=\"source-note\">The original Oldies Radyo feature draws on English Wikipedia (CC BY-SA) and international institutional archives, with the research translated and arranged around the decade. This English edition retains that source trail.</p>\n   </div>\n\n   <nav class=\"archive-sequence-nav\" aria-label=\"Arşivde önceki ve sonraki sayfalar\"><a class=\"archive-sequence-card\" href=\"https://oldiesradyo.com/en/1980s/billy-joel/\"><span>← Previous artist</span><strong>Billy Joel</strong><small>The preceding career feature in this decade</small></a><a class=\"archive-sequence-card\" href=\"https://oldiesradyo.com/en/1980s/1980s-artists/\"><span>Artist map</span><strong>All artists of the 1980s</strong><small>Return to the full decade artist list</small></a><a class=\"archive-sequence-card\" href=\"https://oldiesradyo.com/en/1980s/kylie-minogue/\"><span>Next artist →</span><strong>Kylie Minogue</strong><small>The next career feature in this decade</small></a></nav>\n   <div class=\"next-links\">\n    <a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1980s/1980s-artists/\"><div class=\"card-body\"><h3>All 1980s artists</h3><p>Return to the artist and band map.</p></div></a>\n    <a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1980s/1980s-music-styles/\"><div class=\"card-body\"><h3>1980s music styles</h3><p>Explore the musical scenes in which the artist worked.</p></div></a>\n   </div>\n  </article>\n </section>\n</div>\n\n<!-- /wp:html -->",
+      "featured_media": 4574
+    },
+    {
+      "tr_id": 3520,
+      "en_id": 2467,
+      "title": "Bon Jovi in the 1980s",
+      "slug": null,
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-3520.html",
+      "excerpt": "Bon Jovi in the 1980s: Slippery When Wet, New Jersey, arena touring and the stories behind their biggest songs, with a selected listening route.",
+      "meta": {
+        "jetpack_seo_html_title": "Bon Jovi in the 1980s | Oldies Radyo",
+        "advanced_seo_description": "Bon Jovi in the 1980s: Slippery When Wet, New Jersey, arena touring and the stories behind their biggest songs, with a selected listening route."
+      },
+      "source_words": 634,
+      "english_words": 761,
+      "source_paragraphs": 17,
+      "translated_paragraphs": 17,
+      "images": 1,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1980s/1980s-artists/",
+        "https://oldiesradyo.com/en/1980s/sandra/",
+        "https://oldiesradyo.com/en/1980s/1980s-artists/",
+        "https://oldiesradyo.com/en/1980s/def-leppard/",
+        "https://oldiesradyo.com/en/1980s/1980s-artists/",
+        "https://oldiesradyo.com/en/1980s/1980s-music-styles/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"late-artist-profile-page oldies-en-translated\">\n <section class=\"page-hero late-artist-profile-hero has-artist-photo\">\n  <div class=\"wrap late-artist-profile-hero-grid\">\n   <div class=\"late-artist-hero-copy\">\n    <div class=\"kicker\">1980s • ARTIST CAREER FEATURE</div>\n    <h2>Bon Jovi</h2>\n    <h2>1980s career</h2>\n    <p class=\"intro\">With <em>Slippery When Wet</em> and <em>New Jersey</em>, Bon Jovi turned hard-rock riffs into an international language of huge pop choruses, music-video visibility and arena touring.</p>\n   </div>\n      <figure class=\"late-artist-hero-photo\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/late-artists/1980/bon-jovi.webp\" alt=\"Bon Jovi — 1980s career and music archive\" loading=\"eager\" fetchpriority=\"high\" style=\"object-position:center 28%\"></figure>\n     </div>\n </section>\n  <div class=\"late-artist-photo-credit\"><div class=\"wrap\">Photo: <a target=\"_blank\" rel=\"noopener\" href=\"https://commons.wikimedia.org/wiki/File:Jon_Bon_Jovi_1987.jpg\">Jonathan King — Jon Bon Jovi, 1987</a> <span>• CC BY 3.0 • Resized and compressed for the web.</span></div></div>\n  <section>\n  <article class=\"wrap article narrow late-artist-dossier\">\n   <nav class=\"artist-profile-meta\" aria-label=\"Dosya bilgileri\">\n    <span>1980–1989</span>\n    <span>Rock, hard rock and metal</span>\n    <a href=\"https://oldiesradyo.com/en/1980s/1980s-artists/\">All 1980s artists</a>\n   </nav>\n\n   <nav class=\"artist-story-roadmap\" aria-label=\"Sanatçı hikâyesi anahtar noktaları\"><strong>Key points</strong><div><a href=\"#artist-story-1\">Background</a><a href=\"#artist-albums\">Albums</a><a href=\"#artist-story-3\">Songs</a><a href=\"#artist-story-4\">Stage</a><a href=\"#artist-story-5\">Legacy</a></div></nav>   <section class=\"artist-fact-panel\" id=\"artist-facts\" aria-label=\"Sanatçı dosyası kısa bilgileri\"><div class=\"kicker\">AT A GLANCE</div><div class=\"artist-fact-grid\"><div><span>Feature focus</span><strong>1980–1989</strong></div><div><span>Selected career years</span><strong>1984–1988 selection</strong></div><div><span>Musical setting</span><strong>Rock, hard rock and metal</strong></div><div><span>Feature format</span><strong>Full-length feature</strong></div></div></section>\n      <section class=\"artist-story-sequence\"><div class=\"kicker\">THE STORY IN DETAIL</div><h2>Bon Jovi • 1980–1989</h2><section class=\"artist-story-chapter\" id=\"artist-story-1\"><span>01</span><div><h3>The beginning of the decade</h3><p>Bon Jovi’s first two albums got the band moving. The real breakthrough came with <em>Slippery When Wet</em>, written in New Jersey and recorded at Little Mountain Sound in Vancouver. The guitar-and-vocal partnership of Jon Bon Jovi and Richie Sambora joined hard rock’s punch to choruses anyone could grasp on first hearing. “You Give Love a Bad Name” was a fist-in-the-air opening statement; the talk box sound and Tommy-and-Gina story of “Livin’ on a Prayer” turned it into a communal anthem of solidarity.</p></div></section><section class=\"artist-story-chapter\" id=\"artist-story-2\"><span>02</span><div><h3>A changing album career</h3><p>The warmth of those songs was more than a studio calculation. As the band’s official archive recounts, listening to local teenagers’ choices during the album’s preparation reflected Bon Jovi’s instinct to put the audience at the centre of its career. “Wanted Dead or Alive” described life on the road through a cowboy image, while the band developed a rock ’n’ roll identity that looked glossy on MTV but worked up a sweat on stage. Eighteen months of intensive touring carried the songs from concert halls into arenas.</p></div></section><section class=\"artist-story-chapter\" id=\"artist-story-3\"><span>03</span><div><h3>The world behind the songs</h3><p><em>New Jersey</em> was the follow-up made to prove that the success had been no accident. The band selected a broader, more mature repertoire from dozens of songs. “Bad Medicine” and “I’ll Be There for You” reached number one in the United States, and the album generated five Top 10 singles. Friendship, life on the road, loyalty and the pull of home became more prominent themes.</p></div></section><section class=\"artist-story-chapter\" id=\"artist-story-4\"><span>04</span><div><h3>Performance, videos and turning points</h3><p>Bon Jovi’s strength went beyond Jon’s charisma. Sambora’s talk box and vocal harmonies, David Bryan’s keyboards, Alec John Such’s bass and Tico Torres’s direct drumming gave the songs a collective momentum. However polished the studio recordings were, the band tested this material on the road for years. The choruses consequently sounded less like a production trick than lines born to be sung together.</p></div></section><section class=\"artist-story-chapter\" id=\"artist-story-5\"><span>05</span><div><h3>Why the legacy endures</h3><p>The same thing still happens when Bon Jovi plays on Oldies Radyo: shoulders rise with the first guitar, and the room becomes a small arena when the chorus arrives. “Livin’ on a Prayer” belongs to more than 1986. Its idea of holding on to one another through hard times keeps reaching new generations. Bon Jovi’s 1980s proved that everyday people’s stories could live at the heart of a huge rock spectacle.</p></div></section></section>   <section class=\"artist-album-shelf\" id=\"artist-albums\"><div><div class=\"kicker\">ALBUMS</div><h2>Key albums in this feature</h2><p>This small album shelf helps you follow the records discussed in the story.</p></div><div class=\"artist-album-tags\"><span>Slippery When Wet</span><span>New Jersey</span></div></section>   \n      <section class=\"artist-recordings late-artist-recordings\" id=\"artist-listening-route\">\n    <div class=\"kicker\">A SELECTED LISTENING ROUTE</div>\n    <h2>Starting points from the 1980s</h2>\n    <p class=\"track-intro\">This is a listening route rather than a greatest-hits ranking: a few starting points for hearing how the band’s work developed across the decade.</p>\n    <div class=\"recording-list\">\n          <article class=\"recording-item\"><span>01</span><div><h3>Runaway — 1984</h3><p>Bon Jovi — selections from the band’s 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>02</span><div><h3>You Give Love a Bad Name — 1986</h3><p>Bon Jovi — selections from the band’s 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>03</span><div><h3>Livin’ on a Prayer — 1986</h3><p>Bon Jovi — selections from the band’s 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>04</span><div><h3>Wanted Dead or Alive — 1986</h3><p>Bon Jovi — selections from the band’s 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>05</span><div><h3>Bad Medicine — 1988</h3><p>Bon Jovi — selections from the band’s 1980–1989 career</p></div></article>\n          <article class=\"recording-item\"><span>06</span><div><h3>I’ll Be There for You — 1988</h3><p>Bon Jovi — selections from the band’s 1980–1989 career</p></div></article>\n         </div>\n   </section>\n   \n   <div class=\"article-sources\">\n    <div class=\"kicker\">SOURCES AND ARCHIVES</div>\n    <ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://backstage.bonjovi.com/exhibits/slippery-when-wet\">Bon Jovi official archive — Slippery When Wet</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://backstage.bonjovi.com/exhibits/new-jersey\">Bon Jovi official archive — New Jersey</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://backstage.bonjovi.com/exhibits/we-ll-make-it-i-swear\">Bon Jovi official career timeline</a></li></ul>\n    <p class=\"source-note\">The original Oldies Radyo feature draws on English Wikipedia (CC BY-SA) and international institutional archives, with the research translated and arranged around the decade. This English edition retains that source trail.</p>\n   </div>\n\n   <nav class=\"archive-sequence-nav\" aria-label=\"Arşivde önceki ve sonraki sayfalar\"><a class=\"archive-sequence-card\" href=\"https://oldiesradyo.com/en/1980s/sandra/\"><span>← Previous artist</span><strong>Sandra</strong><small>The preceding career feature in this decade</small></a><a class=\"archive-sequence-card\" href=\"https://oldiesradyo.com/en/1980s/1980s-artists/\"><span>Artist map</span><strong>All artists of the 1980s</strong><small>Return to the full decade artist list</small></a><a class=\"archive-sequence-card\" href=\"https://oldiesradyo.com/en/1980s/def-leppard/\"><span>Next artist →</span><strong>Def Leppard</strong><small>The next career feature in this decade</small></a></nav>\n   <div class=\"next-links\">\n    <a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1980s/1980s-artists/\"><div class=\"card-body\"><h3>All 1980s artists</h3><p>Return to the artist and band map.</p></div></a>\n    <a class=\"card text-card\" href=\"https://oldiesradyo.com/en/1980s/1980s-music-styles/\"><div class=\"card-body\"><h3>1980s music styles</h3><p>Explore the musical scenes in which the band worked.</p></div></a>\n   </div>\n  </article>\n </section>\n</div>\n\n<!-- /wp:html -->",
+      "featured_media": 4575
+    },
+    {
+      "tr_id": 808,
+      "en_id": 4585,
+      "title": "Massiel’s 1968 Eurovision Victory and Her Refusal to Honour Franco",
+      "slug": "massiel-franco-eurovision-1968",
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-808.html",
+      "excerpt": "How Massiel won Eurovision in 1968, refused an honour from Franco and, by her own account, faced a year away from Spanish television.",
+      "meta": {
+        "jetpack_seo_html_title": "Massiel’s 1968 Eurovision Victory and Her Refusal to Honour Franco | Oldies Radyo",
+        "advanced_seo_description": "How Massiel won Eurovision in 1968, refused an honour from Franco and, by her own account, faced a year away from Spanish television."
+      },
+      "source_words": 317,
+      "english_words": 394,
+      "source_paragraphs": 8,
+      "translated_paragraphs": 8,
+      "images": 2,
+      "internal_links": [
+        "https://oldiesradyo.com/en/features/",
+        "https://oldiesradyo.com/en/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"special-feature-page oldies-en-translated\">\n<section class=\"page-hero compact-hero massiel-hero\"><div class=\"wrap narrow\"><div class=\"kicker\">SPECIAL FEATURE • EUROVISION 1968</div><h2>Massiel’s Eurovision Victory and Her Refusal to Honour Franco</h2><p class=\"lead\">Massiel brought Spain its first Eurovision victory. She then refused to let her success become a propaganda photograph for Franco’s regime.</p></div></section>\n\n<section><article class=\"wrap article narrow news-feature\">\n<figure class=\"editorial-figure wide massiel-main-photo\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/massiel-1968-studio.jpg\" alt=\"Massiel in a television studio after her 1968 Eurovision victory\"><figcaption>Massiel in a television studio shortly after her Eurovision victory, 19 April 1968. Photo: Eric Koch / Anefo, Nationaal Archief — CC0.</figcaption></figure>\n\n<p class=\"story-deck\">On 6 April 1968, 20-year-old Massiel took the stage at London’s Royal Albert Hall and beat Cliff Richard by just one point with “La, la, la.” It was Spain’s first Eurovision victory. For Franco’s dictatorship, it also offered a valuable opportunity to present the country abroad as a modern, accepted European state.</p>\n\n<p>After the victory, Massiel was offered the Order of <em>Isabel la Católica</em>, to be presented by Franco. She refused to go to El Pardo Palace and pose for a photograph that would serve the dictator’s propaganda. Years later, she explained the decision plainly: she knew that image would follow her for the rest of her life and did not want the regime to appropriate her achievement.</p>\n\n<div class=\"story-pullquote\">Massiel won the trophy, but refused to let Franco claim ownership of her victory.</div>\n\n<div class=\"story-with-photo massiel-story-grid\"><div><h2>The price: being kept off TVE</h2><p>Her refusal came at a price. According to Massiel’s own account, she was kept off Spain’s state television broadcaster, TVE, for roughly a year. No formal ban was publicly announced, but under the circumstances it amounted to a television blackout.</p><p>What makes the 1968 story memorable is more than the victory of “La, la, la.” At the brightest moment of her career, Massiel chose her principles over the advantages of appearing alongside those in power. She was consequently remembered in Spain not only as a Eurovision winner, but also as an artist who could remain independent in the face of authority.</p></div><figure class=\"editorial-figure secondary\"><img src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/massiel-1968-portrait.jpg\" alt=\"Portrait of Massiel, April 1968\"><figcaption>Massiel, April 1968. Photo: Eric Koch / Anefo, Nationaal Archief — CC0.</figcaption></figure></div>\n\n<div class=\"article-sources\"><div class=\"kicker\">SOURCES AND ARCHIVES</div><ul><li><a target=\"_blank\" rel=\"noopener\" href=\"https://elpais.com/gente/2025-05-25/massiel-ganar-eurovision-fue-lo-mas-facil-que-hice-en-mi-vida.html\">El País — in-depth interview with Massiel</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://eurovision.tv/event/london-1968\">Eurovision — official London 1968 results</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://www.rtve.es/play/noticias/20230719/massiel-ganadora-eurovision-la-1968-repasa-vida-archivo-tve/2013753.shtml\">RTVE archive — Massiel’s career and 1968 victory</a></li><li><a target=\"_blank\" rel=\"noopener\" href=\"https://commons.wikimedia.org/wiki/Category:Massiel\">Wikimedia Commons — Massiel archive photographs</a></li></ul><p class=\"source-note\">The account of roughly a year away from TVE is based on Massiel’s own recollection. Unproven allegations that the contest result was bought are not presented as fact in this feature.</p></div>\n\n<div class=\"next-links\"><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/features/\"><div class=\"card-body\"><h3>Features</h3><p>Return to lasting features on music, politics, censorship and artists’ careers.</p></div></a><a class=\"card text-card\" href=\"https://oldiesradyo.com/en/\"><div class=\"card-body\"><h3>Home</h3><p>Explore the latest Oldies Radyo stories, decade archives and radio programmes.</p></div></a></div>\n</article></section>\n</div>\n\n<!-- /wp:html -->",
+      "featured_media": 4430
+    },
+    {
+      "tr_id": 900,
+      "en_id": 4586,
+      "title": "Popular Music History: The 1950s to the 1990s",
+      "slug": "music-history",
+      "content_file": "/workspace/scratch/53c2da9f0972/operation/translated-900.html",
+      "excerpt": "Explore popular music history from the 1950s to the 1990s through Oldies Radyo’s decade archives, artists, genres, annual timelines and research.",
+      "meta": {
+        "jetpack_seo_html_title": "Popular Music History: The 1950s to the 1990s | Oldies Radyo",
+        "advanced_seo_description": "Explore popular music history from the 1950s to the 1990s through Oldies Radyo’s decade archives, artists, genres, annual timelines and research."
+      },
+      "source_words": 123,
+      "english_words": 145,
+      "source_paragraphs": 6,
+      "translated_paragraphs": 6,
+      "images": 5,
+      "internal_links": [
+        "https://oldiesradyo.com/en/1950s/",
+        "https://oldiesradyo.com/en/1960s/",
+        "https://oldiesradyo.com/en/1970s/",
+        "https://oldiesradyo.com/en/1980s/",
+        "https://oldiesradyo.com/en/1990s/"
+      ],
+      "content": "<!-- wp:html -->\n<style>.english-page>.page-hero{background-image:linear-gradient(120deg,#141611,#090a08)}.english-page>section>article>.english-page-visual,.english-page>section>article>.english-inline-gallery{display:none}.oldies-en-translated .wrap{width:100%;max-width:100%;padding-left:0;padding-right:0}.oldies-en-translated .page-hero h2{font-size:clamp(2rem,5vw,4rem);line-height:1.08}.oldies-en-translated img{max-width:100%;height:auto}</style><div class=\"music-history-hub oldies-en-translated\">\n<section class=\"page-hero archive-hero\"><div class=\"wrap\"><div class=\"kicker\">OLDIES RADYO • DECADE ARCHIVES</div><h2>Popular Music History: The 1950s to the 1990s</h2><p class=\"intro\">Explore music from the 1950s to the 1990s through decades, years, artists and genres. Each decade opens a separate archive with its own sound, culture and stories.</p></div></section>\n<section><article class=\"wrap article wide-article\">\n<div class=\"archive-decade-grid\">\n<a class=\"archive-decade-card\" href=\"https://oldiesradyo.com/en/1950s/\"><img loading=\"lazy\" src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/history-decade-1950s-v35.webp\" alt=\"1950s music history archive\"><div><span>THE BIRTH OF ROCK ’N’ ROLL</span><h2>1950s</h2><p>Rock ’n’ roll, R&amp;B, doo-wop, rockabilly and the birth of youth culture.</p><b>Explore the decade archive →</b></div></a>\n<a class=\"archive-decade-card\" href=\"https://oldiesradyo.com/en/1960s/\"><img loading=\"lazy\" src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/history-decade-1960s-v35.webp\" alt=\"1960s music history archive\"><div><span>CHANGE AND FREEDOM</span><h2>1960s</h2><p>The British Invasion, Motown, soul, folk, psychedelia and the counterculture.</p><b>Explore the decade archive →</b></div></a>\n<a class=\"archive-decade-card\" href=\"https://oldiesradyo.com/en/1970s/\"><img loading=\"lazy\" src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/history-decade-1970s-v7.webp\" alt=\"ABBA, 1979 — 1970s popular music history\"><div><span>THE ALBUM AND LIVE ERA</span><h2>1970s</h2><p>Glam rock, disco, progressive rock, hard rock, punk and funk.</p><b>Explore the decade archive →</b></div></a>\n<a class=\"archive-decade-card\" href=\"https://oldiesradyo.com/en/1980s/\"><img loading=\"lazy\" src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/history-decade-1980s-v7.webp\" alt=\"Michael Jackson — 1980s popular music history\"><div><span>IMAGE AND DIGITAL SOUND</span><h2>1980s</h2><p>New wave, synth-pop, MTV, electronic production and major pop stars.</p><b>Explore the decade archive →</b></div></a>\n<a class=\"archive-decade-card\" href=\"https://oldiesradyo.com/en/1990s/\"><img loading=\"lazy\" src=\"https://oldiesradyo.com/wp-content/themes/oldies-radyo-1950s-theme/assets/images/history-decade-1990s-v7.webp\" alt=\"Mariah Carey, 1990 — 1990s popular music history\"><div><span>ALTERNATIVE MUSIC AND GLOBAL POP</span><h2>1990s</h2><p>The rise of grunge, Britpop, dance-pop, hip-hop and alternative music.</p><b>Explore the decade archive →</b></div></a>\n</div>\n</article></section></div>\n\n<!-- /wp:html -->",
+      "featured_media": 534
+    }
+  ],
+  "note": "20 complete translations live total; late two pair corrections do not count as full translations. Inbound link additions are separate page edits. Browser final check of two inbound additions blocked by environment disconnection; stored content verified."
+}
