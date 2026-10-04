@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T13:55:41.018Z",
+  "updated_at": "2026-10-04T14:15:56.281Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -122,11 +122,14 @@
         "all-1160-published-bodies",
         "120-native-polylang-checks",
         "batch-001-10-live-translations",
-        "batch-001-frontend-polylang-32-link-image-checks"
+        "batch-001-frontend-polylang-32-link-image-checks",
+        "batch-002-10-live-translations",
+        "batch-002-html-and-15-link-image-checks",
+        "fresh-native-1162-published-audit"
       ],
-      "last_checkpoint": "2026-10-04T13:55:41.018Z",
-      "next_step": "Batch 002: full 1950s artist dossiers; review Kylie/Radiohead sources and category-lock items separately.",
-      "note": "10 live translations (8 updates +2 new), 2 wrong pairs repaired; part-002-batch-001.md. Category-label changes blocked by architecture lock; no bypass. Existing English URLs and TR content preserved."
+      "last_checkpoint": "2026-10-04T14:15:56.281Z",
+      "next_step": "Finish per-TR Polylang map and A/B/C queue; next missing Priority A features/dossiers.",
+      "note": "20 translations live, 2 wrong pairs fixed. Fresh audit 1162 published, missing59, broken0. Next content queue must distinguish empty legacy pages from genuine missing English and review source errors."
     }
   ]
 }
