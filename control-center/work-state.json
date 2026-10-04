@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T19:50:04.947Z",
+  "updated_at": "2026-10-04T20:13:23.767Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -146,11 +146,16 @@
         "five-news-frontend-and-ten-native-pair-QA",
         "two-TR-news-category-assignments-corrected",
         "all-554-current-EN-frontends-screened",
-        "checkpoint007-operation-archive-version2"
+        "checkpoint007-operation-archive-version2",
+        "batch-005-10-source-grounded-full-translations",
+        "batch-005-10-existing-EN-pages-expanded-and-published",
+        "batch-005-263-source-paragraphs-preserved",
+        "batch-005-native20-frontend10-bidirectional10-links24-QA",
+        "checkpoint008-full-translations50"
       ],
-      "last_checkpoint": "2026-10-04T19:50:04.947Z",
-      "next_step": "Batch005: TR798/799/800/801/802/803/804/812/813/821 existing English artist pages. Existing published TR613 EN554; 59 unpaired; 480 short EN candidates require section-level review. Continue without repeating completed40 translations or five reviewed news.",
-      "note": "Checkpoint007 durable; 40 full translations, plus five reviewed EN news drafts now published. This continuation:20 full artist expansions+5 news SEO/publication. Full TR613 and EN554 frontend scan complete. Four EN category label renames architecture-locked; correct existing EN language categories assigned. Shared news footer/share labels and duplicate meta-description tags remain open. Original TR content/URLs and global theme unchanged."
+      "last_checkpoint": "2026-10-04T20:13:23.767Z",
+      "next_step": "Batch006 TR840–849: Beatles, Rolling Stones, Who, Kinks, Animals, Hollies, Zombies, Yardbirds, Beach Boys and Bob Dylan. Existing EN1867–1876: expand in place, preserve all sections/images and URLs. Published TR613 EN554;59 unpaired;470 short candidates. Do not repeat completed50 full translations or five published news drafts.",
+      "note": "Checkpoint008;this continuation30 full artist expansions+5 existing EN news drafts reviewed/published. Total50 full translations. Batch005 10/10 HTTP200,20 native pairs,10 live bidirectional switches,24 links/images pass. Four category labels locked; duplicate description tags/shared news footer labels and actual mobile viewport QA open. TR/global theme unchanged."
     }
   ]
 }
