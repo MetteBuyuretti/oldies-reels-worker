@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-04T14:54:53.368Z",
+  "generated_at": "2026-10-04T14:55:49.162Z",
   "limitations": [
-    "Priority is an editorial ordering, not measured traffic.",
+    "Priority is editorial ordering, not measured traffic.",
     "525 paired contents still need full live body quality comparison.",
     "C items are listed, not automatically translated.",
-    "Five existing EN draft counterparts are not empty-body claims."
+    "Five existing EN draft counterparts are not claims of an empty body. No forced seven-state classification without evidence."
   ],
   "counts": {
     "published": {
@@ -22,7 +22,7 @@
       "5_no_EN_pair": 59,
       "1_complete_translation_checked": 20,
       "2_EN_incomplete": 4,
-      "4_EN_exists_as_draft": 5
+      "existing_EN_draft_publication_review_pending": 5
     }
   },
   "records": [
@@ -9758,7 +9758,7 @@
       },
       "priority": "B",
       "priority_basis": "editorial type and international reader relevance; no GSC metrics",
-      "state": "4_EN_exists_as_draft",
+      "state": "existing_EN_draft_publication_review_pending",
       "en_review_status": "draft",
       "action": "review_next"
     },
@@ -9774,7 +9774,7 @@
       },
       "priority": "B",
       "priority_basis": "editorial type and international reader relevance; no GSC metrics",
-      "state": "4_EN_exists_as_draft",
+      "state": "existing_EN_draft_publication_review_pending",
       "en_review_status": "draft",
       "action": "review_next"
     },
@@ -9790,7 +9790,7 @@
       },
       "priority": "B",
       "priority_basis": "editorial type and international reader relevance; no GSC metrics",
-      "state": "4_EN_exists_as_draft",
+      "state": "existing_EN_draft_publication_review_pending",
       "en_review_status": "draft",
       "action": "review_next"
     },
@@ -9806,7 +9806,7 @@
       },
       "priority": "B",
       "priority_basis": "editorial type and international reader relevance; no GSC metrics",
-      "state": "4_EN_exists_as_draft",
+      "state": "existing_EN_draft_publication_review_pending",
       "en_review_status": "draft",
       "action": "review_next"
     },
@@ -9822,7 +9822,7 @@
       },
       "priority": "B",
       "priority_basis": "editorial type and international reader relevance; no GSC metrics",
-      "state": "4_EN_exists_as_draft",
+      "state": "existing_EN_draft_publication_review_pending",
       "en_review_status": "draft",
       "action": "review_next"
     },
