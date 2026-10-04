@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T14:55:49.162Z",
+  "generated_at": "2026-10-04T14:58:17.401Z",
   "limitations": [
     "Priority is editorial ordering, not measured traffic.",
     "525 paired contents still need full live body quality comparison.",
@@ -8,13 +8,13 @@
   ],
   "counts": {
     "published": {
-      "A": 542,
-      "B": 49,
+      "A": 541,
+      "B": 50,
       "C": 22
     },
     "all_admin": {
-      "A": 553,
-      "B": 51,
+      "A": 552,
+      "B": 52,
       "C": 28
     },
     "states": {
@@ -784,7 +784,7 @@
         "tr": 628,
         "en": 1694
       },
-      "priority": "A",
+      "priority": "B",
       "priority_basis": "editorial type and international reader relevance; no GSC metrics",
       "state": "2_EN_incomplete",
       "en_review_status": null,
