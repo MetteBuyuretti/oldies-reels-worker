@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-03T23:56:08.201Z",
+  "updated_at": "2026-10-04T00:15:54.932Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -81,11 +81,13 @@
         "live-source-backup-and-root-cause",
         "source-grounded-020-and-46-tests",
         "persistent-preinstall-rollback-package",
-        "live-plugin-020-installed-activated"
+        "live-plugin-020-installed-activated",
+        "live-021-default-category-and-guards",
+        "priority-three-category-parity-fixes"
       ],
-      "last_checkpoint": "2026-10-03T23:56:08.201Z",
-      "next_step": "Verify TR/EN homepage/archive/menu, complete native audit and confirm schedule/guards.",
-      "note": "Explicit custom-plugin installation approval received. WP UI confirms active v0.2.0 and Ana Kumanda Site Integrity link; checkpoint008 saved."
+      "last_checkpoint": "2026-10-04T00:15:54.932Z",
+      "next_step": "Fresh anonymous module checks, final native audit and 8 priority verification; persist final package.",
+      "note": "Checkpoint009 saved; live runtime publish/menu guards pass nonmutating probes, 47 PHP tests pass; targeted category saves verified with unchanged bodies."
     }
   ]
 }
