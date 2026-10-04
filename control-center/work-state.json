@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T00:15:54.932Z",
+  "updated_at": "2026-10-04T00:32:15.907Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -65,7 +65,7 @@
     {
       "id": "site-integrity-20261003",
       "title": "Oldies Radyo Site Integrity / Editorial Control",
-      "status": "in_progress",
+      "status": "done",
       "completed_units": [
         "priority-content-audit",
         "pre-change-backup",
@@ -83,11 +83,16 @@
         "persistent-preinstall-rollback-package",
         "live-plugin-020-installed-activated",
         "live-021-default-category-and-guards",
-        "priority-three-category-parity-fixes"
+        "priority-three-category-parity-fixes",
+        "anonymous-frontends-cache-and-menu-verified",
+        "native-all-1160-audit-and-review-queue",
+        "priority-8-of-8-frontend-success",
+        "news-card-verifier-and-50-PHP-tests",
+        "persistent-final-delivery-and-rollback"
       ],
-      "last_checkpoint": "2026-10-04T00:15:54.932Z",
-      "next_step": "Fresh anonymous module checks, final native audit and 8 priority verification; persist final package.",
-      "note": "Checkpoint009 saved; live runtime publish/menu guards pass nonmutating probes, 47 PHP tests pass; targeted category saves verified with unchanged bodies."
+      "last_checkpoint": "2026-10-04T00:32:15.907Z",
+      "next_step": "Installed system is active. Use daily dashboard/610-record editorial queue; service label rename awaits owner approval; separately review radio landing-page player visibility.",
+      "note": "Checkpoint010 saved. Activev0.2.1, menusLOCKED/HEALTHY, priority8/8pass,1160 native scan47.4% with568template reviews (not sitewide frontend health), artifactversion4. Do not reinstall or auto-edit bodies."
     }
   ]
 }
