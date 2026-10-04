@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T02:36:14.877Z",
+  "updated_at": "2026-10-04T03:55:55.292Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -103,11 +103,14 @@
         "publish-endpoint-source-confirmation",
         "artifact-retention-check",
         "durable-diagnosis-report",
-        "live-companion-source-and-current-settings-audit"
+        "live-companion-source-and-current-settings-audit",
+        "secure-meta-authentication",
+        "matching-page-token-read-only-identity-verified",
+        "owner-credential-entry-ui-prepared"
       ],
-      "last_checkpoint": "2026-10-04T02:36:14.877Z",
-      "next_step": "Use secure browserAuth to authenticate to Meta Developers, renew the existing Facebook Page grant, then owner-enter any new token in the current Social Automation Facebook settings and verify before one live retry.",
-      "note": "Repair authorized. WordPress reachable; active Companionv1.0.7-R7 has no refresh endpoint and uses social Facebook token unless environment override exists. Legacy Global Settings inactive; no unsafe activation. Meta login required. Runtime/credentials/publishing unchanged. part-002-live-connection-audit.md saved."
+      "last_checkpoint": "2026-10-04T03:55:55.292Z",
+      "next_step": "Owner copies the existing verified Oldies Radyo Page token in Meta Explorer and enters/submits it in current WordPress Social Automation Facebook Page Access Token. Then verify runtime auth, check deduplication and retry only the failed job once.",
+      "note": "part-003 saved. Meta auth complete; GET me?id,name verifies Page1318926181298428. WordPress stored token not replaced; browser security requires owner credential entry/submission. No live retry/publication or runtime changes; token lifetime unverified. Site Integrity remains done."
     }
   ]
 }
