@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T03:55:55.292Z",
+  "updated_at": "2026-10-04T13:21:58.141Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -111,6 +111,20 @@
       "last_checkpoint": "2026-10-04T03:55:55.292Z",
       "next_step": "Owner copies the existing verified Oldies Radyo Page token in Meta Explorer and enters/submits it in current WordPress Social Automation Facebook Page Access Token. Then verify runtime auth, check deduplication and retry only the failed job once.",
       "note": "part-003 saved. Meta auth complete; GET me?id,name verifies Page1318926181298428. WordPress stored token not replaced; browser security requires owner credential entry/submission. No live retry/publication or runtime changes; token lifetime unverified. Site Integrity remains done."
+    },
+    {
+      "id": "tr-en-parity-20261004",
+      "title": "TR → EN eksik içerik çeviri ve eşitleme",
+      "status": "in_progress",
+      "completed_units": [
+        "access-verified",
+        "all-1195-admin-inventory",
+        "all-1160-published-bodies",
+        "120-native-polylang-checks"
+      ],
+      "last_checkpoint": "2026-10-04T13:21:58.141Z",
+      "next_step": "Reconcile existing native audit, review template-rendered source pages and apply first Priority A batch.",
+      "note": "part-001-access-inventory.md persisted. Europe weekly scheduled pairs already exist; preserve schedules. Never rewrite TR originals or good EN pages."
     }
   ]
 }
