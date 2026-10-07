@@ -26,6 +26,13 @@ def audio_duration(path: Path) -> float:
     )
     return float(probe.stdout.strip())
 
+MIN_FINAL_REEL_SECONDS = 10.0
+
+
+def final_reel_duration(voice_seconds: float) -> float:
+    """Never let a finished Reel fall below the 10-second production floor."""
+    return max(MIN_FINAL_REEL_SECONDS, float(voice_seconds) + 0.12)
+
 
 def _clean_script(script: str) -> str:
     text = re.sub(r"\[(?:duraklama|pause)\]", ". ", str(script or ""), flags=re.I)
@@ -247,6 +254,17 @@ def render_timeline(
         current = out
         elapsed += float(timeline[index]["duration"])
 
+    voice_seconds = audio_duration(voiceover)
+    total_duration = final_reel_duration(voice_seconds)
+    visual_duration = sum(float(item["duration"]) for item in timeline)
+    hold_seconds = max(0.0, total_duration - visual_duration)
+    output_video = current
+    if hold_seconds > 0.01:
+        output_video = "vfinal"
+        filters.append(
+            f"[{current}]tpad=stop_mode=clone:stop_duration={hold_seconds:.3f}[{output_video}]"
+        )
+
     audio_index = len(scenes)
     inputs += ["-i", str(voiceover)]
     filters.append(
@@ -255,11 +273,10 @@ def render_timeline(
         "acompressor=threshold=-20dB:ratio=3:attack=10:release=120:makeup=2,"
         "loudnorm=I=-16:TP=-1.0:LRA=7,apad[voice]"
     )
-    total_duration = audio_duration(voiceover) + 0.12
     command = [
         "ffmpeg", "-y", *inputs,
         "-filter_complex", ";".join(filters),
-        "-map", f"[{current}]", "-map", "[voice]",
+        "-map", f"[{output_video}]", "-map", "[voice]",
         "-t", f"{total_duration:.3f}", "-r", str(fps),
         "-c:v", "libx264", "-preset", "medium",
         "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k",
