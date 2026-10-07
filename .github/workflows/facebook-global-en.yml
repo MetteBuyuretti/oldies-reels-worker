@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 concurrency:
   group: oldies-english-facebook-reel
@@ -22,6 +23,13 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/36507074949/locations/global/workloadIdentityPools/github-oldies/providers/github-oldies-reels"
+          service_account: "oldies-reels-tts@project-8af3c2f9-bd84-4afe-b8a.iam.gserviceaccount.com"
 
       - uses: actions/setup-python@v5
         with:
@@ -46,8 +54,12 @@ jobs:
           GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
           OLDIES_PREVIEW_ONLY: "false"
           OLDIES_REELS_LANGUAGE: "en"
-          OLDIES_TTS_ENABLED: "false"
-          OLDIES_TTS_FALLBACK: "false"
+          OLDIES_TTS_ENABLED: "true"
+          OLDIES_TTS_ENGINE: "auto"
+          OLDIES_TTS_FALLBACK: "true"
+          OLDIES_TTS_VOICE: "en-AU-Chirp3-HD-Charon"
+          OLDIES_TTS_LANGUAGE: "en-AU"
+          OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
         run: python worker.py
 
       - name: Keep audit files for seven days
