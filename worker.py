@@ -1039,8 +1039,13 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
             if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
                 raise RuntimeError("DJ voiceover failed size validation")
             total_duration = _audio_duration(path)
-            if not 10.0 <= total_duration <= 18.5:
-                raise VoiceoverQualityError(f"Voiceover does not fit a 10–18-second Reel: {total_duration:.1f}s")
+            # Voice length and final Reel length are separate QC rules.
+            # A natural read may be shorter than 10s; the renderer guarantees
+            # that the final video itself never drops below 10 seconds.
+            if not 7.0 <= total_duration <= 18.5:
+                raise VoiceoverQualityError(
+                    f"Voiceover is outside the natural 7–18.5-second range: {total_duration:.1f}s"
+                )
             candidate["dj_script_tr"] = full_script
             candidate["voiceover_duration_seconds"] = round(total_duration, 2)
             candidate["tts_voice"] = gemini_voice
