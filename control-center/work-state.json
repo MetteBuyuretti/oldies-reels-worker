@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T03:28:05.056322+00:00",
+  "updated_at": "2026-10-07T03:30:41.240372+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -185,11 +185,14 @@
         "controlled-recent-en-wordpress-import",
         "admin-ui-render-checks",
         "all19-existing-branch-code-x-audit",
-        "installable-adapter-package"
+        "installable-adapter-package",
+        "github-pr23-reviewable",
+        "github-ci120-passed-37566947841",
+        "persistent-installation-zip"
       ],
-      "last_checkpoint": "2026-10-07T03:28:05.056322+00:00",
+      "last_checkpoint": "2026-10-07T03:30:41.240372+00:00",
       "next_step": "Obtain browser fallback approval, then inspect current live Command Center 1.0.9 and news schema, upload/activate adapter, validate sources in existing scanner, verify X account/developer and Open Graph. No paid API without explicit budget authorization.",
-      "note": "Code and tests complete, deployment incomplete. API OFF; default uses free web intent with human publication and URL confirmation. No existing workflow/publisher changed."
+      "note": "PR #23 open and mergeable; X News CI run37566947841 success on ac731571. ZIP Oldies-X-News-Bridge-v0.1.0.zip saved; sha256 8144ceb803fa87f3ce404bdc9f7cd001bf6285b7c2f8058aee37969045f6d833. No live deployment, public post or payment. Await browser fallback approval."
     }
   ]
 }
