@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T02:45:01.773183+00:00",
+  "updated_at": "2026-10-07T02:48:25.750621+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -199,11 +199,12 @@
         "three-archive-photo-frames-verified",
         "base-English-ASR-story-and-station",
         "reusable-fixed-signoff-hash-locked",
-        "26-Facebook-regression-tests"
+        "26-Facebook-regression-tests",
+        "current-main-ae09f0d-compatible-review-branch"
       ],
-      "last_checkpoint": "2026-10-07T02:45:01.773183+00:00",
+      "last_checkpoint": "2026-10-07T02:48:25.750621+00:00",
       "next_step": "Owner reviews warm17s preview and template. Main stays unchanged; no live publish. Other artists need reviewed period-photo bank entries before use.",
-      "note": "part-006. Run37562928093 success;17s1080x1920AAC795packets336kB;story127.5wpm;1.1s gap measured-91dB;26FBtests local,24GHA. Fixed closing cached and hash-locked;offline reuse verified. Revised MP4/template/report delivered for review."
+      "note": "part-006. Run37562928093 success;17s1080x1920AAC795packets336kB;story127.5wpm;1.1s gap measured-91dB;26FBtests local,24GHA. Fixed closing cached and hash-locked;offline reuse verified. Revised MP4/template/report delivered for review. Currentmain ae09f0d changes preserved in review branch;26FB/49of50suite;no live publish by this work."
     }
   ]
 }

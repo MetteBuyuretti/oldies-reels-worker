@@ -69,3 +69,7 @@ Gerçek TTS/MP4 testi commit’i: 9cd677e8dd05e7edb0aae5d0331b4d35f513df4a
 MP4 SHA256: bad2bfe06deab170e0c99a3ab8699c704f1e67ff3b4ec75b7aaf077a825f24f0
 
 Canlı publish yapılmadı. Önizleme ve kayıt/fotoğraf şablonu incelemeye hazır.
+
+## Güncel ana dal ile uyum
+
+Son kontrol sırasında ana dalda ae09f0d sürümünün eklendiği görüldü. Bu sürümün mevcut İngilizce TTS değişiklikleri test dalına birleştirilerek korundu; Facebook’a özel kayıt/fotoğraf kapıları ve ayrı DJ motoru test dalında kaldı. Güncel kodla 26/26 Facebook testi ve 49/50 tüm test geçti; tek başarısız Türkçe test önceki temel sürümde de başarısızdır. Bu çalışma ana dala merge edilmedi ve canlı yayın başlatmadı. Sunulan MP4’ün gerçek TTS testi 37562928093 numaralı çalışmadır.
