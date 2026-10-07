@@ -12,7 +12,7 @@ from facebook_global_audio import TEMPLATE, inspect_audio
 
 ROOT = Path(__file__).resolve().parent
 BANNED = re.compile(r'\b(?:statue|plaque|memorial|ticket|logo|building|cropped|crop|collage|illustration)\b', re.I)
-REVIEW_FLAGS = ('approved', 'artist_verified', 'period_verified', 'complete_composition', 'quality_reviewed')
+REVIEW_FLAGS = ('approved', 'artist_verified', 'period_verified', 'complete_composition', 'quality_reviewed', 'artist_dominant')
 
 
 def validate_photo(photo: dict, artist: str, event_year: int, root: Path = ROOT) -> Path:
@@ -22,8 +22,12 @@ def validate_photo(photo: dict, artist: str, event_year: int, root: Path = ROOT)
         raise RuntimeError('Photo rejected: wrong artist')
     if BANNED.search(str(photo.get('title', ''))) or photo.get('derived_variant') or photo.get('source_cropped'):
         raise RuntimeError('Photo rejected: non-photo subject, crop or derived duplicate')
-    if abs(int(photo.get('photo_year', 0)) - event_year) > TEMPLATE['maximum_period_distance_years']:
-        raise RuntimeError('Photo rejected: outside the verified event period')
+    distance = abs(int(photo.get('photo_year', 0)) - event_year)
+    if distance > TEMPLATE['maximum_period_distance_years']:
+        raise RuntimeError('Photo rejected: outside the locked event-year policy')
+    if distance > TEMPLATE['automatic_period_distance_years']:
+        if distance != TEMPLATE['manual_period_distance_years'] or photo.get('manual_period_override') is not True or not str(photo.get('manual_period_note', '')).strip():
+            raise RuntimeError('Photo rejected: ±2-year use requires explicit manual period approval')
     if not photo.get('date_evidence') or not str(photo.get('source', '')).startswith('https://commons.wikimedia.org/wiki/File:'):
         raise RuntimeError('Photo rejected: missing source or date evidence')
     license_name = str(photo.get('license', '')).casefold()
@@ -45,9 +49,10 @@ def load_period_photos(candidate: dict, directory: Path, root: Path = ROOT) -> t
     bank = json.loads((root / TEMPLATE['photo_bank']).read_text(encoding='utf-8'))
     artist, year = str(candidate['artist']), int(str(candidate['event_date'])[:4])
     photos, credits, seen = [], [], set()
-    for entry in bank['photos']:
-        if str(entry.get('artist', '')).casefold() != artist.casefold():
-            continue
+    entries = [entry for entry in bank['photos'] if str(entry.get('artist', '')).casefold() == artist.casefold()]
+    # Immutable selection order: same event year first, then ±1; ±2 only when manually approved.
+    entries.sort(key=lambda entry: (abs(int(entry.get('photo_year', 0)) - year), int(entry.get('photo_year', 0))))
+    for entry in entries:
         try:
             source = validate_photo(entry, artist, year, root)
         except RuntimeError as exc:
