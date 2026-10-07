@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T03:17:48.079240+00:00",
+  "updated_at": "2026-10-07T03:25:00.862573+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -205,11 +205,16 @@
         "1962-first-source-research",
         "three-distinct-1963-plus-one-full-frame-photos",
         "38-current-Facebook-tests-local",
-        "old-signoff-and-1964-1965-assets-withdrawn"
+        "old-signoff-and-1964-1965-assets-withdrawn",
+        "new-Oldies-Radyo-preview-signoff-recorded",
+        "38-current-Facebook-tests-GHA-37566151737",
+        "new17s1080x1920-AAC798-packets347kB",
+        "full-frame-three1963-plus-one-MP4-QA",
+        "audio-gap-minus91dB-English-ASR-QC"
       ],
-      "last_checkpoint": "2026-10-07T03:17:48.079240+00:00",
-      "next_step": "Run all current Facebook tests and new Oldies Radyo preview on GitHub Actions; inspect artifact and await owner listening approval before SHA256 production lock.",
-      "note": "part-007 saved. v3 rules immutable; exact Oldies Radyo brand, event-year-first, ±2 event-specific manual only, ±3 forbidden. Three1963(+1) approved photos; no crop/zoom. New signoff approval pending; production blocked. No live publish."
+      "last_checkpoint": "2026-10-07T03:25:00.862573+00:00",
+      "next_step": "Owner listens to new Oldies Radyo closing and approves tone/pronunciation. Only after approval set production SHA256 and named approval metadata, then rerun Facebook Actions in preview mode. Never live-publish without explicit authorization.",
+      "note": "part-008: Actions37566151737 PASS38/38; new17s1080x1920 AAC798 audio347kB, story127.5WPM,1.1s gap−91dB. Three1963+1 full photos; source territorialPD evidence explicit. Preview SHA1dc358ef…; production approval=false/hash empty. Old recording withdrawn. LOCK READY withheld pending owner listening approval; no live publish."
     }
   ]
 }

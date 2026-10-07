@@ -32,7 +32,7 @@
       "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/42/The_Beatles_1963_Dezo_Hoffman_Capitol_Records_press_photo_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
       "creator": "Dezo Hoffmann, Distributed by Capitol Records",
       "license": "Public domain",
-      "license_url": "",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-US-no_notice",
       "license_evidence": "I Want To Hold Your Hand (song)|Retouched pictures|Dezider Hoffman|PD-scan (PD-US-no notice)|Images with extracted images|PD US no notice|The Beatles in 1963|1963 black and white portrait photographs of men|PD-US missing SDC copyright status|Black and white group photographs of the Beatles|Capitol Records publicity photos",
       "width": 3621,
       "height": 2817,
@@ -59,7 +59,11 @@
       "reviewed_at": "2026-10-07T03:11:32.968342+00:00",
       "dominance_note": "Only the four Beatles form the foreground subject; no guest shares the subject emphasis.",
       "appearance_note": "John, Paul, George and Ringo; early moptop hair and suits, consistent with the 1962 Love Me Do lineup and appearance.",
-      "manual_period_approvals": []
+      "manual_period_approvals": [],
+      "license_evidence_tag": "PD-US-no notice",
+      "license_scope": "United States; Commons explicitly states copyright remains in other source countries.",
+      "stored_width": 1800,
+      "stored_height": 1400
     },
     {
       "title": "File:Beatles Trenter 1963 cleaned up 3 jpg.jpg",
@@ -67,7 +71,7 @@
       "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Beatles_Trenter_1963_cleaned_up_3_jpg.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
       "creator": "Bo Trenter",
       "license": "Public domain",
-      "license_url": "",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-Sweden",
       "license_evidence": "PD Sweden|Images with extracted images|Cakes of Sweden|1963 in Stockholm|John Lennon in 1963|The Beatles in 1963|Paul McCartney in 1963|George Harrison in 1963|Ringo Starr in 1963|October 1963 in Sweden|PD-old missing SDC copyright status|Moptop|Black and white group photographs of the Beatles",
       "width": 2003,
       "height": 1600,
@@ -94,7 +98,11 @@
       "reviewed_at": "2026-10-07T03:11:32.968342+00:00",
       "dominance_note": "All four faces and upper bodies dominate the portrait. The cake is an in-scene prop; no guest or album sleeve is shown.",
       "appearance_note": "John, Paul, George and Ringo; early moptop hair and suits, consistent with the 1962 Love Me Do lineup and appearance.",
-      "manual_period_approvals": []
+      "manual_period_approvals": [],
+      "license_evidence_tag": "PD-Sweden",
+      "license_scope": "Sweden, per source public-domain tag; source page does not provide a separate US public-domain rationale.",
+      "stored_width": 1800,
+      "stored_height": 1438
     },
     {
       "title": "File:The Beatles i Hötorgscity 1963.jpg",
@@ -102,7 +110,7 @@
       "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/The_Beatles_i_H%C3%B6torgscity_1963.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
       "creator": "ingen uppgift",
       "license": "Public domain",
-      "license_url": "",
+      "license_url": "https://commons.wikimedia.org/wiki/Template:PD-US-not_renewed",
       "license_evidence": "PD US not renewed|Sergelgatan|Hötorgscity|Sergelteatern|Beatle boots|PD Sweden|Images with extracted images|Utvald Stockholmsbild|1963 in Stockholm|John Lennon in 1963|The Beatles in 1963|Paul McCartney in 1963|George Harrison in 1963|Ringo Starr in 1963|October 1963 in Sweden|Files with coordinates missing SDC location of creation|October 1963 Sweden photographs|Groups of people jumping|Norrmalm in the 1960s|Black and white group photographs of the Beatles|Portrait photographs of the Beatles",
       "width": 1446,
       "height": 1607,
@@ -129,7 +137,11 @@
       "reviewed_at": "2026-10-07T03:11:32.968342+00:00",
       "dominance_note": "All four Beatles are large foreground figures. Small street passers-by remain incidental in the background.",
       "appearance_note": "John, Paul, George and Ringo; early moptop hair and suits, consistent with the 1962 Love Me Do lineup and appearance.",
-      "manual_period_approvals": []
+      "manual_period_approvals": [],
+      "license_evidence_tag": "PD-Sweden; PD-US-not renewed",
+      "license_scope": "Sweden and United States per source tags; source notes other jurisdictions may retain rights.",
+      "stored_width": 1446,
+      "stored_height": 1607
     }
   ]
 }
