@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "scope": "facebook-global-en-only",
   "approval_policy": "Human review of original photograph, subject, date, license and composition before adding. No automatic search-result approval.",
   "photos": [
@@ -26,7 +26,10 @@
       "complete_composition": true,
       "quality_reviewed": true,
       "reviewed_at": "2026-10-07T02:34:12.774408+00:00",
-      "review_note": "All four Beatles visible; complete supplied composition retained. Reviewed original pixels, not filename alone. Archive context photo, not claimed to depict the 1962 release."
+      "review_note": "All four Beatles visible; complete supplied composition retained. Reviewed original pixels, not filename alone. Archive context photo, not claimed to depict the 1962 release.",
+      "manual_period_override": false,
+      "manual_period_note": "",
+      "artist_dominant": true
     },
     {
       "title": "File:The Beatles, The Ed Sullivan Show group photo.jpg",
@@ -51,7 +54,10 @@
       "complete_composition": true,
       "quality_reviewed": true,
       "reviewed_at": "2026-10-07T02:34:13.074295+00:00",
-      "review_note": "All four Beatles visible; complete supplied composition retained. Reviewed original pixels, not filename alone. Archive context photo, not claimed to depict the 1962 release."
+      "review_note": "All four Beatles visible; complete supplied composition retained. Reviewed original pixels, not filename alone. Archive context photo, not claimed to depict the 1962 release. Reclassified under v2.1: non-artist guests are visually prominent, so this composition is not eligible.",
+      "manual_period_override": false,
+      "manual_period_note": "",
+      "artist_dominant": false
     },
     {
       "title": "File:The Beatles pose for a portrait (1965).jpg",
@@ -75,7 +81,10 @@
       "complete_composition": true,
       "quality_reviewed": true,
       "reviewed_at": "2026-10-07T02:34:13.253846+00:00",
-      "review_note": "All four Beatles visible; complete supplied composition retained. Reviewed original pixels, not filename alone. Archive context photo, not claimed to depict the 1962 release."
+      "review_note": "All four Beatles visible; complete supplied composition retained. Reviewed original pixels, not filename alone. Archive context photo, not claimed to depict the 1962 release.",
+      "manual_period_override": false,
+      "manual_period_note": "",
+      "artist_dominant": true
     }
   ]
 }
