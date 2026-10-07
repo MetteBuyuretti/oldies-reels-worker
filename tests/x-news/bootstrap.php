@@ -25,11 +25,18 @@ function get_current_user_id() { return 42; }
 function check_admin_referer($v) { if (($GLOBALS['nonce_valid'] ?? true) === false) { throw new RuntimeException('BAD_NONCE'); } }
 function admin_url($v) { return 'https://oldiesradyo.com/wp-admin/' . $v; }
 function add_query_arg($args, $url) { return $url . '&' . http_build_query($args); }
-function wp_redirect($v) { echo json_encode(['redirect' => $v, 'rows' => $GLOBALS['wpdb']->data, 'calls' => $GLOBALS['network_calls'] ?? 0]); }
+function wp_redirect($v) { echo json_encode(['redirect' => $v, 'rows' => $GLOBALS['wpdb']->data, 'calls' => $GLOBALS['network_calls'] ?? 0, 'sources'=>$GLOBALS['sources']??[]]); }
 function wp_safe_redirect($v) { wp_redirect($v); }
 function wp_remote_request($url, $args) { $GLOBALS['network_calls'] = ($GLOBALS['network_calls'] ?? 0) + 1; return $GLOBALS['network_response'] ?? new WP_Error('offline'); }
 function add_action(...$args) { $GLOBALS['hooks'][] = $args; }
 function add_submenu_page(...$args) { $GLOBALS['menus'][] = $args; }
+function get_the_terms($id,$taxonomy) { return $GLOBALS['terms'][$id]??[]; }
+function esc_url($v) { return htmlspecialchars($v,ENT_QUOTES,'UTF-8'); }
+function esc_html($v) { return htmlspecialchars($v,ENT_QUOTES,'UTF-8'); }
+function esc_attr($v) { return htmlspecialchars($v,ENT_QUOTES,'UTF-8'); }
+function esc_textarea($v) { return htmlspecialchars($v,ENT_QUOTES,'UTF-8'); }
+function selected($a,$b,$echo=true) { $out=$a===$b?'selected':'';if($echo){echo $out;}return $out; }
+function wp_nonce_field($v) { echo '<input name="_wpnonce" value="fixture">'; }
 
 final class TestDB
 {

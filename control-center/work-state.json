@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T03:23:32.240740+00:00",
+  "updated_at": "2026-10-07T03:28:05.056322+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -169,7 +169,7 @@
     {
       "id": "x-news-20261007",
       "title": "X/Twitter news distribution using existing editorial queue",
-      "status": "checkpointed",
+      "status": "blocked",
       "completed_units": [
         "live-plugin-inventory",
         "main-repository-and-local-x-audit",
@@ -180,11 +180,16 @@
         "reviewed-evidence-and-approval-policy",
         "duplicate-lock-cas-and-uncertain-recovery",
         "108-offline-tests",
-        "22-source-catalog-and14-rss-probes"
+        "22-source-catalog-and14-rss-probes",
+        "120-offline-tests",
+        "controlled-recent-en-wordpress-import",
+        "admin-ui-render-checks",
+        "all19-existing-branch-code-x-audit",
+        "installable-adapter-package"
       ],
-      "last_checkpoint": "2026-10-07T03:23:32.240740+00:00",
-      "next_step": "Finish controlled WP import/render tests and review, save installable package and PR, obtain browser fallback approval to verify live source/schema and deploy.",
-      "note": "API defaults OFF. No live test/post or billable operation. Custom ZIP cannot be uploaded by the current WordPress connector."
+      "last_checkpoint": "2026-10-07T03:28:05.056322+00:00",
+      "next_step": "Obtain browser fallback approval, then inspect current live Command Center 1.0.9 and news schema, upload/activate adapter, validate sources in existing scanner, verify X account/developer and Open Graph. No paid API without explicit budget authorization.",
+      "note": "Code and tests complete, deployment incomplete. API OFF; default uses free web intent with human publication and URL confirmation. No existing workflow/publisher changed."
     }
   ]
 }

@@ -1,10 +1,28 @@
 <?php
 require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/fake-news-repository.php';
 [$row,$x]=setup();
 $scenario=$argv[1]??'intent';
 $_POST=['id'=>1,'intent'=>'intent','confirmed'=>'1'];
 switch($scenario){
     case 'intent': break;
+    case 'sources':
+        $_POST=['id'=>0,'intent'=>'sources'];
+        $GLOBALS['sources']=[['name'=>'Keep custom name','feed_url'=>'https://ultimateclassicrock.com/feed/','is_active'=>0]];
+        break;
+    case 'import_existing':case 'import_new':case 'import_old':case 'import_page':case 'import_draft':case 'import_tr':case 'import_project_category':case 'import_same_source_other_post':
+        $_POST=['id'=>0,'intent'=>'import','post_id'=>$scenario==='import_existing'?10:20,'artist'=>'Elton John','primary'=>'https://www.bbc.com/news/other'];
+        $GLOBALS['posts'][20]=(object)['ID'=>20,'post_status'=>'publish','post_type'=>'post','post_excerpt'=>'Fresh announcement','post_title'=>'Fresh Elton announcement','post_date_gmt'=>gmdate('Y-m-d H:i:s')];
+        $GLOBALS['posts'][10]->post_date_gmt=gmdate('Y-m-d H:i:s');
+        $GLOBALS['urls'][20]='https://oldiesradyo.com/en/new-announcement/';$GLOBALS['languages'][20]='en';
+        $GLOBALS['terms'][20]=[(object)['slug'=>'news-en']];$GLOBALS['terms'][10]=$GLOBALS['terms'][20];
+        if($scenario==='import_old'){$GLOBALS['posts'][20]->post_date_gmt='2016-01-01 00:00:00';}
+        if($scenario==='import_page'){$GLOBALS['posts'][20]->post_type='page';}
+        if($scenario==='import_draft'){$GLOBALS['posts'][20]->post_status='draft';}
+        if($scenario==='import_tr'){$GLOBALS['languages'][20]='tr';}
+        if($scenario==='import_project_category'){$GLOBALS['terms'][20]=[(object)['slug'=>'projects']];}
+        if($scenario==='import_same_source_other_post'){$_POST['primary']='https://www.bbc.com/news/example';}
+        break;
     case 'posted':$x['status']='POSTED';break;
     case 'unapproved':$x['approved_by']=null;break;
     case 'changed_news':$GLOBALS['posts'][10]->post_modified_gmt='2026-10-08 00:00:00';break;

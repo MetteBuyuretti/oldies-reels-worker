@@ -6,10 +6,15 @@ import tempfile
 import unittest
 
 import worker
+import video_factory
 from zero_cost import artist_page_title, deterministic_copy
 
 
 class AnnouncerTests(unittest.TestCase):
+    def test_final_reel_never_drops_below_ten_seconds(self):
+        self.assertAlmostEqual(video_factory.final_reel_duration(9.2), 10.0, places=2)
+        self.assertAlmostEqual(video_factory.final_reel_duration(12.0), 12.12, places=2)
+
     def test_each_female_voice_is_one_day_in_six(self):
         days = [date(2026, 9, 29) + timedelta(days=i) for i in range(18)]
         voices = [worker.scheduled_turkish_voice(day) for day in days]

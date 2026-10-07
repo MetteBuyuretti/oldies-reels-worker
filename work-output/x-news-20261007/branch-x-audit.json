@@ -1,0 +1,82 @@
+[
+  {
+    "branch": "HEAD",
+    "matching_code_files": []
+  },
+  {
+    "branch": "automation/facebook-global-r7",
+    "matching_code_files": []
+  },
+  {
+    "branch": "dual-language-15s",
+    "matching_code_files": []
+  },
+  {
+    "branch": "feature/both-female-dj-voices",
+    "matching_code_files": []
+  },
+  {
+    "branch": "feature/female-dj-voice",
+    "matching_code_files": []
+  },
+  {
+    "branch": "fetch-gemini-audio",
+    "matching_code_files": []
+  },
+  {
+    "branch": "fix/cleanup-retention-audit-20261001",
+    "matching_code_files": []
+  },
+  {
+    "branch": "fix/draft-delivery-idempotency-20260930",
+    "matching_code_files": []
+  },
+  {
+    "branch": "fix/entity-source-validation-eagles-20260930",
+    "matching_code_files": []
+  },
+  {
+    "branch": "fix/facebook-global-dj-voice",
+    "matching_code_files": []
+  },
+  {
+    "branch": "fix/turkish-dj-announcements",
+    "matching_code_files": []
+  },
+  {
+    "branch": "gemini-flash-tr-production",
+    "matching_code_files": []
+  },
+  {
+    "branch": "gemini-tts-natural-dj",
+    "matching_code_files": []
+  },
+  {
+    "branch": "main",
+    "matching_code_files": []
+  },
+  {
+    "branch": "natural-tr-dj-copy",
+    "matching_code_files": []
+  },
+  {
+    "branch": "reels-language-polish",
+    "matching_code_files": []
+  },
+  {
+    "branch": "reels-storage-cleanup",
+    "matching_code_files": []
+  },
+  {
+    "branch": "video-factory-v1",
+    "matching_code_files": []
+  },
+  {
+    "branch": "voiceover-pilot",
+    "matching_code_files": []
+  },
+  {
+    "branch": "zero-cost-final-implementation",
+    "matching_code_files": []
+  }
+]

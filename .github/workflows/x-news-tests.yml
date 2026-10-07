@@ -1,0 +1,24 @@
+name: X News adapter tests
+on:
+  pull_request:
+    paths:
+      - 'wordpress/oldies-x-news-bridge/**'
+      - 'tests/x-news/**'
+      - '.github/workflows/x-news-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  x-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check PHP and required module
+        run: php -r 'if (!extension_loaded("mbstring")) { exit(1); }'
+      - name: PHP syntax
+        run: find wordpress/oldies-x-news-bridge tests/x-news -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Policy, storage and mocked API
+        run: php tests/x-news/run.php
+      - name: Admin actions and shipped browser bundle
+        run: node tests/x-news/browser-and-actions.cjs

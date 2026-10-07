@@ -1,0 +1,11 @@
+{
+  "packages": {
+    "twitter-text": "3.1.0",
+    "twemoji-parser": "11.0.2",
+    "punycode": "1.4.1",
+    "core-js": "2.6.12",
+    "@babel/runtime": "7.29.7"
+  },
+  "entry": "editor-source.js",
+  "build": "NODE_PATH=<build-dependencies>/node_modules esbuild editor-source.js --bundle --minify --outfile=editor.js"
+}
