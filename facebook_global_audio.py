@@ -10,6 +10,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 TEMPLATE = json.loads((ROOT / 'facebook-global-template.json').read_text(encoding='utf-8'))
 
+BRAND_NAME = 'Oldies Radyo'
+BRAND_ADVERT = 'Oldies Radyo. Timeless music. Listen, enjoy, share.'
+if TEMPLATE.get('brand_name') != BRAND_NAME or TEMPLATE.get('brand_translation_allowed') is not False or TEMPLATE.get('advert_text') != BRAND_ADVERT:
+    raise RuntimeError('Facebook Global brand lock violated: the spoken and written brand must remain Oldies Radyo')
+
 
 def build_dj_parts(candidate: dict) -> tuple[str, str]:
     artist = re.sub(r'\s+', ' ', str(candidate.get('artist', ''))).strip()
@@ -32,7 +37,7 @@ def build_dj_parts(candidate: dict) -> tuple[str, str]:
         story += '.'
     if len(story.split()) > TEMPLATE['max_story_words']:
         raise RuntimeError('Facebook DJ story is too long for a relaxed recording')
-    return story, TEMPLATE['advert_text']
+    return story, BRAND_ADVERT
 
 
 def build_dj_script(candidate: dict) -> str:
@@ -54,7 +59,8 @@ def record_part(text: str, role: str, path: Path, project: str, token: str, synt
         'No music, singing, effects, filler or added words. '
     )
     if role == 'advert':
-        prompt += 'This is a separate soft station promotion after the story. Say Oldies Radio clearly: old-eez ray-dee-oh. '
+        prompt += ("This is a separate soft station promotion after the story. The brand name is exactly Oldies Radyo. "
+                   "Do not translate, rewrite or substitute it as Oldies Radio. Pronounce Oldies Radyo clearly: old-eez rah-dee-oh. ")
     else:
         prompt += 'Start directly with the music story, with a small natural pause before the date. '
     raw = synthesize(text=text, prompt=prompt, language=TEMPLATE['language'], voice_name=TEMPLATE['voice'],
@@ -90,13 +96,16 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
     try:
         story_qc = record_part(story, 'story', story_path, project, token, synthesize)
         cached = ROOT / TEMPLATE['advert_asset']
-        if cached.is_file():
-            if hashlib.sha256(cached.read_bytes()).hexdigest() != TEMPLATE.get('advert_sha256'):
+        expected_hash = str(TEMPLATE.get('advert_sha256') or '').strip()
+        if cached.is_file() and expected_hash:
+            if hashlib.sha256(cached.read_bytes()).hexdigest() != expected_hash:
                 raise RuntimeError('Facebook approved station recording hash mismatch')
             advert_path.write_bytes(cached.read_bytes())
             advert_qc = inspect_audio(advert_path)
             advert_qc = {'duration_seconds': advert_qc['duration_seconds'], 'cached_approved_recording': True}
         else:
+            # The previous cached signoff said "Oldies Radio" and is intentionally never reused.
+            # Until a new Oldies Radyo signoff is approved and hash-locked, synthesize the exact locked brand text.
             advert_qc = record_part(advert, 'advert', advert_path, project, token, synthesize)
         gap = TEMPLATE['advert_gap_seconds']
         duration = story_qc['duration_seconds'] + gap + advert_qc['duration_seconds']
@@ -116,7 +125,7 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
     except Exception:
         path.unlink(missing_ok=True)
         raise
-    recording = {'version': TEMPLATE['version'], 'story_text': story, 'advert_text': advert,
+    recording = {'version': TEMPLATE['version'], 'brand_name': BRAND_NAME, 'story_text': story, 'advert_text': advert,
                  'story': story_qc, 'advert': advert_qc, 'advert_gap_seconds': gap,
                  'advert_start_seconds': round(story_qc['duration_seconds'] + gap, 3),
                  'speedup_applied': False, 'background_music_added': False}
@@ -175,7 +184,8 @@ def validate_media(video: Path, candidate: dict) -> dict:
 
 def validate_recording(video: Path, candidate: dict) -> dict:
     recording = candidate.get('dj_recording', {})
-    if (recording.get('version') != TEMPLATE['version'] or recording.get('advert_text') != TEMPLATE['advert_text']
+    if (recording.get('version') != TEMPLATE['version'] or recording.get('brand_name') != BRAND_NAME
+            or recording.get('advert_text') != BRAND_ADVERT or 'Oldies Radio' in str(candidate.get('dj_script_en', ''))
             or recording.get('speedup_applied') is not False
             or recording.get('advert_gap_seconds') != TEMPLATE['advert_gap_seconds']
             or recording.get('background_music_added') is not False):
