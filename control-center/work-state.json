@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T02:19:48.643631+00:00",
+  "updated_at": "2026-10-07T02:35:16.117127+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -169,7 +169,7 @@
     {
       "id": "facebook-global-dj-voice-20261007",
       "title": "Facebook Global — English DJ voice fix",
-      "status": "done",
+      "status": "in_progress",
       "completed_units": [
         "current-source-audit",
         "facebook-only-audio-gates",
@@ -187,11 +187,16 @@
         "embedded-AAC-700-packets-263kB",
         "15s1080x1920-three-scene-QA",
         "local-English-speech-transcription",
-        "durable-reviewable-preview-report"
+        "durable-reviewable-preview-report",
+        "warm-recording-template-v2",
+        "1.1s-digital-advert-gap",
+        "reviewed-three-period-photos",
+        "full-frame-no-zoom-renderer",
+        "24-Facebook-regression-tests"
       ],
-      "last_checkpoint": "2026-10-07T02:19:48.643631+00:00",
-      "next_step": "Owner reviews test MP4. Apply reviewed fix to main only after further live-use instruction; no live publish performed.",
-      "note": "Run37561125079 success. English DJ11.11s; MP415s1080x1920AAC48kHzstereo700packets263kB. No background music, no delivery.13/13FB tests;36/37suite with baseline Turkish failure. ASR story intelligible; station name ambiguous, human tone/pronunciation review remains. PR22 draft, main unchanged."
+      "last_checkpoint": "2026-10-07T02:35:16.117127+00:00",
+      "next_step": "Run real authenticated TTS preview on fix branch; verify actual speech, gap and three-frame composition.",
+      "note": "part-005 checkpoint. Relaxed128wpm template; separate promotion;24Facebook tests pass. No live publish."
     }
   ]
 }

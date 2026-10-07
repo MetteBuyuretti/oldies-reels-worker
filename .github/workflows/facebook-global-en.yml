@@ -57,8 +57,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Verify Facebook audio failure gates
-        run: python -m unittest test_facebook_global_audio -v
+      - name: Verify Facebook audio and period-photo gates
+        run: python -m unittest test_facebook_global_audio test_facebook_global_visuals -v
 
       - name: Create English DJ Reel and validate audio before delivery
         env:

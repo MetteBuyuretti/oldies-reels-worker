@@ -76,7 +76,7 @@ class FacebookAudioTests(unittest.TestCase):
                                      "OLDIES_REELS_LANGUAGE": "en", "OLDIES_PREVIEW_ONLY": "true", "OLDIES_TTS_ENABLED": "false"}), \
              patch.object(worker, "OUTPUT", self.directory), \
              patch.object(worker, "research_candidates", return_value=[candidate]), \
-             patch.object(worker, "download_commons_photos", return_value=([Path("one"), Path("two"), Path("three")], [])), \
+             patch.object(worker.facebook_global_visuals, "load_period_photos", return_value=([Path("one"), Path("two"), Path("three")], [])), \
              patch.object(worker, "render") as render, patch.object(worker, "publish_facebook_global") as publish:
             with self.assertRaisesRegex(RuntimeError, "English DJ voice-over is mandatory"):
                 worker.main()
@@ -94,34 +94,67 @@ class FacebookAudioTests(unittest.TestCase):
             audio.validate_media(video, self.candidate)
 
     def test_long_reel_is_rejected(self):
-        video = self.media("long.mp4", "sine=frequency=440:sample_rate=48000", duration=16)
-        with self.assertRaisesRegex(RuntimeError, "10–15-second"):
+        video = self.media("long.mp4", "sine=frequency=440:sample_rate=48000", duration=19)
+        with self.assertRaisesRegex(RuntimeError, "10–18-second"):
             audio.validate_media(video, self.candidate)
 
     def test_copy_is_short_factual_english(self):
         script = audio.build_dj_script(self.candidate)
         self.assertTrue(script.startswith("The Beatles released"))
         self.assertIn("Love Me Do", script)
-        self.assertIn("Oldies Radyo", script)
+        self.assertIn("Oldies Radio", script)
         self.assertLessEqual(len(script.split()), 38)
         self.assertNotIn("...", script)
 
-    def test_small_tts_overrun_is_timed_without_cutting_words(self):
-        source = self.media("take.mp4", "sine=frequency=440:sample_rate=48000", duration=15.1)
-        path = audio.synthesize_dj(self.candidate, self.directory, "existing", "unused", lambda **kwargs: source.read_bytes())
-        self.assertTrue(9.5 <= audio.inspect_audio(path)["duration_seconds"] <= 14.4)
+    def test_separate_advert_has_a_real_silent_gap_and_no_speedup(self):
+        story = self.media("story.mp4", "sine=frequency=440:sample_rate=48000", duration=9.5)
+        advert = self.media("advert.mp4", "sine=frequency=660:sample_rate=48000", duration=3.5)
+        with patch.object(audio, "ROOT", self.directory):
+            path = audio.synthesize_dj(self.candidate, self.directory, "existing", "unused",
+                                       lambda **kwargs: (advert if kwargs['text'].startswith('Oldies') else story).read_bytes())
+        record = self.candidate['dj_recording']
+        self.assertFalse(record['speedup_applied'])
+        self.assertEqual(record['advert_gap_seconds'], 1.1)
+        self.assertGreater(record['advert_start_seconds'], record['story']['duration_seconds'])
+        import array
+        raw = subprocess.check_output(['ffmpeg', '-v', 'error', '-ss', str(record['story']['duration_seconds'] + .25),
+                                       '-i', str(path), '-t', '0.5', '-f', 'f32le', '-ac', '1', 'pipe:1'])
+        samples = array.array('f'); samples.frombytes(raw)
+        self.assertLess(max(abs(v) for v in samples), .001)
+        self.assertLess(audio.validate_recording(path, self.candidate)['gap_max_volume_db'], -50)
 
-    def test_excessive_tts_overrun_still_fails(self):
-        source = self.media("long-take.mp4", "sine=frequency=440:sample_rate=48000", duration=17)
-        with self.assertRaisesRegex(RuntimeError, "must fit 15 seconds"):
-            audio.synthesize_dj(self.candidate, self.directory, "existing", "unused", lambda **kwargs: source.read_bytes())
+    def test_excessive_tts_overrun_still_fails_without_speedup(self):
+        source = self.media("long-take.mp4", "sine=frequency=440:sample_rate=48000", duration=18)
+        with patch.object(audio, "ROOT", self.directory):
+            with self.assertRaisesRegex(RuntimeError, "too long"):
+                audio.synthesize_dj(self.candidate, self.directory, "existing", "unused", lambda **kwargs: source.read_bytes())
         self.assertFalse((self.directory / "voiceover-facebook-en.mp3").exists())
+
+    def test_rushed_take_is_rejected_instead_of_extreme_stretch(self):
+        source = self.media("rushed.mp4", "sine=frequency=440:sample_rate=48000", duration=3)
+        with self.assertRaisesRegex(RuntimeError, "too rushed"):
+            audio.synthesize_dj(self.candidate, self.directory, "existing", "unused", lambda **kwargs: source.read_bytes())
+
+    def test_advert_tts_failure_invalidates_the_whole_recording(self):
+        source = self.media("story.mp4", "sine=frequency=440:sample_rate=48000", duration=9.5)
+        def synthesize(**kwargs):
+            if kwargs['text'].startswith('Oldies'):
+                raise RuntimeError('advert TTS failed')
+            return source.read_bytes()
+        with patch.object(audio, "ROOT", self.directory):
+            with self.assertRaisesRegex(RuntimeError, 'advert TTS failed'):
+                audio.synthesize_dj(self.candidate, self.directory, 'existing', 'unused', synthesize)
+        self.assertFalse((self.directory / 'voiceover-facebook-en.mp3').exists())
+
+    def test_missing_recording_template_blocks_publication(self):
+        with self.assertRaisesRegex(RuntimeError, 'approved warm DJ'):
+            audio.validate_recording(self.directory/'missing.mp4', self.candidate)
 
     def test_short_complete_source_is_preferred_to_malformed_title(self):
         self.candidate['source_text'] = "The Beatles released their debut single ‘Love Me Do’ in Britain. The record also featured ‘P.S. I Love You’ on the backside."
         self.candidate['instagram_music_title'] = "Love Me Do’ in Britain. The record also featured ‘P.S. I Love You"
         script = audio.build_dj_script(self.candidate)
-        self.assertTrue(script.startswith("The Beatles released their debut single ‘Love Me Do’ in Britain."))
+        self.assertTrue(script.startswith("The Beatles released their debut single ‘Love Me Do’ in Britain"))
         self.assertIn("on this day in 1962", script)
         self.assertNotIn("P.S.", script)
         self.assertLessEqual(len(script.split()), 38)
