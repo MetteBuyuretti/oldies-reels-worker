@@ -800,26 +800,22 @@ def build_english_dj_script(candidate: dict) -> str:
     if kind == "births":
         script = (
             f"Born on this day in {year}: {artist}. "
-            "Another voice from the golden years of music, remembered here on Oldies Radyo. "
-            "And there's more great music ahead."
+            "A familiar voice from the golden years of music, and a name worth remembering."
         )
     elif kind == "deaths":
         script = (
             f"Remembering {artist}, who left us on this day in {year}. "
-            "The music lives on — right here on Oldies Radyo. "
-            "And there's more great music ahead."
+            "The records remain, and so does the story."
         )
     elif title:
         script = (
             f"On this day in {year}, {artist} made music history with '{title}'. "
-            "You're with Oldies Radyo — keeping the great records and their stories alive. "
-            "And there's more great music ahead."
+            "One of those records that still takes you right back."
         )
     else:
         script = (
             f"On this day in {year}, {artist} made music history. "
-            "You're with Oldies Radyo — another story from the golden years of music. "
-            "And there's more great music ahead."
+            "Another great story from the golden years of music."
         )
     return re.sub(r"\s+", " ", script).strip()
 
@@ -1077,13 +1073,30 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     for index, (segment_language, text) in enumerate(parts):
         voice = title_voice if segment_language.startswith("en-") and mode == "tr" else main_voice
         language = segment_language if segment_language.startswith("en-") and mode == "tr" else main_language
-        raw = _google_tts_bytes(
-            text=text,
-            language=language,
-            voice_name=voice,
-            project=project,
-            token=token,
-        )
+        if mode == "en":
+            text = (
+                f"<speak>{html.escape(text)}"
+                '<break time="900ms"/>Oldies Radyo.'
+                '<break time="350ms"/>The music you remember, and the stories behind it. '
+                'Listen, like and share.</speak>'
+            )
+            raw = _google_tts_bytes(
+                text=text,
+                language=language,
+                voice_name=voice,
+                project=project,
+                token=token,
+                ssml=True,
+                speaking_rate=0.96,
+            )
+        else:
+            raw = _google_tts_bytes(
+                text=text,
+                language=language,
+                voice_name=voice,
+                project=project,
+                token=token,
+            )
         segment = directory / f"voiceover-segment-{index}.mp3"
         segment.write_bytes(raw)
         segment_paths.append(segment)
@@ -1094,7 +1107,18 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
         raise RuntimeError("Generated Google voiceover failed size validation")
 
     script = build_english_dj_script(candidate) if mode == "en" else build_turkish_dj_script(candidate)
-    candidate["dj_script_en" if mode == "en" else "dj_script_tr"] = script
+    if mode == "en":
+        candidate["dj_script_en"] = (
+            script
+            + " [pause] Oldies Radyo. [pause] The music you remember, and the stories behind it. "
+              "Listen, like and share."
+        )
+        duration = _audio_duration(path)
+        if not 7.0 <= duration <= 18.5:
+            raise VoiceoverQualityError(f"English DJ voiceover does not fit the Reel: {duration:.1f}s")
+        candidate["voiceover_duration_seconds"] = round(duration, 2)
+    else:
+        candidate["dj_script_tr"] = script
     candidate["tts_voice"] = main_voice
     candidate["tts_language"] = main_language
     candidate["tts_engine"] = "chirp3-hd"
@@ -1443,6 +1467,10 @@ def main() -> None:
         "enabled": bool(voiceover),
         "source": voiceover_source,
     }
+    if language == "en" and not voiceover:
+        raise RuntimeError(
+            "Facebook Global requires a natural English DJ voiceover; refusing to render or publish a silent Reel."
+        )
 
     video = OUTPUT / "oldies-reels-draft.mp4"
     if voiceover:
