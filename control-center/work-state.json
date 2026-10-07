@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T20:41:48.805Z",
+  "updated_at": "2026-10-07T03:10:25.727568+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -165,6 +165,20 @@
       "last_checkpoint": "2026-10-04T21:15:20.669Z",
       "next_step": "Batch008 queue:TR860–864→EN1937–1941 five remaining1960s artist features, then TR866–870→EN1942–1946 five music-style histories. Fresh native reads and full source review. TR613 EN554;59unpaired;450short-EN review candidates;70full translations complete;five existing news reviewed. No background worker.",
       "note": "Checkpoint010: ten additional source-grounded full translations in status follow-up; total70. All336 source paragraphs retained,10EN pages/20native language records/10live switches/27internal links and images pass. Four taxonomy labels architecture-locked;3 source holds;duplicate-description/news-footer/mobile viewport QA pending. ExistingENURLs/TR/globaltheme preserved."
+    },
+    {
+      "id": "x-news-20261007",
+      "title": "X/Twitter news distribution using existing editorial queue",
+      "status": "in_progress",
+      "completed_units": [
+        "live-plugin-inventory",
+        "main-repository-and-local-x-audit",
+        "official-api-pricing-auth-limit-verification",
+        "shared-news-table-contract"
+      ],
+      "last_checkpoint": "2026-10-07T03:10:25.727568+00:00",
+      "next_step": "Implement zero-cost X News module over existing news_articles metadata; test; confirm live source before deployment.",
+      "note": "Live Command Center 1.0.9 differs from local 1.0.3. Do not replace. API disabled; no spend or public test."
     }
   ]
 }
