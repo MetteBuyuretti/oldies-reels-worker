@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T02:07:45.740598+00:00",
+  "updated_at": "2026-10-07T02:10:33.511538+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -174,11 +174,15 @@
         "current-source-audit",
         "facebook-only-audio-gates",
         "10-facebook-regression-tests",
-        "baseline-TR-test-failure-confirmed"
+        "baseline-TR-test-failure-confirmed",
+        "real-TTS-success-first-preview",
+        "duration-overrun-block-verified",
+        "bounded-pitch-preserving-timing",
+        "12-facebook-regression-tests"
       ],
-      "last_checkpoint": "2026-10-07T02:07:45.740598+00:00",
-      "next_step": "Run forced Facebook-only preview on fix branch; inspect real English narration, audio stream and original 9:16 visuals. No live publish.",
-      "note": "Existing TTS identity reused. 10/10 targeted tests passed; 33/34 suite, one pre-existing Turkish test failure. Other workflow files unchanged."
+      "last_checkpoint": "2026-10-07T02:10:33.511538+00:00",
+      "next_step": "Run second forced preview after bounded timing correction; inspect actual MP4.",
+      "note": "Run37560517707 produced real English Gemini audio but 15.02s was rejected before rendering/delivery. Mild atempo only for <=15.65s; longer takes still fail. Targeted12/12 tests passed. No live publish."
     }
   ]
 }

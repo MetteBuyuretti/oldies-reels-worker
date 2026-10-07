@@ -106,6 +106,17 @@ class FacebookAudioTests(unittest.TestCase):
         self.assertLessEqual(len(script.split()), 38)
         self.assertNotIn("...", script)
 
+    def test_small_tts_overrun_is_timed_without_cutting_words(self):
+        source = self.media("take.mp4", "sine=frequency=440:sample_rate=48000", duration=15.1)
+        path = audio.synthesize_dj(self.candidate, self.directory, "existing", "unused", lambda **kwargs: source.read_bytes())
+        self.assertTrue(9.5 <= audio.inspect_audio(path)["duration_seconds"] <= 14.4)
+
+    def test_excessive_tts_overrun_still_fails(self):
+        source = self.media("long-take.mp4", "sine=frequency=440:sample_rate=48000", duration=17)
+        with self.assertRaisesRegex(RuntimeError, "must fit 15 seconds"):
+            audio.synthesize_dj(self.candidate, self.directory, "existing", "unused", lambda **kwargs: source.read_bytes())
+        self.assertFalse((self.directory / "voiceover-facebook-en.mp3").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

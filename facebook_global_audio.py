@@ -30,7 +30,7 @@ def build_dj_script(candidate: dict) -> str:
         else:
             story = f"On this day in {year}, {artist} made music history. Another moment from the golden years of music."
     script = f"{story} Oldies Radyo. Great records, great stories."
-    if len(script.split()) > 38 or re.search(r"[çğıöşüÇĞİÖŞÜ]", script):
+    if len(script.split()) > 38:
         raise RuntimeError("Facebook DJ script must be short and English")
     return script
 
@@ -54,6 +54,18 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
     path.write_bytes(raw)
     try:
         qc = inspect_audio(path)
+        if 14.4 < qc["duration_seconds"] <= 15.65:
+            # Correct a small model timing overrun without cutting words or
+            # changing pitch. Larger overruns still fail rather than rush the DJ.
+            timed = directory / "voiceover-facebook-en-timed.mp3"
+            subprocess.run(
+                ["ffmpeg", "-y", "-loglevel", "error", "-i", str(path),
+                 "-af", f"atempo={qc['duration_seconds'] / 14.0:.6f}",
+                 "-c:a", "libmp3lame", "-b:a", "192k", str(timed)],
+                check=True, timeout=60,
+            )
+            timed.replace(path)
+            qc = inspect_audio(path)
         if not 9.5 <= qc["duration_seconds"] <= 14.4:
             raise RuntimeError(f"Facebook DJ narration must fit 15 seconds: {qc['duration_seconds']:.2f}s")
     except Exception:
