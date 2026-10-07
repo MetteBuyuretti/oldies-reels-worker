@@ -23,13 +23,19 @@ def build_dj_script(candidate: dict) -> str:
         # Prefer a complete, short sourced sentence; never read a truncated caption.
         source = re.sub(r"\s+", " ", str(candidate.get("source_text", ""))).strip()
         first = re.split(r"(?<=[.!?])\s+(?=[A-Z])", source, maxsplit=1)[0]
-        if first and artist.casefold() in first.casefold() and 12 <= len(first.split()) <= 28:
+        if first and artist.casefold() in first.casefold() and 4 <= len(first.split()) <= 28:
             story = first.rstrip(".!?") + "."
+            if len(first.split()) < 20:
+                story += f" That was on this day in {year}."
         elif title:
+            if re.search(r"[.!?]", title):
+                raise RuntimeError("Facebook DJ copy rejected a malformed multi-sentence song title")
             story = f"On this day in {year}, {artist} made music history with '{title}'."
         else:
             story = f"On this day in {year}, {artist} made music history. Another moment from the golden years of music."
-    script = f"{story} Oldies Radyo. Great records, great stories."
+    closing = ("You're with Oldies Radyo — great records, and the stories behind them."
+               if len(story.split()) < 23 else "Oldies Radyo. Great records, great stories.")
+    script = f"{story} {closing}"
     if len(script.split()) > 38:
         raise RuntimeError("Facebook DJ script must be short and English")
     return script

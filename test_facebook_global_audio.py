@@ -117,6 +117,15 @@ class FacebookAudioTests(unittest.TestCase):
             audio.synthesize_dj(self.candidate, self.directory, "existing", "unused", lambda **kwargs: source.read_bytes())
         self.assertFalse((self.directory / "voiceover-facebook-en.mp3").exists())
 
+    def test_short_complete_source_is_preferred_to_malformed_title(self):
+        self.candidate['source_text'] = "The Beatles released their debut single ‘Love Me Do’ in Britain. The record also featured ‘P.S. I Love You’ on the backside."
+        self.candidate['instagram_music_title'] = "Love Me Do’ in Britain. The record also featured ‘P.S. I Love You"
+        script = audio.build_dj_script(self.candidate)
+        self.assertTrue(script.startswith("The Beatles released their debut single ‘Love Me Do’ in Britain."))
+        self.assertIn("on this day in 1962", script)
+        self.assertNotIn("P.S.", script)
+        self.assertLessEqual(len(script.split()), 38)
+
 
 if __name__ == "__main__":
     unittest.main()

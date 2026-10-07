@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T02:10:33.511538+00:00",
+  "updated_at": "2026-10-07T02:15:18.193939+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -178,11 +178,14 @@
         "real-TTS-success-first-preview",
         "duration-overrun-block-verified",
         "bounded-pitch-preserving-timing",
-        "12-facebook-regression-tests"
+        "12-facebook-regression-tests",
+        "second-preview-audio-and-9x16-pass",
+        "three-scene-visual-QA",
+        "Facebook-only-short-source-copy-repair"
       ],
-      "last_checkpoint": "2026-10-07T02:10:33.511538+00:00",
-      "next_step": "Run second forced preview after bounded timing correction; inspect actual MP4.",
-      "note": "Run37560517707 produced real English Gemini audio but 15.02s was rejected before rendering/delivery. Mild atempo only for <=15.65s; longer takes still fail. Targeted12/12 tests passed. No live publish."
+      "last_checkpoint": "2026-10-07T02:15:18.193939+00:00",
+      "next_step": "Final forced preview with complete sourced English sentence; local speech transcription and durable delivery.",
+      "note": "Run37560720854 technical success:15s1080x1920AAC701packets252kB; no WP/Facebook delivery. Visual QA preserved three scenes. Detected upstream malformed extracted song title; Facebook narrator now prefers complete short source sentence. No shared research changes."
     }
   ]
 }
