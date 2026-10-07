@@ -23,6 +23,7 @@ class FacebookVisualTests(unittest.TestCase):
                           source='https://commons.wikimedia.org/wiki/File:Period.jpg', license='Public domain',
                           title='File:The Beatles 1963.jpg', asset='photo.jpg', composition_id='photo-one',
                           sha256=hashlib.sha256(path.read_bytes()).hexdigest(), source_cropped=False,
+                          manual_period_override=False, manual_period_note='',
                           **{flag: True for flag in visuals.REVIEW_FLAGS})
         self.candidate = dict(artist='The Beatles', event_date='1962-10-05')
 
@@ -43,6 +44,39 @@ class FacebookVisualTests(unittest.TestCase):
                 photo = dict(self.photo); photo[flag] = False
                 with self.assertRaisesRegex(RuntimeError, 'approval'):
                     visuals.validate_photo(photo, 'The Beatles', 1962, self.root)
+
+    def test_artist_must_dominate_the_composition(self):
+        self.photo['artist_dominant'] = False
+        with self.assertRaisesRegex(RuntimeError, 'approval'):
+            visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root)
+
+    def test_plus_two_year_photo_requires_manual_approval(self):
+        self.photo['photo_year'] = 1964
+        with self.assertRaisesRegex(RuntimeError, 'manual period approval'):
+            visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root)
+        self.photo['manual_period_override'] = True
+        self.photo['manual_period_note'] = 'Owner/editor confirmed appearance and era match.'
+        self.assertEqual(visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root), self.root/'photo.jpg')
+
+    def test_plus_three_year_photo_is_never_automatic_or_manual_fallback(self):
+        self.photo['photo_year'] = 1965
+        self.photo['manual_period_override'] = True
+        self.photo['manual_period_note'] = 'Even manual approval cannot exceed the hard ±2 boundary.'
+        with self.assertRaisesRegex(RuntimeError, 'outside the locked event-year policy'):
+            visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root)
+
+    def test_same_year_is_selected_before_plus_one(self):
+        plus_one = dict(self.photo, photo_year=1963, composition_id='plus-one')
+        same = dict(self.photo, photo_year=1962, composition_id='same-year')
+        p2 = self.root/'same.jpg'
+        Image.new('RGB',(1600,800),'gray').save(p2)
+        same['asset']='same.jpg'; same['sha256']=hashlib.sha256(p2.read_bytes()).hexdigest()
+        p3 = self.root/'third.jpg'
+        Image.new('RGB',(1600,800),'black').save(p3)
+        third = dict(same, asset='third.jpg', sha256=hashlib.sha256(p3.read_bytes()).hexdigest(), composition_id='same-year-2')
+        (self.root / visuals.TEMPLATE['photo_bank']).write_text(json.dumps({'photos':[plus_one, same, third]}))
+        photos, credits = visuals.load_period_photos(self.candidate, self.root, self.root)
+        self.assertEqual([p['photo_year'] for p in credits[:2]], [1962, 1962])
 
     def test_statue_plaque_and_crops_are_rejected(self):
         for title in ('Beatles statue', 'Beatles plaque', 'Beatles photo cropped', 'Beatles crop'):
