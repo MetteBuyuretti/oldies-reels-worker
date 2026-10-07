@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T03:10:25.727568+00:00",
+  "updated_at": "2026-10-07T03:23:32.240740+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -169,16 +169,22 @@
     {
       "id": "x-news-20261007",
       "title": "X/Twitter news distribution using existing editorial queue",
-      "status": "in_progress",
+      "status": "checkpointed",
       "completed_units": [
         "live-plugin-inventory",
         "main-repository-and-local-x-audit",
         "official-api-pricing-auth-limit-verification",
-        "shared-news-table-contract"
+        "shared-news-table-contract",
+        "x-adapter-shared-metadata",
+        "official-browser-counter-bundled",
+        "reviewed-evidence-and-approval-policy",
+        "duplicate-lock-cas-and-uncertain-recovery",
+        "108-offline-tests",
+        "22-source-catalog-and14-rss-probes"
       ],
-      "last_checkpoint": "2026-10-07T03:10:25.727568+00:00",
-      "next_step": "Implement zero-cost X News module over existing news_articles metadata; test; confirm live source before deployment.",
-      "note": "Live Command Center 1.0.9 differs from local 1.0.3. Do not replace. API disabled; no spend or public test."
+      "last_checkpoint": "2026-10-07T03:23:32.240740+00:00",
+      "next_step": "Finish controlled WP import/render tests and review, save installable package and PR, obtain browser fallback approval to verify live source/schema and deploy.",
+      "note": "API defaults OFF. No live test/post or billable operation. Custom ZIP cannot be uploaded by the current WordPress connector."
     }
   ]
 }
