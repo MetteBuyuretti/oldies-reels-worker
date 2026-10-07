@@ -1,5 +1,5 @@
 {
-  "version": "2.1",
+  "version": "3.0",
   "scope": "facebook-global-en-only",
   "voice": "Charon",
   "language": "en-US",
@@ -12,7 +12,7 @@
   "advert_asset": "assets/facebook/en-warm-signoff-radyo-v3.mp3",
   "ending_tail_seconds": 0.6,
   "max_voiceover_seconds": 17.4,
-  "max_video_seconds": 18,
+  "max_video_seconds": 18.0,
   "max_story_words": 25,
   "photo_bank": "facebook-global-photo-bank.json",
   "photo_count": 3,
@@ -29,5 +29,8 @@
   "same_year_first": true,
   "automatic_period_distance_years": 1,
   "manual_period_distance_years": 2,
-  "artist_dominant_required": true
+  "artist_dominant_required": true,
+  "advert_approved": false,
+  "advert_approval": null,
+  "preview_signoff_generation_allowed": true
 }

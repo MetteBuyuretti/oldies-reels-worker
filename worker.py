@@ -1369,6 +1369,7 @@ def publish_facebook_global(candidate: dict, video: Path, bearer: str, base_url:
     """Deliver one rendered English Reel to the isolated Facebook Global companion."""
     facebook_global_audio.validate_media(video, candidate)
     facebook_global_audio.validate_recording(video, candidate)
+    facebook_global_audio.require_approved_signoff(candidate)
     facebook_global_visuals.validate_publish(candidate)
     public_url = publish_delivery_asset(candidate, video)
     if not public_url:

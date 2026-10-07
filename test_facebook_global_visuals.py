@@ -23,12 +23,52 @@ class FacebookVisualTests(unittest.TestCase):
                           source='https://commons.wikimedia.org/wiki/File:Period.jpg', license='Public domain',
                           title='File:The Beatles 1963.jpg', asset='photo.jpg', composition_id='photo-one',
                           sha256=hashlib.sha256(path.read_bytes()).hexdigest(), source_cropped=False,
-                          manual_period_override=False, manual_period_note='',
+                          manual_period_approvals=[], source_is_cover=False, guest_equal_weight=False, guest_distracts=False,
+                          artist_is_background=False, dominance_note='All four musicians are the foreground subject.',
+                          appearance_note='1962 lineup and early suits and hair verified.', reviewed_by='test editor',
                           **{flag: True for flag in visuals.REVIEW_FLAGS})
         self.candidate = dict(artist='The Beatles', event_date='1962-10-05')
 
     def tearDown(self):
         self.temp.cleanup()
+
+    def audit(self):
+        return {'artist':'The Beatles','event_year':1962,'same_year_review_complete':True,
+                'plus_one_review_complete':True,'reason':'Same year source research did not yield three qualifying assets.',
+                'reviewed_by':'test editor','reviewed_at':'2026-10-07','search_sources':['https://commons.wikimedia.org/wiki/Category:The_Beatles_in_1962']}
+
+    def test_equal_weight_guest_is_blocked_even_with_the_correct_artist(self):
+        self.photo['guest_equal_weight'] = True
+        with self.assertRaisesRegex(RuntimeError, 'equal-weight guests'):
+            visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root)
+
+    def test_appearance_review_is_required(self):
+        self.photo['correct_appearance'] = False
+        with self.assertRaisesRegex(RuntimeError, 'appearance review'):
+            visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root)
+
+    def test_cover_and_copyright_dispute_are_rejected(self):
+        p=dict(self.photo,source_is_cover=True)
+        with self.assertRaisesRegex(RuntimeError,'cover'):
+            visuals.validate_photo(p,'The Beatles',1962,self.root)
+        p=dict(self.photo,copyright_disputed=True)
+        with self.assertRaisesRegex(RuntimeError,'copyright dispute'):
+            visuals.validate_photo(p,'The Beatles',1962,self.root)
+
+    def test_plus_two_approval_cannot_be_reused_for_a_different_event_year(self):
+        self.photo['photo_year']=1964
+        self.photo['manual_period_approvals']=[{'event_year':1963,'approved':True,'photo_sha256':self.photo['sha256']}]
+        with self.assertRaisesRegex(RuntimeError,'event-specific manual'):
+            visuals.validate_photo(self.photo,'The Beatles',1962,self.root)
+
+    def test_no_same_year_research_blocks_plus_one_fallback(self):
+        photos=[]
+        for i,color in enumerate(['red','green','blue']):
+            path=self.root/f'photo-{i}.jpg';Image.new('RGB',(1600,800),color).save(path)
+            photos.append(dict(self.photo,asset=path.name,sha256=hashlib.sha256(path.read_bytes()).hexdigest(),composition_id=f'distinct-{i}'))
+        (self.root/visuals.TEMPLATE['photo_bank']).write_text(json.dumps({'photos':photos}))
+        with self.assertRaisesRegex(RuntimeError,'same-year-first source research'):
+            visuals.load_period_photos(self.candidate,self.root,self.root)
 
     def test_valid_reviewed_period_photo_is_accepted(self):
         self.assertEqual(visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root), self.root/'photo.jpg')
@@ -54,9 +94,14 @@ class FacebookVisualTests(unittest.TestCase):
         self.photo['photo_year'] = 1964
         with self.assertRaisesRegex(RuntimeError, 'manual period approval'):
             visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root)
-        self.photo['manual_period_override'] = True
-        self.photo['manual_period_note'] = 'Owner/editor confirmed appearance and era match.'
+        self.photo['manual_period_approvals'] = [{'event_year':1962,'approved':True,'approved_by':'test editor',
+             'approved_at':'2026-10-07','photo_sha256':self.photo['sha256'], 'reason':'No approved same-year or plus-one set exists.',
+             'appearance_checks':{'hair':'Early hair matches verified reference.', 'clothing':'Early suits match reference.',
+                                  'lineup':'John Paul George and Ringo remain correct.', 'stage':'Stage context consistent with the early era.'}}]
         self.assertEqual(visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root), self.root/'photo.jpg')
+        self.photo['manual_period_approvals'][0]['appearance_checks']['hair'] = True
+        with self.assertRaisesRegex(RuntimeError, 'manual period approval'):
+            visuals.validate_photo(self.photo, 'The Beatles', 1962, self.root)
 
     def test_plus_three_year_photo_is_never_automatic_or_manual_fallback(self):
         self.photo['photo_year'] = 1965
@@ -74,7 +119,7 @@ class FacebookVisualTests(unittest.TestCase):
         p3 = self.root/'third.jpg'
         Image.new('RGB',(1600,800),'black').save(p3)
         third = dict(same, asset='third.jpg', sha256=hashlib.sha256(p3.read_bytes()).hexdigest(), composition_id='same-year-2')
-        (self.root / visuals.TEMPLATE['photo_bank']).write_text(json.dumps({'photos':[plus_one, same, third]}))
+        (self.root / visuals.TEMPLATE['photo_bank']).write_text(json.dumps({'photos':[plus_one, same, third], 'year_research':[self.audit()]}))
         photos, credits = visuals.load_period_photos(self.candidate, self.root, self.root)
         self.assertEqual([p['photo_year'] for p in credits[:2]], [1962, 1962])
 
@@ -106,7 +151,7 @@ class FacebookVisualTests(unittest.TestCase):
         self.assertEqual(canvas.size, (1080,1920))
 
     def test_visual_publish_block_runs_before_upload_or_wordpress(self):
-        with patch.object(worker.facebook_global_audio,'validate_media'), patch.object(worker.facebook_global_audio,'validate_recording'), patch.object(worker,'publish_delivery_asset') as upload, patch.object(worker.requests,'post') as post:
+        with patch.object(worker.facebook_global_audio,'validate_media'), patch.object(worker.facebook_global_audio,'validate_recording'), patch.object(worker.facebook_global_audio,'require_approved_signoff'), patch.object(worker,'publish_delivery_asset') as upload, patch.object(worker.requests,'post') as post:
             with self.assertRaisesRegex(RuntimeError, 'three distinct'):
                 worker.publish_facebook_global(self.candidate, self.root/'unused.mp4', 'unused', 'https://unused.invalid')
             upload.assert_not_called(); post.assert_not_called()

@@ -8,31 +8,45 @@ import shutil
 import subprocess
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageOps
-from facebook_global_audio import TEMPLATE, inspect_audio
+from facebook_global_audio import TEMPLATE, inspect_audio, validate_template
 
 ROOT = Path(__file__).resolve().parent
-BANNED = re.compile(r'\b(?:statue|plaque|memorial|ticket|logo|building|cropped|crop|collage|illustration)\b', re.I)
-REVIEW_FLAGS = ('approved', 'artist_verified', 'period_verified', 'complete_composition', 'quality_reviewed', 'artist_dominant')
+BANNED = re.compile(r'\b(?:statue|plaque|memorial|ticket|logo|building|cropped|crop|collage|illustration|cover|sleeve|replica|statue)\b', re.I)
+REVIEW_FLAGS = ('approved', 'artist_verified', 'period_verified', 'complete_composition', 'quality_reviewed', 'artist_dominant', 'correct_appearance')
 
 
 def validate_photo(photo: dict, artist: str, event_year: int, root: Path = ROOT) -> Path:
+    validate_template()
     if any(photo.get(flag) is not True for flag in REVIEW_FLAGS):
-        raise RuntimeError('Photo rejected: editorial approval and subject/period/full-frame review required')
+        raise RuntimeError('Photo rejected: editorial approval and subject/period/full-frame/artist-dominance/appearance review required')
     if str(photo.get('artist', '')).casefold() != artist.casefold():
         raise RuntimeError('Photo rejected: wrong artist')
-    if BANNED.search(str(photo.get('title', ''))) or photo.get('derived_variant') or photo.get('source_cropped'):
-        raise RuntimeError('Photo rejected: non-photo subject, crop or derived duplicate')
+    if (BANNED.search(str(photo.get('title', ''))) or photo.get('derived_variant')
+            or photo.get('source_cropped') is not False or photo.get('source_is_cover') is not False):
+        raise RuntimeError('Photo rejected: non-photo subject, cover, crop or derived duplicate')
+    if any(photo.get(flag) is not False for flag in ('guest_equal_weight', 'guest_distracts', 'artist_is_background')):
+        raise RuntimeError('Photo rejected: artist must dominate; equal-weight guests/background subjects forbidden')
+    if not photo.get('dominance_note') or not photo.get('appearance_note') or not photo.get('reviewed_by'):
+        raise RuntimeError('Photo rejected: recorded composition and appearance review required')
     distance = abs(int(photo.get('photo_year', 0)) - event_year)
-    if distance > TEMPLATE['maximum_period_distance_years']:
-        raise RuntimeError('Photo rejected: outside the locked event-year policy')
-    if distance > TEMPLATE['automatic_period_distance_years']:
-        if distance != TEMPLATE['manual_period_distance_years'] or photo.get('manual_period_override') is not True or not str(photo.get('manual_period_note', '')).strip():
-            raise RuntimeError('Photo rejected: ±2-year use requires explicit manual period approval')
+    if distance > 2:
+        raise RuntimeError('Photo rejected: outside the locked event-year policy; ±3 and beyond forbidden')
+    if distance == 2:
+        checks = ('hair', 'clothing', 'lineup', 'stage')
+        approvals = photo.get('manual_period_approvals') or []
+        approval = next((p for p in approvals if p.get('event_year') == event_year
+                         and p.get('approved') is True and p.get('photo_sha256') == photo.get('sha256')), {})
+        appearance = approval.get('appearance_checks') or {}
+        if (not approval.get('approved_by') or not approval.get('approved_at') or not approval.get('reason')
+                or any(not isinstance(appearance.get(k), str) or not appearance[k].strip() for k in checks)):
+            raise RuntimeError('Photo rejected: ±2-year use requires event-specific manual period approval with hair/clothing/lineup/stage evidence')
     if not photo.get('date_evidence') or not str(photo.get('source', '')).startswith('https://commons.wikimedia.org/wiki/File:'):
         raise RuntimeError('Photo rejected: missing source or date evidence')
     license_name = str(photo.get('license', '')).casefold()
     if not any(marker in license_name for marker in ('public domain', 'cc0', 'cc by')) or any(marker in license_name for marker in ('nc', 'nd')):
         raise RuntimeError('Photo rejected: approved reuse license required')
+    if photo.get('copyright_disputed'):
+        raise RuntimeError('Photo rejected: unresolved copyright dispute')
     path = (root / str(photo.get('asset', ''))).resolve()
     if not path.is_relative_to(root.resolve()) or not path.is_file():
         raise RuntimeError('Photo rejected: approved asset missing')
@@ -45,30 +59,51 @@ def validate_photo(photo: dict, artist: str, event_year: int, root: Path = ROOT)
     return path
 
 
-def load_period_photos(candidate: dict, directory: Path, root: Path = ROOT) -> tuple[list[Path], list[dict]]:
+def select_period_photos(candidate: dict, root: Path = ROOT) -> tuple[list[dict], dict]:
+    validate_template()
     bank = json.loads((root / TEMPLATE['photo_bank']).read_text(encoding='utf-8'))
     artist, year = str(candidate['artist']), int(str(candidate['event_date'])[:4])
-    photos, credits, seen = [], [], set()
-    entries = [entry for entry in bank['photos'] if str(entry.get('artist', '')).casefold() == artist.casefold()]
-    # Immutable selection order: same event year first, then ±1; ±2 only when manually approved.
-    entries.sort(key=lambda entry: (abs(int(entry.get('photo_year', 0)) - year), int(entry.get('photo_year', 0))))
+    entries = [p for p in bank['photos'] if str(p.get('artist', '')).casefold() == artist.casefold()]
+    entries.sort(key=lambda p: (abs(int(p.get('photo_year', 0)) - year), int(p.get('photo_year', 0)), p.get('composition_id', '')))
+    valid, seen = [], set()
     for entry in entries:
         try:
-            source = validate_photo(entry, artist, year, root)
+            validate_photo(entry, artist, year, root)
         except RuntimeError as exc:
             print(exc)
             continue
-        key = entry.get('composition_id')
-        if not key or key in seen or entry['sha256'] in seen:
+        key, digest = entry.get('composition_id'), entry['sha256']
+        if not key or key in seen or digest in seen:
             continue
-        path = directory / f'photo-{len(photos) + 1}.jpg'
-        shutil.copyfile(source, path)
-        photos.append(path); credits.append(dict(entry)); seen.update((key, entry['sha256']))
-        if len(photos) == TEMPLATE['photo_count']:
-            break
-    if len(photos) != TEMPLATE['photo_count']:
-        raise RuntimeError(f'Facebook photo gate: {artist} requires three distinct reviewed full-frame period photographs; found {len(photos)}')
-    return photos, credits
+        valid.append(entry); seen.update((key, digest))
+    selected = valid[:3]
+    if len(selected) != 3:
+        raise RuntimeError(f'Facebook photo gate: {artist} requires three distinct reviewed full-frame period photographs; found {len(selected)}')
+    distances = [abs(p['photo_year'] - year) for p in selected]
+    audit = next((a for a in bank.get('year_research', []) if a.get('event_year') == year
+                  and str(a.get('artist', '')).casefold() == artist.casefold()), {})
+    if max(distances) > 0:
+        if (audit.get('same_year_review_complete') is not True or not audit.get('reason')
+                or not audit.get('search_sources') or not audit.get('reviewed_by') or not audit.get('reviewed_at')):
+            raise RuntimeError('Facebook photo gate: ±1 fallback requires recorded same-year-first source research')
+    if max(distances) == 2 and audit.get('plus_one_review_complete') is not True:
+        raise RuntimeError('Facebook photo gate: ±2 needs recorded exhaustion of same-year and ±1 choices')
+    qc = {'event_year': year, 'photo_years': [p['photo_year'] for p in selected],
+          'year_distances': distances, 'same_year_first': True,
+          'same_year_eligible_in_bank': sum(p['photo_year'] == year for p in valid),
+          'selection_reason': 'Three same-year approved photos' if not max(distances) else audit['reason'],
+          'manual_plus_two_used': 2 in distances, 'artist_dominant': True, 'correct_appearance': True}
+    return selected, qc
+
+
+def load_period_photos(candidate: dict, directory: Path, root: Path = ROOT) -> tuple[list[Path], list[dict]]:
+    credits, selection = select_period_photos(candidate, root)
+    candidate['photo_year_selection'] = selection
+    paths = []
+    for index, entry in enumerate(credits, 1):
+        path = directory / f'photo-{index}.jpg'
+        shutil.copyfile(root / entry['asset'], path); paths.append(path)
+    return paths, [dict(p) for p in credits]
 
 
 def full_frame_canvas(photo: Path, width: int = 1080, height: int = 1920) -> Image.Image:
@@ -139,6 +174,9 @@ def validate_publish(candidate: dict) -> None:
     credits = candidate.get('image_credits', [])
     if len(credits) != 3 or len({p.get('composition_id') for p in credits}) != 3 or len({p.get('sha256') for p in credits}) != 3:
         raise RuntimeError('Facebook publish blocked: three distinct approved period photos required')
+    expected, selection = select_period_photos(candidate)
+    if [p.get('sha256') for p in credits] != [p.get('sha256') for p in expected]:
+        raise RuntimeError('Facebook publish blocked: event-year-first selected photographs must match the approved bank')
     for photo in credits:
         validate_photo(photo, artist, year)
     visual = candidate.get('visual_qc', {})

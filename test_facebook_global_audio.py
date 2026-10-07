@@ -12,6 +12,8 @@ import worker
 
 class FacebookAudioTests(unittest.TestCase):
     def setUp(self):
+        self.preview_env = patch.dict(os.environ, {'OLDIES_PREVIEW_ONLY': 'true'})
+        self.preview_env.start(); self.addCleanup(self.preview_env.stop)
         self.temp = tempfile.TemporaryDirectory()
         self.directory = Path(self.temp.name)
         self.candidate = {
@@ -159,7 +161,8 @@ class FacebookAudioTests(unittest.TestCase):
         advert = self.media('advert.mp4', 'sine=frequency=660:sample_rate=48000', duration=3.5)
         cached = self.directory / audio.TEMPLATE['advert_asset']; cached.parent.mkdir(parents=True)
         cached.write_bytes(advert.read_bytes())
-        template = dict(audio.TEMPLATE, advert_sha256=hashlib.sha256(cached.read_bytes()).hexdigest())
+        template = dict(audio.TEMPLATE, advert_sha256=hashlib.sha256(cached.read_bytes()).hexdigest(), advert_approved=True,
+                        advert_approval={'approved_by':'test owner','approved_at':'2026-10-07','brand_pronunciation_verified':True})
         synthesize = Mock(return_value=story.read_bytes())
         with patch.object(audio, 'ROOT', self.directory), patch.object(audio, 'TEMPLATE', template):
             voice = audio.synthesize_dj(self.candidate, self.directory, 'existing', 'unused', synthesize)
@@ -171,10 +174,30 @@ class FacebookAudioTests(unittest.TestCase):
         story = self.media('story.mp4', 'sine=frequency=440:sample_rate=48000', duration=9.5)
         cached = self.directory / audio.TEMPLATE['advert_asset']; cached.parent.mkdir(parents=True)
         cached.write_bytes(b'changed')
-        with patch.object(audio, 'ROOT', self.directory), patch.dict(audio.TEMPLATE, {'advert_sha256':'invalid'}):
+        with patch.object(audio, 'ROOT', self.directory), patch.dict(audio.TEMPLATE, {'advert_sha256':'0'*64,'advert_approved':True,
+                           'advert_approval':{'approved_by':'test owner','approved_at':'2026-10-07','brand_pronunciation_verified':True}}):
             with self.assertRaisesRegex(RuntimeError, 'recording hash mismatch'):
                 audio.synthesize_dj(self.candidate, self.directory, 'existing', 'unused', lambda **kw: story.read_bytes())
         self.assertFalse((self.directory/'voiceover-facebook-en.mp3').exists())
+
+    def test_production_cannot_generate_or_publish_an_unapproved_signoff(self):
+        from unittest.mock import Mock
+        synthesize = Mock()
+        with patch.dict(os.environ, {'OLDIES_PREVIEW_ONLY':'false'}):
+            with self.assertRaisesRegex(RuntimeError, 'listening approval'):
+                audio.synthesize_dj(self.candidate, self.directory, 'existing','unused',synthesize)
+        synthesize.assert_not_called()
+        with self.assertRaisesRegex(RuntimeError, 'listening approval'):
+            audio.require_approved_signoff(self.candidate)
+
+    def test_immutable_brand_year_and_no_crop_rules_cannot_be_relaxed(self):
+        for key, value in [('brand_name','Oldies Radio'),('advert_text','Oldies Radio. Timeless music. Listen, enjoy, share.'),
+                           ('maximum_period_distance_years',3),('automatic_period_distance_years',2),
+                           ('artist_dominant_required',False),('crop_allowed',True),('zoom_allowed',True),
+                           ('advert_gap_seconds',0.3),('speedup_allowed',True)]:
+            with self.subTest(key=key):
+                with self.assertRaisesRegex(RuntimeError, 'immutable production'):
+                    audio.validate_template(dict(audio.TEMPLATE, **{key:value}))
 
     def test_missing_recording_template_blocks_publication(self):
         with self.assertRaisesRegex(RuntimeError, 'approved warm DJ'):

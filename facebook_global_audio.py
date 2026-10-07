@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 import re
 import subprocess
 from pathlib import Path
@@ -12,11 +13,49 @@ TEMPLATE = json.loads((ROOT / 'facebook-global-template.json').read_text(encodin
 
 BRAND_NAME = 'Oldies Radyo'
 BRAND_ADVERT = 'Oldies Radyo. Timeless music. Listen, enjoy, share.'
-if TEMPLATE.get('brand_name') != BRAND_NAME or TEMPLATE.get('brand_translation_allowed') is not False or TEMPLATE.get('advert_text') != BRAND_ADVERT:
-    raise RuntimeError('Facebook Global brand lock violated: the spoken and written brand must remain Oldies Radyo')
+LOCKED_SETTINGS = {
+    'brand_name': BRAND_NAME, 'advert_text': BRAND_ADVERT, 'brand_translation_allowed': False,
+    'advert_gap_seconds': 1.1, 'target_wpm': 128, 'speedup_allowed': False,
+    'language': 'en-US', 'max_estimated_wpm': 138, 'minimum_slowdown_factor': 0.7,
+    'max_video_seconds': 18.0, 'max_voiceover_seconds': 17.4,
+    'same_year_first': True, 'automatic_period_distance_years': 1,
+    'manual_period_distance_years': 2, 'maximum_period_distance_years': 2,
+    'artist_dominant_required': True, 'photo_count': 3,
+    'approved_photos_only': True, 'complete_source_frame_required': True,
+    'crop_allowed': False, 'zoom_allowed': False, 'derived_duplicate_allowed': False,
+    'background_music_added': False,
+}
+
+
+def validate_template(template: dict | None = None) -> None:
+    settings = TEMPLATE if template is None else template
+    for key, value in LOCKED_SETTINGS.items():
+        if settings.get(key) != value:
+            raise RuntimeError(f'Facebook immutable production rule violated: {key}')
+    if settings.get('advert_asset') != 'assets/facebook/en-warm-signoff-radyo-v3.mp3':
+        raise RuntimeError('Facebook brand lock: only the new Oldies Radyo recording path is permitted')
+
+
+validate_template()
+
+
+def require_approved_signoff(candidate: dict | None = None) -> None:
+    validate_template()
+    approval = TEMPLATE.get('advert_approval') or {}
+    expected = str(TEMPLATE.get('advert_sha256') or '')
+    if (TEMPLATE.get('advert_approved') is not True or not re.fullmatch(r'[a-f0-9]{64}', expected)
+            or not approval.get('approved_by') or not approval.get('approved_at')
+            or approval.get('brand_pronunciation_verified') is not True):
+        raise RuntimeError('Facebook production blocked: new Oldies Radyo recording awaits listening approval and SHA256 lock')
+    cached = ROOT / TEMPLATE['advert_asset']
+    if not cached.is_file() or hashlib.sha256(cached.read_bytes()).hexdigest() != expected:
+        raise RuntimeError('Facebook approved station recording hash mismatch')
+    if candidate is not None and candidate.get('dj_recording', {}).get('advert_sha256') != expected:
+        raise RuntimeError('Facebook production blocked: MP4 did not use the approved Oldies Radyo recording')
 
 
 def build_dj_parts(candidate: dict) -> tuple[str, str]:
+    validate_template()
     artist = re.sub(r'\s+', ' ', str(candidate.get('artist', ''))).strip()
     year = str(candidate.get('event_date', ''))[:4]
     if not artist or not re.fullmatch(r'\d{4}', year):
@@ -60,7 +99,8 @@ def record_part(text: str, role: str, path: Path, project: str, token: str, synt
     )
     if role == 'advert':
         prompt += ("This is a separate soft station promotion after the story. The brand name is exactly Oldies Radyo. "
-                   "Do not translate, rewrite or substitute it as Oldies Radio. Pronounce Oldies Radyo clearly: old-eez rah-dee-oh. ")
+                   "Keep the registered spelling. Pronounce Oldies as OLD-eez. Pronounce Radyo in two syllables: RAH-dyoh. "
+                   "The first vowel is ah, never ay; the second syllable is dyoh, without an extra ee syllable. ")
     else:
         prompt += 'Start directly with the music story, with a small natural pause before the date. '
     raw = synthesize(text=text, prompt=prompt, language=TEMPLATE['language'], voice_name=TEMPLATE['voice'],
@@ -88,6 +128,11 @@ def record_part(text: str, role: str, path: Path, project: str, token: str, synt
 
 
 def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, synthesize) -> Path:
+    preview = os.getenv('OLDIES_PREVIEW_ONLY', '').strip().lower() in {'true', '1', 'yes', 'on'}
+    if not preview:
+        require_approved_signoff()
+    elif TEMPLATE.get('preview_signoff_generation_allowed') is not True:
+        require_approved_signoff()
     story, advert = build_dj_parts(candidate)
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / 'voiceover-facebook-en.mp3'
@@ -97,7 +142,8 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
         story_qc = record_part(story, 'story', story_path, project, token, synthesize)
         cached = ROOT / TEMPLATE['advert_asset']
         expected_hash = str(TEMPLATE.get('advert_sha256') or '').strip()
-        if cached.is_file() and expected_hash:
+        if cached.is_file() and expected_hash and TEMPLATE.get('advert_approved') is True:
+            require_approved_signoff()
             if hashlib.sha256(cached.read_bytes()).hexdigest() != expected_hash:
                 raise RuntimeError('Facebook approved station recording hash mismatch')
             advert_path.write_bytes(cached.read_bytes())
@@ -128,7 +174,9 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
     recording = {'version': TEMPLATE['version'], 'brand_name': BRAND_NAME, 'story_text': story, 'advert_text': advert,
                  'story': story_qc, 'advert': advert_qc, 'advert_gap_seconds': gap,
                  'advert_start_seconds': round(story_qc['duration_seconds'] + gap, 3),
-                 'speedup_applied': False, 'background_music_added': False}
+                 'speedup_applied': False, 'background_music_added': False,
+                 'advert_sha256': hashlib.sha256(advert_path.read_bytes()).hexdigest(),
+                 'signoff_approval': 'approved' if TEMPLATE.get('advert_approved') is True else 'owner-listening-pending'}
     candidate.update(dj_script_en=f'{story} {advert}', tts_language=TEMPLATE['language'], tts_voice=TEMPLATE['voice'],
                      tts_engine='gemini-2.5-pro-tts-facebook-dj', dj_recording=recording,
                      voiceover_duration_seconds=qc['duration_seconds'])
@@ -183,9 +231,10 @@ def validate_media(video: Path, candidate: dict) -> dict:
 
 
 def validate_recording(video: Path, candidate: dict) -> dict:
+    validate_template()
     recording = candidate.get('dj_recording', {})
     if (recording.get('version') != TEMPLATE['version'] or recording.get('brand_name') != BRAND_NAME
-            or recording.get('advert_text') != BRAND_ADVERT or 'Oldies Radio' in str(candidate.get('dj_script_en', ''))
+            or recording.get('advert_text') != BRAND_ADVERT or re.search(r'\boldies\s+radio\b', str(candidate.get('dj_script_en', '')), re.I)
             or recording.get('speedup_applied') is not False
             or recording.get('advert_gap_seconds') != TEMPLATE['advert_gap_seconds']
             or recording.get('background_music_added') is not False):
