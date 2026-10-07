@@ -5,13 +5,13 @@
   "language": "en-US",
   "target_wpm": 128,
   "max_estimated_wpm": 138,
-  "minimum_slowdown_factor": 0.70,
+  "minimum_slowdown_factor": 0.7,
   "speedup_allowed": false,
-  "advert_gap_seconds": 1.10,
+  "advert_gap_seconds": 1.1,
   "advert_text": "Oldies Radio. Timeless music. Listen, enjoy, share.",
   "advert_asset": "assets/facebook/en-warm-signoff-v2.mp3",
-  "ending_tail_seconds": 0.60,
-  "max_voiceover_seconds": 17.40,
+  "ending_tail_seconds": 0.6,
+  "max_voiceover_seconds": 17.4,
   "max_video_seconds": 18.0,
   "max_story_words": 25,
   "photo_bank": "facebook-global-photo-bank.json",
@@ -22,5 +22,6 @@
   "crop_allowed": false,
   "zoom_allowed": false,
   "derived_duplicate_allowed": false,
-  "background_music_added": false
+  "background_music_added": false,
+  "advert_sha256": "d70090418568bbf7d6e7e02e041e7198f301729c6263a57f4babc0f5da3472d3"
 }

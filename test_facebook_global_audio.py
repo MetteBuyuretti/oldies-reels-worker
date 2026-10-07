@@ -146,6 +146,30 @@ class FacebookAudioTests(unittest.TestCase):
                 audio.synthesize_dj(self.candidate, self.directory, 'existing', 'unused', synthesize)
         self.assertFalse((self.directory / 'voiceover-facebook-en.mp3').exists())
 
+    def test_approved_station_recording_is_reused_without_second_tts_call(self):
+        import hashlib
+        from unittest.mock import Mock
+        story = self.media('story.mp4', 'sine=frequency=440:sample_rate=48000', duration=9.5)
+        advert = self.media('advert.mp4', 'sine=frequency=660:sample_rate=48000', duration=3.5)
+        cached = self.directory / audio.TEMPLATE['advert_asset']; cached.parent.mkdir(parents=True)
+        cached.write_bytes(advert.read_bytes())
+        template = dict(audio.TEMPLATE, advert_sha256=hashlib.sha256(cached.read_bytes()).hexdigest())
+        synthesize = Mock(return_value=story.read_bytes())
+        with patch.object(audio, 'ROOT', self.directory), patch.object(audio, 'TEMPLATE', template):
+            voice = audio.synthesize_dj(self.candidate, self.directory, 'existing', 'unused', synthesize)
+        self.assertEqual(synthesize.call_count, 1)
+        self.assertTrue(self.candidate['dj_recording']['advert']['cached_approved_recording'])
+        self.assertTrue(voice.exists())
+
+    def test_changed_station_recording_is_blocked(self):
+        story = self.media('story.mp4', 'sine=frequency=440:sample_rate=48000', duration=9.5)
+        cached = self.directory / audio.TEMPLATE['advert_asset']; cached.parent.mkdir(parents=True)
+        cached.write_bytes(b'changed')
+        with patch.object(audio, 'ROOT', self.directory), patch.dict(audio.TEMPLATE, {'advert_sha256':'invalid'}):
+            with self.assertRaisesRegex(RuntimeError, 'recording hash mismatch'):
+                audio.synthesize_dj(self.candidate, self.directory, 'existing', 'unused', lambda **kw: story.read_bytes())
+        self.assertFalse((self.directory/'voiceover-facebook-en.mp3').exists())
+
     def test_missing_recording_template_blocks_publication(self):
         with self.assertRaisesRegex(RuntimeError, 'approved warm DJ'):
             audio.validate_recording(self.directory/'missing.mp4', self.candidate)
