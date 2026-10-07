@@ -102,9 +102,15 @@ class FacebookAudioTests(unittest.TestCase):
         script = audio.build_dj_script(self.candidate)
         self.assertTrue(script.startswith("The Beatles released"))
         self.assertIn("Love Me Do", script)
-        self.assertIn("Oldies Radio", script)
+        self.assertIn("Oldies Radyo", script)
+        self.assertNotIn("Oldies Radio", script)
         self.assertLessEqual(len(script.split()), 38)
         self.assertNotIn("...", script)
+
+    def test_brand_name_is_locked_and_never_translated(self):
+        story, advert = audio.build_dj_parts(self.candidate)
+        self.assertEqual(advert, "Oldies Radyo. Timeless music. Listen, enjoy, share.")
+        self.assertNotIn("Oldies Radio", advert)
 
     def test_separate_advert_has_a_real_silent_gap_and_no_speedup(self):
         story = self.media("story.mp4", "sine=frequency=440:sample_rate=48000", duration=9.5)
