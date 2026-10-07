@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-07T02:15:18.193939+00:00",
+  "updated_at": "2026-10-07T02:19:48.643631+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -169,7 +169,7 @@
     {
       "id": "facebook-global-dj-voice-20261007",
       "title": "Facebook Global — English DJ voice fix",
-      "status": "checkpointed",
+      "status": "done",
       "completed_units": [
         "current-source-audit",
         "facebook-only-audio-gates",
@@ -181,11 +181,17 @@
         "12-facebook-regression-tests",
         "second-preview-audio-and-9x16-pass",
         "three-scene-visual-QA",
-        "Facebook-only-short-source-copy-repair"
+        "Facebook-only-short-source-copy-repair",
+        "final-real-preview-success",
+        "13-Facebook-tests-local-and-GHA",
+        "embedded-AAC-700-packets-263kB",
+        "15s1080x1920-three-scene-QA",
+        "local-English-speech-transcription",
+        "durable-reviewable-preview-report"
       ],
-      "last_checkpoint": "2026-10-07T02:15:18.193939+00:00",
-      "next_step": "Final forced preview with complete sourced English sentence; local speech transcription and durable delivery.",
-      "note": "Run37560720854 technical success:15s1080x1920AAC701packets252kB; no WP/Facebook delivery. Visual QA preserved three scenes. Detected upstream malformed extracted song title; Facebook narrator now prefers complete short source sentence. No shared research changes."
+      "last_checkpoint": "2026-10-07T02:19:48.643631+00:00",
+      "next_step": "Owner reviews test MP4. Apply reviewed fix to main only after further live-use instruction; no live publish performed.",
+      "note": "Run37561125079 success. English DJ11.11s; MP415s1080x1920AAC48kHzstereo700packets263kB. No background music, no delivery.13/13FB tests;36/37suite with baseline Turkish failure. ASR story intelligible; station name ambiguous, human tone/pronunciation review remains. PR22 draft, main unchanged."
     }
   ]
 }
