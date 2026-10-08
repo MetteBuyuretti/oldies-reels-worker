@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "stalled_hours": 3,
+  "expected_freshness_hours": {},
+  "issue_alerts_enabled": false
+}
