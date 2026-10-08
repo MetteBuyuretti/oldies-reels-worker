@@ -62,8 +62,12 @@ def collect(api, config: dict, now: datetime):
         if workflow.get('state') != 'active' or path == WORKFLOW_SELF:
             continue
         active_paths.add(path)
-        runs = api.request(f"/actions/workflows/{workflow['id']}/runs?per_page=1").get('workflow_runs', [])
         expected = freshness.get(path)
+        runs_path = f"/actions/workflows/{workflow['id']}/runs?per_page=6"
+        if expected is not None:
+            # Ignore manual/push success when monitoring daily scheduled jobs.
+            runs_path += "&event=schedule"
+        runs = api.request(runs_path).get('workflow_runs', [])
         if not runs:
             if expected is not None:
                 findings.append({'path': path, 'name': workflow['name'], 'reason': 'never_run', 'run_id': None, 'url': ''})
@@ -79,6 +83,18 @@ def collect(api, config: dict, now: datetime):
             reason = 'stalled_run'
         elif expected is not None and age > float(expected):
             reason = 'late_run'
+        if not reason and expected is not None:
+            # Report a recent recovered incident instead of hiding it behind a success.
+            lookback = float(config.get('recent_failure_lookback_hours', 48))
+            previous_failures = [
+                prior for prior in runs[1:]
+                if prior.get('status') == 'completed'
+                and prior.get('conclusion') in BAD_CONCLUSIONS
+                and 0 <= hours_since(prior['created_at'], now) <= lookback
+            ]
+            if previous_failures:
+                reason = 'recovered_after_recent_failure'
+                run = previous_failures[0]
         if reason:
             findings.append({'path': path, 'name': workflow['name'], 'reason': reason,
                              'run_id': run['id'], 'url': run.get('html_url', '')})
@@ -102,6 +118,8 @@ def alert(api, findings: list[dict]):
     titles = {issue['title'] for issue in issues}
     posted = 0
     for finding in findings:
+        if finding['reason'] == 'recovered_after_recent_failure':
+            continue  # informational, not a current outage
         title = f"[OLDIES WATCHDOG] {finding['reason']}: {finding['path']} (run {finding['run_id'] or 'none'})"
         if title in titles:
             continue
