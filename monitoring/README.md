@@ -6,7 +6,7 @@ Bu sürüm `oldies-reels-worker` deposundaki GitHub Actions iş akışlarını d
 - Aktif GitHub Actions iş akışlarının son çalışmasını tarar: başarısız, uzun süre takılı kalmış veya kalibre edilmiş sıklığından gecikmiş görevleri raporlar.
 - Bulgular GitHub Actions Job Summary'de görünür.
 - Son GitHub run başarısı, içeriğin WordPress, Instagram veya Facebook'ta gerçekten yayımlandığının kanıtı değildir.
-- `expected_freshness_hours` alanı bilerek boştur. Önce gerçek cron/sıklık envanteri yapılmalıdır; manuel işleri yanlış alarm olarak işaretlememeliyiz.
+- `expected_freshness_hours` üç doğrulanmış günlük akış için 36 saat olarak ayarlanmıştır. Diğer manuel/test akışları için gereksiz gecikme alarmı oluşturulmaz. Planlı işleri denetlerken manuel veya push çalışmaları gerçek zamanlanmış görev sonuçlarını maskelemez. Son 48 saatte hata yaşayıp toparlanan işler bilgi amaçlı raporlanır; yeni arıza bildirimi oluşturulmaz.
 - İstenirse sonraki güvenli sürümde `issue_alerts_enabled` kontrollü olarak `true` yapılır ve workflow izni `issues: write` seviyesine çıkarılır. Yayımlama işlerinde otomatik yeniden deneme **kapalı** kalır.
 - Birden fazla GitHub deposu, WordPress ve Meta içi gerçek teslim kontrolü sonraki aşamanın konusudur.
 
