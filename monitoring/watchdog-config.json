@@ -1,6 +1,11 @@
 {
   "schema_version": 1,
   "stalled_hours": 3,
-  "expected_freshness_hours": {},
-  "issue_alerts_enabled": false
+  "expected_freshness_hours": {
+    ".github/workflows/reels-worker.yml": 36,
+    ".github/workflows/facebook-global-en.yml": 36,
+    ".github/workflows/reels-cleanup.yml": 36
+  },
+  "issue_alerts_enabled": false,
+  "recent_failure_lookback_hours": 48
 }
