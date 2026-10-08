@@ -6,6 +6,7 @@
     ".github/workflows/facebook-global-en.yml": 36,
     ".github/workflows/reels-cleanup.yml": 36
   },
-  "issue_alerts_enabled": false,
-  "recent_failure_lookback_hours": 48
+  "issue_alerts_enabled": true,
+  "recent_failure_lookback_hours": 48,
+  "manual_workflow_lookback_hours": 48
 }

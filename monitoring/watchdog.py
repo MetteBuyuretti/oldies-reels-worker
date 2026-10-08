@@ -76,6 +76,10 @@ def collect(api, config: dict, now: datetime):
             continue
         run = runs[0]
         age = hours_since(run.get('run_started_at') or run['created_at'], now)
+        if expected is None and age > float(config.get('manual_workflow_lookback_hours', 48)):
+            # One-off tests from weeks ago are not active production outages.
+            unchecked.append(path)
+            continue
         reason = None
         if run.get('status') == 'completed' and run.get('conclusion') in BAD_CONCLUSIONS:
             reason = 'failed_run'
@@ -107,8 +111,8 @@ def collect(api, config: dict, now: datetime):
     return findings, healthy, unchecked
 
 
-def alert(api, findings: list[dict]):
-    # One issue per workflow and failure run. Never retries, republishes or changes production workflows.
+def alert(api, findings: list[dict], monitored_paths: set[str]):
+    # Issues only for explicitly monitored workflows. No reruns or publication.
     issues = []
     for page in range(1, 11):
         batch = api.request(f'/issues?state=all&per_page=100&page={page}').copy()
@@ -118,6 +122,8 @@ def alert(api, findings: list[dict]):
     titles = {issue['title'] for issue in issues}
     posted = 0
     for finding in findings:
+        if finding['path'] not in monitored_paths:
+            continue
         if finding['reason'] == 'recovered_after_recent_failure':
             continue  # informational, not a current outage
         title = f"[OLDIES WATCHDOG] {finding['reason']}: {finding['path']} (run {finding['run_id'] or 'none'})"
@@ -151,7 +157,8 @@ def main() -> int:
     if unchecked:
         rows.append('\nUnchecked (configure expected cadence if scheduled): ' + ', '.join(f'`{p}`' for p in unchecked))
     if config.get('issue_alerts_enabled', False) and findings:
-        rows.append(f"\nNew deduplicated GitHub issues: {alert(api, findings)}")
+        watched = set(config.get('expected_freshness_hours', {}))
+        rows.append(f"\nNew deduplicated GitHub issues: {alert(api, findings, watched)}")
     summary = '\n'.join(rows)
     print(summary)
     if os.getenv('GITHUB_STEP_SUMMARY'):

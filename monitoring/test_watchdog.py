@@ -10,17 +10,19 @@ class API:
         self.workflows = workflows if workflows is not None else [{'id': 42, 'path': '.github/workflows/publisher.yml',
                                       'name': 'publisher', 'state': 'active'}]
         self.posted = []
+        self.issues = []
 
     def request(self, path, *, method='GET', data=None):
         if method == 'POST':
             self.posted.append(data)
+            self.issues.append({'title': data['title']})
             return {}
         if path.startswith('/actions/workflows?'):
             return {'workflows': self.workflows if 'page=1' in path else []}
         if '/runs?' in path:
             return {'workflow_runs': self.runs}
         if path.startswith('/issues?'):
-            return []
+            return list(self.issues)
         raise AssertionError(path)
 
 class WatchdogTests(unittest.TestCase):
@@ -32,7 +34,7 @@ class WatchdogTests(unittest.TestCase):
         a = API([dict(id=5, status='completed', conclusion='failure', created_at='2026-10-08T23:00:00Z')])
         findings, _, _ = collect(a, {}, NOW)
         self.assertEqual(findings[0]['reason'], 'failed_run')
-        self.assertEqual(alert(a, findings), 1)
+        self.assertEqual(alert(a, findings, {'.github/workflows/publisher.yml'}), 1)
         self.assertIn('Do not rerun', a.posted[0]['body'])
 
     def test_stalled_run(self):
@@ -64,7 +66,26 @@ class WatchdogTests(unittest.TestCase):
         findings, healthy, _ = collect(a, config, NOW)
         self.assertEqual(findings[0]['reason'], 'recovered_after_recent_failure')
         self.assertEqual(findings[0]['run_id'], 7)
-        self.assertEqual(alert(a, findings), 0)  # no false outage issue
+        self.assertEqual(alert(a, findings, {'.github/workflows/publisher.yml'}), 0)  # no false outage issue
+
+    def test_old_manual_preview_failure_is_not_alerted(self):
+        a = API([dict(id=12, status='completed', conclusion='failure',
+                      created_at='2026-09-26T12:00:00Z')])
+        findings, healthy, unchecked = collect(a, {'manual_workflow_lookback_hours': 48}, NOW)
+        self.assertEqual(findings, [])
+        self.assertEqual(unchecked, ['.github/workflows/publisher.yml'])
+
+    def test_alert_only_monitored_workflows_and_no_duplicates(self):
+        a = API([])
+        monitored = '.github/workflows/publisher.yml'
+        findings = [
+            dict(path=monitored, name='publisher', reason='failed_run', run_id=19, url='https://github.com/run/19'),
+            dict(path='.github/workflows/legacy-preview.yml', name='legacy', reason='failed_run', run_id=18, url='https://github.com/run/18'),
+        ]
+        self.assertEqual(alert(a, findings, {monitored}), 1)
+        self.assertEqual(alert(a, findings, {monitored}), 0)
+        self.assertEqual(len(a.posted), 1)
+
 
 if __name__ == '__main__':
     unittest.main()
