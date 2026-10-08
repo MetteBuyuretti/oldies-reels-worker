@@ -1,6 +1,11 @@
 name: OLDIES WATCHDOG (audit only)
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/oldies-watchdog.yml'
+      - 'monitoring/**'
   schedule:
     - cron: '37 * * * *'
   pull_request:
