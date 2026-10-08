@@ -52,5 +52,19 @@ class WatchdogTests(unittest.TestCase):
         config = {'expected_freshness_hours': {'.github/workflows/required.yml': 24}}
         self.assertEqual(collect(a, config, NOW)[0][0]['reason'], 'workflow_missing_or_disabled')
 
+    def test_scheduled_recovered_failure_is_reported_without_alert(self):
+        success = dict(id=8, status='completed', conclusion='success',
+                       created_at='2026-10-08T18:00:00Z',
+                       html_url='https://github.com/example/run/8')
+        failed = dict(id=7, status='completed', conclusion='failure',
+                      created_at='2026-10-07T18:00:00Z',
+                      html_url='https://github.com/example/run/7')
+        a = API([success, failed])
+        config = {'expected_freshness_hours': {'.github/workflows/publisher.yml': 36}}
+        findings, healthy, _ = collect(a, config, NOW)
+        self.assertEqual(findings[0]['reason'], 'recovered_after_recent_failure')
+        self.assertEqual(findings[0]['run_id'], 7)
+        self.assertEqual(alert(a, findings), 0)  # no false outage issue
+
 if __name__ == '__main__':
     unittest.main()
