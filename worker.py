@@ -28,6 +28,8 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
 from zero_cost import research_candidates
 from video_factory import build_timeline, export_capcut_package, render_timeline, write_timeline_files
+import facebook_global_audio
+import facebook_global_visuals
 
 OUTPUT = Path("output")
 WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 15
@@ -960,6 +962,8 @@ def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
     # one uninterrupted continuation of the factual announcement.
     engine = os.getenv("OLDIES_TTS_ENGINE", "auto").strip().lower() or "auto"
     fallback_enabled = os.getenv("OLDIES_TTS_FALLBACK", "true").strip().lower() in {"1", "true", "yes", "on"}
+    if mode == "en" and engine == "facebook_dj":
+        return facebook_global_audio.synthesize_dj(candidate, directory, project, token, _gemini_tts_bytes)
     if mode == "tr" and engine == "chirp_dj":
         script = build_turkish_gemini_script(candidate)
         # SSML makes the station break and final-word emphasis explicit.
@@ -1368,6 +1372,10 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
 
 def publish_facebook_global(candidate: dict, video: Path, bearer: str, base_url: str) -> dict:
     """Deliver one rendered English Reel to the isolated Facebook Global companion."""
+    facebook_global_audio.validate_media(video, candidate)
+    facebook_global_audio.validate_recording(video, candidate)
+    facebook_global_audio.require_approved_signoff(candidate)
+    facebook_global_visuals.validate_publish(candidate)
     public_url = publish_delivery_asset(candidate, video)
     if not public_url:
         raise RuntimeError("Facebook Global delivery requires the GitHub reels-delivery asset")
@@ -1451,7 +1459,8 @@ def main() -> None:
             old_photo.unlink()
         try:
             print(f"Trying zero-cost visual candidate: {option['artist']} (score={option['score']})")
-            photos, credits = download_commons_photos(option, OUTPUT)
+            photos, credits = (facebook_global_visuals.load_period_photos(option, OUTPUT) if language == "en"
+                               else download_commons_photos(option, OUTPUT))
             candidate = option
             break
         except Exception as exc:
@@ -1462,7 +1471,9 @@ def main() -> None:
     candidate["image_credits"] = credits
     candidate["pipeline"] = "zero-cost-v1"
     candidate = apply_reel_language(candidate, language)
-    voiceover = download_voiceover(OUTPUT)
+    # Facebook Global always generates its own English DJ read; an optional
+    # unverified external track must not bypass its narration requirement.
+    voiceover = None if language == "en" else download_voiceover(OUTPUT)
     voiceover_source = "external_https" if voiceover else "none"
     if not voiceover:
         voiceover = synthesize_google_voice(candidate, OUTPUT)
@@ -1472,13 +1483,21 @@ def main() -> None:
         "enabled": bool(voiceover),
         "source": voiceover_source,
     }
-    if language == "en" and not voiceover:
-        raise RuntimeError(
-            "Facebook Global requires a natural English DJ voiceover; refusing to render or publish a silent Reel."
-        )
+    if language == "en":
+        facebook_global_audio.require_voiceover(candidate, voiceover)
 
     video = OUTPUT / "oldies-reels-draft.mp4"
-    if voiceover:
+    if language == "en":
+        # Preserve Facebook's three scenes and gold/white identity with complete photos.
+        candidate["video_factory"] = {"enabled": False, "reason": "facebook_existing_three_scene_template"}
+        facebook_global_visuals.render(
+            facebook_global_visuals.make_scenes(candidate, photos, OUTPUT, draw_text_block),
+            video, voiceover, candidate, MAX_VIDEO_BYTES)
+        candidate["audio_qc"] = facebook_global_audio.validate_media(video, candidate)
+        candidate["audio_qc"].update(facebook_global_audio.validate_recording(video, candidate))
+        facebook_global_visuals.validate_publish(candidate)
+        (OUTPUT / "audio-qc.json").write_text(json.dumps(candidate["audio_qc"], indent=2), encoding="utf-8")
+    elif voiceover:
         script_key = "dj_script_en" if language == "en" else "dj_script_tr"
         script = str(candidate.get(script_key, "")).strip()
         if not script:
