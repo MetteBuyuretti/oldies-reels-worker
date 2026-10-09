@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T20:41:48.805Z",
+  "updated_at": "2026-10-07T03:30:41.240372+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -165,6 +165,34 @@
       "last_checkpoint": "2026-10-04T21:15:20.669Z",
       "next_step": "Batch008 queue:TR860–864→EN1937–1941 five remaining1960s artist features, then TR866–870→EN1942–1946 five music-style histories. Fresh native reads and full source review. TR613 EN554;59unpaired;450short-EN review candidates;70full translations complete;five existing news reviewed. No background worker.",
       "note": "Checkpoint010: ten additional source-grounded full translations in status follow-up; total70. All336 source paragraphs retained,10EN pages/20native language records/10live switches/27internal links and images pass. Four taxonomy labels architecture-locked;3 source holds;duplicate-description/news-footer/mobile viewport QA pending. ExistingENURLs/TR/globaltheme preserved."
+    },
+    {
+      "id": "x-news-20261007",
+      "title": "X/Twitter news distribution using existing editorial queue",
+      "status": "blocked",
+      "completed_units": [
+        "live-plugin-inventory",
+        "main-repository-and-local-x-audit",
+        "official-api-pricing-auth-limit-verification",
+        "shared-news-table-contract",
+        "x-adapter-shared-metadata",
+        "official-browser-counter-bundled",
+        "reviewed-evidence-and-approval-policy",
+        "duplicate-lock-cas-and-uncertain-recovery",
+        "108-offline-tests",
+        "22-source-catalog-and14-rss-probes",
+        "120-offline-tests",
+        "controlled-recent-en-wordpress-import",
+        "admin-ui-render-checks",
+        "all19-existing-branch-code-x-audit",
+        "installable-adapter-package",
+        "github-pr23-reviewable",
+        "github-ci120-passed-37566947841",
+        "persistent-installation-zip"
+      ],
+      "last_checkpoint": "2026-10-07T03:30:41.240372+00:00",
+      "next_step": "Obtain browser fallback approval, then inspect current live Command Center 1.0.9 and news schema, upload/activate adapter, validate sources in existing scanner, verify X account/developer and Open Graph. No paid API without explicit budget authorization.",
+      "note": "PR #23 open and mergeable; X News CI run37566947841 success on ac731571. ZIP Oldies-X-News-Bridge-v0.1.0.zip saved; sha256 8144ceb803fa87f3ce404bdc9f7cd001bf6285b7c2f8058aee37969045f6d833. No live deployment, public post or payment. Await browser fallback approval."
     }
   ]
 }

@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-07T03:28:05.056322+00:00",
+  "php": {
+    "passed": 74,
+    "failed": 0,
+    "network": "mock only"
+  },
+  "browser_and_actions": {
+    "passed": 46,
+    "failed": 0,
+    "network": "mock only"
+  },
+  "total_passed": 120,
+  "syntax_files": [
+    "wordpress/oldies-x-news-bridge/oldies-x-news-bridge.php",
+    "wordpress/oldies-x-news-bridge/includes/Controller.php",
+    "wordpress/oldies-x-news-bridge/includes/Store.php",
+    "wordpress/oldies-x-news-bridge/includes/Publisher.php",
+    "wordpress/oldies-x-news-bridge/includes/Policy.php",
+    "tests/x-news/action.php",
+    "tests/x-news/run.php",
+    "tests/x-news/fake-news-repository.php",
+    "tests/x-news/bootstrap.php",
+    "tests/x-news/render.php"
+  ],
+  "live_X_requests": 0,
+  "live_deployment": false
+}

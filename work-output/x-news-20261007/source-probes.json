@@ -1,0 +1,214 @@
+[
+  {
+    "name": "Louder / Classic Rock",
+    "url": "https://www.loudersound.com/feeds/all",
+    "type": "rss",
+    "group": "Classic",
+    "valid": false,
+    "error": "URLError"
+  },
+  {
+    "name": "Ultimate Classic Rock",
+    "url": "https://ultimateclassicrock.com/feed/",
+    "type": "rss",
+    "group": "Classic",
+    "http_status": 200,
+    "final_url": "https://ultimateclassicrock.com/feed/",
+    "items": 35,
+    "valid": true
+  },
+  {
+    "name": "Gold Radio",
+    "url": "https://www.goldradio.com/news/music/",
+    "type": "http",
+    "group": "Classic",
+    "http_status": 200,
+    "final_url": "https://www.goldradio.com/news/music/",
+    "valid": false,
+    "note": "HTTP list extraction requires existing HttpFetcher live test; not enabled merely because page exists."
+  },
+  {
+    "name": "Smooth Radio",
+    "url": "https://www.smoothradio.com/news/music/",
+    "type": "http",
+    "group": "Classic",
+    "http_status": 200,
+    "final_url": "https://www.smoothradio.com/news/music/",
+    "valid": false,
+    "note": "HTTP list extraction requires existing HttpFetcher live test; not enabled merely because page exists."
+  },
+  {
+    "name": "Rock Cellar Magazine",
+    "url": "https://rockcellarmagazine.com/feed/",
+    "type": "rss",
+    "group": "Classic",
+    "http_status": 200,
+    "final_url": "https://rockcellarmagazine.com/feed/",
+    "items": 10,
+    "valid": true
+  },
+  {
+    "name": "Best Classic Bands",
+    "url": "https://bestclassicbands.com/feed/",
+    "type": "rss",
+    "group": "Classic",
+    "http_status": 200,
+    "final_url": "https://bestclassicbands.com/feed/",
+    "items": 10,
+    "valid": true
+  },
+  {
+    "name": "RETROPOP",
+    "url": "https://retropopmagazine.com/feed/",
+    "type": "rss",
+    "group": "Classic",
+    "http_status": 200,
+    "final_url": "https://retropopmagazine.com/feed/",
+    "items": 10,
+    "valid": true
+  },
+  {
+    "name": "uDiscover Music",
+    "url": "https://www.udiscovermusic.com/feed/",
+    "type": "rss",
+    "group": "Classic",
+    "http_status": 200,
+    "final_url": "https://www.udiscovermusic.com/feed/",
+    "items": 100,
+    "valid": true
+  },
+  {
+    "name": "Billboard",
+    "url": "https://www.billboard.com/feed/",
+    "type": "rss",
+    "group": "General",
+    "http_status": 200,
+    "final_url": "https://www.billboard.com/feed/",
+    "items": 10,
+    "valid": true
+  },
+  {
+    "name": "Rolling Stone Music",
+    "url": "https://www.rollingstone.com/music/music-news/feed/",
+    "type": "rss",
+    "group": "General",
+    "http_status": 200,
+    "final_url": "https://www.rollingstone.com/music/music-news/feed/",
+    "items": 10,
+    "valid": true
+  },
+  {
+    "name": "NME",
+    "url": "https://www.nme.com/news/music/feed",
+    "type": "rss",
+    "group": "General",
+    "valid": false,
+    "error": "HTTPError"
+  },
+  {
+    "name": "Variety Music",
+    "url": "https://variety.com/v/music/feed/",
+    "type": "rss",
+    "group": "General",
+    "http_status": 200,
+    "final_url": "https://variety.com/v/music/feed/",
+    "items": 10,
+    "valid": true
+  },
+  {
+    "name": "The Guardian Music",
+    "url": "https://www.theguardian.com/music/rss",
+    "type": "rss",
+    "group": "General",
+    "http_status": 200,
+    "final_url": "https://www.theguardian.com/music/rss",
+    "items": 26,
+    "valid": true
+  },
+  {
+    "name": "Consequence",
+    "url": "https://consequence.net/feed/",
+    "type": "rss",
+    "group": "General",
+    "http_status": 200,
+    "final_url": "https://consequence.net/feed/",
+    "items": 15,
+    "valid": true
+  },
+  {
+    "name": "Stereogum",
+    "url": "https://www.stereogum.com/feed/",
+    "type": "rss",
+    "group": "General",
+    "http_status": 200,
+    "final_url": "https://stereogum.com/feed",
+    "items": 40,
+    "valid": true
+  },
+  {
+    "name": "People Music",
+    "url": "https://people.com/music/",
+    "type": "http",
+    "group": "General",
+    "valid": false,
+    "error": "HTTPError"
+  },
+  {
+    "name": "Official Charts",
+    "url": "https://www.officialcharts.com/chart-news/",
+    "type": "http",
+    "group": "Data",
+    "http_status": 200,
+    "final_url": "https://www.officialcharts.com/chart-news/new-music-friday-playlist-songs-singles-albums-dvds-9th-july-2026/",
+    "valid": false,
+    "note": "HTTP list extraction requires existing HttpFetcher live test; not enabled merely because page exists."
+  },
+  {
+    "name": "Pollstar",
+    "url": "https://news.pollstar.com/feed/",
+    "type": "rss",
+    "group": "Data",
+    "http_status": 200,
+    "final_url": "https://news.pollstar.com/feed/",
+    "items": 10,
+    "valid": true
+  },
+  {
+    "name": "Music Business Worldwide",
+    "url": "https://www.musicbusinessworldwide.com/feed/",
+    "type": "rss",
+    "group": "Industry",
+    "http_status": 200,
+    "final_url": "https://www.musicbusinessworldwide.com/feed/",
+    "items": 10,
+    "valid": true
+  },
+  {
+    "name": "Digital Music News",
+    "url": "https://www.digitalmusicnews.com/feed/",
+    "type": "rss",
+    "group": "Industry",
+    "http_status": 200,
+    "final_url": "https://www.digitalmusicnews.com/feed/",
+    "items": 100,
+    "valid": true
+  },
+  {
+    "name": "Recording Academy",
+    "url": "https://www.grammy.com/news",
+    "type": "http",
+    "group": "Official",
+    "http_status": 200,
+    "final_url": "https://www.grammy.com/news/",
+    "valid": false,
+    "note": "HTTP list extraction requires existing HttpFetcher live test; not enabled merely because page exists."
+  },
+  {
+    "name": "Rock & Roll Hall of Fame",
+    "url": "https://www.rockhall.com/news",
+    "type": "http",
+    "group": "Official",
+    "valid": false,
+    "error": "HTTPError"
+  }
+]
