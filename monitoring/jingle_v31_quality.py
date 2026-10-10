@@ -32,7 +32,7 @@ def gain_ok(value):
             and math.isfinite(value) and abs(value - DUCK_DB) <= DUCK_TOLERANCE_DB)
 
 
-def review_v31(qc, job, now):
+def review_v31(qc, job, now, verified_master_sha256=None):
     """Return (ready, stable reasons) from evidence tied to the current MASTER hash.
 
     Required QC is produced by an independent render/QA step, not inferred
@@ -66,6 +66,12 @@ def review_v31(qc, job, now):
             or not math.isfinite(master["duration_seconds"])
             or not 9 <= master["duration_seconds"] <= 20):
         reasons.append("v31_master_audio_invalid")
+
+    # The QC certificate does not prove its own MASTER file is intact.
+    # An independent FFprobe+SHA256 probe must supply this exact digest.
+    if not hash_ok(verified_master_sha256) or not isinstance(master, dict) or (
+            master.get("sha256") != verified_master_sha256):
+        reasons.append("v31_master_file_unverified")
 
     source = qc.get("source", {})
     if not isinstance(source, dict) or not hash_ok(source.get("sha256")):
