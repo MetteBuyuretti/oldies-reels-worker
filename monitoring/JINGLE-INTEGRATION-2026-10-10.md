@@ -78,23 +78,29 @@ be treated as success.
 
 This is a **schema illustration**, not evidence of a live run.
 
-## Required evidence collection (not implemented by this PR)
+## Evidence and still-required live bridge
 
 1. WordPress records server-side **receipt timestamp**, not just the client
    timestamp, and preserves status transitions per immutable job ID.
-2. A read-only Windows probe checks actual file presence and decodability
-   with FFprobe, measures durations of M4A and WAV, calculates SHA-256,
-   checks modification time against job start, and reads Task Scheduler.
-   It must publish only sanitized results through the existing bridge.
+2. A **read-only Windows probe is included** in this PR:
+   `monitoring/jingle_local_probe.py`. It checks M4A/WAV audio streams using
+   FFprobe, 10 ± 0.6 s durations, SHA-256, task status and job/output binding,
+   and rejects files outside the CapCut inbox. It performs **no scheduling,
+   network delivery, generation or mutation**. Feeding its sanitized result
+   through a protected WordPress relay is **still pending**.
 3. Each event in `events` belongs to the same job and follows
    `GENERATING -> DOWNLOADED -> CAPCUT_READY -> COMPLETE`; absence of
    history means **unverified**, not success.
 4. The provider records `fallback_used`. Local fallback is never
    relabeled Gemini production success.
-5. A transient heartbeat POST failure may be retried **at most once**
-   only by the existing sender, after safe network classification.
-   A permanent auth error must not be retried. No playback, generation,
-   publish, data deletion or duplicate job retries are permitted.
+5. The **existing Windows sender** received a minimal retry guard on
+   10 Oct after a verified backup:
+   `backups/send_jingle_heartbeat.before-watchdog-20261010.ps1`.
+   It retries heartbeat POST **once only** for timeout/connectivity or HTTP
+   429/5xx; it does not retry 401/403. Syntax PASS and one safe live send
+   ACK PASS (`attempts=1`). The transient-failure branch has not been
+   exercised against the real site. No generation, publish or duplicate
+   job retries were made.
 6. Only one deduplicated Issue per incident; fixed issues remain
    informational and cannot trigger automatic production retries.
 7. Confirm complete end-to-end live run, warning at >2h stale heartbeat,
@@ -114,3 +120,21 @@ This is a **schema illustration**, not evidence of a live run.
 
 No new paid API, subscription, scheduled monitor or music-production
 setting is introduced.
+
+## 10 October observed test evidence
+
+- Windows is online, task `Oldies Radyo Gemini Jingle` enabled; last scheduler
+  exit result 0 is **not** proof of produced MASTER.
+- Current job ID: `20261010-manual-recovery`; `CAPCUT_READY`,
+  `voice_mixed=false`, `final_master_verified=false`.
+- Local 10 Oct M4A and WAV both **decode with FFprobe** and measure **10.0 s**.
+  Distinct SHA-256 digests confirmed; current prepared-job binding verified.
+- No persisted per-job stage history; the probe returns an empty `events`
+  array rather than fabricating any stage completion.
+- Existing + new Python Watchdog checks: **29/29 Windows local tests PASS**.
+- GitHub PR remains **DRAFT**. WordPress authenticated read-only relay,
+  repository secret setup, live hourly audit and automatic Issue verification
+  are **not yet complete**.
+
+The Github PR does **not** deploy the Windows sender update, which was
+surgically applied to its existing local script with a byte-for-byte backup.
