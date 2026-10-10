@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -23,27 +24,36 @@ def read(path):
         return {}
 
 
-def file_status(file_path, expected_job, ffprobe):
+def file_status(file_path, expected_job, ffprobe, allowed_directory=None):
     p = Path(file_path) if isinstance(file_path, str) and file_path else None
     if p is None or not p.is_file():
         return {"valid": False, "job_id": expected_job, "reason": "missing"}
     if p.suffix.lower() not in (".m4a", ".wav"):
         return {"valid": False, "job_id": expected_job, "reason": "bad_extension"}
+    # The heartbeat JSON must not induce reading arbitrary local files.
+    if allowed_directory is not None and not p.resolve().is_relative_to(allowed_directory.resolve()):
+        return {"valid": False, "job_id": expected_job, "reason": "outside_capcut_inbox"}
     if p.stat().st_size < 1024:
         return {"valid": False, "job_id": expected_job, "reason": "empty"}
     try:
-        result = subprocess.run([ffprobe, "-v", "error", "-show_entries",
-                                 "format=duration", "-of", "default=nw=1:nk=1", str(p)],
+        result = subprocess.run([ffprobe, "-v", "error", "-select_streams", "a",
+                                 "-show_entries", "stream=codec_type:format=duration",
+                                 "-of", "json", str(p)],
                                 capture_output=True, text=True, timeout=10, check=True)
-        duration = float(result.stdout.strip())
+        info = json.loads(result.stdout)
+        has_audio = any(s.get("codec_type") == "audio" for s in info.get("streams", []))
+        duration = float(info.get("format", {}).get("duration", 0))
+        if not has_audio or not math.isfinite(duration):
+            raise ValueError("no audio or non-finite duration")
         digest = hashlib.sha256(p.read_bytes()).hexdigest()
         observed = datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).isoformat()
         return {"valid": 9.4 <= duration <= 10.6, "job_id": expected_job,
                 "duration_seconds": round(duration, 4), "sha256": digest,
                 "modified_at": observed}
+    except FileNotFoundError:
+        return {"valid": False, "job_id": expected_job, "reason": "ffprobe_missing"}
     except (ValueError, OSError, subprocess.SubprocessError):
         return {"valid": False, "job_id": expected_job, "reason": "decode_failure"}
-
 
 def task_status():
     if sys.platform != "win32":
@@ -74,7 +84,7 @@ def collect(root, ffprobe="ffprobe"):
                and prepared.get("created_at") == cap.get("created_at"))
     outputs = {}
     if matched:
-        outputs = {ext: file_status(cap.get(ext), job_id, ffprobe) for ext in ("m4a", "wav")}
+        outputs = {ext: file_status(cap.get(ext), job_id, ffprobe, root / "capcut-inbox") for ext in ("m4a", "wav")}
     else:
         outputs = {ext: {"valid": False, "job_id": job_id, "reason": "job_file_link_unverified"}
                    for ext in ("m4a", "wav")}
