@@ -10,6 +10,25 @@ CFG = {"enabled": True, "heartbeat_timeout_hours": 2, "audio_target_seconds": 10
        "audio_tolerance_seconds": .6, "daily_scheduled_local_time": "12:40", "daily_grace_hours": 2}
 
 
+def approved_v31_fixture(jid):
+    h = "f" * 64
+    return {
+        "standard": "OLDIES_RADYO_JINGLE_V3_1", "job_id": jid,
+        "mix": {"configured_duck_db": -4.0, "verified_music_gain_db": -4.0,
+                "gain_measured_from_isolated_bed": True,
+                "no_predj_duck": True, "dj_intelligibility_pass": True},
+        "ending": {"dj_end_clean": True, "same_music_bed": True,
+                   "no_foreign_guitar": True, "no_second_music": True,
+                   "no_abrupt_cut": True, "smooth_fade_out": True},
+        "master": {"valid": True, "kind": "MASTER", "sha256": h, "job_id": jid,
+                   "duration_seconds": 14.18, "duplicate_of_previous": False},
+        "source": {"sha256": "e" * 64, "duplicate_of_previous": False},
+        "auditory_review": {"status": "PASS", "reviewer_type": "human",
+                            "review_id": "mock-user-review", "master_sha256": h},
+        "master_qc_pass": True
+    }
+
+
 def sample(status="COMPLETE", fallback=False):
     jid = "20261010-daily"
     seq = ["GENERATING", "DOWNLOADED", "CAPCUT_READY", "COMPLETE"]
@@ -21,7 +40,8 @@ def sample(status="COMPLETE", fallback=False):
         "windows_task": {"enabled": True, "last_result": 0, "last_run_at": "2026-10-10T09:40:00Z"},
         "job": {"id": jid, "date": "2026-10-10", "status": status, "provider": "gemini_pro_web",
                 "fallback_used": fallback, "voice_mixed": True, "master_verified": True},
-        "events": events, "outputs": {"m4a": file(), "wav": file()}
+        "events": events, "outputs": {"m4a": file(), "wav": file()},
+        "quality_v31": approved_v31_fixture(jid) if status == "COMPLETE" else None,
     }
 
 
@@ -113,6 +133,31 @@ class JingleWatchdogTests(unittest.TestCase):
         self.assertTrue(connected)
         self.assertEqual(findings[0]["reason"], "jingle_telemetry_unavailable")
         self.assertNotIn("SUPER_SECRET", str(findings) + report)
+
+
+    def test_complete_without_v31_report_must_never_be_final(self):
+        p = sample()
+        del p["quality_v31"]
+        self.assertIn("v31_qc_report_missing", self.reasons(p))
+        self.assertIn("jingle_complete_not_proven", self.reasons(p))
+
+    def test_complete_wrong_duck_or_unreviewed_tail_blocked(self):
+        p = sample()
+        p["quality_v31"]["mix"]["verified_music_gain_db"] = -12.0
+        self.assertIn("v31_balance_not_verified", self.reasons(p))
+        p = sample()
+        p["quality_v31"]["ending"]["no_foreign_guitar"] = False
+        self.assertIn("v31_clean_end_not_verified", self.reasons(p))
+
+    def test_complete_duplicate_source_is_not_new(self):
+        p = sample()
+        p["quality_v31"]["source"]["duplicate_of_previous"] = True
+        self.assertIn("v31_source_reused", self.reasons(p))
+
+    def test_complete_without_human_listening_stays_pending(self):
+        p = sample()
+        p["quality_v31"]["auditory_review"]["status"] = "PENDING"
+        self.assertIn("v31_auditory_review_pending", self.reasons(p))
 
     def test_unverified_file(self):
         self.assertFalse(output_valid({"valid": True}, "id", NOW, 10, .6))
