@@ -10,12 +10,11 @@ import os
 import urllib.error
 import urllib.request
 from datetime import datetime, time, timedelta, timezone
-from zoneinfo import ZoneInfo
 
 SERVICE = "service:jingle-factory"
 STAGES = ("GENERATING", "DOWNLOADED", "CAPCUT_READY", "COMPLETE")
 ERRORS = {"AUTH_REQUIRED", "ERROR", "CAPCUT_PREP_FAILED", "LAUNCHER_ERROR"}
-TIMEZONE = ZoneInfo("Europe/Istanbul")
+TIMEZONE = timezone(timedelta(hours=3))  # Turkey UTC+03 year-round; no tzdata dependency
 
 
 def parsed(value):
