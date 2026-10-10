@@ -138,3 +138,19 @@ setting is introduced.
 
 The Github PR does **not** deploy the Windows sender update, which was
 surgically applied to its existing local script with a byte-for-byte backup.
+
+## Final staged QA update (10 October)
+
+- Existing `jingle_heartbeat_loop.ps1` process observed active (PID 20124).
+  It invokes the existing heartbeat sender every 3,600 seconds using a
+  single-instance mutex; **no new hourly task created**. No guarantee
+  of restarting after PC/process outage has been established.
+- Existing heartbeat sender was tested against **offline mocked transports**
+  without reaching WordPress: transient timeout -> second attempt success
+  (`calls=2, attempts=2`); permanent protocol error -> no retry
+  (`calls=1, exit=1`). Normal real heartbeat ACK: `attempts=1`.
+- Read-only local M4A/WAV evidence and all 29 Python tests passed.
+- GitHub PR #26 Actions audit/test workflow passed at
+  https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/38009851838 .
+- Production WordPress -> GitHub authenticated telemetry bridge is **still
+  unavailable**. This is not an end-to-end live Jingle monitoring test.
