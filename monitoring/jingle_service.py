@@ -158,7 +158,20 @@ def evaluate(payload, now, cfg):
 
     v31_ok = False
     if status == "COMPLETE" or job.get("master_verified") is True:
-        v31_ok, v31_reasons = review_v31(payload.get("quality_v31"), job, now)
+        # Separate local probe must FFprobe and hash actual MASTER, not preview
+        # or reuse the QC certificate's unproven hash.
+        master_output = payload.get("outputs", {}).get("master") if isinstance(payload.get("outputs"), dict) else None
+        verified_master_hash = None
+        if (isinstance(master_output, dict) and master_output.get("valid") is True
+                and master_output.get("kind") == "MASTER" and master_output.get("job_id") == jid
+                and isinstance(master_output.get("duration_seconds"), (int, float))
+                and not isinstance(master_output["duration_seconds"], bool)
+                and 9 <= master_output["duration_seconds"] <= 20
+                and isinstance(master_output.get("sha256"), str)
+                and len(master_output["sha256"]) == 64):
+            verified_master_hash = master_output["sha256"]
+        v31_ok, v31_reasons = review_v31(payload.get("quality_v31"), job, now,
+                                           verified_master_sha256=verified_master_hash)
         for reason in v31_reasons:
             findings.append(issue(reason, jid))
         detail.append("V3.1 QUALITY: " + ("PASS" if v31_ok else "BLOCKED"))
