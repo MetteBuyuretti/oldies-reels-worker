@@ -29,12 +29,17 @@ def report():
 
 class V31QualityTests(unittest.TestCase):
     def fail(self, case, expected):
-        ok, reasons = review_v31(case, JOB, NOW)
+        ok, reasons = review_v31(case, JOB, NOW, verified_master_sha256=MASTER)
         self.assertFalse(ok)
         self.assertIn(expected, reasons)
 
     def test_full_independent_fixture_passes(self):
-        self.assertEqual(review_v31(report(), JOB, NOW), (True, []))
+        self.assertEqual(review_v31(report(), JOB, NOW, verified_master_sha256=MASTER), (True, []))
+
+    def test_missing_independent_master_sha(self):
+        ready, reasons = review_v31(report(), JOB, NOW)
+        self.assertFalse(ready)
+        self.assertIn("v31_master_file_unverified", reasons)
 
     def test_missing_certificate(self):
         self.fail({}, "v31_standard_or_job_mismatch")
