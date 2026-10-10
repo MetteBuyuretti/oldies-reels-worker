@@ -154,3 +154,44 @@ surgically applied to its existing local script with a byte-for-byte backup.
   https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/38009851838 .
 - Production WordPress -> GitHub authenticated telemetry bridge is **still
   unavailable**. This is not an end-to-end live Jingle monitoring test.
+
+## V3.1 onaylı ses kalite kapısı — 11 Ekim 2026
+
+11 Ekim'de kullanıcı tarafından **V3.1** ses standardı onaylandı
+(`duck_db=-4.0`; önceki -4.8 ve -12 geçersizdir). Referans ve onaylı
+teknik alanlar özel Windows dosyalarında tutulur:
+`Oldies-Jingle-Factory/config/approved-jingle-standard-v3.1.json`.
+
+Mevcut Watchdog'un yerel saatlik `watchdog_jingle_audit.py` kontrolüne,
+ayrı zamanlayıcı kurmadan V3.1 kontrolü eklendi. Geri dönüş yedeği:
+`oldies-jingle-automation/backups/watchdog_jingle_audit.before-v31-20261011.py`.
+
+Watchdog şunları **QC olmadan başarı diye raporlamaz**:
+- Müzik `duck_db=-4.0`, hem üretim ayarı hem izole müzik katmanı
+  ölçüm belgesi; konuşma öncesinde yanlış kısma yasak.
+- Anlaşılır DJ, temiz son sözcük; ikinci müzik/yabancı gitar
+  benzeri tını, ani kesilme ve farklı outro yok.
+  *Yalnız süre ve LUFS ölçümü bu işitsel sonucu ispatlayamaz.*
+  Dosya SHA'sına bağlı bağımsız insan dinleme incelemesi gerekir.
+- Yeni müzik kaynak SHA'sı, önceki tarihin arşiv SHA'larından farklı;
+  ayrıca final MASTER SHA mükerrer olmamalı.
+- İlgili job ID, açılabilir geçerli MASTER MP3 ve ayrı FFprobe+SHA
+  kanıtı. Sadece CapCut için hazırlanmış 10 saniyelik M4A/WAV
+  `FINAL` değildir.
+- Sabah ve akşam üretimleri için eski `COMPLETED` raporları dahi
+  V3.1 kalite kanıtı olmadan `MASTER_EVIDENCE_PASS` olamaz.
+- MASTER QC ve yeni dosyanın ayrıca yayın onayı birbirinden ayrı.
+
+GitHub PR #26'ya mevcut `jingle_service.py` üzerinden bağlı
+`jingle_v31_quality.py` yardımcı kalite kapısı ve regresyon testleri
+eklendi. **45/45 yerel GitHub Python birim testi PASS**. WordPress ->
+GitHub salt-okunur yetkili telemetri köprüsü ve üretici FINAL yazma
+kapısı halen canlı uçtan uca kabul gerektiriyor; PR hâlâ draft.
+Mevcut Windows izleme kontrol sonucu: `CAPCUT_READY`,
+`v31_final_quality_pass=false`, `health=REVIEW`.
+
+Kritik fark: GitHub/yerel Watchdog artık **FINAL kalitesini onaylamaz**;
+bununla birlikte üretici/WordPress yayın kodunun `FINAL` yazmasını
+gerçekten engelleyen bir kilit henüz bu PR ile canlıya alınmamıştır.
+Gerçek yayın güvenlik kilidi ayrı prodüksiyon iş akışına
+yerleştirilip kontrollü E2E testle onaylanmalıdır.
