@@ -34,4 +34,6 @@ jobs:
         if: github.event_name != 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OLDIES_JINGLE_STATUS_URL: ${{ secrets.OLDIES_JINGLE_STATUS_URL }}
+          OLDIES_JINGLE_STATUS_TOKEN: ${{ secrets.OLDIES_JINGLE_STATUS_TOKEN }}
         run: python monitoring/watchdog.py
