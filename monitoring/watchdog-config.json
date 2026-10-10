@@ -8,5 +8,15 @@
   },
   "issue_alerts_enabled": true,
   "recent_failure_lookback_hours": 48,
-  "manual_workflow_lookback_hours": 48
+  "manual_workflow_lookback_hours": 48,
+  "jingle_factory": {
+    "enabled": true,
+    "heartbeat_timeout_hours": 2,
+    "daily_scheduled_local_time": "12:40",
+    "daily_grace_hours": 2,
+    "audio_target_seconds": 10,
+    "audio_tolerance_seconds": 0.6,
+    "issue_alerts_enabled": true,
+    "telemetry_mode": "authenticated_wordpress_readonly"
+  }
 }
