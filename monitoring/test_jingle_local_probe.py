@@ -13,7 +13,7 @@ class JingleLocalProbeTests(unittest.TestCase):
             p = Path(temp) / "jingle.wav"
             p.write_bytes(b"x" * 2048)
             with patch("jingle_local_probe.subprocess.run",
-                       return_value=Mock(stdout="10.000", returncode=0)):
+                       return_value=Mock(stdout=json.dumps({"streams":[{"codec_type":"audio"}],"format":{"duration":"10.000"}}), returncode=0)):
                 result = file_status(str(p), "job-1", "ffprobe")
             self.assertTrue(result["valid"])
             self.assertEqual(result["duration_seconds"], 10.0)
@@ -25,7 +25,7 @@ class JingleLocalProbeTests(unittest.TestCase):
             p = Path(temp) / "jingle.m4a"
             p.write_bytes(b"x" * 2048)
             with patch("jingle_local_probe.subprocess.run",
-                       return_value=Mock(stdout="13.01", returncode=0)):
+                       return_value=Mock(stdout=json.dumps({"streams":[{"codec_type":"audio"}],"format":{"duration":"13.01"}}), returncode=0)):
                 self.assertFalse(file_status(str(p), "job-1", "ffprobe")["valid"])
 
     def test_missing_file_is_not_green(self):
