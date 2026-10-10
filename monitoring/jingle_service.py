@@ -10,6 +10,7 @@ import os
 import urllib.error
 import urllib.request
 from datetime import datetime, time, timedelta, timezone
+from jingle_v31_quality import review_v31
 
 SERVICE = "service:jingle-factory"
 STAGES = ("GENERATING", "DOWNLOADED", "CAPCUT_READY", "COMPLETE")
@@ -155,9 +156,18 @@ def evaluate(payload, now, cfg):
     else:
         pair_ok = False
 
+    v31_ok = False
+    if status == "COMPLETE" or job.get("master_verified") is True:
+        v31_ok, v31_reasons = review_v31(payload.get("quality_v31"), job, now)
+        for reason in v31_reasons:
+            findings.append(issue(reason, jid))
+        detail.append("V3.1 QUALITY: " + ("PASS" if v31_ok else "BLOCKED"))
+    elif status == "CAPCUT_READY":
+        detail.append("V3.1 QUALITY: PENDING (music only)")
+
     final_ok = (status == "COMPLETE" and trace_ok and observed == list(STAGES)
                 and pair_ok and job.get("voice_mixed") is True
-                and job.get("master_verified") is True and not fallback)
+                and job.get("master_verified") is True and v31_ok and not fallback)
     if status == "COMPLETE" and not final_ok:
         findings.append(issue("jingle_complete_not_proven", jid))
     if fallback:
