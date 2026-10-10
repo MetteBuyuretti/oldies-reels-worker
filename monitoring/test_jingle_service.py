@@ -40,7 +40,9 @@ def sample(status="COMPLETE", fallback=False):
         "windows_task": {"enabled": True, "last_result": 0, "last_run_at": "2026-10-10T09:40:00Z"},
         "job": {"id": jid, "date": "2026-10-10", "status": status, "provider": "gemini_pro_web",
                 "fallback_used": fallback, "voice_mixed": True, "master_verified": True},
-        "events": events, "outputs": {"m4a": file(), "wav": file()},
+        "events": events, "outputs": {"m4a": file(), "wav": file(),
+             "master": {"valid": True, "kind": "MASTER", "job_id": jid,
+                        "duration_seconds": 14.18, "sha256": "f" * 64}},
         "quality_v31": approved_v31_fixture(jid) if status == "COMPLETE" else None,
     }
 
@@ -134,6 +136,14 @@ class JingleWatchdogTests(unittest.TestCase):
         self.assertEqual(findings[0]["reason"], "jingle_telemetry_unavailable")
         self.assertNotIn("SUPER_SECRET", str(findings) + report)
 
+
+    def test_complete_without_independent_master_file_fails(self):
+        p = sample()
+        p["outputs"].pop("master")
+        self.assertIn("v31_master_file_unverified", self.reasons(p))
+        p = sample()
+        p["outputs"]["master"]["sha256"] = "1" * 64
+        self.assertIn("v31_master_file_unverified", self.reasons(p))
 
     def test_complete_without_v31_report_must_never_be_final(self):
         p = sample()
