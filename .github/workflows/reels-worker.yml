@@ -47,7 +47,8 @@ on:
     paths:
       - ".github/manual-reels-trigger"
   schedule:
-    - cron: "0 9 * * *"
+    # Avoid the busy start of the hour; GitHub schedules remain best-effort.
+    - cron: "17 9 * * *"
 
 permissions:
   contents: write
@@ -110,3 +111,4 @@ jobs:
           path: output/
           retention-days: 7
           if-no-files-found: ignore
+

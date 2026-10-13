@@ -1526,7 +1526,14 @@ def main() -> None:
     if candidate.get("reels_language") == "en":
         result = publish_facebook_global(candidate, video, bearer, base_url)
         (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"Published English Global Reel to Facebook: {result.get('video_id') or result.get('post_id') or 'success'}")
+        status = result.get('status') if isinstance(result.get('status'), dict) else {}
+        publishing = status.get('publishing_phase') or {}
+        publishing_status = publishing.get('status', 'unknown') if isinstance(publishing, dict) else 'unknown'
+        print(
+            f"Facebook Global response: video={result.get('video_id') or result.get('post_id') or 'unknown'}; "
+            f"video_status={status.get('video_status', 'unknown')}; publishing_phase={publishing_status}. "
+            "Workflow success alone does not verify public Facebook delivery."
+        )
         return
 
     result = upload_draft(candidate, video, bearer, base_url)
@@ -1536,3 +1543,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
