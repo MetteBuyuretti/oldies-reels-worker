@@ -1,0 +1,111 @@
+test_failed_trace_cannot_be_final (test_jingle_robustness.TelemetryRegressionTests.test_failed_trace_cannot_be_final) ... FAIL
+test_missing_timestamp_does_not_crash_audit (test_jingle_robustness.TelemetryRegressionTests.test_missing_timestamp_does_not_crash_audit) ... ERROR
+test_nonfinite_durations_never_pass (test_jingle_robustness.TelemetryRegressionTests.test_nonfinite_durations_never_pass) ...
+  test_nonfinite_durations_never_pass (test_jingle_robustness.TelemetryRegressionTests.test_nonfinite_durations_never_pass) (value=nan) ... FAIL
+test_nonhex_hash_rejected (test_jingle_robustness.TelemetryRegressionTests.test_nonhex_hash_rejected) ... FAIL
+test_oversized_and_malformed_response_fail_closed (test_jingle_robustness.TelemetryRegressionTests.test_oversized_and_malformed_response_fail_closed) ... ok
+test_receipt_threshold_exactly_two_hours_and_over (test_jingle_robustness.TelemetryRegressionTests.test_receipt_threshold_exactly_two_hours_and_over) ... FAIL
+test_repeated_stale_audits_use_existing_dedupe (test_jingle_robustness.TelemetryRegressionTests.test_repeated_stale_audits_use_existing_dedupe) ... ok
+test_trace_must_reach_reported_stage (test_jingle_robustness.TelemetryRegressionTests.test_trace_must_reach_reported_stage) ... FAIL
+test_transport_refuses_redirect_handler (test_jingle_robustness.TelemetryRegressionTests.test_transport_refuses_redirect_handler) ... ok
+test_transport_rejects_plaintext_and_missing_auth (test_jingle_robustness.TelemetryRegressionTests.test_transport_rejects_plaintext_and_missing_auth) ... ok
+test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed) ...
+  test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed) (field='id') ... FAIL
+  test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed) (field='status') ... FAIL
+  test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed) (field='provider') ... FAIL
+test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed) ... FAIL
+
+======================================================================
+ERROR: test_missing_timestamp_does_not_crash_audit (test_jingle_robustness.TelemetryRegressionTests.test_missing_timestamp_does_not_crash_audit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 27, in test_missing_timestamp_does_not_crash_audit
+    findings, _ = evaluate(data, NOW, CFG)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/tmppkeb28iw/jingle_service.py", line 151, in evaluate
+    pair_ok = isinstance(outputs, dict) and all(
+                                            ^^^^
+  File "/tmp/tmppkeb28iw/jingle_service.py", line 152, in <genexpr>
+    output_valid(outputs.get(ext), jid, now, target, tolerance) for ext in ("m4a", "wav"))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/tmppkeb28iw/jingle_service.py", line 75, in output_valid
+    modified = parsed(file["modified_at"])
+                      ~~~~^^^^^^^^^^^^^^^
+KeyError: 'modified_at'
+
+======================================================================
+FAIL: test_failed_trace_cannot_be_final (test_jingle_robustness.TelemetryRegressionTests.test_failed_trace_cannot_be_final)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 39, in test_failed_trace_cannot_be_final
+    self.assertIn('jingle_stage_trace_unverified', [f['reason'] for f in findings])
+AssertionError: 'jingle_stage_trace_unverified' not found in []
+
+======================================================================
+FAIL: test_nonfinite_durations_never_pass (test_jingle_robustness.TelemetryRegressionTests.test_nonfinite_durations_never_pass) (value=nan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 21, in test_nonfinite_durations_never_pass
+    self.assertIn('jingle_audio_invalid_or_stale', [f['reason'] for f in findings])
+AssertionError: 'jingle_audio_invalid_or_stale' not found in []
+
+======================================================================
+FAIL: test_nonhex_hash_rejected (test_jingle_robustness.TelemetryRegressionTests.test_nonhex_hash_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 33, in test_nonhex_hash_rejected
+    self.assertFalse(output_valid(data['outputs']['wav'], data['job']['id'], NOW, 10, .6))
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_receipt_threshold_exactly_two_hours_and_over (test_jingle_robustness.TelemetryRegressionTests.test_receipt_threshold_exactly_two_hours_and_over)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 64, in test_receipt_threshold_exactly_two_hours_and_over
+    self.assertEqual('STALE' in report, stale)
+AssertionError: False != True
+
+======================================================================
+FAIL: test_trace_must_reach_reported_stage (test_jingle_robustness.TelemetryRegressionTests.test_trace_must_reach_reported_stage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 46, in test_trace_must_reach_reported_stage
+    self.assertIn('jingle_stage_trace_unverified', [f['reason'] for f in findings])
+AssertionError: 'jingle_stage_trace_unverified' not found in ['v31_qc_report_missing', 'jingle_daily_incomplete']
+
+======================================================================
+FAIL: test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed) (field='id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 53, in test_untrusted_identifiers_and_provider_not_echoed
+    self.assertNotIn('SENSITIVE_VALUE', str(evaluate(data, NOW, CFG)))
+AssertionError: 'SENSITIVE_VALUE' unexpectedly found in "([{'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'jingle_stage_trace_unverified', 'run_id': 'C:\\\\private\\\\SENSITIVE_VALUE\\nmore', 'url': ''}, {'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'jingle_audio_invalid_or_stale', 'run_id': 'C:\\\\private\\\\SENSITIVE_VALUE\\nmore', 'url': ''}, {'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'v31_standard_or_job_mismatch', 'run_id': 'C:\\\\private\\\\SENSITIVE_VALUE\\nmore', 'url': ''}, {'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'v31_master_audio_invalid', 'run_id': 'C:\\\\private\\\\SENSITIVE_VALUE\\nmore', 'url': ''}, {'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'v31_master_file_unverified', 'run_id': 'C:\\\\private\\\\SENSITIVE_VALUE\\nmore', 'url': ''}, {'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'jingle_complete_not_proven', 'run_id': 'C:\\\\private\\\\SENSITIVE_VALUE\\nmore', 'url': ''}, {'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'jingle_daily_incomplete', 'run_id': '2026-10-10', 'url': ''}], 'heartbeat age: 0.67h; Windows schedule: enabled; job: C:\\\\private\\\\SENSITIVE_VALUE\\nmore, status: COMPLETE, provider: gemini_pro_web; M4A/WAV: NOT VERIFIED; V3.1 QUALITY: BLOCKED; MASTER: NOT VERIFIED')"
+
+======================================================================
+FAIL: test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed) (field='status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 53, in test_untrusted_identifiers_and_provider_not_echoed
+    self.assertNotIn('SENSITIVE_VALUE', str(evaluate(data, NOW, CFG)))
+AssertionError: 'SENSITIVE_VALUE' unexpectedly found in "([{'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'jingle_unknown_stage', 'run_id': '20261010-daily', 'url': ''}, {'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'jingle_daily_incomplete', 'run_id': '2026-10-10', 'url': ''}], 'heartbeat age: 0.67h; Windows schedule: enabled; job: 20261010-daily, status: C:\\\\PRIVATE\\\\SENSITIVE_VALUE\\nMORE, provider: gemini_pro_web; V3.1 QUALITY: PASS; MASTER: NOT VERIFIED')"
+
+======================================================================
+FAIL: test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed) (field='provider')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 53, in test_untrusted_identifiers_and_provider_not_echoed
+    self.assertNotIn('SENSITIVE_VALUE', str(evaluate(data, NOW, CFG)))
+AssertionError: 'SENSITIVE_VALUE' unexpectedly found in "([], 'heartbeat age: 0.67h; Windows schedule: enabled; job: 20261010-daily, status: COMPLETE, provider: C:\\\\private\\\\SENSITIVE_VALUE\\nmore; M4A/WAV: verified; V3.1 QUALITY: PASS; MASTER: VERIFIED')"
+
+======================================================================
+FAIL: test_untrusted_identifiers_and_provider_not_echoed (test_jingle_robustness.TelemetryRegressionTests.test_untrusted_identifiers_and_provider_not_echoed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/tmppkeb28iw/test_jingle_robustness.py", line 56, in test_untrusted_identifiers_and_provider_not_echoed
+    self.assertNotIn('PRIVATE_VALUE', str(evaluate(data, NOW, CFG)))
+AssertionError: 'PRIVATE_VALUE' unexpectedly found in "([{'path': 'service:jingle-factory', 'name': 'Jingle Factory', 'reason': 'jingle_task_failed', 'run_id': 'PRIVATE_VALUE', 'url': ''}], 'heartbeat age: 0.67h; Windows schedule: enabled; job: 20261010-daily, status: COMPLETE, provider: gemini_pro_web; M4A/WAV: verified; V3.1 QUALITY: PASS; MASTER: VERIFIED')"
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.006s
+
+FAILED (failures=9, errors=1)

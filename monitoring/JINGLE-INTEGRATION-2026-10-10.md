@@ -195,3 +195,7 @@ bununla birlikte üretici/WordPress yayın kodunun `FINAL` yazmasını
 gerçekten engelleyen bir kilit henüz bu PR ile canlıya alınmamıştır.
 Gerçek yayın güvenlik kilidi ayrı prodüksiyon iş akışına
 yerleştirilip kontrollü E2E testle onaylanmalıdır.
+
+## 13 October WORK-2 revision
+
+Current main including PR28 reconciled into this draft. CI now discovers all monitoring tests; 61 local tests pass. Telemetry invalid duration/hash/time, unsafe reporting fields and incomplete/error traces hardened. See `work-output/work2-jingle-repair-20261013/technical-report.md` for before/after evidence, all 15 acceptance scenarios, access blockers and rollback. No live relay, producer FINAL gate or new MASTER verified. Windows offline. Do not merge until live acceptance and separate owner authorization.

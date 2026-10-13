@@ -6,11 +6,13 @@ pipeline. No generation, publication, retries or credential mutation happens her
 from __future__ import annotations
 
 import json
+import math
+import re
 import os
 import urllib.error
 import urllib.request
 from datetime import datetime, time, timedelta, timezone
-from jingle_v31_quality import review_v31
+from jingle_v31_quality import hash_ok, review_v31
 
 SERVICE = "service:jingle-factory"
 STAGES = ("GENERATING", "DOWNLOADED", "CAPCUT_READY", "COMPLETE")
@@ -65,14 +67,16 @@ def output_valid(file, job_id, now, duration_target, tolerance):
         return False
     if file.get("valid") is not True or file.get("job_id") != job_id:
         return False
-    if not isinstance(file.get("sha256"), str) or len(file["sha256"]) != 64:
+    if not hash_ok(file.get("sha256")):
         return False
-    if not isinstance(file.get("duration_seconds"), (float, int)):
+    if (not isinstance(file.get("duration_seconds"), (float, int))
+            or isinstance(file["duration_seconds"], bool)
+            or not math.isfinite(file["duration_seconds"])):
         return False
     if abs(file["duration_seconds"] - duration_target) > tolerance:
         return False
     try:
-        modified = parsed(file["modified_at"])
+        modified = parsed(file.get("modified_at"))
     except (ValueError, TypeError):
         return False
     age = (now - modified).total_seconds()
@@ -93,7 +97,7 @@ def evaluate(payload, now, cfg):
             findings.append(issue("jingle_heartbeat_clock_invalid", "clock"))
         elif age > hours:
             findings.append(issue("jingle_heartbeat_stale", last.strftime("%Y%m%dT%H%M")))
-        detail.append(f"heartbeat age: {age:.2f}h")
+        detail.append(f"heartbeat: {'STALE' if age > hours else 'CLOCK INVALID' if age < -0.0833 else 'FRESH'}; age: {age:.2f}h")
     except (ValueError, TypeError):
         findings.append(issue("jingle_heartbeat_unverified", "receipt"))
         detail.append("no verified server receipt")
@@ -102,19 +106,27 @@ def evaluate(payload, now, cfg):
     if not isinstance(task, dict) or task.get("enabled") is not True:
         findings.append(issue("jingle_task_not_verified", "scheduler"))
     elif task.get("last_result") not in (0, "0"):
-        findings.append(issue("jingle_task_failed", str(task.get("last_run_at") or "unknown")))
+        try:
+            task_incident = parsed(task.get("last_run_at")).strftime("%Y%m%dT%H%M")
+        except (ValueError, TypeError):
+            task_incident = "unknown"
+        findings.append(issue("jingle_task_failed", task_incident))
     detail.append("Windows schedule: " + ("enabled" if isinstance(task, dict) and task.get("enabled") is True else "unverified"))
 
     job = payload.get("job")
-    if not isinstance(job, dict) or not str(job.get("id", "")).strip():
+    if (not isinstance(job, dict) or not isinstance(job.get("id"), str)
+            or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,89}", job["id"])):
         findings.append(issue("jingle_job_missing", "daily"))
         return findings, "; ".join(detail + ["no current job"])
     jid = str(job["id"])[:90]
     status = str(job.get("status", "")).upper()
     job_date = job.get("date", "")
     fallback = job.get("fallback_used") is True
-    provider = str(job.get("provider", "unknown"))
-    detail.append(f"job: {jid}, status: {status}, provider: " + ("LOCAL_FALLBACK" if fallback else provider))
+    provider = job.get("provider")
+    if provider not in ("gemini_pro_web", "gemini", "local_fallback"):
+        provider = "unknown"
+    display_status = status if status in STAGES or status in ERRORS else "UNRECOGNIZED"
+    detail.append(f"job: {jid}, status: {display_status}, provider: " + ("LOCAL_FALLBACK" if fallback else provider))
     if status in ERRORS:
         findings.append(issue("jingle_" + status.lower(), jid))
     elif status not in STAGES and status not in ("PROMPT_SYNCED", "PROMPT_READY", "NO_PROMPT", "EMPTY_PROMPT"):
@@ -124,6 +136,7 @@ def evaluate(payload, now, cfg):
     trace_ok = isinstance(trace, list) and len(trace) > 0
     previous = -1
     observed = []
+    trace_error = False
     if trace_ok:
         for event in trace:
             if not isinstance(event, dict) or event.get("job_id") != jid:
@@ -138,9 +151,15 @@ def evaluate(payload, now, cfg):
                 previous = i
                 if current not in observed:
                     observed.append(current)
-            elif current not in ERRORS and current not in ("PROMPT_READY", "PROMPT_SYNCED"):
+            elif current in ERRORS:
+                trace_error = True
+            elif current not in ("PROMPT_READY", "PROMPT_SYNCED"):
                 trace_ok = False
                 break
+    if status in STAGES and (not observed or observed[-1] != status):
+        trace_ok = False
+    if status == "COMPLETE" and trace_error:
+        trace_ok = False
     if not trace_ok:
         findings.append(issue("jingle_stage_trace_unverified", jid))
 
@@ -152,7 +171,7 @@ def evaluate(payload, now, cfg):
             output_valid(outputs.get(ext), jid, now, target, tolerance) for ext in ("m4a", "wav"))
         if not pair_ok:
             findings.append(issue("jingle_audio_invalid_or_stale", jid))
-        detail.append("M4A/WAV: " + ("verified" if pair_ok else "NOT VERIFIED"))
+        detail.append("M4A/WAV (Windows probe report; files not read by GitHub): " + ("verified" if pair_ok else "NOT VERIFIED"))
     else:
         pair_ok = False
 
@@ -167,8 +186,7 @@ def evaluate(payload, now, cfg):
                 and isinstance(master_output.get("duration_seconds"), (int, float))
                 and not isinstance(master_output["duration_seconds"], bool)
                 and 9 <= master_output["duration_seconds"] <= 20
-                and isinstance(master_output.get("sha256"), str)
-                and len(master_output["sha256"]) == 64):
+                and hash_ok(master_output.get("sha256"))):
             verified_master_hash = master_output["sha256"]
         v31_ok, v31_reasons = review_v31(payload.get("quality_v31"), job, now,
                                            verified_master_sha256=verified_master_hash)

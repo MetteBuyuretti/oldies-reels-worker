@@ -47,7 +47,7 @@ class GitHub:
             return json.load(response)
 
 
-def collect(api, config: dict, now: datetime):
+def collect(api, config: dict, now: datetime, *, current_run_id: str = ''):
     workflows = []
     for page in range(1, 11):
         batch = api.request(f'/actions/workflows?per_page=100&page={page}').get('workflows', [])
@@ -60,7 +60,25 @@ def collect(api, config: dict, now: datetime):
     active_paths = set()
     for workflow in workflows:
         path = workflow['path']
-        if workflow.get('state') != 'active' or path == WORKFLOW_SELF:
+        if workflow.get('state') != 'active':
+            continue
+        if path == WORKFLOW_SELF:
+            # A running audit must not hide the gap since its previous schedule.
+            # Report only; this is deliberately outside the issue-alert allowlist.
+            threshold = config.get('self_schedule_freshness_hours')
+            if threshold is not None:
+                self_runs = api.request(
+                    f"/actions/workflows/{workflow['id']}/runs?per_page=6&event=schedule"
+                ).get('workflow_runs', [])
+                prior = next((r for r in self_runs
+                              if str(r['id']) != str(current_run_id)
+                              and r.get('status') == 'completed'), None)
+                if prior is not None:
+                    age = hours_since(prior.get('run_started_at') or prior['created_at'], now)
+                    if age > float(threshold):
+                        findings.append({'path': path, 'name': workflow['name'],
+                                         'reason': 'watchdog_schedule_gap', 'run_id': prior['id'],
+                                         'url': prior.get('html_url', '')})
             continue
         active_paths.add(path)
         expected = freshness.get(path)
@@ -147,7 +165,9 @@ def main() -> int:
     api = GitHub(os.environ['GITHUB_REPOSITORY'], os.environ['GITHUB_TOKEN'],
                  os.environ.get('GITHUB_API_URL', 'https://api.github.com'))
     timestamp = datetime.now(timezone.utc)
-    findings, healthy, unchecked = collect(api, config, timestamp)
+    findings, healthy, unchecked = collect(
+        api, config, timestamp, current_run_id=os.getenv('GITHUB_RUN_ID', '')
+    )
     jingle_cfg = config.get('jingle_factory', {})
     jingle_findings, jingle_report, jingle_connected = audit_jingle(jingle_cfg, timestamp)
     rows = [f"## OLDIES WATCHDOG — GitHub Actions\n",
@@ -156,6 +176,7 @@ def main() -> int:
             f"- No runs, freshness rule not configured: {len(unchecked)}",
             "- Scope: GitHub Actions status only; publication delivery is NOT verified.",
             "- No automated retries or live changes.\n"]
+    rows.append('- A Watchdog schedule gap is visible only when an audit runs again.')
     for f in findings:
         rows.append(f"- **{f['reason']}** — `{f['path']}` — {f['url'] or 'no run'}")
     rows.append("\n## Jingle Factory — service health")
@@ -185,3 +206,4 @@ if __name__ == '__main__':
     except (urllib.error.URLError, ValueError, KeyError) as exc:
         print(f'Watchdog audit error: {type(exc).__name__}: {exc}', file=sys.stderr)
         sys.exit(1)
+

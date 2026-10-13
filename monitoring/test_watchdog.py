@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime, timezone
-from watchdog import collect, alert
+from watchdog import collect, alert, WORKFLOW_SELF
 
 NOW = datetime(2026, 10, 9, 0, 0, tzinfo=timezone.utc)
 
@@ -26,6 +26,46 @@ class API:
         raise AssertionError(path)
 
 class WatchdogTests(unittest.TestCase):
+    def self_api(self, runs):
+        return API(runs, workflows=[dict(id=42, path=WORKFLOW_SELF,
+                                        name='watchdog', state='active')])
+
+    def test_current_audit_does_not_hide_previous_schedule_gap(self):
+        current = dict(id=9, status='in_progress', created_at='2026-10-09T00:00:00Z')
+        prior = dict(id=8, status='completed', conclusion='success',
+                     created_at='2026-10-08T16:00:00Z')
+        a = self.self_api([current, prior])
+        findings, _, _ = collect(a, {'self_schedule_freshness_hours': 3}, NOW,
+                                current_run_id='9')
+        self.assertEqual(findings[0]['reason'], 'watchdog_schedule_gap')
+        self.assertEqual(findings[0]['run_id'], 8)
+        self.assertEqual(alert(a, findings, {'.github/workflows/publisher.yml'}), 0)
+
+    def test_completed_current_audit_does_not_hide_gap(self):
+        current = dict(id=9, status='completed', conclusion='success',
+                       created_at='2026-10-09T00:00:00Z')
+        prior = dict(id=8, status='completed', conclusion='success',
+                     created_at='2026-10-08T16:00:00Z')
+        findings, _, _ = collect(self.self_api([current, prior]),
+                                {'self_schedule_freshness_hours': 3}, NOW, current_run_id='9')
+        self.assertEqual(findings[0]['run_id'], 8)
+
+    def test_recent_watchdog_schedule_is_not_flagged(self):
+        prior = dict(id=8, status='completed', conclusion='success',
+                     created_at='2026-10-08T23:00:00Z')
+        self.assertEqual(collect(self.self_api([prior]),
+                                 {'self_schedule_freshness_hours': 3}, NOW)[0], [])
+
+    def test_first_watchdog_audit_has_no_prior_gap(self):
+        current = dict(id=9, status='in_progress', created_at='2026-10-09T00:00:00Z')
+        self.assertEqual(collect(self.self_api([current]),
+                                 {'self_schedule_freshness_hours': 3}, NOW, current_run_id='9')[0], [])
+
+    def test_unconfigured_self_monitoring_preserves_existing_behavior(self):
+        prior = dict(id=8, status='completed', conclusion='success',
+                     created_at='2026-10-08T16:00:00Z')
+        self.assertEqual(collect(self.self_api([prior]), {}, NOW)[0], [])
+
     def test_success_is_healthy(self):
         a = API([dict(id=5, status='completed', conclusion='success', created_at='2026-10-08T23:00:00Z')])
         self.assertEqual(collect(a, {}, NOW)[0], [])
@@ -89,3 +129,4 @@ class WatchdogTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+

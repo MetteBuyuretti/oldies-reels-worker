@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "stalled_hours": 3,
+  "self_schedule_freshness_hours": 3,
   "expected_freshness_hours": {
     ".github/workflows/reels-worker.yml": 36,
     ".github/workflows/facebook-global-en.yml": 36,
@@ -20,3 +21,4 @@
     "telemetry_mode": "authenticated_wordpress_readonly"
   }
 }
+

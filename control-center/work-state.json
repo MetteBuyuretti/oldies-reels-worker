@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T20:41:48.805Z",
+  "updated_at": "2026-10-13T20:48:46.197791+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -34,11 +34,17 @@
     {
       "id": "jingle-system",
       "title": "Oldies Radyo Jingle üretim sistemi",
-      "status": "needs_reconcile",
-      "completed_units": [],
-      "next_step": "Mevcut jingle çıktıları ve otomasyon kodunu kontrol et; son güvenli aşamayı belirle.",
-      "last_checkpoint": null,
-      "note": "Bağlantı kesintisinde miks veya render baştan başlamadan önce mevcut dosyaları kontrol et."
+      "status": "blocked",
+      "completed_units": [
+        "work2-source-reconciliation",
+        "pr26-main-merge-local-50-tests",
+        "observer-fail-closed-regressions-61-pass",
+        "ci-all-monitoring-tests",
+        "technical-delivery-and-rollback-record"
+      ],
+      "next_step": "Bring existing Windows/Desktop Commander online; inspect actual producer/logs/audio and WordPress receiver source, then implement FINAL gate and authenticated relay. No merge/deploy before acceptance and owner approval.",
+      "last_checkpoint": "2026-10-13T20:48:46.197791+00:00",
+      "note": "work-output/work2-jingle-repair-20261013/technical-report.md. 61 local tests PASS; no live E2E, new MASTER or publication; natural observation 0/3; draft PR26 only."
     },
     {
       "id": "oldies-revenue-live-20261002",
@@ -165,6 +171,26 @@
       "last_checkpoint": "2026-10-04T21:15:20.669Z",
       "next_step": "Batch008 queue:TR860–864→EN1937–1941 five remaining1960s artist features, then TR866–870→EN1942–1946 five music-style histories. Fresh native reads and full source review. TR613 EN554;59unpaired;450short-EN review candidates;70full translations complete;five existing news reviewed. No background worker.",
       "note": "Checkpoint010: ten additional source-grounded full translations in status follow-up; total70. All336 source paragraphs retained,10EN pages/20native language records/10live switches/27internal links and images pass. Four taxonomy labels architecture-locked;3 source holds;duplicate-description/news-footer/mobile viewport QA pending. ExistingENURLs/TR/globaltheme preserved."
+    },
+    {
+      "id": "work1-repair-20261013",
+      "title": "Pinterest path repair and GitHub schedule diagnosis",
+      "status": "checkpointed",
+      "completed_units": [
+        "windows-task-script-queue-backup",
+        "pinterest-node-and-moved-source-path-repair",
+        "scheduled-task-test-result-0-90-image-pins",
+        "github-schedule-and-run-job-timing-audit",
+        "facebook-response-artifact-and-health-audit",
+        "draft-schedule-and-watchdog-gap-fixes-14-tests",
+        "pr28-approved-head-revalidated-and-merged",
+        "live-crons-and-all18-active-workflows-verified",
+        "main-push-watchdog14-tests-and-runtime-audit-success",
+        "facebook-video1732477522215264-public-visibility-verified"
+      ],
+      "last_checkpoint": "2026-10-13T20:20:59.117Z",
+      "next_step": "Read only: verify the first natural 2026-10-14 Reels 09:17 UTC / 12:17 TRT and Facebook 11:23 UTC / 14:23 TRT runs, actual single production and delivery. Token expires_at and full granted scopes require secure debugging of the existing token. Do not dispatch or retry publisher workflows; do not merge PR26.",
+      "note": "PR28 merged as b2365d9edb3fe9d54b2f72899624fc2769acb4a5. Main push run38461270417 passed14 tests; audit3 healthy0 findings;18/18 workflows active. Facebook video1732477522215264 observed publicly visible as Oldies Radyo/The Who. Previous artifact processing state is historical. Pinterest remains tested; no modifications or publication. No changes to Jingle,V3.1,Etsy,WP content or PR26."
     }
   ]
 }
