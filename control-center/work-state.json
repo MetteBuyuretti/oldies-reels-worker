@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-04T20:41:48.805Z",
+  "updated_at": "2026-10-13T18:45:52.004029+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -165,6 +165,22 @@
       "last_checkpoint": "2026-10-04T21:15:20.669Z",
       "next_step": "Batch008 queue:TR860–864→EN1937–1941 five remaining1960s artist features, then TR866–870→EN1942–1946 five music-style histories. Fresh native reads and full source review. TR613 EN554;59unpaired;450short-EN review candidates;70full translations complete;five existing news reviewed. No background worker.",
       "note": "Checkpoint010: ten additional source-grounded full translations in status follow-up; total70. All336 source paragraphs retained,10EN pages/20native language records/10live switches/27internal links and images pass. Four taxonomy labels architecture-locked;3 source holds;duplicate-description/news-footer/mobile viewport QA pending. ExistingENURLs/TR/globaltheme preserved."
+    },
+    {
+      "id": "work1-repair-20261013",
+      "title": "Pinterest path repair and GitHub schedule diagnosis",
+      "status": "checkpointed",
+      "completed_units": [
+        "windows-task-script-queue-backup",
+        "pinterest-node-and-moved-source-path-repair",
+        "scheduled-task-test-result-0-90-image-pins",
+        "github-schedule-and-run-job-timing-audit",
+        "facebook-response-artifact-and-health-audit",
+        "draft-schedule-and-watchdog-gap-fixes-14-tests"
+      ],
+      "last_checkpoint": "2026-10-13T18:45:52.004029+00:00",
+      "next_step": "Owner reviews proposed daily cron offsets before merging the repair PR; Facebook final publishing state and token expiry remain unverified. Do not dispatch or retry a publisher.",
+      "note": "Pinterest local queue task fixed and tested. Reels/Facebook delayed before run creation; Watchdog already minute 37. Facebook upload accepted but artifact publishing_phase=not_started. No manual social publication, deletion, paid service or production workflow change."
     }
   ]
 }
