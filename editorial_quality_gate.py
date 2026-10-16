@@ -20,8 +20,8 @@ class EditorialGateError(RuntimeError):
 
 
 FORBIDDEN_VISUAL_TERMS = re.compile(
-    r"\\b(statue|statues|sculpture|monument|waxwork|wax\\s+figure|painting|drawing|"
-    r"illustration|cartoon|animal|eagle\\s+bird|logo|figurine|idol|religious\\s+symbol)\\b", re.I
+    r"\b(statue|statues|sculpture|monument|waxwork|wax\s+figure|painting|drawing|"
+    r"illustration|cartoon|animal|eagle\s+bird|logo|figurine|idol|religious\s+symbol)\b", re.I
 )
 WEAK_STORY_PHRASES = (
     "müzik tarihinde kayda geçen bir gelişme yaşandı",
@@ -94,7 +94,7 @@ def check_approved_reel(candidate: dict, video: Path, approval: dict, *, measure
 
     script = str(candidate.get("dj_script_tr") if candidate.get("reels_language") != "en" else
                  candidate.get("dj_script_en") or "").strip()
-    script = re.sub(r"\\s+", " ", script)
+    script = re.sub(r"\s+", " ", script)
     if len(script.split()) < 45 or any(s in script.casefold() for s in WEAK_STORY_PHRASES):
         raise EditorialGateError("DJ story too short or generic for a 25-30s documentary-style Reel")
     closing = ("Oldies Radyo. Timeless music. Listen, enjoy, share." if candidate.get("reels_language") == "en"
