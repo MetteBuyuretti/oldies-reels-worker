@@ -20,6 +20,11 @@ concurrency:
 
 jobs:
   publish-facebook:
+    # TEMPORARY P0 SAFETY QUARANTINE (16 Oct 2026): Facebook global
+    # publishes automatically and fails approved editorial/visual QC.
+    # Explicitly skip even manual dispatch until issue #22 and #31 pass.
+    # This does not delete existing posts or alter tokens/credentials.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
