@@ -60,7 +60,11 @@ concurrency:
 
 jobs:
   create-draft:
-    if: github.event_name == 'workflow_dispatch' || vars.REELS_AUTOMATION_ENABLED == 'true'
+    # TEMPORARY P0 SAFETY QUARANTINE (16 Oct 2026): scheduled jobs must not upload
+    # unapproved 10-second/incorrectly illustrated Reels to WordPress.
+    # Manual preview_only runs may render artifacts; production delivery is blocked.
+    # Restore ONLY after issue #30 + #31 QC, 25-30s and independent approval.
+    if: github.event_name == 'workflow_dispatch' && inputs.preview_only == true
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
