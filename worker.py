@@ -26,6 +26,7 @@ from google.auth import default as google_auth_default
 from google.auth.transport.requests import Request as GoogleAuthRequest
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
+from editorial_quality_gate import check_approved_reel, load_approval
 from zero_cost import research_candidates
 from video_factory import build_timeline, export_capcut_package, render_timeline, write_timeline_files
 
@@ -1522,6 +1523,16 @@ def main() -> None:
         (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
         print("Preview-only render completed; WordPress draft upload was intentionally skipped.")
         return
+
+    # Fail closed before ANY WordPress review draft or Facebook publication.
+    # The external reviewer manifest is never generated or auto-approved by this worker.
+    # Exact rendered-media hash, source facts, 25-30s duration, and visual evidence
+    # must all match; no manifest means safe stop and retained preview artifact.
+    review = load_approval(os.getenv("OLDIES_EDITORIAL_APPROVAL_MANIFEST", "").strip())
+    qc = check_approved_reel(candidate, video, review)
+    (OUTPUT / "editorial-qc-result.json").write_text(
+        json.dumps(qc, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
     if candidate.get("reels_language") == "en":
         result = publish_facebook_global(candidate, video, bearer, base_url)
