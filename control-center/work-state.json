@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-13T20:20:59.117Z",
+  "updated_at": "2026-10-13T20:48:46.197791+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -34,11 +34,17 @@
     {
       "id": "jingle-system",
       "title": "Oldies Radyo Jingle üretim sistemi",
-      "status": "needs_reconcile",
-      "completed_units": [],
-      "next_step": "Mevcut jingle çıktıları ve otomasyon kodunu kontrol et; son güvenli aşamayı belirle.",
-      "last_checkpoint": null,
-      "note": "Bağlantı kesintisinde miks veya render baştan başlamadan önce mevcut dosyaları kontrol et."
+      "status": "blocked",
+      "completed_units": [
+        "work2-source-reconciliation",
+        "pr26-main-merge-local-50-tests",
+        "observer-fail-closed-regressions-61-pass",
+        "ci-all-monitoring-tests",
+        "technical-delivery-and-rollback-record"
+      ],
+      "next_step": "Bring existing Windows/Desktop Commander online; inspect actual producer/logs/audio and WordPress receiver source, then implement FINAL gate and authenticated relay. No merge/deploy before acceptance and owner approval.",
+      "last_checkpoint": "2026-10-13T20:48:46.197791+00:00",
+      "note": "work-output/work2-jingle-repair-20261013/technical-report.md. 61 local tests PASS; no live E2E, new MASTER or publication; natural observation 0/3; draft PR26 only."
     },
     {
       "id": "oldies-revenue-live-20261002",

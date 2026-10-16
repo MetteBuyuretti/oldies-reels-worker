@@ -9,6 +9,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from jingle_service import SERVICE as JINGLE_SERVICE, audit as audit_jingle
 
 WORKFLOW_SELF = '.github/workflows/oldies-watchdog.yml'
 BAD_CONCLUSIONS = {'failure', 'timed_out', 'action_required', 'startup_failure'}
@@ -163,9 +164,12 @@ def main() -> int:
     config = json.loads(cfg_path.read_text(encoding='utf-8'))
     api = GitHub(os.environ['GITHUB_REPOSITORY'], os.environ['GITHUB_TOKEN'],
                  os.environ.get('GITHUB_API_URL', 'https://api.github.com'))
+    timestamp = datetime.now(timezone.utc)
     findings, healthy, unchecked = collect(
-        api, config, datetime.now(timezone.utc), current_run_id=os.getenv('GITHUB_RUN_ID', '')
+        api, config, timestamp, current_run_id=os.getenv('GITHUB_RUN_ID', '')
     )
+    jingle_cfg = config.get('jingle_factory', {})
+    jingle_findings, jingle_report, jingle_connected = audit_jingle(jingle_cfg, timestamp)
     rows = [f"## OLDIES WATCHDOG — GitHub Actions\n",
             f"- Healthy/latest run not flagged: {len(healthy)}",
             f"- Requires review: {len(findings)}",
@@ -175,11 +179,18 @@ def main() -> int:
     rows.append('- A Watchdog schedule gap is visible only when an audit runs again.')
     for f in findings:
         rows.append(f"- **{f['reason']}** — `{f['path']}` — {f['url'] or 'no run'}")
+    rows.append("\n## Jingle Factory — service health")
+    rows.append("- " + jingle_report)
+    for finding in jingle_findings:
+        rows.append(f"- **{finding['reason']}** — Jingle Factory — {finding['run_id']}")
     if unchecked:
         rows.append('\nUnchecked (configure expected cadence if scheduled): ' + ', '.join(f'`{p}`' for p in unchecked))
-    if config.get('issue_alerts_enabled', False) and findings:
+    all_findings = findings + jingle_findings
+    if config.get('issue_alerts_enabled', False) and all_findings:
         watched = set(config.get('expected_freshness_hours', {}))
-        rows.append(f"\nNew deduplicated GitHub issues: {alert(api, findings, watched)}")
+        if jingle_connected and jingle_cfg.get('issue_alerts_enabled', False):
+            watched.add(JINGLE_SERVICE)
+        rows.append(f"\nNew deduplicated GitHub issues: {alert(api, all_findings, watched)}")
     summary = '\n'.join(rows)
     print(summary)
     if os.getenv('GITHUB_STEP_SUMMARY'):
