@@ -6,6 +6,9 @@ on:
       - "editorial_quality_gate.py"
       - "test_editorial_quality_gate.py"
       - "worker.py"
+      - "video_factory.py"
+      - "test_announcer.py"
+      - "test_reels_duration_contract.py"
       - ".github/workflows/editorial-quality-gate.yml"
   workflow_dispatch:
 
@@ -21,4 +24,4 @@ jobs:
         with:
           python-version: "3.12"
       - name: Verify editorial delivery refuses unsuitable material
-        run: python -m unittest -v test_editorial_quality_gate
+        run: python -m unittest -v test_editorial_quality_gate test_reels_duration_contract
