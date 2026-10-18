@@ -11,9 +11,13 @@ from zero_cost import artist_page_title, deterministic_copy
 
 
 class AnnouncerTests(unittest.TestCase):
-    def test_final_reel_never_drops_below_ten_seconds(self):
-        self.assertAlmostEqual(video_factory.final_reel_duration(9.2), 10.0, places=2)
-        self.assertAlmostEqual(video_factory.final_reel_duration(12.0), 12.12, places=2)
+    def test_short_old_reels_are_rejected_instead_of_padded(self):
+        for voice in (9.2, 12.0, 18.5, 24.87, 29.89, float("nan"), float("inf")):
+            with self.subTest(voice=voice), self.assertRaisesRegex(RuntimeError, "25-30s"):
+                video_factory.final_reel_duration(voice)
+        self.assertAlmostEqual(video_factory.final_reel_duration(24.88), 25.0, places=2)
+        self.assertAlmostEqual(video_factory.final_reel_duration(26.88), 27.0, places=2)
+        self.assertAlmostEqual(video_factory.final_reel_duration(29.88), 30.0, places=2)
 
     def test_each_female_voice_is_one_day_in_six(self):
         days = [date(2026, 9, 29) + timedelta(days=i) for i in range(18)]
