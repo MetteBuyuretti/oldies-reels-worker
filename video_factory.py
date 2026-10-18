@@ -26,12 +26,19 @@ def audio_duration(path: Path) -> float:
     )
     return float(probe.stdout.strip())
 
-MIN_FINAL_REEL_SECONDS = 10.0
+MIN_FINAL_REEL_SECONDS = 25.0
+MAX_FINAL_REEL_SECONDS = 30.0
 
 
 def final_reel_duration(voice_seconds: float) -> float:
-    """Never let a finished Reel fall below the 10-second production floor."""
-    return max(MIN_FINAL_REEL_SECONDS, float(voice_seconds) + 0.12)
+    """Require naturally timed narration; never pad an old 10-second Reel to 27s."""
+    voice_seconds = float(voice_seconds)
+    if not math.isfinite(voice_seconds) or not 24.88 <= voice_seconds <= 29.88:
+        raise RuntimeError(
+            "Natural full DJ narration must fit a real 25-30s Reel "
+            "(24.88-29.88s voice; no silent padding or speed manipulation)"
+        )
+    return max(MIN_FINAL_REEL_SECONDS, voice_seconds + 0.12)
 
 
 def _clean_script(script: str) -> str:
