@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Zero-cost discovery, verification, scoring and copy generation for Oldies Radyo Reels.
 
-No paid AI or model API is required. Primary sources are Wikipedia date pages via the stable Action API,
-Wikidata and Wikipedia. Optional RSS feeds can be supplied via OLDIES_RSS_FEEDS
-for discovery only; all accepted history candidates still require Wikimedia /
-Wikidata evidence.
+No paid AI or model API is required. Primary discovery uses only the exact
+This Day In Music calendar page. Discovery never creates verified facts, scripts,
+image approvals or delivery permission. Legacy helpers are not acceptance proof.
 """
 from __future__ import annotations
 
@@ -158,6 +157,7 @@ def fetch_day_candidates(today: datetime, artists: dict[str, dict], lookup: dict
 
 
 def _html_to_text(raw: str) -> str:
+    raw = re.sub(r"(?s)<!--.*?-->", " ", raw)
     raw = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", raw)
     raw = re.sub(r"(?i)</?(?:p|div|h[1-6]|li|br|section|article|tr|td)[^>]*>", "\n", raw)
     raw = re.sub(r"<[^>]+>", " ", raw)
@@ -168,81 +168,58 @@ def _html_to_text(raw: str) -> str:
 
 
 def fetch_music_history_candidates(today: datetime, artists: dict[str, dict], lookup: dict[str, str], session=requests) -> list[dict]:
-    """Discover exact-day music events from free public music-history pages.
+    """Only exact calendar-day TDIM entries; failure has no substitute feed.
 
-    These pages are discovery sources. Artist identity is tied back to
-    Wikipedia/Wikidata before scoring, and visuals still come only from
-    license-filtered Wikimedia Commons.
+    Discovery is explicitly unverified. It supplies no translated facts, photo
+    approvals or narration. Independent authority evidence is a later stage.
     """
-    month = MONTH_NAMES_EN[today.month].lower()
-    source_urls = [
-        f"https://soundod.com/{month}-{today.day}-in-music-history/",
-        f"https://www.thisdayinmusic.com/on-this-day-in-music-{month}-{today.day}/",
-    ]
-    results: list[dict] = []
-    seen: set[tuple] = set()
-
-    for source_url in source_urls:
-        try:
-            response = session.get(
-                source_url,
-                headers={"User-Agent": USER_AGENT, "Accept": "text/html,*/*"},
-                timeout=TIMEOUT,
-            )
-            response.raise_for_status()
-        except requests.RequestException:
+    from source_evidence import daily_url, https_host, text_sha256
+    source_url = daily_url(today.date())
+    response = session.get(source_url, headers={"User-Agent": USER_AGENT, "Accept": "text/html"}, timeout=TIMEOUT)
+    response.raise_for_status()
+    final_url = str(getattr(response, "url", source_url) or source_url)
+    from urllib.parse import urlsplit
+    if (https_host(final_url) != "thisdayinmusic.com" or
+            urlsplit(final_url).path != urlsplit(source_url).path or urlsplit(final_url).query):
+        raise RuntimeError("TDIM redirected away from the exact daily page")
+    plain = _html_to_text(response.text)
+    birthday_section = re.search(r"Born on this day in music", plain, re.I)
+    if birthday_section:
+        plain = plain[:birthday_section.start()]
+    # Entries on TDIM are date-led (e.g. 16 Oct 1965), sometimes split across tags.
+    markers = list(re.finditer(r"\b(\d{1,2})\s+([A-Z][a-z]{2})\s+(\d{4})\b", plain))
+    results, seen = [], set()
+    for index, marker in enumerate(markers):
+        year = int(marker.group(3))
+        if (int(marker.group(1)) != today.day or
+                marker.group(2).casefold() != MONTH_NAMES_EN[today.month][:3].casefold() or
+                not 1950 <= year <= 1990):
             continue
-
-        plain = _html_to_text(response.text)
-        # Most music-history pages use either "1957 - ..." or "20 Sep 1957 ..."
-        patterns = [
-            re.compile(r"(?m)^\s*((?:19|20)\d{2})\s*[-\u2013\u2014]\s*(.+)$"),
-            re.compile(rf"(?mi)^\s*{today.day}\s+{MONTH_NAMES_EN[today.month][:3]}\s+((?:19|20)\d{{2}})\s+(.+)$"),
-        ]
-
-        chunks: list[tuple[int, str]] = []
-        for pattern in patterns:
-            for match in pattern.finditer(plain):
-                year = int(match.group(1))
-                body = re.sub(r"\s+", " ", match.group(2)).strip()
-                if 20 <= len(body) <= 700:
-                    chunks.append((year, body))
-
-        # Fallback for headings followed by prose: split at year markers.
-        if not chunks:
-            markers = list(re.finditer(r"\b((?:19|20)\d{2})\s*[-\u2013\u2014]\s*", plain))
-            for idx, marker in enumerate(markers):
-                year = int(marker.group(1))
-                end = markers[idx + 1].start() if idx + 1 < len(markers) else min(len(plain), marker.end() + 700)
-                body = re.sub(r"\s+", " ", plain[marker.end():end]).strip()[:700]
-                if len(body) >= 20:
-                    chunks.append((year, body))
-
-        for year, body in chunks:
-            artist = match_artist({"text": body, "pages": []}, artists, lookup)
-            if not artist:
+        end = markers[index + 1].start() if index + 1 < len(markers) else len(plain)
+        body = re.sub(r"\s+", " ", plain[marker.end():end]).strip()
+        # Reject an ambiguous last entry containing page navigation/footer.
+        body = re.split(r"Born on this day|PARTNERS|Copyright|Share Tweet", body, flags=re.I)[0].strip()
+        artist = match_artist({"text": body, "pages": []}, artists, lookup)
+        # A referenced act is not necessarily the event subject.
+        if artist:
+            prefix = normalize(body[:85])
+            names = [name for name, canonical in lookup.items() if canonical == artist]
+            if not any(re.search(r"(?<!\w)" + re.escape(normalize(name)) + r"(?!\w)", prefix)
+                       for name in names):
                 continue
-            key = (year, artist, normalize(body[:220]))
-            if key in seen:
+            if artist == "Sweet" and re.search(r"\bsweet sensation\b", prefix):
                 continue
-            seen.add(key)
-            try:
-                page = _page_metadata(artist_page_title(artist), session=session)
-            except requests.RequestException:
-                page = {
-                    "title": artist_page_title(artist),
-                    "wikibase_item": "",
-                    "content_urls": {"desktop": {"page": f"https://en.wikipedia.org/wiki/{quote(artist_page_title(artist).replace(' ', '_'))}"}},
-                }
-            results.append({
-                "year": year,
-                "text": body,
-                "pages": [page],
-                "source_url": source_url,
-                "discovery_source": "music_history",
-            })
+        if not artist or not 20 <= len(body) <= 1800 or (artist, year, body) in seen:
+            continue
+        seen.add((artist, year, body))
+        excerpt = re.sub(r"\s+", " ", marker.group(0) + " " + body)
+        results.append({"year": year, "text": body, "pages": [], "artist": artist,
+                        "source_url": source_url, "discovery_source": "thisdayinmusic_daily",
+                        "primary_evidence": {"url": source_url, "text": excerpt,
+                            "sha256": text_sha256(excerpt), "artist": artist,
+                            "event_date": f"{year:04d}-{today.month:02d}-{today.day:02d}",
+                            "retrieved_at": datetime.now(timezone.utc).isoformat()}})
     return results
-
 
 def _item_text(item: dict) -> str:
     bits = [str(item.get("text", ""))]
@@ -480,65 +457,34 @@ def score_candidate(candidate: dict, recent_artists: list[str]) -> dict:
 
 
 def build_history_candidates(recent_artists: list[str], today: datetime | None = None, session=requests) -> list[dict]:
+    """Stage 1 discovery only. Scores and artist biographies are never fact proof."""
     today = today or datetime.now(timezone.utc)
     artists, lookup = load_catalog()
-    payload = fetch_day_candidates(today, artists, lookup, session=session)
-    extra_events = fetch_music_history_candidates(today, artists, lookup, session=session)
-    payload["events"] = list(payload.get("events") or []) + extra_events
-    candidates, seen = [], set()
-    for kind in ("events", "births", "deaths"):
-        for item in payload.get(kind) or []:
-            artist = match_artist(item, artists, lookup)
-            if not artist:
-                continue
-            key = (artist, kind, int(item.get("year", 0) or 0), str(item.get("text", "")))
-            if key in seen:
-                continue
-            seen.add(key)
-            year = int(item.get("year", 0) or 0)
-            if year < 1900 or year > today.year:
-                continue
-            event_date = datetime(year, today.month, today.day, tzinfo=timezone.utc)
-            page = _page_for_artist(item, artist)
-            qid = _qid_from_page(page)
-            entity, verified = {}, False
-            if qid:
-                try:
-                    entity = fetch_wikidata_entity(qid, session=session)
-                    verified = verify_wikidata_date(entity, kind, event_date)
-                except requests.RequestException:
-                    entity = {}
-            tr_title, tr_extract = "", ""
-            if entity:
-                try:
-                    tr_title, tr_extract = tr_wikipedia_extract(entity, session=session)
-                except requests.RequestException:
-                    pass
-            source_text = str(item.get("text", "")).strip()
-            copy = deterministic_copy(artist=artist, kind=kind, event_date=event_date, source_text=source_text, tr_extract=tr_extract)
-            page_url = str(page.get("content_urls", {}).get("desktop", {}).get("page", "") or "")
-            source_url = str(item.get("source_url", "") or "")
-            sources = [u for u in [source_url, page_url, f"https://www.wikidata.org/wiki/{qid}" if qid else ""] if u]
-            candidate = {
-                "artist": artist, "tier": artists[artist]["tier"], "kind": kind,
-                "topic": _short(source_text or copy["hook"], 140),
-                "event_date": event_date.strftime("%Y-%m-%d"),
-                "wikidata_qid": qid, "wikidata_verified": verified,
-                "sources": sources, "source_text": source_text, "tr_wikipedia_title": tr_title,
-                "image_search_queries": [artist, f"{artist} {year}", f"{artist} portrait"],
-                "instagram_music_title": str(copy.get("music_title", "")), "instagram_music_artist": artist,
-                "instagram_music_clip_note": "Instagram m\u00fczik ar\u015fivinden konuyla ilgili 10-15 saniyelik b\u00f6l\u00fcm se\u00e7ilebilir.",
-                **copy,
-            }
-            score_candidate(candidate, recent_artists)
-            if candidate["score"] >= 80 and candidate["score_breakdown"]["audience_fit"] >= 18:
-                candidates.append(candidate)
-    candidates.sort(key=lambda c: (c["score"], c["wikidata_verified"], -c["tier"]), reverse=True)
+    items = fetch_music_history_candidates(today, artists, lookup, session=session)
+    candidates = []
+    for item in items:
+        artist = item["artist"]
+        candidates.append({
+            "artist": artist, "tier": artists[artist]["tier"], "kind": "events",
+            "topic": _short(item["text"], 140),
+            "event_date": item["primary_evidence"]["event_date"],
+            "research_date": today.date().isoformat(), "reels_language": "tr",
+            "sources": [item["source_url"]], "source_text": item["text"],
+            "primary_evidence": item["primary_evidence"],
+            "source_documents": [], "verified_facts": [], "image_credits": [],
+            "editorial_status": "UNVERIFIED_DISCOVERY", "preview_only": True,
+            "blockers": ["Independent authoritative exact-event corroboration missing",
+                         "Evidence-linked Turkish DJ script and voice review missing",
+                         "Artist photo identity, rights, era and event-context evidence missing"],
+        })
+    # Prefer a fresh artist without treating the ordering as evidence confidence.
+    recent = {normalize(name) for name in recent_artists}
+    candidates.sort(key=lambda c: (normalize(c["artist"]) in recent, c["tier"], c["artist"]))
     return candidates
 
 
 def research_candidates(recent_artists: list[str], today: datetime | None = None, session=requests) -> list[dict]:
     candidates = build_history_candidates(recent_artists, today=today, session=session)
     if not candidates:
-        raise RuntimeError("Zero-cost sources produced no candidate above the quality threshold after Wikipedia + music-history discovery")
+        raise RuntimeError("Exact-day This Day In Music discovery yielded no 1950-1990 artist event; no fallback permitted")
     return candidates

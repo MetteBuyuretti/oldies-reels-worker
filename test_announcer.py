@@ -11,9 +11,13 @@ from zero_cost import artist_page_title, deterministic_copy
 
 
 class AnnouncerTests(unittest.TestCase):
-    def test_final_reel_never_drops_below_ten_seconds(self):
-        self.assertAlmostEqual(video_factory.final_reel_duration(9.2), 10.0, places=2)
-        self.assertAlmostEqual(video_factory.final_reel_duration(12.0), 12.12, places=2)
+    def test_short_old_reels_are_rejected_instead_of_padded(self):
+        for voice in (9.2, 12.0, 18.5, 24.87, 29.89, float("nan"), float("inf")):
+            with self.subTest(voice=voice), self.assertRaisesRegex(RuntimeError, "25-30s"):
+                video_factory.final_reel_duration(voice)
+        self.assertAlmostEqual(video_factory.final_reel_duration(24.88), 25.0, places=2)
+        self.assertAlmostEqual(video_factory.final_reel_duration(26.88), 27.0, places=2)
+        self.assertAlmostEqual(video_factory.final_reel_duration(29.88), 30.0, places=2)
 
     def test_each_female_voice_is_one_day_in_six(self):
         days = [date(2026, 9, 29) + timedelta(days=i) for i in range(18)]
@@ -39,19 +43,9 @@ class AnnouncerTests(unittest.TestCase):
             "John Lennon released ‘Whatever Gets You thru the Night’ on this day "
             "September 23 which later became his first solo No.1 single in the US.",
         )
-        spoken = worker.build_turkish_gemini_script(item)
-        self.assertIn("Yirmi üç Eylül bin dokuz yüz yetmiş dört", spoken)
-        self.assertIn("sonra", spoken)
-        self.assertIn("ilk solo liste birinciliğini", spoken)
-        self.assertIn("Elton John piyanoda ve geri vokalde", spoken)
-        self.assertTrue(any("johnlennon.com" in source for source in item["sources"]))
-        self.assertIn("John Lennon,", spoken)
-        self.assertNotIn("Lennon\u0027ın", spoken)
-        self.assertNotIn("Oldies Radyo", spoken)
-        self.assertNotIn("1974", spoken)
-        prompt = worker.turkish_gemini_style_prompt(item)
-        self.assertIn("Whatever Gets You thru the Night", prompt)
-        self.assertIn("haber spikeri tonundan", prompt)
+        # A hardcoded artist/title branch must not invent corroborated facts.
+        with self.assertRaises(worker.VoiceoverQualityError):
+            worker.build_turkish_gemini_script(item)
 
     def test_album_apostrophe_and_type_are_preserved(self):
         item = self.candidate(
@@ -60,11 +54,8 @@ class AnnouncerTests(unittest.TestCase):
             "‘Goat’s Head Soup’ by The Rolling Stones.",
         )
         self.assertEqual(item["instagram_music_title"], "Goat’s Head Soup")
-        spoken = worker.build_turkish_gemini_script(item)
-        self.assertIn("'Goat’s Head Soup' albümü", spoken)
-        self.assertIn("Zirvede iki hafta kaldı", spoken)
-        self.assertTrue(any("officialcharts.com" in source for source in item["sources"]))
-        self.assertNotIn("'Goat'", spoken)
+        with self.assertRaises(worker.VoiceoverQualityError):
+            worker.build_turkish_gemini_script(item)
 
     def test_unsupported_story_is_rejected(self):
         item = self.candidate("Eagles", "1979-09-24", "Eagles made music history.")
@@ -104,6 +95,9 @@ class AnnouncerTests(unittest.TestCase):
         duration = worker._audio_duration(assets / "john-lennon-pro-one-take.mp3")
         self.assertGreater(duration, 18.0)
         self.assertLess(duration, 20.0)
+        # The historical asset is preserved but is too short for the new contract.
+        with self.assertRaises(RuntimeError):
+            video_factory.final_reel_duration(duration)
 
 
 if __name__ == "__main__":

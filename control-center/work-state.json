@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-13T20:20:59.117Z",
+  "updated_at": "2026-10-18T15:16:27.083032+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -185,6 +185,25 @@
       "last_checkpoint": "2026-10-13T20:20:59.117Z",
       "next_step": "Read only: verify the first natural 2026-10-14 Reels 09:17 UTC / 12:17 TRT and Facebook 11:23 UTC / 14:23 TRT runs, actual single production and delivery. Token expires_at and full granted scopes require secure debugging of the existing token. Do not dispatch or retry publisher workflows; do not merge PR26.",
       "note": "PR28 merged as b2365d9edb3fe9d54b2f72899624fc2769acb4a5. Main push run38461270417 passed14 tests; audit3 healthy0 findings;18/18 workflows active. Facebook video1732477522215264 observed publicly visible as Oldies Radyo/The Who. Previous artifact processing state is historical. Pinterest remains tested; no modifications or publication. No changes to Jingle,V3.1,Etsy,WP content or PR26."
+    },
+    {
+      "id": "p0-reels-repair-20261016",
+      "title": "PR33 evidence-based Reels recovery",
+      "completed_units": [
+        "36-offline-regressions-and-real-synthetic-render",
+        "authentic-mj-four-tops-mp4-negative-checks",
+        "dual-language-evidence-reconciliation",
+        "independent-code-audit-and-font-decode-fixes",
+        "local-partial-snapshot-preserved",
+        "real-preview-rejection-readback",
+        "real-tdim-discovery-and-incidental-artist-fix",
+        "source-and-lock-audit",
+        "tr-en-natural-speed-audio-previews"
+      ],
+      "status": "checkpointed",
+      "last_checkpoint": "2026-10-18T15:16:27.083032+00:00",
+      "next_step": "Replace rejected/insufficient licensed photo sets, independently review source coverage and natural voice, then render both languages for two different events. No publish or merge.",
+      "note": "36 offline tests PASS; first recovered commit97654b6 CI39138589664 PASS. Authentic old MJ/FourTops MP4s rejected. TR26.3793s/EN28.774s local audio; no accepted historical MP4 pilot. Both real worker entry points block rejected photo. Work-1/owner acceptance pending."
     }
   ]
 }
