@@ -42,6 +42,14 @@ class PipelineTests(unittest.TestCase):
                  patch.object(worker,"publish_facebook_global",side_effect=AssertionError("FB publish")):
                 worker.main(); self.assertEqual(prepare.call_args.kwargs["language"],lang)
 
+    def test_incidental_artist_country_and_different_band_are_not_event_subjects(self):
+        session=Mock(); r=session.get.return_value
+        r.url="https://www.thisdayinmusic.com/on-this-day-in-music-october-18/"
+        r.text=("18 Oct 1979 Buggles were at No.1 with a record. " + "Additional context. "*8 + "It aired in North America. "
+                "18 Oct 1967 Bobbie Gentry topped the album chart. " + "Additional context. "*8 + "The Beatles were displaced. "
+                "18 Oct 1974 Sweet Sensation were at No.1 with Sad Sweet Dreamer.")
+        self.assertEqual(zero_cost.build_history_candidates([],TODAY,session=session),[])
+
     def test_direct_delivery_helpers_require_approval_before_network(self):
         with patch.dict(os.environ,{"OLDIES_EDITORIAL_APPROVAL_MANIFEST":""}), \
              patch.object(worker.requests,"post",side_effect=AssertionError("network")):

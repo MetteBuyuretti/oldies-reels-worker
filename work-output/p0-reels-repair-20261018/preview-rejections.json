@@ -1,0 +1,22 @@
+{
+  "tr": {
+    "preview_only": true,
+    "delivery_allowed": false,
+    "editorial_approved": false,
+    "status": "BLOCKED_PREVIEW",
+    "blockers": [
+      "Photo 1 was rejected by asset review; select another photo/event"
+    ],
+    "video_created": false
+  },
+  "en": {
+    "preview_only": true,
+    "delivery_allowed": false,
+    "editorial_approved": false,
+    "status": "BLOCKED_PREVIEW",
+    "blockers": [
+      "Photo 1 was rejected by asset review; select another photo/event"
+    ],
+    "video_created": false
+  }
+}

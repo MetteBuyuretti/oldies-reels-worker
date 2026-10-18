@@ -95,6 +95,8 @@ def check_photo_evidence(candidate: dict) -> list[dict]:
     if not territories:
         raise EditorialGateError("Intended photo-use territories must be explicit")
     for i, photo in enumerate(photos, 1):
+        if str(photo.get("review_status") or "").startswith("REJECTED"):
+            raise EditorialGateError(f"Photo {i} was rejected by asset review; select another photo/event")
         label = " ".join(str(photo.get(x, "")) for x in
                          ("title", "description", "description_url", "event_context", "era_context"))
         if FORBIDDEN_VISUAL_TERMS.search(label):

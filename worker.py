@@ -689,6 +689,8 @@ def make_timeline_scenes(candidate: dict, photos: list[Path], timeline: list[dic
             accent = "ON THIS DAY IN MUSIC" if index == 1 else ("OLDIES RADYO • MUSIC & MEMORIES" if index == len(timeline) else "THE STORY")
         else:
             accent = "BUGÜN MÜZİK TARİHİNDE" if index == 1 else ("OLDIES RADYO • DİNLE • BEĞEN • PAYLAŞ" if index == len(timeline) else "HİKÂYE DEVAM EDİYOR")
+        if candidate.get("photo_disclaimer"):
+            accent = str(candidate["photo_disclaimer"])
         if index == 1:
             headline = str(candidate.get("event_headline") or candidate.get("hook") or artist)
         elif title and index % 2 == 0:

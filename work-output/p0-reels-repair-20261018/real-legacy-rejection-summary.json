@@ -1,0 +1,18 @@
+[
+  {
+    "file": "1972-10-14-michael-jackson-38581023241-1.mp4",
+    "duration_seconds": "10.000000",
+    "sha256": "9d36151fd152dac082572c5b90f0cda962abf79bc9a259a80ea7c5fa45bc78d5",
+    "status": "REJECTED_AS_REQUIRED",
+    "reason": "Final MP4 evidence invalid: real video duration must be 25-30s and match the container",
+    "source_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1972-10-14-michael-jackson-38581023241-1.mp4"
+  },
+  {
+    "file": "1966-10-15-four-tops-38748846386-1.mp4",
+    "duration_seconds": "10.000000",
+    "sha256": "2ddbf6d404db3d2d2179bf68564c3ae49cd14e69999fcd80326267eb33d5f9ee",
+    "status": "REJECTED_AS_REQUIRED",
+    "reason": "Final MP4 evidence invalid: real video duration must be 25-30s and match the container",
+    "source_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1966-10-15-four-tops-38748846386-1.mp4"
+  }
+]

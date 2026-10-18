@@ -32,7 +32,7 @@ Install existing requirements and put FFmpeg + FFprobe on PATH. Offline checks:
 
     python -B -m unittest -v test_editorial_quality_gate test_reels_duration_contract test_reels_media_integration test_reels_pipeline test_announcer
 
-34 tests passed locally, including real synthetic 27s audio/video, the actual
+36 tests passed locally, including real synthetic 27s audio/video, the actual
 timeline renderer, silent/missing audio, horizontal video, ten-second clips and
 ten-second audio extended to 27s with silence. These synthetic signals are NOT
 real Four Tops/Michael Jackson source files or natural DJ pilot approval.
@@ -60,9 +60,9 @@ does not infer historical truth, worldwide rights or natural DJ quality from met
 Caption timings are estimated from words/pauses; independent full-video review of
 sync/readability and full listening are mandatory before delivery acceptance.
 
-Real two-event TR/EN pilots, authentic old-media negative checks, independent
+Authentic old-media negative checks are complete: both actual10s files reject. Real two-event TR/EN pilots, independent
 Work-1 review and the owner's final audio/visual approval remain pending. The
-free preview voice service returned NoAudioReceived on the initial TR attempt;
+initial free TR voice attempt returned NoAudioReceived; alternative free voice and revised scripts produced TR26.3793s/EN28.774s audio. The actual preview entry points reject a blurred photo;
 no paid fallback, merge, publishing unlock or external delivery is authorized.
 
 Rollback: revert only this PR33 checkpoint commit. Original main and PR22 remain

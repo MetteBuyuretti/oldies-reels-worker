@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-18T14:42:45.321036+00:00",
+  "updated_at": "2026-10-18T15:16:27.083032+00:00",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -190,14 +190,20 @@
       "id": "p0-reels-repair-20261016",
       "title": "PR33 evidence-based Reels recovery",
       "completed_units": [
+        "36-offline-regressions-and-real-synthetic-render",
+        "authentic-mj-four-tops-mp4-negative-checks",
         "dual-language-evidence-reconciliation",
+        "independent-code-audit-and-font-decode-fixes",
         "local-partial-snapshot-preserved",
-        "source-and-lock-audit"
+        "real-preview-rejection-readback",
+        "real-tdim-discovery-and-incidental-artist-fix",
+        "source-and-lock-audit",
+        "tr-en-natural-speed-audio-previews"
       ],
-      "status": "in_progress",
-      "last_checkpoint": "2026-10-18T14:42:45.321036+00:00",
-      "next_step": "Run targeted evidence, media and preview boundary regressions; independent audit before commit.",
-      "note": "Original local snapshot preserved. Existing PR33 branch reconciled; no live delivery or paid call."
+      "status": "checkpointed",
+      "last_checkpoint": "2026-10-18T15:16:27.083032+00:00",
+      "next_step": "Replace rejected/insufficient licensed photo sets, independently review source coverage and natural voice, then render both languages for two different events. No publish or merge.",
+      "note": "36 offline tests PASS; first recovered commit97654b6 CI39138589664 PASS. Authentic old MJ/FourTops MP4s rejected. TR26.3793s/EN28.774s local audio; no accepted historical MP4 pilot. Both real worker entry points block rejected photo. Work-1/owner acceptance pending."
     }
   ]
 }

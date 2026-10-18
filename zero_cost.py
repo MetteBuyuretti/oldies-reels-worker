@@ -183,6 +183,9 @@ def fetch_music_history_candidates(today: datetime, artists: dict[str, dict], lo
             urlsplit(final_url).path != urlsplit(source_url).path or urlsplit(final_url).query):
         raise RuntimeError("TDIM redirected away from the exact daily page")
     plain = _html_to_text(response.text)
+    birthday_section = re.search(r"Born on this day in music", plain, re.I)
+    if birthday_section:
+        plain = plain[:birthday_section.start()]
     # Entries on TDIM are date-led (e.g. 16 Oct 1965), sometimes split across tags.
     markers = list(re.finditer(r"\b(\d{1,2})\s+([A-Z][a-z]{2})\s+(\d{4})\b", plain))
     results, seen = [], set()
@@ -197,6 +200,15 @@ def fetch_music_history_candidates(today: datetime, artists: dict[str, dict], lo
         # Reject an ambiguous last entry containing page navigation/footer.
         body = re.split(r"Born on this day|PARTNERS|Copyright|Share Tweet", body, flags=re.I)[0].strip()
         artist = match_artist({"text": body, "pages": []}, artists, lookup)
+        # A referenced act is not necessarily the event subject.
+        if artist:
+            prefix = normalize(body[:85])
+            names = [name for name, canonical in lookup.items() if canonical == artist]
+            if not any(re.search(r"(?<!\w)" + re.escape(normalize(name)) + r"(?!\w)", prefix)
+                       for name in names):
+                continue
+            if artist == "Sweet" and re.search(r"\bsweet sensation\b", prefix):
+                continue
         if not artist or not 20 <= len(body) <= 1800 or (artist, year, body) in seen:
             continue
         seen.add((artist, year, body))

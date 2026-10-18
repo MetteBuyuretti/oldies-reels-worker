@@ -121,4 +121,8 @@ class EditorialGateTests(unittest.TestCase):
     def test_no_external_approval_file_refuses_delivery(self):
         with self.assertRaises(EditorialGateError): load_approval("")
 
+    def test_previously_rejected_photo_cannot_be_reintroduced(self):
+        c=sample(); c["image_credits"][0]["review_status"]="REJECTED_BLUR_OR_IDENTITY"
+        with self.assertRaises(EditorialGateError): check_photo_evidence(c)
+
 if __name__=="__main__": unittest.main()
