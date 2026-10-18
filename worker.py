@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Create one zero-cost, approval-only Oldies Radyo Reels draft.
 
-The research path uses only Wikimedia/Wikidata/Wikipedia open data. No OpenAI
-or other paid model API is imported or called. Existing Commons -> FFmpeg ->
-WordPress DRAFT_REVIEW behavior is preserved.
+Exact-day This Day In Music discovery and independent evidence feed the
+existing photo/timeline renderer. The quarantined entry point is preview-only
+for both languages and never reads platform credentials or invokes TTS.
 """
 from __future__ import annotations
 
@@ -22,11 +22,13 @@ from io import BytesIO
 from pathlib import Path
 
 import requests
-from google.auth import default as google_auth_default
-from google.auth.transport.requests import Request as GoogleAuthRequest
+
+
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
-from editorial_quality_gate import check_approved_reel, load_approval
+from editorial_quality_gate import check_approved_reel, load_approval, FORBIDDEN_VISUAL_TERMS
+from source_evidence import check_turkish_script, check_script
+from reels_preview import prepare_preview
 from zero_cost import research_candidates
 from video_factory import build_timeline, export_capcut_package, render_timeline, write_timeline_files
 
@@ -216,6 +218,14 @@ def image_priority(image: dict, artist: str, event_year: int) -> tuple[int, int,
 def image_matches_artist(image: dict, artist: str, music_title: str = "") -> bool:
     """Require explicit music context for names that also label unrelated subjects."""
     title = str(image.get("title", "")).casefold()
+    if FORBIDDEN_VISUAL_TERMS.search(title):
+        return False
+    # A search result is only a possible photo; the TR preview path requires
+    # separately documented identity, era and rights before rendering it.
+    tokens = re.sub(r"[^\w]+", " ", artist.casefold()).split()
+    if not tokens or not all(re.search(r"\b" + re.escape(token) + r"\b", title)
+                             for token in tokens if token != "the"):
+        return False
     if re.search(r"\b(?:bootleg|crowd|audience)\b", title):
         return False
     if music_title and re.search(r"\b(?:album|single|lp|vinyl|record|sleeve|cover)\b", title):
@@ -275,32 +285,18 @@ def download_commons_photos(candidate: dict, directory: Path) -> tuple[list[Path
         if len(paths) == 3:
             break
 
-    # Resilient fallback: two distinct licensed photos are enough for a 3-scene short.
-    # Scene 3 uses a derived crop/zoom of the first licensed image instead of cancelling the daily Reel.
-    if len(paths) == 2:
-        source = Image.open(paths[0]).convert("RGB")
-        width, height = source.size
-        crop = source.crop((
-            max(0, int(width * 0.08)),
-            max(0, int(height * 0.04)),
-            max(1, int(width * 0.92)),
-            max(1, int(height * 0.96)),
-        )).resize((width, height), Image.Resampling.LANCZOS)
-        path = directory / "photo-3.jpg"
-        crop.save(path, "JPEG", quality=94, optimize=True)
-        paths.append(path)
-        derived_credit = dict(credits[0])
-        derived_credit["derived_variant"] = "crop_zoom_from_licensed_source"
-        credits.append(derived_credit)
-
     if len(paths) < 3:
-        raise RuntimeError(f"At least two distinct licensed artist photos were required; only {len(paths)} scene assets were built")
+        raise RuntimeError("Three distinct documented artist photos required; no duplicate crop fallback")
     return paths, credits
 
 
 def font(size: int, bold: bool = False):
-    name = "DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf"
-    return ImageFont.truetype(f"/usr/share/fonts/truetype/dejavu/{name}", size)
+    names = (["/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", "C:/Windows/Fonts/arialbd.ttf"]
+             if bold else ["/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "C:/Windows/Fonts/arial.ttf"])
+    for path in names:
+        if Path(path).is_file():
+            return ImageFont.truetype(path, size)
+    raise RuntimeError("A readable Turkish/English font (DejaVu Sans or Windows Arial) is required")
 
 
 def fit_text(draw: ImageDraw.ImageDraw, text: str, max_width: int, start: int, minimum: int = 38):
@@ -538,52 +534,8 @@ def apply_reel_language(candidate: dict, language: str) -> dict:
 
 
 def build_turkish_dj_parts(candidate: dict) -> list[tuple[str, str]]:
-    """Return language-tagged speech parts so English titles are never read with Turkish phonetics."""
-    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
-    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
-    event_date = str(candidate.get("event_date", "")).strip()
-    year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
-    weeks, uk_no1 = _event_chart_details(candidate)
-
-    tr_numbers = {
-        1: "bir", 2: "iki", 3: "üç", 4: "dört", 5: "beş",
-        6: "altı", 7: "yedi", 8: "sekiz", 9: "dokuz", 10: "on",
-    }
-
-    if title and uk_no1:
-        before = f"{year}'ye gidiyoruz. {artist} imzalı kayıt"
-        after = "İngiltere'de bir numaraya çıktı."
-        if weeks:
-            after += f" {tr_numbers.get(weeks, str(weeks)).capitalize()} hafta zirvede kaldı."
-        after += " Oldies Radyo."
-        return [("tr-TR", before), ("en-AU", title), ("tr-TR", after)]
-
-    facts = list(candidate.get("facts") or ["", ""])
-    while len(facts) < 2:
-        facts.append("")
-    spoken = re.sub(
-        r"\s+",
-        " ",
-        f"Bugün müzik tarihinde. {facts[0]} {facts[1]} Oldies Radyo.",
-    ).strip()
-
-    if not title:
-        return [("tr-TR", spoken)]
-
-    pattern = re.compile(r"['\"‘’“”]?" + re.escape(title) + r"['\"‘’“”]?", re.I)
-    match = pattern.search(spoken)
-    if not match:
-        return [("tr-TR", spoken)]
-
-    before = spoken[:match.start()].strip()
-    after = spoken[match.end():].strip()
-    parts: list[tuple[str, str]] = []
-    if before:
-        parts.append(("tr-TR", before))
-    parts.append(("en-AU", title))
-    if after:
-        parts.append(("tr-TR", after))
-    return parts
+    """Use the evidence-linked TR script; never translate discovery prose as fact."""
+    return [("tr-TR", check_turkish_script(candidate))]
 
 
 def build_turkish_dj_script(candidate: dict) -> str:
@@ -653,51 +605,13 @@ def _spoken_turkish_date(event_date: str) -> str:
 
 
 def build_turkish_gemini_script(candidate: dict) -> str:
-    """Main story only; station ID and CTA are produced as separate audio clips."""
-    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
-    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
-    date = _spoken_turkish_date(str(candidate.get("event_date", "")).strip())
-    source = re.sub(r"\s+", " ", str(candidate.get("source_text", "")).strip())
-    kind = str(candidate.get("kind", "events"))
-    weeks, uk_no1 = _event_chart_details(candidate)
-    if kind == "births":
-        return f"{date}. {artist}, bugün doğdu. Müziği yıllar sonra da dinlenmeye devam ediyor."
-    if kind == "deaths":
-        return f"{date}. {artist}, bugün hayatını kaybetti. Şarkıları hâlâ dinlenmeye devam ediyor."
-    if title and uk_no1:
-        noun = _turkish_record_noun(candidate)
-        if noun == "kaydı":
-            raise VoiceoverQualityError("Chart item type is ambiguous")
-        result = f" Zirvede {_turkish_number(weeks)} hafta kaldı." if weeks else ""
-        return f"{date}. {artist} imzalı '{title}' {noun} İngiltere'de bir numaraya çıktı.{result}"
-
-    if title and re.search(r"\breleased\b", source, re.I):
-        noun = _turkish_record_noun(candidate)
-        if noun == "kaydı":
-            noun = "şarkısı" if re.search(r"\bsingle\b|\bsong\b", source, re.I) else "albümü" if re.search(r"\balbum\b", source, re.I) else ""
-        if not noun:
-            raise VoiceoverQualityError("Released item type is ambiguous")
-        object_noun = "şarkısını" if noun == "şarkısı" else "albümünü"
-        event = f"{date}. {artist}, '{title}' {object_noun} yayımladı."
-        if artist == "John Lennon" and re.search(r"first solo No\.?1 single in the US", source, re.I):
-            if (str(candidate.get("event_date")) == "1974-09-23"
-                    and title.casefold() == "whatever gets you thru the night"):
-                official = "https://www.johnlennon.com/music/singles/whatever-gets-you-thru-the-night/"
-                sources = candidate.setdefault("sources", [])
-                if official not in sources:
-                    sources.append(official)
-                return (f"{event} Elton John piyanoda ve geri vokalde ona eşlik etti. "
-                        "Şarkı, daha sonra Lennon için ABD'deki ilk solo liste birinciliğini getirdi.")
-            return (f"{event} "
-                    "Bu şarkı, daha sonra ABD'de onun ilk solo liste birincisi oldu.")
-        raise VoiceoverQualityError("Release has no verified consequence for the story")
-
-    facts = list(candidate.get("facts") or [])
-    first_fact = re.sub(r"\\s+", " ", str(facts[0] if facts else "").strip())
-    if first_fact:
-        return first_fact
-    raise VoiceoverQualityError("Event cannot be told accurately from the available facts")
-
+    """Compatibility adapter: researched opening/story, with separate closing."""
+    from source_evidence import EvidenceError
+    try:
+        check_turkish_script(candidate)
+    except EvidenceError as exc:
+        raise VoiceoverQualityError(str(exc)) from exc
+    return candidate["story_tr"]["opening"] + " " + candidate["story_tr"]["narrative"]
 
 
 def turkish_gemini_style_prompt(candidate: dict) -> str:
@@ -791,34 +705,9 @@ def make_timeline_scenes(candidate: dict, photos: list[Path], timeline: list[dic
 
 
 def build_english_dj_script(candidate: dict) -> str:
-    """Create a short factual English radio-DJ link from verified candidate fields."""
-    artist = re.sub(r"\s+", " ", str(candidate.get("artist", "")).strip())
-    event_date = str(candidate.get("event_date", "")).strip()
-    year = event_date[:4] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", event_date) else ""
-    kind = str(candidate.get("kind", "events"))
-    title = re.sub(r"\s+", " ", str(candidate.get("instagram_music_title", "")).strip())
-
-    if kind == "births":
-        script = (
-            f"Born on this day in {year}: {artist}. "
-            "A familiar voice from the golden years of music, and a name worth remembering."
-        )
-    elif kind == "deaths":
-        script = (
-            f"Remembering {artist}, who left us on this day in {year}. "
-            "The records remain, and so does the story."
-        )
-    elif title:
-        script = (
-            f"On this day in {year}, {artist} made music history with '{title}'. "
-            "One of those records that still takes you right back."
-        )
-    else:
-        script = (
-            f"On this day in {year}, {artist} made music history. "
-            "Another great story from the golden years of music."
-        )
-    return re.sub(r"\s+", " ", script).strip()
+    if candidate.get("reels_language") != "en":
+        raise VoiceoverQualityError("English narration required")
+    return check_script(candidate)
 
 
 def _google_tts_bytes(
@@ -941,199 +830,38 @@ def _silence_mp3(directory: Path, name: str, seconds: float) -> Path:
 
 
 def synthesize_google_voice(candidate: dict, directory: Path) -> Path | None:
-    """Use a quality-gated Gemini DJ read for Turkish; keep Chirp for English."""
+    """Existing opt-in provider; full evidenced script at natural speed, no retries.
+
+    The preview entry point never calls this paid-capable adapter.
+    """
     enabled = os.getenv("OLDIES_TTS_ENABLED", "").strip().lower() in {"1", "true", "yes", "on"}
     if not enabled:
         return None
-
-    mode = str(candidate.get("reels_language") or reel_language())
-    project = os.getenv("OLDIES_GCP_PROJECT", "").strip()
-    credentials, detected_project = google_auth_default(
-        scopes=["https://www.googleapis.com/auth/cloud-platform"]
-    )
+    script = check_script(candidate)
+    from google.auth import default as google_auth_default
+    from google.auth.transport.requests import Request as GoogleAuthRequest
+    credentials, detected = google_auth_default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
     credentials.refresh(GoogleAuthRequest())
-    project = project or str(detected_project or "").strip()
+    project = os.getenv("OLDIES_GCP_PROJECT", "").strip() or str(detected or "").strip()
     if not project:
-        raise RuntimeError("Google TTS is enabled but no Google Cloud project was resolved")
-    token = str(credentials.token)
-
-    # Separate the story, station name and CTA so the signature is not read as
-    # one uninterrupted continuation of the factual announcement.
-    engine = os.getenv("OLDIES_TTS_ENGINE", "auto").strip().lower() or "auto"
-    fallback_enabled = os.getenv("OLDIES_TTS_FALLBACK", "true").strip().lower() in {"1", "true", "yes", "on"}
-    if mode == "tr" and engine == "chirp_dj":
-        script = build_turkish_gemini_script(candidate)
-        # SSML makes the station break and final-word emphasis explicit.
-        ssml = (
-            f"<speak>{html.escape(script)}"
-            '<break time="900ms"/>Oldies Radyo.'
-            '<break time="350ms"/>Dinle, beğen, '
-            '<prosody rate="90%">paylaş</prosody>.</speak>'
-        )
-        raw = _google_tts_bytes(
-            text=ssml, language="tr-TR", voice_name="tr-TR-Chirp3-HD-Charon",
-            project=project, token=token, ssml=True, speaking_rate=1.21,
-        )
-        path = directory / "voiceover-google.mp3"
-        path.write_bytes(raw)
-        duration = _audio_duration(path)
-        if 12.0 <= duration < 14.25:
-            # Preserve the DJ's pauses and pitch while using the final second
-            # of the fixed-length reel instead of padding it with dead air.
-            expanded = directory / "voiceover-chirp-timed.mp3"
-            subprocess.run([
-                "ffmpeg", "-y", "-loglevel", "error", "-i", str(path),
-                "-af", f"atempo={duration / 14.45:.5f}", "-c:a", "libmp3lame",
-                "-q:a", "3", str(expanded),
-            ], check=True)
-            expanded.replace(path)
-            duration = _audio_duration(path)
-        if not 11.5 <= duration <= 14.7:
-            raise VoiceoverQualityError(f"Chirp DJ narration does not fit 15 seconds: {duration:.1f}s")
-        candidate["dj_script_tr"] = script + " [duraklama] Oldies Radyo. [duraklama] Dinle, beğen, paylaş."
-        candidate["voiceover_duration_seconds"] = round(duration, 2)
-        candidate["tts_voice"] = "tr-TR-Chirp3-HD-Charon"
-        candidate["tts_language"] = "tr-TR"
-        candidate["tts_engine"] = "chirp3-hd-dj-ssml"
-        return path
-    if mode == "tr" and engine in {"auto", "gemini", "gemini_flash"}:
-        configured_voice = os.getenv("OLDIES_GEMINI_TTS_VOICE", "Charon").strip() or "Charon"
-        gemini_voice = (
-            scheduled_turkish_voice(datetime.now(timezone.utc).date())
-            if configured_voice == "auto" else configured_voice
-        )
-        if gemini_voice not in {"Charon", "Callirrhoe", "Aoede"}:
-            raise VoiceoverQualityError("Turkish DJ voice must be Charon, Callirrhoe or Aoede")
-        script = build_turkish_gemini_script(candidate)
-        try:
-            path = directory / "voiceover-google.mp3"
-            approved_event = (
-                str(candidate.get("artist")) == "John Lennon"
-                and str(candidate.get("event_date")) == "1974-09-23"
-                and str(candidate.get("instagram_music_title", "")).casefold()
-                == "whatever gets you thru the night"
-            )
-            if approved_event:
-                approved = Path(__file__).with_name("assets") / "john-lennon-pro-one-take.mp3"
-                if not approved.is_file():
-                    raise VoiceoverQualityError("Approved John Lennon recording is missing")
-                path.write_bytes(approved.read_bytes())
-                full_script = JOHN_LENNON_APPROVED_SCRIPT
-                engine_name = "gemini-2.5-pro-tts-approved-john-lennon"
-                gemini_voice = "Charon"  # This exact approved take is always the male voice.
-            else:
-                full_script = f"{script} Oldies Radyo. Dinle, beğen, paylaş."
-                style = (
-                    turkish_gemini_style_prompt(candidate) + " "
-                    "Read the full script in one continuous take. After the story, pause briefly. "
-                    "Say Oldies briefly as Oldiiz without stretching vowels. "
-                    "Say Dinle, beğen, paylaş in a friendly conversational tone at even volume; "
-                    "never shout or elongate the last word. Read the date exactly as written."
-                )
-                raw = _gemini_tts_bytes(
-                    text=full_script, prompt=style, language="tr-TR",
-                    voice_name=gemini_voice, project=project, token=token,
-                    model_name="gemini-2.5-pro-tts",
-                )
-                path.write_bytes(raw)
-                engine_name = "gemini-2.5-pro-tts-one-take"
-            if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
-                raise RuntimeError("DJ voiceover failed size validation")
-            total_duration = _audio_duration(path)
-            # Voice length and final Reel length are separate QC rules.
-            # A natural read may be shorter than 10s; the renderer guarantees
-            # that the final video itself never drops below 10 seconds.
-            if not 7.0 <= total_duration <= 18.5:
-                raise VoiceoverQualityError(
-                    f"Voiceover is outside the natural 7–18.5-second range: {total_duration:.1f}s"
-                )
-            candidate["dj_script_tr"] = full_script
-            candidate["voiceover_duration_seconds"] = round(total_duration, 2)
-            candidate["tts_voice"] = gemini_voice
-            candidate["tts_language"] = "tr-TR"
-            candidate["tts_engine"] = engine_name
-            print(f"DJ full-take TTS ready: {gemini_voice} ({path.stat().st_size} bytes)")
-            return path
-        except VoiceoverQualityError:
-            raise
-        except Exception as exc:
-            if not fallback_enabled or mode == "tr":
-                raise
-            print(f"Gemini Flash TTS unavailable; falling back to Chirp 3 HD: {exc}")
-
-    if mode == "tr":
-        raise VoiceoverQualityError("Turkish drafts require the segmented Gemini DJ voice")
-
-    main_default_language = "en-AU" if mode == "en" else "tr-TR"
-    main_default_voice = "en-AU-Chirp3-HD-Charon" if mode == "en" else "tr-TR-Chirp3-HD-Charon"
-    main_language = os.getenv("OLDIES_TTS_LANGUAGE", "").strip() or main_default_language
-    main_voice = os.getenv("OLDIES_TTS_VOICE", "").strip() or main_default_voice
-    title_voice = os.getenv("OLDIES_TTS_TITLE_VOICE", "").strip() or "en-AU-Chirp3-HD-Charon"
-
-    if mode == "en":
-        parts = [("en-AU", build_english_dj_script(candidate))]
-    else:
-        parts = build_turkish_dj_parts(candidate)
-
-    segment_paths: list[Path] = []
-    for index, (segment_language, text) in enumerate(parts):
-        voice = title_voice if segment_language.startswith("en-") and mode == "tr" else main_voice
-        language = segment_language if segment_language.startswith("en-") and mode == "tr" else main_language
-        if mode == "en":
-            text = (
-                f"<speak>{html.escape(text)}"
-                '<break time="900ms"/>Oldies Radyo.'
-                '<break time="350ms"/>The music you remember, and the stories behind it. '
-                'Listen, like and share.</speak>'
-            )
-            raw = _google_tts_bytes(
-                text=text,
-                language=language,
-                voice_name=voice,
-                project=project,
-                token=token,
-                ssml=True,
-                speaking_rate=0.96,
-            )
-        else:
-            raw = _google_tts_bytes(
-                text=text,
-                language=language,
-                voice_name=voice,
-                project=project,
-                token=token,
-            )
-        segment = directory / f"voiceover-segment-{index}.mp3"
-        segment.write_bytes(raw)
-        segment_paths.append(segment)
-
-    path = directory / "voiceover-google.mp3"
-    _join_tts_segments(segment_paths, path)
-    if path.stat().st_size <= 0 or path.stat().st_size > MAX_VOICEOVER_BYTES:
-        raise RuntimeError("Generated Google voiceover failed size validation")
-
-    script = build_english_dj_script(candidate) if mode == "en" else build_turkish_dj_script(candidate)
-    if mode == "en":
-        candidate["dj_script_en"] = (
-            script
-            + " [pause] Oldies Radyo. [pause] The music you remember, and the stories behind it. "
-              "Listen, like and share."
-        )
-        duration = _audio_duration(path)
-        if not 7.0 <= duration <= 18.5:
-            raise VoiceoverQualityError(f"English DJ voiceover does not fit the Reel: {duration:.1f}s")
-        candidate["voiceover_duration_seconds"] = round(duration, 2)
-    else:
-        candidate["dj_script_tr"] = script
-    candidate["tts_voice"] = main_voice
-    candidate["tts_language"] = main_language
-    candidate["tts_engine"] = "chirp3-hd"
-    if mode == "tr" and any(lang.startswith("en-") for lang, _ in parts):
-        candidate["tts_title_voice"] = title_voice
-        candidate["tts_title_language"] = "en-AU"
-    print(f"Chirp 3 HD ready: {main_voice} ({path.stat().st_size} bytes, segments={len(parts)})")
-    return path
-
+        raise VoiceoverQualityError("Google project missing")
+    mode = candidate["reels_language"]
+    voice = (os.getenv("OLDIES_GEMINI_TTS_VOICE", "Charon").strip() or "Charon")
+    if voice == "auto":
+        voice = scheduled_turkish_voice(datetime.now(timezone.utc).date())
+    if voice not in {"Charon", "Callirrhoe", "Aoede"}:
+        raise VoiceoverQualityError("Approved natural DJ voice required")
+    target = directory / "voiceover-google.mp3"
+    raw = _gemini_tts_bytes(text=script, prompt=(
+        "Warm, experienced radio DJ. Natural conversational speed. Read every word exactly. "
+        "No added speech, music or sound effects. A brief natural pause before the station closing."
+    ), language="tr-TR" if mode == "tr" else "en-AU", voice_name=voice,
+        project=project, token=str(credentials.token), model_name="gemini-2.5-pro-tts")
+    target.write_bytes(raw)
+    from media_evidence import inspect_audio
+    measured = inspect_audio(target)
+    candidate["voiceover_duration_seconds"] = measured["decoded_seconds"]
+    return target
 
 
 def download_voiceover(directory: Path) -> Path | None:
@@ -1196,55 +924,11 @@ def download_voiceover(directory: Path) -> Path | None:
 
 
 def render(scenes: list[Path], target: Path, voiceover: Path | None = None) -> None:
-    # Keep the full DJ read and its ending. Silent Reels remain 15 seconds.
-    duration = max(DURATION, math.ceil(_audio_duration(voiceover) + 0.55)) if voiceover else DURATION
-    scene_seconds = (duration + 1.10) / 3
-    frames = math.ceil(scene_seconds * FPS)
-    transition_one = scene_seconds - 0.55
-    transition_two = 2 * transition_one
-    inputs = []
-    for scene in scenes:
-        inputs += ["-loop", "1", "-t", f"{scene_seconds:.3f}", "-i", str(scene)]
-
-    graph = (
-        f"[0:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00050,1.08)':d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS}[a];"
-        f"[1:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00036,1.065)':d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS}[b];"
-        f"[2:v]scale={WIDTH}:{HEIGHT},zoompan=z='min(zoom+0.00046,1.075)':d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS}[c];"
-        f"[a][b]xfade=transition=fade:duration=0.55:offset={transition_one:.3f}[x];"
-        f"[x][c]xfade=transition=smoothleft:duration=0.55:offset={transition_two:.3f}[v]"
-    )
-    if voiceover:
-        inputs += ["-i", str(voiceover)]
-        graph += (
-            ";[3:a]aformat=sample_rates=48000:channel_layouts=stereo,"
-            "highpass=f=70,lowpass=f=16000,"
-            "acompressor=threshold=-20dB:ratio=3:attack=10:release=120:makeup=2,"
-            "loudnorm=I=-16:TP=-1.0:LRA=7,apad[voice]"
-        )
-        command = [
-            "ffmpeg", "-y", *inputs, "-filter_complex", graph,
-            "-map", "[v]", "-map", "[voice]",
-            "-t", str(duration), "-r", str(FPS),
-            "-c:v", "libx264", "-preset", "medium",
-            "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k",
-            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
-            "-ar", "48000", "-ac", "2",
-            "-movflags", "+faststart", str(target),
-        ]
-    else:
-        command = [
-            "ffmpeg", "-y", *inputs, "-filter_complex", graph, "-map", "[v]", "-an",
-            "-t", str(duration), "-r", str(FPS), "-c:v", "libx264", "-preset", "medium",
-            "-crf", "24", "-maxrate", "2200k", "-bufsize", "4400k",
-            "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(target),
-        ]
-    subprocess.run(command, check=True)
-    if not target.exists() or target.stat().st_size <= 0 or target.stat().st_size > MAX_VIDEO_BYTES:
-        raise RuntimeError("Rendered MP4 failed size validation")
-
+    raise VoiceoverQualityError("Use the evidence-linked 25-30s timeline renderer; silent legacy render disabled")
 
 
 def publish_delivery_asset(candidate: dict, video: Path) -> str:
+    check_approved_reel(candidate, video, load_approval(os.getenv("OLDIES_EDITORIAL_APPROVAL_MANIFEST", "").strip()))
     """Upload the rendered MP4 as a public GitHub Release asset.
 
     WordPress then receives only the HTTPS URL, avoiding large multipart
@@ -1347,6 +1031,7 @@ def proxy_draft_request(data: dict, bearer: str):
 
 
 def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
+    check_approved_reel(candidate, video, load_approval(os.getenv("OLDIES_EDITORIAL_APPROVAL_MANIFEST", "").strip()))
     data = {
         "artist": candidate["artist"],
         "topic": candidate["topic"],
@@ -1369,6 +1054,7 @@ def upload_draft(candidate: dict, video: Path, bearer: str, base_url: str):
 
 def publish_facebook_global(candidate: dict, video: Path, bearer: str, base_url: str) -> dict:
     """Deliver one rendered English Reel to the isolated Facebook Global companion."""
+    check_approved_reel(candidate, video, load_approval(os.getenv("OLDIES_EDITORIAL_APPROVAL_MANIFEST", "").strip()))
     public_url = publish_delivery_asset(candidate, video)
     if not public_url:
         raise RuntimeError("Facebook Global delivery requires the GitHub reels-delivery asset")
@@ -1421,137 +1107,25 @@ def publish_facebook_global(candidate: dict, video: Path, bearer: str, base_url:
 
 
 def main() -> None:
-    bearer = require_env("OLDIES_WP_BEARER")
-    base_url = require_env("OLDIES_WP_BASE_URL")
-    OUTPUT.mkdir(parents=True, exist_ok=True)
     language = reel_language()
-    preview_only = os.getenv("OLDIES_PREVIEW_ONLY", "").strip().lower() in {"1", "true", "yes", "on"}
     override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
     today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
-    draft_state = {"daily_limit_reached": False, "recent_artists": []} if preview_only else get_draft_state(bearer, base_url)
-    if language != "en" and draft_state["daily_limit_reached"]:
-        print("Daily DRAFT_REVIEW quota is already satisfied; exiting successfully without rendering another Reel.")
-        return
-    candidates = research_candidates(draft_state["recent_artists"], today=today)
-    preview_artist = os.getenv("OLDIES_PREVIEW_ARTIST", "").strip().casefold()
-    if preview_only and preview_artist:
-        candidates = [option for option in candidates if str(option.get("artist", "")).casefold() == preview_artist]
-        if not candidates:
-            raise VoiceoverQualityError(f"No candidate found for preview artist: {preview_artist}")
-    candidate = None
-    photos, credits = [], []
-    photo_errors = []
-    for option in candidates:
-        if language == "tr":
-            try:
-                build_turkish_gemini_script(option)
-            except VoiceoverQualityError as exc:
-                print(f"Skipping unsupported story for {option['artist']}: {exc}")
-                continue
-        for old_photo in OUTPUT.glob("photo-*.jpg"):
-            old_photo.unlink()
-        try:
-            print(f"Trying zero-cost visual candidate: {option['artist']} (score={option['score']})")
-            photos, credits = download_commons_photos(option, OUTPUT)
-            candidate = option
-            break
-        except Exception as exc:
-            photo_errors.append(f"{option.get('artist', 'Unknown')}: {exc}")
-            print(f"Skipping visual candidate: {photo_errors[-1]}")
-    if candidate is None:
-        raise RuntimeError("No zero-cost candidate had three usable licensed photos. " + " | ".join(photo_errors))
-    candidate["image_credits"] = credits
-    candidate["pipeline"] = "zero-cost-v1"
-    candidate = apply_reel_language(candidate, language)
-    voiceover = download_voiceover(OUTPUT)
-    voiceover_source = "external_https" if voiceover else "none"
-    if not voiceover:
-        voiceover = synthesize_google_voice(candidate, OUTPUT)
-        if voiceover:
-            voiceover_source = str(candidate.get("tts_engine") or "google_tts")
-    candidate["voiceover"] = {
-        "enabled": bool(voiceover),
-        "source": voiceover_source,
-    }
-    if language == "en" and not voiceover:
-        raise RuntimeError(
-            "Facebook Global requires a natural English DJ voiceover; refusing to render or publish a silent Reel."
-        )
-
-    video = OUTPUT / "oldies-reels-draft.mp4"
-    if voiceover:
-        script_key = "dj_script_en" if language == "en" else "dj_script_tr"
-        script = str(candidate.get(script_key, "")).strip()
-        if not script:
-            script = build_english_dj_script(candidate) if language == "en" else build_turkish_gemini_script(candidate)
-        timeline = build_timeline(script, voiceover)
-        timeline_scenes = make_timeline_scenes(candidate, photos, timeline, OUTPUT)
-        write_timeline_files(timeline, OUTPUT)
-        export_capcut_package(
-            timeline=timeline,
-            voiceover=voiceover,
-            scenes=timeline_scenes,
-            output_dir=OUTPUT,
-        )
-        candidate["video_factory"] = {
-            "enabled": True,
-            "version": "v1",
-            "scene_count": len(timeline),
-            "timestamp_source": "voiceover_duration+natural_pauses",
-            "capcut_package": "capcut-package/",
-            "captions": "captions.srt",
-            "timeline": "timeline.json",
-        }
-        render_timeline(
-            scenes=timeline_scenes,
-            timeline=timeline,
-            target=video,
-            voiceover=voiceover,
-            width=WIDTH,
-            height=HEIGHT,
-            fps=FPS,
-            max_video_bytes=MAX_VIDEO_BYTES,
-        )
-    else:
-        candidate["video_factory"] = {"enabled": False, "reason": "no_voiceover"}
-        render(make_scenes(candidate, photos, OUTPUT), video, voiceover=None)
-
-    (OUTPUT / "content.json").write_text(json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8")
-
-    if preview_only:
-        result = {"success": True, "preview_only": True, "voiceover": bool(voiceover)}
-        (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-        print("Preview-only render completed; WordPress draft upload was intentionally skipped.")
-        return
-
-    # Fail closed before ANY WordPress review draft or Facebook publication.
-    # The external reviewer manifest is never generated or auto-approved by this worker.
-    # Exact rendered-media hash, source facts, 25-30s duration, and visual evidence
-    # must all match; no manifest means safe stop and retained preview artifact.
-    review = load_approval(os.getenv("OLDIES_EDITORIAL_APPROVAL_MANIFEST", "").strip())
-    qc = check_approved_reel(candidate, video, review)
-    (OUTPUT / "editorial-qc-result.json").write_text(
-        json.dumps(qc, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
-
-    if candidate.get("reels_language") == "en":
-        result = publish_facebook_global(candidate, video, bearer, base_url)
-        (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-        status = result.get('status') if isinstance(result.get('status'), dict) else {}
-        publishing = status.get('publishing_phase') or {}
-        publishing_status = publishing.get('status', 'unknown') if isinstance(publishing, dict) else 'unknown'
-        print(
-            f"Facebook Global response: video={result.get('video_id') or result.get('post_id') or 'unknown'}; "
-            f"video_status={status.get('video_status', 'unknown')}; publishing_phase={publishing_status}. "
-            "Workflow success alone does not verify public Facebook delivery."
-        )
-        return
-
-    result = upload_draft(candidate, video, bearer, base_url)
-    (OUTPUT / "wordpress-result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Created approval-only zero-cost draft {result.get('draft', {}).get('id', '')}; no live post was made.")
+    root = Path(__file__).resolve().parent
+    def render_preview(candidate, photos, voice, target):
+        script = check_script(candidate)
+        timeline = build_timeline(script, voice)
+        scenes = make_timeline_scenes(candidate, photos, timeline, target.parent)
+        write_timeline_files(timeline, target.parent)
+        render_timeline(scenes=scenes, timeline=timeline, target=target, voiceover=voice,
+                        width=WIDTH, height=HEIGHT, fps=FPS, max_video_bytes=MAX_VIDEO_BYTES)
+    output = root / "output" / f"{language}-preview"
+    result = prepare_preview(root=root, output=output, today=today, language=language,
+                             packet_path=os.getenv("OLDIES_EDITORIAL_PACKET", "").strip(),
+                             discover=research_candidates, render=render_preview)
+    print(json.dumps(result, ensure_ascii=False))
+    if not result["video_created"]:
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":
     main()
-

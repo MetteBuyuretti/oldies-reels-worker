@@ -17,27 +17,18 @@ from pathlib import Path
 
 
 def audio_duration(path: Path) -> float:
-    probe = subprocess.run(
-        [
-            "ffprobe", "-v", "error", "-show_entries", "format=duration",
-            "-of", "default=noprint_wrappers=1:nokey=1", str(path),
-        ],
-        check=True, capture_output=True, text=True,
-    )
-    return float(probe.stdout.strip())
+    from media_evidence import inspect_audio
+    return inspect_audio(path)["decoded_seconds"]
 
 MIN_FINAL_REEL_SECONDS = 25.0
 MAX_FINAL_REEL_SECONDS = 30.0
 
 
 def final_reel_duration(voice_seconds: float) -> float:
-    """Require naturally timed narration; never pad an old 10-second Reel to 27s."""
+    """Reject short/long narration; do not stretch, truncate or hide it with a hold."""
     voice_seconds = float(voice_seconds)
     if not math.isfinite(voice_seconds) or not 24.88 <= voice_seconds <= 29.88:
-        raise RuntimeError(
-            "Natural full DJ narration must fit a real 25-30s Reel "
-            "(24.88-29.88s voice; no silent padding or speed manipulation)"
-        )
+        raise RuntimeError("Natural full DJ narration must fit a real 25-30s Reel (24.88-29.88s voice)")
     return max(MIN_FINAL_REEL_SECONDS, voice_seconds + 0.12)
 
 
@@ -120,6 +111,7 @@ def _snap_boundaries(nominal: list[float], pauses: list[float], duration: float)
 
 def build_timeline(script: str, audio: Path, *, target_scene_seconds: float = 3.2) -> list[dict]:
     duration = audio_duration(audio)
+    final_reel_duration(duration)  # Fail before planning/rendering a short narration.
     scene_count = max(4, min(12, int(round(duration / target_scene_seconds))))
     chunks = _balanced_chunks(script, scene_count)
     weights = [max(1, len(_words(chunk))) for chunk in chunks]
@@ -239,13 +231,10 @@ def render_timeline(
     for index, (scene, item) in enumerate(zip(scenes, timeline)):
         intended = float(item["duration"])
         source_duration = intended + (transition if index < len(scenes) - 1 else 0.0)
-        frames = max(2, math.ceil(source_duration * fps))
         inputs += ["-loop", "1", "-t", f"{source_duration:.3f}", "-i", str(scene)]
-        zoom = "0.00042" if index % 2 == 0 else "0.00030"
         filters.append(
-            f"[{index}:v]scale={width}:{height},"
-            f"zoompan=z='min(zoom+{zoom},1.075)':d={frames}:s={width}x{height}:fps={fps},"
-            f"setsar=1[v{index}]"
+            f"[{index}:v]scale={width}:{height},fps={fps},"
+            f"trim=duration={source_duration:.3f},setpts=PTS-STARTPTS,setsar=1[v{index}]"
         )
 
     current = "v0"
@@ -264,6 +253,8 @@ def render_timeline(
     voice_seconds = audio_duration(voiceover)
     total_duration = final_reel_duration(voice_seconds)
     visual_duration = sum(float(item["duration"]) for item in timeline)
+    if abs(visual_duration - voice_seconds) > 0.03:
+        raise RuntimeError("Timeline must cover the complete natural narration without padding")
     hold_seconds = max(0.0, total_duration - visual_duration)
     output_video = current
     if hold_seconds > 0.01:
@@ -281,7 +272,7 @@ def render_timeline(
         "loudnorm=I=-16:TP=-1.0:LRA=7,apad[voice]"
     )
     command = [
-        "ffmpeg", "-y", *inputs,
+        "ffmpeg", "-y", "-loglevel", "error", "-filter_complex_threads", "1", *inputs,
         "-filter_complex", ";".join(filters),
         "-map", f"[{output_video}]", "-map", "[voice]",
         "-t", f"{total_duration:.3f}", "-r", str(fps),
@@ -293,3 +284,5 @@ def render_timeline(
     subprocess.run(command, check=True)
     if not target.exists() or target.stat().st_size <= 0 or target.stat().st_size > max_video_bytes:
         raise RuntimeError("Timestamp-aware MP4 failed size validation")
+    from media_evidence import inspect_reel
+    inspect_reel(target)

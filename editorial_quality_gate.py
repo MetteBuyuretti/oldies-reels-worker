@@ -8,11 +8,15 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
 import subprocess
 from datetime import date
 from pathlib import Path
 from urllib.parse import urlsplit
+
+from source_evidence import (EvidenceError, check_historical_sources, check_script,
+                             https_host, packet_sha256)
 
 
 class EditorialGateError(RuntimeError):
@@ -21,7 +25,8 @@ class EditorialGateError(RuntimeError):
 
 FORBIDDEN_VISUAL_TERMS = re.compile(
     r"\b(statue|statues|sculpture|monument|waxwork|wax\s+figure|painting|drawing|"
-    r"illustration|cartoon|animal|eagle\s+bird|logo|figurine|idol|religious\s+symbol)\b", re.I
+    r"illustration|cartoon|animal|eagle\s+bird|logo|figurine|idol|religious\s+symbol|"
+    r"madonna\s+and\s+child|virgin\s+mary|heykel|balmumu|köpek|kedi)\b", re.I
 )
 WEAK_STORY_PHRASES = (
     "müzik tarihinde kayda geçen bir gelişme yaşandı",
@@ -42,13 +47,22 @@ def media_sha256(path: Path) -> str:
 
 
 def duration_seconds(path: Path, *, run=subprocess.run) -> float:
-    proc = run([
-        "ffprobe", "-v", "error", "-show_entries", "format=duration",
-        "-of", "default=noprint_wrappers=1:nokey=1", str(path),
-    ], capture_output=True, text=True, check=True, timeout=30)
     try:
-        return float(proc.stdout.strip())
-    except (ValueError, TypeError) as exc:
+        proc = run([
+            "ffprobe", "-v", "error", "-show_entries", "format=duration,format_name:stream=codec_type,duration",
+            "-of", "json", str(path),
+        ], capture_output=True, text=True, check=True, timeout=30)
+        data = json.loads(proc.stdout)
+        if "mp4" not in data["format"]["format_name"].split(","):
+            raise ValueError("Not an MP4 container")
+        streams = [s for s in data["streams"] if s["codec_type"] == "video"]
+        secs = float(data["format"]["duration"])
+        # A 10s visual track with 27s of audio/metadata is not a 27s Reel.
+        if (not streams or not math.isfinite(secs) or secs <= 0 or
+                abs(float(streams[0]["duration"]) - secs) > 0.15):
+            raise ValueError("Invalid or mismatched video duration")
+        return secs
+    except (OSError, subprocess.SubprocessError, KeyError, ValueError, TypeError) as exc:
         raise EditorialGateError("MP4 duration cannot be independently measured") from exc
 
 
@@ -56,77 +70,125 @@ def _host(url: str) -> str:
     return (urlsplit(str(url)).hostname or "").casefold().removeprefix("www.")
 
 
-def check_approved_reel(candidate: dict, video: Path, approval: dict, *, measured_duration: float | None = None) -> dict:
-    """Verify independent human-review manifest and basic source/asset evidence.
-
-    This code is not a substitute for an actual historical fact review.
-    The approval must be authored independently, not by the worker/LLM.
-    """
-    if not video.is_file() or video.stat().st_size < 1024:
-        raise EditorialGateError("Final MP4 missing or invalid")
-    secs = duration_seconds(video) if measured_duration is None else float(measured_duration)
-    if not MIN_REEL_SECONDS <= secs <= MAX_REEL_SECONDS:
-        raise EditorialGateError(f"Final MP4 duration {secs:.3f}s is not 25-30s")
-
-    event = str(candidate.get("event_date") or "")
+def check_media_duration(video: Path) -> dict:
+    from media_evidence import MediaEvidenceError, inspect_reel
     try:
-        day = date.fromisoformat(event)
-    except ValueError as exc:
-        raise EditorialGateError("Invalid event date") from exc
-    if not 1950 <= day.year <= 1999:
-        raise EditorialGateError("Event outside approved 1950-1999 period")
+        return inspect_reel(video)
+    except MediaEvidenceError as exc:
+        raise EditorialGateError(str(exc)) from exc
 
-    sources = list(candidate.get("sources") or [])
-    expected = f"/on-this-day-in-music-{day.strftime('%B').lower()}-{day.day}/"
-    if not any(_host(u) == "thisdayinmusic.com" and expected in urlsplit(str(u)).path.lower() for u in sources):
-        raise EditorialGateError("Event not sourced from the exact day's This Day in Music page")
 
-    proofs = list(approval.get("fact_evidence") or [])
-    independent = [
-        row for row in proofs if isinstance(row, dict)
-        and str(row.get("claim", "")).strip()
-        and str(row.get("url", "")).startswith("https://")
-        and _host(row.get("url")) not in ("thisdayinmusic.com", "wikipedia.org", "en.wikipedia.org",
-                                          "tr.wikipedia.org", "wikidata.org")
-    ]
-    if len(independent) < 2 or len({row["claim"].casefold() for row in independent}) < 2:
-        raise EditorialGateError("At least two distinct details need independent cited evidence")
-
-    script = str(candidate.get("dj_script_tr") if candidate.get("reels_language") != "en" else
-                 candidate.get("dj_script_en") or "").strip()
-    script = re.sub(r"\s+", " ", script)
-    if len(script.split()) < 45 or any(s in script.casefold() for s in WEAK_STORY_PHRASES):
-        raise EditorialGateError("DJ story too short or generic for a 25-30s documentary-style Reel")
-    closing = ("Oldies Radyo. Timeless music. Listen, enjoy, share." if candidate.get("reels_language") == "en"
-               else "Oldies Radyo. Dinle, beğen, paylaş.")
-    if closing.casefold() not in script.casefold():
-        raise EditorialGateError("Approved station closing is missing")
-
-    photos = list(candidate.get("image_credits") or [])
-    checked = list(approval.get("visual_evidence") or [])
-    if len(photos) < 3 or len(checked) != len(photos):
-        raise EditorialGateError("At least three photos must be independently reviewed")
-    artist = str(candidate.get("artist") or "").casefold()
-    if not artist:
-        raise EditorialGateError("Artist identity missing")
-    for i, (photo, review) in enumerate(zip(photos, checked, strict=True)):
-        label = " ".join(str(photo.get(x, "")) for x in ("title", "description_url"))
+def check_photo_evidence(candidate: dict) -> list[dict]:
+    """Reject metadata omissions/substitutes before selecting any photo for a TR render."""
+    photos = candidate.get("image_credits") or []
+    if len(photos) < 3:
+        raise EditorialGateError("At least three documented artist photos required")
+    artist = str(candidate.get("artist") or "").strip()
+    hashes = [photo.get("asset_sha256") for photo in photos]
+    if len(set(hashes)) != len(hashes):
+        raise EditorialGateError("Three distinct photo assets required; crop/duplicate fallback forbidden")
+    try:
+        event_year = date.fromisoformat(candidate["event_date"]).year
+    except (KeyError, ValueError, TypeError) as exc:
+        raise EditorialGateError("Photo event date required") from exc
+    territories = set(candidate.get("target_territories") or [])
+    if not territories:
+        raise EditorialGateError("Intended photo-use territories must be explicit")
+    for i, photo in enumerate(photos, 1):
+        label = " ".join(str(photo.get(x, "")) for x in
+                         ("title", "description", "description_url", "event_context", "era_context"))
         if FORBIDDEN_VISUAL_TERMS.search(label):
-            raise EditorialGateError(f"Forbidden statue/illustration/photo substitute at photo {i + 1}")
-        if not str(photo.get("license", "")).strip() or not str(photo.get("description_url", "")).startswith("https://"):
-            raise EditorialGateError(f"Image {i + 1} has no license/source proof")
-        if min(int(photo.get("width", 0)), int(photo.get("height", 0))) < 800:
-            raise EditorialGateError(f"Image {i + 1} lacks suitable source resolution")
-        if review.get("artist_confirmed") is not True or review.get("event_context_confirmed") is not True:
-            raise EditorialGateError(f"Actual artist/event context is not verified for photo {i + 1}")
-        if not str(review.get("evidence_url") or "").startswith("https://"):
-            raise EditorialGateError(f"Image {i + 1} lacks reviewer evidence URL")
-    digest = media_sha256(video)
-    if (approval.get("status") != "APPROVED" or str(approval.get("reviewer", "")).strip() == ""
-            or approval.get("media_sha256") != digest):
-        raise EditorialGateError("Independent review not bound to this exact final MP4")
-    return {"status": "PASS", "duration_seconds": round(secs, 3), "media_sha256": digest,
-            "photo_count": len(photos), "independent_claims": len(independent)}
+            raise EditorialGateError(f"Forbidden photo substitute at photo {i}")
+        if (photo.get("media_type") != "photograph" or not artist or
+                photo.get("identity") != artist or not https_host(photo.get("identity_source_url", ""))):
+            raise EditorialGateError(f"Photo {i} artist identity/photograph proof missing")
+        license_url = str(photo.get("license_url") or "")
+        permitted = {"CC BY 4.0": "https://creativecommons.org/licenses/by/4.0/",
+                     "CC BY-SA 4.0": "https://creativecommons.org/licenses/by-sa/4.0/",
+                     "CC BY 3.0": "https://creativecommons.org/licenses/by/3.0/",
+                     "CC BY-SA 3.0": "https://creativecommons.org/licenses/by-sa/3.0/",
+                     "CC0": "https://creativecommons.org/publicdomain/zero/1.0/"}
+        pd = (photo.get("license") == "Public domain" and
+              https_host(photo.get("rights_source_url", "")) in {"commons.wikimedia.org", "loc.gov"} and
+              len(str(photo.get("rights_basis") or "")) >= 30 and
+              license_url == "https://creativecommons.org/publicdomain/mark/1.0/")
+        if (not pd and permitted.get(photo.get("license")) != license_url) or not license_url:
+            raise EditorialGateError(f"Photo {i} license/rights proof missing or unverified")
+        if (not https_host(photo.get("description_url", "")) or
+                not https_host(photo.get("rights_source_url", "")) or
+                not https_host(photo.get("url", "")) or
+                not str(photo.get("creator") or "").strip() or photo.get("creator") == "Unknown"):
+            raise EditorialGateError(f"Photo {i} source/creator/license evidence missing")
+        try:
+            year = int(photo["capture_year"])
+            resolution = min(int(photo["width"]), int(photo["height"]))
+        except (KeyError, ValueError, TypeError) as exc:
+            raise EditorialGateError(f"Photo {i} era/resolution proof missing") from exc
+        difference = abs(year - event_year)
+        if difference > 2:
+            raise EditorialGateError(f"Photo {i} is outside the event era")
+        if difference and len(str(photo.get("same_year_research") or "")) < 30:
+            raise EditorialGateError(f"Photo {i} needs documented event-year search before fallback")
+        if difference == 2:
+            exception = photo.get("era_exception_review") or {}
+            if (exception.get("status") != "APPROVED" or not exception.get("reviewer") or
+                    exception.get("asset_sha256") != photo["asset_sha256"] or
+                    exception.get("event_date") != candidate["event_date"] or
+                    len(str(exception.get("necessity_and_appearance_evidence") or "")) < 60):
+                raise EditorialGateError(f"Photo {i} needs independent event-specific +/-2 review")
+        covered = set(photo.get("rights_territories") or [])
+        if not ("worldwide" in covered or territories <= covered):
+            raise EditorialGateError(f"Photo {i} rights do not cover intended territories")
+        if photo.get("license") == "Public domain" and (not covered or
+                len(str(photo.get("rights_basis") or "")) < 60):
+            raise EditorialGateError(f"Photo {i} public-domain territory/basis evidence incomplete")
+        if (not 1900 <= year <= date.today().year or resolution < 800 or
+                len(str(photo.get("era_context") or "")) < 20 or
+                len(str(photo.get("event_context") or "")) < 20 or
+                not https_host(photo.get("era_source_url", "")) or
+                not re.fullmatch(r"[0-9a-f]{64}", str(photo.get("asset_sha256", "")))):
+            raise EditorialGateError(f"Photo {i} era/context/asset hash proof missing")
+    return photos
+
+
+def check_approved_reel(candidate: dict, video: Path, approval: dict) -> dict:
+    """Both channels require the same independently reviewed, hash-bound packet.
+
+    A manifest remains a trust boundary: the producer must never author it.
+    Mechanical PASS is not source verification, listening or owner approval.
+    """
+    media = check_media_duration(video)
+    try:
+        script = check_script(candidate)
+    except EvidenceError as exc:
+        raise EditorialGateError(str(exc)) from exc
+    photos = check_photo_evidence(candidate)
+    if approval.get("candidate_sha256") != packet_sha256(candidate):
+        raise EditorialGateError("Independent review not bound to exact source/script/photo packet")
+    required = ("historical_sources_verified", "script_facts_verified", "natural_dj_voice_verified",
+                "opening_narrative_closing_verified", "photo_rights_identity_era_verified",
+                "subtitles_sync_readability_verified", "full_video_watched", "full_audio_listened")
+    for field in required:
+        if approval.get(field) is not True:
+            raise EditorialGateError(f"Independent review missing: {field}")
+    if (approval.get("status") != "APPROVED" or not str(approval.get("reviewer") or "").strip() or
+            approval.get("reviewer") == candidate.get("producer") or
+            approval.get("media_sha256") != media["media_sha256"]):
+        raise EditorialGateError("Independent review not bound to this exact final MP4/DJ narration")
+    reviews = approval.get("visual_evidence") or []
+    if len(reviews) != len(photos):
+        raise EditorialGateError("Each distinct photo needs independent visual evidence")
+    for photo, review in zip(photos, reviews, strict=True):
+        if (review.get("asset_sha256") != photo["asset_sha256"] or
+                any(review.get(field) is not True for field in
+                    ("artist_confirmed", "event_context_confirmed", "era_confirmed", "rights_confirmed")) or
+                not https_host(review.get("evidence_url", ""))):
+            raise EditorialGateError("Photo identity/era/rights review not bound to the asset bytes")
+    rate = len(script.split()) * 60 / media["audio"]["decoded_seconds"]
+    if not 90 <= rate <= 195:
+        raise EditorialGateError("Narration word rate is outside the natural DJ review range")
+    return {**media, "status": "PASS", "editorial_approved": True,
+            "photo_count": len(photos), "words_per_minute": round(rate, 1)}
 
 
 def load_approval(path: str) -> dict:

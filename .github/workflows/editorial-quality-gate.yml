@@ -9,6 +9,12 @@ on:
       - "video_factory.py"
       - "test_announcer.py"
       - "test_reels_duration_contract.py"
+      - "source_evidence.py"
+      - "media_evidence.py"
+      - "reels_preview.py"
+      - "zero_cost.py"
+      - "test_reels_pipeline.py"
+      - "test_reels_media_integration.py"
       - ".github/workflows/editorial-quality-gate.yml"
   workflow_dispatch:
 
@@ -24,4 +30,8 @@ jobs:
         with:
           python-version: "3.12"
       - name: Verify editorial delivery refuses unsuitable material
-        run: python -m unittest -v test_editorial_quality_gate test_reels_duration_contract
+        run: |
+          python -m pip install -r requirements.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          python -m unittest -v test_editorial_quality_gate test_reels_duration_contract test_reels_media_integration test_reels_pipeline test_announcer

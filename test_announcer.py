@@ -43,19 +43,9 @@ class AnnouncerTests(unittest.TestCase):
             "John Lennon released ‘Whatever Gets You thru the Night’ on this day "
             "September 23 which later became his first solo No.1 single in the US.",
         )
-        spoken = worker.build_turkish_gemini_script(item)
-        self.assertIn("Yirmi üç Eylül bin dokuz yüz yetmiş dört", spoken)
-        self.assertIn("sonra", spoken)
-        self.assertIn("ilk solo liste birinciliğini", spoken)
-        self.assertIn("Elton John piyanoda ve geri vokalde", spoken)
-        self.assertTrue(any("johnlennon.com" in source for source in item["sources"]))
-        self.assertIn("John Lennon,", spoken)
-        self.assertNotIn("Lennon\u0027ın", spoken)
-        self.assertNotIn("Oldies Radyo", spoken)
-        self.assertNotIn("1974", spoken)
-        prompt = worker.turkish_gemini_style_prompt(item)
-        self.assertIn("Whatever Gets You thru the Night", prompt)
-        self.assertIn("haber spikeri tonundan", prompt)
+        # A hardcoded artist/title branch must not invent corroborated facts.
+        with self.assertRaises(worker.VoiceoverQualityError):
+            worker.build_turkish_gemini_script(item)
 
     def test_album_apostrophe_and_type_are_preserved(self):
         item = self.candidate(
@@ -64,11 +54,8 @@ class AnnouncerTests(unittest.TestCase):
             "‘Goat’s Head Soup’ by The Rolling Stones.",
         )
         self.assertEqual(item["instagram_music_title"], "Goat’s Head Soup")
-        spoken = worker.build_turkish_gemini_script(item)
-        self.assertIn("'Goat’s Head Soup' albümü", spoken)
-        self.assertIn("Zirvede iki hafta kaldı", spoken)
-        self.assertTrue(any("officialcharts.com" in source for source in item["sources"]))
-        self.assertNotIn("'Goat'", spoken)
+        with self.assertRaises(worker.VoiceoverQualityError):
+            worker.build_turkish_gemini_script(item)
 
     def test_unsupported_story_is_rejected(self):
         item = self.candidate("Eagles", "1979-09-24", "Eagles made music history.")
@@ -108,6 +95,9 @@ class AnnouncerTests(unittest.TestCase):
         duration = worker._audio_duration(assets / "john-lennon-pro-one-take.mp3")
         self.assertGreater(duration, 18.0)
         self.assertLess(duration, 20.0)
+        # The historical asset is preserved but is too short for the new contract.
+        with self.assertRaises(RuntimeError):
+            video_factory.final_reel_duration(duration)
 
 
 if __name__ == "__main__":
