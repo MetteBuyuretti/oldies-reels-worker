@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-13T20:20:59.117Z",
+  "updated_at": "2026-10-23T21:55:57Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -185,6 +185,22 @@
       "last_checkpoint": "2026-10-13T20:20:59.117Z",
       "next_step": "Read only: verify the first natural 2026-10-14 Reels 09:17 UTC / 12:17 TRT and Facebook 11:23 UTC / 14:23 TRT runs, actual single production and delivery. Token expires_at and full granted scopes require secure debugging of the existing token. Do not dispatch or retry publisher workflows; do not merge PR26.",
       "note": "PR28 merged as b2365d9edb3fe9d54b2f72899624fc2769acb4a5. Main push run38461270417 passed14 tests; audit3 healthy0 findings;18/18 workflows active. Facebook video1732477522215264 observed publicly visible as Oldies Radyo/The Who. Previous artifact processing state is historical. Pinterest remains tested; no modifications or publication. No changes to Jingle,V3.1,Etsy,WP content or PR26."
+    },
+    {
+      "id": "work-master-system-takeover-20261024",
+      "title": "WORK MASTER — ekosistem geçmişi, mevcut sistem ve sorumluluk devri",
+      "status": "checkpointed",
+      "completed_units": [
+        "accessible-history-and-partial-master3-review",
+        "legacy-master-status-work1-handoffs-read",
+        "live-wordpress-inventory-and-news-guard-read",
+        "github-publication-gates-independent-audit",
+        "responsibility-and-evidence-matrix",
+        "first-dossier-saved-and-independently-reviewed"
+      ],
+      "last_checkpoint": "2026-10-23T21:55:57Z",
+      "next_step": "Önce eksik eski konuşma kapsamını ve güncel kaynakları salt okunur uzlaştır; gerçek Codex/Work/ayrı WATCHDOG görev alma teyitlerini ayır. Jingle #27 pilot kaydı doğrulaması Mete tarafından ertelendi. Pilot kabul edilmeden diğer üretim otomasyonlarını değiştirme; dispatch/retry/render/yayın başlatma.",
+      "note": "24.10.2026 TSİ: yönetim sorumluluğu bu Work oturumunda. Eski sohbetlerin tamamı eksiksiz okunmadı; tarayıcı eski mesajlarda zaman aşımı yaşadı. WP canlı: CC1.0.9/Social1.7.5/Bridge2.3.7-YT8-SAFE2/Distribution1.2.1/Integrity0.2.1. News ve Guard panelleri son kayıt22Eylül; güncel yürütüm ve kök neden doğrulanmadı. Bağımsız destek bu oturum içinde çalıştı, önceki ayrı WORK WATCHDOG'a mesaj/okuma teyidi yok. Mevcut görev durumları/sonraki adımları değişmedi. Üretim kodu, ayar, credential, scheduler, yayın ve maliyet değişikliği yok."
     }
   ]
 }
