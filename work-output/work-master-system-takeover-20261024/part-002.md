@@ -17,7 +17,7 @@ WATCHDOG'un OR-DEVIR-20261024-0352 raporunun tamamı, V3.0 anayasa metni, ayrı 
 | Reels | 16 kayıt: 11 DRAFT_REVIEW, 5 READY_FOR_EDITS. Bu sorguda hiçbirinde IG final medya ID'si yok. Doors kaydında youtube_success=true fakat verified_source=false. |
 | Etsy dağıtımı | 10 ERROR + 3 READY_FOR_REVIEW; 16 dağıtım kaydı ile 13 ürün işi ayrı tablolardır. Token Expired ve Worker READY; META_FINAL yok. Eski ID4–6 ile temiz hata/kaynak kopyaları bekler. |
 | Etsy zamanlama | 48 saatlik keşif ENABLED; panel next scan alanı 2026-10-24 23:59:09. Alanın saat dilimi teyitsiz olduğu için dönüşüm yapılmadı. Ayar, doğal başarılı koşu kanıtı değildir. |
-| Dinleme sayfaları | TR ve EN görünen sayfa içeriğinde oynatıcı yok; EN DOM'unda audio/video yok. Yayın sunucusunun kapalı olduğu sonucu çıkarılmadı. |
+| Dinleme sayfaları | Kurucunun son açıklaması: oynatıcı işi Mete'nin sorumluluğunda ve henüz başlatılmamış. Bu nedenle arıza veya MASTER onarım görevi olarak sınıflandırılmaz. |
 | Fransa kapak | Origin sağlam, 1672×941. Kartın CDN URL'si bu tarayıcıda sertifika güven hatası verdi. Koruma aşılmadı; bütün kullanıcılarda CDN arızası iddia edilmedi. |
 | Site Integrity | Son scan 24 Ekim04:02 TSİ; 1177 içerik, 599 inceleme sorunu, %49,1 kurala uyum. Menü LOCKED/HEALTHY. 13 görsel, 13 kategori ve 59 dil eşi eksik. |
 | Yedek | Son deneme finished; last_attempt_failed=false; backup_in_progress=false. Restore yapılmadı. |
@@ -36,6 +36,12 @@ EN Draft Agent'ın eski DRAFT talimatı ile 28 Eylül son EN otomatik yayın hed
 - Tamamlanmış İspanyolca araştırma ve Celentano MP4 teslim izleri yok sayılmadı; içerikleri görülmeden yeniden üretim başlamayacak.
 - Kurucunun son geçerli talimatı yetki ve tercihi belirler. Güncel teknik gerçek ayrıca doğrudan kanıtla doğrulanır.
 
+## Kurucu düzeltmesi ve inceleme kapsamı
+**24.10.2026 | 04:55 TSİ (UTC+3)**
+- Canlı Dinle/oynatıcı işinin sahibi Mete; durum henüz başlatılmamış. MASTER arıza ve onarım kuyruğundan çıkarıldı.
+- 61 eklentinin envanteri, aktif/pasif durumu ve sürümleri incelendi. Ana otomasyonların ilgili panelleri, mevcut sonuçları ve ilişkileri okundu.
+- Bütün eklentilerin kaynak kodu, cron/hook tanımları, bağımlılıkları ve uçtan uca çalışma kanıtı eksiksiz incelenmiş değildir. WordPress'in tamamı için inceleme bitti veya sistem çalışıyor kararı yok.
+
 ## BEKLEYEN
 Kod/ayar onarımı, gerçek son ürünler, Windows kaynak/logları, bu yeni devir için bağımsız WATCHDOG kabulü ve süreklilik açıktır. Ayrı WATCHDOG sohbetine yönelik ek okuma girişimi tamamlanamadı; yeni görev mesajı gönderilmedi. Eski sohbetlerin tamamı veya bütün eklenti kaynakları okunmuş gibi sunulmaz.
 
@@ -47,7 +53,6 @@ Her satırın tek operasyonel sahibi WORK MASTER'dır. Uzmanlar gerçek görev a
 | News/EN | Guard hook/kuyruk ve doğal işlem kanıtı; pasif ajanın son hedefle ilişkisi | Canlı ayar/cron/API değişmedi |
 | Reels | Mevcut tam metin, ses ve storyboard paketini bul | Render/merge/yayın kilitli |
 | Etsy | Job kimlikleri ile temiz hata/kaynak dökümlerini eşleştir | OAuth refresh/retry yok |
-| Radyo sayfaları | Mevcut onaylı stream/oynatıcı tanımını bul | Yeni yayın/altyapı yok |
 | Tumblr | Gerçek post ID/URL ile üretim ve birleşik 3/gün kaydını eşleştir | Mevcut motor korunur |
 | Pinterest | 14 CSV satırını gerçek Pin/planlı kayıtla eşleştir | Tekrar yükleme yok |
 | Eylül haberleri | Mevcut4817/4818 üzerinde QA ve son geçerli yayın yetkisi | Mükerrer yazı yok |
