@@ -1,3 +1,5 @@
+**Düzeltme — 24.10.2026 | 05:13 TSİ (UTC+3):** Etsy Distribution ekranı yalnız görüntülenirken koşullu DB satırı yaratabilir/durum güncelleyebilir. Önce/sonra DB dökümü olmadığından önceki panel açılışında kayıt değişmediği kesin söylenemez. Açık kaydetme/render/retry komutu verilmedi; ekran tekrar açılmadı. Bu açıklama önceki salt okunur/değişiklik yok güvencelerinin yerine geçer. Yeni kaynak kapsamı ve teknik bulgular [part-003.md](part-003.md) ve [part-004.md](part-004.md) içindedir.
+
 # Sistem haritası ve görev devri
 **24.10.2026 | 04:26 TSİ (UTC+3)**  
 **Operasyon sahibi:** WORK MASTER  
