@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-24T00:54:44.042Z",
+  "updated_at": "2026-10-24T01:15:46Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -189,18 +189,31 @@
     {
       "id": "work-master-system-takeover-20261024",
       "title": "WORK MASTER — ekosistem geçmişi, mevcut sistem ve sorumluluk devri",
-      "status": "checkpointed",
+      "status": "in_progress",
       "completed_units": [
         "accessible-history-and-partial-master3-review",
         "legacy-master-status-work1-handoffs-read",
         "live-wordpress-inventory-and-news-guard-read",
         "github-publication-gates-independent-audit",
         "responsibility-and-evidence-matrix",
-        "first-dossier-saved-and-independently-reviewed"
+        "first-dossier-saved-and-independently-reviewed",
+        "watchdog-handoff-or-devir-20261024-0352-full-read",
+        "separate-instructions-read",
+        "live-active-version-and-queue-reconciliation",
+        "paused-en-draft-agent-and-last-run-found",
+        "all-nine-tr-news-polylang-maps-read",
+        "september-both-drafts-and-pair-verified",
+        "latest-watchdog-log-and-production-gates-read",
+        "management-ownership-acknowledged"
       ],
-      "last_checkpoint": "2026-10-23T21:55:57Z",
-      "next_step": "Önce eksik eski konuşma kapsamını ve güncel kaynakları salt okunur uzlaştır; gerçek Codex/Work/ayrı WATCHDOG görev alma teyitlerini ayır. Jingle #27 pilot kaydı doğrulaması Mete tarafından ertelendi. Pilot kabul edilmeden diğer üretim otomasyonlarını değiştirme; dispatch/retry/render/yayın başlatma.",
-      "note": "24.10.2026 TSİ: yönetim sorumluluğu bu Work oturumunda. Eski sohbetlerin tamamı eksiksiz okunmadı; tarayıcı eski mesajlarda zaman aşımı yaşadı. WP canlı: CC1.0.9/Social1.7.5/Bridge2.3.7-YT8-SAFE2/Distribution1.2.1/Integrity0.2.1. News ve Guard panelleri son kayıt22Eylül; güncel yürütüm ve kök neden doğrulanmadı. Bağımsız destek bu oturum içinde çalıştı, önceki ayrı WORK WATCHDOG'a mesaj/okuma teyidi yok. Mevcut görev durumları/sonraki adımları değişmedi. Üretim kodu, ayar, credential, scheduler, yayın ve maliyet değişikliği yok."
+      "last_checkpoint": "2026-10-24T01:15:46Z",
+      "next_step": "Bu tur ikinci inceleme paketinde frontend/TR-EN, mevcut zamanlı görev sonuçları ve sorun→sonraki adım matrisini tamamla; ilk uygulanabilir onarım için kanıt/yetki/sorumlu sınırını kaydet. Jingle pilot teyidi erteli; üretim veya canlı değişiklik başlatma.",
+      "note": "24.10.2026 | 04:15 TSİ: WATCHDOG OR-DEVIR-20261024-0352 tam okundu; yönetim sorumluluğu WORK MASTER tarafından alındı. Güncel dar #34 testi PASS; bu yeni işlerin bağımsız devir kabulü değil. EN Draft Agent pasif ve 24 Eylül son sonucu erişim eksikliği; bu Work liste/tam kaynak okumayı başardı. WP News/Guard eski22Eylül; Etsy10ERROR+3READY, META_FINAL0; Eylül4817/4818 ikisiDRAFT ve pairingdoğru. Güncel audit40047688997 bulgu0/kontrol_dışı15. Üretim/ayar/token/yayın/zamanlayıcı/maliyet değişmedi. Ayrı uzman veya yeni WATCHDOG görev alma teyidi yok.",
+      "owner": "WORK MASTER",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-001.md"
+      ],
+      "control_time": "24.10.2026 bu çalışma turunda ikinci paket bitince; arka plan takip görevi kurulmadı."
     },
     {
       "id": "v3-management-installation-20261024",
