@@ -53,3 +53,34 @@ MASTER sorumluluğu sürdürür. WATCHDOG mevcut dar yaklaşımı incelemiş, 24
 - [Önceki ayrıntılı inceleme](https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-007.md)
 - [Watchdog'un kaynak, günlük limit ve geri dönüş şartları](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6386220827)
 - [MASTER'ın doğrudan okuma ve yanıt teyidi](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6386261483)
+
+
+## Erişim sorununun somut açıklaması ve yerel devam talimatı — 25.10.2026 | 00:26 TSİ (UTC+3)
+
+**GERÇEKLEŞEN:** Bu tur mevcut araçlar, bağlı Chrome sekmeleri, erişilebilir GitHub main ağacı ve resmî OpenAI belgeleri kontrol edildi. Chrome bağlıdır; sekmelerde yerel Codex uygulayıcı arayüzü yoktur. Araçlarda Windows'taki yerel Desktop Commander MCP'si görünmüyor. Görünen Remote Desktop Commander farklı bağlantıdır; önceki kota/yasak nedeniyle yeniden çağrılmadı. GitHub main ağacında yerel komut köprüsü yok; incelenen Reels ve Watchdog iş akışları `ubuntu-latest` kullanıyor. Bu iki kaynak Windows yerel ajanı değildir. Eklenti araması kullanılabilir yeni bir yerel Codex komut bağlantısı sağlamadı.
+
+**Kesin sınır:** Bu Work'ün kabuğu uzak çalışma ortamıdır; Windows bilgisayarın kabuğu değildir. Yerel Commander'ın Codex'e kurulması o araçları bu sohbete eklememiştir. Ana kopukluk, bu oturumdan Windows yerel yürütücüsüne erişim olmamasıdır. Yerel Codex'in proje dizinine ilişkin önceki erişim reddi ikinci, ayrı bir kısıttır; bu tur ACL veya dizin ayarı yeniden okunmadığından bugünkü durumu diye sunulmuyor. Bir izin penceresinin reddettiği yeni bir yama girişimi olmadı: uygulama o aşamaya ulaşamadı.
+
+**Neden sonuçlanmadı:** MASTER güncel kodu ve hata kaydını alamadı; yerel uygulayıcıya teslim/başlama teyidi sağlayamadı. Bu engeli tek uygulanabilir başlangıç adımına indirgemeden inceleme ve planı tekrarladı. Tumblr yaması uygulanmadı. Jingle incelemesi tamamlandı fakat üretim sistemi onarılmadı; analiz görevinin DONE olması sistemin çalıştığı anlamına gelmiyor. Son kullanıcı mesajı Jingle onarım beklentisini yeniden açık ediyor; mevcut ana Jingle işi de bu kapsamda açık tutulur.
+
+### Kullanıcının yapabileceği gerekli oturum başlangıcı
+Windows'ta ChatGPT masaüstü uygulamasında, mevcut onaylı OLDIES yerel proje/klasör bağlamında yeni bir **Local Work** görevi başlatılmalı. Mevcut Codex yerel oturumu da kaynaklara hâlihazırdaki izinlerle erişebiliyorsa aşağıdaki talimatı yürütebilir. Mevcut masaüstü kurulumunun ve hesapta Local seçeneğinin bu tur görünürlüğü doğrulanamadı; özellik varmış gibi gösterilmiyor. İlgili kaynak izinli değilse bu talimat izin genişletmez.
+
+Bu adım uygulamayı Windows kaynaklarına erişebilen oturuma taşır; bu bulut sohbetinin kendiliğinden Windows'a bağlanacağı veya aynı sohbetin yerel moda dönüşeceği söylenmiyor. Kullanıcının tekrar tekrar rapor/dosya taşıması kalıcı koordinasyon yöntemi olmayacak. Yerel uygulayıcı mevcut GitHub bağlantısı varsa sonuçları aynı ortak kayda doğrudan yazmalı; bağlantı yoksa bunu ayrıca açık bildirmeli.
+
+### Yerel Work / mevcut Codex için başlangıç talimatı
+**Düzenleme:** 25.10.2026 | 00:26 TSİ (UTC+3). **Sorumlu:** WORK MASTER; teknik uygulayıcı, yalnız görevi gerçekten alan ve erişimi doğrulanan yerel oturum. **Denetçi:** mevcut bağımsız WORK WATCHDOG.
+
+1. Önce onaylı V3.0 ve mevcut `control-center/work-state.json` kayıtlarını, bu planı ve part-007'yi oku. Görev alma kaydında yerel oturum/iş kimliğini, gerçek çalışma dizinini ve erişim sınırını belirt. Erişilemeyen klasörü erişilmiş sayma.
+2. Tumblr için mevcut launcher, iki betik, ledger ve 23 Ekim 02:28 koşusunun özgün stack trace'ini birlikte incele. Daha yeni yerel hata varsa onu esas al. 22 Ekim yedeği/düzeltmesini koru; yalnız kanıtlanan kusur için geri alınabilir dar yama hazırla. Önceki uygulanmış onarımı yeniden yapma.
+3. Yayınsız testlerde postID/permalink uzlaştırması, belirsiz yayın cevabı, eşzamanlılık ve İstanbul günü birleşik 3 sınırını doğrula. Kod/config yedeğini al; ledger'ı kör geri döndürme. Mevcut taslakları topluca yayımlama.
+4. Jingle için son gerçekten çalışan DJ'li MASTER sürümünü ve mevcut 19 Ekim track→MP3→Factory dosya ilişkisini oku. Dosyanın yokluğunu varsayma. STATE_WRITE_BLOCKED, API 6/7 ve Factory çağrı zincirindeki önceki yamaların hangisinin gerçekten kurulu olduğunu belirle; yalnız ilk eksik aşama için kaynak temelli dar onarım hazırla. Mevcut MP3/WAV ve işlem kilitlerini koru.
+5. Mevcut Tumblr onarım yetkisi, Jingle çözüm isteği ve önceki korunacak sınırlar uygulanır. Yeni müzik submit'i, ücret, kimlik bilgisi/izin genişletme, terminal engeli dolanma, kör retry/dispatch, PR26 merge veya zamanlayıcı açma yok. Önceki pilot ertelemesi yeni kaynak veya üretim yetkisi uydurularak aşılmaz.
+6. Gerçek dosya yolları/hashler, dar diff, çalıştırılmış testler ve ilk açık engeli ortak kayda yaz. WATCHDOG incelemesine uygulanabilir değişikliği sun. Önce yayımlamayan doğrulama; gerçek çıktı ve izleyen zamanlı çalışma ayrı kabul edilir. Uygulayıcı teyidi gelmeden görev başladı veya onarım yapıldı denmez.
+
+**Sonraki kontrol:** Yerel oturum görev alma/ilk kaynak okuma sonucunu verdiğinde, herhangi bir canlı değişiklikten önce. Bu tur otomatik izleme veya arka planda yerel görev başlatılmadı.
+
+### Resmî dayanak
+[OpenAI Docs — Get started with ChatGPT Work](https://learn.chatgpt.com/docs/get-started-with-work): masaüstünde yerel Work, bilgisayardaki kaynaklar için kullanılır; Cloud/yerel erişim ayrıdır.  
+[OpenAI Docs — Projects and chats](https://learn.chatgpt.com/docs/projects): bulut proje kaynakları ile yerel klasör erişimi ayrı; yerel proje dosya bağlamı sağlar.  
+[OpenAI Docs — Remote connections](https://learn.chatgpt.com/docs/remote-connections): yerel erişimle bulut eşitlemesi yalnız uygun, etkinleştirme sonrası yeni görevlerde geçerlidir. Bu hesabın uygunluğu ve masaüstü ayarı henüz kontrol edilmedi.
