@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-24T01:15:46Z",
+  "updated_at": "2026-10-24T01:26:57Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -189,7 +189,7 @@
     {
       "id": "work-master-system-takeover-20261024",
       "title": "WORK MASTER — ekosistem geçmişi, mevcut sistem ve sorumluluk devri",
-      "status": "in_progress",
+      "status": "checkpointed",
       "completed_units": [
         "accessible-history-and-partial-master3-review",
         "legacy-master-status-work1-handoffs-read",
@@ -204,16 +204,32 @@
         "all-nine-tr-news-polylang-maps-read",
         "september-both-drafts-and-pair-verified",
         "latest-watchdog-log-and-production-gates-read",
-        "management-ownership-acknowledged"
+        "management-ownership-acknowledged",
+        "all-eight-en-news-publication-statuses-read",
+        "en-agent-last-recorded-result-and-recovery-orpin-results-read",
+        "tr-en-home-and-listen-page-observed",
+        "france-origin-image-versus-browser-cdn-trust-separated",
+        "existing-backup-status-read",
+        "twenty-workstream-owner-next-step-register",
+        "source-bound-system-map-and-detailed-report-saved"
       ],
-      "last_checkpoint": "2026-10-24T01:15:46Z",
-      "next_step": "Bu tur ikinci inceleme paketinde frontend/TR-EN, mevcut zamanlı görev sonuçları ve sorun→sonraki adım matrisini tamamla; ilk uygulanabilir onarım için kanıt/yetki/sorumlu sınırını kaydet. Jingle pilot teyidi erteli; üretim veya canlı değişiklik başlatma.",
-      "note": "24.10.2026 | 04:15 TSİ: WATCHDOG OR-DEVIR-20261024-0352 tam okundu; yönetim sorumluluğu WORK MASTER tarafından alındı. Güncel dar #34 testi PASS; bu yeni işlerin bağımsız devir kabulü değil. EN Draft Agent pasif ve 24 Eylül son sonucu erişim eksikliği; bu Work liste/tam kaynak okumayı başardı. WP News/Guard eski22Eylül; Etsy10ERROR+3READY, META_FINAL0; Eylül4817/4818 ikisiDRAFT ve pairingdoğru. Güncel audit40047688997 bulgu0/kontrol_dışı15. Üretim/ayar/token/yayın/zamanlayıcı/maliyet değişmedi. Ayrı uzman veya yeni WATCHDOG görev alma teyidi yok.",
+      "last_checkpoint": "2026-10-24T01:26:57Z",
+      "next_step": "İlk eksik onarım öncesi kanıt: News/EN için Guard hook/kuyruk ve son doğal işlem kaydını mevcut güvenli kaynaktan bul; pasif EN Draft Agent'ın ayrı yürütme erişimini ve 28 Eylül son kullanıcı hedefiyle ilişkisini doğrula. Bu inceleme canlı onarım yetkisi değildir; Jingle pilot teyidi erteli, render/dispatch/retry/yayın yok. Diğer işler part-002 kartlarındaki ilk eksik adımdan devam eder.",
+      "note": "24.10.2026 | 04:26 TSİ: WATCHDOG devir raporu tam okundu ve yönetim sorumluluğu alındı. WP/GitHub/zamanlı görevler karşılaştırıldı. EN Draft Agent pasif; eski son sonuç okuma erişimi eksikliği. Bu Work list/tam kaynak okumasını başardı. News/Guard son scan22Eylül. Haber9TR/8yayınEN,TR4261eşsiz ilişki; Eylül4817/4818DRAFT,pairingdoğru. Reels16=11review+5Edits,IGfinalIDyok; Etsy10ERROR+3READY,META_FINALyok. TR/ENdinleme sayfasında görünür oynatıcı yok; yayın sunucusu durumu test edilmedi. Fransa origin sağlam, bu tarayıcı CDN sertifika güven hatası. Üretim/ayar/token/yayın/zamanlayıcı/maliyet değişmedi. Bağımsız yeni WD kabulü yok; otomatik Work uyanması kanıtsız.",
       "owner": "WORK MASTER",
       "evidence_urls": [
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-001.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-001.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-002.md"
       ],
-      "control_time": "24.10.2026 bu çalışma turunda ikinci paket bitince; arka plan takip görevi kurulmadı."
+      "control_time": "Bu tur kayıt geri okuması; sonraki yetkili iş oturumu başlangıcında sürüm/kanıt/yetki kontrolü ve yürütüm zamanı yazılır. Arka plan görev kurulmadı.",
+      "acceptance": {
+        "management_ownership": "acknowledged_by_work_master",
+        "watchdog_handoff_full_read": "verified",
+        "live_inventory_and_next_steps": "checkpointed",
+        "new_independent_watchdog_acceptance": "pending",
+        "production_repair": "not_started",
+        "jingle_pilot_verification": "deferred_by_founder"
+      }
     },
     {
       "id": "v3-management-installation-20261024",
