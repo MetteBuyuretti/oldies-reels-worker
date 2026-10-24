@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-24T01:55:02Z",
+  "updated_at": "2026-10-24T02:08:31Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -211,15 +211,19 @@
         "france-origin-image-versus-browser-cdn-trust-separated",
         "existing-backup-status-read",
         "twenty-workstream-owner-next-step-register",
-        "source-bound-system-map-and-detailed-report-saved"
+        "source-bound-system-map-and-detailed-report-saved",
+        "fourteen-existing-archives-static-source-extraction",
+        "news-etsy-oauth-integrity-trigger-and-write-path-review",
+        "conditional-etsy-view-write-correction-recorded"
       ],
-      "last_checkpoint": "2026-10-24T01:55:02Z",
-      "next_step": "İlk eksik onarım öncesi kanıt: News/EN için Guard hook/kuyruk ve son doğal işlem kaydını mevcut güvenli kaynaktan bul; pasif EN Draft Agent'ın ayrı yürütme erişimini ve 28 Eylül son kullanıcı hedefiyle ilişkisini doğrula. Bu inceleme canlı onarım yetkisi değildir; Jingle pilot teyidi erteli, render/dispatch/retry/yayın yok. Diğer işler part-002 kartlarındaki ilk eksik adımdan devam eder.",
-      "note": "24.10.2026 | 04:26 TSİ: WATCHDOG devir raporu tam okundu ve yönetim sorumluluğu alındı. WP/GitHub/zamanlı görevler karşılaştırıldı. EN Draft Agent pasif; eski son sonuç okuma erişimi eksikliği. Bu Work list/tam kaynak okumasını başardı. News/Guard son scan22Eylül. Haber9TR/8yayınEN,TR4261eşsiz ilişki; Eylül4817/4818DRAFT,pairingdoğru. Reels16=11review+5Edits,IGfinalIDyok; Etsy10ERROR+3READY,META_FINALyok. TR/ENdinleme sayfasında görünür oynatıcı yok; yayın sunucusu durumu test edilmedi. Fransa origin sağlam, bu tarayıcı CDN sertifika güven hatası. Üretim/ayar/token/yayın/zamanlayıcı/maliyet değişmedi. Bağımsız yeni WD kabulü yok; otomatik Work uyanması kanıtsız.\n24.10.2026 | 04:55 TSİ: Kurucu Canlı Dinle/oynatıcı işinin kendisinde ve henüz başlatılmamış olduğunu açıkladı. Bu konu MASTER arıza/onarım kuyruğundan çıkarıldı. WordPress inceleme kapsamı: 61 eklenti envanteri ve ana otomasyon panelleri; bütün kaynak kodu/cron/hook/bağımlılık ve gerçek E2E incelemesi tamamlanmış değildir.",
+      "last_checkpoint": "2026-10-24T02:08:31Z",
+      "next_step": "Kaynak incelemesi bölüm2: kalan özel eklenti sorumluluk ve tetikleyici kartları, standart10 eklenti bağımlılıkları. Ardından canlı hash/cron/Guard-TokenBridge kaynak boşluklarını açık kaydet; canlı onarım/üretim yok.",
+      "note": "24.10.2026 | 04:26 TSİ: WATCHDOG devir raporu tam okundu ve yönetim sorumluluğu alındı. WP/GitHub/zamanlı görevler karşılaştırıldı. EN Draft Agent pasif; eski son sonuç okuma erişimi eksikliği. Bu Work list/tam kaynak okumasını başardı. News/Guard son scan22Eylül. Haber9TR/8yayınEN,TR4261eşsiz ilişki; Eylül4817/4818DRAFT,pairingdoğru. Reels16=11review+5Edits,IGfinalIDyok; Etsy10ERROR+3READY,META_FINALyok. TR/ENdinleme sayfasında görünür oynatıcı yok; yayın sunucusu durumu test edilmedi. Fransa origin sağlam, bu tarayıcı CDN sertifika güven hatası. Üretim/ayar/token/yayın/zamanlayıcı/maliyet değişmedi. Bağımsız yeni WD kabulü yok; otomatik Work uyanması kanıtsız.\n24.10.2026 | 04:55 TSİ: Kurucu Canlı Dinle/oynatıcı işinin kendisinde ve henüz başlatılmamış olduğunu açıkladı. Bu konu MASTER arıza/onarım kuyruğundan çıkarıldı. WordPress inceleme kapsamı: 61 eklenti envanteri ve ana otomasyon panelleri; bütün kaynak kodu/cron/hook/bağımlılık ve gerçek E2E incelemesi tamamlanmış değildir.\n24.10.2026 | 05:08 TSİ: part-003 kaynak incelemesi kaydedildi. 14 arşiv:8 özel eklentide aynı sürüm etiketi,4 tarihsel,2 güncel kaynak yok; canlı hash eşitliği kanıtsız. News sessiz Throwable/cron kurulum sınırı, Etsy TokenExpired ön kontrolü ve NewsPublisher–Integrity yayın sırası uyumsuzluğu kaynakta bulundu; canlı neden henüz kanıtlanmadı. DÜZELTME: Önceki Distribution ekranı koşullu DB satırı yaratabilir/güncelleyebilir; açık komut verilmemiş olsa da önce/sonra DB olmadan WordPress kaydı değişmedi denemez. Ekran yeniden açılmadı.",
       "owner": "WORK MASTER",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-001.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-002.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-002.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-003.md"
       ],
       "control_time": "Bu tur kayıt geri okuması; sonraki yetkili iş oturumu başlangıcında sürüm/kanıt/yetki kontrolü ve yürütüm zamanı yazılır. Arka plan görev kurulmadı.",
       "acceptance": {
@@ -241,7 +245,8 @@
       "scope": {
         "all_plugins_inventory": "reviewed_61_total_24_active_37_inactive",
         "key_automation_panels": "reviewed",
-        "all_plugin_source_and_runtime": "not_complete"
+        "all_plugin_source_and_runtime": "not_complete",
+        "source_archives": "8_same_version_label_4_historical_2_custom_sources_missing_no_live_hash_match"
       }
     },
     {
