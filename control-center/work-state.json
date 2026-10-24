@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-24T00:52:02.747Z",
+  "updated_at": "2026-10-24T00:54:44.042Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -205,7 +205,7 @@
     {
       "id": "v3-management-installation-20261024",
       "title": "V3.0 yönetim kurulumu — proje kaynağı, ayrı WORK WATCHDOG ve iletişim kabulü",
-      "status": "in_progress",
+      "status": "checkpointed",
       "owner": "WORK MASTER",
       "completed_units": [
         "approved-v3-full-source-read-in-resumed-session",
@@ -213,16 +213,31 @@
         "project-source-txt-and-docx-text-compared",
         "project-source-filename-reference-corrected-and-save-reopened",
         "prior-support-agent-roundtrip-read-without-repeating",
-        "separate-work-watchdog-created-and-start-observed"
+        "separate-work-watchdog-created-and-start-observed",
+        "separate-work-watchdog-source-and-github-readback",
+        "watchdog-independent-response-read-directly",
+        "master-wd-code-confirmation-written",
+        "separate-work-two-way-record-test-pass"
       ],
-      "last_checkpoint": "2026-10-24T00:52:02.747Z",
-      "next_step": "Ayrı WORK WATCHDOG 6adc00f5-f0c8-83eb-836c-9e7acbec2335 oturumunun #34 yanıtını doğrudan GitHub'dan oku; kendi WD kodunu MASTER teyidiyle kapat. Otomatik issue→Work tetiklemeyi bu kontrollü arayüz devrinden ayrı tut. Jingle pilot teyidi ertelenmiş kalır.",
-      "note": "24.10.2026 | 03:52 TSİ (UTC+3) — V3.0 belge ve proje yönlendirmesi aynı sürümde; gerçek Kaynaklar dosyası OLDIES-RADYO-ANA-KUMANDA-ANAYASASI-V3.0-KURUCU-ONAYLI.txt. 03:48 TSİ kısa yönlendirme düzeltmesi kaydedilip tekrar açılarak okundu. Ayrı Work WATCHDOG aynı proje içinde 03:51 civarı başlatıldı; ChatGPT ile çalış kutusu ve GitHub aracı kullanımı gözlendi. Bu, eski destek alt ajanı değildir. Yeni kabul çağrısı #34 comment6377762125. Karşılıklı kabul ve otomatik tetikleme henüz PASS değil. Üretim, pilot, kod, zamanlayıcı, yayın, erişim anahtarı ve maliyet değişikliği yok.",
+      "last_checkpoint": "2026-10-24T00:54:44.042Z",
+      "next_step": "Belge/proje yönlendirmesi geçişi ve ayrı Work ortak kayıt kabulü tamamlandı. İlk eksik yetenek: issue olayıyla otomatik Work uyanması ve sürekliliğin ayrı doğrulanması; mevcut kayıtlarda otomatik issue köprüsü kanıtı yok. Yeni otomasyon/servis kurmadan önce mevcut yetkili olanakları ve görev kapsamını doğrula. Jingle pilot teyidinin ertelenmesi sürer; üretim başlatma.",
+      "note": "24.10.2026 | 03:54 TSİ (UTC+3) — V3.0 kurucu onaylı kaynak ve kalıcı yönlendirme doğrulandı; kaynak adı TXT/DOCX ayrımı düzeltildi. Bağımsız WORK WATCHDOG 6adc00f5-f0c8-83eb-836c-9e7acbec2335 kendi kaynağını/hashini ve MASTER kodunu doğrudan okudu; #34 comment6377784361 yanıtını MASTER doğrudan okuyarak comment6377801615 ile teyit etti. Ortak kayıt karşılıklı test PASS; önceki destek alt ajanı testi tekrar edilmedi. Otomatik olaydan uyanma ve genel üretim/süreklilik PASS değil. Kullanıcı mesaj taşımadı. Yalnız yönlendirme ve yönetim kayıtları güncellendi; üretim kodu, yayın, zamanlayıcı, kimlik bilgisi, yeni maliyet değişikliği yok.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/34#issuecomment-6377762125",
-        "https://chatgpt.com/g/g-p-6ac054936cd481918f4f9c4a6d6f9358-oldies-radyo-ekosistemi-ana-kumanda/c/6adc00f5-f0c8-83eb-836c-9e7acbec2335"
+        "https://chatgpt.com/g/g-p-6ac054936cd481918f4f9c4a6d6f9358-oldies-radyo-ekosistemi-ana-kumanda/c/6adc00f5-f0c8-83eb-836c-9e7acbec2335",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/34#issuecomment-6377784361",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/34#issuecomment-6377801615"
       ],
-      "control_time": "Bu kurulum turunda WD yanıtı oluştuğunda; sürekli arka plan izleme yok."
+      "control_time": "Bu tur nihai checkpoint geri okunacak; otomatik izleme kurulmadı. Sonraki yetkili iş oturumu #34 ve bu checkpoint'ten ilk eksik yetenekle devam eder.",
+      "acceptance": {
+        "approved_source_and_project_guidance": "verified",
+        "separate_work_watchdog_delivery": "verified",
+        "two_way_shared_record": "pass_scoped_single_test",
+        "event_driven_work_wakeup": "not_demonstrated",
+        "continuous_background_coordination": "not_demonstrated",
+        "general_production_acceptance": "out_of_scope",
+        "jingle_pilot_verification": "deferred_by_founder"
+      }
     }
   ]
 }
