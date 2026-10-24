@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-24T14:51:49.237Z",
+  "updated_at": "2026-10-24T15:52:19.863Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -298,23 +298,54 @@
       "id": "tumblr-pinterest-local-commander-followup-20261024",
       "title": "Tumblr/Pinterest süreklilik ve mevcut yerel Commander uygulama değerlendirmesi",
       "owner": "WORK MASTER",
-      "status": "checkpointed",
+      "status": "blocked",
       "completed_units": [
         "latest-accessible-codex-and-watchdog-history-reconciled",
         "pinterest-20261024-run-read",
         "rollout-gates-and-current-evidence-gaps-recorded",
         "direct-pinterest-nine-scheduled-ids-read",
         "direct-tumblr-23-posts-11-drafts-empty-queue-read",
-        "existing-orpin-browser-fallback-prompt-fixed-and-readback"
+        "existing-orpin-browser-fallback-prompt-fixed-and-readback",
+        "founder-tumblr-repair-order-recorded",
+        "separate-watchdog-contacted-and-independent-response-read",
+        "current-github-and-260-zip-source-check-completed"
       ],
-      "last_checkpoint": "2026-10-24T14:51:49.237Z",
-      "next_step": "Mevcut yerel Codex komut bağlantısı sağlanmalı; bu Work'te yerel MCP/oturum aracı yok, açık tarayıcıda Codex yok. Kaynaklauncher/reconciliationkoduna erişince yedekli dar onarım. Pinterest9planlıkimlik ile14CSVyerel eşlemesi ve sonraki doğal browserfallback koşusu doğrulanacak. Taslakları kontrolsüz sıraya alma ve CSV tekrar yükleme yok.",
-      "note": "24.10.2026 | 17:42 TSİ: part-005 değerlendirmesi kaydedildi. Yerel kurulum tarihsel teknikPASS/sınırlıgüvenlikPASS,operasyonelFAIL; Codex'in tüm özel oturumları tam okunmadı.5/5takipgörevilimiti nedeniyle yeni otomatik izleme kurulamadı. Tumblr23/11/0eski kesit; Pinterest24Ekim08:56sonuç14Pinteyityok. Kesin devreyealma günü kanıtsız.\n24.10.2026 | 17:50 TSİ: Kurucunun sonuçlandırma emri sonrası mevcut OR-PIN promptu browserfallback ile düzeltildi; takvim/enabledkorundu. CanlıPinterest9scheduleID+1gerçekPinID,Tumblr23/11/0doğrudanokundu. YerelCodexkomutkanalıyok;Windowskodonarımıyapılmadı. Kaynak11taslakotomatikyayınahazırsayılmadı.",
+      "last_checkpoint": "2026-10-24T15:52:19.863Z",
+      "next_step": "Uygulanabilir ilk adım: mevcut yetkili yerelCodex'te güncel launcher/betik/hash +23Ekim02:28aynırunstacktrace/reconciliationgirdisi. BuWork'te kaynak ve komut kanalı yok; gerçekuygulayıcıgörevalmateyidiyok. Kaynaksızbelirliyamaönerme,tekrarCIM/Remotequota/izin aşma yok.22Ekimdüzeltmesi,İstanbulbirleşik3limit,belirsizpostutekrarlamama,ledgerkörrollbackyasağıkorunur.",
+      "note": "24.10.2026 | 17:42 TSİ: part-005 değerlendirmesi kaydedildi. Yerel kurulum tarihsel teknikPASS/sınırlıgüvenlikPASS,operasyonelFAIL; Codex'in tüm özel oturumları tam okunmadı.5/5takipgörevilimiti nedeniyle yeni otomatik izleme kurulamadı. Tumblr23/11/0eski kesit; Pinterest24Ekim08:56sonuç14Pinteyityok. Kesin devreyealma günü kanıtsız.\n24.10.2026 | 17:50 TSİ: Kurucunun sonuçlandırma emri sonrası mevcut OR-PIN promptu browserfallback ile düzeltildi; takvim/enabledkorundu. CanlıPinterest9scheduleID+1gerçekPinID,Tumblr23/11/0doğrudanokundu. YerelCodexkomutkanalıyok;Windowskodonarımıyapılmadı. Kaynak11taslakotomatikyayınahazırsayılmadı.\n24.10.2026 | 18:50 TSİ: Kurucu Tumblr onarımını başlatma emri verdi. AyrıWATCHDOG18:44ALINDI/BAŞLANDI,18:46rapor6386220827doğrudanokundu; MASTER6386261483ilekoduteyitetti. Mevcutyerelbetik/ledger/stacktraceveCodexkomutbağlantısıyok; GitHubve260ZIPenvanterindeuygulanabilirkaynakbulunmadı. KodonarımıBLOCKED, yama/test/yayınyapılmadı; buincelemeonarımtamamlandıdeğildir.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-005.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-006.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-006.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6386220827",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-007.md"
       ],
-      "control_time": "Bu tur güncel kayıtlar tekrar okundu; sonraki aktif MASTER kontrolü yeni yerel kanıt paketinden devam eder. Yeni arka plan takibi kurulmadı."
+      "control_time": "Bu tur güncel kayıtlar tekrar okundu; sonraki aktif MASTER kontrolü yeni yerel kanıt paketinden devam eder. Yeni arka plan takibi kurulmadı.",
+      "acceptance": {
+        "watchdog_scoped_review": "received_findings_open",
+        "code_patch": "not_applied_access_blocked",
+        "targeted_tests": "not_run",
+        "production_and_continuity": "not_accepted"
+      }
+    },
+    {
+      "id": "jingle-status-analysis-20261024",
+      "title": "Jingle Factory son durum ve sorun analizi — üretimsiz değerlendirme",
+      "owner": "WORK MASTER",
+      "status": "done",
+      "completed_units": [
+        "issue27-latest-records-read",
+        "pr26-current-state-read-open-draft-unmerged",
+        "historical-production-download-factory-observation-separated",
+        "independent-watchdog-comparison-received",
+        "source-bound-assessment-and-recovery-order-saved"
+      ],
+      "last_checkpoint": "2026-10-24T15:52:19.863Z",
+      "next_step": "Bu analiz teslim edildi; Jingle üretim onarımı yapılmadı. Erteli pilot teyidi ayrı kalır. Son kabul edilmiş otomatik DJMASTERrun/sürümü ve mevcut19Ekimtrack/MP3/Factoryprovenansını mevcutyetkiligüvenlikaynağındaneşleme gelecektekiilkkanıttır; yeniüretim/submit/indirme/miks/schedulerbaşlatma.",
+      "note": "24.10.2026 | 18:50 TSİ: part-007'deanaliztamam. #27son23Ekim06:11notu,10–19EkimgerçekkayıtlarvePR26head9775f791OPEN/DRAFTmerged=falsebugünokundu. Üretici/indirme/Factorydurum-QC/orkestrasyongözlemayrı; tarihselkusurlarbugünküfizikseldosyakanıtısayılmadı. YalnızanalizDONE, üretimvegenelsistemPASSdeğil.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-007.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6386220827"
+      ]
     }
   ]
 }
