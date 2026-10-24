@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-24T14:44:38.918Z",
+  "updated_at": "2026-10-24T14:51:49.237Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -302,13 +302,17 @@
       "completed_units": [
         "latest-accessible-codex-and-watchdog-history-reconciled",
         "pinterest-20261024-run-read",
-        "rollout-gates-and-current-evidence-gaps-recorded"
+        "rollout-gates-and-current-evidence-gaps-recorded",
+        "direct-pinterest-nine-scheduled-ids-read",
+        "direct-tumblr-23-posts-11-drafts-empty-queue-read",
+        "existing-orpin-browser-fallback-prompt-fixed-and-readback"
       ],
-      "last_checkpoint": "2026-10-24T14:44:38.918Z",
-      "next_step": "Mevcut yetkili yerel Codex'in güncel izinli kanıt paketini ortak kayıtta doğrula: fiili araç/config ve test kaynakları; Tumblr son doğal run/ledger/tekilpostID; Pinterest14CSV satırının gerçek planlama/yayın kimlikleri. Yerel bağlantı bu Work'te doğrulanmadı; görev alma/başlama kanıtsız. Yeniden kurulum/izin aşma/Remote kota denemesi/üretim yok.",
-      "note": "24.10.2026 | 17:42 TSİ: part-005 değerlendirmesi kaydedildi. Yerel kurulum tarihsel teknikPASS/sınırlıgüvenlikPASS,operasyonelFAIL; Codex'in tüm özel oturumları tam okunmadı.5/5takipgörevilimiti nedeniyle yeni otomatik izleme kurulamadı. Tumblr23/11/0eski kesit; Pinterest24Ekim08:56sonuç14Pinteyityok. Kesin devreyealma günü kanıtsız.",
+      "last_checkpoint": "2026-10-24T14:51:49.237Z",
+      "next_step": "Mevcut yerel Codex komut bağlantısı sağlanmalı; bu Work'te yerel MCP/oturum aracı yok, açık tarayıcıda Codex yok. Kaynaklauncher/reconciliationkoduna erişince yedekli dar onarım. Pinterest9planlıkimlik ile14CSVyerel eşlemesi ve sonraki doğal browserfallback koşusu doğrulanacak. Taslakları kontrolsüz sıraya alma ve CSV tekrar yükleme yok.",
+      "note": "24.10.2026 | 17:42 TSİ: part-005 değerlendirmesi kaydedildi. Yerel kurulum tarihsel teknikPASS/sınırlıgüvenlikPASS,operasyonelFAIL; Codex'in tüm özel oturumları tam okunmadı.5/5takipgörevilimiti nedeniyle yeni otomatik izleme kurulamadı. Tumblr23/11/0eski kesit; Pinterest24Ekim08:56sonuç14Pinteyityok. Kesin devreyealma günü kanıtsız.\n24.10.2026 | 17:50 TSİ: Kurucunun sonuçlandırma emri sonrası mevcut OR-PIN promptu browserfallback ile düzeltildi; takvim/enabledkorundu. CanlıPinterest9scheduleID+1gerçekPinID,Tumblr23/11/0doğrudanokundu. YerelCodexkomutkanalıyok;Windowskodonarımıyapılmadı. Kaynak11taslakotomatikyayınahazırsayılmadı.",
       "evidence_urls": [
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-005.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-005.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-006.md"
       ],
       "control_time": "Bu tur güncel kayıtlar tekrar okundu; sonraki aktif MASTER kontrolü yeni yerel kanıt paketinden devam eder. Yeni arka plan takibi kurulmadı."
     }
