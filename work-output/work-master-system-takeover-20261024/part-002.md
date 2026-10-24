@@ -1,53 +1,67 @@
-# Sistem haritası ve görev devri kapanış kaydı
-**24.10.2026 04:26 TSİ (UTC+3)**  
-**Operasyon sahibi:** WORK MASTER. **Kayıt:** WM-DEVIR-20261024-0415.  
-Bu kimlik bu çalışma için üretilmiştir; platform sohbet ID'si değildir.
+# Sistem haritası ve görev devri
+**24.10.2026 | 04:26 TSİ (UTC+3)**  
+**Operasyon sahibi:** WORK MASTER  
+**Kayıt:** WM-DEVIR-20261024-0415; bu çalışma için üretilen kimlik, platform sohbet ID'si değildir.
 
 ## GERÇEKLEŞEN
-- WATCHDOG OR-DEVIR-20261024-0352 devir raporunun tamamı, V3.0 tam anayasa, ayrı iş talimatları ve eski MASTER envanteri okundu. Mevcut işlerin yönetim sorumluluğu alındı.
-- WordPress/GitHub/ChatGPT zamanlı görevleri karşılaştırıldı. Tamamlanmış #34 dar kayıt testi tekrar edilmedi. Otomatik Work uyandırma hâlâ kanıtlanmadı.
-- Canlı WP: 61 eklenti/24 aktif/37 pasif; tema7.3.7.1, CC1.0.9, Social1.7.5, ReelsBridge2.3.7-YT8-SAFE2, Distribution1.2.1, Guard1.0.4, Integrity0.2.1.
-- News: monitoringON/autoPublishOFF;173aday,0VERIFIED,sonscan22Eylül. Guardsonscan/error22Eylül ve success[]. Güncel cron/hook nedeni çözülmedi.
-- Ücretsiz EN Draft Agent PASİF. Son24Eylül kayıtlı sonuç kaynak listeleme/tam okuma erişimi eksikliği nedeniyle hiçbir işleme girilmediğini bildiriyor. Bu WORK oturumu listeleme ve tam kaynak okumayı başardı; zamanlı görevin ayrı yürütme erişimi varsayılmadı. Eski DRAFT ajanı ile28Eylül son EN otomatik yayın hedefi/Guard sorumluluğu uzlaştırılmalı; gelişigüzel yeniden etkinleştirme yok.
-- İki TR haber kategorisindeki9yayın tek tek eşleme kontrolü:8EN karşılık yayımlanmış;TR4261'de EN ilişkisi yok. Ayrı eşsiz EN içerik bulunabileceği için çeviri öncesi mükerrerlik taraması gerekir.
-- Eylül4817/4818:ikisiDRAFT,karşılıklıPolylangdoğru,kapak4823. Kaynak/içerik/SEO/görsel finali ayrı bekler.
-- Reels16kayıt=11DRAFT_REVIEW+5READY_FOR_EDITS. Bu sorguda hiçbirindeIGfinalID yok. Doorsyoutube_success=true ama verified_source=false; gerçek final yayın kabulü değil.
-- Etsy10ERROR+3READY_FOR_REVIEW;16dağıtımkaydı ve13ürün işi farklı. TokenExpired/WorkerREADY;0META_FINAL.48hdiscoveryENABLED;panel nextscan2026-10-24 23:59:09(saat dilimi bu alanda teyitsiz, dönüştürülmedi). Seçilmiş hata/kaynak kopyaları ve eskiID4–6 çözülmedi.
-- TRveENana sayfa ve dinleme sayfaları açıldı. Dinleme sayfalarının görünen içeriğinde oynatıcı yok;ENaudio/videoDOMyok. Yayın sunucusunun kapalı olduğu sonucu çıkarılmadı.
-- Fransa kapak origin dosyası sağlam1672×941; kartCDNURL'si bu tarayıcıda sertifika güven hatası verdi. Koruma aşılmadı; küreselCDNarıza iddiası yok.
-- Integritysonscan24Ekim04:02TSİ:1177içerik/599incelemesorunu,%49.1kurala uyum;menüLOCKED/HEALTHY.13görsel/13kategori/59dileşieksik. Yeniden kurulum yok.
-- Yedeksondeneme finished/failed=false/in_progress=false.
-- SonGitHubaudit40047688997(03:59TSİ):14test,3işaretlenmeyen,0bulgu,15kontroldışı;teslim kapsam dışı. mainprotected:false görüldü;güvenlikkilitleri değişmedi. PR26/33OPEN/DRAFT.
-- #31son21Ekimkararı:ÖNCE TAMhikâye/TAMses/storyboard,SONRA hedefliMP4. Eski8–12snörnek tek başına yeterli sayılmaz.
-- OR-PIN23Ekim08:18sonsonucu odenemedeoffline nedeniyle14Pin doğrulanamadı der;cihazın şimdi offline olduğu çıkarılmadı.CSVtekraryüklenmedi.
-- OtomatikDenetim/Kurtarma enabled;eskiprompt1retry ifadesi güncelkarantina ile uzlaştırılmalı;23Ekimsonsonuçretry0vekilitkoruma bildiriyor.
+WATCHDOG'un OR-DEVIR-20261024-0352 raporunun tamamı, V3.0 anayasa metni, ayrı iş talimatları ve önceki MASTER envanteri okundu. Mevcut işlerin yönetim sorumluluğu alındı. WordPress, GitHub ve ChatGPT zamanlı görevleri karşılaştırıldı. Ayrı operatörlerin yeni görev aldığı varsayılmadı.
+
+| Alan | Bu turda doğrulanan durum |
+| --- | --- |
+| WordPress | 61 eklenti: 24 aktif, 37 pasif. Tema 7.3.7.1; CC 1.0.9; Social 1.7.5; Reels Bridge 2.3.7-YT8-SAFE2; Distribution 1.2.1; Guard 1.0.4; Integrity 0.2.1. |
+| Haber taraması | Monitoring ON, auto publish OFF; 173 aday, 0 VERIFIED; son tarama 22 Eylül. Güncel hook/cron nedeni çözülmedi. |
+| TR→EN Guard | Son scan ve hata 22 Eylül; success listesi boş. Eski OpenAI ayar hatası bugünkü kesin kök neden sayılmadı. |
+| EN Draft Agent | PASİF. 24 Eylül son sonuç kaydı kaynak listeleme ve tam okuma erişimi eksikliği nedeniyle hiçbir işleme girilmediğini bildiriyor. Bu WORK oturumu iki okumayı da başardı; zamanlı görevin ayrı bağlamındaki erişim varsayılmadı. |
+| Haber eşlemesi | İki TR haber kategorisindeki bütün 9 yayın kontrol edildi: 8 EN karşılık yayımlanmış; TR4261'de EN ilişkisi yok. Önce eşsiz EN içerik için mükerrerlik taraması gerekir. |
+| Eylül dosyası | TR4817 ve EN4818 ikisi de DRAFT; karşılıklı Polylang doğru, kapak4823. Kaynak/içerik/SEO/görsel finali bekler. |
+| Reels | 16 kayıt: 11 DRAFT_REVIEW, 5 READY_FOR_EDITS. Bu sorguda hiçbirinde IG final medya ID'si yok. Doors kaydında youtube_success=true fakat verified_source=false. |
+| Etsy dağıtımı | 10 ERROR + 3 READY_FOR_REVIEW; 16 dağıtım kaydı ile 13 ürün işi ayrı tablolardır. Token Expired ve Worker READY; META_FINAL yok. Eski ID4–6 ile temiz hata/kaynak kopyaları bekler. |
+| Etsy zamanlama | 48 saatlik keşif ENABLED; panel next scan alanı 2026-10-24 23:59:09. Alanın saat dilimi teyitsiz olduğu için dönüşüm yapılmadı. Ayar, doğal başarılı koşu kanıtı değildir. |
+| Dinleme sayfaları | TR ve EN görünen sayfa içeriğinde oynatıcı yok; EN DOM'unda audio/video yok. Yayın sunucusunun kapalı olduğu sonucu çıkarılmadı. |
+| Fransa kapak | Origin sağlam, 1672×941. Kartın CDN URL'si bu tarayıcıda sertifika güven hatası verdi. Koruma aşılmadı; bütün kullanıcılarda CDN arızası iddia edilmedi. |
+| Site Integrity | Son scan 24 Ekim04:02 TSİ; 1177 içerik, 599 inceleme sorunu, %49,1 kurala uyum. Menü LOCKED/HEALTHY. 13 görsel, 13 kategori ve 59 dil eşi eksik. |
+| Yedek | Son deneme finished; last_attempt_failed=false; backup_in_progress=false. Restore yapılmadı. |
+| GitHub | Son audit40047688997, 24 Ekim03:59 TSİ: 14 test, 3 işaretlenmeyen akış, 0 güncel bulgu, 15 kontrol dışı akış. Gerçek teslim kapsam dışı. |
+| Güvenlik | main protected:false görüldü. Reels manuel preview-only ve Facebook if:false kilitleri korunuyor. PR26/33 OPEN/DRAFT. |
+| OR-PIN | 23 Ekim08:18 son sonucu o denemede cihaz offline olduğu için 14 Pin'in doğrulanamadığını söyler. Cihazın şimdi offline olduğu çıkarılmadı; CSV tekrar yüklenmedi. |
+| Kurtarma görevi | Mevcut görev enabled. Eski prompttaki 1 retry ifadesi güncel karantina ile uzlaştırılmalı; 23 Ekim son sonuç retry0 ve kilit koruma bildiriyor. |
+
+Fransa TR/EN cron yayını ve yeni Integrity taraması, bütün WordPress cronlarının tamamen durmuş olduğu varsayımını desteklemiyor. Haber/Guard'a özgü yürütüm kanıtı gerekir.
+
+EN Draft Agent'ın eski DRAFT talimatı ile 28 Eylül son EN otomatik yayın hedefi ve Guard sorumluluğu birlikte ele alınmalı. Pasif ajan gelişigüzel yeniden etkinleştirilmeyecek; yeni ajan veya ücretli API kurulmadı.
+
+## Eski kayıtlarla uzlaştırılan noktalar
+- #34 karşılıklı kayıt testi 03:54'te zaten kapandı; tekrar edilmedi. Bu yeni işlerin bağımsız kabulü değildir. Otomatik Work uyandırma hâlâ kanıtlanmadı.
+- #31'in 21 Ekim son kararı önce TAM hikâye, TAM ses ve storyboard; sonra hedefli MP4'tür. Eski 8–12 saniyelik örnek tek başına yeterli sayılmaz.
+- Tamamlanmış İspanyolca araştırma ve Celentano MP4 teslim izleri yok sayılmadı; içerikleri görülmeden yeniden üretim başlamayacak.
+- Kurucunun son geçerli talimatı yetki ve tercihi belirler. Güncel teknik gerçek ayrıca doğrudan kanıtla doğrulanır.
 
 ## BEKLEYEN
-Kod/ayar onarımı, canlı gerçek iş çıktıları, Windows kaynak/logları, bağımsız yeni WATCHDOG kabulü ve süreklilik. Ayrı WATCHDOG sohbetini açmaya yönelik ek okuma girişimi tamamlanamadı; yeni görev mesajı gönderilmedi. #34 genel kayıt testi bu yeni iş devrinin kabulü sayılmadı. Eski sohbetlerin tamamı veya bütün61eklenti kaynağı okunmuş gibi sunulmaz.
+Kod/ayar onarımı, gerçek son ürünler, Windows kaynak/logları, bu yeni devir için bağımsız WATCHDOG kabulü ve süreklilik açıktır. Ayrı WATCHDOG sohbetine yönelik ek okuma girişimi tamamlanamadı; yeni görev mesajı gönderilmedi. Eski sohbetlerin tamamı veya bütün eklenti kaynakları okunmuş gibi sunulmaz.
 
-## PLANLANAN — sonraki iş başında kontrol edilecek kartlar
-Her satırın tek operasyonel sahibi WORK MASTER'dır. Atanabilir uzmanlar görev almadan başlamış sayılmaz. Kontrol zamanı: sonraki yetkili iş oturumu BAŞLANGICI; sonra işin gerçek yürütüm/kontrol saati yazılır. Arka plan takip veya onarım görevi kurulmadı.
+## PLANLANAN
+Her satırın tek operasyonel sahibi WORK MASTER'dır. Uzmanlar gerçek görev alma teyidi vermeden başlamış sayılmaz. Kontrol noktası sonraki yetkili iş oturumunun başlangıcıdır; yürütüm ve kontrol saati o aşamada kayda girer. Arka plan takip/onarım görevi kurulmadı.
 
-| İş | İlk eksik adım | Sınır |
+| İş | İlk eksik adım | Korunan sınır |
 | --- | --- | --- |
-| News/EN | Mevcut güvenli kaynaktan Guardhook/kuyruk ve doğal işlem kanıtı;pasif ajanın güncel hedefle ilişkisi | API/cron/ayar değişikliği başlamadı |
-| Reels | Son geçerli tam metin/ses/storyboard paketini mevcut dosyadan bul | Render/merge/publish kilitli |
-| Etsy | JobID ve temiz hata/kaynak dökümlerini eşleştir | OAuthrefresh/retry yok |
+| News/EN | Guard hook/kuyruk ve doğal işlem kanıtı; pasif ajanın son hedefle ilişkisi | Canlı ayar/cron/API değişmedi |
+| Reels | Mevcut tam metin, ses ve storyboard paketini bul | Render/merge/yayın kilitli |
+| Etsy | Job kimlikleri ile temiz hata/kaynak dökümlerini eşleştir | OAuth refresh/retry yok |
 | Radyo sayfaları | Mevcut onaylı stream/oynatıcı tanımını bul | Yeni yayın/altyapı yok |
-| Tumblr | Son gerçek postID/URL ve birleşik3/gün kaydını aynı koşuya bağla | Mevcut motor korunur |
-| Pinterest |14CSVsatırını mevcut gerçekPin/planlı kayıtla eşleştir | Tekrar yükleme yok |
-| Eylülhaberleri | Mevcut4817/4818 QA ve son geçerli yayın yetkisi | Mükerrer yazı yok |
-| LionelEN | EşsizENarama/duplicatecheck | Son EN talimatını uygula |
-| Fransa kapak | Ortam/CDNgüven/erişim ayrımı | Originyenidenüretilmez |
-| Siteçeviri/Integrity | Güncelinceleme kuyruğunu70tamçeviri/Batch008ile karşılaştır | Tamamlanmış iş tekrarlanmaz |
-| Facebook/YT |GerçekInstagramfinalID→medya→yayınURLzinciri | Karantina korunur |
-| Etsyilan/POD | Mevcut3dönüşüm ve gerçek taslak/materyal | Dağıtımdanayrı |
-| Trafik/SEO | GüncelülkeliGSCileGA/Jetpackölçümünüayır | Bu tur büyüme hükmü yok |
-| Araştırma/1980S-C/mini-belgesel | Mevcutteslimdosyalarınıkontrol | İspanyolca/Celentanoteslimizleri yok sayılmaz |
-| Gelir/lisans | Mevcut4397/4398/CTAveülkehakmatrisi | Yeniödeme/yayınyok |
-| Jingle | Kurucuertelemesi kalkınca mevcutdosyakanıtından devam | Pilotteyidierteli,üretimyok |
+| Tumblr | Gerçek post ID/URL ile üretim ve birleşik 3/gün kaydını eşleştir | Mevcut motor korunur |
+| Pinterest | 14 CSV satırını gerçek Pin/planlı kayıtla eşleştir | Tekrar yükleme yok |
+| Eylül haberleri | Mevcut4817/4818 üzerinde QA ve son geçerli yayın yetkisi | Mükerrer yazı yok |
+| Lionel EN | Eşsiz EN araması ve duplicate kontrolü | Son EN talimatını uygula |
+| Fransa kapak | Ortam/CDN güven ve erişim ayrımı | Origin yeniden üretilmez |
+| Çeviri/Integrity | Kuyruğu 70 tam çeviri ve Batch008 ile karşılaştır | Tamamlanmış iş tekrarlanmaz |
+| Facebook/YouTube | Gerçek IG finali, medya ve yayın URL zinciri | Karantina korunur |
+| Etsy ilan/POD | Mevcut üç dönüşümün gerçek taslak/materyal durumunu oku | Dağıtım işinden ayrı |
+| Trafik/SEO | Ülkeli GSC ile GA/Jetpack ölçümünü ayır | Bu tur büyüme hükmü yok |
+| Araştırma/radyo soruları/belgesel | Mevcut teslim dosyalarını kontrol et | Yeni üretim başlamadı |
+| Gelir/lisans | Mevcut4397/4398, CTA ve ülke/hak matrisini oku | Yeni ödeme/yayın yok |
+| Jingle | Erteleme kalkınca mevcut dosya kanıtından devam | Pilot teyidi erteli, üretim yok |
 
-## Kayıt kararı
-Yönetim ve inceleme paketi teslim edildi; genel üretim/onarım kabulü açık. Kurucuya ayrıntılı sistem haritası raporu aynı turda verildi. Yalnız yönetim dokümanları ve checkpoint değişti; üretim kodu,WPayarları,kimlik bilgileri,zamanlayıcılar,APIüretimi,render,yayın,masraf veya mevcut işlerin kendi durumları değiştirilmedi.
+## Kapanış
+Yönetim ve inceleme paketi teslim edildi; genel üretim/onarım kabulü açık. Kurucuya ayrı ayrıntılı sistem haritası raporu verildi. Yalnız yönetim dokümanları ve checkpoint değişti. Üretim kodu, WordPress ayarı, kimlik bilgisi, zamanlayıcı, API üretimi, render, yayın ve maliyet değişmedi; diğer işlerin kendi durumları korunuyor.
 
-[İlkpaket](./part-001.md) · [Merkez#32](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32) · [SonReelskararı](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/31#issuecomment-6305582012) · [Jingle](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/27#issuecomment-6356462019) · [Dartest](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/34#issuecomment-6377801615) · [Sonaudit](https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/40047688997)
+[İlk paket](./part-001.md) · [Merkez #32](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32) · [Son Reels kararı](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/31#issuecomment-6305582012) · [Jingle](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/27#issuecomment-6356462019) · [Dar kayıt testi](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/34#issuecomment-6377801615) · [Son audit](https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/40047688997)
