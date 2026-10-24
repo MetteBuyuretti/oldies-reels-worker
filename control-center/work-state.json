@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-24T01:26:57Z",
+  "updated_at": "2026-10-24T01:55:02Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -213,9 +213,9 @@
         "twenty-workstream-owner-next-step-register",
         "source-bound-system-map-and-detailed-report-saved"
       ],
-      "last_checkpoint": "2026-10-24T01:26:57Z",
+      "last_checkpoint": "2026-10-24T01:55:02Z",
       "next_step": "İlk eksik onarım öncesi kanıt: News/EN için Guard hook/kuyruk ve son doğal işlem kaydını mevcut güvenli kaynaktan bul; pasif EN Draft Agent'ın ayrı yürütme erişimini ve 28 Eylül son kullanıcı hedefiyle ilişkisini doğrula. Bu inceleme canlı onarım yetkisi değildir; Jingle pilot teyidi erteli, render/dispatch/retry/yayın yok. Diğer işler part-002 kartlarındaki ilk eksik adımdan devam eder.",
-      "note": "24.10.2026 | 04:26 TSİ: WATCHDOG devir raporu tam okundu ve yönetim sorumluluğu alındı. WP/GitHub/zamanlı görevler karşılaştırıldı. EN Draft Agent pasif; eski son sonuç okuma erişimi eksikliği. Bu Work list/tam kaynak okumasını başardı. News/Guard son scan22Eylül. Haber9TR/8yayınEN,TR4261eşsiz ilişki; Eylül4817/4818DRAFT,pairingdoğru. Reels16=11review+5Edits,IGfinalIDyok; Etsy10ERROR+3READY,META_FINALyok. TR/ENdinleme sayfasında görünür oynatıcı yok; yayın sunucusu durumu test edilmedi. Fransa origin sağlam, bu tarayıcı CDN sertifika güven hatası. Üretim/ayar/token/yayın/zamanlayıcı/maliyet değişmedi. Bağımsız yeni WD kabulü yok; otomatik Work uyanması kanıtsız.",
+      "note": "24.10.2026 | 04:26 TSİ: WATCHDOG devir raporu tam okundu ve yönetim sorumluluğu alındı. WP/GitHub/zamanlı görevler karşılaştırıldı. EN Draft Agent pasif; eski son sonuç okuma erişimi eksikliği. Bu Work list/tam kaynak okumasını başardı. News/Guard son scan22Eylül. Haber9TR/8yayınEN,TR4261eşsiz ilişki; Eylül4817/4818DRAFT,pairingdoğru. Reels16=11review+5Edits,IGfinalIDyok; Etsy10ERROR+3READY,META_FINALyok. TR/ENdinleme sayfasında görünür oynatıcı yok; yayın sunucusu durumu test edilmedi. Fransa origin sağlam, bu tarayıcı CDN sertifika güven hatası. Üretim/ayar/token/yayın/zamanlayıcı/maliyet değişmedi. Bağımsız yeni WD kabulü yok; otomatik Work uyanması kanıtsız.\n24.10.2026 | 04:55 TSİ: Kurucu Canlı Dinle/oynatıcı işinin kendisinde ve henüz başlatılmamış olduğunu açıkladı. Bu konu MASTER arıza/onarım kuyruğundan çıkarıldı. WordPress inceleme kapsamı: 61 eklenti envanteri ve ana otomasyon panelleri; bütün kaynak kodu/cron/hook/bağımlılık ve gerçek E2E incelemesi tamamlanmış değildir.",
       "owner": "WORK MASTER",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-001.md",
@@ -229,6 +229,19 @@
         "new_independent_watchdog_acceptance": "pending",
         "production_repair": "not_started",
         "jingle_pilot_verification": "deferred_by_founder"
+      },
+      "founder_owned_items": {
+        "radio_player": {
+          "owner": "Mete / Kurucu",
+          "status": "not_started_by_founder",
+          "reported_at": "2026-10-24T01:55:02Z",
+          "master_repair_queue": false
+        }
+      },
+      "scope": {
+        "all_plugins_inventory": "reviewed_61_total_24_active_37_inactive",
+        "key_automation_panels": "reviewed",
+        "all_plugin_source_and_runtime": "not_complete"
       }
     },
     {
