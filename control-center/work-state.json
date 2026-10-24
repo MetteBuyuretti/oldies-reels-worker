@@ -2,16 +2,18 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-24T21:27:29.400Z",
+  "updated_at": "2026-10-24T23:27:00.972Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
       "title": "1960'larda Avrupa ülkelerinin 10 ünlü/önemli şarkıcısı",
       "status": "needs_reconcile",
-      "completed_units": [],
+      "completed_units": [
+        "france-tr-en-images-repaired-20261025"
+      ],
       "next_step": "Mevcut çıktıları kontrol et; tamamlanmış ülkeleri işaretle ve ilk eksik ülkeden devam et.",
       "last_checkpoint": null,
-      "note": "Yunanistan referans sayfasıdır; yeniden üretme. Çok ülkeli çalışma ülke başına checkpoint kullanmalıdır."
+      "note": "Yunanistan referans sayfasıdır; yeniden üretme. Çok ülkeli çalışma ülke başına checkpoint kullanmalıdır.\n25.10.2026 | 02:26 TSİ: Yalnız Fransa TR/EN iç görseller ve ana sayfa kapak onarımı tamam; diğer ülkeler yeniden üretilmedi, genel ülke çalışması tamamlandı sayılmıyor. Kanıt: https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/france-images-repair-20261025/report.md"
     },
     {
       "id": "1980s-radio-100-qa",
@@ -357,6 +359,38 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6386220827",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-008.md"
       ]
+    },
+    {
+      "id": "france-images-repair-20261025",
+      "title": "Fransa 1960’lar TR/EN iç görseller ve ana sayfa kapak onarımı",
+      "owner": "WORK MASTER",
+      "status": "done",
+      "completed_units": [
+        "germany-and-greece-reference-posts-read",
+        "original-posts-featured-and-css-backed-up",
+        "three-placeholder-portraits-replaced-with-attributed-real-photos",
+        "tr-en-eleven-origin-picture-sources-saved-with-hash-locks",
+        "featured-media-4849-and-post-scoped-home-card-css-live",
+        "tr-ten-loaded-portraits-and-home-render-verified",
+        "anonymous-http-and-native-content-readback-verified",
+        "report-and-final-state-saved"
+      ],
+      "last_checkpoint": "2026-10-24T23:27:00.972Z",
+      "next_step": "Kurucunun Fransa görsellerini ve ana sayfa kapağını düzeltme isteği canlıda karşılandı. Sheila2012fotoğrafı açık etiketli; mobilgenişlik talebi1536ölçümünü değiştirmediği için mobilkabulverilmedi. CDNsertifikaaltyapısı bu dar görselonarımıyla çözülmüşsayılmaz; tekrarında report.md'deki kayıttan devam et.",
+      "note": "25.10.2026 | 02:26 TSİ: TR4461/EN4462,featured4849. 10/10TRportreyüklü,herikisinde11originpicture/source; ana sayfaFransakapağıAlmanyaylaaynıkartdüzenindeekrandadoğrulandı. Globalstylesdenemesi576geriçekildi; mevcutAdditionalCSSkorunupyalnızFransa4461/4462research-cardimg içinorigincontenturlkuralıeklendi. Medya4850Johnny1963/4851Serge1965/4852Sheila2012;4846PNGdenemesikullanılmıyor,silinmedi. Yeni bağımsızWDkabulüyok; masaüstügörselQAgerçekleşti.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/france-images-repair-20261025/report.md",
+        "https://oldiesradyo.com/2026/10/23/1960larda-fransa-10-unlu-sarkici/",
+        "https://oldiesradyo.com/en/2026/10/23/1960s-french-singers/"
+      ],
+      "acceptance": {
+        "live_article_images": "verified_tr_10_of_10",
+        "paired_english_content": "saved_and_readback_verified",
+        "homepage_cover": "visually_verified",
+        "mobile": "not_verified_viewport_override_did_not_take_effect",
+        "cdn_infrastructure_root_cause": "not_resolved_scoped_origin_delivery_applied",
+        "independent_watchdog_review": "not_claimed"
+      }
     }
   ]
 }
