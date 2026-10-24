@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-23T21:55:57Z",
+  "updated_at": "2026-10-24T00:52:02.747Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -201,6 +201,28 @@
       "last_checkpoint": "2026-10-23T21:55:57Z",
       "next_step": "Önce eksik eski konuşma kapsamını ve güncel kaynakları salt okunur uzlaştır; gerçek Codex/Work/ayrı WATCHDOG görev alma teyitlerini ayır. Jingle #27 pilot kaydı doğrulaması Mete tarafından ertelendi. Pilot kabul edilmeden diğer üretim otomasyonlarını değiştirme; dispatch/retry/render/yayın başlatma.",
       "note": "24.10.2026 TSİ: yönetim sorumluluğu bu Work oturumunda. Eski sohbetlerin tamamı eksiksiz okunmadı; tarayıcı eski mesajlarda zaman aşımı yaşadı. WP canlı: CC1.0.9/Social1.7.5/Bridge2.3.7-YT8-SAFE2/Distribution1.2.1/Integrity0.2.1. News ve Guard panelleri son kayıt22Eylül; güncel yürütüm ve kök neden doğrulanmadı. Bağımsız destek bu oturum içinde çalıştı, önceki ayrı WORK WATCHDOG'a mesaj/okuma teyidi yok. Mevcut görev durumları/sonraki adımları değişmedi. Üretim kodu, ayar, credential, scheduler, yayın ve maliyet değişikliği yok."
+    },
+    {
+      "id": "v3-management-installation-20261024",
+      "title": "V3.0 yönetim kurulumu — proje kaynağı, ayrı WORK WATCHDOG ve iletişim kabulü",
+      "status": "in_progress",
+      "owner": "WORK MASTER",
+      "completed_units": [
+        "approved-v3-full-source-read-in-resumed-session",
+        "v2-backup-and-v3-docx-hashes-matched",
+        "project-source-txt-and-docx-text-compared",
+        "project-source-filename-reference-corrected-and-save-reopened",
+        "prior-support-agent-roundtrip-read-without-repeating",
+        "separate-work-watchdog-created-and-start-observed"
+      ],
+      "last_checkpoint": "2026-10-24T00:52:02.747Z",
+      "next_step": "Ayrı WORK WATCHDOG 6adc00f5-f0c8-83eb-836c-9e7acbec2335 oturumunun #34 yanıtını doğrudan GitHub'dan oku; kendi WD kodunu MASTER teyidiyle kapat. Otomatik issue→Work tetiklemeyi bu kontrollü arayüz devrinden ayrı tut. Jingle pilot teyidi ertelenmiş kalır.",
+      "note": "24.10.2026 | 03:52 TSİ (UTC+3) — V3.0 belge ve proje yönlendirmesi aynı sürümde; gerçek Kaynaklar dosyası OLDIES-RADYO-ANA-KUMANDA-ANAYASASI-V3.0-KURUCU-ONAYLI.txt. 03:48 TSİ kısa yönlendirme düzeltmesi kaydedilip tekrar açılarak okundu. Ayrı Work WATCHDOG aynı proje içinde 03:51 civarı başlatıldı; ChatGPT ile çalış kutusu ve GitHub aracı kullanımı gözlendi. Bu, eski destek alt ajanı değildir. Yeni kabul çağrısı #34 comment6377762125. Karşılıklı kabul ve otomatik tetikleme henüz PASS değil. Üretim, pilot, kod, zamanlayıcı, yayın, erişim anahtarı ve maliyet değişikliği yok.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/34#issuecomment-6377762125",
+        "https://chatgpt.com/g/g-p-6ac054936cd481918f4f9c4a6d6f9358-oldies-radyo-ekosistemi-ana-kumanda/c/6adc00f5-f0c8-83eb-836c-9e7acbec2335"
+      ],
+      "control_time": "Bu kurulum turunda WD yanıtı oluştuğunda; sürekli arka plan izleme yok."
     }
   ]
 }
