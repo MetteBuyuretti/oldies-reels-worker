@@ -1,0 +1,15 @@
+test_concurrent_runs_are_blocked (test_factory.BasicTests.test_concurrent_runs_are_blocked) ... ok
+test_atomic_checkpoint_retry_preserves_previous_state_until_commit (test_factory.BasicTests.test_atomic_checkpoint_retry_preserves_previous_state_until_commit) ... ok
+test_permanent_checkpoint_lock_retains_old_and_pending_json (test_factory.BasicTests.test_permanent_checkpoint_lock_retains_old_and_pending_json) ... ok
+test_timeout_is_not_retried_or_logged_with_key (test_factory.BasicTests.test_timeout_is_not_retried_or_logged_with_key) ... ok
+test_model_visibility_does_not_claim_entitlement (test_factory.BasicTests.test_model_visibility_does_not_claim_entitlement) ... ok
+test_checkpoint_failure_latch_stops_before_provider (__main__.InstalledRecoveryTests.test_checkpoint_failure_latch_stops_before_provider) ... ok
+test_current_unknown_closure_is_not_success (__main__.InstalledRecoveryTests.test_current_unknown_closure_is_not_success) ... ok
+test_existing_adapter_reservation_blocks_regeneration (__main__.InstalledRecoveryTests.test_existing_adapter_reservation_blocks_regeneration) ... ok
+test_uncertain_api_result_stops_before_provider (__main__.InstalledRecoveryTests.test_uncertain_api_result_stops_before_provider) ... ok
+test_v31_balance_unchanged (__main__.InstalledRecoveryTests.test_v31_balance_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.071s
+
+OK

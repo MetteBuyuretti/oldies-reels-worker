@@ -1,0 +1,157 @@
+diff --git a/work-output/local-repair-20261025/baseline/tumblr_auto_news_v3.mjs b/work-output/local-repair-20261025/candidate/tumblr_auto_news_v3.mjs
+index 987a224..1a350aa 100644
+--- a/work-output/local-repair-20261025/baseline/tumblr_auto_news_v3.mjs
++++ b/work-output/local-repair-20261025/candidate/tumblr_auto_news_v3.mjs
+@@ -6 +6,2 @@ import {createRequire} from 'node:module';
+-const {chromium}=createRequire('C:/Users/METE/oldies-jingle-automation/package.json')('playwright-core');
++// Load browser support only when main runs; offline tests never connect to Chrome.
++const loadChromium=()=>createRequire('C:/Users/METE/oldies-jingle-automation/package.json')('playwright-core').chromium;
+@@ -35,2 +36,7 @@ async function intake(root){
+-async function cards(page,pkg){
+- const rows=[];
++export const istanbulDay=value=>{
++ const date=new Date(value);if(!Number.isFinite(date.getTime()))throw Error('INVALID_PUBLICATION_TIME');
++ return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Istanbul',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
++};
++export function reconcileJournal(pkg,journal,queued,published,at=new Date().toISOString()){
++ // Validate the whole observation before mutating or writing any journal row.
++ const next=structuredClone(journal);
+@@ -38,9 +44,69 @@ async function cards(page,pkg){
+-  const card=page.getByRole('article').filter({has:page.getByRole('heading',{name:p.title,exact:true})});
+-  if(await card.count()>1)throw Error('DUPLICATE_REMOTE_TITLE: '+p.id);
+-  if(await card.count()===1){
+-   const href=await card.getByRole('link',{name:'Kalıcı bağlantı',exact:true}).first().getAttribute('href');
+-   const id=href?.match(/oldiesradyo\/(\d+)/)?.[1];if(!id)throw Error('REMOTE_ID_MISSING');
+-   // A matching title alone is insufficient; validate the final unique tracked link.
+-   const link=card.getByRole('link',{name:'https://oldiesradyo.com/',exact:true});
+-   if(await link.count()!==1||await link.getAttribute('href')!==p.utm)throw Error('REMOTE_FOOTER_MISMATCH: '+p.id);
+-   rows.push({id:p.id,tumblrId:id,url:new URL(href,'https://www.tumblr.com').href,scheduled:(await card.getByRole('time').allTextContents())[0]?.trim()||null});
++  const row=next.items.find(x=>x.id===p.id);if(!row)throw Error('UNREGISTERED_DRAFT: '+p.id);
++  const qs=queued.filter(x=>x.id===p.id),ps=published.filter(x=>x.id===p.id);
++  if(qs.length>1||ps.length>1||qs.length&&ps.length)throw Error('REMOTE_CONFLICT: '+p.id);
++  const remote=ps[0]||qs[0];
++  if(remote){
++   if(row.status==='PUBLISHED_VERIFIED'&&!ps.length)throw Error('REMOTE_STATE_DOWNGRADE: '+p.id);
++   const url=new URL(remote.url);const postId=url.pathname.match(/^\/oldiesradyo\/(\d+)(?:\/|$)/)?.[1];
++   if(url.origin!=='https://www.tumblr.com'||!postId||postId!==remote.tumblrId)throw Error('REMOTE_ID_MISMATCH: '+p.id);
++   row.sourceDraftId ||= row.tumblrId||p.tumblrId;
++   Object.assign(row,remote,{status:ps.length?'PUBLISHED_VERIFIED':'QUEUED_VERIFIED',verifiedAt:at,evidence:'Complete account scan; unique title, exact story, actual permalink and tracked footer'});
++  }else if(['SUBMITTING','UNKNOWN','RECONCILIATION_REQUIRED','QUEUED_VERIFIED','PUBLISHED_VERIFIED'].includes(row.status))throw Error('REMOTE_STATE_RECONCILIATION_REQUIRED: '+p.id);
++ }
++ return next;
++}
++export function dailyAdmission(inventory,journal,now=new Date().toISOString()){
++ // Account-wide inventory, not just this package. Missing evidence fails closed.
++ if(!inventory?.complete||!inventory?.queueComplete||inventory.allPathsCovered!==true)throw Error('DAILY_PUBLICATION_BUDGET_UNVERIFIED');
++ const day=istanbulDay(now),keys=new Set();
++ for(const post of [...inventory.published,...inventory.queued]){
++  const time=post.publishedAt||post.scheduledAt;
++  if(!post.tumblrId||!time)throw Error('DAILY_PUBLICATION_TIME_UNVERIFIED');
++  if(istanbulDay(time)===day)keys.add('post:'+post.tumblrId);
++ }
++ for(const row of journal.items){
++  if(['SUBMITTING','UNKNOWN','RECONCILIATION_REQUIRED'].includes(row.status)){
++   // An old uncertain operation remains blocking until explicitly reconciled.
++   if(!row.reservedDay||row.reservedDay!==day)throw Error('UNCERTAIN_PUBLICATION_REQUIRES_RECONCILIATION');
++   keys.add(row.tumblrId?'post:'+row.tumblrId:'job:'+row.id);
++  }
++ }
++ return {day,used:keys.size,remaining:Math.max(0,3-keys.size)};
++}
++export const acquirePublisherLock=file=>{
++ const handle=fs.openSync(file,'wx');
++ try{fs.writeSync(handle,JSON.stringify({pid:process.pid,at:new Date().toISOString()}));return handle;}
++ catch(e){fs.closeSync(handle);fs.unlinkSync(file);throw e;}
++};
++export async function cards(page,pkg,{expectedCount,maxPasses=30}={}){
++ const found=new Map(),observed=new Map();let complete=expectedCount===0;
++ for(let pass=0;pass<maxPasses&&!complete;pass++){
++  // The account-count link renders before article bodies. Wait for content first.
++  await page.getByRole('article').first().waitFor({state:'visible',timeout:15000});
++  const articles=page.getByRole('article');let lastOwn=null;
++  for(let i=0;i<await articles.count();i++){
++   const article=articles.nth(i);
++   const permalink=article.getByRole('link',{name:'Kalıcı bağlantı',exact:true});
++   if(!await permalink.count())continue;
++   const href=await permalink.first().getAttribute('href');
++   const id=href?.match(/(?:^|\/)oldiesradyo\/(\d+)(?:\/|$)/)?.[1];
++   if(!id)continue; // Sponsored cards belong to other blogs, outside this inventory.
++   lastOwn=article;
++   const time=article.getByRole('time').first();
++   const datetime=await time.count()?await time.getAttribute('datetime'):null;
++   observed.set(id,{tumblrId:id,publishedAt:datetime,scheduledAt:datetime});
++  }
++  for(const p of pkg.posts){
++   const card=articles.filter({has:page.getByRole('heading',{name:p.title,exact:true})});
++   if(await card.count()>1)throw Error('DUPLICATE_REMOTE_TITLE: '+p.id);
++   if(await card.count()===1){
++    const href=await card.getByRole('link',{name:'Kalıcı bağlantı',exact:true}).first().getAttribute('href');
++    const id=href?.match(/oldiesradyo\/(\d+)/)?.[1];if(!id)throw Error('REMOTE_ID_MISSING');
++    const link=card.getByRole('link',{name:'https://oldiesradyo.com/',exact:true});
++    if(await link.count()!==1||await link.getAttribute('href')!==p.utm)throw Error('REMOTE_FOOTER_MISMATCH: '+p.id);
++    const body=normalise(await card.innerText());
++    if(!p.paragraphs.every(s=>body.includes(normalise(s))))throw Error('REMOTE_STORY_MISMATCH: '+p.id);
++    if(found.has(p.id)&&found.get(p.id).tumblrId!==id)throw Error('DUPLICATE_REMOTE_TITLE: '+p.id);
++    const timestamp=observed.get(id)?.publishedAt;
++    found.set(p.id,{id:p.id,tumblrId:id,url:new URL(href,'https://www.tumblr.com').href,scheduled:(await card.getByRole('time').allTextContents())[0]?.trim()||null,...(timestamp?{publishedAt:timestamp,scheduledAt:timestamp}:{})});
++   }
+@@ -47,0 +114,2 @@ async function cards(page,pkg){
++  complete=Number.isInteger(expectedCount)&&observed.size===expectedCount;
++  if(!complete){if(lastOwn)await lastOwn.scrollIntoViewIfNeeded();await page.mouse.wheel(0,700);await page.waitForTimeout(500);}
+@@ -49 +117,2 @@ async function cards(page,pkg){
+- return rows;
++ if(!complete)throw Error('REMOTE_INVENTORY_INCOMPLETE');
++ return {matches:[...found.values()],inventory:[...observed.values()],complete};
+@@ -73 +142 @@ async function main(){
+-  lockHandle=fs.openSync(lock,'wx');fs.writeSync(lockHandle,JSON.stringify({pid:process.pid,at:report.at}));
++  lockHandle=acquirePublisherLock(lock);
+@@ -75 +144 @@ async function main(){
+-  const journal=readJson(journalFile),auth=readJson(path.join(root,'tumblr-publication-authorization.json'));
++  let journal=readJson(journalFile);const auth=readJson(path.join(root,'tumblr-publication-authorization.json'));
+@@ -78 +147,2 @@ async function main(){
+-  items.forEach(i=>classify(i,journal));
++  // Uncertain rows may be reconciled from verified remote evidence, never retried.
++  items.forEach(i=>{const row=journal.items.find(r=>r.id===i.id);if(row&&row.hash!==i.hash)throw Error('CONTENT_CHANGED_REVIEW_REQUIRED: '+i.id);if(!row||!['SUBMITTING','UNKNOWN','RECONCILIATION_REQUIRED'].includes(row.status))classify(i,journal);});
+@@ -81 +151 @@ async function main(){
+-  browser=await chromium.connectOverCDP('http://127.0.0.1:9243');
++  browser=await loadChromium().connectOverCDP('http://127.0.0.1:9243');
+@@ -86 +156,4 @@ async function main(){
+-  const queued=await cards(page,pkg);
++  const queueText=await page.getByRole('link',{name:/^Sıradakiler(?: \d+)?$/}).innerText();
++  if(!/^Sıradakiler\s*\d*$/.test(queueText.trim()))throw Error('REMOTE_QUEUE_COUNT_UNVERIFIED');
++  const queueCount=Number(queueText.match(/\d+/)?.[0]||0);
++  const queued=await cards(page,pkg,{expectedCount:queueCount});
+@@ -89,7 +162,8 @@ async function main(){
+-  const published=await cards(page,pkg);
+-  for(const p of pkg.posts){
+-   const q=queued.find(x=>x.id===p.id),pub=published.find(x=>x.id===p.id),row=journal.items.find(x=>x.id===p.id);
+-   if(q&&pub)throw Error('REMOTE_CONFLICT: '+p.id);
+-   if(q||pub){const remote=pub||q;row.sourceDraftId ||= p.tumblrId;Object.assign(row,remote,{status:pub?'PUBLISHED_VERIFIED':'QUEUED_VERIFIED',verifiedAt:new Date().toISOString(),evidence:pub?'Published account list with actual permalink and unique tracked footer':'Tumblr queue card with actual schedule and unique tracked footer'});atomic(journalFile,journal);}
+-   else if(['QUEUED_VERIFIED','PUBLISHED_VERIFIED'].includes(row?.status))throw Error('REMOTE_STATE_RECONCILIATION_REQUIRED: '+p.id);
+-  }
++  const countText=await page.getByRole('link',{name:/^Gönderiler \d+/}).innerText();
++  const published=await cards(page,pkg,{expectedCount:Number(countText.match(/\d+/)?.[0])});
++  journal=reconcileJournal(pkg,journal,queued.matches,published.matches);
++  atomic(journalFile,journal);
++  // No all-path coverage claim is inferred from Tumblr's queue frequency setting.
++  // Existing authorization has no such evidence; new queue submissions stay blocked.
++  const inventory={allPathsCovered:false,complete:published.complete,queueComplete:queued.complete,published:published.inventory.map(({tumblrId,publishedAt})=>({tumblrId,publishedAt})),queued:queued.inventory.map(({tumblrId,scheduledAt})=>({tumblrId,scheduledAt}))};
++  report.reconciliation={published:published.matches.length,queued:queued.matches.length,accountPosts:published.inventory.length};
+@@ -101 +175,2 @@ async function main(){
+-   if(moved>=3)break;
++   const budget=dailyAdmission(inventory,journal);report.dailyBudget=budget;
++   if(budget.remaining===0){report.warning='DAILY_PUBLICATION_LIMIT_REACHED';break;}
+@@ -104 +179 @@ async function main(){
+-   row.status='SUBMITTING';row.sourceDraftId ||= p.tumblrId;row.submittedAt=new Date().toISOString();atomic(journalFile,journal);
++   row.status='SUBMITTING';row.reservedDay=istanbulDay(new Date().toISOString());row.sourceDraftId ||= p.tumblrId;row.submittedAt=new Date().toISOString();atomic(journalFile,journal);
+@@ -112 +187,4 @@ async function main(){
+-   const confirmed=(await cards(page,pkg)).find(x=>x.id===p.id);if(!confirmed)throw Error('QUEUE_CONFIRMATION_MISSING');
++   const queueTextAfter=await page.getByRole('link',{name:/^Sıradakiler(?: \d+)?$/}).innerText();
++   if(!/^Sıradakiler\s*\d+$/.test(queueTextAfter.trim()))throw Error('REMOTE_QUEUE_COUNT_UNVERIFIED');
++   const after=await cards(page,pkg,{expectedCount:Number(queueTextAfter.match(/\d+/)?.[0])});
++   const confirmed=after.matches.find(x=>x.id===p.id);if(!confirmed)throw Error('QUEUE_CONFIRMATION_MISSING');
+@@ -113,0 +192 @@ async function main(){
++   inventory.queued=after.inventory.map(({tumblrId,scheduledAt})=>({tumblrId,scheduledAt}));
+@@ -119,0 +199,2 @@ async function main(){
++  report.contentStock=report.verifiedQueue.length+report.readyDrafts;
++  report.requiresNewReviewedContent=report.contentStock===0;

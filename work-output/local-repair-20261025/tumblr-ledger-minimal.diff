@@ -1,0 +1,49 @@
+diff --git a/work-output/local-repair-20261025/baseline/tumblr-editorial-state.json b/work-output/local-repair-20261025/candidate/tumblr-editorial-state.json
+index e14d8c0..54ffbd5 100644
+--- a/work-output/local-repair-20261025/baseline/tumblr-editorial-state.json
++++ b/work-output/local-repair-20261025/candidate/tumblr-editorial-state.json
+@@ -14,2 +14,2 @@
+-      "verifiedAt": "2026-10-22T12:06:35.164Z",
+-      "evidence": "Published account list with actual permalink and unique tracked footer",
++      "verifiedAt": "2026-10-25T01:43:42.300Z",
++      "evidence": "25.10.2026 local Codex CUA account DOM: exact reviewed story, actual permalink, timestamp and unique tracked footer; evidence/tumblr-live-observation.json",
+@@ -18,2 +18,3 @@
+-      "publishedAt": "2026-10-22T13:17:00+03:00",
+-      "scheduled": "1 sa."
++      "publishedAt": "2026-10-22T10:17:10.000Z",
++      "scheduled": "1 sa.",
++      "trackedHref": "https://oldiesradyo.com/?utm_source=tumblr&utm_medium=social&utm_campaign=music_stories_202610&utm_content=led-zeppelin-carnegie-1969"
+@@ -29,4 +30,4 @@
+-      "status": "QUEUED_VERIFIED",
+-      "tumblrId": "830730517394620416",
+-      "verifiedAt": "2026-10-22T12:06:35.165Z",
+-      "evidence": "Tumblr queue card with actual schedule and unique tracked footer",
++      "status": "PUBLISHED_VERIFIED",
++      "tumblrId": "831179323999387649",
++      "verifiedAt": "2026-10-25T01:43:42.300Z",
++      "evidence": "25.10.2026 local Codex CUA account DOM: exact reviewed story, actual permalink, timestamp and unique tracked footer; evidence/tumblr-live-observation.json",
+@@ -35 +36,3 @@
+-      "url": "https://www.tumblr.com/oldiesradyo/830730517394620416/the-drumbeat-that-opens-the-door-to-be-my-baby"
++      "url": "https://www.tumblr.com/oldiesradyo/831179323999387649/the-drumbeat-that-opens-the-door-to-be-my-baby",
++      "publishedAt": "2026-10-22T13:06:13.000Z",
++      "trackedHref": "https://oldiesradyo.com/?utm_source=tumblr&utm_medium=social&utm_campaign=music_stories_202610&utm_content=ronettes-be-my-baby-1963"
+@@ -45,4 +48,4 @@
+-      "status": "QUEUED_VERIFIED",
+-      "tumblrId": "830730559471927296",
+-      "verifiedAt": "2026-10-22T12:06:35.167Z",
+-      "evidence": "Tumblr queue card with actual schedule and unique tracked footer",
++      "status": "PUBLISHED_VERIFIED",
++      "tumblrId": "831191288426725376",
++      "verifiedAt": "2026-10-25T01:43:42.300Z",
++      "evidence": "25.10.2026 local Codex CUA account DOM: exact reviewed story, actual permalink, timestamp and unique tracked footer; evidence/tumblr-live-observation.json",
+@@ -51,2 +54,4 @@
+-      "url": "https://www.tumblr.com/oldiesradyo/830730559471927296/when-your-music-collection-began-to-fit-in-a",
+-      "scheduled": "Per 19:00"
++      "url": "https://www.tumblr.com/oldiesradyo/831191288426725376/when-your-music-collection-began-to-fit-in-a",
++      "scheduled": "Per 19:00",
++      "publishedAt": "2026-10-22T16:16:23.000Z",
++      "trackedHref": "https://oldiesradyo.com/?utm_source=tumblr&utm_medium=social&utm_campaign=music_stories_202610&utm_content=pocket-playlist-2001"
+@@ -55 +60 @@
+-}
+\ No newline at end of file
++}
