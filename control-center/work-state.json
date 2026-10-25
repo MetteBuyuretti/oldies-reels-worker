@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-25T01:40:09.278Z",
+  "updated_at": "2026-10-25T02:32:05.488Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -401,6 +401,27 @@
         "cdn_infrastructure_root_cause": "not_resolved_scoped_origin_delivery_applied",
         "independent_watchdog_review": "not_claimed"
       }
+    },
+    {
+      "id": "news-monthly-separation-20261025",
+      "title": "Yeni Haberler — Eylül yayını ve aylık/ay içi ayrımı",
+      "owner": "WORK MASTER",
+      "status": "done",
+      "completed_units": [
+        "september-drafts-located",
+        "live-template-and-english-selector-backed-up",
+        "monthly-and-individual-sections-live-tr-en",
+        "september-4817-4818-published-content-preserved",
+        "browser-and-anonymous-frontend-verified"
+      ],
+      "last_checkpoint": "2026-10-25T02:32:05.488Z",
+      "next_step": "Kurucu görünüm değerlendirmesi; gelecekteki aylık slug standardı aylik-haber / monthly-news korunur. TR liste mevcut40yayınsınırını korur. Kategori mimari kilidi aşılmadı; yeni kategori yok.",
+      "note": "25.10.2026 | 05:31 TSİ: EylülTR4817/EN4818yayında; menühedefiTR630/EN1714aylık/tekilayrıldı. İkiPHPdosyayedeği ve geri dönüş raporda; mobil/WD PASS yok.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-monthly-separation-20261025/report.md",
+        "https://oldiesradyo.com/muzik-haberleri/",
+        "https://oldiesradyo.com/en/music-news/"
+      ]
     }
   ]
 }
