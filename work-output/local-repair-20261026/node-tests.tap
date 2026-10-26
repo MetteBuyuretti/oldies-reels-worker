@@ -1,0 +1,160 @@
+TAP version 13
+# Subtest: tomorrow full, today empty: fourth tomorrow has zero capacity
+ok 1 - tomorrow full, today empty: fourth tomorrow has zero capacity
+  ---
+  duration_ms: 19.4269
+  type: 'test'
+  ...
+# Subtest: today full does not consume tomorrow capacity
+ok 2 - today full does not consume tomorrow capacity
+  ---
+  duration_ms: 0.5392
+  type: 'test'
+  ...
+# Subtest: target day uses Istanbul midnight, not host timezone
+ok 3 - target day uses Istanbul midnight, not host timezone
+  ---
+  duration_ms: 2.1196
+  type: 'test'
+  ...
+# Subtest: no all-path evidence remains blocked
+ok 4 - no all-path evidence remains blocked
+  ---
+  duration_ms: 0.9693
+  type: 'test'
+  ...
+# Subtest: unknown target cannot silently default to today
+ok 5 - unknown target cannot silently default to today
+  ---
+  duration_ms: 0.2974
+  type: 'test'
+  ...
+# Subtest: missing queue time is not inferred from observation time
+ok 6 - missing queue time is not inferred from observation time
+  ---
+  duration_ms: 0.5864
+  type: 'test'
+  ...
+# Subtest: duplicate platform identity across paths counts once
+ok 7 - duplicate platform identity across paths counts once
+  ---
+  duration_ms: 0.7431
+  type: 'test'
+  ...
+# Subtest: manual publication plus queue plus reservation exhausts target day
+ok 8 - manual publication plus queue plus reservation exhausts target day
+  ---
+  duration_ms: 0.8933
+  type: 'test'
+  ...
+# Subtest: uncertain known post and matching platform record count once
+ok 9 - uncertain known post and matching platform record count once
+  ---
+  duration_ms: 0.6875
+  type: 'test'
+  ...
+# Subtest: one identity on inconsistent days requires reconciliation
+ok 10 - one identity on inconsistent days requires reconciliation
+  ---
+  duration_ms: 0.893
+  type: 'test'
+  ...
+# Subtest: past uncertain reservation is never forgotten
+ok 11 - past uncertain reservation is never forgotten
+  ---
+  duration_ms: 0.4521
+  type: 'test'
+  ...
+# Subtest: past target day is rejected
+ok 12 - past target day is rejected
+  ---
+  duration_ms: 0.525
+  type: 'test'
+  ...
+# Subtest: invalid and timezone-less timestamps are rejected
+ok 13 - invalid and timezone-less timestamps are rejected
+  ---
+  duration_ms: 0.6323
+  type: 'test'
+  ...
+# Subtest: pure calculation preserves inventory and ledger
+ok 14 - pure calculation preserves inventory and ledger
+  ---
+  duration_ms: 0.7325
+  type: 'test'
+  ...
+# Subtest: integrated caller refuses fourth item on a full future target day
+ok 15 - integrated caller refuses fourth item on a full future target day
+  ---
+  duration_ms: 44.0932
+  type: 'test'
+  ...
+# Subtest: reservation day and timestamp returned to caller are target values
+ok 16 - reservation day and timestamp returned to caller are target values
+  ---
+  duration_ms: 7.0116
+  type: 'test'
+  ...
+# Subtest: unproved, stale, wrong-draft and generic DOM timestamps cannot admit
+ok 17 - unproved, stale, wrong-draft and generic DOM timestamps cannot admit
+  ---
+  duration_ms: 1.3317
+  type: 'test'
+  ...
+# Subtest: publisher verification does not require an enqueue authorization
+ok 18 - publisher verification does not require an enqueue authorization
+  ---
+  duration_ms: 0.4884
+  type: 'test'
+  ...
+# Subtest: same-day manual plus queue plus unresolved reservation exhaust capacity
+ok 19 - same-day manual plus queue plus unresolved reservation exhaust capacity
+  ---
+  duration_ms: 2.2302
+  type: 'test'
+  ...
+# Subtest: missing all-writer evidence remains blocked in integrated helper
+ok 20 - missing all-writer evidence remains blocked in integrated helper
+  ---
+  duration_ms: 0.7976
+  type: 'test'
+  ...
+# Subtest: two synthetic entry points compete for one target-day reservation
+ok 21 - two synthetic entry points compete for one target-day reservation
+  ---
+  duration_ms: 397.5982
+  type: 'test'
+  ...
+# Subtest: dynamic partial scan plus foreign sponsored card completes own inventory
+ok 22 - dynamic partial scan plus foreign sponsored card completes own inventory
+  ---
+  duration_ms: 7.9187
+  type: 'test'
+  ...
+# Subtest: generic queue timestamp does not become a publication target
+ok 23 - generic queue timestamp does not become a publication target
+  ---
+  duration_ms: 1.4238
+  type: 'test'
+  ...
+# Subtest: wrong body is rejected
+ok 24 - wrong body is rejected
+  ---
+  duration_ms: 0.8394
+  type: 'test'
+  ...
+# Subtest: partial inventory reaches bounded fail-closed result
+ok 25 - partial inventory reaches bounded fail-closed result
+  ---
+  duration_ms: 0.6554
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 579.4106

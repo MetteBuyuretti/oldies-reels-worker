@@ -1,0 +1,103 @@
+diff --git a/work-output/local-repair-20261026/baseline/tumblr_auto_news_v3.mjs b/work-output/local-repair-20261026/candidate/tumblr_auto_news_v3.mjs
+index 1a350aa..fd843e3 100644
+--- a/work-output/local-repair-20261026/baseline/tumblr_auto_news_v3.mjs
++++ b/work-output/local-repair-20261026/candidate/tumblr_auto_news_v3.mjs
+@@ -36,4 +36,7 @@ async function intake(root){
+-export const istanbulDay=value=>{
+- const date=new Date(value);if(!Number.isFinite(date.getTime()))throw Error('INVALID_PUBLICATION_TIME');
+- return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Istanbul',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
+-};
++const uncertain = new Set(['SUBMITTING','UNKNOWN','RECONCILIATION_REQUIRED']);
++export function istanbulDay(value) {
++  if (typeof value !== 'string' || !/(?:Z|[+-]\d{2}:\d{2})$/.test(value)) throw Error('EXPLICIT_TIMEZONE_REQUIRED');
++  const date = new Date(value);
++  if (!Number.isFinite(date.getTime())) throw Error('INVALID_PUBLICATION_TIME');
++  return new Intl.DateTimeFormat('en-CA', {timeZone:'Europe/Istanbul',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
++}
+@@ -58,14 +61,13 @@ export function reconcileJournal(pkg,journal,queued,published,at=new Date().toIS
+-export function dailyAdmission(inventory,journal,now=new Date().toISOString()){
+- // Account-wide inventory, not just this package. Missing evidence fails closed.
+- if(!inventory?.complete||!inventory?.queueComplete||inventory.allPathsCovered!==true)throw Error('DAILY_PUBLICATION_BUDGET_UNVERIFIED');
+- const day=istanbulDay(now),keys=new Set();
+- for(const post of [...inventory.published,...inventory.queued]){
+-  const time=post.publishedAt||post.scheduledAt;
+-  if(!post.tumblrId||!time)throw Error('DAILY_PUBLICATION_TIME_UNVERIFIED');
+-  if(istanbulDay(time)===day)keys.add('post:'+post.tumblrId);
+- }
+- for(const row of journal.items){
+-  if(['SUBMITTING','UNKNOWN','RECONCILIATION_REQUIRED'].includes(row.status)){
+-   // An old uncertain operation remains blocking until explicitly reconciled.
+-   if(!row.reservedDay||row.reservedDay!==day)throw Error('UNCERTAIN_PUBLICATION_REQUIRES_RECONCILIATION');
+-   keys.add(row.tumblrId?'post:'+row.tumblrId:'job:'+row.id);
++export function dailyAdmission(inventory, journal, now, targetAt) {
++  if (!inventory?.complete || !inventory?.queueComplete || inventory.allPathsCovered !== true) throw Error('DAILY_PUBLICATION_BUDGET_UNVERIFIED');
++  if (!Array.isArray(inventory.published) || !Array.isArray(inventory.queued) || !Array.isArray(journal?.items)) throw Error('DAILY_INVENTORY_INVALID');
++  if (!targetAt) throw Error('TARGET_PUBLICATION_TIME_UNVERIFIED');
++  const today=istanbulDay(now), day=istanbulDay(targetAt), reservations=new Map();
++  if (day < today) throw Error('TARGET_PUBLICATION_DAY_IN_PAST');
++  const remember=(key,date)=>{
++    if (reservations.has(key) && reservations.get(key)!==date) throw Error('PUBLICATION_DAY_CONFLICT');
++    reservations.set(key,date);
++  };
++  for (const post of inventory.published) {
++    if (!post.tumblrId || !post.publishedAt) throw Error('DAILY_PUBLICATION_TIME_UNVERIFIED');
++    remember('post:'+post.tumblrId,istanbulDay(post.publishedAt));
+@@ -73,2 +75,28 @@ export function dailyAdmission(inventory,journal,now=new Date().toISOString()){
+- }
+- return {day,used:keys.size,remaining:Math.max(0,3-keys.size)};
++  for (const post of inventory.queued) {
++    if (!post.tumblrId || !post.scheduledAt) throw Error('DAILY_PUBLICATION_TIME_UNVERIFIED');
++    remember('post:'+post.tumblrId,istanbulDay(post.scheduledAt));
++  }
++  for (const row of journal.items) {
++    if (!uncertain.has(row.status)) continue;
++    if (!/^\d{4}-\d{2}-\d{2}$/.test(row.reservedDay||'') || row.reservedDay < today) throw Error('UNCERTAIN_PUBLICATION_REQUIRES_RECONCILIATION');
++    if (!row.tumblrId && !row.id) throw Error('RESERVATION_ID_MISSING');
++    remember(row.tumblrId?'post:'+row.tumblrId:'job:'+row.id,row.reservedDay);
++  }
++  const used=[...reservations.values()].filter(date=>date===day).length;
++  return {day,used,remaining:Math.max(0,3-used)};
++}
++
++
++export function submissionBudget(inventory,journal,p,row,now=new Date().toISOString()){
++ const target=inventory.nextQueueTarget;
++ // Generic DOM <time> and operator booleans cannot prove an automatic queue slot.
++ if(!target||target.semantics!=='VERIFIED_NEXT_PUBLICATION_TIME'||
++    target.source!=='PLATFORM_QUEUE_PREVIEW'||target.forDraftId!==(row.sourceDraftId||row.tumblrId))throw Error('TARGET_PUBLICATION_TIME_UNVERIFIED');
++ const age=Date.parse(now)-Date.parse(target.observedAt);
++ if(!Number.isFinite(age)||age<0||age>60000)throw Error('TARGET_PUBLICATION_EVIDENCE_STALE');
++ const budget=dailyAdmission(inventory,journal,now,target.scheduledAt);
++ return {...budget,targetAt:target.scheduledAt};
++}
++export function shouldSubmit(args,p,row,auth){
++ // Verify never evaluates publication eligibility or enters editor/enqueue.
++ return args.includes('--queue-ready')&&eligible(p,row,auth);
+@@ -81 +109 @@ export const acquirePublisherLock=file=>{
+-export async function cards(page,pkg,{expectedCount,maxPasses=30}={}){
++export async function cards(page,pkg,{expectedCount,maxPasses=30,kind='published'}={}){
+@@ -97 +125 @@ export async function cards(page,pkg,{expectedCount,maxPasses=30}={}){
+-   observed.set(id,{tumblrId:id,publishedAt:datetime,scheduledAt:datetime});
++   observed.set(id,kind==='published'?{tumblrId:id,publishedAt:datetime}:{tumblrId:id,observedTime:datetime,timeSemantics:'UNVERIFIED_QUEUE_TIMESTAMP'});
+@@ -111 +139 @@ export async function cards(page,pkg,{expectedCount,maxPasses=30}={}){
+-    found.set(p.id,{id:p.id,tumblrId:id,url:new URL(href,'https://www.tumblr.com').href,scheduled:(await card.getByRole('time').allTextContents())[0]?.trim()||null,...(timestamp?{publishedAt:timestamp,scheduledAt:timestamp}:{})});
++    found.set(p.id,{id:p.id,tumblrId:id,url:new URL(href,'https://www.tumblr.com').href,scheduled:(await card.getByRole('time').allTextContents())[0]?.trim()||null,...(timestamp?{publishedAt:timestamp}:{})});
+@@ -159 +187 @@ async function main(){
+-  const queued=await cards(page,pkg,{expectedCount:queueCount});
++  const queued=await cards(page,pkg,{expectedCount:queueCount,kind:'queue'});
+@@ -173,3 +201,2 @@ async function main(){
+-   if(!eligible(p,row,auth))continue;
+-   if(!args.includes('--queue-ready'))continue;
+-   const budget=dailyAdmission(inventory,journal);report.dailyBudget=budget;
++   if(!shouldSubmit(args,p,row,auth))continue;
++   const budget=submissionBudget(inventory,journal,p,row);report.dailyBudget=budget;
+@@ -179 +206 @@ async function main(){
+-   row.status='SUBMITTING';row.reservedDay=istanbulDay(new Date().toISOString());row.sourceDraftId ||= p.tumblrId;row.submittedAt=new Date().toISOString();atomic(journalFile,journal);
++   row.status='SUBMITTING';row.reservedDay=budget.day;row.targetAt=budget.targetAt;row.sourceDraftId ||= p.tumblrId;row.submittedAt=new Date().toISOString();atomic(journalFile,journal);
+@@ -189 +216 @@ async function main(){
+-   const after=await cards(page,pkg,{expectedCount:Number(queueTextAfter.match(/\d+/)?.[0])});
++   const after=await cards(page,pkg,{expectedCount:Number(queueTextAfter.match(/\d+/)?.[0]),kind:'queue'});
+@@ -203 +230,2 @@ async function main(){
+-  if(report.status==='CONTENT_STOCK_EMPTY')process.exitCode=4;
++  if(!args.includes('--queue-ready'))report.status='VERIFIED_NO_PUBLICATION';
++  else if(report.status==='CONTENT_STOCK_EMPTY')process.exitCode=4;

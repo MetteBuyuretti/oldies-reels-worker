@@ -1,0 +1,179 @@
+{
+  "candidates": [
+    {
+      "candidate": "M01",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    },
+    {
+      "candidate": "M02",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    },
+    {
+      "candidate": "M03",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    },
+    {
+      "candidate": "M04",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    },
+    {
+      "candidate": "M05",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 1
+    },
+    {
+      "candidate": "M06",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    },
+    {
+      "candidate": "M07",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    },
+    {
+      "candidate": "M08",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    },
+    {
+      "candidate": "M09",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    },
+    {
+      "candidate": "M10",
+      "status": "UNRESOLVED",
+      "source_kind": "UNVERIFIED",
+      "requested_source_kind": "MANUAL",
+      "missing": [
+        "VERIFIED_TRACK_ID",
+        "EXISTING_MANUAL_RECEIPT",
+        "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+      ],
+      "production_receipt": false,
+      "import_allowed": false,
+      "qc_approved": false,
+      "provider_calls": 0,
+      "canonical_writes": 0,
+      "related_existing_records": 0
+    }
+  ],
+  "protected_files_unchanged": true,
+  "downloads": 0,
+  "provider_calls": 0,
+  "imports": 0,
+  "canonical_writes": 0
+}

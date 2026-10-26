@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-26T12:52:24.756Z",
+  "mode": "VERIFY_ONLY",
+  "status": "VERIFIED_NO_PUBLICATION",
+  "queuedByThisRun": 0,
+  "publishedByThisRun": 0,
+  "additionalCost": 0,
+  "reconciliation": {
+    "published": 3,
+    "queued": 0,
+    "accountPosts": 23
+  },
+  "verifiedPublished": [
+    {
+      "id": "led-zeppelin-carnegie-1969",
+      "tumblrId": "831168688175595520",
+      "url": "https://www.tumblr.com/oldiesradyo/831168688175595520/the-night-led-zeppelin-took-carnegie-hall-past"
+    },
+    {
+      "id": "ronettes-be-my-baby-1963",
+      "tumblrId": "831179323999387649",
+      "url": "https://www.tumblr.com/oldiesradyo/831179323999387649/the-drumbeat-that-opens-the-door-to-be-my-baby"
+    },
+    {
+      "id": "pocket-playlist-2001",
+      "tumblrId": "831191288426725376",
+      "url": "https://www.tumblr.com/oldiesradyo/831191288426725376/when-your-music-collection-began-to-fit-in-a"
+    }
+  ],
+  "readyDrafts": 0,
+  "contentStock": 0,
+  "finishedAt": "2026-10-26T12:52:39.399Z"
+}

@@ -1,0 +1,12 @@
+test_complete_consistency_is_preparation_not_import_or_qc (__main__.ManualSourceTests.test_complete_consistency_is_preparation_not_import_or_qc) ... ok
+test_hash_mismatch_is_unresolved (__main__.ManualSourceTests.test_hash_mismatch_is_unresolved) ... ok
+test_missing_existing_receipt_stays_unresolved (__main__.ManualSourceTests.test_missing_existing_receipt_stays_unresolved) ... ok
+test_missing_track_cannot_be_inferred_from_filename (__main__.ManualSourceTests.test_missing_track_cannot_be_inferred_from_filename) ... ok
+test_old_slot_receipt_cannot_fill_new_manual_identity (__main__.ManualSourceTests.test_old_slot_receipt_cannot_fill_new_manual_identity) ... ok
+test_preflight_preserves_source_and_receipt (__main__.ManualSourceTests.test_preflight_preserves_source_and_receipt) ... ok
+test_today_cannot_relabel_historical_track (__main__.ManualSourceTests.test_today_cannot_relabel_historical_track) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.049s
+
+OK
