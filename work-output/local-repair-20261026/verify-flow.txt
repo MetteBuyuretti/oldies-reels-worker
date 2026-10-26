@@ -1,0 +1,73 @@
+async function main(){
+ const args=process.argv.slice(2),arg=n=>{const i=args.indexOf(n);return i<0?null:args[i+1]};
+ const root=arg('--root')||ROOT, packageFile=arg('--package')||PACKAGE;
+ const journalFile=path.join(root,'tumblr-editorial-state.json'),logDir=path.join(root,'logs');fs.mkdirSync(logDir,{recursive:true});
+ const lock=path.join(root,'tumblr-publisher.lock');let lockHandle,browser,page;
+ const report={at:new Date().toISOString(),mode:args.includes('--queue-ready')?'QUEUE_REVIEWED_DRAFTS':'VERIFY_ONLY',status:'STARTED',queuedByThisRun:0,publishedByThisRun:0,additionalCost:0};
+ const log=x=>fs.appendFileSync(path.join(logDir,'tumblr-auto.jsonl'),JSON.stringify({at:new Date().toISOString(),...x})+'\n');
+ try{
+  lockHandle=acquirePublisherLock(lock);
+  const pkg=readJson(packageFile),items=validatePackage(pkg,path.dirname(packageFile));
+  let journal=readJson(journalFile);const auth=readJson(path.join(root,'tumblr-publication-authorization.json'));
+  if(journal.schemaVersion!==1||!Array.isArray(journal.items))throw Error('INVALID_JOURNAL_SCHEMA');
+  // Uncertain submissions always stop automatic retries.
+  // Uncertain rows may be reconciled from verified remote evidence, never retried.
+  items.forEach(i=>{const row=journal.items.find(r=>r.id===i.id);if(row&&row.hash!==i.hash)throw Error('CONTENT_CHANGED_REVIEW_REQUIRED: '+i.id);if(!row||!['SUBMITTING','UNKNOWN','RECONCILIATION_REQUIRED'].includes(row.status))classify(i,journal);});
+  if(args.includes('--intake')){try{report.intakeCandidates=await intake(root)}catch(e){report.intakeError=e.message;log({stage:'INTAKE',status:'ERROR',error:e.message});}}
+  await fetchJson('http://127.0.0.1:9243/json/version');
+  browser=await loadChromium().connectOverCDP('http://127.0.0.1:9243');
+  page=await browser.contexts()[0].newPage();page.setDefaultTimeout(15000);
+  await page.goto('https://www.tumblr.com/blog/oldiesradyo/queue',{waitUntil:'domcontentloaded',timeout:60000});
+  await page.locator('#queue_post_frequency').waitFor({timeout:30000});
+  if(await page.locator('#queue_post_frequency').inputValue()!=='3'||await page.getByRole('button',{name:'Sıradakileri duraklat',exact:true}).count()!==1)throw Error('QUEUE_NOT_ACTIVE_AT_THREE_PER_DAY');
+  const queueText=await page.getByRole('link',{name:/^Sıradakiler(?: \d+)?$/}).innerText();
+  if(!/^Sıradakiler\s*\d*$/.test(queueText.trim()))throw Error('REMOTE_QUEUE_COUNT_UNVERIFIED');
+  const queueCount=Number(queueText.match(/\d+/)?.[0]||0);
+  const queued=await cards(page,pkg,{expectedCount:queueCount,kind:'queue'});
+  await page.goto('https://www.tumblr.com/blog/oldiesradyo',{waitUntil:'domcontentloaded',timeout:60000});
+  await page.getByRole('link',{name:/^Gönderiler \d+/}).waitFor({timeout:30000});
+  const countText=await page.getByRole('link',{name:/^Gönderiler \d+/}).innerText();
+  const published=await cards(page,pkg,{expectedCount:Number(countText.match(/\d+/)?.[0])});
+  journal=reconcileJournal(pkg,journal,queued.matches,published.matches);
+  atomic(journalFile,journal);
+  // No all-path coverage claim is inferred from Tumblr's queue frequency setting.
+  // Existing authorization has no such evidence; new queue submissions stay blocked.
+  const inventory={allPathsCovered:false,complete:published.complete,queueComplete:queued.complete,published:published.inventory.map(({tumblrId,publishedAt})=>({tumblrId,publishedAt})),queued:queued.inventory.map(({tumblrId,scheduledAt})=>({tumblrId,scheduledAt}))};
+  report.reconciliation={published:published.matches.length,queued:queued.matches.length,accountPosts:published.inventory.length};
+  let moved=0;
+  for(const p of pkg.posts){
+   const row=journal.items.find(x=>x.id===p.id);if(!row)throw Error('UNREGISTERED_DRAFT');
+   if(!shouldSubmit(args,p,row,auth))continue;
+   const budget=submissionBudget(inventory,journal,p,row);report.dailyBudget=budget;
+   if(budget.remaining===0){report.warning='DAILY_PUBLICATION_LIMIT_REACHED';break;}
+   const dialog=await verifyEditor(page,p);
+   // Persist before click: a crash cannot silently cause a duplicate retry.
+   row.status='SUBMITTING';row.reservedDay=budget.day;row.targetAt=budget.targetAt;row.sourceDraftId ||= p.tumblrId;row.submittedAt=new Date().toISOString();atomic(journalFile,journal);
+   await dialog.getByRole('button',{name:'Gönderi durum seçeneklerini aç',exact:true}).click();
+   await dialog.getByRole('list').getByRole('button',{name:'Sıraya ekle',exact:true}).click();
+   await dialog.getByRole('list').waitFor({state:'hidden'});
+   await dialog.getByRole('button',{name:'Sıraya ekle',exact:true}).click();
+   await dialog.waitFor({state:'hidden',timeout:30000});
+   await page.goto('https://www.tumblr.com/blog/oldiesradyo/queue',{waitUntil:'domcontentloaded',timeout:60000});
+   await page.getByRole('heading',{name:p.title,exact:true}).waitFor({timeout:30000});
+   const queueTextAfter=await page.getByRole('link',{name:/^Sıradakiler(?: \d+)?$/}).innerText();
+   if(!/^Sıradakiler\s*\d+$/.test(queueTextAfter.trim()))throw Error('REMOTE_QUEUE_COUNT_UNVERIFIED');
+   const after=await cards(page,pkg,{expectedCount:Number(queueTextAfter.match(/\d+/)?.[0]),kind:'queue'});
+   const confirmed=after.matches.find(x=>x.id===p.id);if(!confirmed)throw Error('QUEUE_CONFIRMATION_MISSING');
+   Object.assign(row,confirmed,{status:'QUEUED_VERIFIED',verifiedAt:new Date().toISOString(),evidence:'Publisher submitted existing draft; queue card and schedule read back'});atomic(journalFile,journal);
+   inventory.queued=after.inventory.map(({tumblrId,scheduledAt})=>({tumblrId,scheduledAt}));
+   moved++;report.queuedByThisRun++;log({status:'QUEUED_VERIFIED',id:p.id,tumblrId:row.tumblrId,scheduled:row.scheduled});
+  }
+  report.verifiedQueue=journal.items.filter(x=>x.status==='QUEUED_VERIFIED').map(x=>({id:x.id,tumblrId:x.tumblrId,scheduled:x.scheduled}));
+  report.verifiedPublished=journal.items.filter(x=>x.status==='PUBLISHED_VERIFIED').map(x=>({id:x.id,tumblrId:x.tumblrId,url:x.url}));
+  report.readyDrafts=journal.items.filter(x=>x.status==='DRAFT_VERIFIED').length;
+  report.status=report.queuedByThisRun?'QUEUE_UPDATED':report.verifiedQueue.length?'QUEUE_VERIFIED_NO_DUPLICATE':'CONTENT_STOCK_EMPTY';
+  report.contentStock=report.verifiedQueue.length+report.readyDrafts;
+  report.requiresNewReviewedContent=report.contentStock===0;
+  report.production='REVIEWED_PACKAGE_REQUIRED; WordPress intake is not an original story generator';
+  if(report.verifiedQueue.length<3)report.warning='LOW_CONTENT_STOCK';
+  if(!args.includes('--queue-ready'))report.status='VERIFIED_NO_PUBLICATION';
+  else if(report.status==='CONTENT_STOCK_EMPTY')process.exitCode=4;
+ }catch(e){report.status='ERROR';report.error=e.message;log({status:'ERROR',error:e.stack});process.exitCode=1;}
+ finally{report.finishedAt=new Date().toISOString();atomic(path.join(logDir,'tumblr-publisher-latest.json'),report);log(report);console.log(JSON.stringify(report,null,2));await page?.close().catch(()=>{});await browser?.close().catch(()=>{});if(lockHandle!==undefined){fs.closeSync(lockHandle);fs.unlinkSync(lock);}}
+}
