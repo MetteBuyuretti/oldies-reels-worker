@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-25T02:55:36.589Z",
+  "updated_at": "2026-10-26T02:14:15.059Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -437,6 +437,31 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-monthly-separation-20261025/report.md",
         "https://oldiesradyo.com/muzik-haberleri/",
         "https://oldiesradyo.com/en/music-news/"
+      ]
+    },
+    {
+      "id": "reels-en-charon-voice-integration-20261026",
+      "title": "İngilizce Facebook Reels — sakin/enerjik Charon ses entegrasyonu",
+      "owner": "WORK MASTER",
+      "status": "queued",
+      "completed_units": [
+        "founder_forwarded_voice_acceptance_recorded",
+        "pr22_draft_and_main_facebook_gate_verified"
+      ],
+      "last_checkpoint": "2026-10-26T02:14:15.059Z",
+      "next_step": "Mevcut kabul edilmiş sakin/enerjik kayıtları dosya/hash ile çöz; güncel kullanıcı dinleme kabulüyle eşle, mevcut Reels hattında profile bağla ve25–30syayınsızpilot hazırla. Gerçek uygulayıcı alma teyidi beklenir. Watchdog gerçekMP4ses/süre/anlatım/görseli denetlesin; PR22merge/Facebookyayın kilidi açılmaz.",
+      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.",
+      "acceptance": {
+        "voice_preference": "founder_reported_calm_for_slow_energetic_for_upbeat",
+        "approved_asset_identity": "pending",
+        "automation_integration": "pending",
+        "current_25_30s_mp4": "pending",
+        "independent_watchdog": "pending",
+        "live_publication": "not_authorized_gate_preserved"
+      },
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/reels-english-voice-followup-20261026/report.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/22"
       ]
     }
   ]
