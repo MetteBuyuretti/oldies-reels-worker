@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-27T00:58:23Z",
+  "updated_at": "2026-10-27T01:15:27Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -476,27 +476,48 @@
       "id": "local-commander-scoped-acceptance-20261027",
       "title": "Yerel Commander — mevcut Codex içinde gözetimli salt-okunur kullanım kabulü",
       "owner": "WORK MASTER",
-      "status": "checkpointed",
+      "status": "awaiting_independent_review",
       "completed_units": [
         "constitution-and-watchdog-current-note-read",
-        "scoped-acceptance-instruction-posted-and-readback-verified"
+        "scoped-acceptance-instruction-posted-and-readback-verified",
+        "local-alindi-and-scoped-mcp-read-delivery-read-20261027",
+        "master-scoped-assessment-and-watchdog-decision-request-posted-readback-verified"
       ],
-      "last_checkpoint": "2026-10-27T00:58:23Z",
-      "next_step": "Bilinen yerel Codex'in ALINDI teyidi; mevcut gerçek Commander araç/izin sınırları + izinli tek gerçek read_file çağrısı; gizlisiz kanıt; mevcut Watchdog bağımsız dar kabulü. Bu Work doğrudan Windows yürütücüsüne sahip değil; GitHub yorumu otomatik uyandırma sayılmaz.",
-      "note": "27.10.2026 | 03:58 TSİ: Yeniden kurulum/test tekrarı gerekçesi görülmedi. Sınırlı yerel okuma, bu Work'ten doğrudan erişim ve gözetimsiz üretim ayrı tutulur. Yeni config/izin/terminal/scheduler/üretim değişikliği yapılmadı.",
+      "last_checkpoint": "2026-10-27T01:15:27Z",
+      "next_step": "Mevcut WORK WATCHDOG6431221276 somut teslimi inceleyip yalnız yerel Codex/mevcut izinli kök/gözetimli salt-okunur iş için kabul/ret versin. MASTER sonucu ilk aktif okumada kaydetsin. Yeniden kurulum/geniş test istenmiyor; genel OPERATIONAL PASS, bulut bağlantısı ve gözetimsiz üretim açılmadı.",
+      "note": "27.10.2026 | 03:58 TSİ: Yeniden kurulum/test tekrarı gerekçesi görülmedi. Sınırlı yerel okuma, bu Work'ten doğrudan erişim ve gözetimsiz üretim ayrı tutulur. Yeni config/izin/terminal/scheduler/üretim değişikliği yapılmadı.\n27.10.2026 | 04:15 TSİ: Codex6431221276 tam okundu: ALINDI04:10:32/teslim04:12:47; get_config/list_directory/read_file olmak üzere3yerelçağrı,13araç/5terminalkatalogdayok/telemetryfalse/1kök, gerçek redakte Etsy raporu151/151satır bildirildi. MASTER Windows çağrısını bağımsız yeniden çalıştırmadı; ayrıntılı operatör teslimi incelendi. Yazma araçları mevcut; iş salt-okunur, bağlantı salt-okunur yetkili diye etiketlenmez. Native eski thread eşlemesi UNVERIFIED; CMD-20261027-041032 yalnız korelasyon kimliğidir. Kopyanın orijinal sonu eksik; bu okuma Etsy sağlığı/tamkaynak/hashkanıtı değildir. MASTER6431278599 incelemesi ve bağımsızdar karar isteği yayımlandı/geriokundu; Watchdog ALINDI veya kabulü henüz yok.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6430454697",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6431045274"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6431045274",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6431221276",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6431278599"
       ],
       "acceptance": {
         "instruction": "posted_readback_verified",
-        "local_operator_receipt": "not_observed",
-        "local_supervised_read": "pending_current_mcp_evidence",
-        "direct_work_access": "not_available_in_current_catalog",
+        "local_operator_receipt": "observed_in_6431221276_job_and_correlation_match_native_thread_unverified",
+        "local_supervised_read": "tested_per_detailed_operator_mcp_call_delivery_master_read_not_live_reperformed",
+        "direct_work_access": "not_established_by_this_delivery",
         "unattended_production": "not_opened",
-        "independent_acceptance": "pending"
+        "independent_acceptance": "pending_existing_watchdog_decision",
+        "master_assessment": "delivery_matches_scoped_read_criteria_subject_to_independent_review",
+        "read_only_authority": "not_claimed_write_tools_still_present",
+        "native_thread_mapping": "unverified_not_attributed_to_prior_candidate"
       },
-      "control_time": "27.10.2026 | 03:58 TSİ: Talimat geri okundu. Sonraki kontrol yerel ALINDI kaydı ve uygulayıcının o kayıtta vereceği bitiş zamanı; otomatik kontrol kurulmadı."
+      "control_time": "27.10.2026 | 04:15 TSİ: Dar teslim ve MASTER değerlendirmesi okundu/kaydedildi. Sonraki kontrol mevcut Watchdog'un dar kararının ilk aktif okunması; otomatik uyandırma/izleme yok.",
+      "operator_evidence": {
+        "job_id": "MASTER-COMMANDER-20261027-0357",
+        "correlation_id": "CMD-20261027-041032",
+        "client_reported": "codex-mcp-client 0.164.0-alpha.11.1",
+        "server_reported": "Desktop Commander 0.3.0",
+        "alindi_at": "2026-10-27T04:10:32+03:00",
+        "delivered_at": "2026-10-27T04:12:47+03:00",
+        "read_at": "2026-10-27T04:11:32+03:00",
+        "tool_name": "mcp__desktop_commander_local__read_file",
+        "file_alias": "OLDIES-ETSY-REDACTED-REPORT",
+        "root_alias": "ROOT-01",
+        "read_lines": 151,
+        "remaining_lines": 0
+      }
     }
   ]
 }
