@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-29T23:50:35.573Z",
+  "updated_at": "2026-10-29T23:56:31.756Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -605,10 +605,12 @@
         "existing_masked_shortcut_bound_to_secure_managed_activation_20261030",
         "six_cancel_child_env_auth_rollback_transient_cleanup_fixtures_pass_20261030",
         "masked_activation_window_open_session1_pid50692_20261030",
-        "master_read_all_fifteen_masked_activation_j2_artifacts_and_scoped_source_review_saved_20261030_0249"
+        "master_read_all_fifteen_masked_activation_j2_artifacts_and_scoped_source_review_saved_20261030_0249",
+        "owner_reported_activation_button_pressed_20261030",
+        "master_post_press_fixed_report_tunnel_response_observed_not_project_acceptance"
       ],
-      "last_checkpoint": "2026-10-29T23:50:35.573Z",
-      "next_step": "Kullanıcı açık “OLDIES — güvenli proje araçları aktivasyonu” penceresinde mevcut anahtarı yalnız maskeli alana girip beyan kutusunu işaretleyerek “Proje araçlarını etkinleştir” düğmesine basacak. MASTER kaynak ve altı fixture kaydını inceledi; aynı hazırlık/test/onay tekrarı yok. Yeni yerel aktivasyon sonucunu okuyup araçlar bu Work'e geldiğinde gerçek izinli kaynak→kontrollü staging→syntax kabulünü yap. Eski exit42bu yeni formun sonucu sayılmaz.",
+      "last_checkpoint": "2026-10-29T23:56:31.756Z",
+      "next_step": "Pencerenin gizlisiz sonucunu öğren veya yeni yerel makbuzu oku. Aktivasyon başarılıysa ChatGPTPlugins OLDIESCommander bağlantısında Refresh/Yenile ile yeni araç listesini al; bu Master katalogda altı aracı gerçekten gördüğünde kaynak→kontrollü staging→syntax kabulünü yapar. Hata/geri dönüşte önce gerçek yeni hata kaydını değerlendir; anahtar girme/stop/kurulum veya eski testleri kör tekrarlama.",
       "acceptance": {
         "scope": "three_pinned_tumblr_sources_and_three_fixed_staging_files_only",
         "operator_candidate": "current_windows_local_mcp_7tools_source_ps_staging_roundtrip_syntax_pass_not_Work_acceptance",
@@ -619,14 +621,18 @@
         "production_write_or_general_shell": "not_in_scope",
         "scope_decision": "master_20261029_1710_same_six_tools_after_local_checks",
         "local_activation_receipt": "masked_window_open_020555_waiting_user_input_no_new_runtime_stop",
-        "current_work_catalog": "one_fixed_historical_report_tool_only_observed_20261030_0250",
+        "current_work_catalog": "only_fixed_report_tool_still_exposed_after_press_20261030_0255",
         "execution_channel": "existing_local_codex_completed_masked_bridge_waiting_owner_local_input",
         "restart_credential_context": "secure_child_env_bridge_ready_waiting_owner_local_masked_input",
         "rollback": "byte_backups_and_fixture_rollback_verified_real_runtime_restart_or_rollback_not_exercised",
         "master_delivery_review": "faeb0eca_15_artifacts_full_read_scoped_positive_review_no_independent_windows_rerun_or_final_Work_acceptance",
         "masked_restart_handoff": "installed_existing_shortcut_and_open_masked_form_source_and_six_fixture_records_reviewed_by_master",
         "masked_bridge": "installed_and_reported_open_020555_session1_button_Proje_araclarini_etkinlestir",
-        "secure_flow_fixtures": "6_pass_cancel_empty_success_auth_before_stop_rollback_transient_cleanup_no_real_credentials"
+        "secure_flow_fixtures": "6_pass_cancel_empty_success_auth_before_stop_rollback_transient_cleanup_no_real_credentials",
+        "owner_local_input": "owner_reported_button_pressed_observed_by_master_20261030_0253",
+        "post_press_transport": "fixed_report_call_returned_16044_chars_isError_false_historical_report_only_not_runtime_health_or_activation_proof",
+        "current_ui_activation_outcome": "not_observed_need_visible_outcome_or_fresh_local_receipt",
+        "metadata_refresh": "official_custom_mcp_refresh_flow_verified_client_action_not_performed_by_master"
       },
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
@@ -644,10 +650,11 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/02c1baba7017d72330648d89cc70ab6aec7e3a19/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6510622424",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6510756903",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/e0115bdf0fc18caaf694e045976b774f5e94f4b4/work-output/commander-activation-20261030/masked-review/MASTER-REVIEW.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/e0115bdf0fc18caaf694e045976b774f5e94f4b4/work-output/commander-activation-20261030/masked-review/MASTER-REVIEW.md",
+        "https://developers.openai.com/plugins/deploy/connect-chatgpt"
       ],
-      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: WD6509320201 kararı alındı; genel inceleme/kapsam/yetki beklemesi yok. #32 17:15 sonrası yalnız WD01:00 kaydı içeriyor; yeni yerel uygulama makbuzu bulunmadı. Work araç kataloğu yalnız sabit rapor. Fiilî başlatma kanalı yokluğu açık blocker yapıldı; sessiz bekleme veya yerelde çalışıyor izlenimi verilmez. Yeni kurulum/anahtar/izin değişikliği yapılmadı.\n30.10.2026 | 01:13 TSİ: Kurucu komutu mevcut Windows Codex'e iletti; MASTER6509466771 gerçek01:09ALINDI/BAŞLADI kaydını doğrudan okudu. Başlatma iletimi engeli çözüldü, görev yerelde in_progress; güncel syntax/aktivasyon sonucu bekleniyor. İlk kontrol hedefini Codex01:30verdi. Work'te hâlâ tek rapor aracı var; hedef Work kabulü açılmadı. WD6509451390tam okundu; Jingle eki tek mevcut göreve işlendi, onun alımı henüz teyitli değil.\n30.10.2026 | 01:17 TSİ — WINDOWS CODEX: f8e5316module ve güncelpin/helper/üçkaynak doğrulandı;7/7Windowschecker, gerçekPSAST geçerli/hatalı ve ayrı güncelMCP kaynak→exclusive staging→geriokuma→syntax PASS. Tamaktif yedekler hashle doğrulandı. Yetkiliaktivasyonçağrısı RESTART_KEY_CONTEXT_UNAVAILABLE/exit42 ile stop öncesi durdu: süreçortamında yapılandırılmışCONTROL_PLANE_API_KEYyok. Aktif runtime/PID15192healthy/ready/pollingkorundu, aktiffilespre/postaynı; yeniaraçlarWork'eaçılmadı. Engelyeniinceleme veya görevalınmadıdeğil, yenibaşlatma/geri dönüş için aynıanahtarbağlamıdır.\n30.10.2026 | 01:57 TSİ: MASTER6509615901 ve b21753afaltındaki9dosyayı TAM okudu; modül/pin/Windows7checker/gerçekPS ve yerelcandidateMCP sonuçları ile stop öncesiexit42/aynıaktifhashler tutarlı. Windows testlerini bu Work'te yeniden koşmadı. Main'deki eski01:30beklentisi bu teslimle güncellendi. Sonraki tek dar iş mevcut maskeli girişin aynı managed restart/rollback anahtar bağlamına bağlanması; 02c1baba eki hazır, yerel alımı/uygulaması henüz gözlenmedi. Kullanıcının anahtarı sohbete/GitHub'a/argv/kalıcıenvye koyması istenmiyor. Önce hazır giriş yolu ve güvenli önkontrol teslimi gerekli.\n30.10.2026 | 02:14TSİ WINDOWS CODEX: MASTER01:58talimatı02:02alındı; mevcutshortcut/launcher/C# hashyedekli darbağla -ActivateProjectTools üzerinden güncel managedhelper'a bağlandı.6yeni fixture PASS; gerçekUIcompilePASS. Mevcutkısayol02:05:55'teaçıldı;PID50692Session1/mainWindowTitle/windowhandleile doğrulandı.02:07#32/6510622424MASKELİ AKTİVASYON GİRİŞİ HAZIR teslimi. Anahtaralanı okunmadı; kullanıcıgirişi bekleniyor; yeniaktivasyonmakbuzu henüzyok. Eski01:13exit42yeniUIsonucu sayılmıyor.\n30.10.2026 | 02:49 TSİ: MASTER6510756903 ve faeb0eca15kaynak/diff/kanıt dosyasını tam okudu. Maskeli launcher/core/managed diff ve6fixture tutarlı; dar kaynak/teslim incelemesi e0115bdf'de kaydedildi. User-input yolu artık hazır; eski bridgehazırlanmadı/yenidenCodexgörevlendir notları güncel değil. Bu Master kullanıcıya açık maskeli alan+beyan+düğme adımını bildirdi. Anahtar girişi/yeni runtime aktivasyonu/Work proje kabulü hâlâ gözlenmedi; yeni genel onay/kurulum beklenmiyor.",
-      "control_time": "30.10.2026 | 02:49 TSİ kaynak/teslim incelemesi. Sonraki kontrol yeni maskeli form aktivasyon makbuzu ve hedef Work araçları; otomatik GitHub/Codex takip iddiası yok.",
+      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: WD6509320201 kararı alındı; genel inceleme/kapsam/yetki beklemesi yok. #32 17:15 sonrası yalnız WD01:00 kaydı içeriyor; yeni yerel uygulama makbuzu bulunmadı. Work araç kataloğu yalnız sabit rapor. Fiilî başlatma kanalı yokluğu açık blocker yapıldı; sessiz bekleme veya yerelde çalışıyor izlenimi verilmez. Yeni kurulum/anahtar/izin değişikliği yapılmadı.\n30.10.2026 | 01:13 TSİ: Kurucu komutu mevcut Windows Codex'e iletti; MASTER6509466771 gerçek01:09ALINDI/BAŞLADI kaydını doğrudan okudu. Başlatma iletimi engeli çözüldü, görev yerelde in_progress; güncel syntax/aktivasyon sonucu bekleniyor. İlk kontrol hedefini Codex01:30verdi. Work'te hâlâ tek rapor aracı var; hedef Work kabulü açılmadı. WD6509451390tam okundu; Jingle eki tek mevcut göreve işlendi, onun alımı henüz teyitli değil.\n30.10.2026 | 01:17 TSİ — WINDOWS CODEX: f8e5316module ve güncelpin/helper/üçkaynak doğrulandı;7/7Windowschecker, gerçekPSAST geçerli/hatalı ve ayrı güncelMCP kaynak→exclusive staging→geriokuma→syntax PASS. Tamaktif yedekler hashle doğrulandı. Yetkiliaktivasyonçağrısı RESTART_KEY_CONTEXT_UNAVAILABLE/exit42 ile stop öncesi durdu: süreçortamında yapılandırılmışCONTROL_PLANE_API_KEYyok. Aktif runtime/PID15192healthy/ready/pollingkorundu, aktiffilespre/postaynı; yeniaraçlarWork'eaçılmadı. Engelyeniinceleme veya görevalınmadıdeğil, yenibaşlatma/geri dönüş için aynıanahtarbağlamıdır.\n30.10.2026 | 01:57 TSİ: MASTER6509615901 ve b21753afaltındaki9dosyayı TAM okudu; modül/pin/Windows7checker/gerçekPS ve yerelcandidateMCP sonuçları ile stop öncesiexit42/aynıaktifhashler tutarlı. Windows testlerini bu Work'te yeniden koşmadı. Main'deki eski01:30beklentisi bu teslimle güncellendi. Sonraki tek dar iş mevcut maskeli girişin aynı managed restart/rollback anahtar bağlamına bağlanması; 02c1baba eki hazır, yerel alımı/uygulaması henüz gözlenmedi. Kullanıcının anahtarı sohbete/GitHub'a/argv/kalıcıenvye koyması istenmiyor. Önce hazır giriş yolu ve güvenli önkontrol teslimi gerekli.\n30.10.2026 | 02:14TSİ WINDOWS CODEX: MASTER01:58talimatı02:02alındı; mevcutshortcut/launcher/C# hashyedekli darbağla -ActivateProjectTools üzerinden güncel managedhelper'a bağlandı.6yeni fixture PASS; gerçekUIcompilePASS. Mevcutkısayol02:05:55'teaçıldı;PID50692Session1/mainWindowTitle/windowhandleile doğrulandı.02:07#32/6510622424MASKELİ AKTİVASYON GİRİŞİ HAZIR teslimi. Anahtaralanı okunmadı; kullanıcıgirişi bekleniyor; yeniaktivasyonmakbuzu henüzyok. Eski01:13exit42yeniUIsonucu sayılmıyor.\n30.10.2026 | 02:49 TSİ: MASTER6510756903 ve faeb0eca15kaynak/diff/kanıt dosyasını tam okudu. Maskeli launcher/core/managed diff ve6fixture tutarlı; dar kaynak/teslim incelemesi e0115bdf'de kaydedildi. User-input yolu artık hazır; eski bridgehazırlanmadı/yenidenCodexgörevlendir notları güncel değil. Bu Master kullanıcıya açık maskeli alan+beyan+düğme adımını bildirdi. Anahtar girişi/yeni runtime aktivasyonu/Work proje kabulü hâlâ gözlenmedi; yeni genel onay/kurulum beklenmiyor.\n30.10.2026 | 02:55 TSİ: Kurucu “bastım” bildirdi. MASTERtünel üzerinden sabit eski raporu bu yeni kontrol bağlamında bir kez çağırdı: isErrorfalse/16044karakter; bu sadece mevcut aracın yanıtıdır. Yerel dosya okuması değil, fakat yeni proje araçları/aktivasyon/sağlık kabulü de değil. Oturumkataloğunda hâlâ tekaraç, #32'de yeni aktivasyon teslimi yok. Resmî OpenAI connect-and-test belgesinde customMCPmetadata Refresh akışı okundu; runtimebaşarısı ile clientaraçlistesi ayrı doğrulanacak. Anahtar girişi yeniden istenmedi.",
+      "control_time": "30.10.2026 | 02:55 TSİ düğme sonrası aktif kontrol. Yeni yerel sonuç ve yeni araç metadata'sı bekleniyor; otomatik izleme/Work kabulü yok.",
       "resolved_blockers": [
         {
           "type": "local_execution_channel_unavailable",
@@ -670,13 +677,12 @@
         "activation_result_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509615901",
         "latest_delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6510756903"
       },
-      "blocker_code": "LOCAL_MASKED_INPUT_PENDING",
+      "blocker_code": "POST_PRESS_ACTIVATION_RESULT_AND_TOOL_DISCOVERY_PENDING",
       "blocker": {
-        "type": "owner_local_masked_credential_input_pending",
+        "type": "activation_outcome_and_new_tool_discovery_pending",
         "approval_pending": false,
-        "setup_or_source_bridge_pending": false,
-        "description": "Mevcut maskeli form aynı managed aktivasyon/rollback child-env yoluna bağlandı; kullanıcı mevcut anahtarı yalnız yerel alana girip beyanı işaretleyerek düğmeye basmalı. Bu Work anahtarı okuyamaz/giremez. Yeni runtime aktivasyonu henüz gözlenmedi.",
-        "next_required_evidence": "Bu yeni form işlemine ait güncel aktivasyon/sağlık/geri dönüş makbuzu; ardından Work'te gerçek proje araçları ve kaynak→staging→syntax cevabı."
+        "description": "Kurucu düğmeye bastığını bildirdi. Sonrasında mevcut sabit rapor tünel çağrısı başarılı; yeni altı araç bu oturuma henüz sunulmuyor. Aktivasyonun başarı/geri dönüş sonucu bu Work'te görülemiyor; düğmeye basma başarı kabulü değildir.",
+        "next_required_evidence": "Yerel penceredeki gizlisiz aktivasyon sonucu veya yeni yerel makbuz. Başarılıysa ChatGPT OLDIES Commander bağlantısı Refresh ile yeni metadata'yı almalı; ardından gerçek proje araç çağrıları yapılabilir."
       }
     }
   ]
