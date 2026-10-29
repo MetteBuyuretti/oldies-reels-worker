@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-29T14:07:51Z",
+  "purpose": "Existing English Facebook station signoff asset identity; not full narration or final MP4 acceptance",
+  "approval_evidence": {
+    "report": "OLDIES_WATCHDOG_INGILIZCE_REELS_SES_RAPORU_20261026_0506.md",
+    "library_file_id": "libfile_a3a2acadd7148191b747aa665130c310",
+    "read_in_full": true,
+    "reported_owner_preference": {
+      "calm": "slow content",
+      "energetic": "upbeat content"
+    },
+    "binding_basis": "Exact SHA256 values in the report matched actual bytes retrieved now; prior owner feedback is preserved, not re-requested"
+  },
+  "assets": [
+    {
+      "profile": "calm",
+      "filename": "en-warm-signoff-radyo-v3.mp3",
+      "repository_path": "assets/facebook/en-warm-signoff-radyo-v3.mp3",
+      "source_ref": "9ad08776e882af386f2897ac43e85eaeb28f029e",
+      "sha256": "1dc358ef0cea5a3a6d9fe20d9934358fed5ccd0009ba0838a60bba9f28bb9d9c",
+      "bytes": 26880,
+      "duration_seconds": 6.72,
+      "sample_rate": 24000,
+      "channels": 1,
+      "decode_exit": 0
+    },
+    {
+      "profile": "energetic",
+      "filename": "Oldies-Radyo-DJ-Energetic-Preview.mp3",
+      "library_file_id": "libfile_9aa7cad7f33881918c27603206b19a44",
+      "sha256": "a2df71619290530249fbacbc02c546caceeecaf3c05d265bd8321ebfeefb4ac8",
+      "bytes": 21120,
+      "duration_seconds": 5.28,
+      "sample_rate": 24000,
+      "channels": 1,
+      "decode_exit": 0
+    }
+  ],
+  "excluded_comparison": {
+    "filename": "Oldies-Radyo-DJ-Signoff-1.25x-Preview.mp3",
+    "sha256_in_report": "f1575c07066e83898e6c68628629502bb6d84a3bf9917249546695833dc5ac67",
+    "role": "speed comparison only, not accepted energetic recording",
+    "bytes_not_retrieved_in_this_check": true
+  },
+  "boundaries": {
+    "new_audio_generated": false,
+    "binary_uploaded_to_github": false,
+    "windows_local_copy_matched": false,
+    "active_facebook_launcher_verified": false,
+    "render_or_publication_accepted": false,
+    "production_approval_flags_changed": false
+  }
+}
