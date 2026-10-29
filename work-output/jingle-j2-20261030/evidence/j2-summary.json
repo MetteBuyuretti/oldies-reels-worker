@@ -1,0 +1,97 @@
+{
+  "status": "REFERENCE_VERIFIED_BREAK_LOCALIZED_DIAGNOSTIC_CANDIDATE_ONLY",
+  "at": "2026-10-29T23:10:39.091736+00:00",
+  "reference": {
+    "alias": "APPROVED_V3_1_SOUND_REFERENCE",
+    "recorded_at": "2026-10-11T01:19:07.260303+03:00",
+    "source_date": "2026-10-10",
+    "bytes": 455469,
+    "hash_matches_approval_and_copy": true,
+    "nominal_seconds": 14.18,
+    "format_seconds": "14.180000",
+    "streams": [
+      {
+        "codec": "mp3",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "14.180000"
+      }
+    ],
+    "full_decode_exit": 0,
+    "kind": "DJ_AND_MUSIC_MANUAL_FFMPEG_LISTENING_PREVIEW",
+    "sound_standard_approved": true,
+    "final_master_verified": false,
+    "publication_approved": false
+  },
+  "original_producer": {
+    "file": "temp/make_v3_music_up_08db_20261010_preview.py",
+    "current_source_sha256": "5b9913e974b12339162855fd55f462bb3eee929c8d4685b0b7c0408a5cf5406b",
+    "historical_git_commit": "NOT_RECORDED",
+    "entry": "Direct local script -> existing src.audio helpers -> existing inputs -> FFmpeg encodes",
+    "run_again": false,
+    "music_input_exists": true,
+    "voice_input_exists": true,
+    "music_hash_matches_record": true,
+    "voice_hash_matches_record": true
+  },
+  "approved_config_comparison": {
+    "duck_db": {
+      "current": -4.0,
+      "approved": -4,
+      "matches": true
+    },
+    "dj_start_seconds": {
+      "current": 1.3,
+      "approved": 1.3,
+      "matches": true
+    },
+    "duck_attack_seconds": {
+      "current": 0.1,
+      "approved": 0.1,
+      "matches": true
+    },
+    "duck_release_seconds": {
+      "current": 0.4,
+      "approved": 0.4,
+      "matches": true
+    },
+    "post_recovery_groove_seconds": {
+      "current": 1.8,
+      "approved": 1.8,
+      "matches": true
+    },
+    "fade_out_seconds": {
+      "current": 1.5,
+      "approved": 1.5,
+      "matches": true
+    }
+  },
+  "observed_break": {
+    "status": "DOWNLOAD_ERROR",
+    "error_code": "WEB_DOWNLOAD_ERROR",
+    "recorded_at": "2026-10-18T01:28:16.181Z",
+    "date": "2026-10-18",
+    "slot": "morning",
+    "raw_exists": false,
+    "handoff_receipt_exists": false,
+    "boundary": "UI wait/download -> verified raw.mp3 -> import/handoff",
+    "exact_download_substep": "NOT_RECORDED_IN_HISTORICAL_STATUS",
+    "root_cause": "NOT_PROVEN_FROM_GENERIC_WEB_DOWNLOAD_ERROR",
+    "retry_generation": false
+  },
+  "current_entry_difference": {
+    "legacy": "RUN-EVENING.cmd -> scripts/Run-Factory.ps1 -> src/jingle_factory.py",
+    "web_candidate": "RUN-MORNING.cmd -> producer/candidate.cjs -> prepareForHumanReview -> produce -> import_web_music -> awaiting-human-review",
+    "factory_handoff": "Separate factory_handoff.py --execute with independent ending/dated activation gates",
+    "daily_authorization_expired": true,
+    "provider_calls_authorized": false
+  },
+  "candidate": {
+    "installed": false,
+    "source_sha256": "591fdc52a0dbedfd2afe7fd0838c5c27b35a041e34d78471df73ce5e4fc894af",
+    "candidate_sha256": "f4eeb18226bd1c82d63c330bdef39da1780396ca2a50af3d0c410b9dce44f95f",
+    "change": "Preserve whitelisted download step/detail without raw error/URL/secret, while preserving existing WEB_DOWNLOAD_ERROR and no-retry reservation"
+  },
+  "new_provider_import_mix_or_media": 0,
+  "protected_files_unchanged": true
+}

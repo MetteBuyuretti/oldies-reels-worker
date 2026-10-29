@@ -1,0 +1,16 @@
+{
+  "status": "MASKED_BRIDGE_INSTALLED_PENDING_UI_SELF_TEST",
+  "pre": {
+    "launcher": "e2b4276d93f414a8a9249d27c11388ae967e3c8011a8b19119206d839f0b1964",
+    "dialog": "3a64bb86a7af2675df5dba73a339e5a3d323260c931c664a2603f463dbefefe8"
+  },
+  "post": {
+    "launcher": "bc9375815abb17353bdd80c988dd32c11a9833462391d84ecf0ff39ba6e9c975",
+    "dialog": "950fc4feeaf6707faff47e1718f891e1c64a66b49d901db7a60c4443676aeaf2",
+    "core": "4ad9053d973142b2f6c7b7ed66ba558fe0937a3558510020fd6750172114f44f",
+    "activation": "4efc56e814d9c63f5143b51478685127832b5a49bb2ebcd9865ac5d25ca024cd"
+  },
+  "shortcutSwitch": "-ActivateProjectTools",
+  "button": "Proje ara\u00e7lar\u0131n\u0131 etkinle\u015ftir",
+  "runtimeModified": false
+}
