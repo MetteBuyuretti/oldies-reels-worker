@@ -52,6 +52,15 @@ function stage(policy,name,mustExist=true){
 function pack(raw){return {sha256:hash(raw),bytes:raw.length,text:raw.toString('utf8')};}
 function checkedContent(s){const raw=Buffer.from(s,'utf8');if(raw.length>MAX||raw.includes(0))throw Error('FILE_FORMAT_DENIED');return raw;}
 function reply(data){return {content:[{type:'text',text:JSON.stringify(data)}]};}
+function syntaxOutcome(result){
+ // A checker that never started or was interrupted cannot diagnose candidate syntax.
+ if(result.error){
+  const code=['ENOENT','EACCES','EPERM','ETIMEDOUT','ENOBUFS'].includes(result.error.code)?result.error.code:'CHECKER_FAILED';
+  return {status:code==='ETIMEDOUT'?'CHECK_TIMEOUT':'CHECK_UNAVAILABLE',checkerErrorCode:code};
+ }
+ if(result.signal||!Number.isInteger(result.status))return {status:'CHECK_INTERRUPTED',checkerErrorCode:'CHECKER_INTERRUPTED'};
+ return {status:result.status===0?'SYNTAX_OK':'SYNTAX_ERROR'};
+}
 async function callProject(name,args,policy,upstream){
  validate(name,args);
  if(name==='list_project_files')return reply({files:ALIASES.map(alias=>{const {raw}=source(policy,alias);return {alias,sha256:hash(raw),bytes:raw.length};})});
@@ -85,6 +94,7 @@ async function callProject(name,args,policy,upstream){
  if(args.file.endsWith('.mjs'))result=spawnSync(policy.node,['--permission','--allow-fs-read='+policy.stagingRoot,'--check',p],{encoding:'utf8',timeout:10000,windowsHide:true,env});
  else if(args.file.endsWith('.ps1'))result=spawnSync(policy.powershell,['-NoProfile','-NonInteractive','-File',policy.syntaxHelper,'-Source',p],{encoding:'utf8',timeout:10000,windowsHide:true,env});
  else throw Error('SYNTAX_TYPE_DENIED');
- return reply({file:args.file,status:result.status===0?'SYNTAX_OK':'SYNTAX_ERROR',exitCode:result.status,signal:result.signal||null,executedCandidate:false});
+ return reply({file:args.file,...syntaxOutcome(result),exitCode:result.status,signal:result.signal||null,executedCandidate:false});
 }
-module.exports={TOOLS,validate,source,stage,callProject,hash};
+module.exports={TOOLS,validate,source,stage,callProject,hash,syntaxOutcome};
+
