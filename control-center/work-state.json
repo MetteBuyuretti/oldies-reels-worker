@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-29T14:11:37.888Z",
+  "updated_at": "2026-10-29T22:06:09.741Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -473,27 +473,29 @@
       "id": "reels-en-charon-voice-integration-20261026",
       "title": "İngilizce Facebook Reels — sakin/enerjik Charon ses entegrasyonu",
       "owner": "WORK MASTER",
-      "status": "checkpointed",
+      "status": "blocked",
       "completed_units": [
         "founder_forwarded_voice_acceptance_recorded",
         "pr22_draft_and_main_facebook_gate_verified",
         "github-call-path-map-and-watchdog-return-read-20261029",
         "windows-local-preview-source-identities-compared-20261029",
-        "calm_and_energetic_signoff_actual_bytes_sha256_probe_decode_matched_to_full_acceptance_report"
+        "calm_and_energetic_signoff_actual_bytes_sha256_probe_decode_matched_to_full_acceptance_report",
+        "watchdog_independent_signoff_identity_accepted_WD_SIGNOFF_IDENTITY_20261030_01"
       ],
-      "last_checkpoint": "2026-10-29T14:11:37.888Z",
-      "next_step": "Bulunan sakin6.720s/enerjik5.280s iki KAPANIŞ dosyasını reels-signoff-identities.json tamhashleriyle yerel dar adaylarla eşle; geniş arama/yenidenüretim/tekraronay yok. Gerçek aktif Facebook giriş/ref ve25–30sprofil entegrasyonu ayrıca doğrulanacak; mevcutörnekler tümhikâye/finalMP4 kabulü değildir.",
-      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Yerel recovery dört/altı PR33blob eşleşmesi; worker/editorial gate farklı, git metadata yok. Preview local_voiceover tüketiyor. İki kabul sesinin kimliği ve26/29EkimFacebook giriş makbuzu UNRESOLVED; yeni medya/profil değişikliği yok.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.",
+      "last_checkpoint": "2026-10-29T22:06:09.741Z",
+      "next_step": "Önceden kabul edilmiş iki kapanışın kimliği bağımsız kabul edildi; bu incelemeyi/üretimi/aynı kullanıcı onayını tekrarlama. Sonraki yerel iş Windows dar adaylarını tam SHA256 ile eşlemek ve gerçek aktif Facebook launcher/ref tüketimini göstermek. Bu Work'te yerel komut/proje aracı olmadığından fiilî uygulama başlatılamıyor; mevcut yerel Codex devamının gerçek alım/teslimi veya kapsamı incelenmiş Commander araçlarının gelmesi gerekir. Tam hikâye/25–30sfilm ve nihai medya kabulü ayrı.",
+      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Yerel recovery dört/altı PR33blob eşleşmesi; worker/editorial gate farklı, git metadata yok. Preview local_voiceover tüketiyor. İki kabul sesinin kimliği ve26/29EkimFacebook giriş makbuzu UNRESOLVED; yeni medya/profil değişikliği yok.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: MASTER WD6509320201 kararını TAM okudu; iki gerçek kapanışın bağımsız bytes/hash/süre/decode kabulü merkeze işlendi. Kimlik engeli kapalı, yeniden arama/üretim/dinleme onayı gerekmiyor. Windows kopyası/aktif giriş/entegrasyon hâlâ doğrulanmadı. Yeni Windows teslimi yok; bu Work'te gerçek yerel başlatma aracı bulunmuyor. Status blocked yalnız kalan yerel entegrasyon için; kabul edilmiş alt sonuç geri alınmadı.",
       "acceptance": {
         "voice_preference": "founder_reported_calm_for_slow_energetic_for_upbeat",
-        "approved_asset_identity": "master_actual_bytes_both_match_report_sha256_20261029_1707",
+        "approved_asset_identity": "accepted_by_master_and_independent_watchdog_6509320201_existing_signoffs_only",
         "automation_integration": "pending",
         "current_25_30s_mp4": "pending",
-        "independent_watchdog": "pending",
+        "independent_watchdog": "accepted_signoff_identity_only_WD_SIGNOFF_IDENTITY_20261030_01",
         "live_publication": "not_authorized_gate_preserved",
         "current_local_repair_receipt": "partial_source_identity_observed_6497201301",
         "production_and_continuity": "not_accepted",
-        "windows_local_copy_match": "pending_exact_known_hash_match"
+        "windows_local_copy_match": "pending_exact_known_hash_match",
+        "independent_final_media_review": "pending_separate_from_signoff_identity"
       },
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/reels-english-voice-followup-20261026/report.md",
@@ -504,9 +506,10 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/d4f90e509df8df494805416893f409ec96fbed61/work-output/local-exec-20261029/review/master-review.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6498717365",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fix/automation-mode-guard-20261029/work-output/local-exec-20261029/review/master-continuation-1710.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fix/automation-mode-guard-20261029/work-output/local-exec-20261029/review/master-continuation-1710.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509320201"
       ],
-      "control_time": "29.10.2026 | 17:10 TSİ son aktif kontrol; sonraki somut kontrol yerel güncel pin/PSsyntax/aktivasyon teslimidir. Otomatik uyanma iddiası yok."
+      "control_time": "30.10.2026 | 01:06 TSİ aktif kontrol tamamlandı. Sonraki somut kontrol gerçek yerel teslim veya proje araçları bu Work'e geldiğinde; otomatik izleme/uyandırma başlatılmadı."
     },
     {
       "id": "local-commander-scoped-acceptance-20261027",
@@ -564,16 +567,17 @@
       "id": "commander-project-staging-20261029",
       "title": "Commander — gerçek proje okuma ve sınırlı staging araçları",
       "owner": "WORK MASTER",
-      "status": "in_progress",
+      "status": "blocked",
       "completed_units": [
         "operator_gateway_source_and_six_tool_candidate_read",
         "operator_15_windows_boundary_tests_and_local_mcp_delivery_read",
         "master_missing_checker_misdiagnosis_reproduced_and_fixed",
         "master_seven_checker_outcome_tests_pass_linux",
-        "watchdog_positive_six_tool_scope_read_and_master_authority_mapped"
+        "watchdog_positive_six_tool_scope_read_and_master_authority_mapped",
+        "watchdog_0100_continuation_read_and_current_execution_channel_gap_confirmed"
       ],
-      "last_checkpoint": "2026-10-29T14:11:37.888Z",
-      "next_step": "Mevcut yerel Codex f8e5316module/pin ve etkilenen WindowsPSsyntax sonucunu doğrulasın; aynı6araç/3kaynak/3staging kapsamını yedek/geri dönüş altında mevcut tünelde etkinleştirsin. Sonra MASTER gerçekWork projeokuma→staging→syntax çağrısını yapacak. Yeni genel onay/WDincelemesi beklenmiyor; aktifleşme henüz gözlenmedi.",
+      "last_checkpoint": "2026-10-29T22:06:09.741Z",
+      "next_step": "İncelenmiş mevcut altı araçlık devamın gerçek yerel çalıştırma kanalıyla alınması gerekir; mevcut talimatı yeni rapor/onay turuna sokma. Windows uygulayıcısı f8e5316 pin/etkilenen PSsyntax sonuçlarını doğrulayıp koşullar geçerse aynı yedekli gateway/profile kapsamını etkinleştirir. Bu Work'te bu başlangıcı gönderecek araç yok. Proje araçları geldiğinde MASTER gerçek kaynak→staging→syntax kabulünü yapar; eski raporu tekrar okumak veya GitHub'a yazmak bu kabul değildir.",
       "acceptance": {
         "scope": "three_pinned_tumblr_sources_and_three_fixed_staging_files_only",
         "operator_candidate": "15_windows_tests_and_local_mcp_reported_not_Work_acceptance",
@@ -583,16 +587,27 @@
         "work_project_tool_acceptance": "pending",
         "production_write_or_general_shell": "not_in_scope",
         "scope_decision": "master_20261029_1710_same_six_tools_after_local_checks",
-        "local_activation_receipt": "pending_new_continuation"
+        "local_activation_receipt": "not_observed_in_current_shared_records_20261030_0105",
+        "current_work_catalog": "one_fixed_historical_report_tool_only_observed_20261030_0104",
+        "execution_channel": "no_windows_codex_start_or_project_tool_exposed_in_this_Work"
       },
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/d4f90e509df8df494805416893f409ec96fbed61/work-output/local-exec-20261029/review/master-review.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6498717365",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fix/automation-mode-guard-20261029/work-output/local-exec-20261029/review/master-continuation-1710.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fix/automation-mode-guard-20261029/work-output/local-exec-20261029/review/master-continuation-1710.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509320201"
       ],
-      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.",
-      "control_time": "29.10.2026 | 17:10 TSİ son aktif kontrol; sonraki somut kontrol yerel güncel pin/PSsyntax/aktivasyon teslimidir. Otomatik uyanma iddiası yok."
+      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: WD6509320201 kararı alındı; genel inceleme/kapsam/yetki beklemesi yok. #32 17:15 sonrası yalnız WD01:00 kaydı içeriyor; yeni yerel uygulama makbuzu bulunmadı. Work araç kataloğu yalnız sabit rapor. Fiilî başlatma kanalı yokluğu açık blocker yapıldı; sessiz bekleme veya yerelde çalışıyor izlenimi verilmez. Yeni kurulum/anahtar/izin değişikliği yapılmadı.",
+      "control_time": "30.10.2026 | 01:06 TSİ aktif kontrol tamamlandı. Sonraki somut kontrol gerçek yerel teslim veya proje araçları bu Work'e geldiğinde; otomatik izleme/uyandırma başlatılmadı.",
+      "blocker": {
+        "type": "local_execution_channel_unavailable",
+        "observed_at": "2026-10-29T22:06:09.741Z",
+        "scope_review_pending": false,
+        "founder_general_approval_pending": false,
+        "description": "Güncel modül/Windows syntax/aktivasyon devamının alım ve teslimi ortak kayıtta yok; bu Work yalnız sabit tarihsel rapor aracına sahip. GitHub dosyası/yorum yerel Codex'i otomatik başlatmaz. Yerel uygulamanın burada başladığı iddia edilemez.",
+        "next_required_evidence": "Mevcut Windows Codex'ten gerçek ALINDI ve f8e5316 pin/Windows PSsyntax/koşullar geçerse aynı runtime aktivasyon teslimi; ardından bu Work'te gerçek altı proje aracının görünmesi."
+      }
     }
   ]
 }
