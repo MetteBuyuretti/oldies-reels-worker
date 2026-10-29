@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-29T13:00:00Z",
+  "updated_at": "2026-10-29T13:12:19.486Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -46,8 +46,8 @@
         "windows-m05-record-opened-and-factory-source-chain-reviewed-20261029"
       ],
       "next_step": "M05 için kanıt bulunamadı alt sonucu korunur. Factory importer/state/recovery/mixer zincirindeki ilk eksik handoff'u ayrı kaynak/fixture işi olarak ele al; gerçek üretim/pilot sınırını veya18Ekimbelirsizslotunu aşma.",
-      "last_checkpoint": "2026-10-29T13:00:00Z",
-      "note": "Bağlantı kesintisinde miks veya render baştan başlamadan önce mevcut dosyaları kontrol et.\n25.10.2026 | 00:26 TSİ: Ana Jingle sistemi onarılmış değil; önceki jingle-status-analysis-20261024 DONE yalnız analiz teslimidir. Güncel yerel yürütücü erişimi yok; ana sistem görevi BLOCKED. Yerel devam talimatı hazır; uygulayıcı görevi almadı.\n25.10.2026 | 04:38 TSİ: Yerel Codex 04:33:34 görev alma kaydında Factory config/heartbeat/kaynak erişimini bildirdi; önceki erişim-yok ifadesi bu yerel oturum için güncel değil. Jingle zinciri onarımı/çıktısı teslim edilmedi; sistem BLOCKED yalnız yerel erişim yokluğuyla açıklanamaz, somut zincir kanıtı ve mevcut üretim/pilot sınırı bekliyor. part-009.\n25.10.2026 | 05:37 TSİ: Codex6392440945/rapor/testdosyası doğrudanokundu:4livekaynakstagingSHAeşitliği,10/10üretimsiztest,10legacyMP3veçalışanvenv bildirildi. YeniJingleyaması/üretimyok;19Ekimtrackprovenansı/kimlikliMP3receiptveDJMASTERkabulüyok. AnaBLOCKEDdurumukorunur;eskiPython-yokvekuruluyamayoksavlarıgüncelengeldeğil.\n25.10.2026 05:55 TSİ: Watchdog6392644686üretimsizMP3kimlikeşlemesi/validatorhazırlığınıuygulamayadevamolarakönerdi;MASTERkabul6392669459. Bu yeniJingleişleminin yerelbaşlamateyidi yok.\n27.10.2026 | 03:58 TSİ: 26Ekim yerel teslim ve WD6418204700 okundu: M01–M10 UNRESOLVED; M05 tek ilgili kayıt devam noktası. Preflight kaynak/hash/byte tutarlılığı aracı dar kabul aldı,7/7Python bağımsız test beyanı mevcut. Bu kabul kimlik/özgünreceipt/üretim veya DJ MASTER kabulü değildir; eski yerel devam alınmadı notu güncel engel değildir.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: M05 kaydı13EkimCapCut dönüşüm durumu; provider track/rezervasyon/source date/hash/receipt yok. Kaynak değeri ile yerel hash/byte ayrıldı. Bu dar tarihsel kurtarma UNRESOLVED; yeni makbuz/import/claim yok. Factory state/lock/18Ekimclaim aynı. İlgili importer/handoff/Factory/mixer kaynak yolu incelendi.",
+      "last_checkpoint": "2026-10-29T13:12:19.486Z",
+      "note": "Bağlantı kesintisinde miks veya render baştan başlamadan önce mevcut dosyaları kontrol et.\n25.10.2026 | 00:26 TSİ: Ana Jingle sistemi onarılmış değil; önceki jingle-status-analysis-20261024 DONE yalnız analiz teslimidir. Güncel yerel yürütücü erişimi yok; ana sistem görevi BLOCKED. Yerel devam talimatı hazır; uygulayıcı görevi almadı.\n25.10.2026 | 04:38 TSİ: Yerel Codex 04:33:34 görev alma kaydında Factory config/heartbeat/kaynak erişimini bildirdi; önceki erişim-yok ifadesi bu yerel oturum için güncel değil. Jingle zinciri onarımı/çıktısı teslim edilmedi; sistem BLOCKED yalnız yerel erişim yokluğuyla açıklanamaz, somut zincir kanıtı ve mevcut üretim/pilot sınırı bekliyor. part-009.\n25.10.2026 | 05:37 TSİ: Codex6392440945/rapor/testdosyası doğrudanokundu:4livekaynakstagingSHAeşitliği,10/10üretimsiztest,10legacyMP3veçalışanvenv bildirildi. YeniJingleyaması/üretimyok;19Ekimtrackprovenansı/kimlikliMP3receiptveDJMASTERkabulüyok. AnaBLOCKEDdurumukorunur;eskiPython-yokvekuruluyamayoksavlarıgüncelengeldeğil.\n25.10.2026 05:55 TSİ: Watchdog6392644686üretimsizMP3kimlikeşlemesi/validatorhazırlığınıuygulamayadevamolarakönerdi;MASTERkabul6392669459. Bu yeniJingleişleminin yerelbaşlamateyidi yok.\n27.10.2026 | 03:58 TSİ: 26Ekim yerel teslim ve WD6418204700 okundu: M01–M10 UNRESOLVED; M05 tek ilgili kayıt devam noktası. Preflight kaynak/hash/byte tutarlılığı aracı dar kabul aldı,7/7Python bağımsız test beyanı mevcut. Bu kabul kimlik/özgünreceipt/üretim veya DJ MASTER kabulü değildir; eski yerel devam alınmadı notu güncel engel değildir.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: M05 kaydı13EkimCapCut dönüşüm durumu; provider track/rezervasyon/source date/hash/receipt yok. Kaynak değeri ile yerel hash/byte ayrıldı. Bu dar tarihsel kurtarma UNRESOLVED; yeni makbuz/import/claim yok. Factory state/lock/18Ekimclaim aynı. İlgili importer/handoff/Factory/mixer kaynak yolu incelendi.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.",
       "owner": "WORK MASTER",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-008.md",
@@ -58,9 +58,11 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6418204700",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/35",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/35#issuecomment-6495949780",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/aa6f6354464c0b9e141230d33df5f8db60eb6b76/work-output/local-exec-20261029/review/report.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/aa6f6354464c0b9e141230d33df5f8db60eb6b76/work-output/local-exec-20261029/review/report.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/d4f90e509df8df494805416893f409ec96fbed61/work-output/local-exec-20261029/review/master-review.md"
       ],
-      "control_time": "29.10.2026 | 16:00 TSİ yerel teslim. Sonraki kontrol: somut rapor/diff'in MASTER ve bağımsız WATCHDOG tarafından aktif okunması. Yerel alım15:42TSİ; önceki alınmadı notları tarihsel."
+      "control_time": "29.10.2026 | 16:11 TSİ güncel teslim incelemesi; sonraki kontrol yeni Commander checker/pin yerel sonucu ve bağımsız WATCHDOG kararıdır; otomatik uyanma yok."
     },
     {
       "id": "oldies-revenue-live-20261002",
@@ -341,9 +343,9 @@
         "pr35-staging-delivered-and-watchdog-scoped-pass-20261029",
         "windows-full-entry-guard-installed-with-launcher-freshness-20261029"
       ],
-      "last_checkpoint": "2026-10-29T13:00:00Z",
+      "last_checkpoint": "2026-10-29T13:12:19.486Z",
       "next_step": "Tumblr dar kod/launcher diff'ini ve tam giriş kanıtını denetle. Genel operasyon için gerçek hedef zaman, otomatik yazıcı kapsamı ve onaylı stok ayrı devam eder; yeni gönderim açma.",
-      "note": "24.10.2026 | 17:42 TSİ: part-005 değerlendirmesi kaydedildi. Yerel kurulum tarihsel teknikPASS/sınırlıgüvenlikPASS,operasyonelFAIL; Codex'in tüm özel oturumları tam okunmadı.5/5takipgörevilimiti nedeniyle yeni otomatik izleme kurulamadı. Tumblr23/11/0eski kesit; Pinterest24Ekim08:56sonuç14Pinteyityok. Kesin devreyealma günü kanıtsız.\n24.10.2026 | 17:50 TSİ: Kurucunun sonuçlandırma emri sonrası mevcut OR-PIN promptu browserfallback ile düzeltildi; takvim/enabledkorundu. CanlıPinterest9scheduleID+1gerçekPinID,Tumblr23/11/0doğrudanokundu. YerelCodexkomutkanalıyok;Windowskodonarımıyapılmadı. Kaynak11taslakotomatikyayınahazırsayılmadı.\n24.10.2026 | 18:50 TSİ: Kurucu Tumblr onarımını başlatma emri verdi. AyrıWATCHDOG18:44ALINDI/BAŞLANDI,18:46rapor6386220827doğrudanokundu; MASTER6386261483ilekoduteyitetti. Mevcutyerelbetik/ledger/stacktraceveCodexkomutbağlantısıyok; GitHubve260ZIPenvanterindeuygulanabilirkaynakbulunmadı. KodonarımıBLOCKED, yama/test/yayınyapılmadı; buincelemeonarımtamamlandıdeğildir.\n25.10.2026 | 00:19 TSİ: Kurucunun çözüm planı sorusuna part-008 kaydedildi. Mevcut state/son #32 kayıtları okundu; yeni yerel kaynak, uygulayıcı teyidi, yama/test/üretim veya WATCHDOG kabulü yok. İlk kapı mevcut yetkili yerel Codex kaynak/komut erişimi; Tumblr uygulama engeli ve Jingle pilot ertelemesi sürüyor.\n25.10.2026 | 00:26 TSİ: Kullanıcının neden çözülmediği sorusu üzerine güncel araçlar/Chrome sekmeleri/GitHub main ağacı ve OpenAI Docs kontrol edildi. Yerel Windows yürütücüsü bu Work'e bağlı değil; yerel Codex UI'si yok; incelenen workflowlar ubuntu-latest. part-008'e somut yerel oturum başlangıcı/devir talimatı eklendi. Kullanıcı tarafından masaüstü/Codex yerel görev başlangıcı gerekiyor; uygulayıcı başlamadı, kod yaması yok.\n25.10.2026 | 04:38 TSİ: Kurucu talimatı Codex'e gönderdiğini bildirdi. Yerel Codex'in 04:33:34 TSİ tarihli #32/6391994408 görev alma kaydı ve metadata'sı doğrudan okundu: mevcut Tumblr/Jingle kaynakları okunabilir beyanı; GitHub yorum yazma gözlendi. Önceki uygulayıcı alınmadı engeli aşıldı; bu Work'ün doğrudan Windows yürütücüsü yok. Son yerel log 24Ekim16:23 REMOTE_STATE_RECONCILIATION_REQUIRED/led-zeppelin-carnegie-1969, mjs94:81; kök neden/yama/test/canlı sonuç henüz teslim edilmedi. Dış dizin yazması ayrı denetime tabi. MASTER #32/6392046147 ile teyit verdi; part-009 kaydedildi. Yeni bağımsız kabul veya otomatik takip yok.\n25.10.2026 | 05:37 TSİ: Codex05:25teslimi6392440945ve c03343bcommitindeki5kanıtdosyası doğrudanokundu. Yerel04:43:54publisher+ledgeruygulaması raporlandı;diffte3gerçekyayınkimliğiuzlaştırması,22/22offlineTAPgörüldü. TamVerify/doğalkoşu/WDkabulübekliyor;genelotomasyonPASSyok. allPathsCovered=false,yenikuyrukkapalı. WD-EXEC-20261025-0443notu ve somutteslim MASTER6392547851ile birlikteyanıtlandı.\n25.10.2026 05:55 TSİ: Kurucu yalnız durumtespiti değil tamamlanmışişleyiş istedi. MevcutWD05:47doğrudanuyarıldı;05:48görevialdı,05:49diffincelemesi6392644686okundu. HedefgelecekgünbütçeaçığıWDT1veortak-yazıcıkapsamıWDT2kabul. MASTER14regresyonluhedefgünadayınıkodladı,Node24.22.1ile14/14geçti;GitHubmaster-nextklasöründe. YerelentegrasyonvegerçekVerifyhenüzyok.6392669459somutdevamtalimatı;yenikodOperasyonelPASSdeğil.\n27.10.2026 | 03:58 TSİ: 26Ekim6416695013 yerel teslimi ve6418204700 bağımsız inceleme doğrudan okundu. Kurulu15:52Verify VERIFIED_NO_PUBLICATION/exit0 operatör kanıtında mevcut; WD-T1 dar kaynak/test PASS,25Node+7Python bağımsız test beyanı okundu. 6417802324 kaynak aktarımı kabul edildi. Önceki pending/not-installed/not-received alanları tarihsel kalır; güncel engel WD-T2,gerçek queue-preview ve kip çakışmasıdır. Yeni stok/yayın/operasyonel kabul yok.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Tam Windows publisher/launcher guard ve taze-rapor ayrımı kuruldu; gerçek kurulu publisher iki argüman sırasında exit1 verdi. Ledger/state/yetki/latest korunur. Canlı Verify/yayın/scheduler yok. Commander ek paket yalnız staging hazırlığıdır.",
+      "note": "24.10.2026 | 17:42 TSİ: part-005 değerlendirmesi kaydedildi. Yerel kurulum tarihsel teknikPASS/sınırlıgüvenlikPASS,operasyonelFAIL; Codex'in tüm özel oturumları tam okunmadı.5/5takipgörevilimiti nedeniyle yeni otomatik izleme kurulamadı. Tumblr23/11/0eski kesit; Pinterest24Ekim08:56sonuç14Pinteyityok. Kesin devreyealma günü kanıtsız.\n24.10.2026 | 17:50 TSİ: Kurucunun sonuçlandırma emri sonrası mevcut OR-PIN promptu browserfallback ile düzeltildi; takvim/enabledkorundu. CanlıPinterest9scheduleID+1gerçekPinID,Tumblr23/11/0doğrudanokundu. YerelCodexkomutkanalıyok;Windowskodonarımıyapılmadı. Kaynak11taslakotomatikyayınahazırsayılmadı.\n24.10.2026 | 18:50 TSİ: Kurucu Tumblr onarımını başlatma emri verdi. AyrıWATCHDOG18:44ALINDI/BAŞLANDI,18:46rapor6386220827doğrudanokundu; MASTER6386261483ilekoduteyitetti. Mevcutyerelbetik/ledger/stacktraceveCodexkomutbağlantısıyok; GitHubve260ZIPenvanterindeuygulanabilirkaynakbulunmadı. KodonarımıBLOCKED, yama/test/yayınyapılmadı; buincelemeonarımtamamlandıdeğildir.\n25.10.2026 | 00:19 TSİ: Kurucunun çözüm planı sorusuna part-008 kaydedildi. Mevcut state/son #32 kayıtları okundu; yeni yerel kaynak, uygulayıcı teyidi, yama/test/üretim veya WATCHDOG kabulü yok. İlk kapı mevcut yetkili yerel Codex kaynak/komut erişimi; Tumblr uygulama engeli ve Jingle pilot ertelemesi sürüyor.\n25.10.2026 | 00:26 TSİ: Kullanıcının neden çözülmediği sorusu üzerine güncel araçlar/Chrome sekmeleri/GitHub main ağacı ve OpenAI Docs kontrol edildi. Yerel Windows yürütücüsü bu Work'e bağlı değil; yerel Codex UI'si yok; incelenen workflowlar ubuntu-latest. part-008'e somut yerel oturum başlangıcı/devir talimatı eklendi. Kullanıcı tarafından masaüstü/Codex yerel görev başlangıcı gerekiyor; uygulayıcı başlamadı, kod yaması yok.\n25.10.2026 | 04:38 TSİ: Kurucu talimatı Codex'e gönderdiğini bildirdi. Yerel Codex'in 04:33:34 TSİ tarihli #32/6391994408 görev alma kaydı ve metadata'sı doğrudan okundu: mevcut Tumblr/Jingle kaynakları okunabilir beyanı; GitHub yorum yazma gözlendi. Önceki uygulayıcı alınmadı engeli aşıldı; bu Work'ün doğrudan Windows yürütücüsü yok. Son yerel log 24Ekim16:23 REMOTE_STATE_RECONCILIATION_REQUIRED/led-zeppelin-carnegie-1969, mjs94:81; kök neden/yama/test/canlı sonuç henüz teslim edilmedi. Dış dizin yazması ayrı denetime tabi. MASTER #32/6392046147 ile teyit verdi; part-009 kaydedildi. Yeni bağımsız kabul veya otomatik takip yok.\n25.10.2026 | 05:37 TSİ: Codex05:25teslimi6392440945ve c03343bcommitindeki5kanıtdosyası doğrudanokundu. Yerel04:43:54publisher+ledgeruygulaması raporlandı;diffte3gerçekyayınkimliğiuzlaştırması,22/22offlineTAPgörüldü. TamVerify/doğalkoşu/WDkabulübekliyor;genelotomasyonPASSyok. allPathsCovered=false,yenikuyrukkapalı. WD-EXEC-20261025-0443notu ve somutteslim MASTER6392547851ile birlikteyanıtlandı.\n25.10.2026 05:55 TSİ: Kurucu yalnız durumtespiti değil tamamlanmışişleyiş istedi. MevcutWD05:47doğrudanuyarıldı;05:48görevialdı,05:49diffincelemesi6392644686okundu. HedefgelecekgünbütçeaçığıWDT1veortak-yazıcıkapsamıWDT2kabul. MASTER14regresyonluhedefgünadayınıkodladı,Node24.22.1ile14/14geçti;GitHubmaster-nextklasöründe. YerelentegrasyonvegerçekVerifyhenüzyok.6392669459somutdevamtalimatı;yenikodOperasyonelPASSdeğil.\n27.10.2026 | 03:58 TSİ: 26Ekim6416695013 yerel teslimi ve6418204700 bağımsız inceleme doğrudan okundu. Kurulu15:52Verify VERIFIED_NO_PUBLICATION/exit0 operatör kanıtında mevcut; WD-T1 dar kaynak/test PASS,25Node+7Python bağımsız test beyanı okundu. 6417802324 kaynak aktarımı kabul edildi. Önceki pending/not-installed/not-received alanları tarihsel kalır; güncel engel WD-T2,gerçek queue-preview ve kip çakışmasıdır. Yeni stok/yayın/operasyonel kabul yok.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Tam Windows publisher/launcher guard ve taze-rapor ayrımı kuruldu; gerçek kurulu publisher iki argüman sırasında exit1 verdi. Ledger/state/yetki/latest korunur. Canlı Verify/yayın/scheduler yok. Commander ek paket yalnız staging hazırlığıdır.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-005.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-006.md",
@@ -365,13 +367,15 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6431045274",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/35",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/35#issuecomment-6495949780",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/aa6f6354464c0b9e141230d33df5f8db60eb6b76/work-output/local-exec-20261029/review/report.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/aa6f6354464c0b9e141230d33df5f8db60eb6b76/work-output/local-exec-20261029/review/report.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/d4f90e509df8df494805416893f409ec96fbed61/work-output/local-exec-20261029/review/master-review.md"
       ],
-      "control_time": "29.10.2026 | 16:00 TSİ yerel teslim. Sonraki kontrol: somut rapor/diff'in MASTER ve bağımsız WATCHDOG tarafından aktif okunması. Yerel alım15:42TSİ; önceki alınmadı notları tarihsel.",
+      "control_time": "29.10.2026 | 16:11 TSİ güncel teslim incelemesi; sonraki kontrol yeni Commander checker/pin yerel sonucu ve bağımsız WATCHDOG kararıdır; otomatik uyanma yok.",
       "acceptance": {
-        "watchdog_scoped_review": "wd_t1_closed_wd_t2_preview_and_mode_conflict_open",
+        "watchdog_scoped_review": "old_excerpt_pass_new_windows_delivery_pending_independent_review",
         "code_patch": "installed_publisher_3dd7b098_launcher_9cbf3775",
-        "targeted_tests": "22_of_22_pass_in_operator_test_log",
+        "targeted_tests": "historical_22_tests_preserved_new_full_windows_guard_and_four_launcher_scenarios_in_operator_report",
         "production_and_continuity": "not_accepted",
         "local_operator_receipt": "read_directly",
         "local_source_access": "reported_by_local_operator",
@@ -381,9 +385,10 @@
         "target_day_candidate": "installed_per_operator_wd_t1_source_tests_scoped_pass",
         "local_continuation_receipt": "observed_in_6416695013",
         "commander_scoped_acceptance": "work_fixed_report_only_accepted_not_code_access",
-        "current_local_repair_receipt": "observed_6496979113_6497115102_6497201301",
+        "current_local_repair_receipt": "received_6496979113_and_delivery_6497363164",
         "staging_mode_guard": "full_windows_source_and_installed_entry_verified_exit1_both_orders",
-        "launcher_freshness": "4_isolated_full_launcher_scenarios_pass_health_cdp_stub_actual_child_exit_preserved"
+        "launcher_freshness": "4_isolated_full_launcher_scenarios_pass_health_cdp_stub_actual_child_exit_preserved",
+        "current_mode_guard": "installed_and_full_entry_tested_per_local_operator_master_diff_reviewed"
       }
     },
     {
@@ -472,9 +477,9 @@
         "github-call-path-map-and-watchdog-return-read-20261029",
         "windows-local-preview-source-identities-compared-20261029"
       ],
-      "last_checkpoint": "2026-10-29T13:00:00Z",
+      "last_checkpoint": "2026-10-29T13:12:19.486Z",
       "next_step": "İki kabul edilmiş calm/energetic varlığın özgün asset/kayıt kimliğini ve gerçekten kullanılacak Facebook launcher/ref makbuzunu mevcut kaynaktan sağla; aynı onayı tekrar isteme. R0 tamamlanmadan genel süre/pause değişimi yok.",
-      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Yerel recovery dört/altı PR33blob eşleşmesi; worker/editorial gate farklı, git metadata yok. Preview local_voiceover tüketiyor. İki kabul sesinin kimliği ve26/29EkimFacebook giriş makbuzu UNRESOLVED; yeni medya/profil değişikliği yok.",
+      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Yerel recovery dört/altı PR33blob eşleşmesi; worker/editorial gate farklı, git metadata yok. Preview local_voiceover tüketiyor. İki kabul sesinin kimliği ve26/29EkimFacebook giriş makbuzu UNRESOLVED; yeni medya/profil değişikliği yok.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.",
       "acceptance": {
         "voice_preference": "founder_reported_calm_for_slow_energetic_for_upbeat",
         "approved_asset_identity": "unresolved_calm_and_energetic_no_unproven_rebinding",
@@ -490,9 +495,11 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/22",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/35",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/35#issuecomment-6495949780",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/aa6f6354464c0b9e141230d33df5f8db60eb6b76/work-output/local-exec-20261029/review/report.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/aa6f6354464c0b9e141230d33df5f8db60eb6b76/work-output/local-exec-20261029/review/report.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/d4f90e509df8df494805416893f409ec96fbed61/work-output/local-exec-20261029/review/master-review.md"
       ],
-      "control_time": "29.10.2026 | 16:00 TSİ yerel teslim. Sonraki kontrol: somut rapor/diff'in MASTER ve bağımsız WATCHDOG tarafından aktif okunması. Yerel alım15:42TSİ; önceki alınmadı notları tarihsel."
+      "control_time": "29.10.2026 | 16:11 TSİ güncel teslim incelemesi; sonraki kontrol yeni Commander checker/pin yerel sonucu ve bağımsız WATCHDOG kararıdır; otomatik uyanma yok."
     },
     {
       "id": "local-commander-scoped-acceptance-20261027",
@@ -506,20 +513,18 @@
         "master-scoped-assessment-and-watchdog-decision-request-posted-readback-verified",
         "watchdog-local-scoped-acceptance-20261028-read",
         "master-work-tunnel-fixed-report-read-20261029",
-        "watchdog-work-tunnel-scoped-acceptance-read-20261029",
-        "bounded-project-tools-review-candidate-prepared-20261029"
+        "watchdog-work-tunnel-scoped-acceptance-read-20261029"
       ],
-      "last_checkpoint": "2026-10-29T13:00:00Z",
-      "next_step": "Somut6araç/diff/kök/test paketini incele ve yalnız gerekli kapsamın geçerli yetki kararını değerlendir. Hazırlık aktivasyon yetkisi değildir. Son kabul hedef Work'te gerçek okuma→staging→kontrol; yerel test Work kabulü sayılmaz.",
-      "note": "27.10.2026 | 03:58 TSİ: Yeniden kurulum/test tekrarı gerekçesi görülmedi. Sınırlı yerel okuma, bu Work'ten doğrudan erişim ve gözetimsiz üretim ayrı tutulur. Yeni config/izin/terminal/scheduler/üretim değişikliği yapılmadı.\n27.10.2026 | 04:15 TSİ: Codex6431221276 tam okundu: ALINDI04:10:32/teslim04:12:47; get_config/list_directory/read_file olmak üzere3yerelçağrı,13araç/5terminalkatalogdayok/telemetryfalse/1kök, gerçek redakte Etsy raporu151/151satır bildirildi. MASTER Windows çağrısını bağımsız yeniden çalıştırmadı; ayrıntılı operatör teslimi incelendi. Yazma araçları mevcut; iş salt-okunur, bağlantı salt-okunur yetkili diye etiketlenmez. Native eski thread eşlemesi UNVERIFIED; CMD-20261027-041032 yalnız korelasyon kimliğidir. Kopyanın orijinal sonu eksik; bu okuma Etsy sağlığı/tamkaynak/hashkanıtı değildir. MASTER6431278599 incelemesi ve bağımsızdar karar isteği yayımlandı/geriokundu; Watchdog ALINDI veya kabulü henüz yok.\n29.10.2026 | 15:12 TSİ: MASTER gerçek mcp__codex_apps__oldies_commander_read_file({file:OLDIES-ETSY-REDACTED-REPORT}) çağrısı başarılı;16044 karakter tarihsel rapor döndü. Sunucu SHA256 a364ed04272973fc33729ec852c03cfb78adac5fe7b8f733e8dcd6becde8cc8b beyan ediyor;bytes ayrıca yeniden hash edilmedi. WD6495838492 dar kabul okundu; genel PC/otomasyon onarımı veya süreklilik kabulü değil.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Mevcut gateway/profile/stdio transport kaynağı belirlendi. Aynı gateway diff'i ile üç pinned Tumblr okuması ve tek staging klasörü için6araç adayı hazır.15/15yeni sınır testi ve yerel MCP gerçek okuma→staging yazma/geri okuma→syntax sonucu PASS. Aktif tünel/policy/profile aynı; Work kataloğu genişletilmedi.",
+      "last_checkpoint": "2026-10-29T12:12:45Z",
+      "next_step": "Yerel gözetimli okuma ve sabit rapor tünel okuması dar kapsamda kabul edildi. Yeniden oturum sürekliliği ve başka dosya/işlemler ayrı kapsamdır; tek rapor pilotuyla üretim kodu erişimi varsayma.",
+      "note": "27.10.2026 | 03:58 TSİ: Yeniden kurulum/test tekrarı gerekçesi görülmedi. Sınırlı yerel okuma, bu Work'ten doğrudan erişim ve gözetimsiz üretim ayrı tutulur. Yeni config/izin/terminal/scheduler/üretim değişikliği yapılmadı.\n27.10.2026 | 04:15 TSİ: Codex6431221276 tam okundu: ALINDI04:10:32/teslim04:12:47; get_config/list_directory/read_file olmak üzere3yerelçağrı,13araç/5terminalkatalogdayok/telemetryfalse/1kök, gerçek redakte Etsy raporu151/151satır bildirildi. MASTER Windows çağrısını bağımsız yeniden çalıştırmadı; ayrıntılı operatör teslimi incelendi. Yazma araçları mevcut; iş salt-okunur, bağlantı salt-okunur yetkili diye etiketlenmez. Native eski thread eşlemesi UNVERIFIED; CMD-20261027-041032 yalnız korelasyon kimliğidir. Kopyanın orijinal sonu eksik; bu okuma Etsy sağlığı/tamkaynak/hashkanıtı değildir. MASTER6431278599 incelemesi ve bağımsızdar karar isteği yayımlandı/geriokundu; Watchdog ALINDI veya kabulü henüz yok.\n29.10.2026 | 15:12 TSİ: MASTER gerçek mcp__codex_apps__oldies_commander_read_file({file:OLDIES-ETSY-REDACTED-REPORT}) çağrısı başarılı;16044 karakter tarihsel rapor döndü. Sunucu SHA256 a364ed04272973fc33729ec852c03cfb78adac5fe7b8f733e8dcd6becde8cc8b beyan ediyor;bytes ayrıca yeniden hash edilmedi. WD6495838492 dar kabul okundu; genel PC/otomasyon onarımı veya süreklilik kabulü değil.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6430454697",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6431045274",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6431221276",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6431278599",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6495838492",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6495957638",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/aa6f6354464c0b9e141230d33df5f8db60eb6b76/work-output/local-exec-20261029/review/report.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6495957638"
       ],
       "acceptance": {
         "instruction": "posted_readback_verified",
@@ -530,11 +535,9 @@
         "independent_acceptance": "local_scope_accepted_6457885542_and_work_fixed_report_scope_6495838492",
         "master_assessment": "actual_tool_response_observed_16044_chars_one_text_block_no_error",
         "read_only_authority": "work_tunnel_fixed_alias_only_no_paths_urls_write_or_terminal",
-        "native_thread_mapping": "unverified_not_attributed_to_prior_candidate",
-        "project_tools_preparation": "15_boundary_tests_and_local_mcp_pass_not_activated",
-        "project_tools_work_acceptance": "pending_scope_decision_and_real_Work_catalog_use"
+        "native_thread_mapping": "unverified_not_attributed_to_prior_candidate"
       },
-      "control_time": "29.10.2026 | 16:00 TSİ yerel teslim. Sonraki kontrol: somut rapor/diff'in MASTER ve bağımsız WATCHDOG tarafından aktif okunması. Yerel alım15:42TSİ; önceki alınmadı notları tarihsel.",
+      "control_time": "27.10.2026 | 04:15 TSİ: Dar teslim ve MASTER değerlendirmesi okundu/kaydedildi. Sonraki kontrol mevcut Watchdog'un dar kararının ilk aktif okunması; otomatik uyandırma/izleme yok.",
       "operator_evidence": {
         "job_id": "MASTER-COMMANDER-20261027-0357",
         "correlation_id": "CMD-20261027-041032",
@@ -549,6 +552,34 @@
         "read_lines": 151,
         "remaining_lines": 0
       }
+    },
+    {
+      "id": "commander-project-staging-20261029",
+      "title": "Commander — gerçek proje okuma ve sınırlı staging araçları",
+      "owner": "WORK MASTER",
+      "status": "checkpointed",
+      "completed_units": [
+        "operator_gateway_source_and_six_tool_candidate_read",
+        "operator_15_windows_boundary_tests_and_local_mcp_delivery_read",
+        "master_missing_checker_misdiagnosis_reproduced_and_fixed",
+        "master_seven_checker_outcome_tests_pass_linux"
+      ],
+      "last_checkpoint": "2026-10-29T13:12:19.486Z",
+      "next_step": "Yerel Codex güncellenen modülü yalnız candidate'a alıp yeni SHA/policy pin ve ilgili Windows syntax sonuçlarını doğrulasın. Bağımsız WATCHDOG somut6araç/kök/staging kapsamını ve yeni düzeltmeyi incelesin; sonra geçerli kapsam kararıyla aktive edilen araçlar hedef Work'te gerçek kaynak→staging→kontrol çağrısıyla kabul edilir. Şu an aktivasyon yok.",
+      "acceptance": {
+        "scope": "three_pinned_tumblr_sources_and_three_fixed_staging_files_only",
+        "operator_candidate": "15_windows_tests_and_local_mcp_reported_not_Work_acceptance",
+        "new_checker_fix": "7_focused_Linux_tests_pass_Windows_candidate_pin_pending",
+        "independent_scope_review": "pending",
+        "activated": false,
+        "work_project_tool_acceptance": "pending",
+        "production_write_or_general_shell": "not_in_scope"
+      },
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/d4f90e509df8df494805416893f409ec96fbed61/work-output/local-exec-20261029/review/master-review.md"
+      ],
+      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d."
     }
   ]
 }
