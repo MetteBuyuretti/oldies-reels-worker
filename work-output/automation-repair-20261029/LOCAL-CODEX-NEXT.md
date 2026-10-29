@@ -1,0 +1,16 @@
+# Mevcut yerel Codex — ilk uygulama paketi
+
+29.10.2026 | 15:12 TSİ (UTC+3)
+İş: MASTER-LOCAL-EXEC-20261029-01. Operasyon sahibi WORK MASTER; uygulayıcı mevcut Windows Codex. Bağımsız denetçi mevcut WORK WATCHDOG.
+
+Bu görev kayıtlıdır; fiilî ALINDI/BAŞLADI, aşağıdaki yerel yanıt gelmeden iddia edilemez. Görev başlangıcında kendi gerçek TSİ/oturumunu ve ilk dar teslim için tahmini kontrol saatini #32'ye yaz. Commander kurulumunu, anahtar girişini veya eski test paketlerini tekrar başlatma.
+
+1. **Tumblr — ilk teslim:** PR35 builder/test için HEAD21feaf0 üzerindeki dar WATCHDOG16/16 kabulünü esas al. Bugünkü tam publisher ve onu çağıran run_tumblr_auto.ps1'in preimage/hash ve çağrı yolunu oku. Module import/top-level etkileri ilk guard'dan önce mi kontrol et. Hash farklıysa26Ekim sürümünü bugüne varsayma; farkı incele. Mevcut yedek ve uygulama kilidi kurallarını koruyarak yalnız yeni staging adayını üret; kodun tamamını syntax açısından denetle. İki argüman sırasında ilk gerçek yan etkiden önce ret, gerçek exit/stderr/koşu zamanı ve eski latest.json'un yeni koşu sanılmadığı launcher sonucu teslim et. Üretim tarayıcısına/yayın yoluna yanlışlıkla girebilecek denemeyi staging izolasyonu olmadan başlatma. Dar kaynak düzeltmesini mevcut yetki içinde uygula; uygulandı demek için pre/posthash ve gerçek güvenli giriş sonucu şart. Ledger/state yedeğini kör geri yükleme, lock silme veya yayın açma yok.
+2. **Reels R0:** Yalnız gerçekten kullanılan launcher/workspace/ref → giriş → ses tüketim yolu ve önceden kabul edilmiş calm/energetic iki dosyanın gizlisiz kimlik/hash/onay eşlemesini teslim et. PR33 local_voiceover kullanır; main/PR22 synthesis'e ulaşır. Yerel yolu görmeden genel prompt/süre/pause değiştirme. Yeni ses veya MP4 üretme; aynı kabul edilmiş varlık için tekrar kullanıcı onayı isteme.
+3. **Jingle J1:** Yalnız zaten işaretli M05 kaydını aç; tür/tarih, sağlayıcı kimliği mi rezervasyon mu, hangi dosya/indirmeye bağlı ve preflight alan eşlemesini raporla. Kaynaktaki değer ile yerel hesaplanan hash/byte ayrı kalır. Gerçek kanıt yoksa UNRESOLVED; adapter/receipt uydurma. Tarihsel kurtarma sonuçlanmazsa onun sınırını belirt; importer/state/lock/mixer kaynak incelemesini ayrı iş olarak ilerlet. Pilot ertelemesi, V3.1 ve18Ekim belirsiz slotu korunur.
+
+Sınırlar: özel kaynak/receipt/env/token/ham ses dış aktarımı yok; yalnız gerekli gizlisiz diff/sonuç. Yayın, ücretli API/TTS, yeni üretim, scheduler, merge/deploy ve geniş yetki değişikliği yok. Eski kabul edilmiş kaynak/dosyalar korunur. Geri dönüş yalnız yeni kod farkına sınırlı. Yeni provider/import/claim işlemi başlatma.
+
+Teslim yeri: mevcut #32; her doğal paket sonunda checkpoint. Tumblr ilk somut teslim önceliklidir; R0/J1 sırf bu iş yüzünden süresiz beklemez. Beklenmedik yan etkide gerçek hata/etki ve tek sonraki adımı bildir. İlgili koda başka uygulayıcı yazıyorsa çakışan paralel değişiklik yapma.
+
+Work→Commander sabit rapor okuması MASTER ve WATCHDOG oturumlarında başarılı. Pilot araç yalnız OLDIES-ETSY-REDACTED-REPORT okuyabilir; bu işlere dosya veya terminal erişimi sağlamaz. Kurulumu tekrar etmek bu görevin çözümü değildir. İş bitti ölçütü staging test sayısı değil gerçek yerel uygulama kanıtıdır; genel operasyon ve süreklilik bağımsız kabulü ayrı bekler.
