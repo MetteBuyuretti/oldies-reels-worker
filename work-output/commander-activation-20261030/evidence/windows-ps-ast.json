@@ -1,0 +1,25 @@
+{
+  "status": "PASS_REAL_WINDOWS_PS_AST",
+  "at": "2026-10-29T22:11:22.311Z",
+  "cases": [
+    {
+      "expected": "SYNTAX_OK",
+      "file": "run_tumblr_auto.ps1",
+      "status": "SYNTAX_OK",
+      "exitCode": 0,
+      "signal": null,
+      "executedCandidate": false,
+      "sourceSha256": "64faa5afc36247b1eb68662427fac58d3943216d1b1b888beda0f64a6fef5035"
+    },
+    {
+      "expected": "SYNTAX_ERROR",
+      "file": "run_tumblr_auto.ps1",
+      "status": "SYNTAX_ERROR",
+      "exitCode": 1,
+      "signal": null,
+      "executedCandidate": false,
+      "sourceSha256": "1d8310fabf4c771c23c5c631580e52336f44bad276664e673cb2fa9a75256619"
+    }
+  ],
+  "candidateExecuted": false
+}

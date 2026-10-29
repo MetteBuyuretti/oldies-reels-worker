@@ -1,0 +1,15 @@
+✔ missing node is a checker failure, not a source syntax diagnosis (12.5127ms)
+✔ missing powershell is a checker failure, not a source syntax diagnosis (11.1151ms)
+✔ timeout cannot be reported as completed syntax validation (0.8685ms)
+✔ interrupted or missing exit cannot pass syntax validation (0.2082ms)
+✔ successful completed parser and real parser rejection remain distinct (0.9646ms)
+✔ unknown launch error details are not disclosed (0.154ms)
+✔ actual node checker still parses valid staging code without executing it (196.8361ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 349.3727

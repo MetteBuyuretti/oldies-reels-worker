@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-29T22:13:29.352Z",
+  "updated_at": "2026-10-29T22:17:15Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -572,7 +572,7 @@
       "id": "commander-project-staging-20261029",
       "title": "Commander — gerçek proje okuma ve sınırlı staging araçları",
       "owner": "WORK MASTER",
-      "status": "in_progress",
+      "status": "blocked",
       "completed_units": [
         "operator_gateway_source_and_six_tool_candidate_read",
         "operator_15_windows_boundary_tests_and_local_mcp_delivery_read",
@@ -580,22 +580,28 @@
         "master_seven_checker_outcome_tests_pass_linux",
         "watchdog_positive_six_tool_scope_read_and_master_authority_mapped",
         "watchdog_0100_continuation_read_and_current_execution_channel_gap_confirmed",
-        "windows_activation_continuation_actual_alindi_basladi_0109_receipt_read"
+        "windows_activation_continuation_actual_alindi_basladi_0109_receipt_read",
+        "windows_f8e5316_pins_and_signed_binaries_verified_20261030",
+        "windows_checker_7_pass_and_actual_ps_ast_valid_invalid_no_execution_20261030",
+        "current_candidate_mcp_launcher_stage_roundtrip_syntax_verified_20261030",
+        "managed_activation_guard_exit42_preserved_live_runtime_20261030"
       ],
-      "last_checkpoint": "2026-10-29T22:13:29.352Z",
-      "next_step": "Gerçek Windows Codex devamı01:09ALINDI/BAŞLADI ile teyit edildi; yeniden başlatma/kurulum/onay isteme. Uygulayıcının01:30TSİ hedefli f8e5316 pin/etkilenen WindowsPSsyntax ve koşullar geçerse aynı runtime aktivasyon teslimini incele. Bu Work'e altı araç geldiğinde kaynak→staging→syntax gerçek kabulünü yap; yerel katalog/health veya başlangıç kaydını uçtan uca başarı sayma.",
+      "last_checkpoint": "2026-10-29T22:17:15Z",
+      "next_step": "Aynı mevcut runtime anahtarının env:CONTROL_PLANE_API_KEY başvurusuyla managed yeniden başlatma/geri dönüş sürecine güvenli aktarılabildiği yerel işlem oturumu gerekli. Önkoşul yokken sağlıklıPID15192durmayacak. Anahtar bağlamı sağlandığında hazır f8e5316candidate aynı alias/tünelde etkinleştirilir; ardından hedef Work'te gerçek kaynak→staging→syntax kabulü. Yeni genel kurucu/WATCHDOG onayı, yeni anahtar/tünel/kurulum veya keyfi kill yok.",
       "acceptance": {
         "scope": "three_pinned_tumblr_sources_and_three_fixed_staging_files_only",
-        "operator_candidate": "15_windows_tests_and_local_mcp_reported_not_Work_acceptance",
-        "new_checker_fix": "7_focused_Linux_tests_pass_Windows_candidate_pin_pending",
+        "operator_candidate": "current_windows_local_mcp_7tools_source_ps_staging_roundtrip_syntax_pass_not_Work_acceptance",
+        "new_checker_fix": "f8e5316_exact_pin_7_windows_checks_pass_actual_ps_ast_valid_invalid_pass",
         "independent_scope_review": "positive_6498709833_6498717365",
         "activated": false,
         "work_project_tool_acceptance": "pending",
         "production_write_or_general_shell": "not_in_scope",
         "scope_decision": "master_20261029_1710_same_six_tools_after_local_checks",
-        "local_activation_receipt": "started_0109_activation_result_pending_first_control_0130",
-        "current_work_catalog": "one_fixed_historical_report_tool_only_observed_20261030_0111",
-        "execution_channel": "founder_direct_handoff_to_existing_windows_codex_confirmed_6509466771_work_direct_control_still_unavailable"
+        "local_activation_receipt": "actual_managed_activation_guard_exit42_RESTART_KEY_CONTEXT_UNAVAILABLE_before_stop",
+        "current_work_catalog": "one_fixed_report_only_preserved_20261030_0115",
+        "execution_channel": "founder_direct_windows_dispatch_confirmed_current_execution_completed_credentials_missing_for_restart",
+        "restart_credential_context": "configured_process_env_reference_absent_no_secret_extraction",
+        "rollback": "byte_backups_verified_live_relaunch_not_ready_without_same_key_context"
       },
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
@@ -605,10 +611,12 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509320201",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509466771",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509451390",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/18e741b6db1522a50aa8ade34a15a9f8115386ef/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/18e741b6db1522a50aa8ade34a15a9f8115386ef/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fix/automation-mode-guard-20261029/work-output/commander-activation-20261030/RESULT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509545681"
       ],
-      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: WD6509320201 kararı alındı; genel inceleme/kapsam/yetki beklemesi yok. #32 17:15 sonrası yalnız WD01:00 kaydı içeriyor; yeni yerel uygulama makbuzu bulunmadı. Work araç kataloğu yalnız sabit rapor. Fiilî başlatma kanalı yokluğu açık blocker yapıldı; sessiz bekleme veya yerelde çalışıyor izlenimi verilmez. Yeni kurulum/anahtar/izin değişikliği yapılmadı.\n30.10.2026 | 01:13 TSİ: Kurucu komutu mevcut Windows Codex'e iletti; MASTER6509466771 gerçek01:09ALINDI/BAŞLADI kaydını doğrudan okudu. Başlatma iletimi engeli çözüldü, görev yerelde in_progress; güncel syntax/aktivasyon sonucu bekleniyor. İlk kontrol hedefini Codex01:30verdi. Work'te hâlâ tek rapor aracı var; hedef Work kabulü açılmadı. WD6509451390tam okundu; Jingle eki tek mevcut göreve işlendi, onun alımı henüz teyitli değil.",
-      "control_time": "30.10.2026 | 01:13 TSİ aktif okuma. WINDOWS CODEX ilk kontrol hedefi01:30TSİ; bu hedef otomatik Work izleme/uyandırma kurulduğu anlamına gelmez.",
+      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: WD6509320201 kararı alındı; genel inceleme/kapsam/yetki beklemesi yok. #32 17:15 sonrası yalnız WD01:00 kaydı içeriyor; yeni yerel uygulama makbuzu bulunmadı. Work araç kataloğu yalnız sabit rapor. Fiilî başlatma kanalı yokluğu açık blocker yapıldı; sessiz bekleme veya yerelde çalışıyor izlenimi verilmez. Yeni kurulum/anahtar/izin değişikliği yapılmadı.\n30.10.2026 | 01:13 TSİ: Kurucu komutu mevcut Windows Codex'e iletti; MASTER6509466771 gerçek01:09ALINDI/BAŞLADI kaydını doğrudan okudu. Başlatma iletimi engeli çözüldü, görev yerelde in_progress; güncel syntax/aktivasyon sonucu bekleniyor. İlk kontrol hedefini Codex01:30verdi. Work'te hâlâ tek rapor aracı var; hedef Work kabulü açılmadı. WD6509451390tam okundu; Jingle eki tek mevcut göreve işlendi, onun alımı henüz teyitli değil.\n30.10.2026 | 01:17 TSİ — WINDOWS CODEX: f8e5316module ve güncelpin/helper/üçkaynak doğrulandı;7/7Windowschecker, gerçekPSAST geçerli/hatalı ve ayrı güncelMCP kaynak→exclusive staging→geriokuma→syntax PASS. Tamaktif yedekler hashle doğrulandı. Yetkiliaktivasyonçağrısı RESTART_KEY_CONTEXT_UNAVAILABLE/exit42 ile stop öncesi durdu: süreçortamında yapılandırılmışCONTROL_PLANE_API_KEYyok. Aktif runtime/PID15192healthy/ready/pollingkorundu, aktiffilespre/postaynı; yeniaraçlarWork'eaçılmadı. Engelyeniinceleme veya görevalınmadıdeğil, yenibaşlatma/geri dönüş için aynıanahtarbağlamıdır.",
+      "control_time": "30.10.2026 | 01:17TSİgerçekWindowskanıtı. Sonrakikontrol aynıanahtarın güvenli managed restart bağlamı sağlandığında; eski çalışan runtime korunuyor. Otomatik Work uyanma yok.",
       "resolved_blockers": [
         {
           "type": "local_execution_channel_unavailable",
@@ -628,7 +636,8 @@
         "first_control_target": "2026-10-30T01:30:00+03:00",
         "activation_result": "pending",
         "receipt_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509466771"
-      }
+      },
+      "blocker_code": "RESTART_KEY_CONTEXT_UNAVAILABLE"
     }
   ]
 }

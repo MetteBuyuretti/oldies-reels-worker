@@ -1,0 +1,13 @@
+{
+  "normalization": "UTF-8 LF exported representation",
+  "files": {
+    "RESULT.md": "cf3b69f898622cdbc7598793ff4cd52a9105a9ee8e7865aa2aa4c316ced5569f",
+    "evidence/preflight-files.json": "f849abd2b628bc28248c2f2c5e4113d28d273868a2c5c13930faa6bc6cf3e5f7",
+    "evidence/windows-ps-ast.json": "ce414f0d9dd345fee07723de979e9bac45ba12c4831e5f568a4bbd0b17a3484b",
+    "evidence/checker-tests.tap": "cdac98cce5037b1f77f6a97bf709e04cc0ee19fbf61c46b084387758533dfd50",
+    "evidence/checker-binaries.json": "496c2ca8f2bcf3e00ec450191859546a5f258cc6dd3c1a8dce21dec0edf785cc",
+    "evidence/current-wire.json": "9e04e5cc0c858bf614f9c8a54a81f273acac0953bc231a9ab8062f234a19322c",
+    "evidence/activation-result.json": "e360282964a71cca1b0c38478db89a06e41768b38fcabcef48c4b9f55fe3892e",
+    "evidence/runtime-preserved.json": "a9417617643087491b4ed3d8e79a62d4641d7a34dc24658bd971a97038a49fe3"
+  }
+}

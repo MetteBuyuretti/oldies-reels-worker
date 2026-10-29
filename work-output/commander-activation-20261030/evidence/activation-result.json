@@ -1,0 +1,17 @@
+{
+    "newRuntime":  false,
+    "credentialWritten":  false,
+    "at":  "2026-10-29T22:13:25.3371994Z",
+    "details":  {
+                    "rollbackRelaunchReady":  false,
+                    "preflightFilesPassed":  true,
+                    "currentModuleSha256":  "f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d",
+                    "oldRuntimePreserved":  true,
+                    "secretLookupScope":  "Only configured process environment reference"
+                },
+    "runtimeStopAttempted":  false,
+    "reason":  "RESTART_KEY_CONTEXT_UNAVAILABLE",
+    "activated":  false,
+    "status":  "ACTIVATION_NOT_STARTED",
+    "newTunnel":  false
+}
