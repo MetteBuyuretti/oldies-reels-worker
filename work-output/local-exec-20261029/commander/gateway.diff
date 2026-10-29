@@ -1,0 +1,43 @@
+--- readonly-gateway.cjs
++++ gateway.candidate.cjs
+@@ -6,6 +6,7 @@
+ const { createRequire } = require('node:module');
+ const { pathToFileURL } = require('node:url');
+ 
++let projectTools;
+ const FILE_ALIAS = 'OLDIES-ETSY-REDACTED-REPORT';
+ const MAX_BYTES = 262144;
+ const PUBLIC_TOOL = Object.freeze({
+@@ -59,6 +60,7 @@
+   // Runtime control-plane credentials must not enter Commander child processes.
+   for (const name of Object.keys(process.env)) if (/^(CONTROL_PLANE_|OPENAI_|AZURE_OPENAI_|GITHUB_|GH_TOKEN$)/i.test(name)) delete process.env[name];
+   for (const pinned of policy.pinnedSources) if (sha256(fs.readFileSync(pinned.path)) !== pinned.sha256) throw new Error('SOURCE_CHANGED_DENIED');
++  projectTools=require('./project-tools.cjs');
+   readPinnedFile(policy);
+   const sdk = createRequire(policy.sdkAnchor);
+   const { Server } = sdk('@modelcontextprotocol/sdk/server/index.js');
+@@ -73,16 +75,19 @@
+   let wrapper = configResult.structuredContent;
+   if (!wrapper) for (const block of configResult.content ?? []) if (block.type === 'text') { try { wrapper = JSON.parse(block.text); break; } catch {} }
+   const actualConfig = wrapper?.config ?? wrapper;
+-  if (configResult.isError || actualConfig?.version !== '0.3.0' || actualConfig.telemetryEnabled !== false || !Array.isArray(actualConfig.allowedDirectories) || actualConfig.allowedDirectories.length !== 1 || !samePath(actualConfig.allowedDirectories[0], policy.root)) {
++  if (configResult.isError || actualConfig?.version !== '0.3.0' || actualConfig.telemetryEnabled !== false || !Array.isArray(actualConfig.allowedDirectories) || actualConfig.allowedDirectories.length !== policy.expectedDirectories.length || !actualConfig.allowedDirectories.every(p=>policy.expectedDirectories.some(q=>samePath(p,q)))) {
+     await upstream.close();
+     throw new Error('UPSTREAM_POLICY_MISMATCH');
+   }
+-  const server = new Server({ name: 'oldies-commander-supervised-read', version: '1.0.0' }, { capabilities: { tools: {} }, instructions: 'Only the fixed historical redacted report may be read. This connection grants no writing, terminal, URL access or production health acceptance.' });
+-  server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [PUBLIC_TOOL] }));
++  const server = new Server({ name: 'oldies-commander-project-staging-proposal', version: '1.1.0-candidate' }, { capabilities: { tools: {} }, instructions: 'Review candidate: pinned Tumblr reads and designated staging only. No installed source writes, general shell, URL or production health acceptance.' });
++  server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [PUBLIC_TOOL,...projectTools.TOOLS] }));
+   server.setRequestHandler(CallToolRequestSchema, async request => {
+-    try { return await callReadOnly(request.params, policy, upstream); }
++    try {
++      if(projectTools.TOOLS.some(t=>t.name===request.params.name))return await projectTools.callProject(request.params.name,request.params.arguments,policy.project,upstream);
++      return await callReadOnly(request.params, policy, upstream);
++    }
+     catch (error) {
+-      const safe = ['TOOL_DENIED', 'ARGUMENTS_DENIED', 'ROOT_REPARSE_DENIED', 'PATH_DENIED', 'FILE_REPARSE_DENIED', 'FILE_TYPE_OR_SIZE_DENIED', 'FILE_CHANGED_DENIED', 'FILE_FORMAT_DENIED', 'UPSTREAM_RESULT_DENIED', 'UPSTREAM_CONTENT_MISMATCH'].includes(error.message) ? error.message : 'READ_FAILED_CLOSED';
++      const safe = ['TOOL_DENIED', 'ARGUMENTS_DENIED', 'ROOT_REPARSE_DENIED', 'PATH_DENIED', 'FILE_REPARSE_DENIED', 'FILE_TYPE_OR_SIZE_DENIED', 'FILE_CHANGED_DENIED', 'FILE_FORMAT_DENIED', 'UPSTREAM_RESULT_DENIED', 'UPSTREAM_CONTENT_MISMATCH','SOURCE_POLICY_DENIED','SOURCE_CHANGED_DENIED','PREIMAGE_SHA256_MISMATCH','STAGING_FILE_MISSING','SYNTAX_TYPE_DENIED'].includes(error.message) ? error.message : 'READ_FAILED_CLOSED';
+       throw new McpError(ErrorCode.InvalidParams, safe);
+     }
+   });

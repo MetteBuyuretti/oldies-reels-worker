@@ -1,0 +1,109 @@
+{
+  "task": "MASTER-LOCAL-EXEC-20261029-01",
+  "status": "TUMBLR_GUARD_TESTED__R0_J1_PARTIAL__COMMANDER_PREPARED",
+  "tumblr": {
+    "publisher_sha256": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+    "launcher_sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+    "installed": true,
+    "live_publication": false,
+    "protected_files_unchanged": true
+  },
+  "reels": {
+    "status": "PARTIAL_IDENTITY_RESOLVED",
+    "latest_demonstrated_local_entry": "artifacts/reels-recovery-20261018/pilot_materials.py then correction/package scripts; no 26/29 October run receipt found",
+    "local_worker_path": "worker.main -> prepare_preview -> local_voiceover -> inspect_audio -> render_preview -> build_timeline -> render_timeline",
+    "local_preview_synthesis_called": false,
+    "workflow_main_or_pr22_current_execution_observed": false,
+    "accepted_pair": {
+      "calm": "UNRESOLVED_ASSET_IDENTITY",
+      "energetic": "UNRESOLVED_ASSET_IDENTITY",
+      "founder_preference_preserved": true,
+      "repeat_approval_requested": false
+    },
+    "new_audio_or_mp4": 0,
+    "duration_prompt_or_pause_changed": false,
+    "workspace_file_match_counts": [
+      {
+        "workspace_alias": "LOCAL_REELS_1",
+        "matched": 4,
+        "total": 6
+      },
+      {
+        "workspace_alias": "LOCAL_REELS_2",
+        "matched": 0,
+        "total": 6
+      }
+    ]
+  },
+  "jingle": {
+    "candidate": "M05",
+    "status": "UNRESOLVED",
+    "record_kind": "CAPCUT_CONVERSION_STATUS",
+    "record_date": "2026-10-13T13:46:19.5488425+03:00",
+    "source_path_matches_m05": true,
+    "record_fields": [
+      "status",
+      "created_at",
+      "source",
+      "m4a",
+      "wav",
+      "latest_m4a",
+      "latest_wav",
+      "target_seconds",
+      "loudness_lufs"
+    ],
+    "provider_track_id_present": false,
+    "reservation_id_present": false,
+    "source_reported_sha256": null,
+    "source_reported_bytes": null,
+    "source_reported_date": null,
+    "local_hash_matches_26oct": true,
+    "local_size_matches_26oct": true,
+    "linked_file_existence": {
+      "source": true,
+      "m4a": true,
+      "wav": true,
+      "latest_m4a": true,
+      "latest_wav": true
+    },
+    "conclusion": "Conversion record is not original provider download metadata or MANUAL receipt; no field-name adapter can recover absent identity",
+    "preflight_missing": [
+      "VERIFIED_TRACK_ID",
+      "VERIFIED_SOURCE_DATE",
+      "EXISTING_MANUAL_RECEIPT",
+      "ORIGINAL_PROVIDER_DOWNLOAD_METADATA"
+    ],
+    "production_receipt": false,
+    "import_allowed": false,
+    "qc_approved": false
+  },
+  "commander": {
+    "status": "PREPARED_NOT_ACTIVATED",
+    "boundary_tests": "15/15",
+    "local_wire_status": "PASS_LOCAL_MCP_CANDIDATE_ONLY",
+    "work_session_verified": false,
+    "active_tunnel_changed": false,
+    "source_root": "C:/Users/METE/oldies-jingle-automation",
+    "source_files": [
+      "tumblr_auto_news_v3.mjs",
+      "run_tumblr_auto.ps1",
+      "tumblr_editorial_control_v4.mjs"
+    ],
+    "staging_root": "CURRENT_PROJECT_ROOT/work-output/local-exec-20261029/commander/staging",
+    "staging_files": [
+      "tumblr_auto_news_v3.mjs",
+      "run_tumblr_auto.ps1",
+      "review-note.txt"
+    ],
+    "tools": [
+      "list_project_files",
+      "read_project_file",
+      "create_staging_file",
+      "read_staging_file",
+      "replace_staging_file",
+      "check_staging_syntax"
+    ],
+    "activation_authorized_by_this_task": false,
+    "rollback": "New candidate gateway/profile only; active tunnel and original Commander unchanged"
+  }
+}

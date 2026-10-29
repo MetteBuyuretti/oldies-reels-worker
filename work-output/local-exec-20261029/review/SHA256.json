@@ -1,0 +1,10 @@
+{
+  "review\\checkpoint.json": "1e609b91559eada3d4e54d09a307b3d9149663187f8f95a806108aa12fac547f",
+  "review\\launcher.diff": "2a026a2987aa630a0f1a4c49d9dac9b7a3ed1342af7351cbd717b0f553079ba1",
+  "review\\publisher.diff": "b306dadc7c18ad3fd6c56c1c32f5229e506ccee6275c9d72d1b07cdeb5f23f76",
+  "review\\report.md": "8f2119969531dbf357ebfccfefe3be90bfcb06c2b593389d2a61349868e98d61",
+  "commander\\project-tools.cjs": "ca0bd8b96dc54e96d8f7c4d138a7b094288d99948c02c4dd44ddb63393077ef0",
+  "commander\\gateway.diff": "84f406401d4c58c63ccd779a51cbfa25c49acf47b92f1f0c3c9328588eae7256",
+  "commander\\check-staging.ps1": "30594d978480f5cb987708e601dd4c264339738057dc4aa562bc3a03b47c06b5",
+  "commander\\test-project-tools.cjs": "310d5ad1cd77061dbfad8c0c32a748a6be9b8c1b0064d6f9908eb1c176c50f73"
+}
