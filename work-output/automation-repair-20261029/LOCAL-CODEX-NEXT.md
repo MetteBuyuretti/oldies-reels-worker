@@ -14,3 +14,14 @@ Sınırlar: özel kaynak/receipt/env/token/ham ses dış aktarımı yok; yalnız
 Teslim yeri: mevcut #32; her doğal paket sonunda checkpoint. Tumblr ilk somut teslim önceliklidir; R0/J1 sırf bu iş yüzünden süresiz beklemez. Beklenmedik yan etkide gerçek hata/etki ve tek sonraki adımı bildir. İlgili koda başka uygulayıcı yazıyorsa çakışan paralel değişiklik yapma.
 
 Work→Commander sabit rapor okuması MASTER ve WATCHDOG oturumlarında başarılı. Pilot araç yalnız OLDIES-ETSY-REDACTED-REPORT okuyabilir; bu işlere dosya veya terminal erişimi sağlamaz. Kurulumu tekrar etmek bu görevin çözümü değildir. İş bitti ölçütü staging test sayısı değil gerçek yerel uygulama kanıtıdır; genel operasyon ve süreklilik bağımsız kabulü ayrı bekler.
+
+## Aynı göreve bağlı Commander hazırlığı
+
+29.10.2026 | 15:23 TSİ (UTC+3)
+Watchdog devamı: https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6496531073 . Ayrı yeniden kurulum veya soyut tam erişim görevi açma. Mevcut MASTER-LOCAL-EXEC-20261029-01'in ilk yerel kaynak incelemesine bağla.
+
+Mevcut çalışan tünelin profile/adapter/filtre kaynağını, transportunu ve sürüm/preimage'ını yerelde incele; sabit rapor alias sınırının hangi katmandan geldiğini belirle. Gizli config/env veya dizin envanteri paylaşma. Ardından gerçek proje köküyle sınırlı listeleme/okuma/hash, yalnız belirli staging klasöründe aday oluşturma/geri okuma ve gerekliyse komutu/girdisi sabit syntax-test çalıştırıcısının somut diff ve sınır testlerini hazırla. Önce mevcut kaynağı gör; tahminî wrapper/config yazma. Kurulu üretim yazması, genel shell/process veya ek proje kökü bu hazırlığa eklenmez.
+
+Hazırlık, araç erişimini fiilen açma yetkisi değildir; somut paket hazır olduğunda mevcut geçerli kapsamı denetle ve yalnız gerçekten gerekli yeni erişimi ayrıca review edilebilir sun. Çalışan tünel/anahtar/Commander korunur; geri dönüş yalnız yeni araç/filtre katmanıdır. Kabul Work'te gerçek proje okuma → staging yazma/geri okuma → güvenli kontrol yanıtıdır; yerel terminal başarısını bunun yerine koyma.
+
+İlk ALINDI yanıtında hem bu eki hem üç otomasyon görevini gördüğünü ve kendi gerçekçi ilk teslim/kontrol saatini belirt. Şu anda bu ekin Windows uygulayıcısı tarafından okunduğu veya başlatıldığına dair teyit yok. Kullanıcının ayrıca uzun rapor aktarması gerekmiyor; ortak #32 ve bu tek görev kaynağı kullanılacak.
