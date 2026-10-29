@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-29T22:13:29.352Z",
+  "updated_at": "2026-10-29T22:58:31.433Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -46,9 +46,9 @@
         "windows-m05-record-opened-and-factory-source-chain-reviewed-20261029",
         "watchdog_last_working_output_regression_request_added_to_single_local_codex_task"
       ],
-      "next_step": "WD-DISPATCH-RESTORE6509451390doğrultusunda mevcut Codex Commander kısa paketinden sonra son kullanılabilir gerçek çıktı→script/giriş/config/tarih/sürüm bağını bugünkü zincirle karşılaştırsın. Altyapı/CapCut/manuelmiks/DJMASTER/zamanlanmış üretimi ayırsın; ilk kopan geçişi gerçek fonksiyon/girdi/hata ile doğrulasın. İlk teslim tek dar diff veya eksik tek girdi, üretimsiz odaklı regresyon ve yalnız yeni farkın geri dönüşü. Jingle ekinin ALINDI teyidi henüz yok; M05arama ve üretim kapıları açılmadı.",
-      "last_checkpoint": "2026-10-29T22:13:29.352Z",
-      "note": "Bağlantı kesintisinde miks veya render baştan başlamadan önce mevcut dosyaları kontrol et.\n25.10.2026 | 00:26 TSİ: Ana Jingle sistemi onarılmış değil; önceki jingle-status-analysis-20261024 DONE yalnız analiz teslimidir. Güncel yerel yürütücü erişimi yok; ana sistem görevi BLOCKED. Yerel devam talimatı hazır; uygulayıcı görevi almadı.\n25.10.2026 | 04:38 TSİ: Yerel Codex 04:33:34 görev alma kaydında Factory config/heartbeat/kaynak erişimini bildirdi; önceki erişim-yok ifadesi bu yerel oturum için güncel değil. Jingle zinciri onarımı/çıktısı teslim edilmedi; sistem BLOCKED yalnız yerel erişim yokluğuyla açıklanamaz, somut zincir kanıtı ve mevcut üretim/pilot sınırı bekliyor. part-009.\n25.10.2026 | 05:37 TSİ: Codex6392440945/rapor/testdosyası doğrudanokundu:4livekaynakstagingSHAeşitliği,10/10üretimsiztest,10legacyMP3veçalışanvenv bildirildi. YeniJingleyaması/üretimyok;19Ekimtrackprovenansı/kimlikliMP3receiptveDJMASTERkabulüyok. AnaBLOCKEDdurumukorunur;eskiPython-yokvekuruluyamayoksavlarıgüncelengeldeğil.\n25.10.2026 05:55 TSİ: Watchdog6392644686üretimsizMP3kimlikeşlemesi/validatorhazırlığınıuygulamayadevamolarakönerdi;MASTERkabul6392669459. Bu yeniJingleişleminin yerelbaşlamateyidi yok.\n27.10.2026 | 03:58 TSİ: 26Ekim yerel teslim ve WD6418204700 okundu: M01–M10 UNRESOLVED; M05 tek ilgili kayıt devam noktası. Preflight kaynak/hash/byte tutarlılığı aracı dar kabul aldı,7/7Python bağımsız test beyanı mevcut. Bu kabul kimlik/özgünreceipt/üretim veya DJ MASTER kabulü değildir; eski yerel devam alınmadı notu güncel engel değildir.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: M05 kaydı13EkimCapCut dönüşüm durumu; provider track/rezervasyon/source date/hash/receipt yok. Kaynak değeri ile yerel hash/byte ayrıldı. Bu dar tarihsel kurtarma UNRESOLVED; yeni makbuz/import/claim yok. Factory state/lock/18Ekimclaim aynı. İlgili importer/handoff/Factory/mixer kaynak yolu incelendi.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.\n30.10.2026 | 01:13 TSİ: WD6509451390tam okundu; kurucunun önceki çalışan Jingle çıktısını esas alan regresyon/onarım ilk parçası mevcut LOCAL-CODEX-NEXT'e eklendi(18e741b6). Commander01:09alımı Jingle ekinin de alındığı sayılmaz. Mevcut tek yerel Codex uygulayıcı; yeni paralel kaynak yazarı yok. M05tarihsel alt sonucu, V3.1, pilot ertelemesi ve18Ekimbelirsizclaim korunuyor.",
+      "next_step": "Mevcut tek yerel Codex, önceki J2son çalışan gerçek çıktı→bugünkü zincir karşılaştırması/ilk kopma/dar diff veya eksik tek girdi/üretimsiz regresyon işini alsın; Commander anahtar girişi bekleyişi bu incelemeyi durdurmasın. M05arama veya yeni üretim kapıları açılmadı. J2ALINDI ve ilk gerçek teslim hedefi hâlâ gerekli.",
+      "last_checkpoint": "2026-10-29T22:58:31.433Z",
+      "note": "Bağlantı kesintisinde miks veya render baştan başlamadan önce mevcut dosyaları kontrol et.\n25.10.2026 | 00:26 TSİ: Ana Jingle sistemi onarılmış değil; önceki jingle-status-analysis-20261024 DONE yalnız analiz teslimidir. Güncel yerel yürütücü erişimi yok; ana sistem görevi BLOCKED. Yerel devam talimatı hazır; uygulayıcı görevi almadı.\n25.10.2026 | 04:38 TSİ: Yerel Codex 04:33:34 görev alma kaydında Factory config/heartbeat/kaynak erişimini bildirdi; önceki erişim-yok ifadesi bu yerel oturum için güncel değil. Jingle zinciri onarımı/çıktısı teslim edilmedi; sistem BLOCKED yalnız yerel erişim yokluğuyla açıklanamaz, somut zincir kanıtı ve mevcut üretim/pilot sınırı bekliyor. part-009.\n25.10.2026 | 05:37 TSİ: Codex6392440945/rapor/testdosyası doğrudanokundu:4livekaynakstagingSHAeşitliği,10/10üretimsiztest,10legacyMP3veçalışanvenv bildirildi. YeniJingleyaması/üretimyok;19Ekimtrackprovenansı/kimlikliMP3receiptveDJMASTERkabulüyok. AnaBLOCKEDdurumukorunur;eskiPython-yokvekuruluyamayoksavlarıgüncelengeldeğil.\n25.10.2026 05:55 TSİ: Watchdog6392644686üretimsizMP3kimlikeşlemesi/validatorhazırlığınıuygulamayadevamolarakönerdi;MASTERkabul6392669459. Bu yeniJingleişleminin yerelbaşlamateyidi yok.\n27.10.2026 | 03:58 TSİ: 26Ekim yerel teslim ve WD6418204700 okundu: M01–M10 UNRESOLVED; M05 tek ilgili kayıt devam noktası. Preflight kaynak/hash/byte tutarlılığı aracı dar kabul aldı,7/7Python bağımsız test beyanı mevcut. Bu kabul kimlik/özgünreceipt/üretim veya DJ MASTER kabulü değildir; eski yerel devam alınmadı notu güncel engel değildir.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: M05 kaydı13EkimCapCut dönüşüm durumu; provider track/rezervasyon/source date/hash/receipt yok. Kaynak değeri ile yerel hash/byte ayrıldı. Bu dar tarihsel kurtarma UNRESOLVED; yeni makbuz/import/claim yok. Factory state/lock/18Ekimclaim aynı. İlgili importer/handoff/Factory/mixer kaynak yolu incelendi.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.\n30.10.2026 | 01:13 TSİ: WD6509451390tam okundu; kurucunun önceki çalışan Jingle çıktısını esas alan regresyon/onarım ilk parçası mevcut LOCAL-CODEX-NEXT'e eklendi(18e741b6). Commander01:09alımı Jingle ekinin de alındığı sayılmaz. Mevcut tek yerel Codex uygulayıcı; yeni paralel kaynak yazarı yok. M05tarihsel alt sonucu, V3.1, pilot ertelemesi ve18Ekimbelirsizclaim korunuyor.\n30.10.2026 | 01:57 TSİ: Commander aynı anahtarın yerel restart bağlamı nedeniyle bekliyor; bu credential şartı Jingle J2üretimsiz kaynak/fixture incelemesinin önkoşulu değildir. Aynı Codex görevinde maskeli giriş hazırlığı sonrası kullanıcı girdisi beklenirken J2devamı belirtildi; Jinglealımı/başlaması henüz teyitli değil.",
       "owner": "WORK MASTER",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work-master-system-takeover-20261024/part-008.md",
@@ -63,7 +63,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/d4f90e509df8df494805416893f409ec96fbed61/work-output/local-exec-20261029/review/master-review.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509451390",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/18e741b6db1522a50aa8ade34a15a9f8115386ef/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/18e741b6db1522a50aa8ade34a15a9f8115386ef/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/02c1baba7017d72330648d89cc70ab6aec7e3a19/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md"
       ],
       "control_time": "30.10.2026 | 01:13 TSİ: Jingle eki hazırlanıp mevcut göreve kaydedildi. Sonraki yerel checkpoint'te ekin gerçek alımı ve kendi ilk teslim hedefi istenecek; kaynak/fixture çalışması henüz başladı denmiyor."
     },
@@ -572,7 +573,7 @@
       "id": "commander-project-staging-20261029",
       "title": "Commander — gerçek proje okuma ve sınırlı staging araçları",
       "owner": "WORK MASTER",
-      "status": "in_progress",
+      "status": "blocked",
       "completed_units": [
         "operator_gateway_source_and_six_tool_candidate_read",
         "operator_15_windows_boundary_tests_and_local_mcp_delivery_read",
@@ -580,22 +581,32 @@
         "master_seven_checker_outcome_tests_pass_linux",
         "watchdog_positive_six_tool_scope_read_and_master_authority_mapped",
         "watchdog_0100_continuation_read_and_current_execution_channel_gap_confirmed",
-        "windows_activation_continuation_actual_alindi_basladi_0109_receipt_read"
+        "windows_activation_continuation_actual_alindi_basladi_0109_receipt_read",
+        "windows_f8e5316_pins_and_signed_binaries_verified_20261030",
+        "windows_checker_7_pass_and_actual_ps_ast_valid_invalid_no_execution_20261030",
+        "current_candidate_mcp_launcher_stage_roundtrip_syntax_verified_20261030",
+        "managed_activation_guard_exit42_preserved_live_runtime_20261030",
+        "master_read_all_nine_windows_activation_evidence_files_and_result_20261030_0157",
+        "same_task_masked_launcher_managed_restart_context_completion_prepared"
       ],
-      "last_checkpoint": "2026-10-29T22:13:29.352Z",
-      "next_step": "Gerçek Windows Codex devamı01:09ALINDI/BAŞLADI ile teyit edildi; yeniden başlatma/kurulum/onay isteme. Uygulayıcının01:30TSİ hedefli f8e5316 pin/etkilenen WindowsPSsyntax ve koşullar geçerse aynı runtime aktivasyon teslimini incele. Bu Work'e altı araç geldiğinde kaynak→staging→syntax gerçek kabulünü yap; yerel katalog/health veya başlangıç kaydını uçtan uca başarı sayma.",
+      "last_checkpoint": "2026-10-29T22:58:31.433Z",
+      "next_step": "Aynı mevcut yerel Codex,02c1baba devamına göre mevcut maskeli anahtar penceresi→activate-managed bağlantısını kaynak/preimage ile doğrulayıp gerekiyorsa dar yedekli farkı hazırlasın; gerçek anahtarsız fixture'da iptal/child-env/rollback/cleanup davranışını denetlesin. Hazır tam kısayol/düğme ve tek kullanıcı adımı #32'ye. Kullanıcı aynı anahtarı yalnız hazır maskeli yerel girişte verdiğinde mevcut runtime aktivasyonu sürer; sonra Work proje kabulü. Şimdi eski pencereyi kör çalıştırma veya geçmiş testleri tekrarlama yok.",
       "acceptance": {
         "scope": "three_pinned_tumblr_sources_and_three_fixed_staging_files_only",
-        "operator_candidate": "15_windows_tests_and_local_mcp_reported_not_Work_acceptance",
-        "new_checker_fix": "7_focused_Linux_tests_pass_Windows_candidate_pin_pending",
+        "operator_candidate": "current_windows_local_mcp_7tools_source_ps_staging_roundtrip_syntax_pass_not_Work_acceptance",
+        "new_checker_fix": "f8e5316_exact_pin_7_windows_checks_pass_actual_ps_ast_valid_invalid_pass",
         "independent_scope_review": "positive_6498709833_6498717365",
         "activated": false,
         "work_project_tool_acceptance": "pending",
         "production_write_or_general_shell": "not_in_scope",
         "scope_decision": "master_20261029_1710_same_six_tools_after_local_checks",
-        "local_activation_receipt": "started_0109_activation_result_pending_first_control_0130",
-        "current_work_catalog": "one_fixed_historical_report_tool_only_observed_20261030_0111",
-        "execution_channel": "founder_direct_handoff_to_existing_windows_codex_confirmed_6509466771_work_direct_control_still_unavailable"
+        "local_activation_receipt": "actual_managed_activation_guard_exit42_RESTART_KEY_CONTEXT_UNAVAILABLE_before_stop",
+        "current_work_catalog": "only_fixed_historical_report_tool_observed_by_master_20261030_0155",
+        "execution_channel": "founder_direct_windows_dispatch_confirmed_current_execution_completed_credentials_missing_for_restart",
+        "restart_credential_context": "configured_process_env_reference_absent_no_secret_extraction",
+        "rollback": "byte_backups_verified_live_relaunch_not_ready_without_same_key_context",
+        "master_delivery_review": "nine_files_read_consistent_with_pre_stop_exit42_and_preserved_runtime_not_independent_windows_rerun",
+        "masked_restart_handoff": "prepared_in_existing_task_not_received_or_implemented_yet"
       },
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6497363164",
@@ -605,10 +616,15 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509320201",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509466771",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509451390",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/18e741b6db1522a50aa8ade34a15a9f8115386ef/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/18e741b6db1522a50aa8ade34a15a9f8115386ef/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fix/automation-mode-guard-20261029/work-output/commander-activation-20261030/RESULT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509545681",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509615901",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/b21753afd40a09ddf1b50258cb063095a30d9447/work-output/commander-activation-20261030/RESULT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/02c1baba7017d72330648d89cc70ab6aec7e3a19/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md"
       ],
-      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: WD6509320201 kararı alındı; genel inceleme/kapsam/yetki beklemesi yok. #32 17:15 sonrası yalnız WD01:00 kaydı içeriyor; yeni yerel uygulama makbuzu bulunmadı. Work araç kataloğu yalnız sabit rapor. Fiilî başlatma kanalı yokluğu açık blocker yapıldı; sessiz bekleme veya yerelde çalışıyor izlenimi verilmez. Yeni kurulum/anahtar/izin değişikliği yapılmadı.\n30.10.2026 | 01:13 TSİ: Kurucu komutu mevcut Windows Codex'e iletti; MASTER6509466771 gerçek01:09ALINDI/BAŞLADI kaydını doğrudan okudu. Başlatma iletimi engeli çözüldü, görev yerelde in_progress; güncel syntax/aktivasyon sonucu bekleniyor. İlk kontrol hedefini Codex01:30verdi. Work'te hâlâ tek rapor aracı var; hedef Work kabulü açılmadı. WD6509451390tam okundu; Jingle eki tek mevcut göreve işlendi, onun alımı henüz teyitli değil.",
-      "control_time": "30.10.2026 | 01:13 TSİ aktif okuma. WINDOWS CODEX ilk kontrol hedefi01:30TSİ; bu hedef otomatik Work izleme/uyandırma kurulduğu anlamına gelmez.",
+      "note": "29.10.2026 | 16:11 TSİ: Tek tarihsel rapor tünel kabulü önceki ayrı görevde DONE; bu yeni6araç kapsamı henüz açılmadı. Eski SHA256 manifesti aa6f635 tarihsel teslimine aittir; yeni modül pini f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: WD6509320201 kararı alındı; genel inceleme/kapsam/yetki beklemesi yok. #32 17:15 sonrası yalnız WD01:00 kaydı içeriyor; yeni yerel uygulama makbuzu bulunmadı. Work araç kataloğu yalnız sabit rapor. Fiilî başlatma kanalı yokluğu açık blocker yapıldı; sessiz bekleme veya yerelde çalışıyor izlenimi verilmez. Yeni kurulum/anahtar/izin değişikliği yapılmadı.\n30.10.2026 | 01:13 TSİ: Kurucu komutu mevcut Windows Codex'e iletti; MASTER6509466771 gerçek01:09ALINDI/BAŞLADI kaydını doğrudan okudu. Başlatma iletimi engeli çözüldü, görev yerelde in_progress; güncel syntax/aktivasyon sonucu bekleniyor. İlk kontrol hedefini Codex01:30verdi. Work'te hâlâ tek rapor aracı var; hedef Work kabulü açılmadı. WD6509451390tam okundu; Jingle eki tek mevcut göreve işlendi, onun alımı henüz teyitli değil.\n30.10.2026 | 01:17 TSİ — WINDOWS CODEX: f8e5316module ve güncelpin/helper/üçkaynak doğrulandı;7/7Windowschecker, gerçekPSAST geçerli/hatalı ve ayrı güncelMCP kaynak→exclusive staging→geriokuma→syntax PASS. Tamaktif yedekler hashle doğrulandı. Yetkiliaktivasyonçağrısı RESTART_KEY_CONTEXT_UNAVAILABLE/exit42 ile stop öncesi durdu: süreçortamında yapılandırılmışCONTROL_PLANE_API_KEYyok. Aktif runtime/PID15192healthy/ready/pollingkorundu, aktiffilespre/postaynı; yeniaraçlarWork'eaçılmadı. Engelyeniinceleme veya görevalınmadıdeğil, yenibaşlatma/geri dönüş için aynıanahtarbağlamıdır.\n30.10.2026 | 01:57 TSİ: MASTER6509615901 ve b21753afaltındaki9dosyayı TAM okudu; modül/pin/Windows7checker/gerçekPS ve yerelcandidateMCP sonuçları ile stop öncesiexit42/aynıaktifhashler tutarlı. Windows testlerini bu Work'te yeniden koşmadı. Main'deki eski01:30beklentisi bu teslimle güncellendi. Sonraki tek dar iş mevcut maskeli girişin aynı managed restart/rollback anahtar bağlamına bağlanması; 02c1baba eki hazır, yerel alımı/uygulaması henüz gözlenmedi. Kullanıcının anahtarı sohbete/GitHub'a/argv/kalıcıenvye koyması istenmiyor. Önce hazır giriş yolu ve güvenli önkontrol teslimi gerekli.",
+      "control_time": "30.10.2026 | 01:57 TSİ: Son Windows teslimi okundu ve merkezle uzlaştırıldı. Sonraki somut kontrol maskeli managed-aktivasyon girişinin yerel hazır teslimi; bunun alımı henüz teyit edilmedi. Otomatik uyandırma/izleme yok.",
       "resolved_blockers": [
         {
           "type": "local_execution_channel_unavailable",
@@ -626,8 +642,18 @@
         "alindi_at": "2026-10-30T01:09:00+03:00",
         "receipt_created_at": "2026-10-29T22:09:22Z",
         "first_control_target": "2026-10-30T01:30:00+03:00",
-        "activation_result": "pending",
-        "receipt_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509466771"
+        "activation_result": "ACTIVATION_NOT_STARTED_RESTART_KEY_CONTEXT_UNAVAILABLE_exit42_before_runtime_stop",
+        "receipt_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509466771",
+        "activation_result_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509615901"
+      },
+      "blocker_code": "RESTART_KEY_CONTEXT_UNAVAILABLE",
+      "blocker": {
+        "type": "restart_credential_context_unavailable",
+        "observed_in_operator_delivery": "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509615901",
+        "scope_review_pending": false,
+        "founder_general_approval_pending": false,
+        "description": "Güncel Windows candidate kontrolleri geçti; mevcut aynı anahtar managed restart/rollback sürecinin yapılandırılmış process-env başvurusuna aktarılmadığı için stop öncesi exit42. Mevcut maskeli pencerenin aktivasyon yardımcısına bağlandığı henüz kanıtlı değil.",
+        "next_required_evidence": "Mevcut maskeli girişin activate-managed akışına güvenli aynı-process bağının gizlisiz hazır teslimi; ardından kullanıcının aynı anahtarı yalnız yerel maskeli alana girmesiyle yönetilen aktivasyon. Önce anahtar/tünel geçerliliği ve geri dönüş hazır olmalı."
       }
     }
   ]
