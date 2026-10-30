@@ -1,0 +1,113 @@
+{
+  "checked_at": "2026-10-30T22:01:47.048Z",
+  "checked_at_TSI": "31.10.2026 | 01:01 TSİ",
+  "role": "WORK MASTER",
+  "github": {
+    "central_state_blob": "46fdc23a9e4bc9d25a0fa0f027f33531e662e4d2",
+    "latest_main_record_at": "2026-10-30T20:53:23.784Z",
+    "no_new_J3_followup_or_watchdog_receipt_after_master_2354": true,
+    "last_comment_observed": 6533252919,
+    "last_audit": {
+      "run_id": 41132722008,
+      "created_at": "2026-10-30T21:40:04Z",
+      "local": "31.10.2026 00:40 TSİ",
+      "conclusion": "success"
+    },
+    "last_TR_schedule": {
+      "run_id": 41084974777,
+      "planned_local_time": "12:17",
+      "created_at": "2026-10-30T15:54:15Z",
+      "local": "30.10.2026 18:54 TSİ",
+      "conclusion": "skipped",
+      "job": "create-draft",
+      "steps": 0,
+      "guard": "manual workflow_dispatch && preview_only"
+    },
+    "last_FB_schedule": {
+      "run_id": 41095336911,
+      "planned_local_time": "14:23",
+      "created_at": "2026-10-30T17:02:48Z",
+      "local": "30.10.2026 20:02 TSİ",
+      "conclusion": "skipped",
+      "job": "publish-facebook",
+      "steps": 0,
+      "guard": "if false"
+    },
+    "last_cleanup": {
+      "run_id": 41040152990,
+      "created_at": "2026-10-30T10:21:33Z",
+      "conclusion": "success"
+    },
+    "monitor_config": {
+      "schema_version": 1,
+      "stalled_hours": 3,
+      "self_schedule_freshness_hours": 3,
+      "expected_freshness_hours": {
+        ".github/workflows/reels-worker.yml": 36,
+        ".github/workflows/facebook-global-en.yml": 36,
+        ".github/workflows/reels-cleanup.yml": 36
+      },
+      "issue_alerts_enabled": true,
+      "recent_failure_lookback_hours": 48,
+      "manual_workflow_lookback_hours": 48
+    },
+    "PRs": [
+      {
+        "number": 35,
+        "head": "da122b13def6e2da6dc82786cfc442e0fe70e880",
+        "draft": true,
+        "merged": false
+      },
+      {
+        "number": 36,
+        "head": "7cf964b0b1d0fc79a99591a8793378e7a4b19dcc",
+        "draft": true,
+        "merged": false
+      },
+      {
+        "number": 33,
+        "head": "073e7665d9d381e7c8d595fcd60b905a9071490a",
+        "draft": true,
+        "merged": false
+      }
+    ]
+  },
+  "wordpress": {
+    "ability": "oldies-reels__list-drafts",
+    "readonly": true,
+    "returned_records": 16,
+    "statuses": {
+      "DRAFT_REVIEW": 11,
+      "READY_FOR_EDITS": 5
+    },
+    "top_record": {
+      "artist": "Four Tops",
+      "id": "e803c354-5f00-437b-b6b4-c85e422989ad",
+      "linked_run_id": 38748846386,
+      "linked_run_created_at": "2026-10-15T14:09:11Z"
+    },
+    "records_with_Instagram_publish_ID_or_URL": 0,
+    "limit": "Only returned queue; not proof of all platform activity or media quality",
+    "live_health_token_social_etsy_cron_not_checked": true
+  },
+  "automation_control": {
+    "active_schedules_read": true,
+    "no_schedule_mutation": true,
+    "scope": "Existing information and alert watches; not a Windows executor or production proof"
+  },
+  "preserved": {
+    "commander_scoped_final_acceptance": true,
+    "jingle_manual_V31": true,
+    "accepted_signoff_identities": true,
+    "Tumblr_installed_guard_launcher_acceptance": true
+  },
+  "effects": {
+    "install": false,
+    "production_change": false,
+    "permission_expansion": false,
+    "paid_calls": false,
+    "merge": false,
+    "dispatch": false,
+    "publication": false
+  }
+}
