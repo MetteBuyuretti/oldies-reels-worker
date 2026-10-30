@@ -1,0 +1,207 @@
+{
+  "task_id": "LOCAL-J3-APPLICATION-PREP-20261031-01",
+  "status": "PREPARED_NOT_APPLIED",
+  "at": "2026-10-30T23:37:27.500136+00:00",
+  "target": "C:\\Users\\METE\\Oldies-Jingle-Factory\\backups\\WORK2-20261015-STATE-QC-RECOVERY\\FINAL-LIVE-ADAPTER-20261018\\producer\\gemini_jingle.staged.cjs",
+  "adapter": {
+    "preimage_sha256": "d02e9d551dc1513e2e4312d5b904059c9237cc242f6f6c9b5ec37fd588434817",
+    "postimage_sha256": "f8534ee39676984db0260e991dc849e805f83efde517528f9f09e83f5e08fc01",
+    "existing_candidate": "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\jingle-j3-20261030\\candidate\\gemini_jingle.staged.cjs",
+    "regenerated": false
+  },
+  "manifest": {
+    "target": "C:\\Users\\METE\\Oldies-Jingle-Factory\\backups\\WORK2-20261015-STATE-QC-RECOVERY\\FINAL-LIVE-ADAPTER-20261018\\SHA256-MANIFEST.json",
+    "preimage_sha256": "b22c6238303f25dc4dd47b130d9e817576452d808c44a3aa2458ca04bdae7920",
+    "postimage_sha256": "6cd1a6fb3ad7af2a5e70afa5f39c8b0de7bf632849d5438d96f0a8dd97c003c5",
+    "single_field": "files.producer/gemini_jingle.staged.cjs",
+    "replacement": {
+      "from": "d02e9d551dc1513e2e4312d5b904059c9237cc242f6f6c9b5ec37fd588434817",
+      "to": "f8534ee39676984db0260e991dc849e805f83efde517528f9f09e83f5e08fc01"
+    },
+    "prepared_file": "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\local-followup-20261031\\candidate-manifest.private.json",
+    "other_entries_unchanged": true
+  },
+  "consumption": [
+    "STAGE/RUN-MORNING.cmd or RUN-EVENING.cmd -> node producer/candidate.cjs <slot>",
+    "candidate.main -> verify() reads SHA256-MANIFEST.json files + live_preimages before activation",
+    "candidate --execute only after dated activation + live_guard + browser lock; createUiAdapter from target",
+    "wrapper waitForTrack/download -> actual UI adapter -> produce -> prepareForHumanReview -> import_web_music -> awaiting-human-review",
+    "factory_handoff.py is a separate explicit receipt/independent human/activation/Factory gate; not browser launcher"
+  ],
+  "legacy_entry": {
+    "path": "C:\\Users\\METE\\Oldies-Jingle-Factory\\RUN-EVENING.cmd",
+    "chain": "scripts/Run-Factory.ps1 -> .venv Python src/jingle_factory.py",
+    "consumes_j3_adapter": false,
+    "changed": false
+  },
+  "activation_readonly": {
+    "date": "2026-10-18",
+    "daily_automation_authorized": true,
+    "daily_authorization_start": "2026-10-18",
+    "daily_authorization_end": "2026-10-18",
+    "factory_provider_calls_authorized": false
+  },
+  "manifest_checks": [
+    {
+      "group": "files",
+      "name": "config/activation.example.json",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "config/evening-prompt.example.json",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "config/morning-prompt.example.json",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "producer/candidate.cjs",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "producer/factory_handoff.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "producer/gemini_jingle.staged.cjs",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "producer/live_guard.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "producer/producer_contract.cjs",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "producer/recovery_probe.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "producer/staged_orchestration.cjs",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "runtime/factory/config/settings.json",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "runtime/factory/prompts/dj_style.txt",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "runtime/factory/prompts/music.txt",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/audio.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/common.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/google_api.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/import_web_music.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/jingle_factory.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/producer_factory_pipeline.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/qc.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/staged_delivery.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "src/web_music_handoff.py",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "tests/smoke.cjs",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "RUN-MORNING.cmd",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "RUN-EVENING.cmd",
+      "matches": true
+    },
+    {
+      "group": "files",
+      "name": "ROLLBACK.ps1",
+      "matches": true
+    },
+    {
+      "group": "live_preimages",
+      "name": "gemini_jingle.js",
+      "matches": true
+    },
+    {
+      "group": "live_preimages",
+      "name": "run_daily_jingle.ps1",
+      "matches": true
+    },
+    {
+      "group": "live_preimages",
+      "name": "Run-Factory.ps1",
+      "matches": true
+    },
+    {
+      "group": "live_preimages",
+      "name": "RUN-EVENING.cmd",
+      "matches": true
+    }
+  ],
+  "all_preimages_match": true,
+  "rollback": {
+    "backup_directory": "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\local-followup-20261031\\rollback.private",
+    "adapter_backup_sha256": "d02e9d551dc1513e2e4312d5b904059c9237cc242f6f6c9b5ec37fd588434817",
+    "manifest_backup_sha256": "b22c6238303f25dc4dd47b130d9e817576452d808c44a3aa2458ca04bdae7920",
+    "rule": "Restore only the exact two reviewed files after verifying current hashes are the package postimages; reject drift. Never restore state/claim/activation/locks.",
+    "future_apply_order": "Under exclusive maintenance/quiescence: recheck all pins; adapter then manifest; fail closed in between; verify complete pair. This preparation performs no writes to target.",
+    "future_rollback_order": "Under same maintenance/quiescence: restore manifest then adapter from verified backups; fail closed in between; verify original pair."
+  },
+  "installed": false,
+  "provider_download_import_factory_mix_scheduler_calls": 0
+}

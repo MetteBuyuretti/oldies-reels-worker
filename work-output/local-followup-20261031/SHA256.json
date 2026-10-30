@@ -1,0 +1,20 @@
+{
+  "algorithm": "SHA256",
+  "encoding": "UTF-8 LF public export",
+  "excluded": "private backups/preimages/full manifest/candidate/snapshot sources/media/env",
+  "files": {
+    "RESULT.md": "341cf019465328890e7d1318ac5fa32b05342986077f69f9094de18ce9abe317",
+    "HANDOFF.json": "aa6ada0fe01d8615dbeccbd19b25a51cd11d208ae8a51a7fbb04e1531da43064",
+    "application-plan.json": "8e9198f8108dcca871c26ba14205d1837096f6617c2b2933cbef62d5ab288758",
+    "application-verification.json": "af34cfc6066c713517c959096821b0ed84cffbccf2d59493d9c35ac572135ccc",
+    "prepare_application.py": "42136f29858a6d9b32b76cc45622356c56a1d6e7d13d56a30b7b135a4c311e61",
+    "verify_application.cjs": "ebb74cc42a29245742ea638d743abd1f3d0f5e2f4c7429a0f041a3445671c20e",
+    "run_local_offline.py": "b1b0b828f902851d2960b903f037e4d98da13e74ed2be634c0b72278e5dd1c76",
+    "snapshot-bindings.json": "1462ecbca12296b4725755755fcb5b9ccd86083cd6f6f70b7c6aee2a0415f811",
+    "reels-local-tests.json": "71e1c2c17a7a835d3f8ba1386124665a6896e92e0418464df3bcad63db04cbb4",
+    "first-attempt-summary.json": "cae99d9a933554807dab31ab4c140a495ad7c04ee7757ff790a79eeb7473c40b",
+    "bind_known_signoff.py": "df5e7eaa12fd0388f059f6bab8bbda8517b289fe2eab2f574fe89ced555dc6af",
+    "reels-identity-binding.json": "5871192f40ff46534121698ac3936382609803c2b98df530b54b4da2b42c5205",
+    "final-protection.json": "54b92f9c24e77fe9f098d01ab9af408cf0fb658298ce48897655da63550a92a2"
+  }
+}
