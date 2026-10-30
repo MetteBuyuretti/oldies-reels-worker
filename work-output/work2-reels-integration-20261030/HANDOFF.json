@@ -2,33 +2,69 @@
   "job_id": "WORK2-REELS-INTEGRATION-20261030-01",
   "actor": "WORK2",
   "received_at_TSI": "2026-10-30T19:58:00+03:00",
+  "checkpoint_at_TSI": "2026-10-30 20:09:22+03:00",
   "base_ref": "9ad08776e882af386f2897ac43e85eaeb28f029e",
   "branch": "work2/reels-integration-20261030",
-  "head_commit": "This checkpoint commit; immutable SHA recorded in issue #32 and later final handoff",
+  "head_commit": "8e4d5451737e816fc4c2c91badbb9f0f6af625e8",
+  "head_commit_scope": "Last implementation/code/test snapshot; follow-on manifest-only commit is linked from issue #32",
+  "draft_pr": 36,
+  "status": "blocked",
+  "completed_units": [
+    "R1-consumer-code-and-fixture-test-source",
+    "R1-independent-checkpoint",
+    "R2-natural-duration-render-media-code",
+    "offline-fixture-test-contract-migration",
+    "GitHub-payload-readback-and-visual-guard-source-equality"
+  ],
   "changed_files": [
     "facebook_global_audio.py",
     "facebook-global-template.json",
+    "facebook_global_visuals.py",
+    "test_facebook_global_audio.py",
     "test_facebook_signoff_integration.py"
   ],
+  "output_directory": "work-output/work2-reels-integration-20261030/",
+  "tests_authored_methods": 26,
+  "python_tests_passed": 0,
   "tested_commands": [
     {
       "command": "pwd",
-      "result": "not started: no usable execution environment"
+      "result": "NOT STARTED: no usable execution environment"
     },
     {
       "command": "python --version",
-      "result": "not started: no usable execution environment"
+      "result": "NOT STARTED: no usable execution environment"
     },
     {
-      "command": "python -m unittest -v test_facebook_signoff_integration",
-      "result": "NOT RUN; authored only"
+      "command": "python -m unittest -v test_facebook_signoff_integration test_facebook_global_audio",
+      "result": "NOT STARTED: no usable execution environment"
     }
   ],
-  "limits": [
-    "R1 candidate unexecuted",
-    "no production/media acceptance",
-    "no provider/Windows/workflow operations"
+  "prepared_validation_commands": [
+    "python -m compileall -q facebook_global_audio.py facebook_global_visuals.py test_facebook_signoff_integration.py test_facebook_global_audio.py",
+    "python -m unittest -v test_facebook_signoff_integration test_facebook_global_audio test_facebook_global_visuals"
   ],
-  "remaining_blocker": "Python execution environment unavailable",
-  "next_step": "R2 source/test preparation, then executable validation at exact commit"
+  "verification": {
+    "python_syntax": "NOT RUN",
+    "python_behaviour": "NOT RUN",
+    "github_readback": "Five authored code/test files match fetched GitHub content",
+    "source_assertions": "V8 source-string/JSON and six visual guard body comparisons only; not Python tests"
+  },
+  "limits": [
+    "Draft/source preparation only; NOT code/test acceptance",
+    "No production approval flags opened or invented approver/date",
+    "No real audio/MP4/provider/API/TTS generation",
+    "No Windows/Jingle/staging/Commander scope mutation",
+    "No main/PR22/PR33/PR35/central work-state mutation",
+    "No workflow changes/dispatch, merge, deploy, scheduler or publication",
+    "No full-story originality/source/editorial/real-media acceptance"
+  ],
+  "remaining_blocker": "Python execution environment unavailable; commands cannot start",
+  "external_inputs_after_code_validation": [
+    "Windows operator energetic original-file mapping and active Facebook entry/ref receipt",
+    "Real 25–30s natural event-specific story and independent final media acceptance"
+  ],
+  "next_step": "MASTER executes prepared offline checks at head_commit, records actual results, then reviews only proven failures before any Windows application.",
+  "r1_checkpoint": "63395276b95960ce0de54150957c1e5a7d4d9915",
+  "r2_checkpoint": "194dc88584b5a1c8004a93e8a1f97da252a3167b"
 }

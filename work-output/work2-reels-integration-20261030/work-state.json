@@ -1,13 +1,14 @@
 {
   "id": "WORK2-REELS-INTEGRATION-20261030-01",
   "status": "blocked",
-  "last_checkpoint": "2026-10-30T17:04:56.166Z",
+  "last_checkpoint": "2026-10-30T17:09:22.625Z",
   "completed_units": [
-    "source-call-path-map",
-    "R1-consumer-code-test-source",
-    "R2-timing-render-media-code-test-source",
-    "legacy-fixture-contract-migration"
+    "R1-consumer-code-and-fixture-test-source",
+    "R1-independent-checkpoint",
+    "R2-natural-duration-render-media-code",
+    "offline-fixture-test-contract-migration",
+    "GitHub-payload-readback-and-visual-guard-source-equality"
   ],
-  "next_step": "Execute the exact implementation snapshot offline; review results before Windows integration.",
-  "note": "Source prepared, 22 offline test methods NOT RUN; no Python execution environment. Central main state unchanged."
+  "next_step": "MASTER executes prepared offline checks at head_commit, records actual results, then reviews only proven failures before any Windows application.",
+  "note": "R1/R2 code and 26 offline test methods prepared; all Python checks NOT RUN. See RESULT/HANDOFF. Central main record belongs to MASTER."
 }
