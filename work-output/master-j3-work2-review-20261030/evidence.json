@@ -1,0 +1,188 @@
+{
+  "reviewed_at": "2026-10-30T20:51:58.620Z",
+  "reviewer": "WORK MASTER / current Work session",
+  "jingle": {
+    "ref": "6bbf8ace87d096c062dabcdbb09d9dc8b4ae108d",
+    "public_export_hashes_verified": 10,
+    "public_export_all_match": true,
+    "full_windows_harness_rerun_in_master": false,
+    "full_windows_sources_and_private_preimage_not_available_here": true,
+    "harness_node_syntax_exit": 0,
+    "operator_fixture_records": [
+      {
+        "variant": "baseline",
+        "scenario": "delayed-menu",
+        "result": "EXPECTED_BASELINE_FAILURE"
+      },
+      {
+        "variant": "candidate",
+        "scenario": "delayed-menu",
+        "result": "PASS"
+      },
+      {
+        "variant": "baseline",
+        "scenario": "immediate-menu",
+        "result": "PASS"
+      },
+      {
+        "variant": "candidate",
+        "scenario": "immediate-menu",
+        "result": "PASS"
+      },
+      {
+        "variant": "candidate",
+        "scenario": "missing-menu",
+        "result": "PASS"
+      },
+      {
+        "variant": "candidate",
+        "scenario": "event-timeout",
+        "result": "PASS"
+      },
+      {
+        "variant": "candidate",
+        "scenario": "save-failure",
+        "result": "PASS"
+      },
+      {
+        "variant": "candidate",
+        "scenario": "guard-block",
+        "result": "PASS"
+      },
+      {
+        "variant": "candidate",
+        "scenario": "duplicate-raw",
+        "result": "PASS"
+      }
+    ],
+    "candidate_cases_passed": 7,
+    "baseline_control_passed": 1,
+    "expected_baseline_failure": 1,
+    "installed": false,
+    "master_decision": "positive scoped patch and operator-evidence review; no production or continuity acceptance"
+  },
+  "reels": {
+    "manifest_ref": "7cf964b0b1d0fc79a99591a8793378e7a4b19dcc",
+    "implementation_ref": "8e4d5451737e816fc4c2c91badbb9f0f6af625e8",
+    "pr": 36,
+    "snapshot": {
+      "snapshot": "8e4d5451737e816fc4c2c91badbb9f0f6af625e8",
+      "files": {
+        "facebook_global_audio.py": {
+          "expected_blob": "4052f5cf5d7bd33b70a5222a8f179ec2abcd5e30",
+          "actual_blob": "4052f5cf5d7bd33b70a5222a8f179ec2abcd5e30",
+          "matches": true
+        },
+        "facebook_global_visuals.py": {
+          "expected_blob": "2079fb10377f6159e43913feb260e02d1a5316d5",
+          "actual_blob": "2079fb10377f6159e43913feb260e02d1a5316d5",
+          "matches": true
+        },
+        "test_facebook_signoff_integration.py": {
+          "expected_blob": "1d45d770750c26e86655ba595b8dc2bcfb57dc28",
+          "actual_blob": "1d45d770750c26e86655ba595b8dc2bcfb57dc28",
+          "matches": true
+        },
+        "test_facebook_global_audio.py": {
+          "expected_blob": "7d5eb5bd35a4735ec5fa5c17e3c7e71e8f3ada6a",
+          "actual_blob": "7d5eb5bd35a4735ec5fa5c17e3c7e71e8f3ada6a",
+          "matches": true
+        },
+        "test_facebook_global_visuals.py": {
+          "expected_blob": "bb52518d70f0c0fefe0a4fb71e24716fa8244b1f",
+          "actual_blob": "bb52518d70f0c0fefe0a4fb71e24716fa8244b1f",
+          "matches": true
+        },
+        "facebook-global-template.json": {
+          "expected_blob": "1d88cc309e6b8583fa879613f99e3212835e5e4c",
+          "actual_blob": "1d88cc309e6b8583fa879613f99e3212835e5e4c",
+          "matches": true
+        },
+        "worker.py": {
+          "expected_blob": "01a12d2671246d302b47a1de13b81911d74c53cd",
+          "actual_blob": "01a12d2671246d302b47a1de13b81911d74c53cd",
+          "matches": true
+        },
+        "zero_cost.py": {
+          "expected_blob": "f6bbe6b6c738302de32bfb95939e9861408a3319",
+          "actual_blob": "f6bbe6b6c738302de32bfb95939e9861408a3319",
+          "matches": true
+        },
+        "video_factory.py": {
+          "expected_blob": "be708cb851f1f90ce23156668648cd721a30f5ff",
+          "actual_blob": "be708cb851f1f90ce23156668648cd721a30f5ff",
+          "matches": true
+        },
+        "facebook-global-photo-bank.json": {
+          "expected_blob": "8be7d6de17369b6d2f569fec6e5b72fc4336ec75",
+          "actual_blob": "8be7d6de17369b6d2f569fec6e5b72fc4336ec75",
+          "matches": true
+        },
+        "oldies-artists.json": {
+          "expected_blob": "f6e25fac94df959a909043c7921357c53489ef76",
+          "actual_blob": "f6e25fac94df959a909043c7921357c53489ef76",
+          "matches": true
+        },
+        "requirements.txt": {
+          "expected_blob": "942c873f3c9c5f60f283037a211d872d51c9156a",
+          "actual_blob": "942c873f3c9c5f60f283037a211d872d51c9156a",
+          "matches": true
+        }
+      },
+      "all_match": true
+    },
+    "compileall_exit": 0,
+    "direct_unshimmed_integration_suite": {
+      "exit": 0,
+      "tests": 12,
+      "passed": true
+    },
+    "direct_unshimmed_full_suite": {
+      "exit": 1,
+      "actual_test_passes": 12,
+      "import_errors": 2,
+      "cause": "requests missing; google.auth also absent; not a code behaviour failure"
+    },
+    "offline_runner_result": {
+      "kind": "offline_fixture_tests_with_explicit_import_shims",
+      "code_ref": "8e4d5451737e816fc4c2c91badbb9f0f6af625e8",
+      "python": "3.12.14",
+      "tests_run": 43,
+      "failures": 0,
+      "errors": 0,
+      "passed": true,
+      "dependency_shims": [
+        "requests",
+        "google.auth"
+      ],
+      "external_effect_guard_hits": [],
+      "real_media_auth_provider_windows_acceptance": false,
+      "log": "test_accepted_ending_does_not_open_publication (test_facebook_signoff_integration.FacebookSignoffTests.test_accepted_ending_does_not_open_publication) ... ok\ntest_changed_hash_stops_before_provider (test_facebook_signoff_integration.FacebookSignoffTests.test_changed_hash_stops_before_provider) ... ok\ntest_changed_recording_binding_is_rejected (test_facebook_signoff_integration.FacebookSignoffTests.test_changed_recording_binding_is_rejected) ... ok\ntest_default_profile_is_calm (test_facebook_signoff_integration.FacebookSignoffTests.test_default_profile_is_calm) ... ok\ntest_energetic_requires_explicit_local_mapping (test_facebook_signoff_integration.FacebookSignoffTests.test_energetic_requires_explicit_local_mapping) ... ok\ntest_immutable_rules_cannot_be_relaxed (test_facebook_signoff_integration.FacebookSignoffTests.test_immutable_rules_cannot_be_relaxed) ... ok\ntest_missing_file_stops_before_provider (test_facebook_signoff_integration.FacebookSignoffTests.test_missing_file_stops_before_provider) ... ok\ntest_no_accepted_signoff_regeneration_switch (test_facebook_signoff_integration.FacebookSignoffTests.test_no_accepted_signoff_regeneration_switch) ... ok\ntest_selected_profile_is_consumed_and_bound_without_advert_tts (test_facebook_signoff_integration.FacebookSignoffTests.test_selected_profile_is_consumed_and_bound_without_advert_tts) ... ok\ntest_story_provider_failure_has_no_silent_fallback (test_facebook_signoff_integration.FacebookSignoffTests.test_story_provider_failure_has_no_silent_fallback) ... ok\ntest_unknown_profile_stops_before_provider (test_facebook_signoff_integration.FacebookSignoffTests.test_unknown_profile_stops_before_provider) ... ok\ntest_wrong_decoded_duration_rejects_without_regeneration (test_facebook_signoff_integration.FacebookSignoffTests.test_wrong_decoded_duration_rejects_without_regeneration) ... ok\ntest_actual_gap_gate_is_preserved (test_facebook_global_audio.FacebookAudioTests.test_actual_gap_gate_is_preserved) ... ok\ntest_brand_lock_and_complete_story_remain (test_facebook_global_audio.FacebookAudioTests.test_brand_lock_and_complete_story_remain) ... ok\ntest_disabled_tts_cannot_reach_render_or_publish (test_facebook_global_audio.FacebookAudioTests.test_disabled_tts_cannot_reach_render_or_publish) ... ok\ntest_exact_duration_boundaries_and_nonfinite_values (test_facebook_global_audio.FacebookAudioTests.test_exact_duration_boundaries_and_nonfinite_values) ... ok\ntest_missing_audio_blocks_before_external_delivery (test_facebook_global_audio.FacebookAudioTests.test_missing_audio_blocks_before_external_delivery) ... ok\ntest_natural_profile_segment_render_and_media_gates_agree (test_facebook_global_audio.FacebookAudioTests.test_natural_profile_segment_render_and_media_gates_agree) ... ok\ntest_old_short_media_long_media_and_truncation_are_rejected (test_facebook_global_audio.FacebookAudioTests.test_old_short_media_long_media_and_truncation_are_rejected) ... ok\ntest_real_audio_inspector_rejects_missing_stream_and_silence (test_facebook_global_audio.FacebookAudioTests.test_real_audio_inspector_rejects_missing_stream_and_silence) ... ok\ntest_record_part_preserves_natural_take_without_retiming (test_facebook_global_audio.FacebookAudioTests.test_record_part_preserves_natural_take_without_retiming) ... ok\ntest_recording_timing_pace_and_segment_binding_reject_tampering (test_facebook_global_audio.FacebookAudioTests.test_recording_timing_pace_and_segment_binding_reject_tampering) ... ok\ntest_rushed_take_stops_instead_of_accelerating_or_stretching (test_facebook_global_audio.FacebookAudioTests.test_rushed_take_stops_instead_of_accelerating_or_stretching) ... ok\ntest_short_story_and_overrun_reject_without_time_manipulation (test_facebook_global_audio.FacebookAudioTests.test_short_story_and_overrun_reject_without_time_manipulation) ... ok\ntest_worker_facebook_engine_consumes_selected_ending (test_facebook_global_audio.FacebookAudioTests.test_worker_facebook_engine_consumes_selected_ending) ... ok\ntest_wrong_aspect_and_missing_metadata_still_reject (test_facebook_global_audio.FacebookAudioTests.test_wrong_aspect_and_missing_metadata_still_reject) ... ok\ntest_all_review_flags_are_mandatory (test_facebook_global_visuals.FacebookVisualTests.test_all_review_flags_are_mandatory) ... ok\ntest_appearance_review_is_required (test_facebook_global_visuals.FacebookVisualTests.test_appearance_review_is_required) ... ok\ntest_artist_must_dominate_the_composition (test_facebook_global_visuals.FacebookVisualTests.test_artist_must_dominate_the_composition) ... ok\ntest_cover_and_copyright_dispute_are_rejected (test_facebook_global_visuals.FacebookVisualTests.test_cover_and_copyright_dispute_are_rejected) ... ok\ntest_equal_weight_guest_is_blocked_even_with_the_correct_artist (test_facebook_global_visuals.FacebookVisualTests.test_equal_weight_guest_is_blocked_even_with_the_correct_artist) ... ok\ntest_landscape_photo_keeps_all_four_corners (test_facebook_global_visuals.FacebookVisualTests.test_landscape_photo_keeps_all_four_corners) ... ok\ntest_no_same_year_research_blocks_plus_one_fallback (test_facebook_global_visuals.FacebookVisualTests.test_no_same_year_research_blocks_plus_one_fallback) ... ok\ntest_plus_three_year_photo_is_never_automatic_or_manual_fallback (test_facebook_global_visuals.FacebookVisualTests.test_plus_three_year_photo_is_never_automatic_or_manual_fallback) ... ok\ntest_plus_two_approval_cannot_be_reused_for_a_different_event_year (test_facebook_global_visuals.FacebookVisualTests.test_plus_two_approval_cannot_be_reused_for_a_different_event_year) ... ok\ntest_plus_two_year_photo_requires_manual_approval (test_facebook_global_visuals.FacebookVisualTests.test_plus_two_year_photo_requires_manual_approval) ... ok\ntest_same_year_is_selected_before_plus_one (test_facebook_global_visuals.FacebookVisualTests.test_same_year_is_selected_before_plus_one) ... ok\ntest_statue_plaque_and_crops_are_rejected (test_facebook_global_visuals.FacebookVisualTests.test_statue_plaque_and_crops_are_rejected) ... ok\ntest_three_copies_of_one_photo_cannot_fill_the_bank (test_facebook_global_visuals.FacebookVisualTests.test_three_copies_of_one_photo_cannot_fill_the_bank) ... ok\ntest_valid_reviewed_period_photo_is_accepted (test_facebook_global_visuals.FacebookVisualTests.test_valid_reviewed_period_photo_is_accepted) ... ok\ntest_visual_publish_block_runs_before_upload_or_wordpress (test_facebook_global_visuals.FacebookVisualTests.test_visual_publish_block_runs_before_upload_or_wordpress) ... ok\ntest_wrong_artist_and_changed_asset_are_rejected (test_facebook_global_visuals.FacebookVisualTests.test_wrong_artist_and_changed_asset_are_rejected) ... ok\ntest_wrong_period_is_rejected (test_facebook_global_visuals.FacebookVisualTests.test_wrong_period_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 43 tests in 0.252s\n\nOK\n",
+      "fixture_stdout": "English DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 25.38s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nTrying zero-cost visual candidate: The Beatles (score=90)\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nAudio stream detected: aac, 100 packets; silent publish blocked\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 25.38s, separate advert + 1.10s gap\nAudio stream detected: aac, 100 packets; silent publish blocked\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 25.38s, separate advert + 1.10s gap\nEnglish DJ voice-over generated: warm template 3.1-work2-candidate, 26.82s, separate advert + 1.10s gap\n"
+    },
+    "test_breakdown": {
+      "authored_or_migrated_signoff_and_audio": 26,
+      "existing_visual_regressions": 17,
+      "total": 43
+    },
+    "visual_guard_ast_equal_to_PR22_base": {
+      "validate_photo": true,
+      "select_period_photos": true,
+      "load_period_photos": true,
+      "full_frame_canvas": true,
+      "make_scenes": true,
+      "validate_publish": true
+    },
+    "windows_deployment": false,
+    "real_provider_or_final_media_acceptance": false
+  },
+  "effects": {
+    "new_dependencies_installed": false,
+    "paid_calls": false,
+    "real_media_generation": false,
+    "windows_mutation": false,
+    "merge": false,
+    "publish": false,
+    "automatic_chat_trigger": false
+  }
+}
