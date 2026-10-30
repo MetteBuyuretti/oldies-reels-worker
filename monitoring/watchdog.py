@@ -105,6 +105,15 @@ def collect(api, config: dict, now: datetime, *, current_run_id: str = ''):
             reason = 'stalled_run'
         elif expected is not None and age > float(expected):
             reason = 'late_run'
+        informational = False
+        if not reason:
+            # A recent trigger is not evidence that the job ran or completed.
+            if run.get('status') != 'completed':
+                reason, informational = 'run_pending', True
+            elif run.get('conclusion') == 'skipped':
+                reason, informational = 'run_skipped', True
+            elif run.get('conclusion') != 'success':
+                reason, informational = 'run_not_success', True
         if not reason and expected is not None:
             # Report a recent recovered incident instead of hiding it behind a success.
             lookback = float(config.get('recent_failure_lookback_hours', 48))
@@ -119,7 +128,8 @@ def collect(api, config: dict, now: datetime, *, current_run_id: str = ''):
                 run = previous_failures[0]
         if reason:
             findings.append({'path': path, 'name': workflow['name'], 'reason': reason,
-                             'run_id': run['id'], 'url': run.get('html_url', '')})
+                             'run_id': run['id'], 'url': run.get('html_url', ''),
+                             **({'informational': True} if informational else {})})
         else:
             healthy.append(path)
     for path in freshness:
@@ -131,6 +141,9 @@ def collect(api, config: dict, now: datetime, *, current_run_id: str = ''):
 
 def alert(api, findings: list[dict], monitored_paths: set[str]):
     # Issues only for explicitly monitored workflows. No reruns or publication.
+    findings = [f for f in findings if not f.get('informational', False)]
+    if not findings:
+        return 0
     issues = []
     for page in range(1, 11):
         batch = api.request(f'/issues?state=all&per_page=100&page={page}').copy()
@@ -158,17 +171,12 @@ def alert(api, findings: list[dict], monitored_paths: set[str]):
     return posted
 
 
-def main() -> int:
-    cfg_path = Path(__file__).with_name('watchdog-config.json')
-    config = json.loads(cfg_path.read_text(encoding='utf-8'))
-    api = GitHub(os.environ['GITHUB_REPOSITORY'], os.environ['GITHUB_TOKEN'],
-                 os.environ.get('GITHUB_API_URL', 'https://api.github.com'))
-    findings, healthy, unchecked = collect(
-        api, config, datetime.now(timezone.utc), current_run_id=os.getenv('GITHUB_RUN_ID', '')
-    )
+def render_summary(findings: list[dict], healthy: list[str], unchecked: list[str]) -> str:
+    informational = sum(bool(f.get('informational', False)) for f in findings)
     rows = [f"## OLDIES WATCHDOG — GitHub Actions\n",
-            f"- Healthy/latest run not flagged: {len(healthy)}",
-            f"- Requires review: {len(findings)}",
+            f"- Completed success runs (delivery not verified): {len(healthy)}",
+            f"- Requires review: {len(findings) - informational}",
+            f"- Informational/non-success state: {informational}",
             f"- No runs, freshness rule not configured: {len(unchecked)}",
             "- Scope: GitHub Actions status only; publication delivery is NOT verified.",
             "- No automated retries or live changes.\n"]
@@ -177,6 +185,18 @@ def main() -> int:
         rows.append(f"- **{f['reason']}** — `{f['path']}` — {f['url'] or 'no run'}")
     if unchecked:
         rows.append('\nUnchecked (configure expected cadence if scheduled): ' + ', '.join(f'`{p}`' for p in unchecked))
+    return '\n'.join(rows)
+
+
+def main() -> int:
+    cfg_path = Path(__file__).with_name('watchdog-config.json')
+    config = json.loads(cfg_path.read_text(encoding='utf-8'))
+    api = GitHub(os.environ['GITHUB_REPOSITORY'], os.environ['GITHUB_TOKEN'],
+                 os.environ.get('GITHUB_API_URL', 'https://api.github.com'))
+    findings, healthy, unchecked = collect(
+        api, config, datetime.now(timezone.utc), current_run_id=os.getenv('GITHUB_RUN_ID', '')
+    )
+    rows = [render_summary(findings, healthy, unchecked)]
     if config.get('issue_alerts_enabled', False) and findings:
         watched = set(config.get('expected_freshness_hours', {}))
         rows.append(f"\nNew deduplicated GitHub issues: {alert(api, findings, watched)}")
@@ -195,4 +215,3 @@ if __name__ == '__main__':
     except (urllib.error.URLError, ValueError, KeyError) as exc:
         print(f'Watchdog audit error: {type(exc).__name__}: {exc}', file=sys.stderr)
         sys.exit(1)
-
