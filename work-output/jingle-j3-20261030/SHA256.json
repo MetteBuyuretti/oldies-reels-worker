@@ -1,0 +1,17 @@
+{
+  "algorithm": "sha256",
+  "encoding": "UTF-8 LF canonical public export",
+  "excludes": "local private preimages, full candidate, fixtures, existing audio and configuration",
+  "files": {
+    "RESULT.md": "ef80091bb411e714c1a450e74b63c4f52a76709a68466f99b1d53226e52076e1",
+    "HANDOFF.json": "0987557f2f103c94a9b0df126bce57786c69389da2a8c026e5321b77d88783e4",
+    "adapter-menu-wait.diff": "cded43d48fd8b1bda51f85ce35c98a3dacdee07ab10d4af56952d704b0f7ca4a",
+    "menu-wait-patch.json": "25d2af12826f677c4e6d376e9af5a8713b6dcb1a8497118c023367ea81c622be",
+    "prepare_j3.py": "bc8eb00f6d259dee250a07412384b36c70d61941c05d7a613e72a5fc64778cff",
+    "test-real-adapter.cjs": "83ae719d5089d7fea4ecb9f19638a2318b1b05d83d16cad97bbd656a599f37b3",
+    "inspect_reels_r0.py": "3c76dcec4407bccc308693edcfb2dc6093fb9b60307d237156a7823b86c026f3",
+    "evidence/source-contract.json": "ab2405109a3107e9568216754c080c9046c0775dc8a7f2c0bd9ada1525549862",
+    "evidence/real-adapter-tests.json": "3aaa09203adcef0217cf7f99e6bde124442b385a5459fa83d6fafb3516cc15b0",
+    "evidence/reels-r0-input.json": "8be51e5f3af5de472ba941776173abbcc0f8e946035298610fa4cbfe777e4f13"
+  }
+}

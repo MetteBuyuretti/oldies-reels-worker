@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-30T17:03:16.174356+00:00",
+  "historical_job_files": [
+    "status.json"
+  ],
+  "historical_download_subcause": "NOT_RECOVERABLE_FROM_MARKED_JOB",
+  "historical_root_cause_proven": false,
+  "source_sha256": {
+    "producer/gemini_jingle.staged.cjs": "d02e9d551dc1513e2e4312d5b904059c9237cc242f6f6c9b5ec37fd588434817",
+    "producer/producer_contract.cjs": "591fdc52a0dbedfd2afe7fd0838c5c27b35a041e34d78471df73ce5e4fc894af",
+    "producer/staged_orchestration.cjs": "c04ad159c83de3cdf257c7b96839844914a944cbbdd8e2300fe5220cc45c9188",
+    "producer/candidate.cjs": "5c4ae534a930645577be08a9798efc53e7bf55cf7ccef9decc608ca868b506b6",
+    "src/import_web_music.py": "2a1a9afe2bc5455e3d99dc2fe680488ef6664256a434b6e8e45065d1994f9ecc",
+    "src/web_music_handoff.py": "e88b4c9f3719da3785424886103120ace52e09689329316d7cd28662b3c4d9d5",
+    "src/producer_factory_pipeline.py": "0f2fee93385e7d54556be0fde4dca4184c4a9d09bfc5e6a98bbe6d19777ce7e0"
+  },
+  "candidate_sha256": "f8534ee39676984db0260e991dc849e805f83efde517528f9f09e83f5e08fc01",
+  "installed": false,
+  "change": "Bounded visible-menu wait instead of immediate count/isVisible snapshot",
+  "output_files": [
+    {
+      "name": ".keep",
+      "bytes": 0
+    }
+  ]
+}

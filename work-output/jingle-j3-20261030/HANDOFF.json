@@ -1,0 +1,33 @@
+{
+  "task_id": "LOCAL-JINGLE-J3-20261030-01",
+  "executor": "existing Windows Codex",
+  "status": "TEST EDİLDİ",
+  "scope": "first offline adapter source defect; staging candidate only",
+  "received_at": "2026-10-30T20:01:00+03:00",
+  "first_target_at": "2026-10-30T20:20:00+03:00",
+  "checkpoint_at": "2026-10-30T20:08:00+03:00",
+  "receipt_comment_id": 6528520250,
+  "defect": "Immediate menu snapshot rejects a valid asynchronously rendered download menu",
+  "fix": "Bounded waitFor visible on the existing menu locator",
+  "source_sha256": "d02e9d551dc1513e2e4312d5b904059c9237cc242f6f6c9b5ec37fd588434817",
+  "candidate_sha256": "f8534ee39676984db0260e991dc849e805f83efde517528f9f09e83f5e08fc01",
+  "baseline_failure": "75ms virtual delayed menu -> WEB_DOWNLOAD_ERROR",
+  "same_fixture_candidate": "DOWNLOADED -> validated importer argument boundary; intentional stub stop",
+  "fixture_records": 9,
+  "candidate_cases_passed": 7,
+  "installed": false,
+  "historical_18_oct_root_cause_proven": false,
+  "historical_subcause_recovery": "closed: marked job contains status.json only",
+  "protected_pre_post_unchanged": true,
+  "actual_provider_browser_download_import_factory_mix_calls": 0,
+  "claim_reset": false,
+  "reels_r0": "evidence/reels-r0-input.json",
+  "next_missing_evidence": [
+    "Separately authorized actual download/intake and bound receipt",
+    "Independent audio QC and actual DJ MASTER delivery",
+    "Actual scheduled continuity evidence",
+    "Reels active Windows launcher/ref and accepted profile consumer binding"
+  ],
+  "rollback": "Discard only new workspace candidate/diff; no live source/state/claim restore",
+  "main_checkpoint_owner": "WORK MASTER"
+}

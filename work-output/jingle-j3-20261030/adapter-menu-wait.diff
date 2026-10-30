@@ -1,0 +1,20 @@
+--- a/producer/gemini_jingle.staged.cjs
++++ b/producer/gemini_jingle.staged.cjs
+@@ -141,12 +141,13 @@
+       page.locator('button[aria-label*="download" i]')
+     ]);
+     if (!button) { await page.waitForTimeout(2500); continue; }
+     await button.click();
+-    const item = await firstVisible([
+-      page.getByRole('menuitem', {name:/Yalnızca ses|Audio only|MP3 parçası|MP3 track/i})
+-    ]);
+-    if (!item) throw new Error('DOWNLOAD_AUDIO_MENU_NOT_FOUND');
++    const item = page.getByRole('menuitem',
++      {name:/Yalnızca ses|Audio only|MP3 parçası|MP3 track/i}).first();
++    // A completed button click does not imply an asynchronously rendered menu is visible.
++    try { await item.waitFor({state:'visible', timeout:10000}); }
++    catch (_) { throw new Error('DOWNLOAD_AUDIO_MENU_NOT_FOUND'); }
+     const incoming = page.waitForEvent('download', {timeout:30000}).catch(() => null);
+     await item.click();
+     const file = await incoming;
+     if (file) return file;
