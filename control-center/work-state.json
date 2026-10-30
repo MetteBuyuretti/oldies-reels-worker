@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-30T16:13:57.701Z",
+  "updated_at": "2026-10-30T16:58:33.948Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -508,9 +508,9 @@
         "calm_and_energetic_signoff_actual_bytes_sha256_probe_decode_matched_to_full_acceptance_report",
         "watchdog_independent_signoff_identity_accepted_WD_SIGNOFF_IDENTITY_20261030_01"
       ],
-      "last_checkpoint": "2026-10-30T16:13:57.701Z",
+      "last_checkpoint": "2026-10-30T16:58:33.948Z",
       "next_step": "Work2-Reels görevine göre R1kapanışprofil→gerçektüketim→hash/onay bağı ve R2doğal25–30skapısı ayrı dalda kod/çevrimdışıtest olarak hazırlanacak; gerçekWork2alımı bekleniyor. Aynı WindowsCodex bilineniki dosyayı tamhashle eşleyip gerçekaktifFBgiriş/ref tüketim girdisini ayrıca teslim edecek. Yeni üretim/onay/ücret/yayın açılmıyor; kapanışlar tamhikâye/finalfilm değildir.",
-      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Yerel recovery dört/altı PR33blob eşleşmesi; worker/editorial gate farklı, git metadata yok. Preview local_voiceover tüketiyor. İki kabul sesinin kimliği ve26/29EkimFacebook giriş makbuzu UNRESOLVED; yeni medya/profil değişikliği yok.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: MASTER WD6509320201 kararını TAM okudu; iki gerçek kapanışın bağımsız bytes/hash/süre/decode kabulü merkeze işlendi. Kimlik engeli kapalı, yeniden arama/üretim/dinleme onayı gerekmiyor. Windows kopyası/aktif giriş/entegrasyon hâlâ doğrulanmadı. Yeni Windows teslimi yok; bu Work'te gerçek yerel başlatma aracı bulunmuyor. Status blocked yalnız kalan yerel entegrasyon için; kabul edilmiş alt sonuç geri alınmadı.\n30.10.2026 | 01:13 TSİ: Mevcut WindowsCodex Commanderdevamını01:09aldı/başladı; Reelsentegrasyonu başladı demek değildir. WD6509451390kazanımı kullan talebi tek görev ekine işlendi. Kaynak/varlık kabulü korunuyor; Windows eşleme ve aktif giriş çıktısı hâlâ bekliyor.\n30.10.2026 19:13 TSİ: Work2devir görevi merkeze kaydedildi. YerelCodexJingle/Work2FBkod sahipliği ayrıldı; PR22head9ad08776değişmemiş, Work2dal/teslim henüz yok. Kabul edilmiş ses kimliği korunuyor.",
+      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Yerel recovery dört/altı PR33blob eşleşmesi; worker/editorial gate farklı, git metadata yok. Preview local_voiceover tüketiyor. İki kabul sesinin kimliği ve26/29EkimFacebook giriş makbuzu UNRESOLVED; yeni medya/profil değişikliği yok.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: MASTER WD6509320201 kararını TAM okudu; iki gerçek kapanışın bağımsız bytes/hash/süre/decode kabulü merkeze işlendi. Kimlik engeli kapalı, yeniden arama/üretim/dinleme onayı gerekmiyor. Windows kopyası/aktif giriş/entegrasyon hâlâ doğrulanmadı. Yeni Windows teslimi yok; bu Work'te gerçek yerel başlatma aracı bulunmuyor. Status blocked yalnız kalan yerel entegrasyon için; kabul edilmiş alt sonuç geri alınmadı.\n30.10.2026 | 01:13 TSİ: Mevcut WindowsCodex Commanderdevamını01:09aldı/başladı; Reelsentegrasyonu başladı demek değildir. WD6509451390kazanımı kullan talebi tek görev ekine işlendi. Kaynak/varlık kabulü korunuyor; Windows eşleme ve aktif giriş çıktısı hâlâ bekliyor.\n30.10.2026 19:13 TSİ: Work2devir görevi merkeze kaydedildi. YerelCodexJingle/Work2FBkod sahipliği ayrıldı; PR22head9ad08776değişmemiş, Work2dal/teslim henüz yok. Kabul edilmiş ses kimliği korunuyor.\n30.10.2026 | 19:58 TSİ: Kurucu Work2'ye görevi ilettiğini bildirdi. Bu işin dayanağı 26 Ekim İngilizce Facebook Reels ses entegrasyonu kaydıdır. Uygulayıcı teyidi/teslimi henüz yok; önceki ses kabulü ve yayın sınırları korunuyor.",
       "acceptance": {
         "voice_preference": "founder_reported_calm_for_slow_energetic_for_upbeat",
         "approved_asset_identity": "accepted_by_master_and_independent_watchdog_6509320201_existing_signoffs_only",
@@ -522,7 +522,7 @@
         "production_and_continuity": "not_accepted",
         "windows_local_copy_match": "pending_exact_known_hash_match",
         "independent_final_media_review": "pending_separate_from_signoff_identity",
-        "work2_handoff": "prepared_START_instruction_queued_not_received"
+        "work2_handoff": "founder_reported_forwarded_executor_receipt_and_start_pending"
       },
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/reels-english-voice-followup-20261026/report.md",
@@ -736,16 +736,17 @@
       "id": "work2-reels-integration-20261030",
       "title": "Work2 — İngilizce Facebook Reels ses entegrasyonu ve doğal süre kapıları",
       "owner": "WORK MASTER",
-      "planned_executor": "Kurucunun Work2 sohbeti; gerçek araç erişimi ve ALINDI teyidi henüz gözlenmedi",
+      "planned_executor": "Kurucunun Work2 sohbeti; kurucu görevi ilettiğini bildirdi, uygulayıcı alım/başlangıç teyidi henüz ortak kayıtta gözlenmedi",
       "status": "queued",
       "completed_units": [
         "single_handoff_instruction_prepared_0351dad7",
         "current_instruction_and_PR22_9ad08776_base_verified",
         "exclusive_branch_and_file_ownership_defined",
-        "direct_issue32_result_and_structured_handoff_contract_defined"
+        "direct_issue32_result_and_structured_handoff_contract_defined",
+        "founder_reported_instruction_forwarded_to_Work2_in_master_chat"
       ],
-      "last_checkpoint": "2026-10-30T16:13:57.701Z",
-      "next_step": "Work2 START.md talimatını kendi sohbetinde açıp gerçek ALINDI/BAŞLADI, araç erişimi/ref/branch ve ilk10–20dakikalık kontrol hedefini #32'ye kaydetsin. Ayrı work2/reels-integration-20261030dalında R1gerçek kapanış tüketimi+odaklıtest, sonraR225–30sdoğalsüre/kalitekapısı. Kullanıcıraportaşımaz; MASTERilkaktifokumada sabitcommit/diff/test/RESULT/HANDOFF'u doğrudan devralır.",
+      "last_checkpoint": "2026-10-30T16:58:33.948Z",
+      "next_step": "Kurucu görevi Work2'ye ilettiğini bildirdi. Work2'nin gerçek ALINDI/BAŞLADI, erişim/ref/branch ve ilk parça kontrol hedefini #32'ye yazması; ardından START.md R1 kod+çevrimdışı test teslimi. MASTER sonraki aktif kontrolde ortak kayıttan devralır; kullanıcıdan eski sohbet veya sonuç raporu taşıması istenmez.",
       "instruction_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work2-delegation-20261030/START.md",
       "job_id": "WORK2-REELS-INTEGRATION-20261030-01",
       "code_base": {
@@ -760,7 +761,10 @@
         "started_observed": false,
         "received_at": null,
         "first_control_target": null,
-        "automatic_chat_trigger": false
+        "automatic_chat_trigger": false,
+        "founder_reported_forwarded": true,
+        "forwarding_report_observed_at": "2026-10-30T16:58:33.948Z",
+        "forwarding_source": "Kurucunun MASTER sohbetindeki 'görevi verdim' beyanı; tam gönderim zamanı bilinmiyor"
       },
       "handoff": {
         "issue": 32,
@@ -777,13 +781,14 @@
         "jingle_source_write": false,
         "source_and_offline_test": true
       },
-      "note": "30.10.2026 19:13 TSİ: Kesinti sonrası gece03:38hazırlanan8955karakterlikWork2talimatı tam okundu. #32'de03:29sonrası yeni alım/teslim yok; branchlistesindeWork2dalı veyaWork2PR'si yok. Bu, başka yerde hiç faaliyet yok demek değildir; bu iş için doğrulanmış alım/teslim yok. Görev hazırlığı tamam, uygulama henüz başlamış sayılmıyor. Ayrı sohbetin kota durumuna ilişkin güvence verilmedi.",
+      "note": "30.10.2026 19:13 TSİ: Kesinti sonrası gece03:38hazırlanan8955karakterlikWork2talimatı tam okundu. #32'de03:29sonrası yeni alım/teslim yok; branchlistesindeWork2dalı veyaWork2PR'si yok. Bu, başka yerde hiç faaliyet yok demek değildir; bu iş için doğrulanmış alım/teslim yok. Görev hazırlığı tamam, uygulama henüz başlamış sayılmıyor. Ayrı sohbetin kota durumuna ilişkin güvence verilmedi.\n30.10.2026 | 19:58 TSİ: Kurucu 'bu işin Work2 öncesini bulamadım ama ... görevi verdim' dedi. İletim kurucu beyanıyla kaydedildi; uygulayıcının alım/başlangıcıyla eşitlenmedi. #32 son aktif okumasında Work2 alım/teslimi henüz yok. Önceki işin 26 Ekim 05:13 raporu yeniden okunarak soy bağı doğrulandı; geçmiş ses kimliği engeli 6509320201 ile kapanmış olduğundan yeniden açılmıyor.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/work2-delegation-20261030/START.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6511801783",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6511859657"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6511859657",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/reels-english-voice-followup-20261026/report.md"
       ],
-      "control_time": "30.10.2026 19:13 TSİ aktif kontrol. Sonraki somut kontrol Work2'nin gerçek alım/ilk teslim kaydı; otomatik izleme/uyandırma başlatılmadı."
+      "control_time": "30.10.2026 | 19:58 TSİ aktif kontrol; sonraki kontrol Work2'nin gerçek alım veya teslim kaydının sonraki aktif oturumda okunmasıdır. Yeni otomatik izleme kurulmadı."
     }
   ]
 }
