@@ -4,14 +4,16 @@ The former preview-advert-generation expectations are superseded by the accepted
 cached-ending contract. All bytes and media measurements here are test fixtures.
 """
 import copy
+import os
 import json
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 import facebook_global_audio as audio
 import facebook_global_visuals as visuals
+import worker
 import test_facebook_signoff_integration as fixtures
 
 INSPECT_AUDIO = audio.inspect_audio
@@ -23,6 +25,49 @@ class FacebookAudioTests(fixtures.SignoffFixture, unittest.TestCase):
                 'audio_packets': 100, 'audio_codec': 'aac',
                 'streams': [{'codec_type': 'video', 'width': width, 'height': height,
                              'duration': str(duration)}]}
+
+    def test_worker_facebook_engine_consumes_selected_ending(self):
+        self.candidate.update(reels_language='en', signoff_profile='energetic')
+        credentials = SimpleNamespace(token='fixture-token', refresh=Mock())
+        with patch.dict(os.environ, {'OLDIES_TTS_ENABLED': 'true', 'OLDIES_TTS_ENGINE': 'facebook_dj',
+                                     'OLDIES_GCP_PROJECT': 'fixture-project'}), \
+             patch.object(worker, 'google_auth_default', return_value=(credentials, 'fixture-project')), \
+             patch.object(worker, 'GoogleAuthRequest'), \
+             patch.object(worker, '_gemini_tts_bytes', self.provider):
+            voice = worker.synthesize_google_voice(self.candidate, self.out)
+        self.assertTrue(voice.is_file())
+        self.assertEqual(self.joined[-1], self.raw['energetic'])
+        self.provider.assert_called_once()
+        audio.require_signoff_binding(self.candidate)
+
+    def test_disabled_tts_cannot_reach_render_or_publish(self):
+        candidate = dict(self.candidate, score=90, facts=['Fixture fact one', 'Fixture fact two'],
+                         sources=[], topic='Fixture')
+        with patch.dict(os.environ, {'OLDIES_WP_BEARER': 'fixture', 'OLDIES_WP_BASE_URL': 'https://unused.invalid',
+                                     'OLDIES_REELS_LANGUAGE': 'en', 'OLDIES_PREVIEW_ONLY': 'true',
+                                     'OLDIES_TTS_ENABLED': 'false'}), \
+             patch.object(worker, 'OUTPUT', self.out), \
+             patch.object(worker, 'research_candidates', return_value=[candidate]), \
+             patch.object(worker.facebook_global_visuals, 'load_period_photos',
+                          return_value=([Path('one'), Path('two'), Path('three')], [])), \
+             patch.object(worker, 'render') as render, \
+             patch.object(worker.facebook_global_visuals, 'render') as facebook_render, \
+             patch.object(worker, 'publish_facebook_global') as publish:
+            with self.assertRaisesRegex(RuntimeError, 'English DJ voice-over is mandatory'):
+                worker.main()
+        render.assert_not_called()
+        facebook_render.assert_not_called()
+        publish.assert_not_called()
+
+    def test_missing_audio_blocks_before_external_delivery(self):
+        with patch.object(audio, 'inspect_audio', side_effect=RuntimeError('no populated audio stream')), \
+             patch.object(worker, 'publish_delivery_asset') as delivery, \
+             patch.object(worker.requests, 'post') as post:
+            with self.assertRaisesRegex(RuntimeError, 'no populated audio stream'):
+                worker.publish_facebook_global(self.candidate, Path('fixture.mp4'),
+                                               'fixture', 'https://unused.invalid')
+        delivery.assert_not_called()
+        post.assert_not_called()
 
     def test_natural_profile_segment_render_and_media_gates_agree(self):
         for profile in ('calm', 'energetic'):

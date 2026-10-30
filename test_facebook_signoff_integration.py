@@ -95,6 +95,13 @@ class FacebookSignoffTests(SignoffFixture, unittest.TestCase):
         audio.synthesize_dj(self.candidate, self.out, 'fixture', 'fixture', self.provider)
         self.assertEqual(self.joined[-1], self.raw['calm'])
 
+    def test_story_provider_failure_has_no_silent_fallback(self):
+        self.provider.side_effect = RuntimeError('fixture-provider-failure')
+        with self.assertRaisesRegex(RuntimeError, 'fixture-provider-failure'):
+            self.consume()
+        self.assertFalse((self.out / 'voiceover-facebook-en.mp3').exists())
+        self.assertEqual(self.joined, [])
+
     def test_unknown_profile_stops_before_provider(self):
         with self.assertRaisesRegex(RuntimeError, 'unknown profile'):
             self.consume('loud')
