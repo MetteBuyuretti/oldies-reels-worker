@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-30T22:03:12.600Z",
+  "updated_at": "2026-10-30T23:42:27.357Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -875,6 +875,30 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/33"
       ],
       "control_time": "31.10.2026 | 01:01 TSİ durum uzlaştırması; sonraki somut mevcut uygulama teslimi aktif oturumda okunacak."
+    },
+    {
+      "id": "work1-watchdog-state-20261031",
+      "title": "Work1 — GitHub skipped/pending ve workflow başarı ayrımı",
+      "owner": "WORK1 / root technical executor",
+      "status": "checkpointed",
+      "completed_units": [
+        "baseline_run_state_defect_reproduced",
+        "minimal_monitoring_candidate_written",
+        "9_new_14_existing_23_offline_tests_pass",
+        "compile_pass",
+        "snapshot_result_handoff_saved"
+      ],
+      "last_checkpoint": "2026-10-30T23:42:27.357Z",
+      "next_step": "Somutdiff/test için mevcut bağımsızWATCHDOGincelemesi; merge/deploybaşlatma. Uzakheartbeat ve gerçeküretim buişten ayrı.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/commit/83a8c2528475b5357934051c3c09c792087664b3"
+      ],
+      "acceptance": {
+        "offline_code_tests": "PASS_23_9_new_14_existing",
+        "deployed": false,
+        "independent_watchdog": "pending_actual_review",
+        "production_or_remote_heartbeat": "not_accepted"
+      }
     }
   ],
   "last_status_audit": {
