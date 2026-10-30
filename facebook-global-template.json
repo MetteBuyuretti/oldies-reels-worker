@@ -1,5 +1,5 @@
 {
-  "version": "3.0",
+  "version": "3.1-work2-candidate",
   "scope": "facebook-global-en-only",
   "voice": "Charon",
   "language": "en-US",
@@ -11,9 +11,9 @@
   "advert_text": "Oldies Radyo. Timeless music. Listen, enjoy, share.",
   "advert_asset": "assets/facebook/en-warm-signoff-radyo-v3.mp3",
   "ending_tail_seconds": 0.6,
-  "max_voiceover_seconds": 17.4,
-  "max_video_seconds": 18,
-  "max_story_words": 25,
+  "max_voiceover_seconds": 29.4,
+  "max_video_seconds": 30,
+  "max_story_words": 52,
   "photo_bank": "facebook-global-photo-bank.json",
   "photo_count": 3,
   "maximum_period_distance_years": 2,
@@ -33,5 +33,6 @@
   "advert_approved": false,
   "advert_approval": null,
   "preview_signoff_generation_allowed": false,
-  "signoff_profile": "calm"
+  "signoff_profile": "calm",
+  "min_video_seconds": 25
 }

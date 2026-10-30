@@ -10,14 +10,15 @@ from unittest.mock import Mock, patch
 import facebook_global_audio as audio
 
 
-class FacebookSignoffTests(unittest.TestCase):
+class SignoffFixture:
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.out = self.root / 'out'
         self.candidate = {'artist': 'The Beatles', 'event_date': '1962-10-05',
-                          'kind': 'events', 'source_text': 'The Beatles released Love Me Do in Britain.'}
+                          'kind': 'events', 'voiceover': {'enabled': True},
+                          'source_text': 'The Beatles released Love Me Do in Britain, pairing it with P S I Love You on the reverse, as their first single introduced the Liverpool group to record buyers across the country.'}
         self.raw = {'calm': b'fixture-calm-ending', 'energetic': b'fixture-energetic-ending'}
         self.identities = copy.deepcopy(audio.SIGNOFFS)
         for profile, identity in self.identities.items():
@@ -30,7 +31,7 @@ class FacebookSignoffTests(unittest.TestCase):
         self.energetic.write_bytes(self.raw['energetic'])
         self.template = copy.deepcopy(audio.TEMPLATE)
         self.provider = Mock(return_value=b'fixture-story')
-        self.story_seconds = 9.0
+        self.story_seconds = 19.0
         self.joined = []
         self.record = Mock(side_effect=self.record_story)
         for context in (
@@ -71,6 +72,7 @@ class FacebookSignoffTests(unittest.TestCase):
         return audio.synthesize_dj(self.candidate, self.out, 'fixture-project',
                                    'fixture-token', self.provider)
 
+class FacebookSignoffTests(SignoffFixture, unittest.TestCase):
     def test_selected_profile_is_consumed_and_bound_without_advert_tts(self):
         for profile in ('calm', 'energetic'):
             with self.subTest(profile=profile):

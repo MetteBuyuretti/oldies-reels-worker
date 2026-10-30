@@ -17,7 +17,8 @@ LOCKED_SETTINGS = {
     'brand_name': BRAND_NAME, 'advert_text': BRAND_ADVERT, 'brand_translation_allowed': False,
     'advert_gap_seconds': 1.1, 'target_wpm': 128, 'speedup_allowed': False,
     'language': 'en-US', 'max_estimated_wpm': 138, 'minimum_slowdown_factor': 0.7,
-    'max_video_seconds': 18.0, 'max_voiceover_seconds': 17.4,
+    'min_video_seconds': 25.0, 'max_video_seconds': 30.0, 'max_voiceover_seconds': 29.4,
+    'ending_tail_seconds': 0.6, 'max_story_words': 52,
     'same_year_first': True, 'automatic_period_distance_years': 1,
     'manual_period_distance_years': 2, 'maximum_period_distance_years': 2,
     'artist_dominant_required': True, 'photo_count': 3,
@@ -89,6 +90,7 @@ def require_signoff_binding(candidate: dict) -> None:
             or recording.get('signoff_evidence') != SIGNOFF_EVIDENCE
             or recording.get('signoff_source') != identity.get('asset', identity.get('asset_env'))
             or recording.get('advert', {}).get('cached_approved_recording') is not True
+            or not math.isfinite(float(recording.get('advert', {}).get('duration_seconds') or 0))
             or abs(float(recording.get('advert', {}).get('duration_seconds') or 0)
                    - identity['duration_seconds']) > 0.05):
         raise RuntimeError('Facebook recording does not bind the selected accepted signoff')
@@ -112,6 +114,40 @@ def require_approved_signoff(candidate: dict | None = None) -> None:
         require_signoff_binding(candidate)
 
 
+def planned_video_seconds(voiceover_seconds: float) -> float:
+    validate_template()
+    voice = float(voiceover_seconds)
+    if not math.isfinite(voice) or voice <= 0 or voice > TEMPLATE['max_voiceover_seconds']:
+        raise RuntimeError('Facebook natural voiceover is outside the 25–30-second budget')
+    # Quantize only the fixed visual tail to the existing 30fps renderer.
+    duration = math.ceil((voice + TEMPLATE['ending_tail_seconds']) * 30 - 1e-9) / 30
+    if not TEMPLATE['min_video_seconds'] <= duration <= TEMPLATE['max_video_seconds']:
+        raise RuntimeError('Facebook natural story plus accepted signoff must fit 25–30 seconds; revise copy, never pad or speed up')
+    return duration
+
+
+def validate_natural_recording(candidate: dict, measured_voiceover_seconds: float) -> float:
+    require_signoff_binding(candidate)
+    recording = candidate.get('dj_recording') or {}
+    story = recording.get('story') or {}
+    story_seconds = float(story.get('duration_seconds') or 0)
+    expected = (story_seconds + TEMPLATE['advert_gap_seconds']
+                + float(recording.get('advert', {}).get('duration_seconds') or 0))
+    if (not math.isfinite(story_seconds) or story_seconds <= 0
+            or story.get('tempo_factor') != 1.0
+            or not math.isfinite(float(story.get('estimated_wpm', 999)))
+            or float(story.get('estimated_wpm', 999)) > TEMPLATE['max_estimated_wpm']
+            or recording.get('speedup_applied') is not False
+            or recording.get('advert_gap_seconds') != TEMPLATE['advert_gap_seconds']
+            or not math.isfinite(float(recording.get('advert_start_seconds') or 0))
+            or abs(float(recording.get('advert_start_seconds') or 0)
+                   - (story_seconds + TEMPLATE['advert_gap_seconds'])) > .001
+            or not math.isfinite(measured_voiceover_seconds)
+            or abs(measured_voiceover_seconds - expected) > .1):
+        raise RuntimeError('Facebook natural recording timing/pace binding mismatch')
+    return planned_video_seconds(measured_voiceover_seconds)
+
+
 def build_dj_parts(candidate: dict) -> tuple[str, str]:
     validate_template()
     artist = re.sub(r'\s+', ' ', str(candidate.get('artist', ''))).strip()
@@ -126,8 +162,8 @@ def build_dj_parts(candidate: dict) -> tuple[str, str]:
     else:
         source = re.sub(r'\s+', ' ', str(candidate.get('source_text', ''))).strip()
         first = re.split(r'(?<=[.!?])\s+(?=[A-Z])', source, maxsplit=1)[0]
-        if not first or artist.casefold() not in first.casefold() or not 4 <= len(first.split()) <= 20:
-            raise RuntimeError('Facebook DJ needs a short, complete sourced English story')
+        if not first or artist.casefold() not in first.casefold() or not 4 <= len(first.split()) <= TEMPLATE['max_story_words']:
+            raise RuntimeError('Facebook DJ needs a complete sourced English story')
         story = first.rstrip('.!?')
         if not re.search(r'\bon this day\b', story, re.I):
             story += f' — on this day in {year}'
@@ -171,13 +207,9 @@ def record_part(text: str, role: str, path: Path, project: str, token: str, synt
     target_seconds = words * 60 / TEMPLATE['target_wpm']
     factor = min(1.0, qc['duration_seconds'] / target_seconds)
     if factor < TEMPLATE['minimum_slowdown_factor']:
-        raise RuntimeError('Facebook DJ take was too rushed; rerecord instead of extreme time stretching')
-    if factor < 0.995:
-        timed = path.with_name(path.stem + '-relaxed.mp3')
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(path), '-af', f'atempo={factor:.6f}',
-                        '-c:a', 'libmp3lame', '-b:a', '192k', str(timed)], check=True, timeout=60)
-        timed.replace(path)
-        qc = inspect_audio(path)
+        raise RuntimeError('Facebook DJ take was too rushed; rerecord at a natural pace')
+    # Keep the natural take; timing gates never stretch or accelerate speech.
+    factor = 1.0
     estimated_wpm = words * 60 / qc['duration_seconds']
     if estimated_wpm > TEMPLATE['max_estimated_wpm']:
         raise RuntimeError('Facebook DJ take exceeds the relaxed pace limit')
@@ -205,8 +237,7 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
         advert_qc = {'duration_seconds': advert_qc['duration_seconds'], 'cached_approved_recording': True}
         gap = TEMPLATE['advert_gap_seconds']
         duration = story_qc['duration_seconds'] + gap + advert_qc['duration_seconds']
-        if duration > TEMPLATE['max_voiceover_seconds']:
-            raise RuntimeError(f'Facebook relaxed DJ recording is too long ({duration:.2f}s); shorten the copy, never speed up')
+        planned_video_seconds(duration)
         # A separate digital silence guarantees distance from the main announcement.
         graph = (f'[0:a]aresample=48000,aformat=channel_layouts=mono[a];'
                  f'anullsrc=r=48000:cl=mono,atrim=duration={gap},asetpts=PTS-STARTPTS[gap];'
@@ -216,8 +247,9 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
                         '-filter_complex', graph, '-map', '[voice]', '-c:a', 'libmp3lame', '-b:a', '192k', str(path)],
                        check=True, timeout=60)
         qc = inspect_audio(path)
-        if qc['duration_seconds'] > TEMPLATE['max_voiceover_seconds']:
-            raise RuntimeError('Facebook combined DJ recording exceeds the template duration')
+        planned_video_seconds(qc['duration_seconds'])
+        if abs(qc['duration_seconds'] - duration) > .1:
+            raise RuntimeError('Facebook combined DJ recording differs from natural segment durations')
     except Exception:
         path.unlink(missing_ok=True)
         raise
@@ -276,8 +308,11 @@ def validate_media(video: Path, candidate: dict) -> dict:
     if not width or width * 16 != height * 9:
         raise RuntimeError('Facebook Global MP4 must retain the 9:16 visual template')
     duration = float(visual.get('duration') or qc['duration_seconds'])
-    if not 10 <= duration <= TEMPLATE['max_video_seconds'] + 0.05:
-        raise RuntimeError(f'Facebook Global MP4 must fit a 10–18-second relaxed Reel: {duration:.2f}s')
+    expected_duration = validate_natural_recording(candidate, float(candidate.get('voiceover_duration_seconds') or 0))
+    if (not math.isfinite(duration) or not TEMPLATE['min_video_seconds'] <= duration <= TEMPLATE['max_video_seconds']
+            or abs(duration - expected_duration) > .05
+            or abs(qc['duration_seconds'] - duration) > .05):
+        raise RuntimeError(f'Facebook Global MP4 must fit the natural 25–30-second recording and tail: {duration:.2f}s')
     qc.update(width=width, height=height, video_duration_seconds=duration, silent_publish_blocked=True, background_music_added=False)
     print(f'Audio stream detected: {qc["audio_codec"]}, {qc["audio_packets"]} packets; silent publish blocked')
     return qc
@@ -285,7 +320,7 @@ def validate_media(video: Path, candidate: dict) -> dict:
 
 def validate_recording(video: Path, candidate: dict) -> dict:
     validate_template()
-    require_signoff_binding(candidate)
+    validate_natural_recording(candidate, float(candidate.get('voiceover_duration_seconds') or 0))
     recording = candidate.get('dj_recording', {})
     if (recording.get('version') != TEMPLATE['version'] or recording.get('brand_name') != BRAND_NAME
             or recording.get('advert_text') != BRAND_ADVERT or re.search(r'\boldies\s+radio\b', str(candidate.get('dj_script_en', '')), re.I)

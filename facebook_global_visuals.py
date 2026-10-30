@@ -2,13 +2,13 @@
 from __future__ import annotations
 import hashlib
 import json
-import math
 import re
 import shutil
 import subprocess
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageOps
-from facebook_global_audio import TEMPLATE, inspect_audio, validate_template
+from facebook_global_audio import (TEMPLATE, inspect_audio, validate_template,
+                                   validate_natural_recording)
 
 ROOT = Path(__file__).resolve().parent
 BANNED = re.compile(r'\b(?:statue|plaque|memorial|ticket|logo|building|cropped|crop|collage|illustration|cover|sleeve|replica|statue)\b', re.I)
@@ -144,9 +144,7 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path, draw_text_
 
 def render(scenes: list[Path], target: Path, voiceover: Path, candidate: dict, max_video_bytes: int) -> None:
     qc = inspect_audio(voiceover)
-    duration = max(15, math.ceil(qc['duration_seconds'] + TEMPLATE['ending_tail_seconds']))
-    if duration > TEMPLATE['max_video_seconds']:
-        raise RuntimeError('Facebook relaxed recording cannot fit; shorten copy instead of accelerating')
+    duration = validate_natural_recording(candidate, qc['duration_seconds'])
     fade = 0.35
     first = max(3.0, candidate['dj_recording']['story']['duration_seconds'] / 2)
     second = candidate['dj_recording']['advert_start_seconds'] - fade
