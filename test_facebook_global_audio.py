@@ -60,6 +60,7 @@ class FacebookAudioTests(fixtures.SignoffFixture, unittest.TestCase):
         publish.assert_not_called()
 
     def test_missing_audio_blocks_before_external_delivery(self):
+        self.consume()
         with patch.object(audio, 'inspect_audio', side_effect=RuntimeError('no populated audio stream')), \
              patch.object(worker, 'publish_delivery_asset') as delivery, \
              patch.object(worker.requests, 'post') as post:
