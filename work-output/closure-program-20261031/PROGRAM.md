@@ -42,3 +42,12 @@ Sonuçlar doğrudan #32ve sabitcommit/RESULT/HANDOFF ile gelir. Kullanıcı tekn
 - [WATCHDOGReelssürüm/çağrıyoludüzeltmesi](https://github.com/MetteBuyuretti/oldies-reels-worker/issues/31#issuecomment-6495357982)
 
 Work1kod/testsabitcheckpoint: https://github.com/MetteBuyuretti/oldies-reels-worker/commit/83a8c2528475b5357934051c3c09c792087664b3
+
+## Gerçek devir ve yeni teslim güncellemesi
+**31.10.2026 | 02:44 TSİ (UTC+3)**
+- Root, merkezi main/control-center/work-state.json vePR35aynıdosyanın tek yazarlığını buayrıKOORDİNATÖRajanına açıkça devretti; rootbundansonramerkezstateyazmayacak. NihaiMASTERsorumluluğu root'ta korunur.
+- **WORK1teslimi:** [DraftPR37](https://github.com/MetteBuyuretti/oldies-reels-worker/pull/37), OPEN/DRAFT/unmerged, kaynakteslimhead85dc0085b85924bbd984f50042a68d5239f3aa0e. Kod/test83a8c252;9yeni+14mevcut=23offlinePASS, compilePASS. RESULT/HANDOFFdoğrudanokundu; operasyonelürün veya uzakheartbeatkabulü değil.
+- **WindowsCodex02:42teslimi:** [c118ed21RESULT](https://github.com/MetteBuyuretti/oldies-reels-worker/blob/c118ed21dee8777a79a4da05baf9d9553bed8e74/work-output/local-followup-20261031/RESULT.md), #32/6535869875.02:55hedefindenönceJ3uygulamapaketi ve6yeniverify/plan-onlykontrolü teslimedildi. NativeReelscompile+aynı43fixture gerçekmevcutrequests/google-auth/Pillowile importtaklidiolmadanPASS; öncekiithalSDKsınırı darortamdoğrulamasıolarak kapandı. Energetic gerçekselected_signoffbağıgeçiciçocukenvile eşleşti. Kurulusistem/gerçekAPI/film değişmedi.
+- **Önemlisürümayrımı:** J3adapterSTAGElauncherhattınıonarır; canonicalFactorylegacyRUN-EVENINGonu tüketmiyor. Tarihli18Ekimactivation/provider=falsekapılarıaynı. Bu teslim bütünFactoryonarımıveya bugünçalışanzamanlayıcıkanıtıdeğildir. Yeniaynıhazırlıkistenmeyecek; somutpaket darbağımsızinceleme girdisidir.
+- **TakipGERÇEK:** Yeniayrıgörevoluşturma kapasiteye(5/5)takıldı. Bununyerine mevcutOLDIESWatchdogUyarıları `6ac82e48b8048191aaa0dad9c514fd26` özgünarızaizlemikorunarak teslim/hedefaşımı/engeltakibiyle güncellendi; updatebaşarısı/is_enabledtrue/saatlikEurope/Istanbuldoğrulandı. Takvimdeğişmedi, sadeceoku/bildir; merkezstateyazmaz. Programbitince yalnızekbölümsonaerer, özgünWatchdogkapatılmaz. Ayrıyenitakipgörevikuruldudenmez.
+- **HariciWork2:** YeniTRgörevi hâlâHAZIR; alım/başlangıçkanıtıyok. ÖncekiFBteslimi tamamlanmışkaynakpaketiolarakkorunur.
