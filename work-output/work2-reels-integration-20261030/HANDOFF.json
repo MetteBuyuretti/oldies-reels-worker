@@ -1,0 +1,34 @@
+{
+  "job_id": "WORK2-REELS-INTEGRATION-20261030-01",
+  "actor": "WORK2",
+  "received_at_TSI": "2026-10-30T19:58:00+03:00",
+  "base_ref": "9ad08776e882af386f2897ac43e85eaeb28f029e",
+  "branch": "work2/reels-integration-20261030",
+  "head_commit": "This checkpoint commit; immutable SHA recorded in issue #32 and later final handoff",
+  "changed_files": [
+    "facebook_global_audio.py",
+    "facebook-global-template.json",
+    "test_facebook_signoff_integration.py"
+  ],
+  "tested_commands": [
+    {
+      "command": "pwd",
+      "result": "not started: no usable execution environment"
+    },
+    {
+      "command": "python --version",
+      "result": "not started: no usable execution environment"
+    },
+    {
+      "command": "python -m unittest -v test_facebook_signoff_integration",
+      "result": "NOT RUN; authored only"
+    }
+  ],
+  "limits": [
+    "R1 candidate unexecuted",
+    "no production/media acceptance",
+    "no provider/Windows/workflow operations"
+  ],
+  "remaining_blocker": "Python execution environment unavailable",
+  "next_step": "R2 source/test preparation, then executable validation at exact commit"
+}
