@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-30T20:53:23.784Z",
+  "updated_at": "2026-10-30T22:03:12.600Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -83,7 +83,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/8f3b7d896478f4b8000d368d9395f518d46f9f73/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/139093f2e7da6f979457d4169bb2c7ff0be10d8f/work-output/master-j3-work2-review-20261030/REVIEW.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/37480d55f9ae97a6c814c18700661a4627791c6a/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6528707165"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6528707165",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/f3313a5af2ba2b698f90517e9f06371bfadee063/work-output/status-solution-20261031/REPORT.md"
       ],
       "control_time": "30.10.2026 | 23:51 TSİ: J3 teslim incelemesi tamam; sonraki somut yerel uygulama hazırlığı teslimi sonraki aktif kontrolde okunacak. Otomatik sohbet tetikleme yok.",
       "acceptance": {
@@ -98,7 +99,8 @@
         "j3_installed": false,
         "j3_operational_acceptance": false,
         "j3_next_local_part": "prepared_application_package_and_launcher_manifest_binding_not_received"
-      }
+      },
+      "last_status_audit": "2026-10-30T22:01:47.048Z"
     },
     {
       "id": "oldies-revenue-live-20261002",
@@ -410,7 +412,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6498717365",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fix/automation-mode-guard-20261029/work-output/local-exec-20261029/review/master-continuation-1710.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/3cf0f8c584614d360e9ebca559605bbcac4b43cf/work-output/commander-work-acceptance-20261030/evidence.json",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/00fe64b83cd37ce76bea4af5c40028d8baea063c/work-output/commander-work-acceptance-20261030/RESULT.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/00fe64b83cd37ce76bea4af5c40028d8baea063c/work-output/commander-work-acceptance-20261030/RESULT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/f3313a5af2ba2b698f90517e9f06371bfadee063/work-output/status-solution-20261031/REPORT.md"
       ],
       "control_time": "29.10.2026 | 17:10 TSİ son aktif kontrol; sonraki somut kontrol yerel güncel pin/PSsyntax/aktivasyon teslimidir. Otomatik uyanma iddiası yok.",
       "acceptance": {
@@ -430,7 +433,8 @@
         "staging_mode_guard": "full_windows_source_and_installed_entry_verified_exit1_both_orders",
         "launcher_freshness": "4_isolated_full_launcher_scenarios_pass_health_cdp_stub_actual_child_exit_preserved",
         "current_mode_guard": "installed_and_full_entry_tested_per_local_operator_master_diff_reviewed"
-      }
+      },
+      "last_status_audit": "2026-10-30T22:01:47.048Z"
     },
     {
       "id": "jingle-status-analysis-20261024",
@@ -558,9 +562,11 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/139093f2e7da6f979457d4169bb2c7ff0be10d8f/work-output/master-j3-work2-review-20261030/REVIEW.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/37480d55f9ae97a6c814c18700661a4627791c6a/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6528714647",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/6bbf8ace87d096c062dabcdbb09d9dc8b4ae108d/work-output/jingle-j3-20261030/evidence/reels-r0-input.json"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/6bbf8ace87d096c062dabcdbb09d9dc8b4ae108d/work-output/jingle-j3-20261030/evidence/reels-r0-input.json",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/f3313a5af2ba2b698f90517e9f06371bfadee063/work-output/status-solution-20261031/REPORT.md"
       ],
-      "control_time": "30.10.2026 | 01:06 TSİ aktif kontrol tamamlandı. Sonraki somut kontrol gerçek yerel teslim veya proje araçları bu Work'e geldiğinde; otomatik izleme/uyandırma başlatılmadı."
+      "control_time": "30.10.2026 | 01:06 TSİ aktif kontrol tamamlandı. Sonraki somut kontrol gerçek yerel teslim veya proje araçları bu Work'e geldiğinde; otomatik izleme/uyandırma başlatılmadı.",
+      "last_status_audit": "2026-10-30T22:01:47.048Z"
     },
     {
       "id": "local-commander-scoped-acceptance-20261027",
@@ -821,7 +827,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/37480d55f9ae97a6c814c18700661a4627791c6a/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/36",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6528464244",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6528714647"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6528714647",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/f3313a5af2ba2b698f90517e9f06371bfadee063/work-output/status-solution-20261031/REPORT.md"
       ],
       "control_time": "30.10.2026 | 23:51 TSİ: MASTER teslim/test kontrolü tamam. Sonraki aktif kontrol yerel gerçek bağımlılık/uygulama hazırlığı teslimidir; otomatik çalışma başlatılmadı.",
       "validation": {
@@ -840,7 +847,59 @@
         ],
         "direct_full_suite": "dependency_blocked_requests_google_auth_absent_not_code_failure",
         "real_provider_auth_media_or_windows_acceptance": false
-      }
+      },
+      "last_status_audit": "2026-10-30T22:01:47.048Z"
+    },
+    {
+      "id": "reels-tr-quality-closure-20261031",
+      "title": "Türkçe Reels — mevcut #30/#31 kalite onarımının ayrı takibi",
+      "owner": "WORK MASTER",
+      "status": "checkpointed",
+      "origin": "Existing 14–15 Oct authorized repair; central register reconciliation only, not a new production project",
+      "completed_units": [
+        "existing_PR33_technical_evidence_and_10s_negative_guard_preserved",
+        "current_main_scheduled_job_skip_and_WP_legacy_queue_read_20261031"
+      ],
+      "last_checkpoint": "2026-10-30T22:03:12.600Z",
+      "next_step": "Mevcut gerçek giriş/ref ve hedef profil eşlemesinden kalan ilk eksik parçayla devam. #31 son Watchdog sürüm/çağrı yolu düzeltmesi korunur. Kaynak-span bağlı özgün tam DJ metni/telaffuz/storyboard ön kabulü, sonra hedefli profil testleri ve yetkili gerçek MP4/bağımsız kabul. Facebook PR36 kapanış işi ve ayrı59sDJvideo bunun yerine geçmez. Yeni yürütücü atanmadı/başlamış sayılmıyor.",
+      "acceptance": {
+        "legacy_technical_pass": "preserved_not_rerun",
+        "creative_pilots": "not_accepted_existing_0_of_2_boundary_preserved",
+        "daily_scheduled_delivery": "held_main_preview_guard_last_run_skipped",
+        "real_final_media_and_continuity": "pending"
+      },
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/f3313a5af2ba2b698f90517e9f06371bfadee063/work-output/status-solution-20261031/REPORT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/30",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/31#issuecomment-6495357982",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/33"
+      ],
+      "control_time": "31.10.2026 | 01:01 TSİ durum uzlaştırması; sonraki somut mevcut uygulama teslimi aktif oturumda okunacak."
     }
-  ]
+  ],
+  "last_status_audit": {
+    "checked_at": "2026-10-30T22:01:47.048Z",
+    "report_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/f3313a5af2ba2b698f90517e9f06371bfadee063/work-output/status-solution-20261031/REPORT.md",
+    "scope": "Read-only GitHub runs/jobs/workflow sources, issue receipts, WordPress Reels queue and existing alert schedules",
+    "new_code_or_production_work": false,
+    "new_local_followup_receipt_observed": false,
+    "new_watchdog_J3_receipt_observed": false,
+    "TR_scheduled_run": "41084974777_skipped_0_steps",
+    "FB_scheduled_run": "41095336911_skipped_0_steps",
+    "last_audit_run": "41132722008_success_not_production_acceptance",
+    "WP_returned_queue": {
+      "records": 16,
+      "draft_review": 11,
+      "ready_for_edits": 5,
+      "top_linked_run_at": "2026-10-15T14:09:11Z"
+    },
+    "priorities": [
+      "Existing Windows Codex actual followup execution and bounded application package",
+      "J3 scoped review and authorized actual outcome",
+      "Facebook native entry and complete story/media; TR distinct quality repair",
+      "Tumblr/Pinterest current stock/queue/writers and natural evidence",
+      "Independent remote heartbeat and artifact-based health"
+    ],
+    "cross_project_reconciliation": "Etsy/POD/TeePublic and separate 59s DJ deliverables not re-audited in this report; current central register incomplete"
+  }
 }
