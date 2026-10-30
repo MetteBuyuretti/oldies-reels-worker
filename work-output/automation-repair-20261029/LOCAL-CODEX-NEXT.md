@@ -75,3 +75,22 @@ MASTER raporun tamamını ve gerçek ses bytes'larını bu Work'te doğruladı. 
 7. Kullanıcı mevcut anahtarı bu hazır yerel alana verdiğinde aynı yönetilen runtime'da hazır candidate aktivasyonu sürsün; sağlık/ready/polling, yeni katalog, dosya postimage ve gerekiyorsa geri dönüşün gizlisiz sonucunu #32'ye yaz. Work katalog/gerçek kaynak→staging→syntax kabulü yine MASTER'ın ayrı işlemidir.
 
 **Jingle beklemeye kilitlenmesin:** Maskeli girişin hazırlanması ilk kısa iştir. Kullanıcı anahtar girişi bekleniyorsa bir önceki Jingle J2 kaynak/fixture/regresyon parçası aynı yerel Codex tarafından kendi doğal checkpoint'inden yürütülebilir; Commander credential engeli Factory'nin üretimsiz incelemesinin önkoşulu değildir. Aynı dosyaya ikinci uygulayıcı yok; M05 araması, provider/TTS/import/miks/claim reset/scheduler/yayın açılmıyor. Bu ekin alım/başlama teyidi henüz yok; ilk gerçek alımda kontrol saatini belirt.
+
+## 30 Ekim — kabul kapandı; yerel J3 ve Work2 dosya sahipliği
+
+30.10.2026 03:40 TSİ (UTC+3). MASTER, WATCHDOG03:25/6511801783nihaiCommanderPASS ve03:29/6511859657devamını TAM okudu. Commander mevcut kapsamıyla DONE; kurulum/anahtar/refresh/kabul testi tekrar edilmeyecek. Kurucunun tebrikleri alındı. Yeni devamın hazırlanması yerel Codex'in aldığı/başladığı anlamına gelmez.
+
+Kurucu kullanım penceresi nedeniyle Work2'ye iş devrini istedi. Work2 yalnız ayrı work2/reels-integration-20261030 dalında Facebook Reels kaynak kodu/çevrimdışı test çalışacak; yönergesi main/work-output/work2-delegation-20261030/START.md. PR22/main/PR33/PR35koduna veya ortak Windowsstaging/Jinglekaynaklarına ikinci yazar yok. Yerel Jingle kaynak ve adapter onarımı aynı mevcut Windows Codex'te kalıyor. Hiçbir çalışmanın sırf görev dosyası yazıldı diye başladığı iddia edilmeyecek.
+
+### İlk yerel parça — JINGLE J3
+İş: LOCAL-JINGLE-J3-20261030-01. WD'nin a6edfeb8/work-output/watchdog-continuation-20261030/REVIEW-AND-NEXT.md kararını esas al. J2teşhis diff'i iki taraftan olumlu inceleme aldı; yeni genel inceleme/onay beklemesi yok.
+
+1. Mevcut18Ekimişinin zaten işaretli özgün olay/trace/saveAs kaydı varsa bir dar kontrolle değerlendir. Yoksa bu tarihsel alt sebebin kurtarılamadığı sınırını kapat. M05/receipt arşivine, bütün disk aramasına veya V3.1miks ayarı değiştirmeye dönme.
+2. Gerçek mevcut adapter.download/waitForTrack ve importer/handoff giriş sözleşmesini kaynakta eşle. Provider/browser/gerçekimporter/Factory/miks çalıştırmayan fixture'da mevcut gerçek fonksiyonun tek bir kusurunu yeniden üret: baseline başarısızlığı → en küçük aday farkı → aynıfixturebaşarısı. Yalnız saf yeni yardımcıyı test edip gerçek çağrının düzeldiğini varsayma.
+3. İlk teslim en küçük gizlisiz diff, kaynak/aday hash'leri, gerçekten koşulan odaklı regresyon ve geri dönüş; claim/no-retry/dedupe ve import/miks0sınırı korunsun. Tek kusur doğrulanmadıysa kaynakta tam olarak hangi girdi/sözleşme kanıtının eksik olduğunu yaz; tahmini kesin kök neden yapma. Yeni diagnostic alanını yeni onarım diye sunma.
+4. Mevcut onaylı14.18smanuelV3.1DJ+müzik referansı,6ayar/ikiözgüngirdi ve geçmiş kabul korunur. Son hedef gerçekDJMASTERveplanlısürekliliktir; bu üretimsiz J3parçası bunların tamamlandığı anlamına gelmez. Ücret/provider/TTS/indirme/import/miks/claimreset/scheduler/yayın veya pilot kilidi bu devamla açılmıyor.
+
+### Work2'nin kullanacağı dar Windows R0 girdisi
+J3kaynak işiyle karışmayan ilk uygun checkpoint'te, önceki dar adayların kabul edilmiş calm1dc358ef.../energetica2df7161...tamhashleriyle eşleşmesini ve gerçekten seçilen Facebook launcher/workspace/ref→sesconsumer bağını gizlisiz kaydet. Önceki tamhashler üstte ve Work2START'ta mevcut. Bilinen adaylar kullanılacak; geniş arama/üretim/tekraronay yok. AktifWindowsgirişiyoksa bunu söyle; GitHubdaki kilitliworkflow veya PR22adayını çalışan giriş diye etiketleme. Mevcut dosya/kimlik çıktılarını #32'ye yaz; ham ses/özelconfig/secret publicrepoya aktarılmaz. Bu girdi olmadan Work2'nin çevrimdışı kod/test yapabilmesi engellenmiyor; fiziksel entegrasyon kabulü ayrı.
+
+Teslim #32ve work-output/jingle-j3-20261030/ altında gizlisiz RESULT/HANDOFF/diff/test kanıtı. Work2 kendi dalına raporlayacak; merkezi maincheckpoint'i MASTERuzlaştırır. Kendi mevcut çalışma dalında doğal checkpoint'i koru, başkasının yeni kaydını kör overwrite etme. Gerçek ALINDI/BAŞLADI'da J3işkimliği/TSİ/ilk10–20dakikalık somut kontrol saatini yaz. Bu yeni yerel J3devamının alımı henüz gözlenmedi; GitHub kaydı otomatik uyandırma veya doğrudan Windowskomutu değildir.
