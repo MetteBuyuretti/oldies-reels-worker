@@ -1,0 +1,28 @@
+--- a/scripts/Run-Factory.ps1
++++ b/scripts/Run-Factory.ps1
+@@ -1,5 +1,16 @@
+-param([switch]$FirstTest, [switch]$Doctor, [switch]$SelfTest, [switch]$CheckApi, [switch]$ScheduleReady, [switch]$Morning, [switch]$Evening)
++param([switch]$FirstTest, [switch]$Doctor, [switch]$SelfTest, [switch]$CheckApi, [switch]$ScheduleReady, [switch]$Morning, [switch]$Evening, [AllowEmptyString()][string]$MusicHandoff)
+ $ErrorActionPreference = 'Stop'
++function ConvertTo-WindowsArgument([string]$Value) {
++    # Windows CreateProcess quoting: double backslashes before quotes and the closing quote.
++    $quoted = [regex]::Replace($Value, '(\\*)"', { param($m) ('\' * (2 * $m.Groups[1].Value.Length + 1)) + '"' })
++    $quoted = [regex]::Replace($quoted, '(\\+)$', { param($m) '\' * (2 * $m.Groups[1].Value.Length) })
++    return '"' + $quoted + '"'
++}
++if ($PSBoundParameters.ContainsKey('MusicHandoff')) {
++    if ([string]::IsNullOrWhiteSpace($MusicHandoff) -or -not (Test-Path -LiteralPath $MusicHandoff -PathType Leaf)) { throw 'MUSIC_HANDOFF_FILE_REQUIRED' }
++    $MusicHandoff = (Resolve-Path -LiteralPath $MusicHandoff).ProviderPath
++    if ($Doctor -or $SelfTest -or $CheckApi -or $ScheduleReady) { throw 'MUSIC_HANDOFF_MODE_CONFLICT' }
++}
+ $projectRoot = Split-Path $PSScriptRoot -Parent
+ $logDirectory = Join-Path $projectRoot 'logs'
+ New-Item -ItemType Directory -Force -Path $logDirectory | Out-Null
+@@ -23,6 +34,7 @@
+     if ($SelfTest) { $factoryArguments = @('--self-test') }
+     if ($CheckApi) { $factoryArguments = @('--check-api') }
+     if ($ScheduleReady) { $factoryArguments = @( '--schedule-ready', $(if ($Morning) {'--morning'} else {'--evening'}) ) }
++    if ($PSBoundParameters.ContainsKey('MusicHandoff')) { $factoryArguments += @('--music-handoff', (ConvertTo-WindowsArgument $MusicHandoff)) }
+     # The Python CLI sanitizes errors. No PowerShell transcript or environment dump is enabled.
+     $processInfo = New-Object Diagnostics.ProcessStartInfo
+     $processInfo.FileName = $pythonPath

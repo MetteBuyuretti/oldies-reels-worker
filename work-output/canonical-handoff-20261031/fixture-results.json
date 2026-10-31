@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "baseline_explicit",
+      "exit": 0,
+      "argv": [
+        "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\canonical-handoff-20261031\\fixture\\src\\jingle_factory.py",
+        "--morning"
+      ]
+    },
+    {
+      "case": "candidate_default",
+      "exit": 0,
+      "argv": [
+        "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\canonical-handoff-20261031\\fixture\\src\\jingle_factory.py",
+        "--evening"
+      ]
+    },
+    {
+      "case": "candidate_special_path",
+      "exit": 0,
+      "argv": [
+        "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\canonical-handoff-20261031\\fixture\\src\\jingle_factory.py",
+        "--morning",
+        "--music-handoff",
+        "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\canonical-handoff-20261031\\fixture\\special $ & ü [x].json"
+      ]
+    },
+    {
+      "case": "candidate_missing",
+      "exit": 1,
+      "argv": []
+    },
+    {
+      "case": "candidate_blank",
+      "exit": 1,
+      "argv": []
+    },
+    {
+      "case": "candidate_validator_reject",
+      "exit": 42,
+      "argv": [
+        "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\canonical-handoff-20261031\\fixture\\src\\jingle_factory.py",
+        "--morning",
+        "--music-handoff",
+        "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\work-output\\canonical-handoff-20261031\\fixture\\special $ & ü [x].json"
+      ]
+    },
+    {
+      "case": "candidate_utility_conflict",
+      "exit": 1,
+      "argv": []
+    }
+  ],
+  "fake_child_only": true,
+  "real_factory_provider_calls": 0,
+  "fixture_secret_lookup_replaced": true,
+  "validator_rejection": "simulated child exit 42; real Python validation not executed",
+  "installed": false
+}
