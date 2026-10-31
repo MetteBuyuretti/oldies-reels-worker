@@ -55,6 +55,6 @@ Dayanak: [02:38 koordinatör alımı](https://github.com/MetteBuyuretti/oldies-r
 
 ## Kullanıcıya iki ayrı iş kalemiyle bilgi
 **31.10.2026 | 03:08 TSİ (UTC+3)**
-Kısa durum raporu aynı teslimde iki sorumluyu açık ayıracak: **Work1** için somut kod/diff/test ve gerçek sonucu; **Koordinatör** için gerçek alım/intake, plan, engel, sıradaki hamle ve takip. Kaynak/test/kurulu uygulama/gerçek medya/süreklilik birbirine karıştırılmayacak. Root saatlik mevcut takip talimatını da aynı rapor ayrımına uyarlayacak; bu güncelleme yapıldı demek için araç sonucu gerekir.
+Kısa durum raporu aynı teslimde iki sorumluyu açık ayıracak: **Work1** için somut kod/diff/test ve gerçek sonucu; **Koordinatör** için gerçek alım/intake, plan, engel, sıradaki hamle ve takip. Kaynak/test/kurulu uygulama/gerçek medya/süreklilik birbirine karıştırılmayacak. Mevcut saatlik takip 03:07'de başarıyla güncellendi: en çok 4 maddelik raporda Work1 teknik teslimi ile Koordinatörün alım/intake/engel/plan işleri ayrı gösterilecek. Takvim ve özgün arıza takibi korunuyor; ayrı takip oluşturulmadı.
 
 Harici koordinatör görevi kurucu kararıyla gerçek alımdan önce iptal edildi. Eski EXTERNAL-COORDINATOR-START.md sabit bağlantıları tarihsel hazırlıktır; artık ayrı koordinatör sohbeti veya dış devir istenmiyor. Bu iptal gerçek alımı kanıtlı harici Work2 TR görevini iptal etmez.
