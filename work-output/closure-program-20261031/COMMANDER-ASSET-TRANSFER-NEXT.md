@@ -1,22 +1,62 @@
-# OLDIES COMMANDER — görsel aktarımı eksikliğini kapatma
-**31.10.2026 | 19:21 TSİ (UTC+3)**
-İş COMMANDER-ASSET-TRANSFER-20261031-07. Sorumlu: mevcutWindowsCodex; MASTERgözetimi; bağımsızdenetim mevcutWATCHDOG.
-Durum QUEUED/HAZIR,ALINDI/BAŞLADIYOK. Aktif06Jingle/Tumblrgörevini bölme; onunilk somuttesliminden sonra bu sıradakiişi al. Ayrıikincisunucu/yazıcıbaşlatma.
+# OLDIES COMMANDER — bağımsız bilgisayar çalışma altyapısı
+**Düzenleme: 31.10.2026 | 19:57 TSİ (UTC+3)**
+**Görev:** COMMANDER-INDEPENDENT-PC-20261031-07.
+**Sorumlu uygulayıcı:** mevcutWindowsCodex. **Sahip:** MASTER.
+**Durum:** HAZIR / yeni kapsam için ALINDI/BAŞLADI henüz yok.
 
-## Neden
-KurucuOldiesCommander'ınbilgisayarişlerinitaşımasınıistiyor;1956görselininWindows'aaktarılamamasıeksikliğiaçığaçıktı. Kabul edilmişkapsamüçpinnedTumblrkaynağı/üçfixedstagingdosyası/syntaxkontrolüdür. “Bağlantı kabulü” DesktopCommanderkarşılığıveyaassettransferbaşarısıdeğildir. EskiCommander03:25kabulünütekrarlama. Genel shell ihtiyacınıbuaraçaltındagizliceaçma.
+## KURUCU HEDEFİ VE MASTER DÜZELTMESİ
+Kurucu haftalardır Remote Desktop Commander'ın yaptığı farklı bilgisayar işlerini RC hizmet kotasına bağlı olmadan kendiOldiesCommander yapımızla yürütebilmeyi istiyor. Tumblr yalnızilkpilotveilkbağlantıkabulüydü. Bupilotveöncekiyalnızgörselaktarımı07talimatıgenelhedefinyerinekonmuştu. **Bu sürüm önceki07'nin yalnızassetaktarımıkapsamını DEĞİŞTİRİR ve YERİNE GEÇER.** Aynıişte ikinciayrı07oluşturulmasın;dosyaadı eski bağlantılarbozulmasındiyeaynıtutuldu.
 
-## İlk teslim — çalışan kod adayı ve test
-1. MevcutCommandergerçeksunucukaynağı/giriş/araçkataloğu/auth/allowlist/yerelkısa-yol ve sözleşmeyio ku;preimagehashveyedekal. Çalışanbağlantıyıkoparma;anahtarokuma/export/yenihesap/abonelikyok.
-2. Görselaktarımıiçinonaylıkökümevcutprojevarlıkklasörlerindenbul. Hiçuygunyoksa C:\Users\METE\Oldies-Radyo-Assets\incoming gibi ayrısadecevarlıkhedefiönerveadaymanifesttebelirt; kurulum/kaynak/sistem/credentialdizinlerinihedefalma. RootbaşınaizinMCPkatalogundaaçıkolsun.
-3. Sadece bu köke görselalma+dosyadoğrulama+makbuzokuma yeteneklerini kendiizoleadaydalında uygula. Araçgerçektransferiyapabilmeli, yalnızURLveyatalimatmetnibırakmamalı. ErişilebilirücretsizHTTPSgörselkaynağındanveya mevcutChatGPTassetaktarımyolundan,yereldosyaşeklindetestedilebilirbirtransferseam'ioluştur.
-4. Güvenliksözleşmesi: aktarımkaynağımanifesttenveyaexplicitizinlisourcehost'tangelir;genelarbitraryURLproxy/shellçalıştırmaolmaz. Dosyaadıpathdeğilbasitname;../absolute/UNC/ADS/symlink/reparsepathkaçışlarınıreddet. YalnızPNG/JPEG/WebP, gerçekMIME+decodeboyutuyumluluğu, boyutsınırı, SHA256/byte/pixelmakbuzu. Varsayılanoverwriteyok,öncekidosyayıbozma;yarımindirmetemp+atomikmove,başarısızdosyayıbaşarılısayma. Varolanaynıhashidempotent;farklıhashçatışmasıret. Yerel/gizliağhedeflerineveizinverilmemişredirecteerişimolmaz. İmzalıURL/query/anahtarmakbuzlogunda/açıkGitHub'dabulunmaz.
-5. Testfixture'ıyla gerçekbyteaktarımı→Windowsdosyası→SHA256/byte/pixelmakbuzunu doğrula; yanlıştür/limit/traversal/overwrite/bozukdosya/redirectolumsuzlarını çalıştır. Mevcut7araçregresyonunukontrol et; yeni“connected”durumunuaktarımsağlığıylakarıştırma.
-6. İlgiligörsel1956RocknRoll_Exploded_TeePublic_6000x7500.png. Üretimi/dosyayıkendiliğindenyenidenyaratma; kullanıcıdandosyayenidenistemedenmevcutkalıcıkaynağınagerçekerişimiara. İlkfixturetestigerçekkullanıcıdosyasıyerinegeçmez. Kullanıcıdosyasınagirişyoksa exactkaynak/transfergirdisinibelirt;başarılıaktarımdeme.
-7. Teslim: ayrıdraftPR/kod+test+exactpath/scope/manifest+katalogtaslağı+güvenligüncelleme/rollbackadımları. MevcutprodCommander'ırestart/yetkigenişletmebuadaygörevindeYOK. SomutpaketMASTER/WATCHDOGtarafındanincelenecek; yeniassetköküvearaçlarınaktivasyonu ayrıaçıkuygulamakararıdır. Kurucununtekrarettiğibuözellikihtiyacı, bütünPC'yesınırsızterminalerişimiiznideğildir.
+Bittiölçütütekresimindirmek,üçTumblrdosyasıokumakveyaMCPhealthPASSdeğildir. BittiölçütüaşağıdakiişyeteneklerininaynıkullanıcıWorkoturumundanWindowsüzerindegerçekçağrılarlayapılmasıdır. YeniCommander RCserverpaketini/abonelikAPI'sini/wrapperçağrısınıbağımlılıkolarakkullanmamalı. VarolanbizimMCPsunucusu/ulaşımyoluveücretsizyerelPython/Node/PowerShellüzerindegeliştir;farklıprojelerkapsanmadanbittideme.
 
-## Daha geniş ihtiyaç listesi — tamamlandı sayılmaz
-Projeklasöründe liste/oku/yaz/kopyala, medyaaktarımı, günlük/durumokuma, sınırlandırılmıştestçalıştırma, yetkilisayfalardaüretilenürünüdoğrulama gereksinimlerinikatalogt ablosundaDESTEKLENİYOR/EKSİK olarak çıkar. Gelecekyeteneklerikodlayıpaktifmişgibipazarlama. Bu07işininbittiölçütü sadecegerçekgörselaktarıma dayalıaday+testtir.
+## GERÇEK MEVCUT DURUM
+Katalog7araç:Tumblr3pinnedkaynak,3fixedstagingdosyası,sınırlısyntaxvesabitrapor. Kabulbu sınırlıkapsamdadır. GenelPCyeteneği/başkaaraçlara otomatikerişimkanıtıyok. 06Jingle/Tumblralımı19:20,teslim19:24mevcut;kurulucanonicallauncherSTAGEpinuyuşmazlığındagerialınmış. İlgilionarımlarıbozma/aynıtestiyeniyapma. 07şimdialınabilir;eski06'nınsonsuzbeklemesineb ağlama,canlıkaynakçakışmasıyoksaizoleCommanderadayındailerle.
 
-## Kayıt
-#32ALINDI/BAŞLADIgerçekTSİ/ilk20dkhedefiylesonra; herdoğalteslimsabitcommit. Çıktıwork-output/commander-asset-transfer-20261031/. Merkezstate'iikinciyazarolarakdeğiştirme. Yeniücret/kurulmuşproductionyetkisi/fullshell/yayınaçılmaz. RootMASTERkullanıcıyadarbağlantıilegenelPCyeteneklerininayrımınıaçıklayacak.
+## P0 — Çalışan kodla tamamlanacak temel araçlar
+Aşağıdakiler yalnızkatalogönerisideğil,gerçekuygulama+test+makbuzgerektirir.
+
+### 1 Dosya sistemi / farklı proje kökleri
+- Klasörlisteleme/oluşturma;dosyaveçokludosyaokuma;dosyayazma/append;exacteskiyazişlecerrahiedit;dosyabilgisi;dosyakopyalama/taşıma/yenidenadlandırma.
+- Dosyaadı,konum,pagination,encoding,bytes,SHA veoverwriteçatışmasıelealınır. SabitTumblralias'larıyeniPCaraçlarınınmodeliolmasın. Projekökühergörevdeparametre/configilebelirlenebilsin;yalnızbiryedekstagingklasörünesıkışmasın.
+- Mevcutkullanıcıçalışmaprojeleri,Download/varlıkklasörlerivegöreveaitçıktılarayrıköklerolarakgerçektanımlansın. Yanlışroot/pathtraversalveyabaşkasınınsymlink/reparsehedefiyledosyabozmaengellensin. İşlemyetkisi dışındagizli/cert/credentialenvanteriçıkarma.
+
+### 2 Komut çalıştırma ve devam eden oturum
+- RCstart_processkarşılığı: command,cwd,timeout,stdout/stderr,exitcodevesessionIDilegerçekPowerShell/Python/Node/FFmpeg/Gittest/kurulumkomutlarınıyürütebilenkomutoturumu.
+- Uzunsürenişi başlat→çıktıyıparçalıoku→stdinileyanıtla→iştamamlanıncaexitcodeal→gerektiğindegöreveaitoturumudurdur. Windowsyoluboşluk/Unicode/argümankaçışıtestedilsin.
+- Saltokunurread/syntaxişleminigenelshellsanma;genelkomutyeteneğiyoksa fullRCişlevleri demeyin.
+- Varolankurucuyetkileri,işescopeveplatformeylemkurallarıaynensürer;aritmetikkomutbeyazlistesindeyalnızbirnodeparseilekapsamdaraltılmasın. YeniRCkotası/hizmetiarkadankullanılmasın.
+
+### 3 Arama ve süreç yönetimi
+- Dosyaadı/içerikaraması,sonuçparçalama/aramaID/stop;cwdyeköklenmişrgveyaeşdeğer.
+- Görevoturumları/süreçlistesi/komutsonucu/başlangıçbitişdurumu;gerektiğindeyetkil işlesüreçsonlandırma. Farklıprojelerdehangiişingerçeksürdüğüveçıkışkodu görülebilmeli.
+- “işçağrıld ı”,“oturumçalışıyor”,“exit0”,“üründoğrulandı”ayrıdurumlar.
+
+### 4 Medya ve dosya aktarımı
+- ChatGPTçalışmaalanı/kalıcıdosyaveyaizinlikaynaktakiPNG/JPEG/WebP/ZIP/PDF/MP4dosyalarınınWindowshedefinealınması;WindowsçıktısınınWork'egeriaktarılabilmesi.
+- Gerçekindir/yaz/tamamlanma/SHA/bytes/MIMEveuygunmedyadayükseklik-genişlik/süremakbuzu. Dosyamevcudiyetivetarihbaşarıyerinegeçmez. Yarımaktarımıfinaldosyayapma,mevcutaynıdosyayıkorumaveçatışmayıgöster.
+- İlkgerçekürünörneği1956_Rock_n_Roll_Exploded_TeePublic_6000x7500.png;yenidenüretme,mevcutkalıcıkaynağıkullan. Dahaöncekiyalnızgörselaktarımıburadabirbaşarıörneğidir,projenintamamıdeğildir.
+- PublicGitHub'aimzalıURL/hesapdosyalinki/parola/anahtarkoyma. Gizliverilerikayıtlardasansürle;aktarımıgenelarbitraryproxyyapma.
+
+### 5 Durum / kapasite / sürdürülebilirlik
+- get_capabilities+root/config/status,lastoperation/health,paginationvelimitsilegerçekdesteklenenyeteneklerigöster.
+- YerelMCP/taşımatüneli/ChatGPTçağrılimitleriniveRCabonelikkotasındakibağımsızlığıayır. RCkotasıortadankalksabileinternet/ChatGPT/tünel/platformlimitleriyokmuşgibisözverme.
+- Varolanyedek/yüklüpaketlerikullan. Yeniücretliuzakservis/abonelikoluşturma. Mevcutanahtarısohbeteçıkarma/yeniücretlihesapaaktarmayok.
+
+## GERÇEK KULLANIM TESTLERİ — BİTTİ ÖLÇÜTÜ
+1. TumblrolmayanbirtestprojesindeWindows'tagerçekklasör→dosya→çokludosyaokuma→exactedit→arama→kopyalama/taşıma→bytes/SHAgeriokuma.
+2. AynıWorkoturumundanPowerShellsürümveçalışmakökünüokuma;Python/Nodezararsıztesti;başlatılmışbiruzunişinçıktısınıokuma/standartgirdi/göreveaitdurdurma/başarısızexitcodegösterme. GerçekWindowsişlemleriolmalı;LinuxstubsonucunuWindowsPASSsayma.
+3. GörselWindows'aaktar→SHA+6000×7500pikseldoğrula→Work'tengeriokumamakbuzu. BaşkatekZIP/PDFveyadiğermevcutişdosyasıylaikinciaktarımformatınıdoğrula.
+4. Enaz3farklıprojeyegörevköküparametresiyleeriş;birisiTumblr,digeriJingle/Reels,üçüncüsümağazavarlıklarıolsun. Kuruluüretimbudurumtestiiçindeğişmez;projeiçindezararsıztestdosyalarıkullan.
+5. Mevcut7araçaynıdavranışlasürsün;varolanbağlantıyıkoparmadanizoleadaytesti,geriyeuyumluluk/geri dönüşhazırlansın.
+6. Pathçatışması/yanlışhash/timeout/bozukvebüyükdosya/başarısızkomut/bağlantıkesintisindeaynımutasyonuniki kezçalıştırılmamasıtestedilsin.
+7. ADAYTESTEDİLDİ,WINDOWS'AKURULDU,BUWORK'TENGERÇEKÇAĞRIGEÇTİvedoğrulamasüresiayrıraporlansın. TümP0matrisiteslimolmadan“RCyerinegeçti/Commanderbitti”denmeyecek.
+
+## UYGULAMA DÜZENİ VE AKTİVASYON
+- Öncegerçekyerelsunucukaynağıveçalışangiriş/hash/authköprüsünübul;izolebranch/çalışmaalanındakodla. Gereksinimtablosuuzunkalmasın;ilk20dkteslimigerçekdosya+komutadaytestiolsun.
+- İşiböl: P0dosya+komutçekirdeği,oturum/arama,çift yönaktarım,gerçekWorkkabulü. Herdoğalteslimkalıcı, #32kısakanıt. Yeniçıktıwork-output/commander-independent-pc-20261031/.
+- Bu07mevcutkuruludarCommander'ıhabersizrestartyetkigenişletmeiznideğildir. Önceçalışankod/test+tamtool/root/command/sessionkapsamı+backup/rollback/aynıanahtargüvenligüncellemeincelemeye hazırpaketiyap. Productionerişimgenişletmesi ancak gerekliaçıkaktivasyonadımıylayapılacak. Buadayaçıkkapsamlıişiyapmakyerine“sadeceTumblriznimvar”diyeörnekprototiptedurulmaz.
+- KurucununbugünküaçıktalebiGENELBİLGİSAYARİŞLERİdir. Bunuvarsayımsalbaşkaprojeveyayalnız1956fotoğrafınaindirgeme. Öteyandankullanıcıhesapları/ödeme/üretim/yayınkararlarınıkendidonanımkontrolüylekendiliğindenaçma.
+- Mevcutkaynakolmadanhazırmışgibiyazma. Erişimengelinintamkatmanıveilkeksikparçasıbildirilir;diğerbağımsızyeteneklerinisomutadayınıtamamla.
+
+## DEVİR
+#32'ye buYENİKAPSAM için COMMANDER-INDEPENDENT-PC-20261031-07 ALINDI/BAŞLADIgerçekTSİ/ref/ilk20dkhedefi;P0matrisi,gerçektestkanıtları,başarısızdenemeler/çözümüvebekleyenaktivasyonuyaz. ROOTMASTERnihaihedefveeksiksizliğiizler;kurucudanaynıihtiyacıyenidenanlatmasıistenmez.
