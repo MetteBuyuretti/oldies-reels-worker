@@ -1,0 +1,181 @@
+{
+  "job_id": "WORK2-SITE-AND-VISUAL-CLOSURE-20261031-03",
+  "checked_at_TSI": "2026-10-31T07:16:00+03:00",
+  "target_workday": "2026-10-31",
+  "status": "NOT_VERIFIED",
+  "platforms": [
+    {
+      "platform": "Tumblr",
+      "new_eligible_stock": null,
+      "stock_source_time": null,
+      "next_publication_at_or_null": null,
+      "queue_verified_at_or_null": null,
+      "queue_freshness_seconds_or_null": null,
+      "last_job_receipt": null,
+      "last_platform_receipt_or_null": null,
+      "historical_only": {
+        "observed_at": "2026-10-25T05:24:00+03:00",
+        "account_published": 23,
+        "drafts": 11,
+        "queue": 0,
+        "eligible_in_reviewed_package": 0,
+        "published_ids": [
+          "831168688175595520",
+          "831179323999387649",
+          "831191288426725376"
+        ],
+        "published_urls": [
+          "https://www.tumblr.com/oldiesradyo/831168688175595520",
+          "https://www.tumblr.com/oldiesradyo/831179323999387649",
+          "https://www.tumblr.com/oldiesradyo/831191288426725376"
+        ],
+        "published_at": [
+          "2026-10-22T10:17:10Z",
+          "2026-10-22T13:06:13Z",
+          "2026-10-22T16:16:23Z"
+        ],
+        "fresh_for_today": false
+      },
+      "writer_coverage": {
+        "status": "NOT_VERIFIED",
+        "historical_gate": "allPathsCovered=false; new submissions blocked",
+        "known_roles": [
+          "publisher",
+          "run_tumblr_auto launcher",
+          "editorial controller"
+        ],
+        "current_owner_paths": null,
+        "shared_lock": null,
+        "daily_budget_enforced_all_paths": null
+      }
+    },
+    {
+      "platform": "Pinterest",
+      "new_eligible_stock": null,
+      "stock_source_time": null,
+      "next_publication_at_or_null": null,
+      "queue_verified_at_or_null": null,
+      "queue_freshness_seconds_or_null": null,
+      "last_job_receipt": null,
+      "last_platform_receipt_or_null": null,
+      "writer_coverage": {
+        "status": "NOT_VERIFIED",
+        "shared_lock": null,
+        "daily_budget_enforced_all_paths": null
+      }
+    }
+  ],
+  "github": {
+    "ref": "d82faf2640d31eed8e3efe494759efe76a8dba30",
+    "tracked_workflow_paths": [
+      ".github/workflows/facebook-global-en.yml",
+      ".github/workflows/oldies-watchdog.yml",
+      ".github/workflows/reels-cleanup.yml",
+      ".github/workflows/reels-worker.yml",
+      ".github/workflows/retention-tests.yml"
+    ],
+    "tumblr_or_pinterest_workflow_in_this_ref": false,
+    "latest_10_runs": [
+      {
+        "id": 41165029803,
+        "path": ".github/workflows/editorial-quality-gate.yml",
+        "event": "pull_request",
+        "conclusion": "success",
+        "created_at": "2026-10-31T03:35:23Z"
+      },
+      {
+        "id": 41164581199,
+        "path": ".github/workflows/editorial-quality-gate.yml",
+        "event": "pull_request",
+        "conclusion": "success",
+        "created_at": "2026-10-31T03:29:24Z"
+      },
+      {
+        "id": 41163526132,
+        "path": ".github/workflows/editorial-quality-gate.yml",
+        "event": "pull_request",
+        "conclusion": "success",
+        "created_at": "2026-10-31T03:14:52Z"
+      },
+      {
+        "id": 41156821096,
+        "path": ".github/workflows/oldies-watchdog.yml",
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-10-31T01:44:56Z"
+      },
+      {
+        "id": 41146883336,
+        "path": ".github/workflows/oldies-watchdog.yml",
+        "event": "pull_request",
+        "conclusion": "success",
+        "created_at": "2026-10-30T23:51:09Z"
+      },
+      {
+        "id": 41146054060,
+        "path": ".github/workflows/oldies-watchdog.yml",
+        "event": "pull_request",
+        "conclusion": "success",
+        "created_at": "2026-10-30T23:42:33Z"
+      },
+      {
+        "id": 41132722008,
+        "path": ".github/workflows/oldies-watchdog.yml",
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-10-30T21:40:04Z"
+      },
+      {
+        "id": 41095336911,
+        "path": ".github/workflows/facebook-global-en.yml",
+        "event": "schedule",
+        "conclusion": "skipped",
+        "created_at": "2026-10-30T17:02:48Z"
+      },
+      {
+        "id": 41093135971,
+        "path": ".github/workflows/oldies-watchdog.yml",
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-10-30T16:47:58Z"
+      },
+      {
+        "id": 41084974777,
+        "path": ".github/workflows/reels-worker.yml",
+        "event": "schedule",
+        "conclusion": "skipped",
+        "created_at": "2026-10-30T15:54:15Z"
+      }
+    ],
+    "inference": "No Tumblr/Pinterest workflow in this repository/ref is not evidence of absent Windows/platform scheduler. Actions success is not a platform receipt.",
+    "workflow_collection_fetch": "connector rejected actions/workflows collection URL; tracked workflow tree and actions/runs available"
+  },
+  "access": {
+    "oldies_project_tools_in_this_catalog": false,
+    "desktop_commander_mete_device": "Offline, last seen 51h; no remote commands issued",
+    "windows_snapshot_in_current_main_tree": false,
+    "current_issue_receipt_of_local_snapshot": false
+  },
+  "prior_acceptance": {
+    "commander_final_comment": 6511801783,
+    "scope": "Three pinned source/staging/parser accepted 30 Oct; not retested here",
+    "installed_guard_repair": "25 Oct source/ledger report read; preserve 22 Oct launcher correction",
+    "current_full_source_read": false
+  },
+  "limits": {
+    "new_posts_or_pins": 0,
+    "queue_writes": 0,
+    "claim_lock_scheduler_activation_writes": 0,
+    "guard_tests_repeated": 0,
+    "source_patch_created": false
+  },
+  "missing_evidence": [
+    {
+      "owner": "Existing Windows Codex",
+      "file_or_record": "work-output/social-readonly-snapshot-20261031/SNAPSHOT.json + RESULT.md + HANDOFF.json",
+      "command": "Existing LOCAL-SOCIAL-SNAPSHOT-20261031-01 readonly procedure (fixed fd243724 and latest LOCAL-JINGLE-SOCIAL-NEXT step 6)",
+      "why": "No current stock/queue target/freshness/writer coverage/platform receipt available in this Work; existing device offline; do not run writing Verify."
+    }
+  ],
+  "next_step": "Existing Windows Codex fills only local evidence gap under already prepared task; MASTER merges facts, no guard reinstallation or new publication."
+}

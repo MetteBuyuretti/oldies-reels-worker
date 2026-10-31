@@ -1,0 +1,9 @@
+{
+  "job_id": "WORK2-SITE-AND-VISUAL-CLOSURE-20261031-03",
+  "status": "checkpointed",
+  "completed_units": [
+    "A-GitHub-and-existing-acceptance-reconciled"
+  ],
+  "next_step": "B site inventory and authorized missing-image repair; local social evidence pending existing Windows Codex",
+  "central_write_performed": false
+}
