@@ -27,3 +27,30 @@ Bulgu somut: src/jingle_factory.py --music-handoff kabul ediyor; scripts/Run-Fac
 07:14snapshot tarihi30Ekimstock0/pin94gözlemini bugünesaymıyor. Artıkbugün17:01; 09:20/12:30planlıadımlarıngüncelsonuçloglarını saltokunur incele. Stokkaynağını bugün yeniden say; yayın/prepare/reconcilelauncher çalıştırma.
 PlatformkuyruğunuGETileokuyan mevcutyolun yanetkisizliğini kaynakla doğrula. Mümkünse mevcutyetkilioturumla saltokunur actualGET,platformqueuehedefi/tazelik/job↔platformmakbuzunu getir; tokenrefresh/logwrite içerenlauncher'a “check” deyipçalıştırma. Bağlantıyoksa exactAPIyeteneği/erişimgirdisiyaz; koddan gerçekstok/queueuydurma. Bu sosyalparçakodadayınıbeklemeden ayrıcheckpointolabilir.
 MevcutWork2'nin07:40sonucunu kullan; aynı07:14snapshot'ıtekraristemeyin. YeniALINDI/BAŞLADIveilk20dkhedefi#32'ye; somutaday/testveyagüncelplatformkanıtı da#32'ye. Kullanıcıraportaşıyıcısıolmasın.
+
+## MASTER — 17:26 teslimi sonrası uygulama ve Tumblr onarımı
+**31.10.2026 | 17:38 TSİ (UTC+3)** · LOCAL-CANONICAL-TUMBLR-20261031-06.
+Önceki05alımı17:24/teslim17:26ve06ce92d874ac159757613402dc2749ae281618ca RESULT/diff/fixturetamokundu. Wrapperiletimadayına darolumlukaynakgörüşüverildi; bağımsızWatchdog/gerçekvalidator/üretimkabulüdeğil. Baselinebeklenenkusuru+6adaykontrolüvar; yeni7testPASSdiye sayma.
+Adayıyenidenhazırlama,STAGEyenidenkurma. #32'ye06ALINDI/BAŞLADIveilk20dkhedefini yaz.
+
+### 1. Canonical tek-launcher kurulumu ve gerçek validator sınırı
+- GerçekkuruluRun-Factory.ps1 hash1300e811e001719fbe1d2b6fa581bd2f7b1f1297ea457117d2a51fe30973934d vePythonFactory68ad43649497eabbc828c30c06ebc4b4944a616de0c83c7c2dfbdb78043298bf, hazırlauncheraday21a6c0ea568a3fad76e7e33a843204f41eb7054d28cdca9a3fa7b8d84b5cc2f4 kimliklerini güncelokumayla doğrula.
+- BağlıJingletümzamanlayıcılarınınhalenDisabledveilgiliyürütücününçalışmadığını doğrula. Yeni aktifgörev/drift/Watchdogkritikolumsuzkararvarsa otomatiküzerineyazma: exactfarkıraporla,diğerparçayı sürdür.
+- Doğrulanmışözgünprivateyedek+rollbackvehashkarşılaştırmasısonrasında **yalnız scripts/Run-Factory.ps1 için bu hazıradayın kurulması yetkilidir**. Pythonkaynakları/STAGE/state/claim/lock/activation/scheduleraynıkalsın. Kurulumyedekönce/atomikdosyadeğişimi/sonhash/PowerShellparse/rollbackcheckkanıtıteslimet. Kuruluwrapper'ı üretimparametresiyleçalıştırma; kurulumüretimikendiliğindenaçmaz.
+- İzolefixture'de mümkünsegerçek web_music_handoff doğrulama callable'ını kaynakyanetkisinikontrolederek çağır. Geçersizgün/slot/job/hash/dışkök testgirdilerinin gerçekvalidatorca reddedildiğiniveprovider/Factorymiks/importçağrılarınınsıfırolduğunu kanıtla. Testgirdileri yalnız işaretliTESTklasöründe; gerçekizin/receiptgibiFactoryroot'unayerleştirme. Importyanetkisibelirsizse güvenli fixtureseam'iayır; kuruludenetimigevşetme.
+- Çocukexit42'ninaktarılması gerçekvalidatorPASSyerinegeçmez. Geçerliüretimhandoff'u,bugünküizin ve gerçekDJMASTERbirsonrakikapıolarakaçık kalsın.
+
+### 2. Öncelikli Tumblr DOM arızasını gerçekkaynakta onar
+- Mevcutinstalledpublisherfonksiyonunu ve31Ekim09:20stacktrace'ininexactçağrısını oku; rootWork'ünCommanderçağrısı17:36Sessionterminateddöndü,GitHubkodaramasındakaynakyok. Bu kaynakyerelCodex'te; onu kullanıcıyaarama/kopyalatma. İhtiyaçvarsa yalnızgizlisizilgilikaynakdarparçasınıincelemeiçinexportet.
+- scrollIntoViewIfNeededçağrısındaelementDOM'dankopma aynıfixture'deenazbirkezbaselinefailolaraküret. Elementhandle/cachedlisteyerinegüncellocator'ıyenidenedinme/yenidengörünürlükkontrolüile **yalnızsaltokunurDOMtaramaadımına**sınırlıenfazla1–2yenidendenemeekle. Publisherişinintamamınıyenidenbaşlatma; queue/publishclickişlemlerinegenelretryekleme,aynıpostuniki kezoluşmasınaizinverme.
+- DOMdeğişimisonrasıbaşarı,kalıcıayrılmadasınırlıret,güncelsayı/kimlikteçiftokumayımükerrerpostayazmama ve başarısızokumadatarihiyeşilraporugerçekbaşarısaymama kontrollerinikoş. Tamfonksiyonkaynağıolmadanmockbuton/çağrılmayanyardımcıylaonarılmışdemeyin.
+- İzoleaday+test+exacthashdiff+rollbackteslimet. Tumblrkuruludosyasınayazmayetkisibuparçadaaçılmadı; kuruluuygulamaiçinönceadayınsomutteslimigörülsün. BöyleceNodepublisher'ınüretimyanetkisibuonarımiçinbaşlatılmamışolur.
+- Gerçekpublish/queue/draftcreateyok. DOMokumasıneyazıyoröncekaynaktandoğrula; log/journal/tokenrefreshyapabilenlauncher'ıyeni“check”etiketiyleçalıştırma.
+
+### 3. Pinterest actualqueuekanıtı
+- 31Ekim15:40yerelplan90satır/3PENDING_PINTORA yalnızyerelplandır. Üçsatırıkimlikleriyleçıkar; gizlisizsourceURLvehedefboard/hesapsahibinimevcutkaynaktan eşleştir.
+- Mevcutyetkilioturumda yanetkisizplatformGETveyaarayüzsaltokunurincelemesiyleherbiri için queued/published/notfound/NOT_VERIFIED,platformID/URLveokumazamanıkaydet. Hazırlama/planlama/gönderim/tokenrefreshbaşlatma. GerçekplatformaraçerişimiyoksabutabayaaçıkçaNOT_VERIFIEDyaz; üçplanıbaşarıdiyeetiketleme.
+- Hazırbulunanbugünkü17:30Preparelogunuyerel saltokunurincelemek,launcher'ıçalıştırmakdeğildir; varsaal. Kodkusurudadahaöncedenkanıtlıolmayanplatformdışıbütçeyikaldırma.
+
+### Teslim/kapanış
+work-output/canonical-tumblr-20261031/RESULT+HANDOFF+test/hash/rollbackve#32sabitcommit. Varsayılansınırdeğişmez: ücret/provider/activation/claim/scheduler/gerçekindirme/import/miks/yayınyok. Kurulucanonicallauncher,gerçekvalidatortesti,TumblradayıvePinterestplatformkanıtı ayrıraporlanır.06adımınındagöreveulaşmasıotomatikvarsayılmaz.
