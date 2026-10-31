@@ -1,0 +1,35 @@
+{
+  "checked_at_TSI": "2026-10-31T07:14:21+03:00",
+  "target_workday": "2026-10-31",
+  "new_eligible_stock": null,
+  "stock_source_time": "2026-10-30T09:20:04+03:00",
+  "historical_stock": 0,
+  "next_publication_at_or_null": null,
+  "queue_verified_at_or_null": null,
+  "queue_freshness_seconds_or_null": null,
+  "writer_coverage": {
+    "tumblr_publisher_lock": "tumblr-publisher.lock",
+    "tumblr_allPathsCovered": false,
+    "pinterest_lock": ".or-pin-run.lock",
+    "cross_writer_common_budget": "NOT_VERIFIED"
+  },
+  "last_job_receipt": {
+    "tumblr": "2026-10-30T09:20:16+03:00 exit4 CONTENT_STOCK_EMPTY; fresh report",
+    "pinterest": "2026-10-30T22:10:02+03:00 Reconcile; 0 new published; 0 verified scheduled; 94 observed live; bulk acceptance unverified",
+    "pinterest_prepare": "2026-10-30T19:06:42+03:00 ANOTHER_OR_PIN_RUN_ACTIVE"
+  },
+  "last_platform_receipt_or_null": null,
+  "limits": [
+    "No fresh platform queue preview",
+    "Old Tumblr 0 stock is not current stock",
+    "Pinterest 94 is prior observation, not current count",
+    "Prepare/Reconcile launcher writes logs and can refresh token; not invoked"
+  ],
+  "missing_evidence": [
+    "Current reviewed stock",
+    "Fresh queue target and 60-second source binding",
+    "All-writer shared lock/budget coverage",
+    "Current job-to-platform receipt"
+  ],
+  "next_step": "Obtain explicitly read-only platform queue preview and current inventory without invoking mutating launchers"
+}
