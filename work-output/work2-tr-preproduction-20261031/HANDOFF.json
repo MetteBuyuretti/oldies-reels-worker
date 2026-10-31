@@ -6,7 +6,7 @@
   "base_ref": "073e7665d9d381e7c8d595fcd60b905a9071490a",
   "branch": "work2/tr-preproduction-20261031",
   "head_commit": "2be10a68dd7f904a5b99b55fda79d81fc722b181",
-  "head_commit_scope": "Frozen T1 content snapshot. Follow-on manifest commit identified in issue #32.",
+  "head_commit_scope": "Frozen T1 content snapshot; final supplement/manifest commit is linked directly from issue #32.",
   "changed_files": [
     "work-output/work2-tr-preproduction-20261031/DJ-SCRIPT-TR.txt",
     "work-output/work2-tr-preproduction-20261031/ENTRY-MAP.md",
@@ -18,7 +18,10 @@
     "work-output/work2-tr-preproduction-20261031/VALIDATION.json",
     "work-output/work2-tr-preproduction-20261031/VISUAL-CANDIDATES.json",
     "work-output/work2-tr-preproduction-20261031/verify_t1.py",
-    "work-output/work2-tr-preproduction-20261031/work-state.json"
+    "work-output/work2-tr-preproduction-20261031/work-state.json",
+    "work-output/work2-tr-preproduction-20261031/HANDOFF.json",
+    "work-output/work2-tr-preproduction-20261031/NEXT-CODE-SCOPE.md",
+    "work-output/work2-tr-preproduction-20261031/VISUAL-CONTRACT-CANDIDATE.json"
   ],
   "status": "checkpointed",
   "target_profile": "legacy_short_TR_25_30",
@@ -70,5 +73,25 @@
   "remaining_blocker": "B-VISUAL-PACKET: three original photo assets tied to SHA256, resolution/sharpness, quartet identity/composition, distinct scenes and TR/GB/US rights evidence with independent visual review.",
   "next_step": "Coordinator takes frozen T1 script/storyboard into creative/visual pre-review and arranges the single missing B-VISUAL-PACKET; root code ownership must be confirmed separately before any T2 implementation.",
   "rollback": "Do not use this output folder; no installed/live change to roll back.",
-  "automatic_chat_trigger": false
+  "automatic_chat_trigger": false,
+  "handoff_updated_at_TSI": "2026-10-31T03:17:32.639+03:00",
+  "t1_manifest_commit": "0daf1b0bac3fe3b976f4d497dab1cc03c1b4c5d5",
+  "t1_receipt_comment": 6536162119,
+  "t1_delivery_comment": 6536332197,
+  "t1_github_readback": {
+    "commit": "0daf1b0bac3fe3b976f4d497dab1cc03c1b4c5d5",
+    "files_equal": 12
+  },
+  "supplement": {
+    "phase": "T2 proposal only after T1 checkpoint",
+    "files": [
+      "NEXT-CODE-SCOPE.md",
+      "VISUAL-CONTRACT-CANDIDATE.json"
+    ],
+    "root_code_changed": false,
+    "code_ownership_confirmation_observed": false,
+    "test_implementation": "NOT WRITTEN / NOT RUN",
+    "duration_profile_unchanged": true
+  },
+  "current_coordination": "Work1 internal Coordinator remains central single writer; #32/6536284668 read."
 }

@@ -55,3 +55,11 @@ Bu daldaki tüm yeni/değişen dosyalar yalnız **work-output/work2-tr-preproduc
 
 Geri dönüş bu T1 aday çıktı klasörünü kullanmamaktır; canlı sistem için geri yükleme yoktur. Merkez main/state yazarı Koordinatör'dür; kendi checkpoint'i burada tutulur. GitHub kaydı başka sohbeti kendiliğinden uyandırmaz. Sabit içerik ve manifest commit bağlantıları #32'ye doğrudan yazılır.
 
+
+## T1 sonrası dar T2 önerisi — kod uygulanmadı
+
+T1 #32/6536332197 ve 0daf1b0bac3fe3b976f4d497dab1cc03c1b4c5d5 RESULT/HANDOFF ile checkpoint'lendi; ardından NEXT-CODE-SCOPE.md ve VISUAL-CONTRACT-CANDIDATE.json eklendi. Taslak, script SHA'ya bağlı 0–24 / 24–35 / 35–56 kelime aralıklarını üç fotoğraf sahnesine ayırır; bunlar ses zaman damgası değildir. Hedef profil aynı kısa TR sözleşmesidir. Gerçek fotoğraf hashleri null, plan UNAPPROVED ve PR33 tarafından tüketilmiyor.
+
+Yalnız dört gerçek modüldeki preview→storyboard→renderer tüketimi için kapsam ve odaklı test önerileri vardır. T2 test kaynağı/kod diff'i uygulanmadı, testler **NOT RUN**. Koordinatör dosya sahipliği teyidi henüz görülmedi; kök kod değişikliği yapılmadı. Gerçek TR sesinin, görsel ön kabulün ve yeni medya yetkisinin yerine geçmez.
+
+03:11 #32/6536284668 güncel iç koordinasyon kararı okundu: Koordinatör merkezi tek yazar olarak devam ediyor; harici Work2 teknik rolü sürüyor. Bu görev iptal edilen harici koordinatör sohbeti değildir. İlk T1 manifestindeki 12 dosyanın tamamı GitHub'dan geri okunup birebir eşleşti. Son eklerin de sabit commit/readback doğrulaması teslim kaydına yazılır.
