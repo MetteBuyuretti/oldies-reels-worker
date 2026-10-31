@@ -1,0 +1,48 @@
+{
+  "applied_at_TSI": [
+    "2026-10-31T07:24:32+03:00",
+    "2026-10-31T07:24:40+03:00"
+  ],
+  "updates": [
+    {
+      "id": 4465,
+      "section_index": 1,
+      "block_type": "core/html",
+      "changed_artist": "Marisol",
+      "attachment_id": 4965,
+      "photo_date": "1962-10-18",
+      "credit": "Harry Pot / Anefo / Nationaal Archief, 914-4259, CC0 1.0",
+      "before_sha256": "b41587cb3aec37ae4d2437eb9049a5c6b37b6eeea54706ff6f5730fe89d6af94",
+      "after_sha256": "3254fbc1c3268335ed70d90bf537a9b7976fb076fdec325381cadef739da37b0",
+      "raw_postimage_exact": true,
+      "warnings": [],
+      "status_preserved": "future",
+      "date_preserved": "2026-11-06T19:00:00",
+      "featured_preserved": 4406,
+      "style_block_unchanged": true,
+      "remaining_placeholders": 7
+    },
+    {
+      "id": 4466,
+      "section_index": 1,
+      "block_type": "core/html",
+      "changed_artist": "Marisol",
+      "attachment_id": 4965,
+      "photo_date": "1962-10-18",
+      "credit": "Harry Pot / Anefo / Nationaal Archief, 914-4259, CC0 1.0",
+      "before_sha256": "8c2c3fe1325a7ea3818c21744887e10f677c37feb72e6c102ed3a468cbd662c2",
+      "after_sha256": "cdbe7fc3e916ab54723561ae3520645515757647fe23f6ab3e8f8155ce8c55ef",
+      "raw_postimage_exact": true,
+      "warnings": [],
+      "status_preserved": "future",
+      "date_preserved": "2026-11-06T19:00:00",
+      "featured_preserved": 4406,
+      "style_block_unchanged": true,
+      "remaining_placeholders": 7
+    }
+  ],
+  "new_publication": false,
+  "date_shift": false,
+  "theme_or_HFCM_changes": false,
+  "public_after": "future content intentionally not visible; original/medium file decoded and raw readback confirmed"
+}

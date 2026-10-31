@@ -1,0 +1,135 @@
+{
+  "records": [
+    {
+      "id": 4876,
+      "status": "future",
+      "date": "2026-11-01T12:00:00",
+      "date_gmt": "2026-11-01T09:00:00",
+      "modified": "2026-10-31T06:16:17",
+      "featured_media": 4443,
+      "content_sha256": "5591f711fd62c18e3cbefade314bc77f2e8e9be7a2736032a07712e91d31d241"
+    },
+    {
+      "id": 4877,
+      "status": "future",
+      "date": "2026-11-01T12:00:00",
+      "date_gmt": "2026-11-01T09:00:00",
+      "modified": "2026-10-31T06:16:20",
+      "featured_media": 4443,
+      "content_sha256": "455d78bc3239ef865dd2c6213ff44f5461ad42d8f6a251d1396ad325a6ce3b17"
+    },
+    {
+      "id": 4878,
+      "status": "future",
+      "date": "2026-11-02T12:00:00",
+      "date_gmt": "2026-11-02T09:00:00",
+      "modified": "2026-10-31T06:16:24",
+      "featured_media": 4891,
+      "content_sha256": "168be223e6b2e7409ca925646372f7e13dcf6c2a5428552e2244c08b53609158"
+    },
+    {
+      "id": 4879,
+      "status": "future",
+      "date": "2026-11-02T12:00:00",
+      "date_gmt": "2026-11-02T09:00:00",
+      "modified": "2026-10-31T06:16:27",
+      "featured_media": 4891,
+      "content_sha256": "65f3d65ccf10f97c936a29fccf97f18a5f67c3c738f6a3d2f93d7fcea5a31dd9"
+    },
+    {
+      "id": 4880,
+      "status": "future",
+      "date": "2026-11-03T12:00:00",
+      "date_gmt": "2026-11-03T09:00:00",
+      "modified": "2026-10-31T06:16:35",
+      "featured_media": 4568,
+      "content_sha256": "479158f8c2c569970578a5d35cf41a5d87dd461903fce0ae96cc1d3852b35a8a"
+    },
+    {
+      "id": 4881,
+      "status": "future",
+      "date": "2026-11-03T12:00:00",
+      "date_gmt": "2026-11-03T09:00:00",
+      "modified": "2026-10-31T06:16:38",
+      "featured_media": 4568,
+      "content_sha256": "4cc2f7140dbdff442ccfa4c7eda7925d9c4bb1e403f604f4595bba51513ddee9"
+    },
+    {
+      "id": 4882,
+      "status": "future",
+      "date": "2026-11-04T12:00:00",
+      "date_gmt": "2026-11-04T09:00:00",
+      "modified": "2026-10-31T06:16:41",
+      "featured_media": 4892,
+      "content_sha256": "43afbb851dbd7522facde5458030b00e2ac95d066ea97dbf3a0291748fe2639a"
+    },
+    {
+      "id": 4883,
+      "status": "future",
+      "date": "2026-11-04T12:00:00",
+      "date_gmt": "2026-11-04T09:00:00",
+      "modified": "2026-10-31T06:16:44",
+      "featured_media": 4892,
+      "content_sha256": "9531be8282173cd4dd8511a727d1113d9e21b1c95a200e1c2fe642bef601e82e"
+    },
+    {
+      "id": 4465,
+      "status": "future",
+      "date": "2026-11-06T19:00:00",
+      "date_gmt": "2026-11-06T16:00:00",
+      "modified": "2026-10-02T18:35:57",
+      "featured_media": 4406,
+      "content_sha256": "b41587cb3aec37ae4d2437eb9049a5c6b37b6eeea54706ff6f5730fe89d6af94"
+    },
+    {
+      "id": 4466,
+      "status": "future",
+      "date": "2026-11-06T19:00:00",
+      "date_gmt": "2026-11-06T16:00:00",
+      "modified": "2026-10-02T18:35:59",
+      "featured_media": 4406,
+      "content_sha256": "8c2c3fe1325a7ea3818c21744887e10f677c37feb72e6c102ed3a468cbd662c2"
+    },
+    {
+      "id": 4875,
+      "status": "publish",
+      "date": "2026-10-31T06:16:00",
+      "date_gmt": "2026-10-31T03:16:00",
+      "modified": "2026-10-31T07:04:08",
+      "featured_media": 4442,
+      "content_sha256": "4429291ae52709de1363ebd657d62066b74057edbd7451801de5389341ad111e"
+    },
+    {
+      "id": 4874,
+      "status": "publish",
+      "date": "2026-10-31T06:16:00",
+      "date_gmt": "2026-10-31T03:16:00",
+      "modified": "2026-10-31T07:04:05",
+      "featured_media": 4442,
+      "content_sha256": "7b0a4168d732970eeec5b967342e98f16c283ad104707b1403323b47e8454bca"
+    },
+    {
+      "id": 4873,
+      "status": "publish",
+      "date": "2026-10-31T06:15:23",
+      "date_gmt": "2026-10-31T03:15:23",
+      "modified": "2026-10-31T07:04:13",
+      "featured_media": 4890,
+      "content_sha256": "48fba7ab2677e215c9e43f4197e916be86b9abfe84e3c2c4c9a8170dec3d4998"
+    },
+    {
+      "id": 4872,
+      "status": "publish",
+      "date": "2026-10-31T06:15:23",
+      "date_gmt": "2026-10-31T03:15:23",
+      "modified": "2026-10-31T07:04:11",
+      "featured_media": 4890,
+      "content_sha256": "4f2521441c1c1ff9c41eccfda3ab262bda9c155e4d1ca0030e2db0c2e3d1dfc4"
+    }
+  ],
+  "raw_backup": {
+    "filename": "OLDIES-SITE-BEFORE-20261031.zip",
+    "sha256": "6e8b92adeb6cfcefb91ccce0208b74d883a02a4d5593e945fcb4053a21ab64c7",
+    "persistent_private_save": "succeeded before post edits; owner only; unpublished raw not exposed in public GitHub"
+  }
+}

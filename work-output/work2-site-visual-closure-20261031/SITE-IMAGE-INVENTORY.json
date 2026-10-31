@@ -1,0 +1,611 @@
+{
+  "checked_at_TSI": "2026-10-31T07:26:03.030908+03:00",
+  "scope": "4 today publish + all 10 future through 7 Nov, 14 records <=20",
+  "posts": [
+    {
+      "id": 4876,
+      "title": "The Rolling Stones'tan Yeni Şarkı: Who You Callin’ Crazy",
+      "link": "https://oldiesradyo.com/?p=4876",
+      "status": "future",
+      "date": "2026-11-01T12:00:00",
+      "date_gmt": "2026-11-01T09:00:00",
+      "modified": "2026-10-31T06:16:17",
+      "featured_media": 4443,
+      "translations": {
+        "tr": 4876,
+        "en": 4877
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "5591f711fd62c18e3cbefade314bc77f2e8e9be7a2736032a07712e91d31d241",
+      "after_sha256": "5591f711fd62c18e3cbefade314bc77f2e8e9be7a2736032a07712e91d31d241",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/Rolling_Stones_in_Beverly_Hills_1965.jpg",
+      "featured_file_check": {
+        "id": 4443,
+        "path": "overnight/evidence/media-4443.img",
+        "sha256": "c4c3ff8aff98e555b19ba5a992d7f2b50d7462c12e055940ee960348bd524a97",
+        "bytes": 8647216,
+        "size": [
+          5364,
+          4083
+        ]
+      },
+      "credit": "Los Angeles Times. 10 December 1965. CC BY 4.0. Source: https://commons.wikimedia.org/wiki/File%3ARolling_Stones_in_Beverly_Hills%2C_1965.jpg",
+      "visitor_html": {
+        "id": 4876,
+        "error": "HTTP Error 404: Not Found"
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4877,
+      "title": "The Rolling Stones Release New Song Who You Callin’ Crazy",
+      "link": "https://oldiesradyo.com/en/?p=4877",
+      "status": "future",
+      "date": "2026-11-01T12:00:00",
+      "date_gmt": "2026-11-01T09:00:00",
+      "modified": "2026-10-31T06:16:20",
+      "featured_media": 4443,
+      "translations": {
+        "tr": 4876,
+        "en": 4877
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "455d78bc3239ef865dd2c6213ff44f5461ad42d8f6a251d1396ad325a6ce3b17",
+      "after_sha256": "455d78bc3239ef865dd2c6213ff44f5461ad42d8f6a251d1396ad325a6ce3b17",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/Rolling_Stones_in_Beverly_Hills_1965.jpg",
+      "featured_file_check": {
+        "id": 4443,
+        "path": "overnight/evidence/media-4443.img",
+        "sha256": "c4c3ff8aff98e555b19ba5a992d7f2b50d7462c12e055940ee960348bd524a97",
+        "bytes": 8647216,
+        "size": [
+          5364,
+          4083
+        ]
+      },
+      "credit": "Los Angeles Times. 10 December 1965. CC BY 4.0. Source: https://commons.wikimedia.org/wiki/File%3ARolling_Stones_in_Beverly_Hills%2C_1965.jpg",
+      "visitor_html": {
+        "id": 4877,
+        "url": "https://oldiesradyo.com/en/?p=4877",
+        "http": 200,
+        "html_sha256": "5d01ccc5c61ab70978533e13c25041dc8736f916faa793abaa2eda6793f45ced",
+        "content_coming_soon": false,
+        "html_img_count": 16,
+        "future_render_acceptance": false
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4878,
+      "title": "Fleetwood Mac'in Hikâyesi İlk Kez Bu Kadar Yakından: The Chain Belgeseli Geliyor",
+      "link": "https://oldiesradyo.com/?p=4878",
+      "status": "future",
+      "date": "2026-11-02T12:00:00",
+      "date_gmt": "2026-11-02T09:00:00",
+      "modified": "2026-10-31T06:16:24",
+      "featured_media": 4891,
+      "translations": {
+        "tr": 4878,
+        "en": 4879
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "168be223e6b2e7409ca925646372f7e13dcf6c2a5428552e2244c08b53609158",
+      "after_sha256": "168be223e6b2e7409ca925646372f7e13dcf6c2a5428552e2244c08b53609158",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/fleetwood-mac-2014-steffane-lui.jpg",
+      "featured_file_check": {
+        "id": 4891,
+        "path": "overnight/evidence/media-4891.img",
+        "sha256": "3b196afb65c08828279f09b99a3dfa1d4dd6de21c61fe5fa101ea98e026123c8",
+        "bytes": 647977,
+        "size": [
+          1607,
+          894
+        ]
+      },
+      "credit": "Fleetwood Mac on stage, Sacramento, November 2014. Photograph: Steffane lui / Wikimedia Commons, CC BY 2.0. Source: https://commons.wikimedia.org/wiki/File:Fleetwood_Mac_November_2014.jpg. Archival photograph; not a 2026 documentary still.",
+      "visitor_html": {
+        "id": 4878,
+        "error": "HTTP Error 404: Not Found"
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4879,
+      "title": "Fleetwood Mac: The Chain Documentary Set for January 2027",
+      "link": "https://oldiesradyo.com/en/?p=4879",
+      "status": "future",
+      "date": "2026-11-02T12:00:00",
+      "date_gmt": "2026-11-02T09:00:00",
+      "modified": "2026-10-31T06:16:27",
+      "featured_media": 4891,
+      "translations": {
+        "tr": 4878,
+        "en": 4879
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "65f3d65ccf10f97c936a29fccf97f18a5f67c3c738f6a3d2f93d7fcea5a31dd9",
+      "after_sha256": "65f3d65ccf10f97c936a29fccf97f18a5f67c3c738f6a3d2f93d7fcea5a31dd9",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/fleetwood-mac-2014-steffane-lui.jpg",
+      "featured_file_check": {
+        "id": 4891,
+        "path": "overnight/evidence/media-4891.img",
+        "sha256": "3b196afb65c08828279f09b99a3dfa1d4dd6de21c61fe5fa101ea98e026123c8",
+        "bytes": 647977,
+        "size": [
+          1607,
+          894
+        ]
+      },
+      "credit": "Fleetwood Mac on stage, Sacramento, November 2014. Photograph: Steffane lui / Wikimedia Commons, CC BY 2.0. Source: https://commons.wikimedia.org/wiki/File:Fleetwood_Mac_November_2014.jpg. Archival photograph; not a 2026 documentary still.",
+      "visitor_html": {
+        "id": 4879,
+        "url": "https://oldiesradyo.com/en/?p=4879",
+        "http": 200,
+        "html_sha256": "5d01ccc5c61ab70978533e13c25041dc8736f916faa793abaa2eda6793f45ced",
+        "content_coming_soon": false,
+        "html_img_count": 16,
+        "future_render_acceptance": false
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4880,
+      "title": "Elvis Presley'in 274 Şarkısı İçin Yapay Zekâ Davası Açıldı",
+      "link": "https://oldiesradyo.com/?p=4880",
+      "status": "future",
+      "date": "2026-11-03T12:00:00",
+      "date_gmt": "2026-11-03T09:00:00",
+      "modified": "2026-10-31T06:16:35",
+      "featured_media": 4568,
+      "translations": {
+        "tr": 4880,
+        "en": 4881
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "479158f8c2c569970578a5d35cf41a5d87dd461903fce0ae96cc1d3852b35a8a",
+      "after_sha256": "479158f8c2c569970578a5d35cf41a5d87dd461903fce0ae96cc1d3852b35a8a",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/oldies-en-elvis-presley-archive.webp",
+      "featured_file_check": {
+        "id": 4568,
+        "path": "overnight/evidence/media-4568.img",
+        "sha256": "a789a74e4cd95b8d245457cdb2a95c3c234ea0b6b37b13545f63e095a9d0454f",
+        "bytes": 92006,
+        "size": [
+          1000,
+          1200
+        ]
+      },
+      "credit": "1956 publicity portrait; reused from the existing Turkish archive, Wikimedia Commons / public domain.",
+      "visitor_html": {
+        "id": 4880,
+        "error": "HTTP Error 404: Not Found"
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4881,
+      "title": "Elvis Presley Rights Holders Sue Anthropic Over 274 Songs",
+      "link": "https://oldiesradyo.com/en/?p=4881",
+      "status": "future",
+      "date": "2026-11-03T12:00:00",
+      "date_gmt": "2026-11-03T09:00:00",
+      "modified": "2026-10-31T06:16:38",
+      "featured_media": 4568,
+      "translations": {
+        "tr": 4880,
+        "en": 4881
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "4cc2f7140dbdff442ccfa4c7eda7925d9c4bb1e403f604f4595bba51513ddee9",
+      "after_sha256": "4cc2f7140dbdff442ccfa4c7eda7925d9c4bb1e403f604f4595bba51513ddee9",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/oldies-en-elvis-presley-archive.webp",
+      "featured_file_check": {
+        "id": 4568,
+        "path": "overnight/evidence/media-4568.img",
+        "sha256": "a789a74e4cd95b8d245457cdb2a95c3c234ea0b6b37b13545f63e095a9d0454f",
+        "bytes": 92006,
+        "size": [
+          1000,
+          1200
+        ]
+      },
+      "credit": "1956 publicity portrait; reused from the existing Turkish archive, Wikimedia Commons / public domain.",
+      "visitor_html": {
+        "id": 4881,
+        "url": "https://oldiesradyo.com/en/?p=4881",
+        "http": 200,
+        "html_sha256": "5d01ccc5c61ab70978533e13c25041dc8736f916faa793abaa2eda6793f45ced",
+        "content_coming_soon": false,
+        "html_img_count": 16,
+        "future_render_acceptance": false
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4882,
+      "title": "David Bowie'nin 1978 Konser Görüntüleri Stage ile Yeniden Hayat Buluyor",
+      "link": "https://oldiesradyo.com/?p=4882",
+      "status": "future",
+      "date": "2026-11-04T12:00:00",
+      "date_gmt": "2026-11-04T09:00:00",
+      "modified": "2026-10-31T06:16:41",
+      "featured_media": 4892,
+      "translations": {
+        "tr": 4882,
+        "en": 4883
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "43afbb851dbd7522facde5458030b00e2ac95d066ea97dbf3a0291748fe2639a",
+      "after_sha256": "43afbb851dbd7522facde5458030b00e2ac95d066ea97dbf3a0291748fe2639a",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/david-bowie-1987-jo-atmon.jpg",
+      "featured_file_check": {
+        "id": 4892,
+        "path": "overnight/evidence/media-4892.img",
+        "sha256": "c35dbe92d712ce84600a1d7d0bbc7415387686177d08e80629ab43357c7c4fbe",
+        "bytes": 299264,
+        "size": [
+          761,
+          945
+        ]
+      },
+      "credit": "David Bowie at Rock am Ring, June 7, 1987. Photograph: Jo Atmon (Elmar J. Lordemann) / Wikimedia Commons, CC BY-SA 2.0 Germany. Source: https://commons.wikimedia.org/wiki/File:David_Bowie_(1987).jpg. This is an archival image from 1987, not footage from the 1978 Stage production.",
+      "visitor_html": {
+        "id": 4882,
+        "error": "HTTP Error 404: Not Found"
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4883,
+      "title": "David Bowie's Unreleased 1978 Concert Footage Returns as Stage",
+      "link": "https://oldiesradyo.com/en/?p=4883",
+      "status": "future",
+      "date": "2026-11-04T12:00:00",
+      "date_gmt": "2026-11-04T09:00:00",
+      "modified": "2026-10-31T06:16:44",
+      "featured_media": 4892,
+      "translations": {
+        "tr": 4882,
+        "en": 4883
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "9531be8282173cd4dd8511a727d1113d9e21b1c95a200e1c2fe642bef601e82e",
+      "after_sha256": "9531be8282173cd4dd8511a727d1113d9e21b1c95a200e1c2fe642bef601e82e",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/david-bowie-1987-jo-atmon.jpg",
+      "featured_file_check": {
+        "id": 4892,
+        "path": "overnight/evidence/media-4892.img",
+        "sha256": "c35dbe92d712ce84600a1d7d0bbc7415387686177d08e80629ab43357c7c4fbe",
+        "bytes": 299264,
+        "size": [
+          761,
+          945
+        ]
+      },
+      "credit": "David Bowie at Rock am Ring, June 7, 1987. Photograph: Jo Atmon (Elmar J. Lordemann) / Wikimedia Commons, CC BY-SA 2.0 Germany. Source: https://commons.wikimedia.org/wiki/File:David_Bowie_(1987).jpg. This is an archival image from 1987, not footage from the 1978 Stage production.",
+      "visitor_html": {
+        "id": 4883,
+        "url": "https://oldiesradyo.com/en/?p=4883",
+        "http": 200,
+        "html_sha256": "5d01ccc5c61ab70978533e13c25041dc8736f916faa793abaa2eda6793f45ced",
+        "content_coming_soon": false,
+        "html_img_count": 16,
+        "future_render_acceptance": false
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4465,
+      "title": "1960’larda İspanya: 10 Ünlü Şarkıcı ve Grup",
+      "link": "https://oldiesradyo.com/?p=4465",
+      "status": "future",
+      "date": "2026-11-06T19:00:00",
+      "date_gmt": "2026-11-06T16:00:00",
+      "modified": "2026-10-31T07:24:32",
+      "featured_media": 4406,
+      "translations": {
+        "tr": 4465,
+        "en": 4466
+      },
+      "polylang_verified": true,
+      "body_img_before": 3,
+      "body_img_after": 4,
+      "placeholder_before": 8,
+      "placeholder_after": 7,
+      "before_sha256": "b41587cb3aec37ae4d2437eb9049a5c6b37b6eeea54706ff6f5730fe89d6af94",
+      "after_sha256": "3254fbc1c3268335ed70d90bf537a9b7976fb076fdec325381cadef739da37b0",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/hero-spain.png",
+      "featured_file_check": {
+        "id": 4406,
+        "path": "overnight/evidence/media-4406.img",
+        "sha256": "aa3ee7ecafbd36b28c2a4c4c64c700ba2a5eb25f08119bdcffab9d6add385161",
+        "bytes": 2928313,
+        "size": [
+          1672,
+          941
+        ]
+      },
+      "credit": "Oldies Radyo için hazırlanan yaratıcı kapak illüstrasyonu. Gerçek dönem fotoğrafı değildir.",
+      "visitor_html": {
+        "id": 4465,
+        "error": "HTTP Error 404: Not Found"
+      },
+      "action": "Marisol photo and credit only",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 7
+    },
+    {
+      "id": 4466,
+      "title": "10 Famous Spanish Singers and Bands of the 1960s",
+      "link": "https://oldiesradyo.com/en/?p=4466",
+      "status": "future",
+      "date": "2026-11-06T19:00:00",
+      "date_gmt": "2026-11-06T16:00:00",
+      "modified": "2026-10-31T07:24:40",
+      "featured_media": 4406,
+      "translations": {
+        "tr": 4465,
+        "en": 4466
+      },
+      "polylang_verified": true,
+      "body_img_before": 3,
+      "body_img_after": 4,
+      "placeholder_before": 8,
+      "placeholder_after": 7,
+      "before_sha256": "8c2c3fe1325a7ea3818c21744887e10f677c37feb72e6c102ed3a468cbd662c2",
+      "after_sha256": "cdbe7fc3e916ab54723561ae3520645515757647fe23f6ab3e8f8155ce8c55ef",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/hero-spain.png",
+      "featured_file_check": {
+        "id": 4406,
+        "path": "overnight/evidence/media-4406.img",
+        "sha256": "aa3ee7ecafbd36b28c2a4c4c64c700ba2a5eb25f08119bdcffab9d6add385161",
+        "bytes": 2928313,
+        "size": [
+          1672,
+          941
+        ]
+      },
+      "credit": "Oldies Radyo için hazırlanan yaratıcı kapak illüstrasyonu. Gerçek dönem fotoğrafı değildir.",
+      "visitor_html": {
+        "id": 4466,
+        "url": "https://oldiesradyo.com/en/?p=4466",
+        "http": 200,
+        "html_sha256": "5d01ccc5c61ab70978533e13c25041dc8736f916faa793abaa2eda6793f45ced",
+        "content_coming_soon": false,
+        "html_img_count": 16,
+        "future_render_acceptance": false
+      },
+      "action": "Marisol photo and credit only",
+      "visual_quality": "featured original seen; final scheduled visitor layout NOT_VERIFIED",
+      "remaining_missing_artist_photos": 7
+    },
+    {
+      "id": 4875,
+      "title": "The Beatles Story Is Getting a New Home in Liverpool for 2028",
+      "link": "https://oldiesradyo.com/en/2026/10/31/beatles-story-liverpool-2028-new-museum/",
+      "status": "publish",
+      "date": "2026-10-31T06:16:00",
+      "date_gmt": "2026-10-31T03:16:00",
+      "modified": "2026-10-31T07:04:08",
+      "featured_media": 4442,
+      "translations": {
+        "tr": 4874,
+        "en": 4875
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "4429291ae52709de1363ebd657d62066b74057edbd7451801de5389341ad111e",
+      "after_sha256": "4429291ae52709de1363ebd657d62066b74057edbd7451801de5389341ad111e",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/The_Beatles_at_Wellington_Airport_21_June_1964.jpg",
+      "featured_file_check": {
+        "id": 4442,
+        "path": "overnight/evidence/media-4442.img",
+        "sha256": "e1eddd296b025587d053dad54c9547727f929f4ac9fbf6f8c688ce06f430a261",
+        "bytes": 2555977,
+        "size": [
+          6128,
+          3796
+        ]
+      },
+      "credit": "National Film Unit (AAPG), New Zealand Government.. 21 June 1964. CC BY-SA 2.0. Source: https://commons.wikimedia.org/wiki/File%3AThe_Beatles_at_Wellington_Airport%2C_21_June_1964.jpg",
+      "visitor_html": {
+        "id": 4875,
+        "url": "https://oldiesradyo.com/en/2026/10/31/beatles-story-liverpool-2028-new-museum/",
+        "http": 200,
+        "html_sha256": "702f050bebb4f2185a8e2b2e3a9dad058b6f9aa44b2d14f8b59210bea8f22a68",
+        "content_coming_soon": false,
+        "html_img_count": 1,
+        "future_render_acceptance": null
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; browser QA in D",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4874,
+      "title": "The Beatles’ın Liverpool’daki Hikâyesine Yeni Bir Ev: 2028’de Dev Müze",
+      "link": "https://oldiesradyo.com/2026/10/31/beatles-liverpool-2028-yeni-muze/",
+      "status": "publish",
+      "date": "2026-10-31T06:16:00",
+      "date_gmt": "2026-10-31T03:16:00",
+      "modified": "2026-10-31T07:04:05",
+      "featured_media": 4442,
+      "translations": {
+        "tr": 4874,
+        "en": 4875
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "7b0a4168d732970eeec5b967342e98f16c283ad104707b1403323b47e8454bca",
+      "after_sha256": "7b0a4168d732970eeec5b967342e98f16c283ad104707b1403323b47e8454bca",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/The_Beatles_at_Wellington_Airport_21_June_1964.jpg",
+      "featured_file_check": {
+        "id": 4442,
+        "path": "overnight/evidence/media-4442.img",
+        "sha256": "e1eddd296b025587d053dad54c9547727f929f4ac9fbf6f8c688ce06f430a261",
+        "bytes": 2555977,
+        "size": [
+          6128,
+          3796
+        ]
+      },
+      "credit": "National Film Unit (AAPG), New Zealand Government.. 21 June 1964. CC BY-SA 2.0. Source: https://commons.wikimedia.org/wiki/File%3AThe_Beatles_at_Wellington_Airport%2C_21_June_1964.jpg",
+      "visitor_html": {
+        "id": 4874,
+        "url": "https://oldiesradyo.com/2026/10/31/beatles-liverpool-2028-yeni-muze/",
+        "http": 200,
+        "html_sha256": "d86c2a4bf07fce90a84b3fb15de6d84c84acfc26a8808d2d68afcfb94725ae75",
+        "content_coming_soon": false,
+        "html_img_count": 3,
+        "future_render_acceptance": null
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; browser QA in D",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4873,
+      "title": "Michael Jackson Leads the UK's 2026 Album Race",
+      "link": "https://oldiesradyo.com/en/2026/10/31/michael-jackson-uk-biggest-album-2026/",
+      "status": "publish",
+      "date": "2026-10-31T06:15:23",
+      "date_gmt": "2026-10-31T03:15:23",
+      "modified": "2026-10-31T07:04:13",
+      "featured_media": 4890,
+      "translations": {
+        "tr": 4872,
+        "en": 4873
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "48fba7ab2677e215c9e43f4197e916be86b9abfe84e3c2c4c9a8170dec3d4998",
+      "after_sha256": "48fba7ab2677e215c9e43f4197e916be86b9abfe84e3c2c4c9a8170dec3d4998",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/michael-jackson-1988-alan-light.jpg",
+      "featured_file_check": {
+        "id": 4890,
+        "path": "overnight/evidence/media-4890.img",
+        "sha256": "38a309929a7b22c902990798d61243a6e011679fe3e55efc5972f1c1875e3c6d",
+        "bytes": 604319,
+        "size": [
+          957,
+          1405
+        ]
+      },
+      "credit": "Michael Jackson, 1988. Photograph: Alan Light / Wikimedia Commons, CC BY 2.0. Source: https://commons.wikimedia.org/wiki/File:Michael_Jackson,_1988.jpg. This is an archival image, not a photograph of the 2026 UK chart results.",
+      "visitor_html": {
+        "id": 4873,
+        "url": "https://oldiesradyo.com/en/2026/10/31/michael-jackson-uk-biggest-album-2026/",
+        "http": 200,
+        "html_sha256": "eddba9659636b7bbe72880436bc90ca1459fe66399abd496c3802c99fd1be113",
+        "content_coming_soon": false,
+        "html_img_count": 1,
+        "future_render_acceptance": null
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; browser QA in D",
+      "remaining_missing_artist_photos": 0
+    },
+    {
+      "id": 4872,
+      "title": "Michael Jackson, 2026’da İngiltere Albüm Listelerinin Zirvesinde",
+      "link": "https://oldiesradyo.com/2026/10/31/michael-jackson-2026-ingiltere-album-listeleri/",
+      "status": "publish",
+      "date": "2026-10-31T06:15:23",
+      "date_gmt": "2026-10-31T03:15:23",
+      "modified": "2026-10-31T07:04:11",
+      "featured_media": 4890,
+      "translations": {
+        "tr": 4872,
+        "en": 4873
+      },
+      "polylang_verified": true,
+      "body_img_before": 0,
+      "body_img_after": 0,
+      "placeholder_before": 0,
+      "placeholder_after": 0,
+      "before_sha256": "4f2521441c1c1ff9c41eccfda3ab262bda9c155e4d1ca0030e2db0c2e3d1dfc4",
+      "after_sha256": "4f2521441c1c1ff9c41eccfda3ab262bda9c155e4d1ca0030e2db0c2e3d1dfc4",
+      "featured_source": "https://oldiesradyo.com/wp-content/uploads/2026/10/michael-jackson-1988-alan-light.jpg",
+      "featured_file_check": {
+        "id": 4890,
+        "path": "overnight/evidence/media-4890.img",
+        "sha256": "38a309929a7b22c902990798d61243a6e011679fe3e55efc5972f1c1875e3c6d",
+        "bytes": 604319,
+        "size": [
+          957,
+          1405
+        ]
+      },
+      "credit": "Michael Jackson, 1988. Photograph: Alan Light / Wikimedia Commons, CC BY 2.0. Source: https://commons.wikimedia.org/wiki/File:Michael_Jackson,_1988.jpg. This is an archival image, not a photograph of the 2026 UK chart results.",
+      "visitor_html": {
+        "id": 4872,
+        "url": "https://oldiesradyo.com/2026/10/31/michael-jackson-2026-ingiltere-album-listeleri/",
+        "http": 200,
+        "html_sha256": "5cf142875a7c4e0522c1fe9e783620a75469434d97a46b11b9478fb426c7e614",
+        "content_coming_soon": false,
+        "html_img_count": 3,
+        "future_render_acceptance": null
+      },
+      "action": "UNTOUCHED",
+      "visual_quality": "featured original seen; browser QA in D",
+      "remaining_missing_artist_photos": 0
+    }
+  ]
+}
