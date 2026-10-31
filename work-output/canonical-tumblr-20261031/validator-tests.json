@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "actual_source_sha256": "e88b4c9f3719da3785424886103120ace52e09689329316d7cd28662b3c4d9d5",
+  "actual_callable": "import_download early input validation",
+  "cases": [
+    {
+      "case": "wrong_day",
+      "actual_error": "WEB_MUSIC_SOURCE_STALE",
+      "result": "PASS"
+    },
+    {
+      "case": "wrong_slot",
+      "actual_error": "WEB_MUSIC_SLOT_MISMATCH",
+      "result": "PASS"
+    },
+    {
+      "case": "invalid_job",
+      "actual_error": "WEB_MUSIC_MANIFEST_INVALID",
+      "result": "PASS"
+    },
+    {
+      "case": "invalid_hash",
+      "actual_error": "WEB_MUSIC_MANIFEST_INVALID",
+      "result": "PASS"
+    },
+    {
+      "case": "mismatched_job",
+      "actual_error": "WEB_MUSIC_STATUS_INVALID",
+      "result": "PASS"
+    },
+    {
+      "case": "mismatched_hash",
+      "actual_error": "WEB_MUSIC_SOURCE_HASH_OR_SIZE_INVALID",
+      "result": "PASS"
+    },
+    {
+      "case": "status_outside_producer_root",
+      "actual_error": "WEB_MUSIC_PATH_INVALID",
+      "result": "PASS"
+    }
+  ],
+  "factory_class_and_dependencies": "explicit no-effect fixture stubs",
+  "actual_provider_qc_mix_import_write_calls": 0,
+  "real_receipt_used": false
+}

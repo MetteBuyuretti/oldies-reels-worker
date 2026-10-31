@@ -1,0 +1,6 @@
+{
+  "source_sha256": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+  "candidate_sha256": "9e44f9af845c889c0079ba5cc956ea0e5be08b825050cb9aea6fa5670032c622",
+  "installed": false,
+  "scope": "cards read-only scan scroll only"
+}

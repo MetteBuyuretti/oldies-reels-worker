@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "baseline_detach",
+      "result": "EXPECTED_FAILURE",
+      "scrolls": 1,
+      "wheels": 0
+    },
+    {
+      "case": "candidate_detach_recovers_deduplicates",
+      "result": "PASS",
+      "inventory": 2,
+      "matches": 1,
+      "scrolls": 2,
+      "wheels": 1
+    },
+    {
+      "case": "persistent_detach_bounded_failure",
+      "result": "PASS",
+      "scrolls": 3,
+      "wheels": 0
+    },
+    {
+      "case": "incomplete_scan_no_green_result",
+      "result": "PASS",
+      "scrolls": 3,
+      "wheels": 2
+    }
+  ],
+  "actualFunction": "cards",
+  "publisherExecuted": false,
+  "realBrowserProviderPublishCalls": 0,
+  "installed": false
+}

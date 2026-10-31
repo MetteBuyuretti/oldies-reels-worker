@@ -1,0 +1,11 @@
+{
+  "task_id": "LOCAL-CANONICAL-TUMBLR-20261031-06",
+  "received_comment": 6545981041,
+  "status": "KISMİ / TEST EDİLDİ",
+  "canonical": {"installed_temporarily": true, "rolled_back": true, "current_sha256": "1300e811e001719fbe1d2b6fa581bd2f7b1f1297ea457117d2a51fe30973934d", "reason": "STAGE manifest live_preimages pins previous launcher; candidate.verify LIVE_PREIMAGE_CHANGED", "stage_verify_after_rollback": "PASS", "stage_manifest_changed": false},
+  "real_validator": {"early_rejection_cases_passed": 7, "dependencies": "no-effect fixture stubs", "provider_or_import_writes": 0},
+  "tumblr": {"installed": false, "baseline": "detach failure", "candidate_cases_passed": 3, "candidate_sha256": "9e44f9af845c889c0079ba5cc956ea0e5be08b825050cb9aea6fa5670032c622", "prior_green_integration_test": "NOT_RUN; previous launcher freshness behavior source-observed"},
+  "pinterest": {"platform_status": "NOT_VERIFIED", "listing_ids": [4562070998,4561093225,4560314387], "platform_ids": [null,null,null], "existing_submission_reserved": true},
+  "real_production_publish_provider_calls": 0,
+  "next": "Resolve canonical/STAGE live_preimages pin and rollback scope; obtain read-only Pinterest platform evidence"
+}

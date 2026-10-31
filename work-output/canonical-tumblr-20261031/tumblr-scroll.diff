@@ -1,0 +1,44 @@
+--- a/tumblr_auto_news_v3.mjs
++++ b/tumblr_auto_news_v3.mjs
+@@ -112,7 +112,7 @@
+  for(let pass=0;pass<maxPasses&&!complete;pass++){
+   // The account-count link renders before article bodies. Wait for content first.
+   await page.getByRole('article').first().waitFor({state:'visible',timeout:15000});
+-  const articles=page.getByRole('article');let lastOwn=null;
++  const articles=page.getByRole('article');let lastOwnId=null;
+   for(let i=0;i<await articles.count();i++){
+    const article=articles.nth(i);
+    const permalink=article.getByRole('link',{name:'Kalıcı bağlantı',exact:true});
+@@ -120,7 +120,7 @@
+    const href=await permalink.first().getAttribute('href');
+    const id=href?.match(/(?:^|\/)oldiesradyo\/(\d+)(?:\/|$)/)?.[1];
+    if(!id)continue; // Sponsored cards belong to other blogs, outside this inventory.
+-   lastOwn=article;
++   lastOwnId=id;
+    const time=article.getByRole('time').first();
+    const datetime=await time.count()?await time.getAttribute('datetime'):null;
+    observed.set(id,kind==='published'?{tumblrId:id,publishedAt:datetime}:{tumblrId:id,observedTime:datetime,timeSemantics:'UNVERIFIED_QUEUE_TIMESTAMP'});
+@@ -141,7 +141,22 @@
+    }
+   }
+   complete=Number.isInteger(expectedCount)&&observed.size===expectedCount;
+-  if(!complete){if(lastOwn)await lastOwn.scrollIntoViewIfNeeded();await page.mouse.wheel(0,700);await page.waitForTimeout(500);}
++  if(!complete){
++   if(lastOwnId){
++    for(let attempt=0;attempt<3;attempt++){
++     try{
++      // Reacquire the current article by the previously observed numeric permalink ID.
++      const current=page.getByRole('article').filter({has:page.locator(`a[href*="/oldiesradyo/${lastOwnId}/"], a[href$="/oldiesradyo/${lastOwnId}"]`)}).first();
++      await current.waitFor({state:'visible',timeout:15000});
++      await current.scrollIntoViewIfNeeded();
++      break;
++     }catch(error){
++      if(attempt===2||!/not attached|detached/i.test(String(error?.message)))throw error;
++     }
++    }
++   }
++   await page.mouse.wheel(0,700);await page.waitForTimeout(500);
++  }
+  }
+  if(!complete)throw Error('REMOTE_INVENTORY_INCOMPLETE');
+  return {matches:[...found.values()],inventory:[...observed.values()],complete};
