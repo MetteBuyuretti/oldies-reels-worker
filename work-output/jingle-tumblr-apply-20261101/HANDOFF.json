@@ -1,0 +1,10 @@
+{
+  "task": "LOCAL-CANONICAL-TUMBLR-20261031-06 application continuation",
+  "received": 6549473778,
+  "result_comment": 6549520058,
+  "jingle": {"bridge_installed": true, "launcher_sha256": "21a6c0ea568a3fad76e7e33a843204f41eb7054d28cdca9a3fa7b8d84b5cc2f4", "stage_manifest_sha256": "8520b954029103e4259c16175a698da903125f1ef6d5b2cb9f63191c2a8005e1", "real_candidate_verify": "PASS", "fixture_injected_failure_rollback": "PASS", "production_started": false},
+  "tumblr": {"installed": true, "publisher_sha256": "9e44f9af845c889c0079ba5cc956ea0e5be08b825050cb9aea6fa5670032c622", "old_green_fresh_error_fixture": "PASS", "real_cards_at_utc": "2026-10-31T21:43:05.990Z", "expected": 23, "unique": 23, "complete": true, "publication": false},
+  "commander": {"prior_checkpoint_pr": 39, "wide_07_complete": false, "runtime_status": "SESSION_TERMINATED", "restarted": false, "pin_scope_expanded": false},
+  "provider_download_import_mix_publish_calls": 0,
+  "remaining": ["Authorized current-day Jingle job/activation/receipt and real DJ MASTER/QC", "Actual Tumblr publication/continuity acceptance", "Commander reconnect and broad 07 development"]
+}

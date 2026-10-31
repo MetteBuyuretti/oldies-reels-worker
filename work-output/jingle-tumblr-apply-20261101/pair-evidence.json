@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "original_manifest_sha256": "6cd1a6fb3ad7af2a5e70afa5f39c8b0de7bf632849d5438d96f0a8dd97c003c5",
+  "candidate_manifest_sha256": "8520b954029103e4259c16175a698da903125f1ef6d5b2cb9f63191c2a8005e1",
+  "launcher_old": "1300e811e001719fbe1d2b6fa581bd2f7b1f1297ea457117d2a51fe30973934d",
+  "launcher_new": "21a6c0ea568a3fad76e7e33a843204f41eb7054d28cdca9a3fa7b8d84b5cc2f4",
+  "baseline_pair": "PASS",
+  "mixed_pair": "REJECT",
+  "updated_pair": "PASS",
+  "injected_second_step_failure_rollback_pair": "PASS",
+  "all_other_pins_unchanged": true,
+  "fixture_only": true
+}

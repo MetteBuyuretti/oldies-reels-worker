@@ -1,0 +1,17 @@
+{
+  "encoding": "UTF-8 LF",
+  "files": {
+    "work-output/jingle-tumblr-apply-20261101/RESULT.md": "932beacb2d7fc1e53b32fe29826a767f7e65c19211413044003b0edeb19f0115",
+    "work-output/jingle-tumblr-apply-20261101/HANDOFF.json": "7f81704a6abb5cf112dbf43741c9b525d8a0153b2a1bc8483996aaefb04fe4a7",
+    "work-output/jingle-tumblr-apply-20261101/prepare_pair.py": "55f3aad7069de2aaf087d33a201f17b1fa3d69168bcd091a00b874833a396340",
+    "work-output/jingle-tumblr-apply-20261101/pair-evidence.json": "27048c66f5399630bd824a45a82500788a9dbbfee6cc75cf31cd5fc359752d64",
+    "work-output/jingle-tumblr-apply-20261101/install_pair.ps1": "e4d2a2fe9b4781ecf9c55c726d27406a2d203130db64efcd40b887dc08da665e",
+    "work-output/jingle-tumblr-apply-20261101/test_launcher_error.py": "48a92be06f8abf7dcce206087fb1d45bb48bc712799d9788320e3b23c25aff5a",
+    "work-output/jingle-tumblr-apply-20261101/launcher-error-tests.json": "6587c1664e9e06cb30d232f577a6b18ce79092277df97608737421314a942f89",
+    "work-output/jingle-tumblr-apply-20261101/prepare_tumblr_pins.py": "a68746ee12050d5f98d98efea5be6171530e55b3a5ee2104ea9b65a33ae0b9ce",
+    "work-output/jingle-tumblr-apply-20261101/tumblr-pin-evidence.json": "00262389ddd80775fa82804c96886b849d57ab39a6d0eabd4281a29366395780",
+    "work-output/jingle-tumblr-apply-20261101/install_tumblr.ps1": "dd5f83f79702b25bd1d70a731fbf127190e0943ebc51393de008523624249a98",
+    "work-output/jingle-tumblr-apply-20261101/read_cards.cjs": "6c082beb1e23bfaedcaab470fc62b495a6b6713e8cdfb07750177460ed2b6641",
+    "work-output/jingle-tumblr-apply-20261101/live-cards.json": "f7fa205e3b329166210bb42114292af30d1ff7b3f822aa4b214ffb5557e61d18"
+  }
+}

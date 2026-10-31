@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "failed_child_preserves_old_success",
+      "launcher_exit": 17,
+      "publisher_exit": 17,
+      "report_fresh": false,
+      "status": null,
+      "old_report_unchanged": true,
+      "result": "PASS"
+    },
+    {
+      "case": "failed_child_reports_fresh_error",
+      "launcher_exit": 17,
+      "publisher_exit": 17,
+      "report_fresh": true,
+      "status": "ERROR",
+      "old_report_unchanged": false,
+      "result": "PASS"
+    }
+  ],
+  "real_browser_or_publisher_calls": 0
+}

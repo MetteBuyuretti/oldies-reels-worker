@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "at": "2026-10-31T21:43:05.990Z",
+  "expected": 23,
+  "unique_ids": 23,
+  "ids_sha256": "17ec77b7ca611e00e22c520c2c454547f25b2d6e503a1292287749f7f7a30d50",
+  "complete": true,
+  "candidate_sha256": "9e44f9af845c889c0079ba5cc956ea0e5be08b825050cb9aea6fa5670032c622",
+  "uses_installed_candidate": true,
+  "publisher_main_called": false,
+  "queue_publish_clicks": 0
+}

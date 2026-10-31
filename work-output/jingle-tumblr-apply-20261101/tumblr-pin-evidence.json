@@ -1,0 +1,13 @@
+{
+  "source_old": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+  "source_new": "9e44f9af845c889c0079ba5cc956ea0e5be08b825050cb9aea6fa5670032c622",
+  "policy_old": "992132c3f078decbba3f8eb7be215736db3217ca4accaff9e8a91b7dd562b826",
+  "policy_new": "d46d12956429994f45337b3dcda136edc01c17c4e7f3db0dce8c5719bb32ea01",
+  "activation_plan_old": "a031c175ac889f71a5f9eac12979457720162b09a8485fe753b23b869d99fcc6",
+  "activation_plan_new": "c7cf8361b7af4a1fcbdc60419468d0edefa6a72c73fea1ac98f9aa6085c3cc09",
+  "secure_pins_old": "aec0ee71221573587e33b87a9418e93c17b490526989e7fca4899765d3097805",
+  "secure_pins_new": "358d90ab95d26821a13bd71e67617c864cfc2068c999ae6bec4e421301c43ef5",
+  "source_policy_fixture": "PASS",
+  "policy_hash_pin_chain": "PASS",
+  "runtime_restart": false
+}
