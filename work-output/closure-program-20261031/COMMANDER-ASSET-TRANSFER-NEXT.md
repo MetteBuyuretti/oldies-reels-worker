@@ -1,0 +1,22 @@
+# OLDIES COMMANDER — görsel aktarımı eksikliğini kapatma
+**31.10.2026 | 19:21 TSİ (UTC+3)**
+İş COMMANDER-ASSET-TRANSFER-20261031-07. Sorumlu: mevcutWindowsCodex; MASTERgözetimi; bağımsızdenetim mevcutWATCHDOG.
+Durum QUEUED/HAZIR,ALINDI/BAŞLADIYOK. Aktif06Jingle/Tumblrgörevini bölme; onunilk somuttesliminden sonra bu sıradakiişi al. Ayrıikincisunucu/yazıcıbaşlatma.
+
+## Neden
+KurucuOldiesCommander'ınbilgisayarişlerinitaşımasınıistiyor;1956görselininWindows'aaktarılamamasıeksikliğiaçığaçıktı. Kabul edilmişkapsamüçpinnedTumblrkaynağı/üçfixedstagingdosyası/syntaxkontrolüdür. “Bağlantı kabulü” DesktopCommanderkarşılığıveyaassettransferbaşarısıdeğildir. EskiCommander03:25kabulünütekrarlama. Genel shell ihtiyacınıbuaraçaltındagizliceaçma.
+
+## İlk teslim — çalışan kod adayı ve test
+1. MevcutCommandergerçeksunucukaynağı/giriş/araçkataloğu/auth/allowlist/yerelkısa-yol ve sözleşmeyio ku;preimagehashveyedekal. Çalışanbağlantıyıkoparma;anahtarokuma/export/yenihesap/abonelikyok.
+2. Görselaktarımıiçinonaylıkökümevcutprojevarlıkklasörlerindenbul. Hiçuygunyoksa C:\Users\METE\Oldies-Radyo-Assets\incoming gibi ayrısadecevarlıkhedefiönerveadaymanifesttebelirt; kurulum/kaynak/sistem/credentialdizinlerinihedefalma. RootbaşınaizinMCPkatalogundaaçıkolsun.
+3. Sadece bu köke görselalma+dosyadoğrulama+makbuzokuma yeteneklerini kendiizoleadaydalında uygula. Araçgerçektransferiyapabilmeli, yalnızURLveyatalimatmetnibırakmamalı. ErişilebilirücretsizHTTPSgörselkaynağındanveya mevcutChatGPTassetaktarımyolundan,yereldosyaşeklindetestedilebilirbirtransferseam'ioluştur.
+4. Güvenliksözleşmesi: aktarımkaynağımanifesttenveyaexplicitizinlisourcehost'tangelir;genelarbitraryURLproxy/shellçalıştırmaolmaz. Dosyaadıpathdeğilbasitname;../absolute/UNC/ADS/symlink/reparsepathkaçışlarınıreddet. YalnızPNG/JPEG/WebP, gerçekMIME+decodeboyutuyumluluğu, boyutsınırı, SHA256/byte/pixelmakbuzu. Varsayılanoverwriteyok,öncekidosyayıbozma;yarımindirmetemp+atomikmove,başarısızdosyayıbaşarılısayma. Varolanaynıhashidempotent;farklıhashçatışmasıret. Yerel/gizliağhedeflerineveizinverilmemişredirecteerişimolmaz. İmzalıURL/query/anahtarmakbuzlogunda/açıkGitHub'dabulunmaz.
+5. Testfixture'ıyla gerçekbyteaktarımı→Windowsdosyası→SHA256/byte/pixelmakbuzunu doğrula; yanlıştür/limit/traversal/overwrite/bozukdosya/redirectolumsuzlarını çalıştır. Mevcut7araçregresyonunukontrol et; yeni“connected”durumunuaktarımsağlığıylakarıştırma.
+6. İlgiligörsel1956RocknRoll_Exploded_TeePublic_6000x7500.png. Üretimi/dosyayıkendiliğindenyenidenyaratma; kullanıcıdandosyayenidenistemedenmevcutkalıcıkaynağınagerçekerişimiara. İlkfixturetestigerçekkullanıcıdosyasıyerinegeçmez. Kullanıcıdosyasınagirişyoksa exactkaynak/transfergirdisinibelirt;başarılıaktarımdeme.
+7. Teslim: ayrıdraftPR/kod+test+exactpath/scope/manifest+katalogtaslağı+güvenligüncelleme/rollbackadımları. MevcutprodCommander'ırestart/yetkigenişletmebuadaygörevindeYOK. SomutpaketMASTER/WATCHDOGtarafındanincelenecek; yeniassetköküvearaçlarınaktivasyonu ayrıaçıkuygulamakararıdır. Kurucununtekrarettiğibuözellikihtiyacı, bütünPC'yesınırsızterminalerişimiiznideğildir.
+
+## Daha geniş ihtiyaç listesi — tamamlandı sayılmaz
+Projeklasöründe liste/oku/yaz/kopyala, medyaaktarımı, günlük/durumokuma, sınırlandırılmıştestçalıştırma, yetkilisayfalardaüretilenürünüdoğrulama gereksinimlerinikatalogt ablosundaDESTEKLENİYOR/EKSİK olarak çıkar. Gelecekyeteneklerikodlayıpaktifmişgibipazarlama. Bu07işininbittiölçütü sadecegerçekgörselaktarıma dayalıaday+testtir.
+
+## Kayıt
+#32ALINDI/BAŞLADIgerçekTSİ/ilk20dkhedefiylesonra; herdoğalteslimsabitcommit. Çıktıwork-output/commander-asset-transfer-20261031/. Merkezstate'iikinciyazarolarakdeğiştirme. Yeniücret/kurulmuşproductionyetkisi/fullshell/yayınaçılmaz. RootMASTERkullanıcıyadarbağlantıilegenelPCyeteneklerininayrımınıaçıklayacak.
