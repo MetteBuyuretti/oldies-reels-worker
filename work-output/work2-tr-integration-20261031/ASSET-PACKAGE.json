@@ -1,0 +1,30 @@
+{
+  "job_id": "WORK2-TR-INTEGRATION-20261031-02",
+  "artifacts": [
+    {
+      "file_name": "OLDIES-TR-VISUAL-REVIEW-20261031.zip",
+      "bytes": 78915155,
+      "sha256": "3e38be49283abddc8fe462c97b3b91ac822c06c079bdd159b492497018d80595",
+      "matches_preupload_bytes": true,
+      "local_metadata_applied": true
+    },
+    {
+      "file_name": "OLDIES-TR-CONTACT-SHEET-20261031.jpg",
+      "bytes": 923674,
+      "sha256": "70a87290676feb5ec0193610e1b9b9a17b24d1a313a446515e5b30af79b62f55",
+      "matches_preupload_bytes": true,
+      "local_metadata_applied": true
+    },
+    {
+      "file_name": "OLDIES-TR-MOBILE-REVIEW-20261031.jpg",
+      "bytes": 359492,
+      "sha256": "ba24c785e86f41848a743605d763edd07af7b7d7b1b0427f44f098c41c15946f",
+      "matches_preupload_bytes": true,
+      "local_metadata_applied": true
+    }
+  ],
+  "access_scope": "Review files are owner-private and delivered only in the current conversation. Public repo records filenames/hashes plus the canonical public LOC source URLs in ASSET-MANIFEST.json. No private artifact IDs or links are disclosed.",
+  "originals_unchanged": true,
+  "runtime_or_independent_acceptance": false,
+  "public_delivery_boundary": "Private artifact references were blocked by automatic approval review; they were removed rather than published through another route."
+}

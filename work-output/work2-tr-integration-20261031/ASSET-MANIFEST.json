@@ -1,0 +1,287 @@
+{
+  "job_id": "WORK2-TR-INTEGRATION-20261031-02",
+  "reviewed_at_UTC": "2026-10-31T03:22:49.200719+00:00",
+  "reviewer_role": "WORK2 producer pre-review, not independent Watchdog",
+  "assets": [
+    {
+      "asset_id": "P3",
+      "archive_id": "41592",
+      "item_url": "https://www.loc.gov/item/2016646493/",
+      "original_url": "https://tile.loc.gov/storage-services/master/pnp/ppmsca/41500/41592u.tif",
+      "original_file": "41592-original.tif",
+      "sha256": "6d962da0f66488403f4d646de2f656d5689a1eefc3f44599b20d934d225bcc46",
+      "bytes": 20720540,
+      "width": 5475,
+      "height": 3768,
+      "mime_type": "image/tiff",
+      "acquired_at_UTC": "2026-10-31T03:08:56.573606+00:00",
+      "capture_date": "1964-02-11",
+      "creator": "Marion S. Trikosko",
+      "credit": "Library of Congress, Prints & Photographs Division, U.S. News & World Report Magazine Collection, LC-DIG-ppmsca-41592",
+      "archive_rights_statement": "No known restrictions on publication.",
+      "rights_source_url": "https://www.loc.gov/rr/print/res/078_usnw.html",
+      "copyright_basis": "Archive staff-work dedication documented; CC0 and territory/personality clearance are not asserted.",
+      "territory_assessment": {
+        "US": "DOCUMENTED_ARCHIVE_BASIS_NOT_FINAL_CLEARANCE",
+        "TR": "NOT_CONFIRMED",
+        "GB": "NOT_CONFIRMED"
+      },
+      "rights_territories_verified": [],
+      "runtime_license": null,
+      "visual_review_actor": "WORK2",
+      "visual_review_status": "CANDIDATE_WORK2_ONLY",
+      "review_note": "Dört üye açık; en güçlü grup çerçevesi.",
+      "independent_acceptance": false,
+      "publisher_or_founder_approval": false,
+      "production_selected": false,
+      "is_actual_EMI_1964_10_18_session_photo": false,
+      "source_bytes_modified": false,
+      "mobile_layout": {
+        "canvas": [
+          1080,
+          1920
+        ],
+        "method": "contain",
+        "photo_box": [
+          56,
+          307,
+          968,
+          666
+        ],
+        "all_source_corners_retained": true,
+        "faces_cropped_by_layout": false,
+        "review_derivative": "41592-mobile-review.png"
+      },
+      "visible_identity_note": "Work2 visual identification left-to-right: George Harrison, Ringo Starr, Paul McCartney, John Lennon; archive title collectively names The Beatles. Independent face review still pending."
+    },
+    {
+      "asset_id": "P1",
+      "archive_id": "41593",
+      "item_url": "https://www.loc.gov/item/2016646494/",
+      "original_url": "https://tile.loc.gov/storage-services/master/pnp/ppmsca/41500/41593u.tif",
+      "original_file": "41593-original.tif",
+      "sha256": "0152e09d31b0ccb98421c4d040d00ff336c03aa5664fca584f19af7b013ff18d",
+      "bytes": 20681496,
+      "width": 5479,
+      "height": 3759,
+      "mime_type": "image/tiff",
+      "acquired_at_UTC": "2026-10-31T03:09:04.128909+00:00",
+      "capture_date": "1964-02-11",
+      "creator": "Marion S. Trikosko",
+      "credit": "Library of Congress, Prints & Photographs Division, U.S. News & World Report Magazine Collection, LC-DIG-ppmsca-41593",
+      "archive_rights_statement": "No known restrictions on publication.",
+      "rights_source_url": "https://www.loc.gov/rr/print/res/078_usnw.html",
+      "copyright_basis": "Archive staff-work dedication documented; CC0 and territory/personality clearance are not asserted.",
+      "territory_assessment": {
+        "US": "DOCUMENTED_ARCHIVE_BASIS_NOT_FINAL_CLEARANCE",
+        "TR": "NOT_CONFIRMED",
+        "GB": "NOT_CONFIRMED"
+      },
+      "rights_territories_verified": [],
+      "runtime_license": null,
+      "visual_review_actor": "WORK2",
+      "visual_review_status": "RESERVE_WEAKER_THAN_P3",
+      "review_note": "Daha uzak yüzler ve ek görevli; P3 tercih edilir.",
+      "independent_acceptance": false,
+      "publisher_or_founder_approval": false,
+      "production_selected": false,
+      "is_actual_EMI_1964_10_18_session_photo": false,
+      "source_bytes_modified": false,
+      "mobile_layout": {
+        "canvas": [
+          1080,
+          1920
+        ],
+        "method": "contain",
+        "photo_box": [
+          56,
+          308,
+          968,
+          664
+        ],
+        "all_source_corners_retained": true,
+        "faces_cropped_by_layout": false,
+        "review_derivative": "41593-mobile-review.png"
+      },
+      "visible_identity_note": "Do not infer a fully verified quartet from the collection title; see composition decision."
+    },
+    {
+      "asset_id": "P2",
+      "archive_id": "41598",
+      "item_url": "https://www.loc.gov/item/2016646499/",
+      "original_url": "https://tile.loc.gov/storage-services/master/pnp/ppmsca/41500/41598u.tif",
+      "original_file": "41598-original.tif",
+      "sha256": "f2a13484863f5af50dc801bbe921109b790715b6c379e4e47ee2fa55944f0408",
+      "bytes": 21627792,
+      "width": 5455,
+      "height": 3948,
+      "mime_type": "image/tiff",
+      "acquired_at_UTC": "2026-10-31T03:08:48.459265+00:00",
+      "capture_date": "1964-02-11",
+      "creator": "Marion S. Trikosko",
+      "credit": "Library of Congress, Prints & Photographs Division, U.S. News & World Report Magazine Collection, LC-DIG-ppmsca-41598",
+      "archive_rights_statement": "No known restrictions on publication.",
+      "rights_source_url": "https://www.loc.gov/rr/print/res/078_usnw.html",
+      "copyright_basis": "Archive staff-work dedication documented; CC0 and territory/personality clearance are not asserted.",
+      "territory_assessment": {
+        "US": "DOCUMENTED_ARCHIVE_BASIS_NOT_FINAL_CLEARANCE",
+        "TR": "NOT_CONFIRMED",
+        "GB": "NOT_CONFIRMED"
+      },
+      "rights_territories_verified": [],
+      "runtime_license": null,
+      "visual_review_actor": "WORK2",
+      "visual_review_status": "REJECTED_COMPOSITION",
+      "review_note": "Arkadan sahne; davul/ışık baskın, yüzler yetersiz.",
+      "independent_acceptance": false,
+      "publisher_or_founder_approval": false,
+      "production_selected": false,
+      "is_actual_EMI_1964_10_18_session_photo": false,
+      "source_bytes_modified": false,
+      "mobile_layout": {
+        "canvas": [
+          1080,
+          1920
+        ],
+        "method": "contain",
+        "photo_box": [
+          56,
+          289,
+          968,
+          701
+        ],
+        "all_source_corners_retained": true,
+        "faces_cropped_by_layout": false,
+        "review_derivative": "41598-mobile-review.png"
+      },
+      "visible_identity_note": "Do not infer a fully verified quartet from the collection title; see composition decision."
+    },
+    {
+      "asset_id": "A1",
+      "archive_id": "41596",
+      "item_url": "https://www.loc.gov/item/2016646497/",
+      "original_url": "https://tile.loc.gov/storage-services/master/pnp/ppmsca/41500/41596u.tif",
+      "original_file": "41596-original.tif",
+      "sha256": "ec209df97c7ac0ff1be94eb23dfbc56ca2ac06c4d25fd83d5d6124917281f262",
+      "bytes": 20489942,
+      "width": 5416,
+      "height": 3767,
+      "mime_type": "image/tiff",
+      "acquired_at_UTC": "2026-10-31T03:14:23.222195+00:00",
+      "capture_date": "1964-02-11",
+      "creator": "Marion S. Trikosko",
+      "credit": "Library of Congress, Prints & Photographs Division, U.S. News & World Report Magazine Collection, LC-DIG-ppmsca-41596",
+      "archive_rights_statement": "No known restrictions on publication.",
+      "rights_source_url": "https://www.loc.gov/rr/print/res/078_usnw.html",
+      "copyright_basis": "Archive staff-work dedication documented; CC0 and territory/personality clearance are not asserted.",
+      "territory_assessment": {
+        "US": "DOCUMENTED_ARCHIVE_BASIS_NOT_FINAL_CLEARANCE",
+        "TR": "NOT_CONFIRMED",
+        "GB": "NOT_CONFIRMED"
+      },
+      "rights_territories_verified": [],
+      "runtime_license": null,
+      "visual_review_actor": "WORK2",
+      "visual_review_status": "CONDITIONAL_IDENTITY_CONTEXT",
+      "review_note": "Ringo yakın plan; dört üye/gitar hikâyesi değil.",
+      "independent_acceptance": false,
+      "publisher_or_founder_approval": false,
+      "production_selected": false,
+      "is_actual_EMI_1964_10_18_session_photo": false,
+      "source_bytes_modified": false,
+      "mobile_layout": {
+        "canvas": [
+          1080,
+          1920
+        ],
+        "method": "contain",
+        "photo_box": [
+          56,
+          303,
+          968,
+          673
+        ],
+        "all_source_corners_retained": true,
+        "faces_cropped_by_layout": false,
+        "review_derivative": "41596-mobile-review.png"
+      },
+      "visible_identity_note": "Ringo Starr is visually consistent at center; item does not name him individually. Other three members are not established in this frame."
+    },
+    {
+      "asset_id": "A2",
+      "archive_id": "41597",
+      "item_url": "https://www.loc.gov/item/2016646498/",
+      "original_url": "https://tile.loc.gov/storage-services/master/pnp/ppmsca/41500/41597u.tif",
+      "original_file": "41597-original.tif",
+      "sha256": "b14dccad07d68a0f51beaa9bc0ecef27a48ab4b89f6428e72e61e12488a3b4c5",
+      "bytes": 21314572,
+      "width": 5515,
+      "height": 3848,
+      "mime_type": "image/tiff",
+      "acquired_at_UTC": "2026-10-31T03:14:38.316443+00:00",
+      "capture_date": "1964-02-11",
+      "creator": "Marion S. Trikosko",
+      "credit": "Library of Congress, Prints & Photographs Division, U.S. News & World Report Magazine Collection, LC-DIG-ppmsca-41597",
+      "archive_rights_statement": "No known restrictions on publication.",
+      "rights_source_url": "https://www.loc.gov/rr/print/res/078_usnw.html",
+      "copyright_basis": "Archive staff-work dedication documented; CC0 and territory/personality clearance are not asserted.",
+      "territory_assessment": {
+        "US": "DOCUMENTED_ARCHIVE_BASIS_NOT_FINAL_CLEARANCE",
+        "TR": "NOT_CONFIRMED",
+        "GB": "NOT_CONFIRMED"
+      },
+      "rights_territories_verified": [],
+      "runtime_license": null,
+      "visual_review_actor": "WORK2",
+      "visual_review_status": "REJECTED_NOT_ARTIST",
+      "review_note": "Yalnız seyirci; sanatçı sahnesinin yerine geçmez.",
+      "independent_acceptance": false,
+      "publisher_or_founder_approval": false,
+      "production_selected": false,
+      "is_actual_EMI_1964_10_18_session_photo": false,
+      "source_bytes_modified": false,
+      "mobile_layout": {
+        "canvas": [
+          1080,
+          1920
+        ],
+        "method": "contain",
+        "photo_box": [
+          56,
+          302,
+          968,
+          675
+        ],
+        "all_source_corners_retained": true,
+        "faces_cropped_by_layout": false,
+        "review_derivative": "41597-mobile-review.png"
+      },
+      "visible_identity_note": "Do not infer a fully verified quartet from the collection title; see composition decision."
+    }
+  ],
+  "ready_three_photo_set": false,
+  "runtime_image_credits_populated": false,
+  "missing_input": {
+    "id": "B-VISUAL-PACKET",
+    "owner": "MASTER / designated rights and independent visual reviewer",
+    "fields": [
+      "three distinct story-relevant approved photos (current strong/conditional candidates are insufficient)",
+      "TR/GB/US territorial and personality-rights assessment",
+      "independent identity/composition acceptance"
+    ]
+  },
+  "failed_access": [
+    {
+      "item_url": "https://www.loc.gov/item/2016646500/?fo=json",
+      "asset": "ppmsca.41599",
+      "attempts": [
+        "item JSON timeout",
+        "original TIFF timeout"
+      ],
+      "visual_review": "NOT_PERFORMED",
+      "owner": "archive access / later designated reviewer"
+    }
+  ],
+  "source_images_downloaded": 5,
+  "new_audio_or_video": false
+}
