@@ -59,3 +59,16 @@ Harici koordinatörün yazarlığı ancak yeni ayrı Work sohbeti:
 geçer. O ana kadar dış koordinatör için HAZIR/queued/receipt=false korunur. Alım olmadan başlamış veya devralmış denmeyecek. İç ajan kendiliğinden yeniden yazarlığa dönmez; bir sonraki gerçek devir kaydı esas alınır.
 
 Nihai MASTER sorumluluğu root'ta, bağımsız Watchdog rolü mevcut Watchdog'da kalır. Bu idari devir yeni üretim, ücret, merge/deploy, kurulu sistem değişikliği, activation/claim/scheduler veya yayın yetkisi açmaz. Mevcut saatlik takip yalnız okur/bildirir; merkezi dosyayı yazmaz.
+
+## Güncel karar — iç koordinasyon yeniden etkin, harici koordinatör devri iptal
+**31.10.2026 | 03:08 TSİ (UTC+3)**
+
+Kurucunun yeni açık talimatı: “Farketmez sen kendi içinde organize ettiysen böyle devam et... ama çalışmalarını ve onunkilerini bana bilgilendir.” Ayrı koordinatör sohbeti açılmayacak. Bu yeni talimat önceki 03:03 duraklatmayı ve harici devir hazırlığını geçersiz kılıyor. Önceki kayıtlar tarihsel olarak korunur.
+
+İç ajan `/root/work_koordinatoru` koordinasyona devam ediyor; main ve PR35 merkezi durum dosyasının tek yazarıdır. `writing_paused=false`. Teknik Work1 root'ta ve kendi dalında kalır; merkezi dosyaya paralel yazmaz. MASTER'ın nihai sorumluluğu root'tadır; bağımsız Watchdog rolü değişmez.
+
+EXTERNAL-COORDINATOR-TAKEOVER-20261031-01 gerçek alımdan önce kurucu kararıyla iptal edildi. Dış görev kaydı `done` ve `resolution=cancelled_by_founder_before_receipt`; receipt/started/writer_transfer=false kalacak. Bu, başarılı harici devir değildir. Ana EXTERNAL-COORDINATOR-START.md sürümü en üstte iptal notu taşır; eski sabit sürümler yalnız tarihsel hazırlıktır.
+
+**Harici Work2 ile karıştırılmayacak:** WORK2-TR-PREPRODUCTION-20261031-01 görevi #32/6536162119'da **03:01:56'da ALINDI/BAŞLADI**; ilk somut hedef **03:21:56 TSİ**. GitHub ve bu kez scratch bash/Python erişimi bildirildi. PR33head073e7665 aynı; yeni ayrı TR dalı oluşturma planı var. İlk paket yalnız kendi çıktı klasörü, kök kod ve merkez state değişmez. Yeni harici koordinatör alımı yoktur; gerçek harici Work2 alımı vardır.
+
+Kullanıcıya kısa raporda **Work1'in somut kod/test çalışması** ile **Koordinatörün gerçek alım/intake/plan/engel/takip çalışması** ayrı gösterilecek. Aynı 23/43 test yeni ilerleme diye tekrarlanmayacak. Native 02:42 teslimi korunur; sosyal snapshot'ın yeni alımı bu son bilinen kayıtta yok. Yeni genel analiz, ücret, medya, merge veya deploy yok. Mevcut saatlik takip aynı rapor biçimine root tarafından uyarlanacak; araç teyidi olmadan yapılmış sayılmaz.
