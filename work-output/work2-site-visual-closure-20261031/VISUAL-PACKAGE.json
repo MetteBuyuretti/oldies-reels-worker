@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "filename": "OLDIES-WORK2-NEW-VISUALS-20261031.zip",
+      "bytes": 3676368,
+      "sha256": "bb10aa81c583ebfaed6857f4b96a9f3883c9957edad23d4ac292ae6e8628dfc3",
+      "private_persistent_save": "succeeded",
+      "local_metadata_applied": true
+    },
+    {
+      "filename": "OLDIES-WORK2-C-REVIEW-20261031.jpg",
+      "bytes": 152767,
+      "sha256": "1c29b769bdd0ede94589a5ceb0ff38256de5165428723a2e4262341e853f4e76",
+      "private_persistent_save": "succeeded",
+      "local_metadata_applied": true
+    }
+  ],
+  "access": "owner-private files delivered in conversation; public repo has only canonical public source URLs and hashes",
+  "previous_private_links_republished": false,
+  "real_film": false
+}

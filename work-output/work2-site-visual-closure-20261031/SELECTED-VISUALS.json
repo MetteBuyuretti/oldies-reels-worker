@@ -1,0 +1,118 @@
+{
+  "job_id": "WORK2-SITE-AND-VISUAL-CLOSURE-20261031-03",
+  "checked_at_TSI": "2026-10-31T07:28:59.645551+03:00",
+  "status": "INCOMPLETE_CANDIDATE_SET",
+  "independent_acceptance": false,
+  "runtime_image_credits_created": false,
+  "three_accepted_assets": false,
+  "prior_packet_sha256": "3e38be49283abddc8fe462c97b3b91ac822c06c079bdd159b492497018d80595",
+  "prior_packet_bytes_match": true,
+  "old_decisions_preserved": [
+    "P3 candidate",
+    "P1 reserve",
+    "A1 conditional",
+    "P2 rejected",
+    "A2 rejected"
+  ],
+  "scenes": [
+    {
+      "scene_id": "S1",
+      "candidate_id": "P3",
+      "source": "https://www.loc.gov/item/2016646493/",
+      "sha256": "6d962da0f66488403f4d646de2f656d5689a1eefc3f44599b20d934d225bcc46",
+      "status": "VISUAL_CANDIDATE_RIGHTS_AND_INDEPENDENT_REVIEW_OPEN",
+      "context": "Washington, 11 February 1964; four original members; not EMI recording day",
+      "individual_identity_note": "Current image view appears left-to-right John Lennon, Ringo Starr, Paul McCartney, George Harrison; the earlier Work2 order note differs. Do not treat the earlier individual order as verified; independent identity review remains open."
+    },
+    {
+      "scene_id": "S2",
+      "candidate_id": "PRONI-LENNON",
+      "asset": {
+        "source": "https://commons.wikimedia.org/wiki/File:John_Lennon,_King%27s_Hall,_Belfast_1964_(18227564799).jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/John_Lennon%2C_King%27s_Hall%2C_Belfast_1964_%2818227564799%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+        "sha256": "7514a4c172759bb9426eb75f70f766e5e08bd3d8216a4a4246e90f8c70e1c81b",
+        "dimensions": [
+          2451,
+          2993
+        ],
+        "bytes": 606113,
+        "primary_source": "https://www.flickr.com/photos/proni/18227564799/",
+        "credit": "Nick Newbery / PRONI D4542/2/1/2A",
+        "date": "1964-11-02",
+        "license_statement": "No known copyright restrictions, not CC0",
+        "primary_access": {
+          "http": 200,
+          "bytes": 527765,
+          "sha256": "a2baf562ca61454eacc4c96de0909e0258b0b0a280ace5ac53413ced5a4a5ede",
+          "NKCR_statement_present": true
+        }
+      },
+      "status": "CONDITIONAL_VISUAL_CANDIDATE_RIGHTS_OPEN",
+      "visual_review": "John Lennon with electric guitar and VOX amplifiers, full figure and face intact; soft focus but subject and instrument readable at contain. Not a picture of I Feel Fine feedback or EMI.",
+      "context": "Belfast 2 November 1964, after recording date and before UK release; explicit representative archive label required"
+    },
+    {
+      "scene_id": "S3",
+      "candidate_id": null,
+      "status": "MISSING",
+      "required": "Distinct sharp composition of original lineup or a directly relevant release/producer context, with original source/rights; no near duplicate P1/P3 or unrelated fan handshake substituted."
+    }
+  ],
+  "new_screening_limit": 5,
+  "screened": [
+    {
+      "id": "Blokker-9165174",
+      "asset": {
+        "id": "Blokker",
+        "source": "https://commons.wikimedia.org/wiki/File:Beatles_in_ons_land,_hun_optreden_in_de_veilingshal_te_Blokker,_de_Beatles_tijde,_Bestanddeelnr_916-5174.jpg",
+        "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/83/Beatles_in_ons_land%2C_hun_optreden_in_de_veilingshal_te_Blokker%2C_de_Beatles_tijde%2C_Bestanddeelnr_916-5174.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+        "bytes": 1444126,
+        "sha256": "ece39692ee8e9e8507d9325eeba447792db74446dca150bb487c9eda72f41935",
+        "dimensions": [
+          2607,
+          2613
+        ],
+        "path": "overnight/evidence/Blokker-original.jpg",
+        "CC0_on_file_page": true
+      },
+      "decision": "NOT_SELECTED_FOR_FEEDBACK_SCENE",
+      "reason": "Paul bass foreground, George partly obscured; original full frame seen, not Lennon feedback guitar or original full lineup proof"
+    },
+    {
+      "id": "Blokker-audience-9165171",
+      "source": "https://commons.wikimedia.org/wiki/File:Beatles_in_ons_land,_hun_optreden_in_de_veilinghal_te_Blokker,_publiek,_Bestanddeelnr_916-5171.jpg",
+      "decision": "REJECTED_AT_METADATA",
+      "reason": "Audience-only subject, not artist scene; not downloaded or given visual PASS"
+    },
+    {
+      "id": "Treslong-9165098",
+      "source": "https://commons.wikimedia.org/wiki/File:Televisie-optreden_van_The_Beatles_in_Treslong_te_Hillegom_vlnr_George_Harriso,_Bestanddeelnr_916-5098.jpg",
+      "decision": "REJECTED_AT_METADATA",
+      "reason": "Jimmie Nicol replaces Ringo, original lineup mismatch; cropped Lennon derivative not used; do not restore old rejected Harrison9165122"
+    },
+    {
+      "id": "PRONI-LENNON",
+      "source": "https://commons.wikimedia.org/wiki/File:John_Lennon,_King%27s_Hall,_Belfast_1964_(18227564799).jpg",
+      "decision": "CONDITIONAL_S2",
+      "reason": "Actual full original viewed; explicit rights gap remains"
+    },
+    {
+      "id": "Wellington-existing-site4442",
+      "source": "https://commons.wikimedia.org/wiki/File:The_Beatles_at_Wellington_Airport,_21_June_1964.jpg",
+      "decision": "NOT_SELECTED_S3",
+      "reason": "Existing full source seen in B; distant side/back figures, weak mobile face identity. It is an airport archive, not EMI. Not redownloaded for C."
+    }
+  ],
+  "missing_inputs": [
+    {
+      "owner": "MASTER / visual reviewer",
+      "scene": "S3",
+      "input": "Distinct relevant original-lineup/record-release composition with primary date/identity/rights"
+    },
+    {
+      "owner": "MASTER / rights reviewer",
+      "scene": "S1/S2",
+      "input": "Territory/personality assessment TR/GB/US; primary current PRONI/LOC basis and independent acceptance"
+    }
+  ]
+}
