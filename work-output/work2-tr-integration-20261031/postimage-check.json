@@ -1,0 +1,51 @@
+{
+  "job_id": "WORK2-TR-INTEGRATION-20261031-02",
+  "mode": "postimage",
+  "status": "MATCH",
+  "files": [
+    {
+      "path": "editorial_quality_gate.py",
+      "expected": "116771813a4e55d0a50c992affb6e456bb0899cb533c05040f7c2b172f9e9408",
+      "actual": "116771813a4e55d0a50c992affb6e456bb0899cb533c05040f7c2b172f9e9408",
+      "match": true
+    },
+    {
+      "path": "media_evidence.py",
+      "expected": "c2e30a6d87a66f5b970fcaff680a99f93d2292f4fe0d0bdb1fbf6a0fba7253f2",
+      "actual": "c2e30a6d87a66f5b970fcaff680a99f93d2292f4fe0d0bdb1fbf6a0fba7253f2",
+      "match": true
+    },
+    {
+      "path": "reels_preview.py",
+      "expected": "f79f4b6c78e4f1f63ba857a53a7fd19c62d050cdd842d6590375ecf5738937b3",
+      "actual": "f79f4b6c78e4f1f63ba857a53a7fd19c62d050cdd842d6590375ecf5738937b3",
+      "match": true
+    },
+    {
+      "path": "source_evidence.py",
+      "expected": "e7c95765638f7f8708ff3333f41138b09c18693eb5a7329a0f3f3966ea187fd3",
+      "actual": "e7c95765638f7f8708ff3333f41138b09c18693eb5a7329a0f3f3966ea187fd3",
+      "match": true
+    },
+    {
+      "path": "video_factory.py",
+      "expected": "bf55565ab9d635f95d6135452132393a67a6e961dc4769bde1834420f79c665b",
+      "actual": "bf55565ab9d635f95d6135452132393a67a6e961dc4769bde1834420f79c665b",
+      "match": true
+    },
+    {
+      "path": "worker.py",
+      "expected": "d4969d9a2182b0104517ec581cfb0fcc56490c181b43ece0fe9f59c29c73e9f1",
+      "actual": "d4969d9a2182b0104517ec581cfb0fcc56490c181b43ece0fe9f59c29c73e9f1",
+      "match": true
+    },
+    {
+      "path": "test_tr_storyboard_integration.py",
+      "expected": "73dc56b56550fb90877b6ba61bc7228366f743a196f28b52333641a5f452474c",
+      "actual": "73dc56b56550fb90877b6ba61bc7228366f743a196f28b52333641a5f452474c",
+      "match": true
+    }
+  ],
+  "source_writes": 0,
+  "network_calls": 0
+}

@@ -1,5 +1,5 @@
 {
-  "phase": "A",
+  "phase": "A-B-C final",
   "new_methods": 24,
   "new_failures": 0,
   "new_errors": 0,
@@ -43,5 +43,44 @@
       "command": "PYTHONPATH=/workspace/scratch/aeeb19f34e04/tr-integration-deps python -m unittest -v test_editorial_quality_gate test_reels_pipeline test_reels_duration_contract",
       "exit": 0
     }
+  ],
+  "additional_checks": {
+    "py_compile": "PASS",
+    "read_only_verifier": {
+      "preimage_fixture": "MATCH",
+      "mutated_preimage_fixture": "STOP_HASH_MISMATCH",
+      "mode": "read-only fixture verification, not Windows application"
+    },
+    "patch_roundtrip": {
+      "scope": "isolated scratch fixture only, not Windows or installed source",
+      "steps": [
+        {
+          "phase": "matching_preimage_patch_check_and_apply",
+          "exit": 0
+        },
+        {
+          "phase": "patched_scratch_postimage_hashes",
+          "status": "MATCH"
+        },
+        {
+          "phase": "reverse_patch_and_preimage_hashes",
+          "status": "MATCH"
+        }
+      ],
+      "root_network_or_provider_calls": 0
+    },
+    "ffmpeg_synthetic_null_graph": {
+      "status": "PASS",
+      "exit": 0,
+      "scope": "Synthetic color PNGs + synthetic silence stream to null sink only; no output media file",
+      "real_story_or_media": false,
+      "stderr": ""
+    }
+  },
+  "scope_limitations": [
+    "No real narration/alignment or final film",
+    "No independent editorial/visual/DJ acceptance",
+    "No Windows installed-source execution",
+    "Synthetic null-sink smoke is not complete rendered-media verification"
   ]
 }
