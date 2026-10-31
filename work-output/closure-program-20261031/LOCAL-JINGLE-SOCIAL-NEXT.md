@@ -10,3 +10,20 @@ TamV3.0: work-output/master-work2-intake-20261031/FOUNDER-APPROVED-CONSTITUTION-
 5. Gerçekindirme/provider/DJMASTERüretimi için geçerliişevebugünebağlıyetki/kimlik/receiptönkoşulunukontrolet. Bu talimat yeniücret/TTS/providerpilot/activation/claim/scheduler/yayın izni açmaz. Yetkilikoşulvarsa yalnızokapsamla sürdür; yoksatamolarakhangikaydınnedeneksikolduğunu birblokerolarakyaz. 18Ekimclaim/iznibugüneyenileme veya silme. SesüretilmedenMASTER/QCPASSyok.
 6. Ardından mevcut LOCAL-SOCIAL-SNAPSHOT-20261031-01'i ilkeksikadımdançalıştır: saltokunurgüncelstok/targetqueue/sahipler/ortakbütçe/kilit/lastplatformreceiptSNAPSHOT+RESULT+HANDOFF. Webkaynak/workflowverisinden mevcutWindowsstokadediuydurma. GuardtestlerinikapanmışCommander'ıtekrarlama. Work2'ninaynıiştekiGitHubsnapshot'ınıtekrarlama; yerelkanıtboşluğunutamamla.
 7. #32'yegüncelTSİvesabitcommitlinkleriylekısasonuçyaz; kuruluolanSTAGE,canonicaladay,gerçekçıktıvebekleyenyetkiyiayır. Work2veTR47testgöreviylekaynakçakışmasıyapma. Merkezstate'etekyazarlığıkoru.
+
+## MASTER somut devam düzeltmesi — 31.10.2026 | 17:01 TSİ
+07:13alımı,07:15STAGEuygulaması ve a6b4cf87teslimi doğrudan okundu. STAGEadapter+manifest installed=true/STAGE_ONLY; bu çifti yeniden uygulama veya yeniden paketleme. Aynıaltı/eskiJ3fixturetestini tekrar ilerleme sayma. Bu ek önceki tamamlanmışadımların yerini alır.
+**İş:** LOCAL-CANONICAL-HANDOFF-BRIDGE-20261031-05. **Durum:** HAZIR, yenialımhenüzyok.
+
+### Önce yapılabilir canonical aday ve regresyonu bitir
+Bulgu somut: src/jingle_factory.py --music-handoff kabul ediyor; scripts/Run-Factory.ps1 iletmiyor. Gerçek bugün/slothandoff/izin kaydının eksikliği **gerçek üretimi** engeller; parametreiletiminin izoleadayını ve ağsızfixturetestini yazmayı engellemez. Bu ikisini aynıblokajda bekletme.
+1. İki gerçek kaynakdosyasının güncelkimliğini al; mevcutçalışanses/Factory/V3.1 korunur. Kendi ayrıstagingdalında en küçükwrapperparametreiletim adayını yaz. Parametreismi/çağrı Factorykaynağından türetilsin; bu metinden tahmin edilmesin.
+2. Mevcutparametresizkomut davranışıaynıkalsın; explicitMusicHandoff verilirse pathi tekargüman olarak taşı. Boş/eksik/dışkök/uyuşmayan gün-slot-job-hash davranışını mevcutPythonvalidatöre bağlıkoru; bypassflag/otomatikarama/bugüneçekme/eskihandoffyenidenkullanma yok. Stringkomutbirleştirmesiyle injection yaratma.
+3. Testler gerçekPythonFactory/providerçalıştırmadan commandcapture veya sahtechildprocess ile wrapper'ın exactargümanını doğrulasın. Fixture yalnız açıkTESTverisidir; gerçekhandoff/receipt/izin üretme. Enaz: defaultkomutaynı; verilenpath tekargüman; boş/eksikpathret; boşlukveözelkarakterlipathsafe; validatorretleriilerlemez. İlgili tekbaşarısızbaseline→adayPASSkanıtı oluştur.
+4. Canonicalkuruludosyaları değiştirme; kaynakref/preimage/postimage/yedek/rollback/üretimsiztestpaketini teslim et. TamadayveyereltestSONUCU bekleniyor; yalnız “girdi eksik” raporuyla bitirme.
+5. Ayrıca gerçeküretimkapısının eksikgirdisini tek exactlisteyle ayır: izin/slot/job/bugünhandoff/receipt/sourcehash ve kimin sağlayacağı. Yeniücret/provider/import/claim/activation/gerçekDJMASTER açılmaz. ÖncekiJ3STAGEbaşarısıcanonicalPASSdeğil.
+
+### Sosyal ilk eksik parça
+07:14snapshot tarihi30Ekimstock0/pin94gözlemini bugünesaymıyor. Artıkbugün17:01; 09:20/12:30planlıadımlarıngüncelsonuçloglarını saltokunur incele. Stokkaynağını bugün yeniden say; yayın/prepare/reconcilelauncher çalıştırma.
+PlatformkuyruğunuGETileokuyan mevcutyolun yanetkisizliğini kaynakla doğrula. Mümkünse mevcutyetkilioturumla saltokunur actualGET,platformqueuehedefi/tazelik/job↔platformmakbuzunu getir; tokenrefresh/logwrite içerenlauncher'a “check” deyipçalıştırma. Bağlantıyoksa exactAPIyeteneği/erişimgirdisiyaz; koddan gerçekstok/queueuydurma. Bu sosyalparçakodadayınıbeklemeden ayrıcheckpointolabilir.
+MevcutWork2'nin07:40sonucunu kullan; aynı07:14snapshot'ıtekraristemeyin. YeniALINDI/BAŞLADIveilk20dkhedefi#32'ye; somutaday/testveyagüncelplatformkanıtı da#32'ye. Kullanıcıraportaşıyıcısıolmasın.
