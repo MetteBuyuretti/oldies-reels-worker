@@ -1,17 +1,17 @@
 {
   "job_id": "WORK2-SITE-AND-VISUAL-CLOSURE-20261031-03",
-  "checked_at_TSI": "2026-10-31T07:16:00+03:00",
+  "checked_at_TSI": "2026-10-31T07:37:00+03:00",
   "target_workday": "2026-10-31",
   "status": "NOT_VERIFIED",
   "platforms": [
     {
       "platform": "Tumblr",
       "new_eligible_stock": null,
-      "stock_source_time": null,
+      "stock_source_time": "2026-10-30T09:20:04+03:00",
       "next_publication_at_or_null": null,
       "queue_verified_at_or_null": null,
       "queue_freshness_seconds_or_null": null,
-      "last_job_receipt": null,
+      "last_job_receipt": "2026-10-30T09:20:16+03:00 exit4 CONTENT_STOCK_EMPTY; fresh report",
       "last_platform_receipt_or_null": null,
       "historical_only": {
         "observed_at": "2026-10-25T05:24:00+03:00",
@@ -34,20 +34,20 @@
           "2026-10-22T13:06:13Z",
           "2026-10-22T16:16:23Z"
         ],
-        "fresh_for_today": false
+        "fresh_for_today": false,
+        "latest_operator_stock": {
+          "count": 0,
+          "source_time": "2026-10-30T09:20:04+03:00",
+          "result": "CONTENT_STOCK_EMPTY / exit4; fresh for that 30 Oct job, not current stock"
+        }
       },
       "writer_coverage": {
-        "status": "NOT_VERIFIED",
-        "historical_gate": "allPathsCovered=false; new submissions blocked",
-        "known_roles": [
-          "publisher",
-          "run_tumblr_auto launcher",
-          "editorial controller"
-        ],
-        "current_owner_paths": null,
-        "shared_lock": null,
-        "daily_budget_enforced_all_paths": null
-      }
+        "status": "PARTIALLY_VERIFIED_FROM_OPERATOR",
+        "tumblr_publisher_lock": "tumblr-publisher.lock",
+        "allPathsCovered": false,
+        "cross_writer_common_budget": "NOT_VERIFIED"
+      },
+      "reported_next_scheduled_run_TSI": "2026-10-31T09:20:00+03:00"
     },
     {
       "platform": "Pinterest",
@@ -56,12 +56,26 @@
       "next_publication_at_or_null": null,
       "queue_verified_at_or_null": null,
       "queue_freshness_seconds_or_null": null,
-      "last_job_receipt": null,
+      "last_job_receipt": "2026-10-30T22:10:02+03:00 Reconcile; 0 new published; 0 verified scheduled; 94 observed live; bulk acceptance unverified",
       "last_platform_receipt_or_null": null,
       "writer_coverage": {
-        "status": "NOT_VERIFIED",
-        "shared_lock": null,
-        "daily_budget_enforced_all_paths": null
+        "status": "PARTIALLY_VERIFIED_FROM_OPERATOR",
+        "lock": ".or-pin-run.lock",
+        "cross_writer_common_budget": "NOT_VERIFIED"
+      },
+      "last_prepare_receipt": "2026-10-30T19:06:42+03:00 ANOTHER_OR_PIN_RUN_ACTIVE",
+      "historical_only": {
+        "observed_live_pins": 94,
+        "at": "2026-10-30T22:10:02+03:00",
+        "new_verified_published": 0,
+        "verified_scheduled": 0,
+        "bulk_acceptance": "NOT_VERIFIED",
+        "fresh_for_today": false
+      },
+      "reported_next_scheduled_runs_TSI": {
+        "queue_refresh": "2026-10-31T12:30:00+03:00",
+        "prepare": "2026-10-31T17:30:00+03:00",
+        "reconcile": "2026-10-31T18:10:00+03:00"
       }
     }
   ],
@@ -154,7 +168,7 @@
     "oldies_project_tools_in_this_catalog": false,
     "desktop_commander_mete_device": "Offline, last seen 51h; no remote commands issued",
     "windows_snapshot_in_current_main_tree": false,
-    "current_issue_receipt_of_local_snapshot": false
+    "current_issue_receipt_of_local_snapshot": true
   },
   "prior_acceptance": {
     "commander_final_comment": 6511801783,
@@ -171,11 +185,34 @@
   },
   "missing_evidence": [
     {
-      "owner": "Existing Windows Codex",
-      "file_or_record": "work-output/social-readonly-snapshot-20261031/SNAPSHOT.json + RESULT.md + HANDOFF.json",
-      "command": "Existing LOCAL-SOCIAL-SNAPSHOT-20261031-01 readonly procedure (fixed fd243724 and latest LOCAL-JINGLE-SOCIAL-NEXT step 6)",
-      "why": "No current stock/queue target/freshness/writer coverage/platform receipt available in this Work; existing device offline; do not run writing Verify."
+      "owner": "Existing Windows Codex / MASTER",
+      "file_or_record": "Current stock observation + fresh readonly platform queue + writer coverage + job-to-platform receipt",
+      "command": "Continue existing LOCAL-SOCIAL-SNAPSHOT from remaining four missing fields; do not request completed SNAPSHOT/RESULT/HANDOFF again",
+      "why": "Native 07:14 snapshot received, but explicitly leaves these current platform fields NOT_VERIFIED; mutating launchers were not called."
     }
   ],
-  "next_step": "Existing Windows Codex fills only local evidence gap under already prepared task; MASTER merges facts, no guard reinstallation or new publication."
+  "next_step": "Use received native snapshot; complete only its four missing live-platform fields through a proven readonly path, no guard reinstallation/duplicate snapshot/no publication.",
+  "local_snapshot": {
+    "ref": "a6b4cf87be11f2d7d0af0ee5a0737df2907df12d",
+    "checked_at_TSI": "2026-10-31T07:14:21+03:00",
+    "status": "PARTIAL_READ_ONLY_EVIDENCE",
+    "directly_read": [
+      "SNAPSHOT.json",
+      "RESULT.md",
+      "HANDOFF.json"
+    ],
+    "receipt_comment": 6538857290,
+    "delivery_comment": 6538880217,
+    "evidence_origin": "Windows Codex operator evidence, not rerun here"
+  },
+  "schedule_boundary": "Operator reports tasks Ready. Scheduled job times are not verified next publication times. No scheduler was enabled or modified here.",
+  "jingle_operator_receipt": {
+    "comment": 6538875173,
+    "status": "INSTALLED_STAGE_ONLY",
+    "adapter_sha256": "f8534ee39676984db0260e991dc849e805f83efde517528f9f09e83f5e08fc01",
+    "manifest_sha256": "6cd1a6fb3ad7af2a5e70afa5f39c8b0de7bf632849d5438d96f0a8dd97c003c5",
+    "canonical_Factory_repaired": false,
+    "real_DJMASTER_or_QC": false,
+    "boundary": "Native says Run-Factory.ps1 does not pass existing --music-handoff; same-day canonical-root handoff/receipt/job/slot/authorization missing. Work2 is not a second Factory writer."
+  }
 }

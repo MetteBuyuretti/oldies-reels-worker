@@ -1,0 +1,5 @@
+--- post-4300-rod-figure.before.html
++++ post-4300-rod-figure.proposed.html
+@@ -1 +1 @@
+-<figure class="augx-portrait"><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Rod_Stewart.jpg" alt="ROD STEWART arşiv fotoğrafı" loading="lazy"><figcaption>archive · <a href="https://commons.wikimedia.org/wiki/File:Rod_Stewart.jpg">Pascal Kirchmair</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a><br>Arşiv fotoğrafı · İlgili Ağustos olayından değildir. Görsel kırpılmadı.</figcaption></figure>
++<figure class="augx-portrait"><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Rod_Stewart.jpg" alt="Rod Stewart — Pascal Kirchmair çizimi" loading="lazy"><figcaption>2014 illüstrasyonu · <a href="https://commons.wikimedia.org/wiki/File:Rod_Stewart.jpg">Pascal Kirchmair</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a><br>İllüstrasyon/karikatür; fotoğraf değildir. İlgili Ağustos olayını göstermez.</figcaption></figure>

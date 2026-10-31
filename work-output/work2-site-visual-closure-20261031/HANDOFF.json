@@ -1,0 +1,99 @@
+{
+  "job_id": "WORK2-SITE-AND-VISUAL-CLOSURE-20261031-03",
+  "first_TSI": "2026-10-31T07:13:00+03:00",
+  "last_TSI": "2026-10-31T07:38:52.288246+03:00",
+  "branch": "work2/site-visual-closure-20261031",
+  "start_ref": "d82faf2640d31eed8e3efe494759efe76a8dba30",
+  "checkpoints": {
+    "A": "4b71a2130093abd2741a158cadc9da7462f01958",
+    "B": "db08671d47a18f76f3b7446a6b2581c0294df4ee",
+    "C": "fdbedee94128288f248d8d746960a92513da394a"
+  },
+  "status": "DELIVERED_WITH_EXPLICIT_OPEN_INPUTS",
+  "operational_pass": false,
+  "completed": [
+    "A GitHub and received native social evidence reconciled; no duplicate local snapshot requested",
+    "B 14 post inventory, actual originals seen, Spain4465/4466Marisol repaired with immutable date/status",
+    "C new Lennon guitar original and primary PRONI statement, hash-bound candidate/contactsheet with S3gap",
+    "D seven real desktop records/27 image geometry measurements, Rod illustration defect and exact raw proposal"
+  ],
+  "live_wordpress_changes": {
+    "post_ids": [
+      4465,
+      4466
+    ],
+    "new_media_id": 4965,
+    "scope": "Marisol placeholder + source/credit only, second HTML block",
+    "status": "future",
+    "date_TSI": "2026-11-06T19:00:00+03:00",
+    "featured_media": 4406,
+    "raw_readback": "exact both",
+    "content_warnings": [],
+    "polylang_after": {
+      "tr": 4465,
+      "en": 4466
+    }
+  },
+  "received_native": {
+    "ref": "a6b4cf87be11f2d7d0af0ee5a0737df2907df12d",
+    "files": [
+      "SNAPSHOT.json",
+      "RESULT.md",
+      "HANDOFF.json"
+    ],
+    "stage_status": "INSTALLED_STAGE_ONLY per operator, not Work2 application",
+    "canonical_or_DJMASTER_acceptance": false
+  },
+  "open_inputs": [
+    {
+      "id": "A-CURRENT-PLATFORM",
+      "owner": "Existing Windows Codex / MASTER",
+      "need": "Current eligible stock + actual next platform publication <=60s binding + all-writer lock/budget + job↔platformID/URL/time receipt",
+      "already_received": "07:14 local SNAPSHOT/RESULT/HANDOFF; do not ask again",
+      "next_control": "Next actual bounded readonly platform observation; prepared queue job times are not publication targets"
+    },
+    {
+      "id": "B-SPAIN-7",
+      "owner": "MASTER / site-image executor",
+      "need": "Correct1960–69free/licensed images for Raphael,Karina,RocíoDúrcal,LosBrincos,LosBravos,MiguelRíos,Serrat; tried sources/reasons in SITE-GAPS",
+      "next_control": "Before6Nov19:00scheduled publication; no automation installed here"
+    },
+    {
+      "id": "C-THIRD-SCENE-RIGHTS",
+      "owner": "MASTER / visual and rights reviewers",
+      "need": "Distinct relevant S3 original; S1/S2rightsTR/GB/US/personality and independent review",
+      "next_control": "On exact asset/right input receipt before real-media work"
+    },
+    {
+      "id": "D-MOBILE390",
+      "owner": "MASTER / viewport-capable browser operator",
+      "need": "Real390pxCSSviewport+metrics/screenshots on same7URLs then restore",
+      "next_control": "10–20min after real QA intake"
+    },
+    {
+      "id": "D-ROD-ILLUSTRATION",
+      "owner": "MASTER / site editorial executor",
+      "need": "Review exact raw proposed alt/credit correction or select licensed real photograph; D did not edit4300",
+      "next_control": "Next site image fix checkpoint"
+    }
+  ],
+  "constitution_full_read": {
+    "ref": "c61cf49c182b1fe9016221830e70d6a923ec9774",
+    "blob": "2388244ad47f1d2972ad4ab43beb51583e8605aa",
+    "complete": true
+  },
+  "preserved": [
+    "T1/PR38/root source/test modules",
+    "HFCM1/2/3/theme/menu",
+    "Italy4463/4464",
+    "central work-state single writer",
+    "existing Commander/guards/previous tests",
+    "Windows/scheduler/claim/lock/activation/provider gates"
+  ],
+  "source_patch_or_tests_invented": false,
+  "new_tests_reusing_old_counts": 0,
+  "new_post_pin_voice_film_or_paid_calls": 0,
+  "private_backups_and_assets_saved": true,
+  "public_repo_private_artifact_refs": false,
+  "ongoing_background_claim": false
+}

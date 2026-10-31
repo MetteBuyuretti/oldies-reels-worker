@@ -1,9 +1,21 @@
 {
   "job_id": "WORK2-SITE-AND-VISUAL-CLOSURE-20261031-03",
   "status": "checkpointed",
+  "last_checkpoint": "2026-10-31T07:38:52.288246+03:00",
   "completed_units": [
-    "A-GitHub-and-existing-acceptance-reconciled"
+    "A GitHub and received native social evidence reconciled; no duplicate local snapshot requested",
+    "B 14 post inventory, actual originals seen, Spain4465/4466Marisol repaired with immutable date/status",
+    "C new Lennon guitar original and primary PRONI statement, hash-bound candidate/contactsheet with S3gap",
+    "D seven real desktop records/27 image geometry measurements, Rod illustration defect and exact raw proposal"
   ],
-  "next_step": "B site inventory and authorized missing-image repair; local social evidence pending existing Windows Codex",
-  "central_write_performed": false
+  "open_inputs": [
+    "A-CURRENT-PLATFORM",
+    "B-SPAIN-7",
+    "C-THIRD-SCENE-RIGHTS",
+    "D-MOBILE390",
+    "D-ROD-ILLUSTRATION"
+  ],
+  "next_step": "MASTER reconcile these outputs and new native receipt; complete only exact open platform/assets/mobile/content inputs",
+  "central_write_performed": false,
+  "operational_pass": false
 }
