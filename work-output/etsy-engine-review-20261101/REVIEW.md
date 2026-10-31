@@ -1,15 +1,36 @@
-# MASTER — Gemini Etsy Listing Engine iddialarının kontrolü
-**01.11.2026 | 02:00 TSİ (UTC+3)**  
-**Durum:** Mevcut ZIP incelendi ve hedefli testler çalıştırıldı; canlı Etsy yazması yapılmadı.  
-**Kaynak paket:** etsy_listing_engine_v1.0.0.zip, 16055 byte, SHA256 731493f0fe8a5f674ea8ae5924f5125f95a1b7dabf76c76b037ed2fb8c81df2f.
+# MASTER — Mevcut Etsy API'si ve Gemini motorunun doğru kapsamı
+**Düzeltme: 01.11.2026 | 02:21 TSİ (UTC+3)**
 
 ## Kısa karar
-- Kod tabanı var; gerçek Etsy entegrasyonu hazır değil. Varsayılan istemci EtsyMockClient ve yanıt/ilan numaraları bellekte üretiliyor.
-- %25 kâr eşiği zorunlu durdurma değil; yalnız uyarı. 4% brüt marjlı ürün SUCCESS_DRAFT_CREATED döndürdü.
-- Görsel ve envanter çağrıları ikisi de500 döndürürken pipeline yine SUCCESS_DRAFT_CREATED döndürdü. Gerçek mağaza kabulü için bu yanlış başarı davranışı düzeltilmeli.
-- Etsy paneli yerleşik CSV ile yeni ilanları toplu yüklemiyor. Paket hazırlanması veya örnek testin geçmesi mağazada taslak yaratıldığı anlamına gelmez.
+Kurucu haklı olarak mevcut Etsy API altyapısının yeniden kontrol edilmesini istedi. Önceki raporun etsy_listing_engine_v1.0.0.zip hakkındaki bulguları geçerlidir; bunlardan bütün Oldies sisteminde API bağlantısı olmadığı sonucu çıkarılamaz. **Oldies-Seller-Manager-Master v2.0 gerçek Etsy HTTP/OAuth istemcisi içeriyor. Yeni bir API istemcisi/OAuth kurulumu önermek yerine mevcut bağlantı kullanılmalıdır.**
 
-## Gerçek kaynak ve test bulguları
+## Kontrol edilen ayrı bileşenler
+1. **Oldies-Seller-Manager-Master-v2.0.zip:** 67747byte, SHA256 cfa32c49ce50063d4b10f293d2e32a37117810e145d6163762d3386b39855a00. Mevcut kalıcı proje dosyasından açıldı; kod çalıştırılmadı.
+   - oauth-local.mjs: varsayılan OAuth kapsam talebi listings_r listings_w shops_r transactions_r. Bu, kodun yazma kapsamı istediğini gösterir; bugünkü canlı token'ın o kapsamla yetkilendirildiğini tek başına kanıtlamaz.
+   - etsy-common.mjs: gerçek https://api.etsy.com/v3/application adresine x-api-key ve Bearer ile istek; 401 halinde refreshAccessToken; getShop ve api(path,options) arayüzleri var. Token/private config değerleri okunmadı veya yayımlanmadı.
+   - scan-listings.mjs: mağazayı ve sayfalanmış aktif Etsy ilanlarını okur; yerel shop/listings JSON/CSV üretir. Bu ZIP'te özel yeni Etsy taslağı oluşturma komutu görülmedi. Genel api() fonksiyonu yöntem/istek seçeneklerini geçirebilir; yeni taslak işlevinin mevcut istemciye bağlanması, OAuth'u baştan kurmakla aynı şey değildir.
+   - MENU/KURULUM: Etsy OAuth/ilan tarama ve seçili müzik tişörtlerinin Shopier hazırlığı. Hazırlanmış kod, bugün çalıştırılmış/yetkilendirilmiş API işlemi olarak sunulmadı.
+2. **WordPress canlı eklenti envanteri:** Oldies Radyo — Etsy OAuth Bridge1.2.1 ve Oldies Etsy Distribution Center1.2.1 aktif. Bu envanter mevcut kurulu bağlantı katmanını doğrular; token tazeliği veya yeni Etsy ilanı yazma yetkisinin canlı kanıtı değildir. Video/dağıtım hattı ile yeni Etsy taslak oluşturma ayrı işlemlerdir.
+3. **Etsy-Listing-Factory / Etsy Otomatik İlan Merkezi:** 12Ekim devir dosyası okundu. Windows projesi C:\Users\METE\Documents\Oldies-Radyo-Automation\Etsy-Listing-Factory; katalog, üretim standardı, paket ve QC katmanı ayrı. Kullanıcı yalnız taslak ister; otomatik Etsy yayını yok.
+4. **30Ekim Python Listing Engine:** mock paket; bu yalnız mevcut entegrasyona eklenecek içerik/payload bileşeni. Hata bulguları bütün kurulu altyapının yokluğu anlamına gelmez.
+
+## Bugünkü doğrulama sınırı
+Eski proje sohbetleri Kişisel Bağlam üzerinden tarandı; bunun tam sohbet dökümlerinin tamamına erişim olduğu iddia edilmedi. İlgili kalıcı devir ve gerçek eski kaynak ZIP ayrıca okundu. WordPress plugin.list canlı olarak alındı. Mevcut WordPress araçlarında özel Etsy durum/endpoint yeteneği bulunmadı.
+
+Remote Desktop Commander cihaz envanteri Mete-DELL-2025 için Offline gösterdi; Oldies Commander tarihsel rapor okuması Session terminated döndü. Bu nedenle kurulu Windows sürümü, güncel token kapsamı/geçerliliği, son gerçek taslak kimliği ve mevcut Gemini oturumunun çalıştırıcı erişimi bugün doğrulanamadı. Bu bir “API yok” bulgusu değil, canlı tekrar okuma sınırıdır.
+
+## Gemini'ye geçerli devam
+- Mevcut Oldies-Seller-Manager etsy-common.mjs/OAuth ve kurulu yetkili yapılandırmayı yeniden kullan; mevcut çalışan otomasyonu yeniden yazma, başka uygulama/anahtar/token istemcisi kurma. Gizli değerleri sohbet/public repo üzerinden taşıma.
+- Önce kendi ortamında bu mevcut çalıştırıcıya gerçekten erişebildiğini göster. Kullanıcının ChatGPT veya Windows bağlantısı Gemini'ye otomatik miras kalmaz. Erişim yoksa tam eksik erişim arayüzünü bildir; yerel mock ile canlı bağlantı var/yok kararı verme.
+- Yetkili salt-okunur mağaza/profile okumasıyla gerçek shop_id, shipping/processing profile ve gerekli güncel kapsamları yerinde doğrula. api() yardımcı fonksiyonunun401'de token dosyasını yenileyebileceğini bil; onu mutlak dosya-yazmasız işlem diye tanımlama.
+- Yeni listing hazırlama yolu kurulu projede varsa doğrudan kullan. Yoksa Python üretici paketini mevcut api() istemcisine bağlayan dar taslak oluşturma adaptörü ekle; yeni OAuth altyapısı oluşturma. Resmî endpoint sözleşmesi, gerçek görsel yükleme ve inventory readback'i uygula.
+- Önce yalnız bir doğrulanmış üründe TASLAK ve geri okuma. Gerçek ID/medya/varyant/profil eşleşmesi olmadan başarı deme. Mevcut ilanı onaysız değiştirme/yayınlama yok.
+- Aşağıdaki mock bileşenin gerçek hata kontrollerini düzelt; mevcut token'ın varlığı bu kusurları ortadan kaldırmaz.
+
+---
+
+## Önceki Python ZIP denetimi — yalnız bu alt bileşene ilişkin teknik bulgular
+
 1. pipeline/listing_pipeline.py varsayılan olarak mock_api/etsy_mock_client.py içindeki EtsyMockClient'i kuruyor. ZIP'te gerçek HTTP/OAuth Etsy adaptörü yok. Mock client oluşturulan ilanları, görselleri ve inventory'yi bellekte saklıyor; ilan kimliklerini rastgele üretiyor.
 2. data/ altında geçerli tişört ve battaniye örnek JSON'ları ile hatalı örnekler bulunuyor. Şapka/kupa için Gemini mesajındaki PKK ürün kodları bu pakette bulunmuyor. Battaniye örneğinde üretici Printify; bu, mesajdaki PrintKK ürün havuzuna doğrudan kanıt değil. Başka bir Drive veritabanına erişim iddiası ayrıca dosya kimliği, güncel okuma ve üretici kaynaklarıyla kanıtlanmalı; bu incelemede bütünüyle yanlış olduğu ileri sürülmüyor.
 3. validator/product_validator.py satır124–127: %25 altındaki marj WARNING. Hesap yalnız (satış−taban maliyet)/satış; kargo, Etsy/ödeme ücretleri ve diğer kesintileri içermiyor. %25 net kâr garantisi yok.
@@ -24,19 +45,6 @@
 - Görsel yükleme500 + inventory500: SUCCESS_DRAFT_CREATED ve uploaded_images_count0.
 - Gerçek Etsy ağ/yazma isteği:0. Mağaza, fiyat, profil veya ilan değiştirilmedi.
 
-## Gemini'nin devamı için tek somut iş
-Yukarıdaki iddiaları düzelt; “hazır canlı altyapı” yerine “mock ile test edilmiş içerik/ürün paketi motoru” de. Eksik bağlantıyı yalnız API anahtarı eksikliğine indirgeme.
 
-Önce bir gerçek, kaynakları doğrulanmış mevcut üründe ilerle:
-1. Üretici ürün URL/kodu, güncel varyant/ölçü/malzeme/maliyet+kargo, mevcut onaylı satış fiyatı ve gerçek görsel dosyalarını aynı kayıtla eşleştir. Varsayımsal PKK kodlarını, katalog stok sayılarını ve örnek shipping/shop ID'lerini gerçek değer sayma. Mağazada aynı ürün/tasarım ilanı varsa mükerrer oluşturma.
-2. Canlı API yolu seçilecekse gerçek OAuth/HTTP adaptörünü ve listings_w dahil gerekli kapsamları, güncel API şemasını, görsel dosya aktarımını, varyasyon/işlem süresi profillerini uygula. Sırları konuşmaya veya public repoya kopyalatma; yetkili özel yapılandırmayı kullan. Yanlış yanıt, yarım görsel/variant yüklemesi veya tekrar denemede yanlış başarı/mükerrer ilan oluşturmayı engelle.
-3. API olmadan, gerçekten yetkili tarayıcı oturumu varsa Etsy panelinde taslak oluşturulabilir; CSV'yi Etsy'nin kendi yükleme özelliği gibi sunma. Kullanılacak araç/oturum bu Gemini çalışma ortamında gerçekten bulunmalı.
-4. Önce yalnız bir taslak; yayınlama veya yeni ücret doğuran işlem ayrıca yetkili değilse yapılmaz. Gerçek taslak kimliği + mağazadan readback + yüklenen görsel/varyant/fiyat/profil eşleşmesi olmadan “taslak girildi” deme.
-5. %25 istenen eşikse uyarı mı zorunlu kapı mı olduğunu açıkça ayır; gerçek toplam maliyet olmadan net kâr iddiası verme.
 
-## Resmî yabancı kaynak kontrolü
-- Etsy Help, Can I Create or Edit Multiple Listings at Once?: https://help.etsy.com/hc/en-us/articles/360000337307-Can-I-Create-or-Edit-Multiple-Listings-at-Once — yeni ilanlar için yerleşik toplu yükleme yok; mevcut ilanları toplu düzenleme/kopyalama ayrı.
-- Etsy Request Standards: https://developers.etsy.com/documentation/essentials/requests/ — x-api-key ve kapsam gerektiren işlemlerde OAuth Authorization; yalnız shop_id/client_id saymak bağlantı kanıtı değil.
-- Etsy Listings Tutorial: https://developer.etsy.com/documentation/tutorials/listings/ — draft oluşturma, medya ve inventory ayrı işlemler; ilgili profil ve ürün alanları güncel endpoint şemasıyla eşleşmeli. Bu belgelerde draft/aktif gereksinimleri farklılaşabildiğinden işlem anında gerçek endpoint sözleşmesi esas alınmalı.
-
-Bu kayıt inceleme ve uygulanabilir devam tarifidir; Gemini'ye otomatik iletim veya onun işi aldığı iddiası değildir.
+Resmî endpoint kaynakları: https://developers.etsy.com/documentation/essentials/requests/ ve https://developer.etsy.com/documentation/tutorials/listings/ .
