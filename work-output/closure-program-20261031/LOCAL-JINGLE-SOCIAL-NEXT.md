@@ -54,3 +54,27 @@ Adayıyenidenhazırlama,STAGEyenidenkurma. #32'ye06ALINDI/BAŞLADIveilk20dkhedef
 
 ### Teslim/kapanış
 work-output/canonical-tumblr-20261031/RESULT+HANDOFF+test/hash/rollbackve#32sabitcommit. Varsayılansınırdeğişmez: ücret/provider/activation/claim/scheduler/gerçekindirme/import/miks/yayınyok. Kurulucanonicallauncher,gerçekvalidatortesti,TumblradayıvePinterestplatformkanıtı ayrıraporlanır.06adımınındagöreveulaşmasıotomatikvarsayılmaz.
+
+## GEÇERLİ UYGULAMA DEVAMI — 31.10.2026 | 20:38 TSİ
+**İş:** LOCAL-CANONICAL-TUMBLR-20261031-06 devamı. **Uygulayıcı:** mevcut Windows Codex. **Sahip:** MASTER.
+Bu bölüm önceki 06'nın “yalnız launcher kurulabilir / STAGE manifesti ve Tumblr publisher kurulamaz” kısıtlarını aşağıdaki dar, geri alınabilir onarım kapsamıyla değiştirir. Kurucunun devam eden açık onarım talebinin uygulanmasıdır; yeni üretim, ücret veya yayın yetkisi değildir. Genel Commander 07 hedefi değişmez. Aktif 07 varsa mevcut doğal checkpoint'ini kaydet; aynı kaynaklara paralel yazar açma.
+
+**Dayanak:** 19:24 teslimi e2e761bc03bd529198c091027f7f00fcbe7c7d0c ve MASTER incelemesi daee5402c128f388fd1f3a4d7597f393fa66aaca. Bridge geri alınmış; Tumblr adayı kurulu değil. Önceki testli adayları yeniden yazma, aynı negatif testleri yeni ilerleme sayma.
+
+### A. Jingle — bilinen pin uyuşmazlığını uygulamayla kapat
+1. Mevcut eski launcher 1300e811e001719fbe1d2b6fa581bd2f7b1f1297ea457117d2a51fe30973934d, hazır aday 21a6c0ea568a3fad76e7e33a843204f41eb7054d28cdca9a3fa7b8d84b5cc2f4 ve STAGE manifestinin canonical live_preimages girdisini birlikte güncel kaynaktan doğrula. İlgili görevler Disabled ve yürütücü yok koşulu sürsün; başka sürüm üzerine yazma.
+2. İki dosyanın mevcut özel yedeğini al. İzole tam çift üzerinde yalnız bu launcher değişikliğine bağlı manifest girdisini yeni doğrulanmış hash'e bağla. Diğer pinleri aynen koru; hash korumasını kaldırma. Gerçek candidate.verify yeni çiftte geçmeli; başarısız ikinci adım senaryosunda iki eski dosyanın birlikte geri geldiğini göster.
+3. Bu kanıt geçerse **hazır launcher ve yalnız ona bağlı STAGE manifest metadata değişikliğinin birlikte kurulması bu devam kapsamında yetkilidir**. Önce/son hash ve gerçek verify makbuzunu al; kurulum başarısızsa ikisini de geri al. Çok dosyalı değişimi tek atomik işlemmiş gibi raporlama; üretim kapalıyken sıralı, geri alınabilir geçiş yap.
+4. Bu sonuç “bridge kuruldu ve STAGE uyumlu”dur. Sonraki gerçek üretim için eksik girdileri tek kayıtta güncel dosya/alan/üretecek mevcut araç/sorumlu düzeyinde çıkar. Handoff, üretici receipt'i veya izin uydurma. Geçerli mevcut üretim izni ve girdi yoksa gerçek Jingle üretimi bekler; bu eksiklik A1–3'ü durdurmaz.
+
+### B. Tumblr — mevcut adayı kur ve gerçek taramada göster
+1. Kurulu publisher 3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a ve hazır aday 9e44f9af845c889c0079ba5cc956ea0e5be08b825050cb9aea6fa5670032c622 değişmemişse mevcut dar diff'i kullan. Yeni detach algoritması yazma.
+2. Önce eksik tek entegre hata kontrolünü kapat: eski başarılı rapor yerinde dururken yeni tarama başarısız olsun; launcher güncel hatayı ve başarısız exit'i korusun, eski yeşili kabul etmesin. Bu test izole root ve yan etkisiz çocuk süreçle yapılır.
+3. İlgili yürütücü yokken, özel yedek ve kaynak/hash bağımlılıkları doğrulanarak **yalnız bu testli publisher adayının geri alınabilir kurulumu yetkilidir**. Kimlik korumaları, ledger, günlük limitler ve mükerrerlik guard'ları değişmez. Başka dosyada bu kaynağın eski hash'ine pin varsa önce tam bağımlılığı belirt ve çift geçişi hazırla; pin kontrolünü kapatma, geniş Commander yetkisi açma. Kritik WATCHDOG itirazı varsa exact kaydıyla durdur; sırf eski “aday kurulamaz” cümlesini yeni engel sayma.
+4. Mevcut yetkili tarayıcıda, yan etkileri kaynakla ayrılmış yalnız gerçek cards/envanter okumasını koş. Normal publisher main'i veya yayın/prepare/queue launcher'ını “test” diye çalıştırma. Gerçek Playwright sayfasında aday fonksiyonla tarama; beklenen sayı, gözlenen benzersiz kimlikler ve incomplete/error davranışı makbuz olsun. Erişim yoksa tam bağlantı katmanını yaz; sahte DOM'u gerçek kabul sayma. Kurulum sonrası güvenli tarama başarısızsa geri al.
+5. Kapanış: kurulu aday hash'i + gerçek tarama sonucu + entegre eski-rapor reddi. Bu, mevcut DOM arızasının kapanışıdır; otomatik yayın/süreklilik ayrıca gerçek yetkili yayın koşusuyla ölçülür.
+
+### Teslim ve kontrol
+#32'ye bu devam için gerçek ALINDI/BAŞLADI/ref ve ilk **20 dakikalık kontrol hedefini** yaz. Süre bitince “çalışılıyor” yerine kurulan dosya/gerçek sonuç veya exact başarısız adımı bildir; bu süre başarı garantisi değildir. Bir sonraki parça kaldığı yerden sürsün. Jingle ve Tumblr birbirini beklemesin; aynı Windows Codex sıralı uygulasın. Yeni rapor/fixture paketi üretip uygulamadan işi kapatma.
+
+Korunan sınır: scheduler aktivasyonu, yeni ücret/provider, üretim claim/state/lock değişimi, otomatik indirme/miks veya sosyal yayın bu ekle açılmaz. Bağımsız kabul gerçek çıktıyla yapılır. Hazır talimatın GitHub'a yazılması Windows Codex'i kendiliğinden başlatmaz.
