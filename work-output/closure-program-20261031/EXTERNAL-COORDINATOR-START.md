@@ -1,3 +1,12 @@
+# İPTAL — ayrı koordinatör sohbeti gerekmiyor
+**31.10.2026 | 03:08 TSİ (UTC+3)**
+
+Kurucunun yeni kararıyla bu harici koordinatör devir talimatı **gerçek alım gerçekleşmeden iptal edildi**. Koordinasyon mevcut Work1 sohbetinin içindeki ayrı ajanla devam eder. Yeni ayrı koordinatör sohbeti açmayın; bu dosyayı yeni devir emri olarak uygulamayın.
+
+İş EXTERNAL-COORDINATOR-TAKEOVER-20261031-01 için sonuç `cancelled_by_founder_before_receipt`; harici alım, başlangıç ve yazarlık devri gerçekleşmedi. Eski sabit commit bağlantıları yalnız tarihsel hazırlık kaydıdır. Aşağıdaki eski talimat korunuyor, **yürürlükte değildir**. Harici Work2'nin kanıtlı Türkçe Reels uygulama görevi ayrı olup devam ediyor.
+
+---
+
 # HARİCİ WORK KOORDİNATÖRÜ — ayrı sohbet için devir
 **31.10.2026 | 03:03 TSİ (UTC+3)**  
 İş kimliği: EXTERNAL-COORDINATOR-TAKEOVER-20261031-01. Durum: HAZIR; yeni harici sohbetin gerçek alımı henüz yok.
