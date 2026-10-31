@@ -1,0 +1,13 @@
+{
+  "job_id": "WORK2-TR-INTEGRATION-20261031-02",
+  "actor": "WORK2",
+  "status": "checkpointed",
+  "last_checkpoint": "2026-10-31T03:12:40.433Z",
+  "completed_units": [
+    "A-called-TR-storyboard-consumer",
+    "A-24-new-focused-tests-pass",
+    "A-23-existing-regressions-pass"
+  ],
+  "next_step": "B: original archive image/rights/contact-sheet review, then C: draft PR and Windows hash/rollback handoff.",
+  "central_write_performed": false
+}

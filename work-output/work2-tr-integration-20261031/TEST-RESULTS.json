@@ -1,0 +1,47 @@
+{
+  "phase": "A",
+  "new_methods": 24,
+  "new_failures": 0,
+  "new_errors": 0,
+  "existing_regressions": 23,
+  "existing_failures": 0,
+  "existing_errors": 0,
+  "python": "3.12.14",
+  "real_dependencies": [
+    "requests 2.34.2 (isolated dependency directory)",
+    "Pillow"
+  ],
+  "explicit_stubs": [
+    "decoded audio duration",
+    "reviewed word timestamps in fixture",
+    "FFmpeg output placeholder bytes",
+    "final media inspector"
+  ],
+  "real_voice_or_MP4": false,
+  "provider_calls": 0,
+  "prior_5_or_43_count_reused": false,
+  "initial_attempts": [
+    {
+      "suite": "new focused 24",
+      "result": "one caption-layout failure"
+    },
+    {
+      "suite": "focused positive only",
+      "result": "still failed; pixel-width analysis performed"
+    },
+    {
+      "suite": "old affected 23",
+      "result": "two snapshot setup errors; unchanged oldies-artists.json materialized"
+    }
+  ],
+  "final_commands": [
+    {
+      "command": "PYTHONPATH=/workspace/scratch/aeeb19f34e04/tr-integration-deps python -m unittest -v test_tr_storyboard_integration",
+      "exit": 0
+    },
+    {
+      "command": "PYTHONPATH=/workspace/scratch/aeeb19f34e04/tr-integration-deps python -m unittest -v test_editorial_quality_gate test_reels_pipeline test_reels_duration_contract",
+      "exit": 0
+    }
+  ]
+}

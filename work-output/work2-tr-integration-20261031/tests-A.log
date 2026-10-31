@@ -1,0 +1,52 @@
+test_alignment_end_must_match_measured_voice (test_tr_storyboard_integration.StoryboardIntegrationTests.test_alignment_end_must_match_measured_voice) ... ok
+test_changed_voice_bytes_cannot_use_old_alignment (test_tr_storyboard_integration.StoryboardIntegrationTests.test_changed_voice_bytes_cannot_use_old_alignment) ... ok
+test_closing_cannot_be_omitted (test_tr_storyboard_integration.StoryboardIntegrationTests.test_closing_cannot_be_omitted) ... ok
+test_derived_photo_identity_cannot_bypass_diversity (test_tr_storyboard_integration.StoryboardIntegrationTests.test_derived_photo_identity_cannot_bypass_diversity) ... ok
+test_duplicate_composition_cannot_bypass_distinct_bytes (test_tr_storyboard_integration.StoryboardIntegrationTests.test_duplicate_composition_cannot_bypass_distinct_bytes) ... ok
+test_estimated_alignment_is_not_accepted_as_measured (test_tr_storyboard_integration.StoryboardIntegrationTests.test_estimated_alignment_is_not_accepted_as_measured) ... ok
+test_gap_in_word_coverage (test_tr_storyboard_integration.StoryboardIntegrationTests.test_gap_in_word_coverage) ... ok
+test_missing_alignment_is_not_estimated_from_words (test_tr_storyboard_integration.StoryboardIntegrationTests.test_missing_alignment_is_not_estimated_from_words) ... ok
+test_missing_independent_approval_cannot_reach_delivery (test_tr_storyboard_integration.StoryboardIntegrationTests.test_missing_independent_approval_cannot_reach_delivery) ... ok
+test_missing_plan_never_falls_back_to_legacy_modulo (test_tr_storyboard_integration.StoryboardIntegrationTests.test_missing_plan_never_falls_back_to_legacy_modulo) ... ok
+test_missing_rights_rejected_before_render (test_tr_storyboard_integration.StoryboardIntegrationTests.test_missing_rights_rejected_before_render) ... ok
+test_over_thirty_second_voice_remains_rejected (test_tr_storyboard_integration.StoryboardIntegrationTests.test_over_thirty_second_voice_remains_rejected) ... ok
+test_overlap_in_word_coverage (test_tr_storyboard_integration.StoryboardIntegrationTests.test_overlap_in_word_coverage) ... ok
+test_overlapping_word_timestamps_rejected (test_tr_storyboard_integration.StoryboardIntegrationTests.test_overlapping_word_timestamps_rejected) ... ok
+test_photo_bytes_change_rejected (test_tr_storyboard_integration.StoryboardIntegrationTests.test_photo_bytes_change_rejected) ... ok
+test_real_main_preview_renderer_uses_three_photo_intervals_and_eight_captions (test_tr_storyboard_integration.StoryboardIntegrationTests.test_real_main_preview_renderer_uses_three_photo_intervals_and_eight_captions) ... ok
+test_rejected_photo_cannot_render (test_tr_storyboard_integration.StoryboardIntegrationTests.test_rejected_photo_cannot_render) ... ok
+test_renamed_rejected_photo_hash_cannot_render (test_tr_storyboard_integration.StoryboardIntegrationTests.test_renamed_rejected_photo_hash_cannot_render) ... ok
+test_ten_second_voice_remains_rejected (test_tr_storyboard_integration.StoryboardIntegrationTests.test_ten_second_voice_remains_rejected) ... ok
+test_unknown_plan_rejected_before_audio_or_renderer (test_tr_storyboard_integration.StoryboardIntegrationTests.test_unknown_plan_rejected_before_audio_or_renderer) ... ok
+test_wrong_photo_asset_reference (test_tr_storyboard_integration.StoryboardIntegrationTests.test_wrong_photo_asset_reference) ... ok
+test_wrong_photo_evidence_binding (test_tr_storyboard_integration.StoryboardIntegrationTests.test_wrong_photo_evidence_binding) ... ok
+test_wrong_script_binding (test_tr_storyboard_integration.StoryboardIntegrationTests.test_wrong_script_binding) ... ok
+test_wrong_source_binding (test_tr_storyboard_integration.StoryboardIntegrationTests.test_wrong_source_binding) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 1.658s
+
+OK
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Alignment does not cover the measured natural audio"], "video_created": false, "voice_measurement": {"decoded_seconds": 26.5}}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Local narration must be hash-bound to exact script/language at natural speed"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard must cover all words including the exact closing"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard cannot reuse a rejected/cropped/derived composition"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard cannot reuse a rejected/cropped/derived composition"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Reviewed exact-audio word alignment is required; estimates are not timestamps"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard ranges/photos must be ordered, complete and nonrepeating"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Reviewed exact-audio word alignment is required; estimates are not timestamps"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Missing or unknown visual storyboard; no legacy fallback"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Photo 1 license/rights proof missing or unverified"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Natural full DJ narration must fit a real 25-30s Reel (24.88-29.88s voice)"], "video_created": false, "voice_measurement": {"decoded_seconds": 27.0}}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard ranges/photos must be ordered, complete and nonrepeating"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Alignment must be finite and ordered without overlap"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Local artist photo hash differs from documented asset"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "UNAPPROVED_MEDIA_PREVIEW", "blockers": ["Independent original-source, photo and natural DJ review required; no delivery authorized"], "video_created": true, "voice_measurement": {"decoded_seconds": 27.0}, "reused_checkpoint": false, "media": {"fixture": true, "media_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "audio": {"decoded_seconds": 27.0}}, "candidate_sha256": "88fe105f8ec62ff640298d1d0e82b2d7b6a5b7554ea1d2618da0bc084d45550a", "video_path": "/tmp/tmpodn8tm8f/output/tr-preview/88fe105f8ec62ff6-71f9e6330c2f/tr-unapproved-preview.mp4"}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Photo 1 was rejected by asset review; select another photo/event"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard cannot reuse a rejected/cropped/derived composition"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Natural full DJ narration must fit a real 25-30s Reel (24.88-29.88s voice)"], "video_created": false, "voice_measurement": {"decoded_seconds": 27.0}}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Missing or unknown visual storyboard; no legacy fallback"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard ranges/photos must be ordered, complete and nonrepeating"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard profile/script/source/photo evidence binding mismatch"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard profile/script/source/photo evidence binding mismatch"], "video_created": false}
+{"preview_only": true, "delivery_allowed": false, "editorial_approved": false, "status": "BLOCKED_PREVIEW", "blockers": ["Storyboard profile/script/source/photo evidence binding mismatch"], "video_created": false}

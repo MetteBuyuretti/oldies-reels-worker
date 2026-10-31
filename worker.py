@@ -26,11 +26,13 @@ import requests
 
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
-from editorial_quality_gate import check_approved_reel, load_approval, FORBIDDEN_VISUAL_TERMS
+from editorial_quality_gate import (check_approved_reel, load_approval, FORBIDDEN_VISUAL_TERMS,
+                                    check_storyboard, media_sha256)
 from source_evidence import check_turkish_script, check_script
 from reels_preview import prepare_preview
 from zero_cost import research_candidates
-from video_factory import build_timeline, export_capcut_package, render_timeline, write_timeline_files
+from video_factory import (build_timeline, build_storyboard_timelines, export_capcut_package,
+                           render_timeline, write_timeline_files)
 
 OUTPUT = Path("output")
 WIDTH, HEIGHT, FPS, DURATION = 1080, 1920, 30, 15
@@ -1108,18 +1110,95 @@ def publish_facebook_global(candidate: dict, video: Path, bearer: str, base_url:
     return result
 
 
-def main() -> None:
-    language = reel_language()
-    override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
-    today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
-    root = Path(__file__).resolve().parent
-    def render_preview(candidate, photos, voice, target):
+def make_storyboard_scenes(candidate: dict, photos: list[Path], photo_timeline: list[dict],
+                           directory: Path) -> list[Path]:
+    """One complete photo per story interval; captions are separate overlays."""
+    check_storyboard(candidate)
+    credits = candidate['image_credits']
+    if len(photos) != len(credits):
+        raise RuntimeError('Storyboard photo files do not match the evidence packet')
+    mapping = {}
+    for path, credit in zip(photos, credits):
+        if media_sha256(path) != credit['asset_sha256']:
+            raise RuntimeError('Storyboard original photo bytes changed')
+        mapping[credit['asset_sha256']] = (path, credit)
+    paths = []
+    for index, item in enumerate(photo_timeline, 1):
+        path, credit = mapping[item['photo_sha256']]
+        canvas = Image.new('RGBA', (WIDTH, HEIGHT), (7, 7, 12, 255))
+        with Image.open(path) as opened:
+            image = ImageOps.exif_transpose(opened).convert('RGB')
+            contained = ImageOps.contain(image, (WIDTH - 112, 1020), Image.Resampling.LANCZOS)
+            canvas.paste(contained, ((WIDTH - contained.width) // 2,
+                                    130 + (1020 - contained.height) // 2))
+        draw = ImageDraw.Draw(canvas)
+        draw.text((64, 42), f"{credit['capture_year']} ARŞİV", font=font(26), fill=(236,193,77,255))
+        draw.text((64, 1185), str(candidate['artist']), font=font(54, True), fill='white')
+        draw.text((64, 1570), str(candidate['event_date']) + ' • KAYIT',
+                  font=font(28), fill=(236,193,77,255))
+        # Text is below the complete photo, never over the musicians' faces.
+        for line_index, line in enumerate(textwrap.wrap('Fotoğraf: ' + credit['creator'], width=62)):
+            draw.text((64, 1685 + line_index * 30), line, font=font(24), fill='white')
+        draw.text((64, 1820), 'OLDIES RADYO', font=font(30, True), fill=(236,193,77,255))
+        target = directory / f'story-photo-{index:02d}.png'
+        canvas.convert('RGB').save(target)
+        paths.append(target)
+    return paths
+
+
+def make_caption_overlays(timeline: list[dict], directory: Path) -> list[Path]:
+    """Full exact text, no shortening; a caption cannot restart a photo."""
+    paths = []
+    for index, item in enumerate(timeline, 1):
+        canvas = Image.new('RGBA', (WIDTH, HEIGHT), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(canvas)
+        for size in (64, 60, 56):
+            face, lines = font(size, True), ['']
+            for word in item['text'].split():
+                proposal = (lines[-1] + ' ' + word).strip()
+                if draw.textbbox((0,0), proposal, font=face)[2] > WIDTH - 160:
+                    lines.append(word)
+                else:
+                    lines[-1] = proposal
+            if (len(lines) <= 2 and all(lines)
+                    and all(draw.textbbox((0,0), line, font=face)[2] <= WIDTH - 160 for line in lines)):
+                break
+        else:
+            raise RuntimeError('Caption does not fit two readable lines; edit caption grouping')
+        draw.rounded_rectangle((64,1280,WIDTH-64,1510), radius=16, fill=(7,7,12,242))
+        for line_index, line in enumerate(lines):
+            draw.text((80,1310 + 83 * line_index), line, font=face, fill='white')
+        target = directory / f'caption-overlay-{index:02d}.png'
+        canvas.save(target); paths.append(target)
+    return paths
+
+
+def render_preview(candidate: dict, photos: list[Path], voice: Path, target: Path) -> None:
+    if candidate['reels_language'] == 'tr' or 'visual_storyboard' in candidate:
+        check_storyboard(candidate)
+        captions, photo_timeline = build_storyboard_timelines(candidate, voice)
+        scenes = make_storyboard_scenes(candidate, photos, photo_timeline, target.parent)
+        overlays = make_caption_overlays(captions, target.parent)
+        write_timeline_files(captions, target.parent)
+        (target.parent / 'photo-timeline.json').write_text(
+            json.dumps(photo_timeline, ensure_ascii=False, indent=2), encoding='utf-8')
+        render_timeline(scenes=scenes, timeline=captions, photo_timeline=photo_timeline,
+                        caption_overlays=overlays, target=target, voiceover=voice,
+                        width=WIDTH, height=HEIGHT, fps=FPS, max_video_bytes=MAX_VIDEO_BYTES)
+    else:
         script = check_script(candidate)
         timeline = build_timeline(script, voice)
         scenes = make_timeline_scenes(candidate, photos, timeline, target.parent)
         write_timeline_files(timeline, target.parent)
         render_timeline(scenes=scenes, timeline=timeline, target=target, voiceover=voice,
                         width=WIDTH, height=HEIGHT, fps=FPS, max_video_bytes=MAX_VIDEO_BYTES)
+
+
+def main() -> None:
+    language = reel_language()
+    override = os.getenv("OLDIES_ZERO_COST_DATE", "").strip()
+    today = datetime.strptime(override, "%Y-%m-%d").replace(tzinfo=timezone.utc) if override else datetime.now(timezone.utc)
+    root = Path(__file__).resolve().parent
     output = root / "output" / f"{language}-preview"
     result = prepare_preview(root=root, output=output, today=today, language=language,
                              packet_path=os.getenv("OLDIES_EDITORIAL_PACKET", "").strip(),
