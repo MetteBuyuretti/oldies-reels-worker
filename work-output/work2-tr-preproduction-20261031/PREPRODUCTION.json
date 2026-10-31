@@ -1,0 +1,92 @@
+{
+  "job_id": "WORK2-TR-PREPRODUCTION-20261031-01",
+  "producer": "WORK2",
+  "prepared_at": "2026-10-31T00:08:27.353Z",
+  "actual_research_session_date": "2026-10-31",
+  "archive_preview_calendar_date": "2026-10-18",
+  "research_date": "2026-10-18",
+  "research_date_semantics": "Legacy PR33 requested preview calendar date only, NOT the actual research/retrieval date. Historical archive pilot, never 31 October on-this-day content.",
+  "event_date": "1964-10-18",
+  "artist": "The Beatles",
+  "kind": "recording",
+  "instagram_music_title": "I Feel Fine",
+  "reels_language": "tr",
+  "target_profile": "legacy_short_25_30",
+  "target_territories": [
+    "TR",
+    "GB",
+    "US"
+  ],
+  "preview_only": true,
+  "editorial_approved": false,
+  "delivery_allowed": false,
+  "full_video_render_allowed": false,
+  "primary_evidence": {
+    "url": "https://www.thisdayinmusic.com/on-this-day-in-music-october-18/",
+    "event_date": "1964-10-18",
+    "artist": "The Beatles",
+    "text": "18 Oct 1964 Taking a day off from their British tour The Beatles went into the studio",
+    "retrieved_at": "2026-10-31T00:08:27.353Z",
+    "evidence_note": "Short retained daily-entry excerpt; calendar date and event independent confirmation are retained from #31/6253570090. Timestamp records this Work2 evidence intake, not an HTTP server response time.",
+    "sha256": "f727153c59dcfd0810076e17d40609ee4463153a69b0916d56eb2c170107ed7b"
+  },
+  "source_documents": [
+    {
+      "url": "https://www.thebeatles.com/i-feel-fine",
+      "text": "18 October 1964\nEMI Studios, London\nguitar feedback\nGeorge Martin\n27 November 1964 (UK)",
+      "retrieved_at": "2026-10-31T00:08:27.353Z",
+      "text_is": "Selected non-contiguous factual fields/body terms, separated by newlines, not the full page or a continuous paragraph.",
+      "locations": [
+        "Table: recording date and place",
+        "Body: feedback description",
+        "Table: producer",
+        "Table: UK release",
+        "Body: single-side role"
+      ],
+      "human_original_source_review_required": true,
+      "sha256": "227d8743656224e55e7bf90cb3aec0bb7ab8f75da0db57bcf1a3d56a705d64eb"
+    }
+  ],
+  "verified_facts": [
+    {
+      "id": "F1",
+      "url": "https://www.thebeatles.com/i-feel-fine",
+      "script_span": "On sekiz Ekim bin dokuz yüz altmış dört. The Beatles, Londra’daki EMI stüdyolarında “I Feel Fine”ı kaydetti.",
+      "source_excerpt": "18 October 1964",
+      "event_date": "1964-10-18",
+      "artist": "The Beatles",
+      "kind": "event_date",
+      "evidence_scope": "recording date plus location corroborated by full table"
+    },
+    {
+      "id": "F2",
+      "url": "https://www.thebeatles.com/i-feel-fine",
+      "script_span": "Açılıştaki gitar geri beslemesi, pop müzikte bu sesin ilk örnekleri arasındaydı.",
+      "source_excerpt": "guitar feedback",
+      "event_date": "1964-10-18",
+      "artist": "The Beatles",
+      "kind": "detail",
+      "evidence_scope": "feedback detail; early example, NEVER first-ever claim"
+    },
+    {
+      "id": "F3",
+      "url": "https://www.thebeatles.com/i-feel-fine",
+      "script_span": "George Martin’in yapımcılığındaki kayıt, grubun bir sonraki kırkbeşliğinin ön yüzü oldu; İngiltere’de yirmi yedi Kasım’da yayımlandı.",
+      "source_excerpt": "George Martin\n27 November 1964 (UK)",
+      "event_date": "1964-10-18",
+      "artist": "The Beatles",
+      "kind": "detail",
+      "evidence_scope": "producer credit, A-side role corroborated by official song description, and UK release date; not the US 23 November date"
+    }
+  ],
+  "story_tr": {
+    "opening": "Bir uğultu, bir şarkının imzası olabilir mi?",
+    "narrative": "On sekiz Ekim bin dokuz yüz altmış dört. The Beatles, Londra’daki EMI stüdyolarında “I Feel Fine”ı kaydetti. Açılıştaki gitar geri beslemesi, pop müzikte bu sesin ilk örnekleri arasındaydı. George Martin’in yapımcılığındaki kayıt, grubun bir sonraki kırkbeşliğinin ön yüzü oldu; İngiltere’de yirmi yedi Kasım’da yayımlandı.",
+    "closing": "Oldies Radyo. Dinle, beğen, paylaş."
+  },
+  "dj_script_tr": "Bir uğultu, bir şarkının imzası olabilir mi? On sekiz Ekim bin dokuz yüz altmış dört. The Beatles, Londra’daki EMI stüdyolarında “I Feel Fine”ı kaydetti. Açılıştaki gitar geri beslemesi, pop müzikte bu sesin ilk örnekleri arasındaydı. George Martin’in yapımcılığındaki kayıt, grubun bir sonraki kırkbeşliğinin ön yüzü oldu; İngiltere’de yirmi yedi Kasım’da yayımlandı. Oldies Radyo. Dinle, beğen, paylaş.",
+  "image_credits": [],
+  "storyboard_status": "CANDIDATE_METADATA_ONLY_NOT_VISUALLY_OR_RIGHTS_APPROVED",
+  "local_voiceover": null,
+  "voice_evidence": null
+}

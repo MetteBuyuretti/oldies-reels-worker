@@ -1,0 +1,61 @@
+{
+  "ref": "073e7665d9d381e7c8d595fcd60b905a9071490a",
+  "files": [
+    {
+      "path": "worker.py",
+      "expected_git_blob": "554421fa99c57b221a3fa6a469a7b0b9fdbbf0ca"
+    },
+    {
+      "path": "reels_preview.py",
+      "expected_git_blob": "4c9886faf9d807f6d68b383bff6b7823dfa5fce2"
+    },
+    {
+      "path": "video_factory.py",
+      "expected_git_blob": "1f293124644120afbdd3790f5a4c6a33bb45e78d"
+    },
+    {
+      "path": "media_evidence.py",
+      "expected_git_blob": "1e6f2617352be0b7a0db5484bf1729a0030d936d"
+    },
+    {
+      "path": "source_evidence.py",
+      "expected_git_blob": "3113a522c4a17e7d74f3e807fdaa7f7496af42fd"
+    },
+    {
+      "path": "editorial_quality_gate.py",
+      "expected_git_blob": "88a0727431cc3b8da58b0e2d2442719c65512e1e"
+    }
+  ],
+  "local_R0": {
+    "evidence_commit": "6bbf8ace87d096c062dabcdbb09d9dc8b4ae108d",
+    "evidence_path": "work-output/jingle-j3-20261030/evidence/reels-r0-input.json",
+    "workspaces": [
+      {
+        "alias": "LOCAL_REELS_1",
+        "git_head": "073e7665d9d381e7c8d595fcd60b905a9071490a",
+        "git_head_is_full_worktree_identity": false,
+        "files": {
+          "worker.py": "90ee2a1955e340af13b6b119dc796e2d40e90805a2f29c297c7222468f813fb1",
+          "reels_preview.py": "b4a7225e22a8a6a2cbf31dbcfd7c5149411d580277f575e83cfd9945f63e3cd4",
+          "video_factory.py": "fbe4aacf901a61cb0b03d7765c46eb9c4b9575ad562f0156aec299a5e6696d96",
+          "media_evidence.py": "c2e30a6d87a66f5b970fcaff680a99f93d2292f4fe0d0bdb1fbf6a0fba7253f2",
+          "source_evidence.py": "e7c95765638f7f8708ff3333f41138b09c18693eb5a7329a0f3f3966ea187fd3",
+          "editorial_quality_gate.py": "35289752afc2cf975ca53ddfa3998e0b379c534ef52dd7d903917c8a0294f0f8"
+        }
+      },
+      {
+        "alias": "LOCAL_REELS_2",
+        "git_head": "NO_GIT_METADATA",
+        "git_head_is_full_worktree_identity": false,
+        "files": {
+          "worker.py": "285be65a047d793afcdeaaa6ddfcac33ff2c1e9973451011a423fb1191f1d237",
+          "reels_preview.py": "a7da2286b14fcc17e50588b8f2279ad6b998b7f2104e05ba4aa2a8de2eb3d29d",
+          "video_factory.py": "4b9937a98b58f22317a32142500a4ee002141f105b75c89141a633f49dc6bc93",
+          "media_evidence.py": null,
+          "source_evidence.py": "30e94d2a3f108c894dd9afa4fe821c78800987fa3336116d2f05ddbd8fe5df2a",
+          "editorial_quality_gate.py": "b3d7d839b8b03ba26dd413bb7f6332d85cfe9c3bb55a9424d34faa85279246fd"
+        }
+      }
+    ]
+  }
+}

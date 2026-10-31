@@ -1,0 +1,74 @@
+[
+  {
+    "id": "P1",
+    "source_url": "https://www.loc.gov/item/2016646494/",
+    "image_record_url": "https://www.loc.gov/resource/ppmsca.41593/",
+    "creator": "Marion S. Trikosko",
+    "capture_date": "1964-02-11",
+    "context": "Washington Coliseum press conference; representative 1964 archive, NOT 18 October EMI session",
+    "rights_statement": "No known restrictions on publication.",
+    "rights_source_url": "https://www.loc.gov/item/2016646494/",
+    "rights_type": "ARCHIVE_ADVISORY_NOT_CC0",
+    "credit": "Marion S. Trikosko / U.S. News & World Report Magazine Photograph Collection / Library of Congress, LC-DIG-ppmsca-41593",
+    "expected_members": [
+      "John Lennon",
+      "Paul McCartney",
+      "George Harrison",
+      "Ringo Starr"
+    ],
+    "individual_identification_reviewed": false,
+    "asset_sha256": null,
+    "pixel_dimensions": null,
+    "visual_review_status": "NOT_PERFORMED",
+    "rights_territories_confirmed": [],
+    "selected_for_render": false
+  },
+  {
+    "id": "P2",
+    "source_url": "https://www.loc.gov/item/2016646499/",
+    "image_record_url": "https://www.loc.gov/resource/ppmsca.41598/",
+    "creator": "Marion S. Trikosko",
+    "capture_date": "1964-02-11",
+    "context": "Washington Coliseum concert; representative 1964 playing context, NOT I Feel Fine performed there or EMI recording",
+    "rights_statement": "No known restrictions on publication.",
+    "rights_source_url": "https://www.loc.gov/item/2016646499/",
+    "rights_type": "ARCHIVE_ADVISORY_NOT_CC0",
+    "credit": "Marion S. Trikosko / U.S. News & World Report Magazine Photograph Collection / Library of Congress, LC-DIG-ppmsca-41598",
+    "expected_members": [
+      "John Lennon",
+      "Paul McCartney",
+      "George Harrison",
+      "Ringo Starr"
+    ],
+    "individual_identification_reviewed": false,
+    "asset_sha256": null,
+    "pixel_dimensions": null,
+    "visual_review_status": "NOT_PERFORMED",
+    "rights_territories_confirmed": [],
+    "selected_for_render": false
+  },
+  {
+    "id": "P3",
+    "source_url": "https://www.loc.gov/item/2016646493/",
+    "image_record_url": "https://www.loc.gov/resource/ppmsca.41592/",
+    "creator": "Marion S. Trikosko",
+    "capture_date": "1964-02-11",
+    "context": "1964 Washington archive press frame; record/official LOC blog preferred over conflicting Commons JFK/UPI metadata",
+    "rights_statement": "No known restrictions on publication.",
+    "rights_source_url": "https://www.loc.gov/item/2016646493/",
+    "rights_type": "ARCHIVE_ADVISORY_NOT_CC0",
+    "credit": "Marion S. Trikosko / U.S. News & World Report Magazine Photograph Collection / Library of Congress, LC-DIG-ppmsca-41592",
+    "expected_members": [
+      "John Lennon",
+      "Paul McCartney",
+      "George Harrison",
+      "Ringo Starr"
+    ],
+    "individual_identification_reviewed": false,
+    "asset_sha256": null,
+    "pixel_dimensions": null,
+    "visual_review_status": "NOT_PERFORMED",
+    "rights_territories_confirmed": [],
+    "selected_for_render": false
+  }
+]
