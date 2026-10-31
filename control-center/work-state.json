@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-10-30T23:49:25.547Z",
+  "updated_at": "2026-10-31T00:04:53.920Z",
   "tasks": [
     {
       "id": "europe-1960s-singers",
@@ -941,7 +941,7 @@
       "id": "coordinator-closure-20261031",
       "title": "Ayrı WORK Koordinatörü — paralel kapanış ve teslim takibi",
       "owner": "WORK KOORDİNATÖRÜ /root/work_koordinatoru",
-      "status": "in_progress",
+      "status": "checkpointed",
       "completed_units": [
         "constitution_AGENTS_and_current_state_read",
         "actual_coordinator_receipt_6535816742",
@@ -949,10 +949,12 @@
         "central_main_and_PR35_single_writer_handoff_received_from_root",
         "native_J3_application_and_FB_real_dependency_delivery_intake_completed",
         "Work1_PR37_source_RESULT_HANDOFF_metadata_read",
-        "existing_hourly_Watchdog_tracking_extension_confirmed_by_root"
+        "existing_hourly_Watchdog_tracking_extension_confirmed_by_root",
+        "internal_vs_external_chat_distinction_corrected",
+        "central_main_PR35_writing_paused_for_external_takeover"
       ],
-      "last_checkpoint": "2026-10-30T23:49:25.547Z",
-      "next_step": "Program/statevegerçek nativeilkparça intake tamam; mevcutWATCHDOGdarPR37/J3paketincelemesi ve hariciWork2TRgerçekalımını izle. WindowsCodexiçin yeniLOCAL-SOCIAL-SNAPSHOT-20261031-01talimatıhazır, alımıhenüzyok. Saatliktakipmevcutalarmgörevineeklendi, ayrıgörevyok.",
+      "last_checkpoint": "2026-10-31T00:04:53.920Z",
+      "next_step": "Bu iç koordinatör ajanı aynı Work1 sohbetindeydi; ayrı harici Work sohbeti değildi. Main/PR35 merkezi yazma bu son duraklatma checkpoint'inden sonra donduruldu. Yeni EXTERNAL-COORDINATOR-TAKEOVER-20261031-01 görevi hazır; gerçek ayrı sohbet #32 alımı ve bu duraklatma kaydı okunmadan dış koordinatör devralmış sayılmaz. İç ajan kendiliğinden yeniden yazmayacak.",
       "receipt_comment_id": 6535816742,
       "received_at": "2026-10-31T02:38:00+03:00",
       "ultimate_responsibility": "WORK MASTER / root",
@@ -964,9 +966,13 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/85dc0085b85924bbd984f50042a68d5239f3aa0e/work-output/work1-watchdog-run-state-20261031/RESULT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/1ff6ca787e84ba896910cb0cbef7e77e2a25c539/work-output/closure-program-20261031/PROGRAM.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/1ff6ca787e84ba896910cb0cbef7e77e2a25c539/work-output/closure-program-20261031/COORDINATOR.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fd2437240e9ef7a67f8f05fb757e00f854b1191c/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fd2437240e9ef7a67f8f05fb757e00f854b1191c/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/a2d075ed97be77833e11a5ea00c2c88d0e376aad/work-output/closure-program-20261031/COORDINATOR.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/4b64959a84b9b18b158ae2c901e6238d97c3c931/work-output/closure-program-20261031/EXTERNAL-COORDINATOR-START.md"
       ],
-      "control_time": "31.10.2026 | 02:44 TSİ ilkkoordinasyoncheckpoint tamam; sonrakiaktifsomutinceleme/haricialım/teslim."
+      "control_time": "31.10.2026 | 02:44 TSİ ilkkoordinasyoncheckpoint tamam; sonrakiaktifsomutinceleme/haricialım/teslim.",
+      "note": "\n31.10.2026 | 03:03 TSİ: Kurucunun 'hangi sohbette devraldı?' sorusuyla iç ajan/harici sohbet ayrımı açıklaştırıldı. Önceki02:38alım ve program/intake/devralınmışmerkezkayıtyazımları bu sohbet içindeki ajana aittir ve korunur. Ayrısohbetalımı yok; bundan sonra iki koordinatör yazmasın diye merkez yazımı duraklatıldı. Root teknik Work1 olarak sürer; yeni ücret/üretim/merge/deploy/Watchdog yetkisi yok.",
+      "writing_paused": true
     },
     {
       "id": "work1-watchdog-state-20261031",
@@ -1090,6 +1096,43 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/1ff6ca787e84ba896910cb0cbef7e77e2a25c539/work-output/closure-program-20261031/PROGRAM.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fd2437240e9ef7a67f8f05fb757e00f854b1191c/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md"
       ]
+    },
+    {
+      "id": "external-coordinator-takeover-20261031",
+      "title": "Ayrı harici Work Koordinatörü — gerçek sohbet devri",
+      "job_id": "EXTERNAL-COORDINATOR-TAKEOVER-20261031-01",
+      "owner": "WORK MASTER / root until real external handoff",
+      "planned_executor": "User opens a new separate Work chat in this project; no actual receipt yet",
+      "status": "queued",
+      "completed_units": [
+        "external_START_prepared_by_root_and_readback_verified",
+        "internal_coordinator_pause_checkpoint_prepared"
+      ],
+      "last_checkpoint": "2026-10-31T00:04:53.920Z",
+      "instruction_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/4b64959a84b9b18b158ae2c901e6238d97c3c931/work-output/closure-program-20261031/EXTERNAL-COORDINATOR-START.md",
+      "next_step": "Yeni ayrı Work sohbeti EXTERNAL-COORDINATOR-START.md talimatını ve son iç-koordinatör duraklatma kaydını okuyup #32'ye gerçek işID/TSİ/araç/ref/ilk kontrol hedefiyle ALINDI/BAŞLADI yazsın. Ancak bu gerçek alım ve duraklatma kaydı görüldüğünde tek merkez yazarlığı harici koordinatöre geçer. Şu anda devraldı denmeyecek.",
+      "dispatch": {
+        "prepared": true,
+        "receipt_observed": false,
+        "started_observed": false,
+        "received_at": null,
+        "first_control_target": null,
+        "actual_external_chat_identified": false,
+        "automatic_chat_trigger": false
+      },
+      "authority": {
+        "central_writer_transferred": false,
+        "requires_actual_external_receipt": true,
+        "requires_pause_record_read": true,
+        "ultimate_master_responsibility": "root",
+        "new_production_fee_merge_deploy_authority": false,
+        "independent_WATCHDOG_role": false
+      },
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/4b64959a84b9b18b158ae2c901e6238d97c3c931/work-output/closure-program-20261031/EXTERNAL-COORDINATOR-START.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/a2d075ed97be77833e11a5ea00c2c88d0e376aad/work-output/closure-program-20261031/COORDINATOR.md"
+      ],
+      "control_time": "31.10.2026 | 03:03 TSİ hazırlık ve son iç yazma checkpoint'i; gerçek harici alım gelmeden devredilmiş sayılmaz."
     }
   ],
   "last_status_audit": {
@@ -1118,16 +1161,16 @@
     "cross_project_reconciliation": "Etsy/POD/TeePublic and separate 59s DJ deliverables not re-audited in this report; current central register incomplete"
   },
   "coordination": {
-    "owner": "WORK KOORDİNATÖRÜ / this Work session separate agent",
+    "owner": "External Work coordinator handoff pending; current internal agent writing paused",
     "agent_id": "/root/work_koordinatoru",
     "job_id": "COORD-CLOSURE-20261031-01",
     "receipt_comment_id": 6535816742,
     "received_at": "2026-10-31T02:38:00+03:00",
-    "central_state_writer": "coordinator_only_main_and_PR35_root_relinquished_parallel_writes",
+    "central_state_writer": "PAUSED_no_active_writer_until_true_external_receipt_and_freeze_record_read",
     "writer_handoff_received_at": "2026-10-30T23:44:53.643Z",
-    "ultimate_management_responsibility": "WORK MASTER / root retained per constitution V3.0 section2",
+    "ultimate_management_responsibility": "WORK MASTER / root retained; root continues technical Work1",
     "program_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/1ff6ca787e84ba896910cb0cbef7e77e2a25c539/work-output/closure-program-20261031/PROGRAM.md",
-    "role_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/1ff6ca787e84ba896910cb0cbef7e77e2a25c539/work-output/closure-program-20261031/COORDINATOR.md",
+    "role_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/a2d075ed97be77833e11a5ea00c2c88d0e376aad/work-output/closure-program-20261031/COORDINATOR.md",
     "independent_watchdog": false,
     "external_Work2": false,
     "task_statuses_not_implying_automatic_wakeup": true,
@@ -1145,6 +1188,35 @@
       "new_create_attempt": "capacity_error_current5_limit5_then_existing_task_update_succeeded",
       "verified_source": "root update success and peek readback confirmed at 31Oct02:45TSI, issue32/6535935603",
       "program_stop_rule": "Stop only added closure checks when program complete; retain original fault monitoring"
+    },
+    "historical_internal_coordinator": {
+      "owner": "WORK KOORDİNATÖRÜ / this Work session separate agent",
+      "agent_id": "/root/work_koordinatoru",
+      "job_id": "COORD-CLOSURE-20261031-01",
+      "receipt_comment_id": 6535816742,
+      "received_at": "2026-10-31T02:38:00+03:00",
+      "writer_handoff_received_at": "2026-10-30T23:44:53.643Z",
+      "performed_coordination_and_intakes_preserved": true
+    },
+    "writing_paused_at": "2026-10-31T00:03:45.839Z",
+    "pause_effective_after_this_final_freeze_checkpoint": true,
+    "internal_coordinator_status": "checkpointed_paused_not_a_separate_external_Work_chat",
+    "external_handoff": {
+      "task_id": "external-coordinator-takeover-20261031",
+      "job_id": "EXTERNAL-COORDINATOR-TAKEOVER-20261031-01",
+      "status": "queued",
+      "instruction_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/4b64959a84b9b18b158ae2c901e6238d97c3c931/work-output/closure-program-20261031/EXTERNAL-COORDINATOR-START.md",
+      "instruction_prepared": true,
+      "receipt_observed": false,
+      "started_observed": false,
+      "received_at": null,
+      "writer_transferred": false,
+      "required_before_transfer": [
+        "Real new separate Work chat reads current pause record and main/PR35 SHAs",
+        "New chat posts actual EXTERNAL coordinator receipt/start with job ID, TSI, access/ref and first control target in issue32"
+      ],
+      "pause_record_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/a2d075ed97be77833e11a5ea00c2c88d0e376aad/work-output/closure-program-20261031/COORDINATOR.md",
+      "internal_agent_must_not_resume_writing_automatically": true
     }
   }
 }
