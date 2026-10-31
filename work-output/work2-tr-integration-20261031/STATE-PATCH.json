@@ -1,0 +1,19 @@
+{
+  "job_id": "WORK2-TR-INTEGRATION-20261031-02",
+  "actor": "WORK2",
+  "status": "checkpointed",
+  "last_checkpoint": "2026-10-31T03:34:36.876912+00:00",
+  "completed_units": [
+    "A-called-TR-storyboard-consumer",
+    "A-24-new-focused-tests-pass",
+    "A-23-existing-regressions-pass",
+    "B-5-originals-viewed-hashes-and-rights-recorded",
+    "B-private-archive-and-contact-sheets-saved",
+    "C-draft-PR38",
+    "C-fixed-code-hashes-patch-and-rollback-preflight",
+    "C-Windows-offline-handoff"
+  ],
+  "next_step": "MASTER reconcile candidate delivery; coordinate missing visual/rights/audio/independent review and Windows isolated handoff. No operational acceptance.",
+  "central_write_performed": false,
+  "operational_pass": false
+}

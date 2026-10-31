@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "exit": 0,
+  "scope": "Synthetic color PNGs + synthetic silence stream to null sink only; no output media file",
+  "real_story_or_media": false,
+  "stderr": ""
+}

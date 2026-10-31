@@ -1,0 +1,83 @@
+{
+  "job_id": "WORK2-TR-INTEGRATION-20261031-02",
+  "delivered_at": "2026-10-31T03:34:36.876912+00:00",
+  "branch": "work2/tr-preproduction-20261031",
+  "status": "candidate_delivery_complete_operational_inputs_open",
+  "operational_pass": false,
+  "t1_base": "3b71f9debc4becc4b2a868796b88897ad1da484d",
+  "code_commit": "2e829a56cee7452959f88d4182e14f62e88cc75a",
+  "visual_commit": "3a1b9c329b05bb5ebb2305f0a06e404c92b35e42",
+  "draft_pr": "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/38",
+  "pr_base_branch": "fix/p0-evidence-based-reels-qc-20261016",
+  "pr33_initial_base": "073e7665d9d381e7c8d595fcd60b905a9071490a",
+  "tests": {
+    "new_methods_pass": 24,
+    "existing_methods_pass": 23,
+    "historical_counts_reused": false,
+    "real_media_acceptance": false,
+    "provider_or_publish_calls": 0
+  },
+  "missing_inputs": [
+    {
+      "id": "B-VISUAL-PACKET",
+      "owner": "MASTER / visual reviewer",
+      "required": [
+        "Three distinct story-relevant originals with identity/composition approval; guitar/work S2 still missing",
+        "TR/GB/US rights/personality basis",
+        "Independent review"
+      ],
+      "evidence": "ASSET-MANIFEST.json and RIGHTS-AND-VISUAL-REVIEW.md",
+      "failed_access": {
+        "public_item_url": "https://www.loc.gov/item/2016646500/?fo=json",
+        "public_original_url": "https://tile.loc.gov/storage-services/master/pnp/ppmsca/41500/41599u.tif",
+        "attempted_paths": [
+          "LOC primary JSON",
+          "LOC master TIFF"
+        ],
+        "result": "timeouts, no visual inspection, no PASS"
+      }
+    },
+    {
+      "id": "REAL-TR-VOICE-ALIGNMENT",
+      "owner": "MASTER / assigned media executor",
+      "required": [
+        "Natural exact-script local voice",
+        "Measured decoded duration/audio SHA/transcript",
+        "Reviewed exact-audio word boundaries, not estimates"
+      ]
+    },
+    {
+      "id": "INDEPENDENT-ACCEPTANCE",
+      "owner": "WORK WATCHDOG / founder per existing gates",
+      "required": [
+        "Original source, photos, natural DJ and final media acceptance"
+      ]
+    },
+    {
+      "id": "WINDOWS-ALIM",
+      "owner": "Windows Codex",
+      "required": [
+        "Fixed C package receipt",
+        "Actual launcher/path/current hashes",
+        "Isolated preimage checks; stop on known R0 divergence"
+      ]
+    },
+    {
+      "id": "V3-CONSTITUTION-CANONICAL",
+      "owner": "MASTER",
+      "required": [
+        "Full founder-approved V3.0 canonical source/version"
+      ],
+      "searched": [
+        "repository filename/code",
+        "Library title/content",
+        "targeted prior context"
+      ],
+      "read_verified": false
+    }
+  ],
+  "windows_applied": false,
+  "central_state_written": false,
+  "source_and_media_evidence_unchanged": true,
+  "next_step": "MASTER reconcile candidate delivery; coordinate missing visual/rights/audio/independent review and Windows isolated handoff. No operational acceptance."
+}

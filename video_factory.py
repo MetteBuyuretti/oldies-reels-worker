@@ -147,6 +147,43 @@ def build_timeline(script: str, audio: Path, *, target_scene_seconds: float = 3.
     return timeline
 
 
+def build_storyboard_timelines(candidate: dict, voiceover: Path) -> tuple[list[dict], list[dict]]:
+    """Use reviewed audio word boundaries, never a word-rate duration estimate."""
+    from editorial_quality_gate import check_storyboard, media_sha256
+    from source_evidence import check_script
+    duration = audio_duration(voiceover)
+    final_reel_duration(duration)
+    plan = check_storyboard(candidate, duration)
+    if media_sha256(voiceover) != candidate['voice_alignment']['audio_sha256']:
+        raise RuntimeError('Storyboard alignment is for different audio bytes')
+    script = check_script(candidate)
+    rows = candidate['voice_alignment']['words']
+    count = max(4, min(12, int(round(duration / 3.2))))
+    words = script.split()
+    # Caption grouping cannot inherit an oversized final punctuation chunk.
+    # Audio is untouched; each caption boundary uses a reviewed word timestamp.
+    chunks = [' '.join(words[round(i * len(words) / count):round((i+1) * len(words) / count)])
+              for i in range(count)]
+    if ' '.join(chunks) != ' '.join(script.split()):
+        raise RuntimeError('Caption grouping must retain every exact script word')
+    captions, cursor = [], 0
+    for index, text in enumerate(chunks, 1):
+        end_word = cursor + len(text.split())
+        start = 0.0 if cursor == 0 else float(rows[cursor]['start'])
+        end = duration if end_word == len(rows) else float(rows[end_word]['start'])
+        captions.append({'index': index, 'start': start, 'end': end,
+                         'duration': end - start, 'text': text})
+        cursor = end_word
+    photos = []
+    for index, scene in enumerate(plan['scenes']):
+        start = 0.0 if index == 0 else float(rows[scene['start_word']]['start'])
+        end = (duration if index == len(plan['scenes']) - 1 else
+               float(rows[plan['scenes'][index + 1]['start_word']]['start']))
+        photos.append({'scene_id': scene['scene_id'], 'start': start, 'end': end,
+                       'duration': end - start, 'photo_sha256': scene['photo_sha256']})
+    return captions, photos
+
+
 def _srt_time(seconds: float) -> str:
     milliseconds = int(round(max(0.0, seconds) * 1000))
     hours, milliseconds = divmod(milliseconds, 3_600_000)
@@ -219,16 +256,33 @@ def render_timeline(
     height: int,
     fps: int,
     max_video_bytes: int,
+    photo_timeline: list[dict] | None = None,
+    caption_overlays: list[Path] | None = None,
 ) -> None:
     if not scenes or not timeline:
         raise RuntimeError("Timeline render requires scenes and timing data")
-    if len(scenes) != len(timeline):
+    visual_timeline = timeline if photo_timeline is None else photo_timeline
+    if len(scenes) != len(visual_timeline):
         raise RuntimeError("Scene count must match timeline count")
+    if photo_timeline is not None:
+        if caption_overlays is None or len(caption_overlays) != len(timeline):
+            raise RuntimeError('Storyboard render requires a separate overlay for every caption')
+        for rows in (timeline, photo_timeline):
+            cursor = 0.0
+            for row in rows:
+                start, end = float(row['start']), float(row['end'])
+                seconds = float(row['duration'])
+                if (not math.isfinite(start) or not math.isfinite(end)
+                        or not math.isfinite(seconds)
+                        or abs(start - cursor) > .001 or end <= start
+                        or abs(seconds - (end - start)) > .001):
+                    raise RuntimeError('Caption/photo intervals must cover audio without gaps or overlaps')
+                cursor = end
 
     transition = 0.28
     inputs: list[str] = []
     filters: list[str] = []
-    for index, (scene, item) in enumerate(zip(scenes, timeline)):
+    for index, (scene, item) in enumerate(zip(scenes, visual_timeline)):
         intended = float(item["duration"])
         source_duration = intended + (transition if index < len(scenes) - 1 else 0.0)
         inputs += ["-loop", "1", "-t", f"{source_duration:.3f}", "-i", str(scene)]
@@ -238,7 +292,7 @@ def render_timeline(
         )
 
     current = "v0"
-    elapsed = float(timeline[0]["duration"])
+    elapsed = float(visual_timeline[0]["duration"])
     transitions = ("fade", "smoothleft", "smoothright")
     for index in range(1, len(scenes)):
         out = f"x{index}"
@@ -248,13 +302,25 @@ def render_timeline(
             f"duration={transition:.2f}:offset={elapsed:.3f}[{out}]"
         )
         current = out
-        elapsed += float(timeline[index]["duration"])
+        elapsed += float(visual_timeline[index]["duration"])
 
     voice_seconds = audio_duration(voiceover)
     total_duration = final_reel_duration(voice_seconds)
-    visual_duration = sum(float(item["duration"]) for item in timeline)
-    if abs(visual_duration - voice_seconds) > 0.03:
+    visual_duration = sum(float(item["duration"]) for item in visual_timeline)
+    caption_duration = sum(float(item["duration"]) for item in timeline)
+    if abs(visual_duration - voice_seconds) > 0.03 or abs(caption_duration - voice_seconds) > .03:
         raise RuntimeError("Timeline must cover the complete natural narration without padding")
+    if photo_timeline is not None:
+        # The three photo inputs continue uninterrupted. Caption changes add
+        # transparent text layers, never reopen or transition a photo input.
+        for index, (overlay, item) in enumerate(zip(caption_overlays, timeline)):
+            input_index = len(scenes) + index
+            inputs += ['-loop', '1', '-t', f'{voice_seconds:.3f}', '-i', str(overlay)]
+            filters.append(f'[{input_index}:v]format=rgba,setpts=PTS-STARTPTS[cap{index}]')
+            out = f'caption{index}'
+            filters.append(f"[{current}][cap{index}]overlay=enable='gte(t,{float(item['start']):.6f})*"
+                           f"lt(t,{float(item['end']):.6f})'[{out}]")
+            current = out
     hold_seconds = max(0.0, total_duration - visual_duration)
     output_video = current
     if hold_seconds > 0.01:
@@ -263,7 +329,7 @@ def render_timeline(
             f"[{current}]tpad=stop_mode=clone:stop_duration={hold_seconds:.3f}[{output_video}]"
         )
 
-    audio_index = len(scenes)
+    audio_index = len(scenes) + (len(caption_overlays) if photo_timeline is not None else 0)
     inputs += ["-i", str(voiceover)]
     filters.append(
         f"[{audio_index}:a]aformat=sample_rates=48000:channel_layouts=stereo,"

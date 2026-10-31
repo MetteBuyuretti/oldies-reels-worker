@@ -153,6 +153,98 @@ def check_photo_evidence(candidate: dict) -> list[dict]:
     return photos
 
 
+def storyboard_source_sha256(candidate: dict) -> str:
+    """Bind the plan to historical evidence, independently of the plan itself."""
+    fields = ('artist', 'event_date', 'research_date', 'reels_language',
+              'primary_evidence', 'source_documents', 'verified_facts', 'target_territories')
+    data = {key: candidate.get(key) for key in fields}
+    return hashlib.sha256(json.dumps(data, ensure_ascii=False, sort_keys=True,
+                                    separators=(',', ':')).encode('utf-8')).hexdigest()
+
+
+def storyboard_photos_sha256(candidate: dict) -> str:
+    return hashlib.sha256(json.dumps(candidate.get('image_credits'), ensure_ascii=False,
+                                    sort_keys=True, separators=(',', ':')).encode('utf-8')).hexdigest()
+
+
+def check_storyboard(candidate: dict, measured_voice_seconds: float | None = None) -> dict:
+    """Validate a requested plan before render; metadata is never human acceptance.
+
+    Words identify script coverage. Reviewed per-word audio timestamps are a
+    separate input; word counts or estimated reading rates cannot replace them.
+    """
+    script = check_script(candidate)
+    photos = check_photo_evidence(candidate)
+    plan = candidate.get('visual_storyboard')
+    if not isinstance(plan, dict) or plan.get('version') != 'storyboard-v1':
+        raise EditorialGateError('Missing or unknown visual storyboard; no legacy fallback')
+    from source_evidence import text_sha256
+    if (plan.get('profile') != 'legacy_short_25_30'
+            or plan.get('script_sha256') != text_sha256(script)
+            or plan.get('source_evidence_sha256') != storyboard_source_sha256(candidate)
+            or plan.get('photo_evidence_sha256') != storyboard_photos_sha256(candidate)):
+        raise EditorialGateError('Storyboard profile/script/source/photo evidence binding mismatch')
+    by_hash = {photo['asset_sha256']: photo for photo in photos}
+    origins = set()
+    for photo in photos:
+        origin = photo.get('original_asset_sha256') or photo['asset_sha256']
+        composition = photo.get('composition_id') or origin
+        if (photo.get('derived_from_sha256') or photo.get('derived_variant')
+                or photo.get('source_cropped') is True or origin != photo['asset_sha256']
+                or photo['asset_sha256'] in candidate.get('rejected_visual_sha256', [])
+                or not isinstance(composition, str)
+                or composition in origins):
+            raise EditorialGateError('Storyboard cannot reuse a rejected/cropped/derived composition')
+        origins.add(composition)
+    words = script.split()
+    scenes = plan.get('scenes')
+    if not isinstance(scenes, list) or len(scenes) != len(photos):
+        raise EditorialGateError('Storyboard must use each distinct documented photo once')
+    cursor, used_photos, scene_ids = 0, set(), set()
+    for scene in scenes:
+        if not isinstance(scene, dict):
+            raise EditorialGateError('Storyboard scene must be an object')
+        start, end = scene.get('start_word'), scene.get('end_word')
+        sid, asset = scene.get('scene_id'), scene.get('photo_sha256')
+        if (type(start) is not int or type(end) is not int or start != cursor
+                or not start < end <= len(words) or not isinstance(sid, str) or not sid.strip()
+                or sid in scene_ids or not isinstance(asset, str)
+                or asset not in by_hash or asset in used_photos):
+            raise EditorialGateError('Storyboard ranges/photos must be ordered, complete and nonrepeating')
+        cursor = end
+        scene_ids.add(sid); used_photos.add(asset)
+    if cursor != len(words):
+        raise EditorialGateError('Storyboard must cover all words including the exact closing')
+    alignment = candidate.get('voice_alignment')
+    evidence = candidate.get('voice_evidence') or {}
+    if (not isinstance(alignment, dict) or alignment.get('version') != 'word-alignment-v1'
+            or alignment.get('timing_basis') != 'reviewed_audio_word_boundaries'
+            or not isinstance(alignment.get('reviewed_by'), str) or not alignment['reviewed_by'].strip()
+            or not alignment.get('evidence_id')
+            or alignment.get('script_sha256') != text_sha256(script)
+            or alignment.get('audio_sha256') != evidence.get('sha256')
+            or not re.fullmatch(r'[a-f0-9]{64}', str(alignment.get('audio_sha256') or ''))):
+        raise EditorialGateError('Reviewed exact-audio word alignment is required; estimates are not timestamps')
+    rows = alignment.get('words')
+    if not isinstance(rows, list) or len(rows) != len(words):
+        raise EditorialGateError('Alignment must cover every script word including closing')
+    previous = 0.0
+    for word, row in zip(words, rows):
+        if (not isinstance(row, dict) or row.get('word') != word
+                or type(row.get('start')) not in (int, float) or type(row.get('end')) not in (int, float)):
+            raise EditorialGateError('Alignment token/timestamp mismatch')
+        start, end = float(row['start']), float(row['end'])
+        if not math.isfinite(start) or not math.isfinite(end) or start < previous or end <= start:
+            raise EditorialGateError('Alignment must be finite and ordered without overlap')
+        previous = end
+    if measured_voice_seconds is not None:
+        duration = float(measured_voice_seconds)
+        if (not math.isfinite(duration) or rows[0]['start'] > .15
+                or previous > duration or duration - previous > .25):
+            raise EditorialGateError('Alignment does not cover the measured natural audio')
+    return plan
+
+
 def check_approved_reel(candidate: dict, video: Path, approval: dict) -> dict:
     """Both channels require the same independently reviewed, hash-bound packet.
 
@@ -165,6 +257,8 @@ def check_approved_reel(candidate: dict, video: Path, approval: dict) -> dict:
     except EvidenceError as exc:
         raise EditorialGateError(str(exc)) from exc
     photos = check_photo_evidence(candidate)
+    if 'visual_storyboard' in candidate:
+        check_storyboard(candidate, media['audio']['decoded_seconds'])
     if approval.get("candidate_sha256") != packet_sha256(candidate):
         raise EditorialGateError("Independent review not bound to exact source/script/photo packet")
     required = ("historical_sources_verified", "script_facts_verified", "natural_dj_voice_verified",

@@ -1,0 +1,118 @@
+{
+  "job_id": "WORK2-TR-PREPRODUCTION-20261031-01",
+  "status": "T1_TEXT_SOURCE_CHECKED_VISUAL_MEDIA_NOT_APPROVED",
+  "python": "3.12.14",
+  "base_ref": "073e7665d9d381e7c8d595fcd60b905a9071490a",
+  "source_snapshots": [
+    {
+      "path": "worker.py",
+      "github_blob": "554421fa99c57b221a3fa6a469a7b0b9fdbbf0ca",
+      "github_snapshot_sha256": "c0c1555cf8ff583f42cc6059ad70e575846f54153d3e99571d152e2a7a221b4c",
+      "R0_LOCAL_REELS_1_sha256": "90ee2a1955e340af13b6b119dc796e2d40e90805a2f29c297c7222468f813fb1",
+      "R0_exact_bytes_match": false
+    },
+    {
+      "path": "reels_preview.py",
+      "github_blob": "4c9886faf9d807f6d68b383bff6b7823dfa5fce2",
+      "github_snapshot_sha256": "b4a7225e22a8a6a2cbf31dbcfd7c5149411d580277f575e83cfd9945f63e3cd4",
+      "R0_LOCAL_REELS_1_sha256": "b4a7225e22a8a6a2cbf31dbcfd7c5149411d580277f575e83cfd9945f63e3cd4",
+      "R0_exact_bytes_match": true
+    },
+    {
+      "path": "video_factory.py",
+      "github_blob": "1f293124644120afbdd3790f5a4c6a33bb45e78d",
+      "github_snapshot_sha256": "fbe4aacf901a61cb0b03d7765c46eb9c4b9575ad562f0156aec299a5e6696d96",
+      "R0_LOCAL_REELS_1_sha256": "fbe4aacf901a61cb0b03d7765c46eb9c4b9575ad562f0156aec299a5e6696d96",
+      "R0_exact_bytes_match": true
+    },
+    {
+      "path": "media_evidence.py",
+      "github_blob": "1e6f2617352be0b7a0db5484bf1729a0030d936d",
+      "github_snapshot_sha256": "c2e30a6d87a66f5b970fcaff680a99f93d2292f4fe0d0bdb1fbf6a0fba7253f2",
+      "R0_LOCAL_REELS_1_sha256": "c2e30a6d87a66f5b970fcaff680a99f93d2292f4fe0d0bdb1fbf6a0fba7253f2",
+      "R0_exact_bytes_match": true
+    },
+    {
+      "path": "source_evidence.py",
+      "github_blob": "3113a522c4a17e7d74f3e807fdaa7f7496af42fd",
+      "github_snapshot_sha256": "e7c95765638f7f8708ff3333f41138b09c18693eb5a7329a0f3f3966ea187fd3",
+      "R0_LOCAL_REELS_1_sha256": "e7c95765638f7f8708ff3333f41138b09c18693eb5a7329a0f3f3966ea187fd3",
+      "R0_exact_bytes_match": true
+    },
+    {
+      "path": "editorial_quality_gate.py",
+      "github_blob": "88a0727431cc3b8da58b0e2d2442719c65512e1e",
+      "github_snapshot_sha256": "002ee289505c26d80d568a5f1cd7bb5cb04606d5ae118c3a7f8104c0edf7edd1",
+      "R0_LOCAL_REELS_1_sha256": "35289752afc2cf975ca53ddfa3998e0b379c534ef52dd7d903917c8a0294f0f8",
+      "R0_exact_bytes_match": false
+    }
+  ],
+  "focused_checks": [
+    {
+      "check": "actual_PR33_check_script_on_archive_packet",
+      "result": "STRUCTURAL_ONLY_PASS",
+      "human_acceptance": false
+    },
+    {
+      "check": "old_event_as_current_day",
+      "result": "EXPECTED_REJECTION",
+      "error": "Event is not on the requested calendar day"
+    },
+    {
+      "check": "unsupported_extra_narrative",
+      "result": "EXPECTED_REJECTION",
+      "error": "Narrative contains unsupported text outside independently sourced facts"
+    },
+    {
+      "check": "no_photo_package_no_acceptance",
+      "result": "EXPECTED_REJECTION",
+      "error": "At least three documented artist photos required"
+    },
+    {
+      "check": "actual_PR33_timeline_and_photo_assignment_fixture",
+      "result": "EXISTING_STORYBOARD_CONSUMPTION_GAP_REPRODUCED",
+      "voice_seconds": 27.0,
+      "duration_is": "STUB_NOT_A_MEASUREMENT",
+      "scene_count": 8,
+      "photo_sequence": [
+        "P1",
+        "P2",
+        "P3",
+        "P1",
+        "P2",
+        "P3",
+        "P1",
+        "P2"
+      ],
+      "new_storyboard_consumed": false
+    }
+  ],
+  "script_words_whitespace": 56,
+  "script_sha256": "900621258a5fd01a5fb996f2973fa0a409db1d2794261ef315da1fea1a7baa1d",
+  "estimates_not_audio_measurements": [
+    {
+      "words_per_minute": 120,
+      "speech_seconds_estimate": 28.0,
+      "with_1_2s_draft_pause_seconds_estimate": 29.2
+    },
+    {
+      "words_per_minute": 130,
+      "speech_seconds_estimate": 25.85,
+      "with_1_2s_draft_pause_seconds_estimate": 27.05
+    },
+    {
+      "words_per_minute": 140,
+      "speech_seconds_estimate": 24.0,
+      "with_1_2s_draft_pause_seconds_estimate": 25.2
+    }
+  ],
+  "provider_calls": 0,
+  "network_calls": 0,
+  "media_calls": 0,
+  "render_calls": 0,
+  "audio_file_produced": false,
+  "video_file_produced": false,
+  "creative_acceptance": false,
+  "visual_or_territory_acceptance": false,
+  "prior_test_counts_reused": false
+}

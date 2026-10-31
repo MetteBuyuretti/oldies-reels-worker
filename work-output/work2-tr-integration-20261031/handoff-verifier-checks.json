@@ -1,0 +1,5 @@
+{
+  "preimage_fixture": "MATCH",
+  "mutated_preimage_fixture": "STOP_HASH_MISMATCH",
+  "mode": "read-only fixture verification, not Windows application"
+}

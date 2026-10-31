@@ -1,0 +1,37 @@
+{
+  "status": "DESIGN_ONLY_NOT_CONSUMED",
+  "job_id": "WORK2-TR-PREPRODUCTION-20261031-01",
+  "applies_only_to_base_ref": "073e7665d9d381e7c8d595fcd60b905a9071490a",
+  "target_profile": "legacy_short_25_30",
+  "proposed_visual_plan_version": "storyboard-v1",
+  "script_sha256": "900621258a5fd01a5fb996f2973fa0a409db1d2794261ef315da1fea1a7baa1d",
+  "word_indexing": "zero-based half-open indices; whitespace tokens, not timestamps",
+  "scenes": [
+    {
+      "scene_id": "S1",
+      "start_word_inclusive": 0,
+      "end_word_exclusive": 24,
+      "photo_candidate_id": "P1",
+      "photo_asset_sha256": null
+    },
+    {
+      "scene_id": "S2",
+      "start_word_inclusive": 24,
+      "end_word_exclusive": 35,
+      "photo_candidate_id": "P2",
+      "photo_asset_sha256": null
+    },
+    {
+      "scene_id": "S3",
+      "start_word_inclusive": 35,
+      "end_word_exclusive": 56,
+      "photo_candidate_id": "P3",
+      "photo_asset_sha256": null
+    }
+  ],
+  "consumption_implemented": false,
+  "review_status": "UNAPPROVED",
+  "code_ownership_confirmation_observed": false,
+  "real_timestamps": null,
+  "media_and_publication_authorized": false
+}

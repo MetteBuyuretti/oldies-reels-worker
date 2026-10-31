@@ -6,7 +6,7 @@ from datetime import datetime
 from pathlib import Path
 
 from editorial_quality_gate import (EditorialGateError, check_media_duration,
-                                     check_photo_evidence, media_sha256)
+                                     check_photo_evidence, check_storyboard, media_sha256)
 from source_evidence import EvidenceError, check_script, packet_sha256, text_sha256
 from media_evidence import MediaEvidenceError, inspect_audio
 
@@ -49,6 +49,9 @@ def prepare_preview(*, root: Path, output: Path, today: datetime, packet_path: s
             raise EvidenceError("Packet language differs from requested channel")
         script = check_script(candidate)
         photos = check_photo_evidence(candidate)
+        use_storyboard = language == 'tr' or 'visual_storyboard' in candidate
+        if use_storyboard:
+            check_storyboard(candidate)
         paths = []
         for photo in photos:
             path = workspace_file(root, str(photo.get("local_path") or ""))
@@ -68,6 +71,8 @@ def prepare_preview(*, root: Path, output: Path, today: datetime, packet_path: s
                 evidence.get("unmodified_speed") is not True):
             raise EvidenceError("Local narration must be hash-bound to exact script/language at natural speed")
         result["voice_measurement"] = inspect_audio(voice)
+        if use_storyboard:
+            check_storyboard(candidate, result['voice_measurement']['decoded_seconds'])
         # Reuse only a completed, hash-checked checkpoint for this exact packet
         # and renderer revision. Ambiguous/partial output stops, never overwrites.
         digest = packet_sha256(candidate)

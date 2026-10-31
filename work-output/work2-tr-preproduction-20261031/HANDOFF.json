@@ -1,0 +1,97 @@
+{
+  "job_id": "WORK2-TR-PREPRODUCTION-20261031-01",
+  "actor": "Harici WORK2",
+  "received_at_TSI": "2026-10-31T03:01:56.737+03:00",
+  "first_control_target_TSI": "2026-10-31T03:21:56+03:00",
+  "base_ref": "073e7665d9d381e7c8d595fcd60b905a9071490a",
+  "branch": "work2/tr-preproduction-20261031",
+  "head_commit": "2be10a68dd7f904a5b99b55fda79d81fc722b181",
+  "head_commit_scope": "Frozen T1 content snapshot; final supplement/manifest commit is linked directly from issue #32.",
+  "changed_files": [
+    "work-output/work2-tr-preproduction-20261031/DJ-SCRIPT-TR.txt",
+    "work-output/work2-tr-preproduction-20261031/ENTRY-MAP.md",
+    "work-output/work2-tr-preproduction-20261031/PREPRODUCTION.json",
+    "work-output/work2-tr-preproduction-20261031/PREPRODUCTION.md",
+    "work-output/work2-tr-preproduction-20261031/RESULT.md",
+    "work-output/work2-tr-preproduction-20261031/SOURCE-SNAPSHOT.json",
+    "work-output/work2-tr-preproduction-20261031/STORYBOARD.md",
+    "work-output/work2-tr-preproduction-20261031/VALIDATION.json",
+    "work-output/work2-tr-preproduction-20261031/VISUAL-CANDIDATES.json",
+    "work-output/work2-tr-preproduction-20261031/verify_t1.py",
+    "work-output/work2-tr-preproduction-20261031/work-state.json",
+    "work-output/work2-tr-preproduction-20261031/HANDOFF.json",
+    "work-output/work2-tr-preproduction-20261031/NEXT-CODE-SCOPE.md",
+    "work-output/work2-tr-preproduction-20261031/VISUAL-CONTRACT-CANDIDATE.json"
+  ],
+  "status": "checkpointed",
+  "target_profile": "legacy_short_TR_25_30",
+  "event_date": "1964-10-18",
+  "actual_research_session_date": "2026-10-31",
+  "archive_preview_calendar_date": "2026-10-18",
+  "full_script_words": 56,
+  "script_sha256": "900621258a5fd01a5fb996f2973fa0a409db1d2794261ef315da1fea1a7baa1d",
+  "source_bytes_checked": 6,
+  "windows_R0_source_matches": 4,
+  "windows_R0_source_mismatches": [
+    "worker.py",
+    "editorial_quality_gate.py"
+  ],
+  "tested_commands": [
+    {
+      "command": "pwd",
+      "result": "exit0; scratch environment accessible"
+    },
+    {
+      "command": "python --version",
+      "result": "exit0 Python 3.12.14"
+    },
+    {
+      "command": "python -m py_compile work-output/work2-tr-preproduction-20261031/verify_t1.py",
+      "result": "exit0"
+    },
+    {
+      "command": "WORK2_SOURCE_SNAPSHOT=/workspace/scratch/aeeb19f34e04/tr-preproduction-snapshot python work-output/work2-tr-preproduction-20261031/verify_t1.py",
+      "result": "exit0; one structural script pass, three expected fail-closed rejections, existing timeline/photo-cycle gap reproduced; six source Git blobs matched"
+    }
+  ],
+  "test_results_path": "VALIDATION.json",
+  "not_run": [
+    "Real voice recording/listening/pronunciation assessment",
+    "Photo bytes/dimensions/sharpness/individual identification and territory review",
+    "Real ffprobe/FFmpeg/MP4 render/decode",
+    "Windows active-launcher/full-worktree verification",
+    "Independent creative/media acceptance"
+  ],
+  "limits": [
+    "Only own output folder on isolated PR33-based branch",
+    "No root-code, central-state, workflow, monitoring, other branch or Windows mutation",
+    "No paid API/provider/TTS, media download/generation/render/import/mix",
+    "No merge/deploy/scheduler/platform publication or claim reset",
+    "Previous 36/43 success not rerun or added to new count",
+    "No reviewer/person/date approval manufactured"
+  ],
+  "remaining_blocker": "B-VISUAL-PACKET: three original photo assets tied to SHA256, resolution/sharpness, quartet identity/composition, distinct scenes and TR/GB/US rights evidence with independent visual review.",
+  "next_step": "Coordinator takes frozen T1 script/storyboard into creative/visual pre-review and arranges the single missing B-VISUAL-PACKET; root code ownership must be confirmed separately before any T2 implementation.",
+  "rollback": "Do not use this output folder; no installed/live change to roll back.",
+  "automatic_chat_trigger": false,
+  "handoff_updated_at_TSI": "2026-10-31T03:17:32.639+03:00",
+  "t1_manifest_commit": "0daf1b0bac3fe3b976f4d497dab1cc03c1b4c5d5",
+  "t1_receipt_comment": 6536162119,
+  "t1_delivery_comment": 6536332197,
+  "t1_github_readback": {
+    "commit": "0daf1b0bac3fe3b976f4d497dab1cc03c1b4c5d5",
+    "files_equal": 12
+  },
+  "supplement": {
+    "phase": "T2 proposal only after T1 checkpoint",
+    "files": [
+      "NEXT-CODE-SCOPE.md",
+      "VISUAL-CONTRACT-CANDIDATE.json"
+    ],
+    "root_code_changed": false,
+    "code_ownership_confirmation_observed": false,
+    "test_implementation": "NOT WRITTEN / NOT RUN",
+    "duration_profile_unchanged": true
+  },
+  "current_coordination": "Work1 internal Coordinator remains central single writer; #32/6536284668 read."
+}
