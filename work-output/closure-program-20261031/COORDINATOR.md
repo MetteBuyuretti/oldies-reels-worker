@@ -42,3 +42,20 @@ Root, c118ed21RESULT/HANDOFF/application-plan/reels-local-tests/reels-identity-b
 İlk yerel parça bitti; aynı hazırlık/test yeniden istenmeyecek. Sıradaki mevcut Windows Codex görevi LOCAL-SOCIAL-SNAPSHOT-20261031-01, tek LOCAL-CODEX-NEXT.md sonuna somut olarak eklendi: güncel stok, gerçek kuyruk hedefi/tazeliği, ortak yazıcı/kilit/bütçe ve son koşu/platform makbuzu; gizlisiz ve salt okunur. Sabit yerel talimat: https://github.com/MetteBuyuretti/oldies-reels-worker/blob/fd2437240e9ef7a67f8f05fb757e00f854b1191c/work-output/automation-repair-20261029/LOCAL-CODEX-NEXT.md. Yeni alım henüz görülmedi.
 
 Work1 merkezi görev kimliği branch ile aynı tutulacak: work1-watchdog-state-20261031; job_id WORK1-WATCHDOG-STATE-20261031-01. Aynı iş iki task kaydı olmayacak. Root yalnız kendi Work1 dalındaki checkpoint kopyasını merkezi snapshot ile eşleyebilir; main/PR35 tek yazarı Koordinatör kalır.
+
+
+## Düzeltme — iç ajan ile ayrı harici Work sohbeti ve yazma duraklatması
+**31.10.2026 | 03:03 TSİ (UTC+3)**
+
+Önceki 02:38 alımı ve 02:44 merkezi kayıt devri, **aynı Work1 sohbetinin içinde araçla başlatılmış ayrı koordinatör ajanı** `/root/work_koordinatoru` içindir. Ayrı bir ChatGPT Work sohbeti açılmadı. Bu iç ajan, harici Work2 veya bağımsız Watchdog değildir. Önceki program, teslim alma ve kayıt uzlaştırmaları gerçektir ve korunur; “başka bir harici koordinatör sohbeti devraldı” anlamına gelmez.
+
+Mete koordinatörü hangi sohbette görevlendireceğini sordu. Root, ayrı sohbet için [EXTERNAL-COORDINATOR-START.md](https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/closure-program-20261031/EXTERNAL-COORDINATOR-START.md) talimatını hazırlıyor. Yeni iş kimliği **EXTERNAL-COORDINATOR-TAKEOVER-20261031-01**. Bu talimatın hazırlanması veya bağlantısının verilmesi harici sohbetin görevi aldığı anlamına gelmez.
+
+**Bu son kontrol kaydından sonra iç koordinatörün main ve PR35 merkezi durum dosyasına yazması duraklatıldı.** İç koordinasyon görevi checkpointed olarak kalır; önceki teslimler silinmez veya yapılmamış sayılmaz. Root teknik Work1 görevini kendi dalında sürdürebilir; iki koordinatör aynı merkez dosyaya yazmayacak.
+
+Harici koordinatörün yazarlığı ancak yeni ayrı Work sohbeti:
+1. Bu son duraklatma kaydını ve güncel main/PR35 dosya SHA'larını okuduğunda,
+2. #32'ye bu iş kimliğiyle gerçek “HARİCİ KOORDİNATÖR ALINDI / BAŞLADI” kaydını, TSİ ve erişim/ref/ilk kontrol hedefini yazdığında
+geçer. O ana kadar dış koordinatör için HAZIR/queued/receipt=false korunur. Alım olmadan başlamış veya devralmış denmeyecek. İç ajan kendiliğinden yeniden yazarlığa dönmez; bir sonraki gerçek devir kaydı esas alınır.
+
+Nihai MASTER sorumluluğu root'ta, bağımsız Watchdog rolü mevcut Watchdog'da kalır. Bu idari devir yeni üretim, ücret, merge/deploy, kurulu sistem değişikliği, activation/claim/scheduler veya yayın yetkisi açmaz. Mevcut saatlik takip yalnız okur/bildirir; merkezi dosyayı yazmaz.
