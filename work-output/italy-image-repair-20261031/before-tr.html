@@ -1,0 +1,219 @@
+<!-- wp:html -->
+<style>
+body.postid-4463 .page-hero.compact-hero{display:none!important;}
+body.postid-4463 main h1:not(.oldies-hero-title),
+body.postid-4463 .site-main h1:not(.oldies-hero-title),
+body.postid-4463 .content-area h1:not(.oldies-hero-title),
+body.postid-4463 .single-post-header,
+body.postid-4463 .post-header,
+body.postid-4463 .post-heading,
+body.postid-4463 .single-header,
+body.postid-4463 .entry-header{
+ display:none!important;
+}
+
+body.postid-4463 .entry-header,
+body.postid-4463 .entry-title,
+body.postid-4463 h1.entry-title,
+body.postid-4463 h1.wp-block-post-title,
+body.postid-4463 .wp-block-post-title,
+body.postid-4463 .post-title,
+body.postid-4463 .single-post-title,
+body.postid-4463 header.entry-header,
+body.postid-4463 article header h1{
+ display:none!important;
+ height:0!important;
+ margin:0!important;
+ padding:0!important;
+ overflow:hidden!important;
+}
+
+
+.oldies-hero-merged{
+ position:relative;left:50%;transform:translateX(-50%);
+ width:min(1120px,calc(100vw - 36px));margin:14px 0 30px!important;
+ border-radius:14px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.28);
+ background:#071826;border:1px solid rgba(214,174,88,.24);
+}
+.oldies-hero-merged img{
+ display:block;width:100%;height:auto!important;min-height:0!important;
+ object-fit:contain!important;object-position:center!important;
+}
+.oldies-hero-merged:after{display:none!important;content:none!important;}
+.oldies-hero-copy{
+ position:relative!important;z-index:2;left:auto!important;right:auto!important;bottom:auto!important;
+ padding:22px 28px 24px!important;text-align:center!important;
+ background:linear-gradient(135deg,#0b2234,#123a56)!important;
+ border-top:1px solid rgba(214,174,88,.22);
+}
+.oldies-hero-kicker{
+ display:inline-block;margin:0 0 9px!important;padding:5px 9px!important;
+ border:1px solid rgba(143,194,224,.26);border-radius:999px;
+ background:rgba(7,24,38,.42);
+ color:#9fd0ea!important;font:800 10px/1.2 Arial,Helvetica,sans-serif!important;
+ letter-spacing:.15em!important;text-transform:uppercase!important;
+}
+.oldies-hero-title{
+ margin:0 auto!important;padding:0!important;max-width:900px!important;
+ color:#f0d78d!important;-webkit-text-fill-color:#f0d78d!important;
+ font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(30px,3.2vw,40px)!important;
+ font-weight:700!important;line-height:1.12!important;letter-spacing:-.012em!important;
+ text-shadow:none!important;
+}
+.oldies-hero-sub{
+ margin:9px auto 0!important;max-width:820px!important;
+ color:#d9cdb8!important;font-family:Georgia,"Times New Roman",serif!important;
+ font-size:17px!important;line-height:1.4!important;font-style:italic!important;
+ text-shadow:none!important;
+}
+@media(max-width:760px){
+ .oldies-hero-merged{width:calc(100vw - 24px);margin-top:10px!important;}
+ .oldies-hero-copy{padding:17px 15px 19px!important;}
+ .oldies-hero-title{font-size:26px!important;line-height:1.16!important;}
+ .oldies-hero-sub{font-size:15px!important;}
+}
+.oldies-custom-title{max-width:1020px;margin:14px auto 24px!important;padding:26px 34px 28px!important;text-align:center!important;background:linear-gradient(135deg,#0b2234,#123a56)!important;border:1px solid rgba(214,174,88,.36)!important;border-radius:12px!important;box-shadow:0 10px 28px rgba(0,0,0,.18)!important;}
+.oldies-custom-title .kicker{display:block;margin:0 0 7px!important;color:#8fc2e0!important;font:800 10px/1.2 Arial,Helvetica,sans-serif!important;letter-spacing:.17em!important;text-transform:uppercase!important;}
+.oldies-custom-title h1{margin:0!important;padding:0!important;color:#f0d78d!important;-webkit-text-fill-color:#f0d78d!important;font-family:Georgia,"Times New Roman",serif!important;font-size:40px!important;font-weight:700!important;line-height:1.14!important;letter-spacing:-.012em!important;}
+.oldies-custom-title .sub{margin:10px 0 0!important;color:#d6cbb9!important;font-family:Georgia,"Times New Roman",serif!important;font-size:19px!important;line-height:1.38!important;font-style:italic!important;}
+.oldies-country-hero{max-width:1120px;margin:1em auto 0!important;border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.3);}
+.oldies-country-hero img{display:block;width:100%;height:auto;}
+.oldies-series-strip{max-width:1120px;margin:0 auto 2em!important;padding:16px 20px!important;background:linear-gradient(90deg,#0b2437,#153d5b);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);}
+.oldies-series-strip p{margin:0!important;text-align:center!important;color:#f4ead5!important;font-size:12px!important;letter-spacing:.19em!important;font-weight:800!important;text-transform:uppercase!important;}
+.oldies-lead{max-width:820px!important;font-family:Georgia,"Times New Roman",serif!important;font-size:22px!important;line-height:1.62!important;color:#e9dfcb!important;}
+.oldies-lead strong{color:#f0d78d!important;}
+.oldies-opening-quote{max-width:780px!important;margin:1.7em auto 2.4em!important;padding:1.15em 1.3em!important;border-left:4px solid var(--or-blue2)!important;background:linear-gradient(90deg,rgba(47,111,165,.16),rgba(214,174,88,.06))!important;border-radius:8px!important;}
+.oldies-opening-quote p{font-family:Georgia,"Times New Roman",serif!important;font-size:19px!important;color:#ded6c8!important;margin:0!important;}
+.oldies-toc{max-width:820px;margin:1.6em auto 2.8em!important;padding:1.1em 1.25em!important;border:1px solid var(--or-line);border-radius:10px;background:rgba(13,37,56,.45);}
+.oldies-toc h2{margin:0 0 .7em!important;padding:0!important;border:0!important;color:#f0d78d!important;font-size:24px!important;font-family:Georgia,"Times New Roman",serif!important;}
+.oldies-toc ul{margin:0!important;padding-left:1.2em!important;columns:2;column-gap:30px;}
+.oldies-toc li{margin:.35em 0!important;font-size:15px!important;break-inside:avoid;}
+.oldies-toc a{color:#9ec7df!important;text-decoration:none!important;}
+.oldies-era{max-width:1120px;margin:3.5em auto 2em!important;}
+.oldies-era img{display:block;width:100%;height:auto;border-radius:10px 10px 0 0;box-shadow:0 12px 30px rgba(0,0,0,.25);}
+.oldies-era-caption{padding:18px 22px 20px!important;background:linear-gradient(180deg,#122d43,#0b2031);border-radius:0 0 10px 10px;border-top:1px solid rgba(255,255,255,.08);}
+.oldies-era-caption .eyebrow{display:block;color:#d6ae58!important;font-size:11px!important;font-weight:800!important;letter-spacing:.18em!important;text-transform:uppercase!important;margin-bottom:5px!important;}
+.oldies-era-caption h2{margin:0!important;padding:0!important;border:0!important;color:#f4ead5!important;font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(34px,4.8vw,52px)!important;line-height:1.06!important;}
+.oldies-era-caption p{margin:.35em 0 0!important;color:#b9c8d3!important;font-family:Georgia,"Times New Roman",serif!important;font-style:italic!important;font-size:17px!important;}
+.oldies-feature-grid{max-width:920px;margin:1.4em auto 2.5em!important;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.oldies-feature-card{padding:18px!important;border:1px solid rgba(127,179,213,.2);border-top:3px solid var(--or-blue2);border-radius:9px;background:rgba(13,37,56,.4);}
+.oldies-feature-card b{display:block;color:#f0d78d!important;font-family:Georgia,"Times New Roman",serif!important;font-size:18px!important;margin-bottom:5px;}
+.oldies-feature-card span{color:#c4c0b8!important;font-size:14px!important;line-height:1.5!important;}
+.oldies-section-title{max-width:900px!important;margin:3.4em auto 1.2em!important;text-align:center!important;}
+.oldies-section-title .tag{display:inline-block;margin-bottom:8px;color:#8fc2e0!important;font-size:11px!important;font-weight:800!important;letter-spacing:.18em!important;text-transform:uppercase!important;}
+.oldies-section-title h2{margin:0!important;padding:0!important;border:0!important;background:none!important;color:#f0d78d!important;font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(32px,4.5vw,48px)!important;line-height:1.1!important;}
+.oldies-section-title p{max-width:680px;margin:.55em auto 0!important;color:#aca79f!important;font-family:Georgia,"Times New Roman",serif!important;font-size:17px!important;font-style:italic!important;}
+.oldies-artist-card{max-width:860px;margin:1.35em auto!important;padding:22px 24px 20px!important;border:1px solid rgba(214,174,88,.22);border-left:4px solid var(--or-blue2);border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(13,37,56,.2));box-shadow:0 8px 22px rgba(0,0,0,.10);}
+.oldies-artist-card:nth-of-type(even){border-left-color:var(--or-gold);}
+.oldies-artist-layout{display:grid;grid-template-columns:124px minmax(0,1fr);gap:20px;align-items:start;}
+.oldies-artist-card.is-right .oldies-artist-layout{grid-template-columns:minmax(0,1fr) 124px;}
+.oldies-artist-card.is-right .oldies-artist-photo{order:2;}
+.oldies-artist-card.is-right .oldies-artist-copy{order:1;}
+.oldies-artist-photo{width:118px;height:118px;border-radius:11px;overflow:hidden;border:1px solid rgba(214,174,88,.35);box-shadow:0 6px 16px rgba(0,0,0,.24);background:#0d2538;}
+.oldies-artist-photo img{display:block;width:118px;height:118px;object-fit:cover;object-position:center top;filter:grayscale(100%);background:#0d2538;}
+.oldies-artist-copy{min-width:0;}
+.oldies-artist-head{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:center;margin-bottom:10px;}
+.oldies-artist-no{width:58px;height:58px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(145deg,#1d5378,#0d2d45);border:1px solid rgba(255,255,255,.12);color:#f7e8c8!important;font-family:Georgia,"Times New Roman",serif!important;font-size:26px!important;font-weight:700!important;}
+.oldies-artist-name{margin:0!important;color:#f0d78d!important;font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif!important;font-size:31px!important;line-height:1.12!important;}
+.oldies-artist-sub{margin:.15em 0 0!important;color:#9ec7df!important;font-size:12px!important;font-weight:800!important;letter-spacing:.11em!important;text-transform:uppercase!important;}
+.oldies-artist-card p{margin:.72em 0!important;color:#d8d2c8!important;}
+.oldies-listen{margin-top:13px!important;padding:10px 12px!important;border-radius:7px;background:rgba(214,174,88,.085)!important;border:1px solid rgba(214,174,88,.18)!important;color:#d7ccb4!important;font-size:14px!important;}
+.oldies-listen strong{color:#e7bd66!important;}
+.oldies-rock-box{max-width:960px;margin:3em auto!important;padding:24px 26px!important;border-radius:12px;background:linear-gradient(135deg,rgba(30,78,112,.42),rgba(93,57,25,.22));border:1px solid rgba(214,174,88,.24);}
+.oldies-rock-box .kicker{color:#8fc2e0!important;font-size:11px!important;letter-spacing:.18em!important;font-weight:800!important;text-transform:uppercase!important;}
+.oldies-rock-box h2{margin:.3em 0 .55em!important;padding:0!important;border:0!important;color:#f0d78d!important;font-family:Georgia,"Times New Roman",serif!important;font-size:36px!important;}
+.oldies-rock-box p{margin:.7em 0!important;}
+.oldies-timeline{max-width:980px;margin:1.5em auto 2.8em!important;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.oldies-year{position:relative;padding:16px 16px 16px 72px!important;border:1px solid rgba(127,179,213,.18);border-radius:9px;background:rgba(13,37,56,.36);}
+.oldies-year b{position:absolute;left:14px;top:14px;color:#f0d78d!important;font-family:Georgia,"Times New Roman",serif!important;font-size:20px!important;}
+.oldies-year span{color:#d1cbc1!important;font-size:14px!important;line-height:1.5!important;}
+.oldies-listening-box{max-width:860px;margin:2.3em auto!important;padding:22px 24px!important;border-radius:12px;background:linear-gradient(135deg,rgba(214,174,88,.11),rgba(47,111,165,.13));border:1px solid rgba(214,174,88,.2);}
+.oldies-listening-box h2{margin:0 0 .55em!important;padding:0!important;border:0!important;color:#f0d78d!important;font-family:Georgia,"Times New Roman",serif!important;font-size:30px!important;}
+.oldies-listening-box p{margin:.4em 0!important;}
+.oldies-sources{max-width:820px;margin:3.2em auto 0!important;padding-top:1.2em!important;border-top:1px solid rgba(214,174,88,.2);}
+.oldies-sources h2{margin:0 0 .5em!important;padding:0!important;border:0!important;color:#b69d68!important;font-family:Georgia,"Times New Roman",serif!important;font-size:21px!important;}
+.oldies-sources ul{columns:2;column-gap:28px;padding-left:1.2em!important;}
+.oldies-sources li{break-inside:avoid;font-size:12px!important;line-height:1.4!important;color:#8f8a82!important;margin:.2em 0!important;}
+.oldies-sources a{color:#9faeae!important;text-decoration:none!important;}
+.oldies-signoff{text-align:center!important;margin:2.2em auto 0!important;color:#8f8a82!important;font-size:12px!important;letter-spacing:.08em!important;text-transform:uppercase!important;}
+@media(max-width:760px){
+ .oldies-custom-title{margin:12px 12px 16px!important;padding:18px 16px 20px!important;}
+ .oldies-custom-title h1{font-size:28px!important;line-height:1.18!important;}
+ .oldies-custom-title .sub{font-size:16px!important;}
+ body.postid-4463 .entry-content{font-size:17px!important;line-height:1.72!important;}
+ .oldies-toc ul,.oldies-sources ul{columns:1;}
+ .oldies-feature-grid,.oldies-timeline{grid-template-columns:1fr;}
+ .oldies-artist-head{grid-template-columns:52px 1fr;gap:12px;}
+ .oldies-artist-no{width:48px;height:48px;font-size:22px!important;}
+ .oldies-artist-name{font-size:27px!important;}
+ .oldies-artist-layout,.oldies-artist-card.is-right .oldies-artist-layout{grid-template-columns:82px minmax(0,1fr);gap:13px;}
+ .oldies-artist-card.is-right .oldies-artist-photo{order:0;}
+ .oldies-artist-card.is-right .oldies-artist-copy{order:1;}
+ .oldies-artist-photo,.oldies-artist-photo img{width:78px;height:78px;border-radius:9px;}
+ .oldies-era-caption h2{font-size:36px!important;}
+  body.postid-4463 .entry-header:after{font-size:17px!important;}
+}
+.oldies-late-image{max-width:920px;margin:3em auto 2em!important;border-radius:10px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.22);}
+.oldies-late-image img{display:block;width:100%;height:auto;}
+
+/* FINAL HERO OVERRIDE */
+.oldies-hero-merged{
+ position:relative!important;
+ left:50%!important;
+ transform:translateX(-50%)!important;
+ width:min(1120px,calc(100vw - 36px))!important;
+ max-width:none!important;
+ margin:14px 0 30px!important;
+ border-radius:14px!important;
+ overflow:hidden!important;
+ background:#071826!important;
+ border:1px solid rgba(214,174,88,.24)!important;
+ box-shadow:0 18px 40px rgba(0,0,0,.28)!important;
+}
+.oldies-hero-merged::after{display:none!important;content:none!important;}
+.oldies-hero-merged>img{
+ display:block!important;
+ width:100%!important;
+ max-width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ object-fit:contain!important;
+ object-position:center!important;
+ position:relative!important;
+}
+.oldies-hero-merged .oldies-hero-copy{
+ position:static!important;
+ inset:auto!important;
+ padding:22px 28px 24px!important;
+ text-align:center!important;
+ background:linear-gradient(135deg,#0b2234,#123a56)!important;
+ border-top:1px solid rgba(214,174,88,.22)!important;
+}
+.oldies-hero-merged .oldies-hero-title{
+ margin:0 auto!important;
+ max-width:900px!important;
+ font-size:clamp(30px,3.2vw,40px)!important;
+ line-height:1.12!important;
+ color:#f0d78d!important;
+ -webkit-text-fill-color:#f0d78d!important;
+ text-shadow:none!important;
+}
+.oldies-hero-merged .oldies-hero-sub{
+ margin:9px auto 0!important;
+ max-width:820px!important;
+ font-size:17px!important;
+ color:#d9cdb8!important;
+ text-shadow:none!important;
+}
+@media(max-width:760px){
+ .oldies-hero-merged{width:calc(100vw - 24px)!important;margin-top:10px!important;}
+ .oldies-hero-merged .oldies-hero-copy{padding:17px 15px 19px!important;}
+ .oldies-hero-merged .oldies-hero-title{font-size:26px!important;line-height:1.16!important;}
+ .oldies-hero-merged .oldies-hero-sub{font-size:15px!important;}
+}
+
+</style>
+<!-- /wp:html -->
+<!-- wp:html -->
+<div class="oldies-hero-merged"><img src="https://oldiesradyo.com/wp-content/uploads/2026/10/hero-italy.png" alt="İtalya 1960’lar müziği: vintage kapak illüstrasyonu"><div class="oldies-hero-copy"><span class="oldies-hero-kicker">OLDIES RADYO • ÜLKELERDE 60’LARIN SESLERİ • İTALYA</span><h1 class="oldies-hero-title">1960’larda İtalya: 10 Ünlü Şarkıcı ve Grup</h1><p class="oldies-hero-sub">Sanremo • Cantautori • Television pop • Beat</p></div></div><p class="oldies-lead">İtalya 1960’lara melodik şarkı, radyo orkestraları ve Sanremo’nun güçlü mirasıyla girdi. Domenico Modugno’nun 1950’lerin sonundaki çıkışı, geleneksel sunumun da değişebileceğini göstermişti.</p><div class="oldies-section-title" id="1950-miras"><span class="tag">BÖLÜM 1 • KÖKLER</span><h2>1950’lerden Gelen Kültür</h2></div><p>RAI televizyonu, festivaller ve müzikli gençlik filmleri sanatçıları evlere taşıdı. 45’lik plak, sahne performansı ve ekran kişiliği birbirini tamamlıyordu.</p><div class="oldies-section-title" id="1960-donusum"><span class="tag">BÖLÜM 2 • DÖNÜŞÜM</span><h2>1960’lar Başlıyor</h2></div><p>ABD rock ’n’ roll’u ve İngiliz beat’i yeni bir enerji getirirken cantautori, şarkıyı daha kişisel yazarlığa açtı. Mina gibi yorumcular bestecilerin eserlerini güçlü bir vokal dünyasına dönüştürdü.</p><p>Bu on isim, festival zaferlerini, gençlik heyecanını ve şarkı yazarlığını yan yana getiriyor. Daha sonraki hitleri geriye taşımadan, özellikle 1960–1969 kayıtlarını dinliyoruz.</p><div class="oldies-section-title" id="10-ses"><span class="tag">BÖLÜM 3 • PORTRELER</span><h2>1960’ların 10 Önemli Sesi</h2></div><div class="oldies-artist-card" id="sanatci-1"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">01</div><div><h3 class="oldies-artist-name">Mina</h3><p class="oldies-artist-sub">Vocal pop / television</p></div></div><p>Mina, rock etkili genç popun enerjisini gelişmiş şarkı yazarlığı ve güçlü vokal kontrolüyle buluşturdu. Gino Paoli’nin Il cielo in una stanza’sı ile Morricone müzikli Se telefonando iki farklı dönüm noktası. RAI’nin koruduğu Studio Uno performansları, ses ve televizyon kişiliğinin ortaklığını gösterir. Onun kayıtlarında yorum, besteyi aktarmanın ötesinde başlı başına yaratıcı bir olay hâline gelir.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Il cielo in una stanza — 1960 • Se telefonando — 1966</div></div></div></div><div class="oldies-artist-card is-right" id="sanatci-2"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">02</div><div><h3 class="oldies-artist-name">Adriano Celentano</h3><p class="oldies-artist-sub">Rock ’n’ roll / songwriter</p></div></div><p>Celentano’nun hareketli sahne tavrı, İtalyan gençlik popuna belirgin bir rock ’n’ roll figürü kazandırdı. 24.000 baci çevresindeki 1961 Sanremo dönemi bu çıkışa ait; 1966’daki Il ragazzo della via Gluck ise değişen mahalleyi daha düşünceli biçimde anlatır. RAI festival tarihçesi onu yeni kuşağın içinde ele alıyor. İki kayıt arasındaki fark, büyüyen müzikal arayışı gösteriyor.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> 24.000 baci — 1961 • Il ragazzo della via Gluck — 1966</div></div></div></div><div class="oldies-artist-card" id="sanatci-3"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">03</div><div><h3 class="oldies-artist-name">Gianni Morandi</h3><p class="oldies-artist-sub">Teen pop / musicarelli</p></div></div><p>Morandi’nin 1962 çıkışı, plaklarla Alta pressione televizyon vitrininin birleşmesine dayanıyordu. Açık ve genç sunumu, musicarelli denen müzikli filmlere de uygun bir yıldız yarattı. Fatti mandare dalla mamma erken repertuvarın canlılığını gösterir. Uzun sonraki kariyerini geriye okumadan, büyüyen İtalyan ekran ve plak pazarında onu gençlik yıldızı yapan kısa, hareketli kayıtları dinlemek gerekir.</p><p>1962’de Alta pressione ve Neil Sedaka ile televizyon buluşması, Andavo a 100 all’ora’yı izleyiciye taşıdı.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Fatti mandare dalla mamma — 1962</div></div></div></div><div class="oldies-artist-card is-right" id="sanatci-4"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">04</div><div><h3 class="oldies-artist-name">Patty Pravo</h3><p class="oldies-artist-sub">Beat-era pop / vocal identity</p></div></div><p>Pravo, Roma’nın Piper kulübü çevresinden mesafeli ve farklı bir vokal kişilikle çıktı. Ragazzo triste 1966’da bu kimliği tanıttı; La bambola 1968’de geniş dinleyiciye ulaştırdı. Önemi yalnız çağdaş görünmesi değil, kolay dinlenen pop içinde bağımsızlık ve gerilim duyurmasıdır. Festival yorumcusu veya sevimli sinema yıldızından başka bir kadın pop modeli sunar.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Ragazzo triste — 1966 • La bambola — 1968</div></div></div></div><div class="oldies-artist-card" id="sanatci-5"><div class="oldies-artist-layout"><div class="oldies-artist-photo"><img loading="lazy" src="https://oldiesradyo.com/wp-content/uploads/2026/10/Gigliola_Cinquetti_1966-225x300.jpg" alt="Gigliola Cinquetti, 1 April 1966 — gerçek dönem arşiv fotoğrafı" style="object-fit:contain!important"></div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">05</div><div><h3 class="oldies-artist-name">Gigliola Cinquetti</h3><p class="oldies-artist-sub">Sanremo / Eurovision</p></div></div><p>Cinquetti, 1964’te Non ho l’età ile Sanremo’yu ve ardından Eurovision’u kazanarak İtalya’nın ilk Eurovision zaferini getirdi. Ölçülü sunumu, hareketli gençlik popçularına belirgin bir alternatifti. Sade vokal ve romantik sözler, şarkının farklı dillere geçmesini kolaylaştırdı. Seçkideki yerini açıklamak için sonraki yarışmalara veya daha geç liste başarılarına ihtiyaç yok.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Non ho l’età — 1964</div></div></div></div><div class="oldies-artist-card is-right" id="sanatci-6"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">06</div><div><h3 class="oldies-artist-name">Ornella Vanoni</h3><p class="oldies-artist-sub">Interpretive pop / chanson</p></div></div><p>Vanoni, başlangıcındaki tiyatral şarkılardan 60’larda daha geniş bir yorumcu popuna yöneldi. Senza fine, Gino Paoli’nin yazarlığına bağlanır; La musica è finita ise 1967 Sanremo dönemine aittir. Vokal kişiliği, seçkiye olgun ve konuşur gibi bir yoğunluk katar. Dönem dışındaki L’appuntamento yerine bu dönüşümü dinlemek, 60’lar hikâyesini daha doğru kurar.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Senza fine — 1961 • La musica è finita — 1967</div></div></div></div><div class="oldies-artist-card" id="sanatci-7"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">07</div><div><h3 class="oldies-artist-name">Milva</h3><p class="oldies-artist-sub">Festival pop / dramatic interpretation</p></div></div><p>Milva’nın 1961 Sanremo çıkışı Il mare nel cassetto ile geldi; yeni festival kuşağı içinde dolgun ve dramatik bir ses duyurdu. Sahne repertuvarına açılması, onu sıradan bir gençlik idolünün ötesine taşıdı. Bazı dinleyicilerin bildiği daha sonraki tiyatro ve uluslararası çalışmalardan önce 60’lar kayıtlarına kulak vermek gerekir. Vokal ağırlığıyla kolay benimsenen melodi arasındaki ilişki iyi bir başlangıçtır.</p><p>Il mare nel cassetto (1961), Cetra SP 977: ilk Sanremo katılımında Gino Latilla ile birlikte üçüncülük.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Il mare nel cassetto — 1961</div></div></div></div><div class="oldies-artist-card is-right" id="sanatci-8"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">08</div><div><h3 class="oldies-artist-name">Gino Paoli</h3><p class="oldies-artist-sub">Cantautore / intimate song</p></div></div><p>Paoli, İtalyan ana akım şarkısına yazarın yakınlığını taşıyan isimlerdendi. Sapore di sale, ölçülü sesini yalın ve etkili bir pop kaydında duyurur. Mina ve Vanoni için yazdıkları da hikâyeyi kendi plaklarının dışına taşır. Önemi, özgün yazarlık duyarlılığının farklı yorumculara geçmesidir. Sohbet eder gibi söyleyiş ve duygusal belirsizlik, bu repertuvarı daha gösterişli festival sunumundan ayırır.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Sapore di sale — 1963</div></div></div></div><div class="oldies-artist-card" id="sanatci-9"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">09</div><div><h3 class="oldies-artist-name">Luigi Tenco</h3><p class="oldies-artist-sub">Cantautore / reflective pop</p></div></div><p>Tenco’nun kayıtları, İtalyan popüler şarkısına içine dönük ve sorgulayan bir kişilik taşıdı. Mi sono innamorato di te, 1962’deki sesine açık bir giriş sunar. 1967 Sanremo sırasında ölmesi festival tarihinde büyük bir kırılma oldu; fakat müziğini yalnız bu olayla okumamak gerekir. Yalın sözler ve gösterişsiz yorum, sonraki şarkıcı-yazarlara kalan etkisini anlamayı sağlar.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Mi sono innamorato di te — 1962</div></div></div></div><div class="oldies-artist-card is-right" id="sanatci-10"><div class="oldies-artist-layout"><div class="oldies-artist-photo" aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#b69d68;font:38px Georgia">♫</div><div class="oldies-artist-copy"><div class="oldies-artist-head"><div class="oldies-artist-no">10</div><div><h3 class="oldies-artist-name">Domenico Modugno</h3><p class="oldies-artist-sub">Dramatic popular song / festival</p></div></div><p>Modugno’nun dünya çapındaki Volare çıkışı 1958’e aittir; festival gücü 60’larda da sürdü. Dio, come ti amo, 1966’da Modugno ve Cinquetti yorumlarıyla Sanremo’yu kazandı; ardından Modugno şarkıyı Eurovision’a götürdü. Bu süreç yerli festival itibarıyla uluslararası yarışma sonucunun aynı şey olmadığını gösterir. Vurgulu yorumu, daha önce eski sahne kalıplarını değiştiren sanatçıyla süreklilik kurar.</p><div class="oldies-listen"><strong>60’lar dinleme notu:</strong> Dio, come ti amo — 1966</div></div></div></div><div class="oldies-listening-box" id="dinleme"><h2>🎧 Bu ülkenin 1960’lar müziğini keşfetmek için önce bunları dinleyin</h2><p><strong>Mina</strong> — Il cielo in una stanza — 1960</p><p><strong>Adriano Celentano</strong> — 24.000 baci — 1961</p><p><strong>Gianni Morandi</strong> — Fatti mandare dalla mamma — 1962</p><p><strong>Patty Pravo</strong> — Ragazzo triste — 1966</p><p><strong>Gigliola Cinquetti</strong> — Non ho l’età — 1964</p><p><strong>Ornella Vanoni</strong> — Senza fine — 1961</p><p><strong>Milva</strong> — Il mare nel cassetto — 1961</p><p><strong>Gino Paoli</strong> — Sapore di sale — 1963</p><p><strong>Luigi Tenco</strong> — Mi sono innamorato di te — 1962</p><p><strong>Domenico Modugno</strong> — Dio, come ti amo — 1966</p><p><strong>Mina</strong> — Se telefonando — 1966</p><p><strong>Adriano Celentano</strong> — Il ragazzo della via Gluck — 1966</p><p><strong>Patty Pravo</strong> — La bambola — 1968</p><p><strong>Ornella Vanoni</strong> — La musica è finita — 1967</p></div><div class="oldies-rock-box"><h2>Avrupa serisinde keşfe devam edin</h2><p><a href="https://oldiesradyo.com/2026/09/28/1960larda-yunanistan-pop-rock-roll-10-sanatci/">Yunanistan’ın 10 önemli sesi</a> · <a href="https://oldiesradyo.com/2026/10/02/1960larda-belcika-10-unlu-sarkici/">Belçika’nın 10 önemli sesi</a> · <a href="https://oldiesradyo.com/1960lar/">1960’lar arşivi</a> · <a href="https://oldiesradyo.com/1950ler/">1950’ler arşivi</a></p></div><div class="oldies-sources"><h2>Kaynaklar ve okuma notları</h2><ul><li><a href="https://www.teche.rai.it/2025/07/morricone-la-sua-orchestra/">www.teche.rai.it</a></li><li><a href="https://www.raiplay.it/video/2020/01/Sanremo-2020-70-anni-di-Festival-1961-1970-L-esplosione-e1291718-5f61-46c5-b18a-dfac08e47811.html">www.raiplay.it</a></li><li><a href="https://www.morandimania.it/gianni-morandi-televisione-P1.asp">www.morandimania.it</a></li><li><a href="https://www.report.rai.it/programmi/sanremo/Patty-Pravo--bde53c43-3f39-466a-958b-0804e8b043c3.html">www.report.rai.it</a></li><li><a href="https://www.eurovision.com/eurovision-song-contest/copenhagen-1964/">www.eurovision.com</a></li><li><a href="https://www.raicultura.it/musica/articoli/2025/11/Ornella-Vanoni-la-Signora-della-musica-italiana-e61f1bf7-6293-49b2-ae74-52b96e9c3bde.html">www.raicultura.it</a></li><li><a href="https://www.milva.it/biografia/">www.milva.it</a></li><li><a href="https://www.milva.it/discografia-anni-60/">www.milva.it</a></li><li><a href="https://www.treccani.it/magazine/lingua_italiana/speciali/Ritratti/E_Paoli18.html">www.treccani.it</a></li><li><a href="https://www.teche.rai.it/2026/03/buon-compleanno-gino-paoli/">www.teche.rai.it</a></li><li><a href="https://www.teche.rai.it/2023/03/ciao-amore-ciao-ricordando-luigi-tenco/">www.teche.rai.it</a></li><li><a href="https://www.eurovision.com/eurovision-song-contest/luxembourg-1966/participants/domenico-modugno/">www.eurovision.com</a></li></ul><h2>Görsel kaynakları</h2><ul><li><a href="https://commons.wikimedia.org/wiki/File%3AGigliola_Cinquetti_%281966%29.jpg">Gigliola Cinquetti — 1 April 1966</a>: Ron Kroon for Anefo · <a href="https://creativecommons.org/licenses/by-sa/3.0/nl/">CC BY-SA 3.0 NL</a>.</li></ul><p style="font-size:12px;color:#8f8a82">Kapak illüstrasyondur; tarihsel fotoğraf değildir. Sanatçı fotoğrafları gerçek dönem kayıtlarıdır; kartlarda gri tonlu, çerçeveye sığdırılarak gösterilir. Uygun lisanslı dönem portresi eklenmeyen isimler: Mina, Adriano Celentano, Gianni Morandi, Patty Pravo, Ornella Vanoni, Milva, Gino Paoli, Luigi Tenco, Domenico Modugno</p><p class="oldies-signoff"><em>Oldies Radyo • Voices of the Sixties</em></p></div>
+<!-- /wp:html -->
