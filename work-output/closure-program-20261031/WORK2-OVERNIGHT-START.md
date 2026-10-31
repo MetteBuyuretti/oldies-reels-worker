@@ -5,6 +5,23 @@
 **Durum:** HAZIR; yeni ALINDI/BAŞLADI henüz yok.
 Kurucu yatarken Work2'nin birkaç mevcut işi sonuç odaklı sürdürmesini istedi. Aşağıdaki üç parçaya sırayla çalış; her parçada tekrar MASTER komutu bekleme. Oturum kapanınca arka planda çalıştığını iddia etme.
 
+## ÖNCELİK GÜNCELLEMESİ — 31.10.2026 | 07:08 TSİ
+Kurucu Tumblr/Pinterest ve otomatik Jingle Factory'nin özellikle önemli olduğunu ekledi. Bu son talimat önceki üç parçanın önüne geçer. Gerçek alımında yeni sıralamayı belirt:
+**A Tumblr/Pinterest → B mevcut site görselleri → C Reels üçlü görsel → D haber mobilQA.** Bir parça erişim beklerse diğerini sürdür.
+
+### A — Tumblr/Pinterest somut devamı
+- Güncel command-center-social ve social-readonly-snapshot-20261031 görevlerini, kurulu22Ekim onarımının kabulünü ve son#32'yi oku. Kapanmış Commander/guard/testleri yeniden yapma.
+- GitHub gerçekworkflow/scheduler kaynakları, sonkoşu ve varsa platformmakbuzlarını; erişimin varsa OLDIESCommander'ın izinliüçTumblrkaynağını oku. Araçların izinli kaynak sınırları dışına çıkma. WindowsCodex'in LOCAL-SOCIAL-SNAPSHOT teslimi gelmişse aynıkayıtları yeniden istemeden devral.
+- Stok adedi/tazeliği, sıradaki gerçekkuyrukhedefi/TSİ, TumblrvePinterest gönderim sahipleri, ortakmükerrerlik/kilit/günlükbütçesınırları ve platformpostID/URL/saat kanıtını tek SOCIAL-STATE.json tablosunda uzlaştır. Eski yeşilrapor, Actions success veya uploadstatus yayınbaşarısı değildir.
+- Gerçekyetkilerle erişilebilir snapshot/yerelkayıt yoksa bunu NOT_VERIFIED yaz; kaynak koddan stokveyaçalışıyor sonucu çıkarma. Somuteksik yalnız dosya/komut/sahip/neden şeklinde kaydedilsin.
+- Mevcutkaynakta yeni somutkodkusuru kanıtlanırsa aynıfixturebaselinefail→en küçükadayfix→odaklıtest şeklinde kendi ayrıdalında düzeltme oluştur ve draftPR hazırla. Yeni hata yoksa rastgele refactor/testsayısı üretme. Kurulukaynak/scheduler/kuyruk/claim/kilit değiştirme; yenipost/pin yayımlama.
+- Kaynaklar tam değilse taklit uygulama yapma. Çalışanüçkomut/paket/geri dönüş ve mevcutWindowsCodex'e uygulanabilir tamdosyaref/hashdevir hazırla. Tam kaynak olmayan kusur için sahtepatch üretme.
+- Bittiölçütü: güncelkanıtla gerçekdurum+varsa gerçekkusur için çalışantestliaday+yereluygulayıcıya tek somutdevir. Sadece “otomasyonkontroledildi” raporu değildir.
+
+### Jingle iş bölümü — yanlış hatta ikinci onarım yok
+Jingle'ın gerçekWindows uygulaması mevcutCodex'tekalır; Work2ikinciFactoryyazarı değildir. Son02:42paket c118ed21 hazır, yenidenhazırlama. Kanıtlanan temel ayrım: STAGEadapterdüzeltmesicanonical RUN-EVENING.cmd→Run-Factory.ps1→jingle_factory.py hattında tüketilmiyor. STAGE activation18Ekimveproviderfalse; bunu bugünaçma. Work2varsa yeniWatchdog/Windowsmakbuzunu#32'den okuyup somutdevirlinki bırakabilir; görevin alınmasını/tetiklenmesini varsayamaz. MASTER'ın yerelJingledevamı aşağıdaki ayrıdosyada. Jingle'ı “çalışıyor” diye etiketlemek için gerçekintake→DJMASTER→sesQC kanıtı gerekir.
+
+
 ## Başlangıç ve korunacaklar
 - Tam kurucu onaylıV3.0 artık erişilebilir:
 https://github.com/MetteBuyuretti/oldies-reels-worker/blob/c61cf49c182b1fe9016221830e70d6a923ec9774/work-output/master-work2-intake-20261031/FOUNDER-APPROVED-CONSTITUTION-V3.0.txt
