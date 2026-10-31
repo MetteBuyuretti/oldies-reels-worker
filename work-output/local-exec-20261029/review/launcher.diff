@@ -1,0 +1,41 @@
+--- run_tumblr_auto.ps1.preimage
++++ run_tumblr_auto.ps1.installed
+@@ -8,4 +8,10 @@
+ $errPath=Join-Path $logDir ('tumblr-control-'+$stamp+'.stderr.log')
+ $runLog=Join-Path $logDir 'tumblr-launcher.jsonl'
++$startedAt=(Get-Date).ToUniversalTime()
++$publisherStartedAt=$null
++$publisherFinishedAt=$null
++$publisherReportFresh=$false
++$publisherStatus=$null
++$publisherReportError=$null
+ try {
+   New-Item -ItemType Directory -Path $logDir -Force | Out-Null
+@@ -26,10 +32,25 @@
+     }
+     $publishArgs=@(('"'+(Join-Path $root 'tumblr_auto_news_v3.mjs')+'"'))
+-    if($Mode -eq 'Run'){$publishArgs+=@('--queue-ready','--intake')}
++    if($Mode -eq 'Run'){$publishArgs+=@('--queue-ready','--intake')}else{$publishArgs+='--verify'}
++    $publisherStartedAt=(Get-Date).ToUniversalTime()
+     $publisher=Start-Process -FilePath $node -ArgumentList $publishArgs -WorkingDirectory $root -WindowStyle Hidden -Wait -PassThru -RedirectStandardOutput ($outPath+'.publisher') -RedirectStandardError ($errPath+'.publisher')
+     $publishCode=$publisher.ExitCode
++    $publisherFinishedAt=(Get-Date).ToUniversalTime()
++    # A guard failure can leave an older successful report untouched.
++    # Only a report created within this child run may describe its result.
++    $latestPath=Join-Path $logDir 'tumblr-publisher-latest.json'
++    if(Test-Path -LiteralPath $latestPath){
++      try{
++        $latest=Get-Content -LiteralPath $latestPath -Raw | ConvertFrom-Json -ErrorAction Stop
++        $reportAt=[DateTimeOffset]::Parse($latest.at).UtcDateTime
++        $publisherReportFresh=((Get-Item -LiteralPath $latestPath).LastWriteTimeUtc -ge $publisherStartedAt -and $reportAt -ge $publisherStartedAt -and $reportAt -le $publisherFinishedAt)
++        if($publisherReportFresh){$publisherStatus=$latest.status}
++      }catch{$publisherReportError='PUBLISHER_REPORT_INVALID'}
++    }
++    if($publishCode -eq 0 -and -not $publisherReportFresh){$publisherReportError='FRESH_PUBLISHER_REPORT_REQUIRED'}
+   }
+   $result=if($health.ExitCode -ne 0){$health.ExitCode}elseif($null -ne $publishCode){$publishCode}else{0}
+-  [pscustomobject]@{at=(Get-Date).ToUniversalTime().ToString('o');mode=$Mode;status=$(if($result -eq 0){'OK'}else{'ERROR_OR_CONTENT_REQUIRED'});healthExit=$health.ExitCode;publisherExit=$publishCode;exitCode=$result;stdout=$outPath;stderr=$errPath} | ConvertTo-Json -Compress | Add-Content -LiteralPath $runLog -Encoding UTF8
++  if($publisherReportError -eq 'FRESH_PUBLISHER_REPORT_REQUIRED'){$result=1}
++  [pscustomobject]@{at=(Get-Date).ToUniversalTime().ToString('o');mode=$Mode;status=$(if($result -eq 0){'OK'}else{'ERROR_OR_CONTENT_REQUIRED'});healthExit=$health.ExitCode;publisherExit=$publishCode;exitCode=$result;stdout=$outPath;stderr=$errPath;startedAt=$startedAt.ToString('o');finishedAt=(Get-Date).ToUniversalTime().ToString('o');publisherStartedAt=$(if($publisherStartedAt){$publisherStartedAt.ToString('o')});publisherFinishedAt=$(if($publisherFinishedAt){$publisherFinishedAt.ToString('o')});publisherElapsedMs=$(if($publisherFinishedAt){[math]::Round(($publisherFinishedAt-$publisherStartedAt).TotalMilliseconds,1)});publisherStdout=$(if($publisherStartedAt){$outPath+'.publisher'});publisherStderr=$(if($publisherStartedAt){$errPath+'.publisher'});publisherReportFresh=$publisherReportFresh;publisherStatus=$publisherStatus;publisherReportError=$publisherReportError} | ConvertTo-Json -Compress | Add-Content -LiteralPath $runLog -Encoding UTF8
+   exit $result
+ } catch {

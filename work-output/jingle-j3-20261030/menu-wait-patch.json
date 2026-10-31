@@ -1,0 +1,5 @@
+{
+  "source": "producer/gemini_jingle.staged.cjs",
+  "old": "    const item = await firstVisible([\n      page.getByRole('menuitem', {name:/Yalnızca ses|Audio only|MP3 parçası|MP3 track/i})\n    ]);\n    if (!item) throw new Error('DOWNLOAD_AUDIO_MENU_NOT_FOUND');",
+  "new": "    const item = page.getByRole('menuitem',\n      {name:/Yalnızca ses|Audio only|MP3 parçası|MP3 track/i}).first();\n    // A completed button click does not imply an asynchronously rendered menu is visible.\n    try { await item.waitFor({state:'visible', timeout:10000}); }\n    catch (_) { throw new Error('DOWNLOAD_AUDIO_MENU_NOT_FOUND'); }"
+}

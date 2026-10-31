@@ -1,0 +1,34 @@
+{
+  "status": "PREFLIGHT_FILES_PASS_BACKUP_VERIFIED",
+  "at": "2026-10-29T22:13:10.149752+00:00",
+  "module_sha256": "f8e5316c2831adb7d4be189e35f75ba3f7d9ed6cae9751c5ddf9592340805e4d",
+  "gateway_sha256": "696ff10d1de5f4912873ad1c568a9744e5f11fd3875229cb998ca380ee413fc5",
+  "policy_sha256": "992132c3f078decbba3f8eb7be215736db3217ca4accaff9e8a91b7dd562b826",
+  "syntax_helper_sha256": "30594d978480f5cb987708e601dd4c264339738057dc4aa562bc3a03b47c06b5",
+  "source_hashes": {
+    "TUMBLR_PUBLISHER": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+    "TUMBLR_LAUNCHER": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+    "TUMBLR_EDITORIAL_CONTROLLER": "61f535b7a4946d924a52b102a94d533960f5b90834d7c4a7114a20144e6bbb12"
+  },
+  "backup_verified": [
+    {
+      "alias": "active-profile",
+      "sha256": "3943c9c88d425079604c442945b0aee6d1105bdac942da3beca0876977c39298"
+    },
+    {
+      "alias": "active-gateway",
+      "sha256": "8708a17189514b749a8091f7725e5182098e7621dec99b5c8682626d54707875"
+    },
+    {
+      "alias": "active-policy",
+      "sha256": "d7dcff03ea898c68c68250eb24ff27fe67eb7963f36732ee4503e7b7d425eb43"
+    },
+    {
+      "alias": "active-commander-config",
+      "sha256": "faa68e35c311b0b9335bcc1b6184e2a536f9ce914e0afe1b74ab9e67d82b7c05"
+    }
+  ],
+  "fixed_binary_signatures_valid": true,
+  "active_files_changed": false,
+  "activated": false
+}

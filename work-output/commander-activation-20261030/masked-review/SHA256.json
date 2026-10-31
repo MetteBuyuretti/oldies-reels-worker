@@ -1,0 +1,19 @@
+{
+  "normalization": "UTF-8 LF as exported",
+  "files": {
+    "work-output/commander-activation-20261030/masked-review/RESULT.md": "c690cbb8ca4478cf86026afbf763eadf7bbb30aa99718a6efd52eee7a1b0bc1b",
+    "work-output/commander-activation-20261030/masked-review/Start-OldiesTunnel-Secure.ps1.diff": "37d2d8c5db011966dc49c395256f88a4a6e10361499f8c2a2789e09a4acac310",
+    "work-output/commander-activation-20261030/masked-review/SecureKeyDialog.cs.diff": "af2ebbcda2da3920080ad9885d4111a5c422095734c09c16ab75db5aca6acf27",
+    "work-output/commander-activation-20261030/masked-review/ANAHTAR-PENCERESINI-AC.cmd.diff": "b4eb423236c6cfed68d819369e38cfe52031fd7f2b9d5e25c119123ebaba3833",
+    "work-output/commander-activation-20261030/masked-review/activate-managed.ps1.diff": "b0a754a5a1bd532c55b100f5db14bc9bd1d90bd2eb9a79e940817f53d3503d98",
+    "work-output/commander-activation-20261030/SecureActivation.Core.ps1": "4ad9053d973142b2f6c7b7ed66ba558fe0937a3558510020fd6750172114f44f",
+    "work-output/commander-activation-20261030/Start-OldiesActivation-Secure.ps1": "ce7f54c853b71bf53437c6d5cd6f92c4052571c0ca90a94caa56148a3606ddcc",
+    "work-output/commander-activation-20261030/evidence/secure-flow-tests.json": "736c8f460e55a83348705da808e18eab79e3b4458163c245d3ee33fa28338ae5",
+    "work-output/commander-activation-20261030/evidence/masked-bridge-install.json": "cf7b018471c7150dfad76812a9ab6f9da49f5a2a9fdf559ebd423a48b36b0d40",
+    "work-output/commander-activation-20261030/evidence/masked-window-observation.json": "59be5803f1ca7723d8a9396c688a7fa4b2c377343a6c1c5a8909d8d5b64942f7",
+    "work-output/jingle-j2-20261030/RESULT.md": "20c965e0cd8c1d8d1928c3c67d2252ba91035827aae4e26a91749444d2eb6fa2",
+    "work-output/jingle-j2-20261030/candidate/producer-download-diagnostic.diff": "b918afe7ea59a4a6883cfdc60d629f856c3514c2f9bcfd9c669ca694b972fe23",
+    "work-output/jingle-j2-20261030/evidence/j2-summary.json": "f6cd6a88aa61b712471cdc7230fd5892d9fd6a40477b1324dad75de5a560cc23",
+    "work-output/jingle-j2-20261030/evidence/download-boundary-tests.json": "47cd1c24d2ea2e9832dc648ce4efbc0b8278f44014db386aae245b8a1a77cfe1"
+  }
+}

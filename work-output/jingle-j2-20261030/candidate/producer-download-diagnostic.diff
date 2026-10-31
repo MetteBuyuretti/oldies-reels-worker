@@ -1,0 +1,41 @@
+--- producer_contract.cjs.current
++++ producer_contract.cjs.staging
+@@ -60,4 +60,5 @@
+   save('CREATED');
+   let phase = 'MODEL_SELECTOR';
++  let downloadStep = null;
+   try {
+     await adapter.selectModel();
+@@ -67,12 +68,16 @@
+     await adapter.generate(job);
+     save('GENERATING');
++    downloadStep = 'WAIT_FOR_DOWNLOAD_EVENT';
+     const download = await adapter.waitForTrack();
+     phase = 'DOWNLOAD';
+     const rawPath = path.join(directory, 'raw.mp3');
++    downloadStep = 'SAVE_RAW_FILE';
+     await adapter.download(download, rawPath);
++    downloadStep = 'VALIDATE_RAW_FILE';
+     const stat = fs.lstatSync(rawPath);
+     if (!stat.isFile() || stat.isSymbolicLink() || stat.size < 1024) throw new Error('RAW_INVALID');
+     const sha256 = createHash('sha256').update(fs.readFileSync(rawPath)).digest('hex');
+     // Atomic uniqueness reservation across ALL slots/jobs; duplicate bytes stay review-only.
++    downloadStep = 'RESERVE_RAW_HASH';
+     const claim = fs.openSync(path.join(claims, sha256 + '.json'), 'wx');
+     try { fs.writeFileSync(claim, JSON.stringify(job)); fs.fsyncSync(claim); } finally { fs.closeSync(claim); }
+@@ -80,7 +85,14 @@
+   } catch (error) {
+     if (phase === 'GENERATION' && /^DOWNLOAD_/.test(String(error && error.message))) phase = 'DOWNLOAD';
++    // Whitelisted diagnostics only; the original public error code and retry gate remain unchanged.
++    const knownDownloadErrors = new Set(['DOWNLOAD_AUDIO_MENU_NOT_FOUND','DOWNLOAD_EVENT_TIMEOUT',
++      'DOWNLOAD_NOT_AVAILABLE','DOWNLOAD_FILE_MISSING_OR_EMPTY','RAW_INVALID']);
++    const ioCodes = new Set(['ENOENT','EACCES','EPERM','ENOSPC','EDQUOT','EEXIST']);
++    const downloadDetail = knownDownloadErrors.has(error?.message) ? error.message
++      : ioCodes.has(error?.code) ? 'FILE_' + error.code : 'UNKNOWN_DOWNLOAD_ERROR';
+     // Never serialize raw browser/provider errors, URLs, prompts or credentials.
+     save(phase + '_ERROR', {error_code:'WEB_' + phase + '_ERROR',
+-      outcome:phase === 'MODEL_SELECTOR' ? 'NOT_SUBMITTED' : 'REVIEW_REQUIRED', retry_generation:false});
++      outcome:phase === 'MODEL_SELECTOR' ? 'NOT_SUBMITTED' : 'REVIEW_REQUIRED', retry_generation:false,
++      ...(phase === 'DOWNLOAD' ? {download_step:downloadStep,download_detail:downloadDetail} : {})});
+     throw new Error('WEB_' + phase + '_ERROR');
+   }

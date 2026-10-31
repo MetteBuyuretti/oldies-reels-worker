@@ -1,0 +1,61 @@
+{
+  "status": "PASS_CURRENT_WINDOWS_CANDIDATE_MCP",
+  "at": "2026-10-29T22:14:30.719Z",
+  "rows": [
+    {
+      "check": "candidate-seven-tools",
+      "tools": [
+        "read_file",
+        "list_project_files",
+        "read_project_file",
+        "create_staging_file",
+        "read_staging_file",
+        "replace_staging_file",
+        "check_staging_syntax"
+      ]
+    },
+    {
+      "check": "pinned-three-sources",
+      "files": [
+        {
+          "alias": "TUMBLR_PUBLISHER",
+          "sha256": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+          "bytes": 18559
+        },
+        {
+          "alias": "TUMBLR_LAUNCHER",
+          "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+          "bytes": 5003
+        },
+        {
+          "alias": "TUMBLR_EDITORIAL_CONTROLLER",
+          "sha256": "61f535b7a4946d924a52b102a94d533960f5b90834d7c4a7114a20144e6bbb12",
+          "bytes": 7519
+        }
+      ]
+    },
+    {
+      "check": "current-powershell-read-stage-readback-parser",
+      "action": "NEW_EXCLUSIVE_STAGING_CREATED",
+      "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+      "bytes": 5003,
+      "parser": {
+        "file": "run_tumblr_auto.ps1",
+        "status": "SYNTAX_OK",
+        "exitCode": 0,
+        "signal": null,
+        "executedCandidate": false
+      }
+    },
+    {
+      "check": "checker-argument-injection-denied"
+    },
+    {
+      "check": "legacy-fixed-report-preserved-local-candidate",
+      "returned": true
+    }
+  ],
+  "activeFilesUnchanged": true,
+  "activated": false,
+  "workAcceptance": false
+}

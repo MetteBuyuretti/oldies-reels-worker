@@ -1,0 +1,37 @@
+--- SecureKeyDialog.cs.before
++++ SecureKeyDialog.cs.current
+@@ -44,5 +44,7 @@
+     }
+ 
+-    public static OldiesKeyInputResult Capture()
++    public static OldiesKeyInputResult Capture() { return Capture(false); }
++    public static OldiesKeyInputResult CaptureActivation() { return Capture(true); }
++    private static OldiesKeyInputResult Capture(bool activation)
+     {
+         var result = new OldiesKeyInputResult { Accepted = false, Value = null };
+@@ -50,5 +52,5 @@
+         using (var input = new TextBox())
+         {
+-            form.Text = "OLDIES — yerel güvenli tünel anahtarı";
++            form.Text = activation ? "OLDIES — güvenli proje araçları aktivasyonu" : "OLDIES — yerel güvenli tünel anahtarı";
+             form.ClientSize = new Size(580, 270);
+             form.StartPosition = FormStartPosition.CenterScreen;
+@@ -60,5 +62,8 @@
+             var label = new Label {
+                 Location = new Point(18, 15), Size = new Size(545, 75),
+-                Text = "OLDIES Commander tunnel runtime anahtarını yalnız buraya girin.\r\n"
++                Text = activation ? "Mevcut tünel kontrollü yeniden başlatılacak; aynı altı proje aracı açılacak.\r\n"
++                    + "Mevcut runtime anahtarını yalnız maskeli alana girin.\r\n"
++                    + "Yeni anahtar veya kurulum yok. Başarısızlıkta eski bağlantıya dönülür."
++                    : "OLDIES Commander tunnel runtime anahtarını yalnız buraya girin.\r\n"
+                     + "İzin: Tunnels Read + Use. Bitiş: 05.11.2026 02:49:12 TSİ.\r\n"
+                     + "Kasadaki tam anahtarı kullanın. Bağlantı veya anahtar kimliği girmeyin."
+@@ -74,6 +79,6 @@
+             };
+             var submit = new Button {
+-                Text = "Sınırlı tüneli başlat", Location = new Point(285, 215),
+-                Size = new Size(170, 35), Enabled = false
++                Text = activation ? "Proje araçlarını etkinleştir" : "Sınırlı tüneli başlat", Location = new Point(235, 215),
++                Size = new Size(220, 35), Enabled = false
+             };
+             var cancel = new Button {

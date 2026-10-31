@@ -1,0 +1,99 @@
+{
+  "realManagedRuntimeTouched": false,
+  "count": 6,
+  "realCredentialsUsed": false,
+  "at": "2026-10-29T23:04:35.7619092Z",
+  "results": [
+    {
+      "case": "cancel",
+      "result": "PASS",
+      "cleanup": {
+        "inputReferenceCleared": true,
+        "childEnvironmentReferenceCleared": true,
+        "parentEnvironmentUnchanged": true
+      },
+      "status": "CANCELLED_NO_RUNTIME_CHANGE"
+    },
+    {
+      "case": "empty",
+      "result": "PASS",
+      "cleanup": {
+        "inputReferenceCleared": true,
+        "childEnvironmentReferenceCleared": true,
+        "parentEnvironmentUnchanged": true
+      },
+      "status": "EMPTY_INPUT_NO_RUNTIME_CHANGE"
+    },
+    {
+      "case": "success",
+      "events": [
+        "doctor:",
+        "status:",
+        "stop:",
+        "connect:FIXTURE_NEW",
+        "status:"
+      ],
+      "result": "PASS",
+      "status": "ACTIVATED_LOCAL_RUNTIME_WORK_TEST_PENDING",
+      "exitCode": 0,
+      "cleanup": {
+        "inputReferenceCleared": true,
+        "childEnvironmentReferenceCleared": true,
+        "parentEnvironmentUnchanged": true
+      }
+    },
+    {
+      "case": "auth-reject",
+      "events": [
+        "doctor:",
+        "status:"
+      ],
+      "result": "PASS",
+      "status": "ACTIVATION_NOT_STARTED",
+      "exitCode": 1,
+      "cleanup": {
+        "inputReferenceCleared": true,
+        "childEnvironmentReferenceCleared": true,
+        "parentEnvironmentUnchanged": true
+      }
+    },
+    {
+      "case": "rollback",
+      "events": [
+        "doctor:",
+        "status:",
+        "stop:",
+        "connect:FIXTURE_NEW",
+        "stop:",
+        "connect:FIXTURE_OLD",
+        "status:"
+      ],
+      "result": "PASS",
+      "status": "ACTIVATION_FAILED_OLD_RUNTIME_RESTORED",
+      "exitCode": 1,
+      "cleanup": {
+        "inputReferenceCleared": true,
+        "childEnvironmentReferenceCleared": true,
+        "parentEnvironmentUnchanged": true
+      }
+    },
+    {
+      "case": "transient",
+      "events": [
+        "doctor:",
+        "status:",
+        "stop:",
+        "connect:FIXTURE_NEW",
+        "status:"
+      ],
+      "result": "PASS",
+      "status": "ACTIVATED_LOCAL_RUNTIME_WORK_TEST_PENDING",
+      "exitCode": 0,
+      "cleanup": {
+        "inputReferenceCleared": true,
+        "childEnvironmentReferenceCleared": true,
+        "parentEnvironmentUnchanged": true
+      }
+    }
+  ]
+}

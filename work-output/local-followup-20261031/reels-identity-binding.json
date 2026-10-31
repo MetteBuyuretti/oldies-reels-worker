@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-30T23:40:13.670052+00:00",
+  "snapshot": "8e4d5451737e816fc4c2c91badbb9f0f6af625e8",
+  "actual_function": "facebook_global_audio.selected_signoff",
+  "profile": "energetic",
+  "local_path": "C:\\Users\\METE\\Downloads\\Oldies-Radyo-DJ-Energetic-Preview.mp3",
+  "mapping_key": "OLDIES_FACEBOOK_ENERGETIC_SIGNOFF_PATH",
+  "mapping_scope": "this child process only; cleared/restored in finally",
+  "bytes": 21120,
+  "sha256": "a2df71619290530249fbacbc02c546caceeecaf3c05d265bd8321ebfeefb4ac8",
+  "matches_actual_contract": true,
+  "production_approval_metadata_changed": false,
+  "raw_audio_exported": false,
+  "new_media_provider_calls": 0,
+  "mapping_cleanup_verified": true,
+  "calm_reference": {
+    "expected_sha256": "1dc358ef0cea5a3a6d9fe20d9934358fed5ccd0009ba0838a60bba9f28bb9d9c",
+    "checked_paths": [
+      "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\artifacts\\reels-recovery-20261018\\repo\\assets\\facebook\\en-warm-signoff-radyo-v3.mp3",
+      "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Codex-P0-Review\\Reels-20261016\\source\\oldies-reels-worker-fix-p0-evidence-based-reels-qc-20261016\\assets\\facebook\\en-warm-signoff-radyo-v3.mp3",
+      "C:\\Users\\METE\\Downloads\\en-warm-signoff-radyo-v3.mp3"
+    ],
+    "local_matches": [],
+    "original_source": "PR22/9ad08776/assets/facebook/en-warm-signoff-radyo-v3.mp3"
+  },
+  "calm_searched_again": false,
+  "marked_entry_evidence": {
+    "workspace": "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\artifacts\\reels-recovery-20261018\\repo",
+    "entry": "worker.main -> prepare_preview -> local_voiceover -> inspect_audio -> render_timeline",
+    "packet_sha256": "0ddedcbef8ba5fbe099fe579c8e3452362cdf4d5848aeb301ad7c8545d15ede6",
+    "packet_voice": "work-output/p0-reels-repair-20261018/pilots/beatles-en-natural-v2-clean-tail.wav",
+    "packet_date": "2026-10-18",
+    "preview_status": "BLOCKED_PREVIEW",
+    "video_created": false,
+    "active_windows_facebook_launcher_ref": "NOT_PROVEN_IN_MARKED_ENTRY_RECEIPTS",
+    "scope": "Known entry/receipt set only; no whole-device scan or absence claim"
+  }
+}

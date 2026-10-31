@@ -1,0 +1,20 @@
+--- tumblr_auto_news_v3.mjs.preimage
++++ tumblr_auto_news_v3.mjs.installed
+@@ -100,4 +100,5 @@
+ export function shouldSubmit(args,p,row,auth){
+  // Verify never evaluates publication eligibility or enters editor/enqueue.
++ assertPublisherMode(args);
+  return args.includes('--queue-ready')&&eligible(p,row,auth);
+ }
+@@ -160,6 +161,11 @@
+  return dialog;
+ }
++function assertPublisherMode(args){
++ if(args.includes('--verify')&&args.includes('--queue-ready'))throw Error('CONFLICTING_PUBLISHER_MODES');
++}
++
+ async function main(){
+  const args=process.argv.slice(2),arg=n=>{const i=args.indexOf(n);return i<0?null:args[i+1]};
++ assertPublisherMode(args);
+  const root=arg('--root')||ROOT, packageFile=arg('--package')||PACKAGE;
+  const journalFile=path.join(root,'tumblr-editorial-state.json'),logDir=path.join(root,'logs');fs.mkdirSync(logDir,{recursive:true});

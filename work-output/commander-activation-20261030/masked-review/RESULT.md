@@ -1,0 +1,17 @@
+# Mevcut maskeli pencereden güvenli aktivasyon
+
+30.10.2026,02:12TSİ. MASTER01:58/6510493149 ve kurucunun bu Codex sohbetindeki talimatı uygulandı. Gerçek alım02:02/#32/6510530090; ilk kısa kontrol hedefi02:20idi. **MASKELİ AKTİVASYON GİRİŞİ HAZIR** kaydı02:07/#32/6510622424'e yazıldı.
+
+Mevcut masaüstü **OLDIES - Anahtar Penceresi** kısayolu, mevcut Start-OldiesTunnel-Secure.ps1'e **-ActivateProjectTools** geçiriyor. Eski connect/AlreadyRunning yolu yerine küçük bir branch güncel Start-OldiesActivation-Secure.ps1 ve activate-managed.ps1 akışına gidiyor. Mevcut C# maskeli form korunarak “OLDIES — güvenli proje araçları aktivasyonu” başlığı ve **“Proje araçlarını etkinleştir”** düğmesi eklendi. Form mevcut bağlantının kontrollü yeniden başlatılacağını açıklıyor. Yeni tünel/runtime alias/servis/anahtar veya scope yok.
+
+Launcher/C#/cmd/shortcut preimage'ları yedeklendi; hash kontrollü değişti ve readback doğrulandı. Aktivasyon helper'ının önceki61019394preimage'ı da birebir hash ile korunuyor. Önceki7Windowschecker/pin seti yeniden çalıştırılmadı. Yeni form derleme/guard self-test geçti.
+
+Yeni core, kullanıcı tarafından yalnız formda girilen değeri sadece gizli activation child ortamındaki CONTROL_PLANE_API_KEY başvurusuna verir. Parent ortam değiştirilmez. argv yalnız sabit engine/script argümanlarını taşır; secret dosya/sohbet/GitHub/loga yazılmaz. Child stdout/stderr dışarı aktarılmaz; beklenmedik secret echo tespit edilirse generic hata üretilir. Child input ve ProcessStartInfo ortam başvuruları finally'de temizlenir. Anahtar, managed restart ve rollback'in aynı process bağlamında kalır; runtime kendi normal çalışma ortamında kullanmayı sürdürür. İptal/boş/geçersiz inputta child veya stop başlamaz.
+
+Same-key önkontrolü, runtime sağlıklı çalışırken doctor ve desteklenen authenticated status/expected tunnel doğrulamasını yapar. Bu önkoşul geçmeden stop yok. Aynı alias stop/connect başarısızsa eski komuta aynı geçici bağlamla dönülür. connect exit2 geçici startup sonucu olarak readiness kontrolüne alınır; gerçek error/remote auth reddi kabul edilmez. Yeni helper farkı bunun dışında yetki açmaz.
+
+Altı dar, gerçek anahtarsız fixture geçti: cancel, empty, success, auth-before-stop rejection, connect failure→old-command rollback ve transient connect2→ready. Fake CLI çağrıları aynı üretim activation script'inin workspace kopyasına bağlandı; gerçek managed runtime'a dokunmadı. Child/key-context, argv'de değer bulunmaması, error sonrası rollback ve nihai cleanup doğrulandı. İlk fixture PS7'nin ISO JSON zamanını DateTime'a çevirdiğini ortaya çıkardı; locale Parse yerine typed DateTimeOffset karşılaştırmasıyla düzeltildi. Eski7/15/14/16setler bu testlere eklenmedi.
+
+Mevcut kısayol02:05:55TSİ'de açıldı. PID50692/Session1, kullanıcının explorer oturumuyla aynı; gerçek pencere başlığı ve windowhandle doğrulandı. Computer Use pencere listesi terminal-owned formu göstermedi; formun süreç/pencere başlığı metadatası ayrıca doğrulandı. UI Automation, klavye/mouse girdisi, screenshot veya anahtar alanı okunmadı.
+
+02:12checkpoint'inde durum **MASKED_ACTIVATION_INPUT_READY**: kullanıcı girişi bekleniyor. Bu, anahtarın girildiği veya runtime'ın aktive olduğu anlamına gelmez. Eski01:13exit42makbuzu bu yeni çağrının sonucu sayılmadı. Kullanıcı adımı yalnız açık maskeli formda mevcut anahtarı girip yerel beyanı işaretleyerek düğmeye basmaktır. Bu beklemede aynı Codex JingleJ2 kaynak/fixture teslimini hazırladı; arka planda sürekli ajan/otomatik GitHub raporu iddiası yok.

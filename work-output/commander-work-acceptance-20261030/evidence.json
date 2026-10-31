@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "job_id": "MASTER-WORK-E2E-20261030-0312",
+  "observed_window": {
+    "date": "2026-10-30",
+    "timezone": "Europe/Istanbul",
+    "from": "03:11",
+    "to": "03:14"
+  },
+  "actor": "This WORK MASTER conversation",
+  "transport": "Actual OLDIES Commander plugin calls over the existing tunnel",
+  "tool_catalog": {
+    "count": 7,
+    "new_project_tools": [
+      "list_project_files",
+      "read_project_file",
+      "create_staging_file",
+      "read_staging_file",
+      "replace_staging_file",
+      "check_staging_syntax"
+    ],
+    "legacy_report_preserved": true
+  },
+  "source_listing_before": [
+    {
+      "alias": "TUMBLR_PUBLISHER",
+      "sha256": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+      "bytes": 18559
+    },
+    {
+      "alias": "TUMBLR_LAUNCHER",
+      "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+      "bytes": 5003
+    },
+    {
+      "alias": "TUMBLR_EDITORIAL_CONTROLLER",
+      "sha256": "61f535b7a4946d924a52b102a94d533960f5b90834d7c4a7114a20144e6bbb12",
+      "bytes": 7519
+    }
+  ],
+  "source_reads": [
+    {
+      "alias": "TUMBLR_PUBLISHER",
+      "sha256": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+      "bytes": 18559
+    },
+    {
+      "alias": "TUMBLR_LAUNCHER",
+      "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+      "bytes": 5003
+    },
+    {
+      "alias": "TUMBLR_EDITORIAL_CONTROLLER",
+      "sha256": "61f535b7a4946d924a52b102a94d533960f5b90834d7c4a7114a20144e6bbb12",
+      "bytes": 7519
+    }
+  ],
+  "source_listing_after": [
+    {
+      "alias": "TUMBLR_PUBLISHER",
+      "sha256": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+      "bytes": 18559
+    },
+    {
+      "alias": "TUMBLR_LAUNCHER",
+      "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+      "bytes": 5003
+    },
+    {
+      "alias": "TUMBLR_EDITORIAL_CONTROLLER",
+      "sha256": "61f535b7a4946d924a52b102a94d533960f5b90834d7c4a7114a20144e6bbb12",
+      "bytes": 7519
+    }
+  ],
+  "installed_sources_hashes_unchanged": true,
+  "staging_probe": {
+    "publisher_existing_sha256": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a",
+    "launcher_existing_sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+    "note_preflight": "STAGING_FILE_MISSING; expected absent target before exclusive create"
+  },
+  "write_roundtrip": {
+    "target": "run_tumblr_auto.ps1",
+    "source_and_stage_preimage_sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+    "before_bytes": 5003,
+    "change": "Only a non-executing comment marker added in staging",
+    "write_receipt": {
+      "file": "run_tumblr_auto.ps1",
+      "sha256": "975834091f848d287f2409347cbd53d269d2b262a1caed7f95cc03b8127ad6b1",
+      "bytes": 5077,
+      "scope": "STAGING_ONLY"
+    },
+    "readback": {
+      "file": "run_tumblr_auto.ps1",
+      "sha256": "975834091f848d287f2409347cbd53d269d2b262a1caed7f95cc03b8127ad6b1",
+      "bytes": 5077
+    },
+    "text_matches_written": true,
+    "syntax_response": {
+      "file": "run_tumblr_auto.ps1",
+      "status": "SYNTAX_OK",
+      "exitCode": 0,
+      "signal": null,
+      "executedCandidate": false
+    },
+    "restore_receipt": {
+      "file": "run_tumblr_auto.ps1",
+      "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+      "bytes": 5003,
+      "scope": "STAGING_ONLY"
+    },
+    "restored_readback": {
+      "file": "run_tumblr_auto.ps1",
+      "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+      "bytes": 5003
+    },
+    "restored_exact_preimage": true
+  },
+  "local_hash_verification": {
+    "basis": "UTF-8 bytes of actual tunnel-returned text; no direct Windows filesystem access",
+    "checks": [
+      {
+        "stage": "source",
+        "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+        "bytes": 5003,
+        "verified": true
+      },
+      {
+        "stage": "candidate",
+        "sha256": "975834091f848d287f2409347cbd53d269d2b262a1caed7f95cc03b8127ad6b1",
+        "bytes": 5077,
+        "verified": true
+      },
+      {
+        "stage": "readback",
+        "sha256": "975834091f848d287f2409347cbd53d269d2b262a1caed7f95cc03b8127ad6b1",
+        "bytes": 5077,
+        "verified": true
+      },
+      {
+        "stage": "restored",
+        "sha256": "9cbf37754d771b46ea9698ce3767073b0b775b5caecd6c94cbd4504ce74d5d59",
+        "bytes": 5003,
+        "verified": true
+      }
+    ]
+  },
+  "exclusive_note": {
+    "write": {
+      "file": "review-note.txt",
+      "sha256": "d6b7f92639363b15786128c0018464a868fcdb1c317b105b08d56112adb779da",
+      "bytes": 1150,
+      "scope": "STAGING_ONLY"
+    },
+    "readback": {
+      "file": "review-note.txt",
+      "sha256": "d6b7f92639363b15786128c0018464a868fcdb1c317b105b08d56112adb779da",
+      "bytes": 1150
+    },
+    "exact_content_matched": true,
+    "source_binding_sha256": "3dd7b0988c091526ce59bc73a155bbc37ea9dacb553f49cfb132e0d729e5c38a"
+  },
+  "master_scoped_result": "PASS_REAL_WORK_SOURCE_STAGE_SYNTAX_ROUNDTRIP",
+  "independent_watchdog_final_decision": "pending_review_of_these_concrete_Work_receipts_scope_review_previously_positive",
+  "limits": {
+    "general_shell": false,
+    "installed_source_write": false,
+    "other_project_roots": false,
+    "production_publication": false,
+    "new_media_generation": false,
+    "continuity_tested": false,
+    "actual_runtime_pid_or_health_receipt_read": false
+  }
+}

@@ -1,0 +1,9 @@
+--- ANAHTAR-PENCERESINI-AC.cmd.before
++++ ANAHTAR-PENCERESINI-AC.cmd.current
+@@ -2,5 +2,5 @@
+ setlocal
+ title OLDIES - Yerel guvenli anahtar girisi
+-"C:\Users\METE\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe" -NoProfile -NoExit -STA -File "%~dp0Start-OldiesTunnel-Secure.ps1"
++"C:\Users\METE\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe" -NoProfile -NoExit -STA -File "%~dp0Start-OldiesTunnel-Secure.ps1" -ActivateProjectTools
+ if errorlevel 1 pause
+ endlocal

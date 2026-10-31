@@ -1,0 +1,7 @@
+{
+  "task": "LOCAL-SOCIAL-SNAPSHOT-20261031-01",
+  "status": "PARTIAL_READ_ONLY_EVIDENCE",
+  "snapshot": "SNAPSHOT.json",
+  "platform_current_state_verified": false,
+  "next_step": "Obtain explicitly read-only platform queue preview and current inventory without invoking mutating launchers"
+}

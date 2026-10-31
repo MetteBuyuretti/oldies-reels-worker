@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-29T22:15:38.1875968Z",
+  "process_running": true,
+  "healthy": true,
+  "ready": true,
+  "pid": 15192,
+  "detailLive": true,
+  "detailReady": true,
+  "components": [
+    {
+      "name": "cloudflared",
+      "state": "disabled",
+      "status": "disabled"
+    },
+    {
+      "name": "control-plane",
+      "state": "polling",
+      "status": "ok"
+    },
+    {
+      "name": "dispatcher",
+      "state": "accepting",
+      "status": "ok"
+    },
+    {
+      "name": "harpoon",
+      "state": "settled",
+      "status": "ok"
+    },
+    {
+      "name": "mcp",
+      "state": "initialized",
+      "status": "ok"
+    },
+    {
+      "name": "oauth",
+      "state": "disabled",
+      "status": "disabled"
+    },
+    {
+      "name": "proxy",
+      "state": "direct",
+      "status": "disabled"
+    },
+    {
+      "name": "queue",
+      "state": "available",
+      "status": "ok"
+    },
+    {
+      "name": "response-delivery",
+      "state": "accepted",
+      "status": "ok"
+    }
+  ],
+  "runtimeKeyPresentInThisProcess": false,
+  "activationAttempted": false
+}

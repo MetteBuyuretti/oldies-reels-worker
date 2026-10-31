@@ -1,0 +1,64 @@
+{
+  "at": "2026-10-30T17:06:27.504274+00:00",
+  "workspaces": [
+    {
+      "alias": "LOCAL_REELS_1",
+      "path": "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\artifacts\\reels-recovery-20261018\\repo",
+      "files": {
+        "worker.py": "90ee2a1955e340af13b6b119dc796e2d40e90805a2f29c297c7222468f813fb1",
+        "reels_preview.py": "b4a7225e22a8a6a2cbf31dbcfd7c5149411d580277f575e83cfd9945f63e3cd4",
+        "video_factory.py": "fbe4aacf901a61cb0b03d7765c46eb9c4b9575ad562f0156aec299a5e6696d96",
+        "media_evidence.py": "c2e30a6d87a66f5b970fcaff680a99f93d2292f4fe0d0bdb1fbf6a0fba7253f2",
+        "source_evidence.py": "e7c95765638f7f8708ff3333f41138b09c18693eb5a7329a0f3f3966ea187fd3",
+        "editorial_quality_gate.py": "35289752afc2cf975ca53ddfa3998e0b379c534ef52dd7d903917c8a0294f0f8"
+      },
+      "git_head": "073e7665d9d381e7c8d595fcd60b905a9071490a",
+      "git_head_is_full_worktree_identity": false
+    },
+    {
+      "alias": "LOCAL_REELS_2",
+      "path": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Codex-P0-Review\\Reels-20261016\\source\\oldies-reels-worker-fix-p0-evidence-based-reels-qc-20261016",
+      "files": {
+        "worker.py": "285be65a047d793afcdeaaa6ddfcac33ff2c1e9973451011a423fb1191f1d237",
+        "reels_preview.py": "a7da2286b14fcc17e50588b8f2279ad6b998b7f2104e05ba4aa2a8de2eb3d29d",
+        "video_factory.py": "4b9937a98b58f22317a32142500a4ee002141f105b75c89141a633f49dc6bc93",
+        "media_evidence.py": null,
+        "source_evidence.py": "30e94d2a3f108c894dd9afa4fe821c78800987fa3336116d2f05ddbd8fe5df2a",
+        "editorial_quality_gate.py": "b3d7d839b8b03ba26dd413bb7f6332d85cfe9c3bb55a9424d34faa85279246fd"
+      },
+      "git_head": "NO_GIT_METADATA"
+    }
+  ],
+  "accepted_assets": {
+    "calm": {
+      "expected_sha256": "1dc358ef0cea5a3a6d9fe20d9934358fed5ccd0009ba0838a60bba9f28bb9d9c",
+      "checked_paths": [
+        "C:\\Users\\METE\\.codex\\.chatgpt-projects\\g-p-6ac054936cd481918f4f9c4a6d6f9358\\artifacts\\reels-recovery-20261018\\repo\\assets\\facebook\\en-warm-signoff-radyo-v3.mp3",
+        "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Codex-P0-Review\\Reels-20261016\\source\\oldies-reels-worker-fix-p0-evidence-based-reels-qc-20261016\\assets\\facebook\\en-warm-signoff-radyo-v3.mp3",
+        "C:\\Users\\METE\\Downloads\\en-warm-signoff-radyo-v3.mp3"
+      ],
+      "local_matches": [],
+      "original_source": "PR22/9ad08776/assets/facebook/en-warm-signoff-radyo-v3.mp3"
+    },
+    "energetic": {
+      "expected_sha256": "a2df71619290530249fbacbc02c546caceeecaf3c05d265bd8321ebfeefb4ac8",
+      "path": "C:\\Users\\METE\\Downloads\\Oldies-Radyo-DJ-Energetic-Preview.mp3",
+      "actual_sha256": "a2df71619290530249fbacbc02c546caceeecaf3c05d265bd8321ebfeefb4ac8",
+      "bytes": 21120,
+      "matches_accepted_bytes": true
+    }
+  },
+  "last_marked_english_packet": {
+    "date": "2026-10-18",
+    "language": "en",
+    "local_voiceover": "work-output/p0-reels-repair-20261018/pilots/beatles-en-natural-v2-clean-tail.wav",
+    "file_sha256": "0ddedcbef8ba5fbe099fe579c8e3452362cdf4d5848aeb301ad7c8545d15ede6"
+  },
+  "entry": {
+    "source_entry": "LOCAL_REELS_1/worker.py main -> prepare_preview -> packet.local_voiceover -> inspect_audio -> render_preview -> render_timeline",
+    "active_windows_facebook_launcher_ref": "NOT_EVIDENCED_IN_MARKED_ENTRY_OR_RECEIPTS",
+    "accepted_signoff_profile_bound_in_this_consumer": false,
+    "scope": "Known workspaces and marked prior receipts only; not a whole-device absence claim",
+    "new_tts_audio_video_render_publish_calls": 0
+  }
+}

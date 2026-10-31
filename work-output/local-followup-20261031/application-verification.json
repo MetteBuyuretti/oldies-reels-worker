@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-30T23:37:53.303Z",
+  "status": "PASS_READ_ONLY_APPLICATION_BINDING",
+  "cases": [
+    {
+      "name": "current-installed-pair",
+      "result": "PASS",
+      "expectedError": null,
+      "actualCandidateVerify": true,
+      "readonly": true,
+      "externalProcessCalls": 0
+    },
+    {
+      "name": "adapter-only-with-stale-manifest",
+      "result": "PASS",
+      "expectedError": "CANDIDATE_HASH_MISMATCH",
+      "actualCandidateVerify": true,
+      "readonly": true,
+      "externalProcessCalls": 0
+    },
+    {
+      "name": "manifest-only-with-old-adapter",
+      "result": "PASS",
+      "expectedError": "CANDIDATE_HASH_MISMATCH",
+      "actualCandidateVerify": true,
+      "readonly": true,
+      "externalProcessCalls": 0
+    },
+    {
+      "name": "reviewed-postimage-pair",
+      "result": "PASS",
+      "expectedError": null,
+      "actualCandidateVerify": true,
+      "readonly": true,
+      "externalProcessCalls": 0
+    },
+    {
+      "name": "tampered-candidate",
+      "result": "PASS",
+      "expectedError": "CANDIDATE_HASH_MISMATCH",
+      "actualCandidateVerify": true,
+      "readonly": true,
+      "externalProcessCalls": 0
+    },
+    {
+      "name": "exact-rollback-pair",
+      "result": "PASS",
+      "expectedError": null,
+      "actualCandidateVerify": true,
+      "readonly": true,
+      "externalProcessCalls": 0
+    }
+  ],
+  "protectedPrePostUnchanged": true,
+  "installed": false,
+  "realProviderDownloadImportMixCalls": 0,
+  "fullPriorJ3NineCasesRerun": false,
+  "manifestPreimageSha256": "b22c6238303f25dc4dd47b130d9e817576452d808c44a3aa2458ca04bdae7920",
+  "manifestPostimageSha256": "6cd1a6fb3ad7af2a5e70afa5f39c8b0de7bf632849d5438d96f0a8dd97c003c5"
+}

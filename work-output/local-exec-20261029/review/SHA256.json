@@ -1,0 +1,13 @@
+{
+  "normalization": "UTF-8 with LF as exported to GitHub",
+  "files": {
+    "review/checkpoint.json": "e0dc69d1220a21355766276586a739e860eeee623a28744e78750817a203b185",
+    "review/launcher.diff": "7c97bb7b24207f134d60bba50abe35074abbb81e94f333d73da4385f2752ede0",
+    "review/publisher.diff": "77760fc61f517d1dff8364a51185976a7d9c46cf06483312539b9ebcb5a3b6fb",
+    "review/report.md": "8f2119969531dbf357ebfccfefe3be90bfcb06c2b593389d2a61349868e98d61",
+    "commander/project-tools.cjs": "ca0bd8b96dc54e96d8f7c4d138a7b094288d99948c02c4dd44ddb63393077ef0",
+    "commander/gateway.diff": "f97f4ebb95ade00a3fc5b92b9bb353b17d8270e2ad006b6ed9d61a230b22d8fb",
+    "commander/check-staging.ps1": "30594d978480f5cb987708e601dd4c264339738057dc4aa562bc3a03b47c06b5",
+    "commander/test-project-tools.cjs": "310d5ad1cd77061dbfad8c0c32a748a6be9b8c1b0064d6f9908eb1c176c50f73"
+  }
+}

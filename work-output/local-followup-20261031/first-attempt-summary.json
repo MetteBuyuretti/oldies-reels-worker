@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-30T23:38:47.508518+00:00",
+  "compile_exit": 0,
+  "unittest_exit": 1,
+  "tests_run": 43,
+  "result": "FAILED_ENVIRONMENT_SANDBOX_TEMP_ACCESS_DENIED",
+  "cause": "TemporaryDirectory fixture setup/cleanup denied in redirected sandbox temp; no source defect inferred",
+  "external_guard_hits": []
+}

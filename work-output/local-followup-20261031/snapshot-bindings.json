@@ -1,0 +1,77 @@
+{
+  "ref": "8e4d5451737e816fc4c2c91badbb9f0f6af625e8",
+  "files": [
+    {
+      "path": "facebook_global_audio.py",
+      "git_blob": "4052f5cf5d7bd33b70a5222a8f179ec2abcd5e30",
+      "sha256": "6b049e86ff01eef1a551fccf2f705bb498e14395c69739733b3c0308646f3730",
+      "matches_snapshot": true
+    },
+    {
+      "path": "facebook_global_visuals.py",
+      "git_blob": "2079fb10377f6159e43913feb260e02d1a5316d5",
+      "sha256": "c2d87c042d5eb858d86b664b0ed26daedbd30de20d6744be61ce2f6449f6d4a2",
+      "matches_snapshot": true
+    },
+    {
+      "path": "test_facebook_signoff_integration.py",
+      "git_blob": "1d45d770750c26e86655ba595b8dc2bcfb57dc28",
+      "sha256": "b46a1fffc5a6b975f36d6118faf639ff42e8d678fdbb706a68f100c10fbf2fb4",
+      "matches_snapshot": true
+    },
+    {
+      "path": "test_facebook_global_audio.py",
+      "git_blob": "7d5eb5bd35a4735ec5fa5c17e3c7e71e8f3ada6a",
+      "sha256": "61a1637a0ef2c29671eb29b2eb6af22d6c334ab2ac843f7e489dd3e840a36fbd",
+      "matches_snapshot": true
+    },
+    {
+      "path": "test_facebook_global_visuals.py",
+      "git_blob": "bb52518d70f0c0fefe0a4fb71e24716fa8244b1f",
+      "sha256": "c64d134b8ee2e58bbd8137a26a251bb5a1f730bc4ff711e5caaf22a89c94e5ff",
+      "matches_snapshot": true
+    },
+    {
+      "path": "facebook-global-template.json",
+      "git_blob": "1d88cc309e6b8583fa879613f99e3212835e5e4c",
+      "sha256": "5ece0f74ed0ddd494fbb6185e7232b4e9507215a7c89310d49b02361385a9209",
+      "matches_snapshot": true
+    },
+    {
+      "path": "worker.py",
+      "git_blob": "01a12d2671246d302b47a1de13b81911d74c53cd",
+      "sha256": "f201e045d00a2f0cb3068e102d8b91ea734061dc55cfcfe020f620639cca7168",
+      "matches_snapshot": true
+    },
+    {
+      "path": "zero_cost.py",
+      "git_blob": "f6bbe6b6c738302de32bfb95939e9861408a3319",
+      "sha256": "3308167f44f6589d39a7e6bb942a1ff81fb564d28f13e06ae265a4c4070028e5",
+      "matches_snapshot": true
+    },
+    {
+      "path": "video_factory.py",
+      "git_blob": "be708cb851f1f90ce23156668648cd721a30f5ff",
+      "sha256": "4a76f0fa67c1d24e5a4dcc8e57e836ac0a0364a56a01c44ade5171981f5ee941",
+      "matches_snapshot": true
+    },
+    {
+      "path": "facebook-global-photo-bank.json",
+      "git_blob": "8be7d6de17369b6d2f569fec6e5b72fc4336ec75",
+      "sha256": "22faaf1cbd88d1de5bdbe820d87682f82bf6f987cc8e050622a231b115802f6a",
+      "matches_snapshot": true
+    },
+    {
+      "path": "oldies-artists.json",
+      "git_blob": "f6e25fac94df959a909043c7921357c53489ef76",
+      "sha256": "3157ce97e3b55df69ccfa76e4400e447bb60d9f9abb6cc6ac5d2a45f0c9081ec",
+      "matches_snapshot": true
+    },
+    {
+      "path": "requirements.txt",
+      "git_blob": "942c873f3c9c5f60f283037a211d872d51c9156a",
+      "sha256": "a71219864eb625fd716eef03c5193aa9a05e3f9d817ef4f3bc77318268f5303e",
+      "matches_snapshot": true
+    }
+  ]
+}

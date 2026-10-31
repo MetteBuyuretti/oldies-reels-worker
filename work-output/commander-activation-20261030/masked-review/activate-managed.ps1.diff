@@ -1,0 +1,49 @@
+--- activate-managed.ps1.before
++++ activate-managed.ps1.current
+@@ -9,10 +9,10 @@
+  @{at=(Get-Date).ToUniversalTime().ToString('o');status=$status;reason=$reason;details=$extra;activated=$script:activated;runtimeStopAttempted=$script:stopped;newTunnel=$false;newRuntime=$false;credentialWritten=$false} | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $taskRoot 'evidence\activation-result.json') -Encoding utf8
+ }
+-function Invoke-Managed([string[]]$CliArgs,[string]$Name){
++function Invoke-Managed([string[]]$CliArgs,[string]$Name,[int[]]$AllowedExitCodes=@(0)){
+  $raw=& $plan.binary @CliArgs 2>&1 | Out-String
+  $code=$LASTEXITCODE
+  if($runtimeKey){$raw=$raw.Replace($runtimeKey,'[REDACTED]')}
+  $raw | Set-Content -LiteralPath (Join-Path $taskRoot ('evidence\'+$Name+'.private.json')) -Encoding utf8
+- if($code -ne 0){throw ('MANAGED_COMMAND_FAILED_'+$Name+'_EXIT_'+$code)}
++ if($code -notin $AllowedExitCodes){throw ('MANAGED_COMMAND_FAILED_'+$Name+'_EXIT_'+$code)}
+  return ConvertFrom-Json $raw
+ }
+@@ -27,5 +27,14 @@
+ }
+ function Connect-Existing($command,$label){
+- return Invoke-Managed -CliArgs @('runtimes','connect','--alias',$plan.alias,'--tunnel-id',$plan.tunnel_id,'--profile',$plan.profile_name,'--profile-dir',$plan.profile_dir,'--runtime-api-key','env:CONTROL_PLANE_API_KEY','--mcp-command',$command,'--json') -Name $label
++ return Invoke-Managed -CliArgs @('runtimes','connect','--alias',$plan.alias,'--tunnel-id',$plan.tunnel_id,'--profile',$plan.profile_name,'--profile-dir',$plan.profile_dir,'--runtime-api-key','env:CONTROL_PLANE_API_KEY','--mcp-command',$command,'--json') -Name $label -AllowedExitCodes @(0,2)
++}
++function Wait-ManagedReady($label){
++ for($attempt=0;$attempt -lt 15;$attempt++){
++  $status=Invoke-Managed -CliArgs @('runtimes','status',$plan.alias,'--json') -Name $label
++  if($status.remote_error){throw 'MANAGED_RUNTIME_REMOTE_AUTH_ERROR'}
++  if($status.process_running -and $status.healthy -and $status.ready){return $status}
++  Start-Sleep -Seconds 1
++ }
++ throw 'MANAGED_RUNTIME_READINESS_TIMEOUT'
+ }
+ try{
+@@ -44,7 +53,6 @@
+  $null=Invoke-Managed -CliArgs @('runtimes','stop',$plan.alias,'--json') -Name 'stop-existing'
+  $connected=Connect-Existing -command $plan.new_command -label 'connect-updated'
+- if(-not $connected.process_running -or -not $connected.healthy -or -not $connected.ready -or $connected.remote_error){throw 'UPDATED_RUNTIME_NOT_READY'}
+- $after=Invoke-Managed -CliArgs @('runtimes','status',$plan.alias,'--json') -Name 'runtime-after'
+- if(-not $after.process_running -or -not $after.healthy -or -not $after.ready){throw 'UPDATED_RUNTIME_STATUS_FAILED'}
++ if($connected.remote_error){throw 'UPDATED_RUNTIME_REMOTE_AUTH_ERROR'}
++ $after=Wait-ManagedReady 'runtime-after'
+  $activated=$true
+  Save-Receipt 'ACTIVATED_LOCAL_RUNTIME_WORK_TEST_PENDING' $null @{moduleSha256=$plan.approved_module_sha256;healthy=$after.healthy;ready=$after.ready;workAcceptance=$false}
+@@ -55,5 +63,6 @@
+    $null=Invoke-Managed -CliArgs @('runtimes','stop',$plan.alias,'--json') -Name 'rollback-stop'
+    $restored=Connect-Existing -command $plan.old_command -label 'rollback-connect'
+-   if(-not $restored.process_running -or -not $restored.healthy -or -not $restored.ready){throw 'ROLLBACK_RUNTIME_NOT_READY'}
++   if($restored.remote_error){throw 'ROLLBACK_RUNTIME_REMOTE_AUTH_ERROR'}
++   $restored=Wait-ManagedReady 'rollback-status'
+    Save-Receipt 'ACTIVATION_FAILED_OLD_RUNTIME_RESTORED' $failure @{rollbackHealthy=$restored.healthy;rollbackReady=$restored.ready}
+   }catch{Save-Receipt 'ACTIVATION_FAILED_ROLLBACK_NEEDS_ATTENTION' $failure @{rollbackError=$_.Exception.Message}}
