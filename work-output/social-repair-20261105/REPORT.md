@@ -137,3 +137,6 @@ Tumblr üç dosya yedeği: editorial/repair-20261105/backup-2026-11-05T12-27-13-
 
 Geri dönüş gerekirse önce mevcut kilidi alıp yalnız ilgili kod/yapılandırma dosyasını doğrulanmış yedekten geri yükle. Gerçek yayımlanmış Pin/yazı kimliklerini ve eklemeli yayın geçmişini silme veya eski boş duruma döndürme. Hesaplar, anahtarlar, ek ücret, Jingle/Reels üretimi ve kapalı ek yayıncılar değiştirilmedi.
 
+## Son ekran kanıtı
+
+Son kontrol görüntüleri: [etkin Tumblr kuyruğu](evidence/tumblr-queue-live.png) ve [yayımlanan Country Pin](evidence/pinterest-country-live.png). Bildirim içerikleri veya kişisel mesajlar açılmadı.
