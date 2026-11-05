@@ -5,6 +5,23 @@
   "updated_at": "2026-11-01T01:26:00+03:00",
   "tasks": [
     {
+      "id": "oldies-news-seo-bilingual-20261105",
+      "title": "OldiesRadyo.com — yeni TR/EN müzik haberleri SEO kalite kapısı ve Google indeks denetimi",
+      "owner": "WORK MASTER",
+      "status": "queued",
+      "completed_units": [
+        "master-project-charter-created-20261105",
+        "github-issue-41-opened-20261105"
+      ],
+      "next_step": "MASTER gerçek alımını/araç erişimini doğrula. AGENTS.md, PROJECT.md, existing tr-en-parity-20261004 and site-integrity-20261003 oku. Önce 30 yeni haber çiftinde yalnız salt-okunur audit; part-001-audit.md, örnekler/kanıt/blocker; hiçbir canlı sistem değişikliği veya otomatik yayın yok.",
+      "last_checkpoint": "2026-11-05T06:26:22+03:00",
+      "note": "Master'a resmî proje ve issue hazırlandı; bu kayıt Master'ın uyandığı veya görevi aldığı kanıtı değildir. Son 13 TR/EN çiftinde doğru Polylang bağı; son 26 yayında tags boş; 6 örnek özel SEO açıklaması boş; GSC dizin verisi henüz doğrulanamadı. Mevcut backlog tr-en-parity-20261004 in_progress, çakışma yok. Kullanıcı canlı değişiklik onayı henüz vermedi.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/41",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/PROJECT.md"
+      ]
+    },
+    {
       "id": "europe-1960s-singers",
       "title": "1960'larda Avrupa ülkelerinin 10 ünlü/önemli şarkıcısı",
       "status": "needs_reconcile",
