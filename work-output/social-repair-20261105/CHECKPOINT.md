@@ -1,24 +1,15 @@
-# Pinterest / Tumblr — onarım kontrol noktası
+# Pinterest / Tumblr — güncel denetim kontrol noktası
 
-05.11.2026 | 22:56 TSİ · WORK WATCHDOG / bu oturumda uygulandı
+05.11.2026 | 23:47 TSİ · WORK WATCHDOG
 
-GERÇEKLEŞEN: Tumblr bugün iki gerçek yeni yayın (832444089716916224, 832444342869344256); yedi gerçek kuyruk kaydı. Kuyruk etkin, 06–14 Europe/Istanbul, günde üç. İlk doğal yayın tahmini 6 Kasım 08.00. Dokuz içerik/gerçek platform kimliği ve özgün görsel baytları mevcut Windows paketi/journal/scoped izinlerle birleştirildi; eski üç kayıt korundu. 15.28 sağlık HEALTH_OK; bu doğal 09.20 publisher başarısı değildir.
+GERÇEKLEŞEN: Kurucu dosyayı elle yüklediğini bildirdi; WATCHDOG mevcut aktarımı yeniden yüklemeden denetledi. Pinterest Scheduled Pins'te altı tekil gerçek kayıt görüldü; 6–8 Kasım her gün 18/22 TSİ. Başlık/açıklama/Share & Save hedefi/pano/tarih/saat ve gerçek kaynak görsel eşlemesi 6/6 doğrulandı. Bu tur yeni Pin oluşturma, üretim kodu yaması veya yeni yayın yok.
 
-GERÇEKLEŞEN: Pinterest eski paket 14/14 gerçek yayınla kapandı; eski ürünler tekrar yüklenmedi. UTF-8 ve terminal durum kilidi onarıldı. Bugün iki yeni gerçek web Pin'i: https://www.pinterest.com/pin/1150317929857035018/ ve https://www.pinterest.com/pin/1150317929857035858/ . Doğru Etsy Share & Save hedefi, PUBLIC pano, başlık/açıklama/alt ve gerçek görsel API+decoded-image ile doğrulandı; ledger'a PUBLISHED_VERIFIED yazıldı. Canlı envanter 96.
+GERÇEKLEŞEN: Mevcut RecordSubmission 20261105-233708-de89f293 exit0, altı rezervasyon. Metadata ve decoded-image eşleşmesi sonrası mevcut kilit altında altı SCHEDULED_VERIFIED olayı eklendi; eski geçmiş korundu. 20261105-221230 aktif paket/manifest verified_scheduled=6, SCHEDULED_VERIFIED. CSV aynı SHA256: 3d5e266e21644ef5f4198d574c3baf2b5782a5ec71ec6d704cb655557f7fd2d4. DO-NOT-IMPORT işareti var; bu CSV'yi tekrar yükleme. Planlama kimlikleri yayımlanmış Pin kimliği değildir.
 
-GERÇEKLEŞEN: Sekiz yeni Etsy kaynağı tek tek görsel+canlı ilan QA aldı. İki yayın sonrası altı aday kaldı. Hazırlayıcı 1–14 uygun stokla çalışır, tüm QA/dedup kapıları sürer. 16 test Windows ve Linux PASS. Windows Prepare 22.12 exit0 altılı dosya oluşturdu; gerçek zamanlanmış görev 22.17'de operatör tetiklemesiyle exit0, aynı dosyayı değiştirmeden kullandı. Python SHA256 83375d3f8314cedcf918f0e73ae0f8a9cbb0bbd037fa71174e10186a0818b9de.
+BEKLEYEN: Native planlı Pin editörü özel alt metin alanı sunmadığından platform_alt_verified=false. Kaynak alt metinler manifestte; yayın kimlikleri çıktığında MASTER/operatör doğrulayıp gerekiyorsa tamamlamalı, WATCHDOG denetlemeli. İlk Pinterest doğal yayın 6 Kasım 18.00; ilgili Verify18.10. Genel üretim/süreklilik kabulü verilmedi. Python API raporundaki sabit verified_scheduled=0 gerçek UI kabulünü tek başına temsil etmez; kod bu tur değiştirilmedi.
 
-BEKLEYEN: 20261105-221230 altı ürünlük Pinterest paketi PREPARED_NOT_SUBMITTED. 6–8 Kasım 18/22 TSİ hedefleri dosyada var; platforma yüklenmiş/planlanmış sayılmaz. Son Reconcile 0/6 ve submission_pending=false. Tarayıcı dosya seçici zaman aşımında; kullanıcının ChatGPT Chrome uzantısında Dosya URL'lerine erişime izin ver ayarını açması sonrası gerçek aktarım/saat/alt kontrolünden devam edilecek. Trial API halka açık yayın yerine kullanılmadı; Standard başvurusu gönderilmedi.
+ÖNCEKİ KAZANIM: Pinterest eski14/14 kapandı; bugün iki yeni gerçek yayın var. Önceki16 test teknik kazanımdır; kendi uygulamam bağımsız kabul değildir. Tumblr önceki iki yayın+yedi kuyruk; bu tur değişmedi. İlk doğal Tumblr yayını6Kasım08.00 ve09.20uzlaştırma bekliyor.
 
-BEKLEYEN: Tumblr'ın 6 Kasım 08.00 doğal yayını ve 09.20 uzlaştırması; 8 Kasım sonrası yeni araştırılmış içerik. Mevcut publisher allPathsCovered=false kapısı kaldırılmadı; kuyruktaki yedi yazı tam otomatik stok üretimi kanıtı değildir.
+SİSTEMSEL DEVAM: Uygulama sahibi MASTER; WATCHDOG denetçi. Üç günlük stok kalıcı çözüm değildir. Stok yenileme, manuel aktarım bağımlılığı, tüm yazarların günlük toplam limiti, doğru gerçek-çıktı sağlık ölçümü ve hata sonrası toparlanma + doğal ardışık koşular üzerinden kabul gerekiyor. Otomatik başka sohbet tetiklemesi veya gerçek görev alımı bu ortak dosyadan varsayılmaz.
 
-DeepSeek hassas veriden arındırılmış Pinterest mantığı için teknik ikinci görüşte kullanıldı; Windows testlerini o çalıştırmadı. Ayrı MASTER veya Codex oturumu otomatik başlatılmadı. Merkezdeki diğer iş kayıtları değiştirilmedi. Jingle ayrı DeepSeek devamındadır.
-
-[Ayrıntılı sonuç, kanıtlar ve ilk eksik adım](REPORT.md)
-
-
-## 05.11.2026 | 22:56 TSİ — devam
-
-Tumblr'ın aynı yedi kaydı etkin kuyruğunda. Pinterest Reconcile 20261105-224903-a8fe0782 exit0; 96 canlı Pin, altılı paket henüz kabul edilmiş sayılmıyor. CSV hash'i aynı. Gerçek #csv-input dosya seçiciyi açtı; setFiles çağrısı bağlantı zaman aşımına girdi. Son kontrolde dosya alanı boş, kabul sonucu yok; tekrar yükleme yapılmadı.
-
-Yeni geçerli devam: kullanıcı hazır dosyayı açık CSV ekranında elle seçebilir; yol panoda. Seçim bildirimi sonrası aynı oturum gerçek kabul/saat/alt kontrollerini tamamlayacak. Dosya URL ayarının kapalı olduğu kesinleştirilmedi ve ayar değiştirilmedi. Instagram çapraz yayını açık görüldü, mevcut ayar korundu. Ayrıntı: [Devam kontrolü](RESUME.md). Bu tur yeni yayın veya yeni kod/test koşusu yok.
+[Ayrıntılı kabul denetimi ve kanıtlar](ACCEPTANCE.md)

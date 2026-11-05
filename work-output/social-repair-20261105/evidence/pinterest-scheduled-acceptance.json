@@ -1,0 +1,236 @@
+{
+  "batch_id": "20261105-221230",
+  "csv_sha256": "3d5e266e21644ef5f4198d574c3baf2b5782a5ec71ec6d704cb655557f7fd2d4",
+  "status": "SCHEDULED_VERIFIED_ALT_UNVERIFIED",
+  "operator": "WORK WATCHDOG, this session; narrow continuation authorized by founder after manual upload",
+  "verification_method": "Actual native Scheduled Pins list and per-record editor. Values below transcribe and compare observed DOM fields to the immutable CSV manifest. Initial partial/loading DOM reads were discarded; they were not treated as actual mismatches.",
+  "list_proof": {
+    "observed_at_utc": "2026-11-05T20:37:05.116Z",
+    "url": "https://www.pinterest.com/OldiesRadyoShop/scheduled-pins/",
+    "cards": [
+      {
+        "href": "/OldiesRadyoShop/scheduled-pin/4009044149001027392/",
+        "image_url": "https://i.pinimg.com/474x/73/d1/0d/73d10ddf38e7fe77d6c583b398bc525f.jpg",
+        "text": "Scheduled for\nFri, 11/6\n06:00 PM\n1967 Guitar Man T-Shirt | Vintage Rock Guitarist Music Gift\nClassic Music & Vinyl Gifts",
+        "title": "1967 Guitar Man T-Shirt | Vintage Rock Guitarist Music Gift"
+      },
+      {
+        "href": "/OldiesRadyoShop/scheduled-pin/4009044159705200256/",
+        "image_url": "https://i.pinimg.com/474x/82/82/2b/82822be4f0369131ea7c201afba3ef66.jpg",
+        "text": "Scheduled for\nFri, 11/6\n10:00 PM\nMerseybeat Sound T-Shirt | Liverpool 1960s Music and Scooter Style\nClassic Music & Vinyl Gifts",
+        "title": "Merseybeat Sound T-Shirt | Liverpool 1960s Music and Scooter Style"
+      },
+      {
+        "href": "/OldiesRadyoShop/scheduled-pin/4009044170744123136/",
+        "image_url": "https://i.pinimg.com/474x/cf/b9/3b/cfb93bb01e339030b776f942b0dfd482.jpg",
+        "text": "Scheduled for\nSat, 11/7\n06:00 PM\nVinyl Revolution T-Shirt | Retro Record Player Music Gift\nClassic Music & Vinyl Gifts",
+        "title": "Vinyl Revolution T-Shirt | Retro Record Player Music Gift"
+      },
+      {
+        "href": "/OldiesRadyoShop/scheduled-pin/4009044184569025728/",
+        "image_url": "https://i.pinimg.com/474x/46/79/23/467923ffcaed97412b3f1ed9ecc55bb2.jpg",
+        "text": "Scheduled for\nSat, 11/7\n10:00 PM\nRock n Roll Unity T-Shirt | No Color Just Rock n Roll Design\nClassic Music & Vinyl Gifts",
+        "title": "Rock n Roll Unity T-Shirt | No Color Just Rock n Roll Design"
+      },
+      {
+        "href": "/OldiesRadyoShop/scheduled-pin/4009044195775905600/",
+        "image_url": "https://i.pinimg.com/474x/94/27/da/9427daad740642e1ef11ef648a2a4948.jpg",
+        "text": "Scheduled for\nSun, 11/8\n06:00 PM\nRock n Roll Boy Kids T-Shirt | Colourful Retro Guitar Graphic\nClassic Music & Vinyl Gifts",
+        "title": "Rock n Roll Boy Kids T-Shirt | Colourful Retro Guitar Graphic"
+      },
+      {
+        "href": "/OldiesRadyoShop/scheduled-pin/4009044207554044480/",
+        "image_url": "https://i.pinimg.com/474x/58/51/12/58511297922ce9588d59a339c3fd0a0d.jpg",
+        "text": "Scheduled for\nSun, 11/8\n10:00 PM\nStill Rock n Roll Fan T-Shirt | Vintage Microphone Music Gift\nClassic Music & Vinyl Gifts",
+        "title": "Still Rock n Roll Fan T-Shirt | Vintage Microphone Music Gift"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "listing_id": "4535918656",
+      "pin_title": "1967 Guitar Man T-Shirt | Vintage Rock Guitarist Music Gift",
+      "pin_description": "A black T-shirt with a leather-jacketed acoustic guitarist and a red Guitar Man design beneath 1967 lettering. Explore this original Oldies Radyo Etsy listing for size, colour and product details. A retro music look for guitar fans.",
+      "destination_url": "https://oldiesradyo.etsy.com/listing/4535918656?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793904879000&utm_term=so.slt",
+      "schedule_trt": "2026-11-06T18:00:00+03:00",
+      "alt_text": "Black T-shirt with tan 1967 text, red Guitar Man lettering and a leather-jacketed musician playing a sunburst acoustic guitar.",
+      "scheduled_pin_id": "4009044149001027392",
+      "scheduled_url": "https://www.pinterest.com/OldiesRadyoShop/scheduled-pin/4009044149001027392/",
+      "ui_date": "11/06/2026",
+      "ui_time": "06:00 PM",
+      "observed_board": "Classic Music & Vinyl Gifts",
+      "observed_image_url": "https://i.pinimg.com/474x/73/d1/0d/73d10ddf38e7fe77d6c583b398bc525f.jpg",
+      "verified_fields": {
+        "title": true,
+        "description": true,
+        "etsy_link": true,
+        "board": true,
+        "date": true,
+        "time": true,
+        "publish_later": true
+      },
+      "alt_text_platform_verified": false,
+      "alt_verification_limit": "Native scheduled editor exposes no custom alt-text field; the generic preview image alt is not proof of stored publishing alt. Source alt text remains in the manifest."
+    },
+    {
+      "listing_id": "4519806799",
+      "pin_title": "Merseybeat Sound T-Shirt | Liverpool 1960s Music and Scooter Style",
+      "pin_description": "Celebrate the Liverpool beat sound with this original Oldies Radyo T-shirt design. Musicians, a record player and a scooter sit beneath The Merseybeat Sound lettering in a distressed red, blue and cream print. See the matching Etsy listing for product options.",
+      "destination_url": "https://oldiesradyo.etsy.com/listing/4519806799?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793905237000&utm_term=so.slt",
+      "schedule_trt": "2026-11-06T22:00:00+03:00",
+      "alt_text": "Black T-shirt with The Merseybeat Sound lettering, four guitarists, a record player, a scooter and Cavern Club Liverpool text.",
+      "scheduled_pin_id": "4009044159705200256",
+      "scheduled_url": "https://www.pinterest.com/OldiesRadyoShop/scheduled-pin/4009044159705200256/",
+      "ui_date": "11/06/2026",
+      "ui_time": "10:00 PM",
+      "observed_board": "Classic Music & Vinyl Gifts",
+      "observed_image_url": "https://i.pinimg.com/474x/82/82/2b/82822be4f0369131ea7c201afba3ef66.jpg",
+      "verified_fields": {
+        "title": true,
+        "description": true,
+        "etsy_link": true,
+        "board": true,
+        "date": true,
+        "time": true,
+        "publish_later": true
+      },
+      "alt_text_platform_verified": false,
+      "alt_verification_limit": "Native scheduled editor exposes no custom alt-text field; the generic preview image alt is not proof of stored publishing alt. Source alt text remains in the manifest."
+    },
+    {
+      "listing_id": "4549965167",
+      "pin_title": "Vinyl Revolution T-Shirt | Retro Record Player Music Gift",
+      "pin_description": "A vinyl record, turntable arm and warm retro colours bring the Vinyl Revolution graphic to this Oldies Radyo T-shirt. The Etsy product image shows the original design on a black tee. Visit the matching listing for available options and details.",
+      "destination_url": "https://oldiesradyo.etsy.com/listing/4549965167?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793905478000&utm_term=so.slt",
+      "schedule_trt": "2026-11-07T18:00:00+03:00",
+      "alt_text": "A person wearing a black T-shirt with a vinyl record, turntable arm, orange yellow and teal arcs, and Vinyl Revolution lettering.",
+      "scheduled_pin_id": "4009044170744123136",
+      "scheduled_url": "https://www.pinterest.com/OldiesRadyoShop/scheduled-pin/4009044170744123136/",
+      "ui_date": "11/07/2026",
+      "ui_time": "06:00 PM",
+      "observed_board": "Classic Music & Vinyl Gifts",
+      "observed_image_url": "https://i.pinimg.com/474x/cf/b9/3b/cfb93bb01e339030b776f942b0dfd482.jpg",
+      "verified_fields": {
+        "title": true,
+        "description": true,
+        "etsy_link": true,
+        "board": true,
+        "date": true,
+        "time": true,
+        "publish_later": true
+      },
+      "alt_text_platform_verified": false,
+      "alt_verification_limit": "Native scheduled editor exposes no custom alt-text field; the generic preview image alt is not proof of stored publishing alt. Source alt text remains in the manifest."
+    },
+    {
+      "listing_id": "4536185296",
+      "pin_title": "Rock n Roll Unity T-Shirt | No Color Just Rock n Roll Design",
+      "pin_description": "Two guitarists share the stage in this original Oldies Radyo design, with No Color Just Rock 'N' Roll lettering in black and tan on a white T-shirt. A music-themed graphic celebrating a shared love of rock and roll. See Etsy for product options.",
+      "destination_url": "https://oldiesradyo.etsy.com/listing/4536185296?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793905482000&utm_term=so.slt",
+      "schedule_trt": "2026-11-07T22:00:00+03:00",
+      "alt_text": "White T-shirt with two guitarists, tan stars and bold No Color Just Rock N Roll lettering against a wooden background.",
+      "scheduled_pin_id": "4009044184569025728",
+      "scheduled_url": "https://www.pinterest.com/OldiesRadyoShop/scheduled-pin/4009044184569025728/",
+      "ui_date": "11/07/2026",
+      "ui_time": "10:00 PM",
+      "observed_board": "Classic Music & Vinyl Gifts",
+      "observed_image_url": "https://i.pinimg.com/474x/46/79/23/467923ffcaed97412b3f1ed9ecc55bb2.jpg",
+      "verified_fields": {
+        "title": true,
+        "description": true,
+        "etsy_link": true,
+        "board": true,
+        "date": true,
+        "time": true,
+        "publish_later": true
+      },
+      "alt_text_platform_verified": false,
+      "alt_verification_limit": "Native scheduled editor exposes no custom alt-text field; the generic preview image alt is not proof of stored publishing alt. Source alt text remains in the manifest."
+    },
+    {
+      "listing_id": "4528886349",
+      "pin_title": "Rock n Roll Boy Kids T-Shirt | Colourful Retro Guitar Graphic",
+      "pin_description": "A colourful cartoon guitarist, music notes and Rock'n'Roll Boy lettering appear on this children's T-shirt from Oldies Radyo. The image is the original Etsy product visual. Visit the matching listing for sizing and available product options.",
+      "destination_url": "https://oldiesradyo.etsy.com/listing/4528886349?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793905521000&utm_term=so.slt",
+      "schedule_trt": "2026-11-08T18:00:00+03:00",
+      "alt_text": "Child wearing a black T-shirt with a colourful cartoon guitarist, musical notes and yellow blue Rock n Roll Boy lettering.",
+      "scheduled_pin_id": "4009044195775905600",
+      "scheduled_url": "https://www.pinterest.com/OldiesRadyoShop/scheduled-pin/4009044195775905600/",
+      "ui_date": "11/08/2026",
+      "ui_time": "06:00 PM",
+      "observed_board": "Classic Music & Vinyl Gifts",
+      "observed_image_url": "https://i.pinimg.com/474x/94/27/da/9427daad740642e1ef11ef648a2a4948.jpg",
+      "verified_fields": {
+        "title": true,
+        "description": true,
+        "etsy_link": true,
+        "board": true,
+        "date": true,
+        "time": true,
+        "publish_later": true
+      },
+      "alt_text_platform_verified": false,
+      "alt_verification_limit": "Native scheduled editor exposes no custom alt-text field; the generic preview image alt is not proof of stored publishing alt. Source alt text remains in the manifest."
+    },
+    {
+      "listing_id": "4515468513",
+      "pin_title": "Still Rock n Roll Fan T-Shirt | Vintage Microphone Music Gift",
+      "pin_description": "Still Rock'n'Roll Fan Since Forever lettering surrounds a vintage microphone and lightning bolts on this black Oldies Radyo tee. A classic music-themed design with a distressed white print. Visit the matching Etsy listing for colours, sizing and product details.",
+      "destination_url": "https://oldiesradyo.etsy.com/listing/4515468513?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793905527000&utm_term=so.slt",
+      "schedule_trt": "2026-11-08T22:00:00+03:00",
+      "alt_text": "Person wearing a black T-shirt with distressed white Still Rock n Roll Fan Since Forever text, a vintage microphone and lightning bolts.",
+      "scheduled_pin_id": "4009044207554044480",
+      "scheduled_url": "https://www.pinterest.com/OldiesRadyoShop/scheduled-pin/4009044207554044480/",
+      "ui_date": "11/08/2026",
+      "ui_time": "10:00 PM",
+      "observed_board": "Classic Music & Vinyl Gifts",
+      "observed_image_url": "https://i.pinimg.com/474x/58/51/12/58511297922ce9588d59a339c3fd0a0d.jpg",
+      "verified_fields": {
+        "title": true,
+        "description": true,
+        "etsy_link": true,
+        "board": true,
+        "date": true,
+        "time": true,
+        "publish_later": true
+      },
+      "alt_text_platform_verified": false,
+      "alt_verification_limit": "Native scheduled editor exposes no custom alt-text field; the generic preview image alt is not proof of stored publishing alt. Source alt text remains in the manifest."
+    }
+  ],
+  "verified_at_trt": "2026-11-05T23:45:02+03:00",
+  "image_checks": [
+    {
+      "listing_id": "4535918656",
+      "scheduled_pin_id": "4009044149001027392",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4519806799",
+      "scheduled_pin_id": "4009044159705200256",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4549965167",
+      "scheduled_pin_id": "4009044170744123136",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4536185296",
+      "scheduled_pin_id": "4009044184569025728",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4528886349",
+      "scheduled_pin_id": "4009044195775905600",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4515468513",
+      "scheduled_pin_id": "4009044207554044480",
+      "decoded_original_image_match": true
+    }
+  ],
+  "verified_scheduled": 6,
+  "verified_published": 0
+}

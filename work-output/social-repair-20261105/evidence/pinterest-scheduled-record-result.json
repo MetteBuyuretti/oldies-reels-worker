@@ -1,0 +1,41 @@
+{
+  "verified_at_trt": "2026-11-05T23:45:02+03:00",
+  "status": "SCHEDULED_VERIFIED_ALT_UNVERIFIED",
+  "scheduled": 6,
+  "published_by_this_operation": 0,
+  "csv_unchanged": true,
+  "ledger_scheduled_events": 6,
+  "backup": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Pinterest\\work-output\\social-repair-20261105\\receipt-backup-20261105-234502",
+  "image_checks": [
+    {
+      "listing_id": "4535918656",
+      "scheduled_pin_id": "4009044149001027392",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4519806799",
+      "scheduled_pin_id": "4009044159705200256",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4549965167",
+      "scheduled_pin_id": "4009044170744123136",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4536185296",
+      "scheduled_pin_id": "4009044184569025728",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4528886349",
+      "scheduled_pin_id": "4009044195775905600",
+      "decoded_original_image_match": true
+    },
+    {
+      "listing_id": "4515468513",
+      "scheduled_pin_id": "4009044207554044480",
+      "decoded_original_image_match": true
+    }
+  ]
+}
