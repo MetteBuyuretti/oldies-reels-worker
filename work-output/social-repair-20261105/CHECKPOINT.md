@@ -1,6 +1,6 @@
 # Pinterest / Tumblr — onarım kontrol noktası
 
-05.11.2026 | 22:20 TSİ · WORK WATCHDOG / bu oturumda uygulandı
+05.11.2026 | 22:56 TSİ · WORK WATCHDOG / bu oturumda uygulandı
 
 GERÇEKLEŞEN: Tumblr bugün iki gerçek yeni yayın (832444089716916224, 832444342869344256); yedi gerçek kuyruk kaydı. Kuyruk etkin, 06–14 Europe/Istanbul, günde üç. İlk doğal yayın tahmini 6 Kasım 08.00. Dokuz içerik/gerçek platform kimliği ve özgün görsel baytları mevcut Windows paketi/journal/scoped izinlerle birleştirildi; eski üç kayıt korundu. 15.28 sağlık HEALTH_OK; bu doğal 09.20 publisher başarısı değildir.
 
@@ -16,3 +16,9 @@ DeepSeek hassas veriden arındırılmış Pinterest mantığı için teknik ikin
 
 [Ayrıntılı sonuç, kanıtlar ve ilk eksik adım](REPORT.md)
 
+
+## 05.11.2026 | 22:56 TSİ — devam
+
+Tumblr'ın aynı yedi kaydı etkin kuyruğunda. Pinterest Reconcile 20261105-224903-a8fe0782 exit0; 96 canlı Pin, altılı paket henüz kabul edilmiş sayılmıyor. CSV hash'i aynı. Gerçek #csv-input dosya seçiciyi açtı; setFiles çağrısı bağlantı zaman aşımına girdi. Son kontrolde dosya alanı boş, kabul sonucu yok; tekrar yükleme yapılmadı.
+
+Yeni geçerli devam: kullanıcı hazır dosyayı açık CSV ekranında elle seçebilir; yol panoda. Seçim bildirimi sonrası aynı oturum gerçek kabul/saat/alt kontrollerini tamamlayacak. Dosya URL ayarının kapalı olduğu kesinleştirilmedi ve ayar değiştirilmedi. Instagram çapraz yayını açık görüldü, mevcut ayar korundu. Ayrıntı: [Devam kontrolü](RESUME.md). Bu tur yeni yayın veya yeni kod/test koşusu yok.

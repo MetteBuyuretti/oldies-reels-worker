@@ -1,0 +1,68 @@
+{
+  "at_trt": "2026-11-05T22:56:54+03:00",
+  "role": "WORK WATCHDOG",
+  "pinterest": {
+    "repair_installed": true,
+    "tests_windows": 16,
+    "live_reconcile": "20261105-224903-a8fe0782",
+    "live_count": 96,
+    "old_batch": {
+      "batch": "20261021-181119",
+      "verified": 14,
+      "total": 14
+    },
+    "new_verified_pins": [
+      "1150317929857035018",
+      "1150317929857035858"
+    ],
+    "active_batch": "20261105-221230",
+    "active_status": "PREPARED_NOT_SUBMITTED",
+    "planned_csv_rows": 6,
+    "verified_scheduled": 0,
+    "csv_sha256": "3d5e266e21644ef5f4198d574c3baf2b5782a5ec71ec6d704cb655557f7fd2d4",
+    "upload_attempt": "CHOOSER_READY_SETFILES_MCP_TIMEOUT_THEN_FILENAME_EMPTY_NO_RECEIPT",
+    "next": "User selects existing CSV once on prepared browser import page; inspect real acceptance before any further upload."
+  },
+  "tumblr": {
+    "new_stories_prepared": 9,
+    "new_images_prepared": 9,
+    "published_verified": 2,
+    "queued_verified": 7,
+    "queue_active": true,
+    "queue_daily": 3,
+    "queue_window_trt": "06:00-14:00",
+    "next_expected_platform_publish": "2026-11-06T08:00:00+03:00",
+    "natural_run_continuity_verified": false,
+    "all_paths_admission_gate_unchanged": true
+  },
+  "deepseek": {
+    "url": "https://chat.deepseek.com/a/chat/s/41a6d110-4536-4efe-b8b6-5b22755cb071",
+    "scope": "sanitized Pinterest logic second opinion",
+    "final": "Dar mantık incelemesinde engel yok"
+  },
+  "report_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/social-repair-20261105/RESUME.md",
+  "previous_checkpoint": {
+    "at_trt": "2026-11-05T05:20:00+03:00",
+    "role": "WORK WATCHDOG",
+    "pinterest": {
+      "repair_installed": true,
+      "tests_windows": 13,
+      "live_reconcile": "20261105-050427-71494dd4",
+      "batch": "20261021-181119",
+      "verified": 14,
+      "total": 14,
+      "new_pins_not_yet_scheduled": true
+    },
+    "tumblr": {
+      "new_stories_prepared": 9,
+      "new_images_prepared": 9,
+      "platform_submissions": 0,
+      "blocker": "Browser filechooser failed; alternate clipboard route under evaluation"
+    },
+    "deepseek": {
+      "url": "https://chat.deepseek.com/a/chat/s/41a6d110-4536-4efe-b8b6-5b22755cb071",
+      "scope": "sanitized Pinterest logic second opinion",
+      "final": "Dar mantık incelemesinde engel yok"
+    }
+  }
+}
