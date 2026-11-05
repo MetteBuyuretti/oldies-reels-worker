@@ -2,23 +2,26 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-01T01:26:00+03:00",
+  "updated_at": "2026-11-05T07:16:40+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
       "title": "OldiesRadyo.com — yeni TR/EN müzik haberleri SEO kalite kapısı ve Google indeks denetimi",
       "owner": "WORK MASTER",
-      "status": "queued",
+      "status": "checkpointed",
       "completed_units": [
         "master-project-charter-created-20261105",
-        "github-issue-41-opened-20261105"
+        "github-issue-41-opened-20261105",
+        "part-001-audit-10-tr-en-pairs-20-live-pages-20261105"
       ],
-      "next_step": "MASTER gerçek alımını/araç erişimini doğrula. AGENTS.md, PROJECT.md, existing tr-en-parity-20261004 and site-integrity-20261003 oku. Önce 30 yeni haber çiftinde yalnız salt-okunur audit; part-001-audit.md, örnekler/kanıt/blocker; hiçbir canlı sistem değişikliği veya otomatik yayın yok.",
-      "last_checkpoint": "2026-11-05T06:26:22+03:00",
-      "note": "Master'a resmî proje ve issue hazırlandı; bu kayıt Master'ın uyandığı veya görevi aldığı kanıtı değildir. Son 13 TR/EN çiftinde doğru Polylang bağı; son 26 yayında tags boş; 6 örnek özel SEO açıklaması boş; GSC dizin verisi henüz doğrulanamadı. Mevcut backlog tr-en-parity-20261004 in_progress, çakışma yok. Kullanıcı canlı değişiklik onayı henüz vermedi.",
+      "next_step": "Paket B ön hazırlık: aktif TR→EN News Guard 1.0.4 kaynak/tetikleme/retry/idempotency salt-okunur inceleme; Oldies SEO fallback v3.5 ile ikinci meta description + Article JSON-LD üreticisinin kaynağını doğrula. Yalnız izole fixture/staging ve rollback planı; canlı WP değişikliği, otomatik yayın, ücretli GSC yok.",
+      "last_checkpoint": "2026-11-05T07:16:40+03:00",
+      "note": "05.11.2026 | 07:16 TSİ: Ana Kumanda mevcut oturum Paket A kamuya açık REST/HTML + WordPress Polylang read-only doğrulamasını tamamladı: Yeni Haberler kategorisi 10 TR/10 EN aday çift (7 çift Ekim 1 sonrası); 20/20 HTTP200+single self-canonical+karşılıklı hreflang; 20/20 çift meta description, 20/20 iki JSON-LD scripti, Bowie TR iki Article; 17/20 tag boş; 20/20 excerpt+featured. Native Polylang 4 çift her iki yönde doğrulandı, tüm 10 çiftin native eşleşmesi kanıtlanmış değil. Robots/sitemap uçları 200. GSC Wizard payment_required; gerçek Google indeks UNVERIFIED. WordPress canlı kod/ayar/yayın değişmedi. Ayrı Work MASTER oturumunun otomatik uyanması varsayılmıyor. Kanıt part-001-audit.md ve CSV.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/41",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/PROJECT.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/PROJECT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/part-001-audit.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/part-001-sample.csv"
       ]
     },
     {
