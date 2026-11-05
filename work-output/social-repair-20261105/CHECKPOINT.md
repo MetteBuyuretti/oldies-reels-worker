@@ -1,15 +1,18 @@
 # Pinterest / Tumblr — onarım kontrol noktası
 
-05.11.2026 | 15:07 TSİ · WORK WATCHDOG (bu oturum)
+05.11.2026 | 22:20 TSİ · WORK WATCHDOG / bu oturumda uygulandı
 
-Kurucu talimatı: Pinterest ve Tumblr'ın çalışmasını sağla. Mevcut günlük sınırlar Pinterest 2, Tumblr 3; sıfır ek ücret; eski yayın ve kimlik doğrulama verileri korunacak. Yeni yayın iddiası gerçek platform kaydı gerektirir.
+GERÇEKLEŞEN: Tumblr bugün iki gerçek yeni yayın (832444089716916224, 832444342869344256); yedi gerçek kuyruk kaydı. Kuyruk etkin, 06–14 Europe/Istanbul, günde üç. İlk doğal yayın tahmini 6 Kasım 08.00. Dokuz içerik/gerçek platform kimliği ve özgün görsel baytları mevcut Windows paketi/journal/scoped izinlerle birleştirildi; eski üç kayıt korundu. 15.28 sağlık HEALTH_OK; bu doğal 09.20 publisher başarısı değildir.
 
-GERÇEKLEŞEN: Windows Pinterest kaynakları yedeklenip onarıldı. 13 odaklı test aynı Windows Python üzerinde geçti; PowerShell UTF-8 pozitif/negatif kontrolleri geçti. Gerçek Reconcile 20261105-050427-71494dd4, 94 canlı Pin içinde 20261021-181119 paketinin 14/14 satırını doğruladı; kalan 0, blocker yok. Aktif durum PUBLISHED_VERIFIED. Deployed SHA256 or_pin_local.py AC7FC77DDE4C10B52544BCE6A525E1250DE4C17DC542DABD0EB2AF61B32C671B; or-pin-live-preflight.ps1 8D2BB2B4F5D085F9BB682465E85DF1D38AFA47E60F182C1D6269C0F4875E7198. 15:04 geri okumada aynı hash/durum korundu.
+GERÇEKLEŞEN: Pinterest eski paket 14/14 gerçek yayınla kapandı; eski ürünler tekrar yüklenmedi. UTF-8 ve terminal durum kilidi onarıldı. Bugün iki yeni gerçek web Pin'i: https://www.pinterest.com/pin/1150317929857035018/ ve https://www.pinterest.com/pin/1150317929857035858/ . Doğru Etsy Share & Save hedefi, PUBLIC pano, başlık/açıklama/alt ve gerçek görsel API+decoded-image ile doğrulandı; ledger'a PUBLISHED_VERIFIED yazıldı. Canlı envanter 96.
 
-DeepSeek web sohbetinde yalnız hassas veriden arındırılmış Pinterest durum mantığı için ikinci görüş alındı. Windows testlerini DeepSeek çalıştırmadı. Son dar değerlendirme: engel yok. https://chat.deepseek.com/a/chat/s/41a6d110-4536-4efe-b8b6-5b22755cb071
+GERÇEKLEŞEN: Sekiz yeni Etsy kaynağı tek tek görsel+canlı ilan QA aldı. İki yayın sonrası altı aday kaldı. Hazırlayıcı 1–14 uygun stokla çalışır, tüm QA/dedup kapıları sürer. 16 test Windows ve Linux PASS. Windows Prepare 22.12 exit0 altılı dosya oluşturdu; gerçek zamanlanmış görev 22.17'de operatör tetiklemesiyle exit0, aynı dosyayı değiştirmeden kullandı. Python SHA256 83375d3f8314cedcf918f0e73ae0f8a9cbb0bbd037fa71174e10186a0818b9de.
 
-Tumblr 09:20 koşusu CONTENT_STOCK_EMPTY; 23 yayın, 0 kuyruk, eski 3 yazı zaten yayımlanmış. 9 yeni İngilizce kaynaklı müzik yazısı ve 9 özgün programmatik illüstrasyon Windows editorial klasöründe hazır. Dosya seçici başarısız; tarayıcı panosundan görsel yükleme başarılı. İlk yazı editörde kaydediliyor; henüz yeni yayın veya kuyruk başarısı iddia edilmiyor.
+BEKLEYEN: 20261105-221230 altı ürünlük Pinterest paketi PREPARED_NOT_SUBMITTED. 6–8 Kasım 18/22 TSİ hedefleri dosyada var; platforma yüklenmiş/planlanmış sayılmaz. Son Reconcile 0/6 ve submission_pending=false. Tarayıcı dosya seçici zaman aşımında; kullanıcının ChatGPT Chrome uzantısında Dosya URL'lerine erişime izin ver ayarını açması sonrası gerçek aktarım/saat/alt kontrolünden devam edilecek. Trial API halka açık yayın yerine kullanılmadı; Standard başvurusu gönderilmedi.
 
-BEKLEYEN: yeni Pinterest medya/listing QA, gelecek tarihli gerçek platform kabulü; Tumblr yeni taslak kimlikleri, kaynak/alt/CTA doğrulaması, en fazla 3/gün açık saatlerle takvim ve kayıtların eşleştirilmesi. Takvimde kabul = yayın başarısı değildir.
+BEKLEYEN: Tumblr'ın 6 Kasım 08.00 doğal yayını ve 09.20 uzlaştırması; 8 Kasım sonrası yeni araştırılmış içerik. Mevcut publisher allPathsCovered=false kapısı kaldırılmadı; kuyruktaki yedi yazı tam otomatik stok üretimi kanıtı değildir.
 
-SONRAKİ: bu oturum mevcut editörden ilk eksik adıma devam ediyor. MASTER'a ayrıca mesaj iletildiği, otomatik uyandırıldığı veya işin alındığı varsayılmıyor. Windows kanıtları Pinterest/work-output/social-repair-20261105 altında; Tumblr kaynakları editorial/repair-20261105 altında. Sonraki kayıt anlamlı teslimden sonra güncellenecek.
+DeepSeek hassas veriden arındırılmış Pinterest mantığı için teknik ikinci görüşte kullanıldı; Windows testlerini o çalıştırmadı. Ayrı MASTER veya Codex oturumu otomatik başlatılmadı. Merkezdeki diğer iş kayıtları değiştirilmedi. Jingle ayrı DeepSeek devamındadır.
+
+[Ayrıntılı sonuç, kanıtlar ve ilk eksik adım](REPORT.md)
+

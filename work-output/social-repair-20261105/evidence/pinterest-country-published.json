@@ -1,0 +1,76 @@
+{
+  "receipt": {
+    "listing_id": "4522282376",
+    "source_image_url": "https://i.etsystatic.com/66064135/r/il/d9fffd/8139174596/il_fullxfull.8139174596_6ytd.jpg",
+    "source_image_path": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Pinterest\\source-assets\\4522282376\\reviewed-20261105.jpg",
+    "source_image_sha256": "cd1ded89753dc56e84acd47d788bd40ed3d356d4a4b4c1113848e88eac8df965",
+    "pin_image_path": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Pinterest\\source-assets\\4522282376\\reviewed-20261105.jpg",
+    "pin_image_sha256": "cd1ded89753dc56e84acd47d788bd40ed3d356d4a4b4c1113848e88eac8df965",
+    "pin_title": "Country Music Cowboy T-Shirt | Vintage Guitar and Honky Tonk Design",
+    "pin_description": "Country Music lettering frames a guitar, cowboy hat, boots, a pickup truck and a rural sunset in this Oldies Radyo design. The original Etsy image shows black and white T-shirt options. Explore the listing for available colours, sizes and product details.",
+    "alt_text": "Black and white T-shirts with matching Country Music graphics showing a guitar, cowboy hat, boots, pickup truck and Whiskey Cowboys Honky Tonk text.",
+    "target_board": "Classic Music & Vinyl Gifts",
+    "board_id": "1150317998514143741",
+    "source_locked": "TRUE",
+    "identity_qa": "PASS",
+    "visual_qa": "PASS",
+    "link_qa": "PASS",
+    "board_qa": "PASS",
+    "event_at_trt": "2026-11-05T22:12:44+03:00",
+    "batch_id": "BROWSER-SOCIAL-20261105",
+    "status": "PUBLISHED_VERIFIED",
+    "published_pin_id": "1150317929857035858",
+    "destination_url": "https://oldiesradyo.etsy.com/listing/4522282376?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793905517000&utm_term=so.slt",
+    "platform_created_at_utc": "2026-11-05T19:09:35",
+    "live_snapshot_checked_at_trt": "2026-11-05T22:12:29+03:00",
+    "evidence": "Native Pinterest web save; PUBLIC board; read-only live API exact id/listing/board/title/description/alt; decoded original-image similarity"
+  },
+  "platform_pin": {
+    "product_tags": [],
+    "link": "https://oldiesradyo.etsy.com/listing/4522282376?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793905517000&utm_term=so.slt",
+    "media": {
+      "media_type": "image",
+      "images": {
+        "150x150": {
+          "width": 150,
+          "height": 150,
+          "url": "https://i.pinimg.com/150x150/6b/f0/fb/6bf0fbee46136931599ec23cfa65b28e.jpg"
+        },
+        "400x300": {
+          "width": 400,
+          "height": 300,
+          "url": "https://i.pinimg.com/400x300/6b/f0/fb/6bf0fbee46136931599ec23cfa65b28e.jpg"
+        },
+        "600x": {
+          "width": 564,
+          "height": 376,
+          "url": "https://i.pinimg.com/564x/6b/f0/fb/6bf0fbee46136931599ec23cfa65b28e.jpg"
+        },
+        "1200x": {
+          "width": 1200,
+          "height": 800,
+          "url": "https://i.pinimg.com/1200x/6b/f0/fb/6bf0fbee46136931599ec23cfa65b28e.jpg"
+        }
+      }
+    },
+    "board_section_id": null,
+    "title": "Country Music Cowboy T-Shirt | Vintage Guitar and Honky Tonk Design",
+    "creative_type": "REGULAR",
+    "parent_pin_id": null,
+    "board_id": "1150317998514143741",
+    "is_standard": true,
+    "description": "Country Music lettering frames a guitar, cowboy hat, boots, a pickup truck and a rural sunset in this Oldies Radyo design. The original Etsy image shows black and white T-shirt options. Explore the listing for available colours, sizes and product details.",
+    "pin_metrics": null,
+    "dominant_color": "#dcc9ab",
+    "board_owner": {
+      "username": "OldiesRadyoShop"
+    },
+    "has_been_promoted": false,
+    "is_removable": false,
+    "created_at": "2026-11-05T19:09:35",
+    "is_product": false,
+    "id": "1150317929857035858",
+    "is_owner": true,
+    "alt_text": "Black and white T-shirts with matching Country Music graphics showing a guitar, cowboy hat, boots, pickup truck and Whiskey Cowboys Honky Tonk text."
+  }
+}

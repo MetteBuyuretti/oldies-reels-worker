@@ -1,0 +1,147 @@
+{
+  "at": "2026-11-05T12:28:47.691Z",
+  "mode": "HEALTH_CHECK_ONLY",
+  "status": "HEALTH_OK",
+  "linkHealth": "OFFLINE_TEST",
+  "legacyIds": 11,
+  "legacyUrls": 0,
+  "items": [
+    {
+      "id": "led-zeppelin-carnegie-1969",
+      "title": "The Night Led Zeppelin Took Carnegie Hall Past Bedtime",
+      "hash": "7b74ce859ad9af33708c955a590050f56b65427ff9b1c659dee375f56523ddee",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\led-zeppelin-carnegie-1969.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 5,
+      "status": "PUBLISHED_VERIFIED",
+      "tumblrId": "831168688175595520"
+    },
+    {
+      "id": "ronettes-be-my-baby-1963",
+      "title": "The Drumbeat That Opens the Door to “Be My Baby”",
+      "hash": "91ac3f7d8447196338bb037a3bf3a9257cc04b1065a265fc84690fb1546df425",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\ronettes-be-my-baby-1963.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 5,
+      "status": "PUBLISHED_VERIFIED",
+      "tumblrId": "831179323999387649"
+    },
+    {
+      "id": "pocket-playlist-2001",
+      "title": "When Your Music Collection Began to Fit in a Pocket",
+      "hash": "1209f9efb12f759fcd1d9946b10620853f6aac7f011fcf25be7872d1c5355ce4",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\pocket-playlist-2001.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 5,
+      "status": "PUBLISHED_VERIFIED",
+      "tumblrId": "831191288426725376"
+    },
+    {
+      "id": "elvis-suspicious-minds-1969",
+      "title": "When a Familiar Voice Finds a New Room",
+      "hash": "48602cd2a342f0e318f156a67c1b35af9f32c25e1ddfe46bd578f19c5298679d",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\elvis-suspicious-minds-1969.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "PUBLISHED_VERIFIED",
+      "tumblrId": "832444089716916224"
+    },
+    {
+      "id": "george-michael-faith-1987",
+      "title": "The Space Between the Beats on Faith",
+      "hash": "fd72e463226619aebf879b1b92d85d7567ed5bf29321b89d0792bfbe36b60b0b",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\george-michael-faith-1987.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "PUBLISHED_VERIFIED",
+      "tumblrId": "832444342869344256"
+    },
+    {
+      "id": "aretha-respect-1967",
+      "title": "A Voice That Makes Every Word Count",
+      "hash": "9f039a00420ea666fdd119a15e20b06dd4bd8cf53a6340aabf85e0dfa6280db7",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\aretha-respect-1967.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "QUEUED_VERIFIED",
+      "tumblrId": "832444639819792384"
+    },
+    {
+      "id": "beatles-rubber-soul-1965",
+      "title": "A Small Detour Through Rubber Soul",
+      "hash": "31e1aa62576c5b5ef4db472532623da02c977f9554fc8e5662898a80c573dde4",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\beatles-rubber-soul-1965.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "QUEUED_VERIFIED",
+      "tumblrId": "832444910477148160"
+    },
+    {
+      "id": "walkman-listening-1979",
+      "title": "When the Walk Became Part of the Music",
+      "hash": "a11ad0eb682251516d20010e9c6ad2cc75efe69d546c697856234fdf9e2214ea",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\walkman-listening-1979.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "QUEUED_VERIFIED",
+      "tumblrId": "832444968249573376"
+    },
+    {
+      "id": "abba-waterloo-1974",
+      "title": "Before the Chorus Becomes a Memory",
+      "hash": "97ac5fa8e0e68169096eab13b6512825b9f1af650f39cc47166f6ce017f5bcc4",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\abba-waterloo-1974.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "QUEUED_VERIFIED",
+      "tumblrId": "832445003225841664"
+    },
+    {
+      "id": "dolly-jolene-album-1974",
+      "title": "The Quiet Tension Inside Jolene",
+      "hash": "58c78adfbcf71b902534365907a0c30ab924fcb20607644190b585efbf623120",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\dolly-jolene-album-1974.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "QUEUED_VERIFIED",
+      "tumblrId": "832445031502807040"
+    },
+    {
+      "id": "donna-summer-feel-love-1977",
+      "title": "A Human Voice Inside an Electronic Pulse",
+      "hash": "2160a1357a415d86e3a052eeefd5ff4abf742a927d7e6158a0a5ae96df53b9aa",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\donna-summer-feel-love-1977.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "QUEUED_VERIFIED",
+      "tumblrId": "832445069085868032"
+    },
+    {
+      "id": "supremes-baby-love-1964",
+      "title": "The Little Details That Keep Baby Love Moving",
+      "hash": "a6e673126ddb223471bbf2c24def8ec6472915aaad55ae6b57a3cea8e083c85d",
+      "image": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\supremes-baby-love-1964.png",
+      "canonicalTarget": "https://oldiesradyo.com/",
+      "sources": 2,
+      "paragraphs": 4,
+      "status": "QUEUED_VERIFIED",
+      "tumblrId": "832445099535368192"
+    }
+  ],
+  "readyForDraft": 0,
+  "verifiedDrafts": 0,
+  "queuedByThisRun": 0,
+  "publishedByThisRun": 0,
+  "additionalCost": 0
+}

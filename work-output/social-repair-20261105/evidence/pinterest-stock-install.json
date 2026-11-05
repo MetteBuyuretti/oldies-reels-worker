@@ -1,0 +1,25 @@
+{
+  "installed_at_trt": "2026-11-05T22:12:15+03:00",
+  "backup": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Pinterest\\backups\\OR-PIN-STOCK-20261105-221215",
+  "new_reviewed_sources": 8,
+  "ready_rows": 34,
+  "code_sha256": "83375d3f8314cedcf918f0e73ae0f8a9cbb0bbd037fa71174e10186a0818b9de",
+  "files": {
+    "or_pin_local.py": {
+      "before_sha256": "ac7fc77dde4c10b52544bce6a525e1250de4c17dc542dabd0eb2af61b32c671b",
+      "after_sha256": "83375d3f8314cedcf918f0e73ae0f8a9cbb0bbd037fa71174e10186a0818b9de"
+    },
+    "or-pin-daily-ready.csv": {
+      "before_sha256": "fbce335ca5e27a65c09cbea316ad58b9768295ef6a7f237c1ad5c00360cb33b7",
+      "after_sha256": "52b45c7074968e4b47f4141a1032886e4d8ed0039e2d2cc34a7e825a7c0d62f2"
+    },
+    "or-pin-live-etsy-qa.json": {
+      "before_sha256": "23789125776ae43af07c1d3fe5e4083f5e2d74d4867e8ee3b85d8cc394f82b2d",
+      "after_sha256": "d33e479165603b18a9f52dadbf448ed3665b8dc291a245c20f2cc085f7483c18"
+    },
+    "or-pin-visual-approvals.json": {
+      "before_sha256": "93d2e192db1bbe4bb654eedc4838bea4f7f2dc254dca926ba379b453938196b9",
+      "after_sha256": "723b9904fcd233d4e5593ff47084b90be9be4c85213ce96de199434a4cbf15a8"
+    }
+  }
+}

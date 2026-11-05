@@ -1,0 +1,86 @@
+{
+  "at": "2026-11-05T12:27:13.524Z",
+  "mode": "IMPORT_VERIFIED_BROWSER_RECEIPTS_ONLY",
+  "published": 2,
+  "queued": 7,
+  "daily": {
+    "2026-11-05": 2,
+    "2026-11-06": 3,
+    "2026-11-07": 3,
+    "2026-11-08": 1
+  },
+  "originalCounts": {
+    "posts": 3,
+    "journal": 3,
+    "grants": 3
+  },
+  "finalCounts": {
+    "posts": 12,
+    "journal": 12,
+    "grants": 12
+  },
+  "files": [
+    {
+      "path": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\tumblr-editorial-package.json",
+      "sha256": "81c84ed54b45fa3ac89b81f603f06a7a2093042355287055e1fc80ff3644698d"
+    },
+    {
+      "path": "C:\\Users\\METE\\oldies-jingle-automation\\tumblr-editorial-state.json",
+      "sha256": "bec6688b6b3e4c846a688916a6b1ddd63ca7c6e87d912cdcab38cf766918f742"
+    },
+    {
+      "path": "C:\\Users\\METE\\oldies-jingle-automation\\tumblr-publication-authorization.json",
+      "sha256": "6dc6e0346127d1795ea8501a993ad25853f07aed187fc2d9dc7c764c96e8e8f7"
+    }
+  ],
+  "imageProof": [
+    {
+      "id": "elvis-suspicious-minds-1969",
+      "sha256": "658e5c0f53b497d0da6691abef2078df8a7461badea8ec9eba870f2e01fd7ee8",
+      "bytes": 58053
+    },
+    {
+      "id": "george-michael-faith-1987",
+      "sha256": "ac37471c8b933f1cf7908f362afb009545568ac23e2a9b0d643c5dc6dbfe502d",
+      "bytes": 39952
+    },
+    {
+      "id": "aretha-respect-1967",
+      "sha256": "631427795c1cfd7f5371363f53e258fda30c493b0fcc29700c6d1e98fc2298e4",
+      "bytes": 38189
+    },
+    {
+      "id": "beatles-rubber-soul-1965",
+      "sha256": "2e776d3dc0c53557b55ca8a2f5cf2af1f4086ed2d47926df6d9a5a9494a548d3",
+      "bytes": 46024
+    },
+    {
+      "id": "walkman-listening-1979",
+      "sha256": "0d0b62bd443815e9bb8e5393cbc4aa4e75c110d9cd36229212701406cef25f91",
+      "bytes": 51468
+    },
+    {
+      "id": "abba-waterloo-1974",
+      "sha256": "2887d652fbcd01536c336849eee57e6b5ee471604839903e17af2dfd1f143e16",
+      "bytes": 41329
+    },
+    {
+      "id": "dolly-jolene-album-1974",
+      "sha256": "a5a2241dd949f432a318aa36a0162b7a0339793c44b37becf71a81146cd3cbdc",
+      "bytes": 47305
+    },
+    {
+      "id": "donna-summer-feel-love-1977",
+      "sha256": "96b472af3b5b88ddfbc2426d85e68eaeed3b522d13428f2a7b36ac775be417dc",
+      "bytes": 30953
+    },
+    {
+      "id": "supremes-baby-love-1964",
+      "sha256": "37442ccea395654aef811842723a6bfc0f913d618fd9acbbcf5cfe11b03a12f6",
+      "bytes": 59240
+    }
+  ],
+  "backup": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Tumblr\\editorial\\repair-20261105\\backup-2026-11-05T12-27-13-484Z",
+  "networkCalls": 0,
+  "publicationCalls": 0
+}

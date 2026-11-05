@@ -1,0 +1,59 @@
+{
+  "active": true,
+  "queued": [
+    {
+      "links": [
+        "/oldiesradyo/832444639819792384/a-voice-that-makes-every-word-count"
+      ],
+      "scheduleLabel": " Cum 8:00oldie",
+      "title": "A Voice That Makes Every Word Count"
+    },
+    {
+      "links": [
+        "/oldiesradyo/832444910477148160/a-small-detour-through-rubber-soul"
+      ],
+      "scheduleLabel": " Cum 10:00oldi",
+      "title": "A Small Detour Through Rubber Soul"
+    },
+    {
+      "links": [
+        "/oldiesradyo/832444968249573376/when-the-walk-became-part-of-the-music"
+      ],
+      "scheduleLabel": " Cum 12:00oldi",
+      "title": "When the Walk Became Part of the Music"
+    },
+    {
+      "links": [
+        "/oldiesradyo/832445003225841664/before-the-chorus-becomes-a-memory"
+      ],
+      "scheduleLabel": " Cmt 8:00oldie",
+      "title": "Before the Chorus Becomes a Memory"
+    },
+    {
+      "links": [
+        "/oldiesradyo/832445031502807040/the-quiet-tension-inside-jolene"
+      ],
+      "scheduleLabel": " Cmt 10:00oldi",
+      "title": "The Quiet Tension Inside Jolene"
+    },
+    {
+      "links": [
+        "/oldiesradyo/832445069085868032/a-human-voice-inside-an-electronic-pulse"
+      ],
+      "scheduleLabel": " Cmt 12:00oldi",
+      "title": "A Human Voice Inside an Electronic Pulse"
+    },
+    {
+      "links": [
+        "/oldiesradyo/832445099535368192/the-little-details-that-keep-baby-love-moving"
+      ],
+      "scheduleLabel": " Paz 8:00oldie",
+      "title": "The Little Details That Keep Baby Love Moving"
+    }
+  ],
+  "settings": [
+    "6",
+    "14",
+    "3"
+  ]
+}

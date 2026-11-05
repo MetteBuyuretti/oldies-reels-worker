@@ -1,0 +1,18 @@
+{
+  "mode": "Reconcile",
+  "status": "ONAY BEKLİYOR",
+  "new_verified_published": 0,
+  "verified_scheduled": 0,
+  "live_pins": 96,
+  "batch_progress": {
+    "batch_id": "20261105-221230",
+    "total": 6,
+    "verified": 0,
+    "remaining": 6,
+    "complete": false,
+    "submission_pending": false
+  },
+  "blockers": [
+    "PINTEREST_BULK_ACCEPTANCE_NOT_VERIFIED"
+  ]
+}

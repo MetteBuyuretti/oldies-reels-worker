@@ -1,0 +1,98 @@
+[
+  {
+    "id": "elvis-suspicious-minds-1969",
+    "sourceDraftId": "832443939387736064",
+    "tumblrId": "832444089716916224",
+    "url": "https://www.tumblr.com/oldiesradyo/832444089716916224/when-a-familiar-voice-finds-a-new-room",
+    "status": "PUBLISHED_VERIFIED",
+    "publishedAt": "2026-11-05T12:09:08.000Z",
+    "targetAt": "2026-11-05T16:00:00+03:00",
+    "scheduleDeviation": "Platform published immediately after schedule UI submission; actual published time overrides requested target",
+    "verifiedAt": "2026-11-05T12:10:35.227Z"
+  },
+  {
+    "id": "george-michael-faith-1987",
+    "tumblrId": "832444342869344256",
+    "url": "https://www.tumblr.com/oldiesradyo/832444342869344256/the-space-between-the-beats-on-faith",
+    "status": "PUBLISHED_VERIFIED",
+    "publishedAt": "2026-11-05T12:13:09.000Z",
+    "verifiedAt": "2026-11-05T12:16:25.149Z",
+    "scheduleDeviation": "Schedule UI did not reserve future time; actual publication overrides target"
+  },
+  {
+    "id": "aretha-respect-1967",
+    "tumblrId": "832444639819792384",
+    "url": "https://www.tumblr.com/oldiesradyo/832444639819792384/a-voice-that-makes-every-word-count",
+    "status": "QUEUED_VERIFIED",
+    "scheduleLabel": " Cum 8:00",
+    "scheduledAt": "2026-11-06T08:00:00+03:00",
+    "scheduleSource": "Platform queue card + current dated observation + Europe/Istanbul; dynamic queue estimate",
+    "verifiedAt": "2026-11-05T12:20:09.213Z"
+  },
+  {
+    "id": "beatles-rubber-soul-1965",
+    "tumblrId": "832444910477148160",
+    "url": "https://www.tumblr.com/oldiesradyo/832444910477148160/a-small-detour-through-rubber-soul",
+    "status": "QUEUED_VERIFIED",
+    "scheduleLabel": "Cum 10:00",
+    "verifiedAt": "2026-11-05T12:22:13.825Z",
+    "evidence": "Actual queue card; editor full story, sources, image alt, footer verified",
+    "scheduledAt": "2026-11-06T10:00:00+03:00",
+    "scheduleSource": "Platform queue card + current dated observation + Europe/Istanbul; dynamic queue estimate"
+  },
+  {
+    "id": "walkman-listening-1979",
+    "tumblrId": "832444968249573376",
+    "url": "https://www.tumblr.com/oldiesradyo/832444968249573376/when-the-walk-became-part-of-the-music",
+    "status": "QUEUED_VERIFIED",
+    "scheduleLabel": "Cum 12:00",
+    "verifiedAt": "2026-11-05T12:23:09.387Z",
+    "evidence": "Actual queue card; editor full story, sources, image alt, footer verified",
+    "scheduledAt": "2026-11-06T12:00:00+03:00",
+    "scheduleSource": "Platform queue card + current dated observation + Europe/Istanbul; dynamic queue estimate"
+  },
+  {
+    "id": "abba-waterloo-1974",
+    "tumblrId": "832445003225841664",
+    "url": "https://www.tumblr.com/oldiesradyo/832445003225841664/before-the-chorus-becomes-a-memory",
+    "status": "QUEUED_VERIFIED",
+    "scheduleLabel": "Cmt 8:00",
+    "verifiedAt": "2026-11-05T12:23:42.472Z",
+    "evidence": "Actual queue card; editor full story, sources, image alt, footer verified",
+    "scheduledAt": "2026-11-07T08:00:00+03:00",
+    "scheduleSource": "Platform queue card + current dated observation + Europe/Istanbul; dynamic queue estimate"
+  },
+  {
+    "id": "dolly-jolene-album-1974",
+    "tumblrId": "832445031502807040",
+    "url": "https://www.tumblr.com/oldiesradyo/832445031502807040/the-quiet-tension-inside-jolene",
+    "status": "QUEUED_VERIFIED",
+    "scheduleLabel": "Cmt 10:00",
+    "verifiedAt": "2026-11-05T12:24:09.000Z",
+    "evidence": "Actual queue card; editor full story, sources, image alt, footer verified",
+    "scheduledAt": "2026-11-07T10:00:00+03:00",
+    "scheduleSource": "Platform queue card + current dated observation + Europe/Istanbul; dynamic queue estimate"
+  },
+  {
+    "id": "donna-summer-feel-love-1977",
+    "tumblrId": "832445069085868032",
+    "url": "https://www.tumblr.com/oldiesradyo/832445069085868032/a-human-voice-inside-an-electronic-pulse",
+    "status": "QUEUED_VERIFIED",
+    "scheduleLabel": "Cmt 12:00",
+    "verifiedAt": "2026-11-05T12:24:45.093Z",
+    "evidence": "Actual queue card; editor full story, sources, image alt, footer verified",
+    "scheduledAt": "2026-11-07T12:00:00+03:00",
+    "scheduleSource": "Platform queue card + current dated observation + Europe/Istanbul; dynamic queue estimate"
+  },
+  {
+    "id": "supremes-baby-love-1964",
+    "tumblrId": "832445099535368192",
+    "url": "https://www.tumblr.com/oldiesradyo/832445099535368192/the-little-details-that-keep-baby-love-moving",
+    "status": "QUEUED_VERIFIED",
+    "scheduleLabel": "Paz 8:00",
+    "verifiedAt": "2026-11-05T12:25:14.066Z",
+    "evidence": "Actual queue card; editor full story, sources, image alt, footer verified",
+    "scheduledAt": "2026-11-08T08:00:00+03:00",
+    "scheduleSource": "Platform queue card + current dated observation + Europe/Istanbul; dynamic queue estimate"
+  }
+]

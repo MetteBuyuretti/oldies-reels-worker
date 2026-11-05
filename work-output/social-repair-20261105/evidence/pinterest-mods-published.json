@@ -1,0 +1,76 @@
+{
+  "receipt": {
+    "listing_id": "4540159763",
+    "source_image_url": "https://i.etsystatic.com/66064135/r/il/49fee0/8269457574/il_fullxfull.8269457574_59vr.jpg",
+    "source_image_path": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Pinterest\\source-assets\\4540159763\\reviewed-20261105.jpg",
+    "source_image_sha256": "ae8e9a8bfc1c1c642f2467cca62f92a5ec3be2846d2ca70a8eba839225ca0e07",
+    "pin_image_path": "C:\\Users\\METE\\Documents\\Oldies-Radyo-Automation\\Pinterest\\source-assets\\4540159763\\reviewed-20261105.jpg",
+    "pin_image_sha256": "ae8e9a8bfc1c1c642f2467cca62f92a5ec3be2846d2ca70a8eba839225ca0e07",
+    "pin_title": "Mods vs Rockers T-Shirt | 1960s Scooter and Motorcycle Retro Style",
+    "pin_description": "Bring 1960s street culture into your wardrobe with this Mods vs Rockers graphic T-shirt. The original Oldies Radyo Etsy design pairs a scooter rider with a motorcycle rider in a vintage red, blue and cream print. Explore the matching listing for colours, sizes and product details.",
+    "alt_text": "Black T-shirt with a vintage 1960s Streets Mods vs Rockers graphic, showing scooter and motorcycle riders in blue, red and cream.",
+    "target_board": "Classic Music & Vinyl Gifts",
+    "board_id": "1150317998514143741",
+    "source_locked": "TRUE",
+    "identity_qa": "PASS",
+    "visual_qa": "PASS",
+    "link_qa": "PASS",
+    "board_qa": "PASS",
+    "event_at_trt": "2026-11-05T22:08:48+03:00",
+    "batch_id": "BROWSER-SOCIAL-20261105",
+    "status": "PUBLISHED_VERIFIED",
+    "published_pin_id": "1150317929857035018",
+    "destination_url": "https://oldiesradyo.etsy.com/listing/4540159763?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793844615000&utm_term=so.slt",
+    "platform_created_at_utc": "2026-11-05T18:53:48",
+    "live_snapshot_checked_at_trt": "2026-11-05T21:58:32+03:00",
+    "evidence": "Native Pinterest web save; PUBLIC board; read-only live API exact id/listing/board/title/description/alt; decoded original-image similarity"
+  },
+  "platform_pin": {
+    "board_id": "1150317998514143741",
+    "is_standard": true,
+    "alt_text": "Black T-shirt with a vintage 1960s Streets Mods vs Rockers graphic, showing scooter and motorcycle riders in blue, red and cream.",
+    "description": "Bring 1960s street culture into your wardrobe with this Mods vs Rockers graphic T-shirt. The original Oldies Radyo Etsy design pairs a scooter rider with a motorcycle rider in a vintage red, blue and cream print. Explore the matching listing for colours, sizes and product details.",
+    "is_product": false,
+    "is_owner": true,
+    "media": {
+      "media_type": "image",
+      "images": {
+        "150x150": {
+          "width": 150,
+          "height": 150,
+          "url": "https://i.pinimg.com/150x150/16/72/6f/16726fb8d7186b3d56961e6982adad5c.jpg"
+        },
+        "400x300": {
+          "width": 400,
+          "height": 300,
+          "url": "https://i.pinimg.com/400x300/16/72/6f/16726fb8d7186b3d56961e6982adad5c.jpg"
+        },
+        "600x": {
+          "width": 564,
+          "height": 376,
+          "url": "https://i.pinimg.com/564x/16/72/6f/16726fb8d7186b3d56961e6982adad5c.jpg"
+        },
+        "1200x": {
+          "width": 1200,
+          "height": 800,
+          "url": "https://i.pinimg.com/1200x/16/72/6f/16726fb8d7186b3d56961e6982adad5c.jpg"
+        }
+      }
+    },
+    "parent_pin_id": null,
+    "dominant_color": "#cec5ac",
+    "board_owner": {
+      "username": "OldiesRadyoShop"
+    },
+    "created_at": "2026-11-05T18:53:48",
+    "id": "1150317929857035018",
+    "link": "https://oldiesradyo.etsy.com/listing/4540159763?utm_medium=SellerListingTools&utm_campaign=Share&utm_source=Pinterest&share_time=1793844615000&utm_term=so.slt",
+    "product_tags": [],
+    "creative_type": "REGULAR",
+    "board_section_id": null,
+    "is_removable": false,
+    "title": "Mods vs Rockers T-Shirt | 1960s Scooter and Motorcycle Retro Style",
+    "pin_metrics": null,
+    "has_been_promoted": false
+  }
+}
