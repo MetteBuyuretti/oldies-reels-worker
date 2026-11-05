@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-05T07:16:40+03:00",
+  "updated_at": "2026-11-05T07:21:05+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -12,16 +12,18 @@
       "completed_units": [
         "master-project-charter-created-20261105",
         "github-issue-41-opened-20261105",
-        "part-001-audit-10-tr-en-pairs-20-live-pages-20261105"
+        "part-001-audit-10-tr-en-pairs-20-live-pages-20261105",
+        "part-002-preflight-live-plugin-version-historical-v103-split-20261105"
       ],
-      "next_step": "Paket B ön hazırlık: aktif TR→EN News Guard 1.0.4 kaynak/tetikleme/retry/idempotency salt-okunur inceleme; Oldies SEO fallback v3.5 ile ikinci meta description + Article JSON-LD üreticisinin kaynağını doğrula. Yalnız izole fixture/staging ve rollback planı; canlı WP değişikliği, otomatik yayın, ücretli GSC yok.",
-      "last_checkpoint": "2026-11-05T07:16:40+03:00",
-      "note": "05.11.2026 | 07:16 TSİ: Ana Kumanda mevcut oturum Paket A kamuya açık REST/HTML + WordPress Polylang read-only doğrulamasını tamamladı: Yeni Haberler kategorisi 10 TR/10 EN aday çift (7 çift Ekim 1 sonrası); 20/20 HTTP200+single self-canonical+karşılıklı hreflang; 20/20 çift meta description, 20/20 iki JSON-LD scripti, Bowie TR iki Article; 17/20 tag boş; 20/20 excerpt+featured. Native Polylang 4 çift her iki yönde doğrulandı, tüm 10 çiftin native eşleşmesi kanıtlanmış değil. Robots/sitemap uçları 200. GSC Wizard payment_required; gerçek Google indeks UNVERIFIED. WordPress canlı kod/ayar/yayın değişmedi. Ayrı Work MASTER oturumunun otomatik uyanması varsayılmıyor. Kanıt part-001-audit.md ve CSV.",
+      "next_step": "PAKET B DEVAM (henüz tamam değil): canlı v1.0.4 News Guard kaynak/log yetkisini salt-okunur teyit et; v1.0.3 arşiv kodunu canlı sürüm sanma. SEO fallback v3.5 ile ikinci meta/JSON-LD üretici hook'unu doğrula; XML news:title double entity için izole test hazırla. Canlı kod, plugin, yayın, bülten ve otomasyon yazma yok; yeni ücret yok.",
+      "last_checkpoint": "2026-11-05T07:21:05+03:00",
+      "note": "05.11.2026 | 07:16 TSİ: Ana Kumanda mevcut oturum Paket A kamuya açık REST/HTML + WordPress Polylang read-only doğrulamasını tamamladı: Yeni Haberler kategorisi 10 TR/10 EN aday çift (7 çift Ekim 1 sonrası); 20/20 HTTP200+single self-canonical+karşılıklı hreflang; 20/20 çift meta description, 20/20 iki JSON-LD scripti, Bowie TR iki Article; 17/20 tag boş; 20/20 excerpt+featured. Native Polylang 4 çift her iki yönde doğrulandı, tüm 10 çiftin native eşleşmesi kanıtlanmış değil. Robots/sitemap uçları 200. GSC Wizard payment_required; gerçek Google indeks UNVERIFIED. WordPress canlı kod/ayar/yayın değişmedi. Ayrı Work MASTER oturumunun otomatik uyanması varsayılmıyor. Kanıt part-001-audit.md ve CSV.\n05.11.2026 | 07:21 TSİ: WordPress.com canlı plugin list sürümleri doğrulandı (News Guard1.0.4, Polylang3.9.1, Integrity0.2.1, Site Kit1.187.0, Jetpack16.4). Windows arşivindeki eski News Guard v1.0.3 PHP kaynak okundu; mevcut v1.0.4 ile aynı sayılmıyor. Canlı news sitemap Bowie TR/EN başlığında XML parse sonrası literal &#039; double-encoding doğrulandı. Paket B önkontrol kalıcı dosyada; gerçek v1.0.4 source/hook/log halen bekliyor. Hiçbir canlı WP değişikliği yok.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/41",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/PROJECT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/part-001-audit.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/part-001-sample.csv"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/part-001-sample.csv",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/part-002-bilingual-guard-preflight.md"
       ]
     },
     {
