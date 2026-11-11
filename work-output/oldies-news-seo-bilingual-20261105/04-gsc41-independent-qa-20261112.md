@@ -30,3 +30,7 @@
 **GOOGLE:** WordPress onarımı/testi ve gerekli onaylar tamamlanmadan yeniden doğrulama başlatma. GSC 404 listesi tümüyle 301 yapılacak bir görev değil; kasıtlı kaldırılmış adresler meşru 404 kalabilir.
 
 **Korunan:** 93 eski doğru 301, mevcut TR/EN yayın, haber taslakları, Polylang, CMS eklentileri/tema, WordPress canlı kodu, Google Search Console işlemleri ve sıfır ek maliyet.
+
+## 12.11.2026 | 02:45 TSİ — SALT-OKUNUR GERİ DÖNÜŞ ÖNKONTROLÜ
+
+WordPress.com / Jetpack Backup `rewind_status` salt-okunur sorgusunda **state=active**, son yedekleme **2026-11-11 10:07:48**, son deneme **finished**, `last_attempt_failed=false`, **120 yedek** göründü. `restore_preflight_status=null`: bu veri geri yüklemenin başarılı çalışacağını tek başına doğrulamaz. Canlı onarım öncesi güncel yedek ve geri dönüş yetkisi ayrıca kontrol edilmeli; WordPress canlı kurulum yapılmadı.
