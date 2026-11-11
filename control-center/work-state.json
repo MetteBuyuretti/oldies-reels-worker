@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-11T04:54:17+03:00",
+  "updated_at": "2026-11-11T05:07:23+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -17,11 +17,12 @@
         "gsc-404-official-export-129-urls-20261111",
         "gsc-404-failed-33-http-triage-20261111",
         "gsc-404-9-advertised-rss-mismatch-evidence-20261111",
-        "github-issue41-checkpoint-6784671656"
+        "github-issue41-checkpoint-6784671656",
+        "gsc-404-428-rechecks-confirmed-404-20261111"
       ],
       "next_step": "#41 P0: Gerçek GSC 33 başarısız URL listesi artık erişildi (kaynak 129 URL; 96 beklemede / 33 başarısız). 16 eski 1950 slug için exact 301 içerik eşdeğerliği/çakışma QA; 9 İngilizce feed için canlı HTML'deki bozuk rel=alternate üretici kaynağı ve dar düzeltme QA; 5 özel vaka / 3 joker güvenlik kalıbı ayrı karar. WATCHDOG bağımsız denetimi ve mevcut kurucu canlı onay kapısı olmadan WordPress/yönlendirme/GSC yeniden doğrulama değişikliği yok. Başka Work MASTER oturumu görevi aldığı kanıtlanmadı.",
-      "last_checkpoint": "2026-11-11T04:54:17+03:00",
-      "note": "05.11.2026 | 07:16 TSİ: Ana Kumanda mevcut oturum Paket A kamuya açık REST/HTML + WordPress Polylang read-only doğrulamasını tamamladı: Yeni Haberler kategorisi 10 TR/10 EN aday çift (7 çift Ekim 1 sonrası); 20/20 HTTP200+single self-canonical+karşılıklı hreflang; 20/20 çift meta description, 20/20 iki JSON-LD scripti, Bowie TR iki Article; 17/20 tag boş; 20/20 excerpt+featured. Native Polylang 4 çift her iki yönde doğrulandı, tüm 10 çiftin native eşleşmesi kanıtlanmış değil. Robots/sitemap uçları 200. GSC Wizard payment_required; gerçek Google indeks UNVERIFIED. WordPress canlı kod/ayar/yayın değişmedi. Ayrı Work MASTER oturumunun otomatik uyanması varsayılmıyor. Kanıt part-001-audit.md ve CSV.\n05.11.2026 | 07:21 TSİ: WordPress.com canlı plugin list sürümleri doğrulandı (News Guard1.0.4, Polylang3.9.1, Integrity0.2.1, Site Kit1.187.0, Jetpack16.4). Windows arşivindeki eski News Guard v1.0.3 PHP kaynak okundu; mevcut v1.0.4 ile aynı sayılmıyor. Canlı news sitemap Bowie TR/EN başlığında XML parse sonrası literal &#039; double-encoding doğrulandı. Paket B önkontrol kalıcı dosyada; gerçek v1.0.4 source/hook/log halen bekliyor. Hiçbir canlı WP değişikliği yok.\n11.11.2026 | 04:54 TSİ: Ana Kumanda mevcut oturumu Google GSC Chrome arayüzünden güncel resmi CSV indirdi; 129 etkilenen: 96 Beklemede, 33 Başarısız. Eski 95 listesiyle 91 ortak (hepsi Beklemede). 33 failed salt-okunur HEAD: 27×404, 3×428, 3 joker test edilmedi. 16 eski slug canonical final200; 9 feed linki site HTML'inde RSS olarak duyuruluyor ama hedef 404/428; TR Lionel#4261 canlı, EN#4974 taslak. Github CSV+rapor+Issue#41 kanıtlı. CANLI WP/GSC değişikliği yok. Ayrı WORK MASTER/WATCHDOG alımı otomatik varsayılmıyor.",
+      "last_checkpoint": "2026-11-11T05:07:23+03:00",
+      "note": "05.11.2026 | 07:16 TSİ: Ana Kumanda mevcut oturum Paket A kamuya açık REST/HTML + WordPress Polylang read-only doğrulamasını tamamladı: Yeni Haberler kategorisi 10 TR/10 EN aday çift (7 çift Ekim 1 sonrası); 20/20 HTTP200+single self-canonical+karşılıklı hreflang; 20/20 çift meta description, 20/20 iki JSON-LD scripti, Bowie TR iki Article; 17/20 tag boş; 20/20 excerpt+featured. Native Polylang 4 çift her iki yönde doğrulandı, tüm 10 çiftin native eşleşmesi kanıtlanmış değil. Robots/sitemap uçları 200. GSC Wizard payment_required; gerçek Google indeks UNVERIFIED. WordPress canlı kod/ayar/yayın değişmedi. Ayrı Work MASTER oturumunun otomatik uyanması varsayılmıyor. Kanıt part-001-audit.md ve CSV.\n05.11.2026 | 07:21 TSİ: WordPress.com canlı plugin list sürümleri doğrulandı (News Guard1.0.4, Polylang3.9.1, Integrity0.2.1, Site Kit1.187.0, Jetpack16.4). Windows arşivindeki eski News Guard v1.0.3 PHP kaynak okundu; mevcut v1.0.4 ile aynı sayılmıyor. Canlı news sitemap Bowie TR/EN başlığında XML parse sonrası literal &#039; double-encoding doğrulandı. Paket B önkontrol kalıcı dosyada; gerçek v1.0.4 source/hook/log halen bekliyor. Hiçbir canlı WP değişikliği yok.\n11.11.2026 | 04:54 TSİ: Ana Kumanda mevcut oturumu Google GSC Chrome arayüzünden güncel resmi CSV indirdi; 129 etkilenen: 96 Beklemede, 33 Başarısız. Eski 95 listesiyle 91 ortak (hepsi Beklemede). 33 failed salt-okunur HEAD: 27×404, 3×428, 3 joker test edilmedi. 16 eski slug canonical final200; 9 feed linki site HTML'inde RSS olarak duyuruluyor ama hedef 404/428; TR Lionel#4261 canlı, EN#4974 taslak. Github CSV+rapor+Issue#41 kanıtlı. CANLI WP/GSC değişikliği yok. Ayrı WORK MASTER/WATCHDOG alımı otomatik varsayılmıyor.\n11.11.2026 | 05:07 TSİ: Eski 3×HTTP 428 kaydı GET+HEAD ile yeniden doğrulandı, 3×404. GSC failed toplam 33 kayıtta 30×404 ve üç joker test edilmedi. Kaynak 33 satırlı triage CSV korundu, yeni iki yeniden kontrol sütunu eklendi. #41 yorum 6784917705. Canlı site değişmedi; WATCHDOG bağımsız QA ve kurucu canlı onay sınırı sürüyor.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/41",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/PROJECT.md",
@@ -31,7 +32,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/404-gsc-validation-20261111.csv",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/404-gsc-failed-triage-20261111.csv",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/404-gsc-findings-20261111.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/41#issuecomment-6784671656"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/41#issuecomment-6784671656",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/41#issuecomment-6784917705"
       ]
     },
     {
