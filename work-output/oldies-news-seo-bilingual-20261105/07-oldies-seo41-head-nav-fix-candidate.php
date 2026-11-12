@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Oldies Radyo #41 Head and Draft Language Link Repair
  * Description: Surgical front-end output correction of duplicate meta descriptions and one known unpublished-language header link. Does not edit content, routes, Polylang, or other plugins.
- * Version: 0.1.1
+ * Version: 0.1.2
  * Author: Oldies Radyo
  */
 
@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 
 add_action('template_redirect', 'oldies_seo41_begin_html_filter', 999);
 function oldies_seo41_begin_html_filter() {
-    if (is_admin() || !(is_singular('post') || is_front_page()) || is_feed() || is_preview() || wp_doing_ajax()) {
+    if (is_admin() || !(is_singular() || is_front_page() || is_category() || is_tag()) || is_feed() || is_preview() || wp_doing_ajax()) {
         return;
     }
     if (defined('REST_REQUEST') && REST_REQUEST) {
@@ -31,16 +31,28 @@ function oldies_seo41_repair_html($html) {
     $head = substr($html, 0, $head_end);
     $rest = substr($html, $head_end);
 
-    // Keep the final meta description (on this site it is the complete one).
-    // Leave all canonical, hreflang, OG, Twitter and other head entries untouched.
+    // Prefer the most informative existing description, not a generic fallback.
+    // Preserve the winning tag byte-for-byte, including all other head fields.
     $pattern = '~<meta\b(?=[^>]*\bname\s*=\s*(["\'])description\1)[^>]*>~i';
-    $found = preg_match_all($pattern, $head, $unused);
+    $found = preg_match_all($pattern, $head, $matches);
     if ($found !== false && $found > 1) {
+        $best_index = 0;
+        $best_length = -1;
+        foreach ($matches[0] as $i => $tag) {
+            $size = 0;
+            if (preg_match('~\bcontent\s*=\s*(["\'])(.*?)\1~is', $tag, $captured)) {
+                $value = html_entity_decode($captured[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $size = function_exists('mb_strlen') ? mb_strlen($value, 'UTF-8') : strlen($value);
+            }
+            // On equal lengths use the later source, otherwise use the fuller one.
+            if ($size >= $best_length) {
+                $best_length = $size;
+                $best_index = $i;
+            }
+        }
         $index = 0;
-        $count = $found;
-        $head = preg_replace_callback($pattern, static function($match) use (&$index, $count) {
-            $index++;
-            return $index === $count ? $match[0] : '';
+        $head = preg_replace_callback($pattern, static function($match) use (&$index, $best_index) {
+            return $index++ === $best_index ? $match[0] : '';
         }, $head);
     }
 
