@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Oldies Radyo #41 Head and Draft Language Link Repair
  * Description: Surgical front-end output correction of duplicate meta descriptions and one known unpublished-language header link. Does not edit content, routes, Polylang, or other plugins.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Author: Oldies Radyo
  */
 
@@ -10,7 +10,7 @@ defined('ABSPATH') || exit;
 
 add_action('template_redirect', 'oldies_seo41_begin_html_filter', 999);
 function oldies_seo41_begin_html_filter() {
-    if (is_admin() || !is_singular('post') || is_feed() || is_preview() || wp_doing_ajax()) {
+    if (is_admin() || !(is_singular('post') || is_front_page()) || is_feed() || is_preview() || wp_doing_ajax()) {
         return;
     }
     if (defined('REST_REQUEST') && REST_REQUEST) {
