@@ -1,0 +1,8 @@
+{
+  "root": "C:\\Users\\METE\\Oldies-Radyo-Assets\\incoming",
+  "root_status": "PROPOSED_NOT_CREATED_NOT_ACTIVATED",
+  "python": "REVIEWED_ABSOLUTE_PYTHON_PATH_REQUIRED",
+  "helper": "REVIEWED_ABSOLUTE_ASSET_SERVICE_PATH_REQUIRED",
+  "sources": {},
+  "notes": "Populate only reviewed per-asset HTTPS URLs, approved source hosts and expected SHA-256 where available. Store actual configuration privately. Pin gateway, helper, Python and image decoder before activation."
+}

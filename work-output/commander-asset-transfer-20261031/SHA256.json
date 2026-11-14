@@ -1,0 +1,20 @@
+{
+  "algorithm": "SHA256",
+  "encoding": "UTF-8 LF",
+  "files": {
+    "work-output/commander-asset-transfer-20261031/RESULT.md": "710dc05c7cc843e3092ac4bb61cbcd762f6e426a7a227f149ca6a459bec78857",
+    "work-output/commander-asset-transfer-20261031/HANDOFF.json": "5eae5889f564f158cc276e3c148db7fba8506e36d726ad7599f55eed1d72de0d",
+    "work-output/commander-asset-transfer-20261031/asset_service.py": "0aa0c81c0a9ec3d333d709c1f81ef701bcb1e752c0514b99b0654ff3858146d7",
+    "work-output/commander-asset-transfer-20261031/asset-tools.cjs": "8dafc6e44545000fe834843cf77c670be9d1026b281988b38683e477ce53ebd6",
+    "work-output/commander-asset-transfer-20261031/gateway-asset.cjs": "c4582b06fdfec715fb2533bb68221d9a3e3a21633795723bf2938af61d6397fc",
+    "work-output/commander-asset-transfer-20261031/gateway-asset.diff": "a18c15b19d97c282dc999bb9652be1eb9e419218f65c3be795ecaebfe148bb88",
+    "work-output/commander-asset-transfer-20261031/gateway-identity.json": "a6683e7a7a14119219e332822145bd6bad57495ad39fc68b2758a231e3c575fe",
+    "work-output/commander-asset-transfer-20261031/prepare_gateway.py": "bf9460b310b2f597b008c2dcceb38d43bd555962025eae4d5ccf38578b0253be",
+    "work-output/commander-asset-transfer-20261031/asset-policy.example.json": "ab6216fee0a39af30c842068e8ceadf2c15c5f9b4110698cc9164a3fecc45650",
+    "work-output/commander-asset-transfer-20261031/test_asset_service.py": "3e782c4aa3f44188f9313ce625e5d8c33457e808fb31af6f90ade8fd425e72e3",
+    "work-output/commander-asset-transfer-20261031/fixture_helper.py": "17dffee7889110c474e681fdd3672a1a425ebab5b50baf4a8f5eaf855a7a6eb2",
+    "work-output/commander-asset-transfer-20261031/test_asset_tools.cjs": "c2cc848a849a3f8a9c0c9b80cf06c62f8c4ac2b65e1437b62d7a65620655746d",
+    "work-output/commander-asset-transfer-20261031/test_legacy_read.cjs": "69d3f70e6d9085c83c7e2ee761a29421bfa902a4bf1ca5aca67b940cd561161b",
+    "work-output/commander-asset-transfer-20261031/handler-test.json": "87d28ba29588f1656e735b701e029ab323fcdf634bb5cc377f44fa614a42f157"
+  }
+}

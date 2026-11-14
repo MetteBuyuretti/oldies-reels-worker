@@ -1,0 +1,24 @@
+--- a/gateway.candidate.cjs
++++ b/gateway-asset.cjs
+@@ -5,6 +5,7 @@
+ const crypto = require('node:crypto');
+ const { createRequire } = require('node:module');
+ const { pathToFileURL } = require('node:url');
++const {createAssetTools} = require('./asset-tools.cjs');
+ 
+ let projectTools;
+ const FILE_ALIAS = 'OLDIES-ETSY-REDACTED-REPORT';
+@@ -79,10 +80,12 @@
+     await upstream.close();
+     throw new Error('UPSTREAM_POLICY_MISMATCH');
+   }
++  const assets = createAssetTools(policy.asset);
+   const server = new Server({ name: 'oldies-commander-project-staging-proposal', version: '1.1.0-candidate' }, { capabilities: { tools: {} }, instructions: 'Review candidate: pinned Tumblr reads and designated staging only. No installed source writes, general shell, URL or production health acceptance.' });
+-  server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [PUBLIC_TOOL,...projectTools.TOOLS] }));
++  server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [PUBLIC_TOOL,...projectTools.TOOLS,...assets.TOOLS] }));
+   server.setRequestHandler(CallToolRequestSchema, async request => {
+     try {
++      if(assets.TOOLS.some(t=>t.name===request.params.name))return await assets.call(request.params.name,request.params.arguments);
+       if(projectTools.TOOLS.some(t=>t.name===request.params.name))return await projectTools.callProject(request.params.name,request.params.arguments,policy.project,upstream);
+       return await callReadOnly(request.params, policy, upstream);
+     }
