@@ -446,7 +446,8 @@ final class Oldies_Radyo_Reels_Bridge
         $sourceBound = $verifiedSource && $uploaded
             && (string)($youtube['source_origin'] ?? '') === 'instagram_published_final'
             && hash_equals($instagramMediaId, (string)($youtube['source_instagram_media_id'] ?? ''))
-            && hash_equals((string)($instagram['permalink'] ?? ''), (string)($youtube['source_instagram_permalink'] ?? ''));
+            && hash_equals((string)($instagram['permalink'] ?? ''), (string)($youtube['source_instagram_permalink'] ?? ''))
+            && hash_equals($finalMediaUrl, (string)($youtube['source_final_media_url'] ?? ''));
         $publicationVerified = $uploaded && !empty($youtubeResult['publication_verified'])
             && (string)($youtubeResult['visibility'] ?? '') === 'public'
             && (string)($youtubeResult['upload_status'] ?? '') === 'processed';
@@ -477,7 +478,8 @@ final class Oldies_Radyo_Reels_Bridge
             'youtube_success' => $uploaded,
             'youtube_status' => sanitize_text_field($youtubeStatus),
             'youtube_publication_verified' => $publicationVerified,
-            'youtube_visibility' => sanitize_text_field((string)($youtubeResult['visibility'] ?? 'unknown')),
+            'youtube_visibility' => array_key_exists('publication_verified', $youtubeResult)
+                ? sanitize_text_field((string)($youtubeResult['visibility'] ?? 'unknown')) : 'unknown',
             'youtube_url' => esc_url_raw((string)($youtubeResult['youtube_url'] ?? '')),
             'youtube_error' => sanitize_text_field($youtubeError),
         ];
@@ -2106,6 +2108,7 @@ final class Oldies_Radyo_Reels_Bridge
             'source_origin' => sanitize_text_field((string)($args['origin'] ?? '')),
             'source_instagram_media_id' => self::sanitizeMetaId($args['instagram_media_id'] ?? ''),
             'source_instagram_permalink' => esc_url_raw((string)($args['instagram_permalink'] ?? '')),
+            'source_final_media_url' => esc_url_raw((string)($args['video_url'] ?? '')),
         ];
     }
 
