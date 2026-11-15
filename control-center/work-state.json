@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-15T18:30:00Z",
+  "updated_at": "2026-11-15T18:53:00Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1340,6 +1340,24 @@
       "next_step": "İlk birim tamam: PR36 eski test engeli düzeltildi; canlı IG/YT kayıt uyuşmazlığı kanıtlandı. Sonraki dar birim platform receipt/final-source yazıcısını ve intended EN preview girişini doğrular; uygun küçük düzeltme hazırlığı. Operasyonel kapanış yok.",
       "note": "15.11.2026 | 21:30 TSİ. WP16 legacy kayıt; son3IG URL burada yok. TheDoors youtube published yerel kaydına rağmen canlı sayfada private. Windsor Free hesap sayısı nedeniyle read engelli; browser fallback başarılı. Remote0/yeniCodex0/üretim0/yayın0. Antigravity/Etsy kapsam dışı. WATCHDOG ayrı alım/kabulü iddia edilmedi.",
       "control_time": "Bu aktif birimin kanıtı kaydedildi; sonraki aktif birimde ilk eksik adımdan devam. Arka plan/otomatik tetikleme yok."
+    },
+    {
+      "id": "oldies-news-visual-refresh-20261115",
+      "title": "Müzik Haberleri — kalıcı kart görseli/Elvis blur-fill ve aylık banner yenileme",
+      "owner": "WORK MASTER",
+      "support": "ChatGPT WordPress oturumu; WATCHDOG QA; kurucu nihai onay",
+      "status": "queued",
+      "completed_units": [
+        "part-001-read-only-discovery-and-design-brief-20261115"
+      ],
+      "last_checkpoint": "2026-11-15T18:53:00Z",
+      "next_step": "WORK MASTER gerçek ALINDI/BAŞLADI teyidi versin; aktif tema v7.3.7.1 kaynak dosyaları ve aylık arşiv bileşenini tespit edip önceki news-monthly-separation ile uzlaştırsın. Sayfa ID630 Query Loop crop sorunu ve Elvis/diğer portreler için staging CSS/tema pilotu; 390px QA; WATCHDOG bağımsız inceleme; kurucu onaysız canlı uygulama yok.",
+      "note": "15 Kas 2026: kurucu bordo-krem görselli aylık banner ve blur-fill portre standardını görsel olarak beğendi. WP page 630 ve aktif tema salt-okunur doğrulandı. Github issue #43 açıldı, intake/part-001 oluşturuldu. Canlı değişiklik YOK, master kabulü henüz doğrulanmadı.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/43",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-visual-refresh-20261115/part-001-intake.md",
+        "https://oldiesradyo.com/muzik-haberleri/"
+      ]
     }
   ],
   "last_status_audit": {
