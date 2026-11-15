@@ -17,7 +17,8 @@ LOCKED_SETTINGS = {
     'brand_name': BRAND_NAME, 'advert_text': BRAND_ADVERT, 'brand_translation_allowed': False,
     'advert_gap_seconds': 1.1, 'target_wpm': 128, 'speedup_allowed': False,
     'language': 'en-US', 'max_estimated_wpm': 138, 'minimum_slowdown_factor': 0.7,
-    'max_video_seconds': 18.0, 'max_voiceover_seconds': 17.4,
+    'min_video_seconds': 25.0, 'max_video_seconds': 30.0, 'max_voiceover_seconds': 29.4,
+    'ending_tail_seconds': 0.6, 'max_story_words': 52,
     'same_year_first': True, 'automatic_period_distance_years': 1,
     'manual_period_distance_years': 2, 'maximum_period_distance_years': 2,
     'artist_dominant_required': True, 'photo_count': 3,
@@ -32,6 +33,10 @@ def validate_template(template: dict | None = None) -> None:
     for key, value in LOCKED_SETTINGS.items():
         if settings.get(key) != value:
             raise RuntimeError(f'Facebook immutable production rule violated: {key}')
+    if settings.get('signoff_profile') not in {'calm', 'energetic'}:
+        raise RuntimeError('Facebook signoff: unknown default profile')
+    if settings.get('preview_signoff_generation_allowed') is not False:
+        raise RuntimeError('Facebook accepted signoff regeneration is forbidden')
     if settings.get('advert_asset') != 'assets/facebook/en-warm-signoff-radyo-v3.mp3':
         raise RuntimeError('Facebook brand lock: only the new Oldies Radyo recording path is permitted')
 
@@ -39,19 +44,108 @@ def validate_template(template: dict | None = None) -> None:
 validate_template()
 
 
-def require_approved_signoff(candidate: dict | None = None) -> None:
+# Accepted station endings only. These identities do not approve a story or MP4.
+SIGNOFF_EVIDENCE = 'https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509320201'
+SIGNOFFS = {
+    'calm': {
+        'asset': 'assets/facebook/en-warm-signoff-radyo-v3.mp3',
+        'sha256': '1dc358ef0cea5a3a6d9fe20d9934358fed5ccd0009ba0838a60bba9f28bb9d9c',
+        'bytes': 26880, 'duration_seconds': 6.720,
+    },
+    'energetic': {
+        # Local mapping is supplied by the Windows operator; never upload the audio.
+        'asset_env': 'OLDIES_FACEBOOK_ENERGETIC_SIGNOFF_PATH',
+        'sha256': 'a2df71619290530249fbacbc02c546caceeecaf3c05d265bd8321ebfeefb4ac8',
+        'bytes': 21120, 'duration_seconds': 5.280,
+    },
+}
+
+
+def selected_signoff(candidate: dict | None = None) -> tuple[str, dict, bytes]:
     validate_template()
+    profile = (candidate or {}).get('signoff_profile', TEMPLATE['signoff_profile'])
+    if not isinstance(profile, str) or profile not in SIGNOFFS:
+        raise RuntimeError('Facebook signoff: unknown profile')
+    identity = SIGNOFFS[profile]
+    if identity.get('asset_env'):
+        supplied = os.getenv(identity['asset_env'], '').strip()
+        path = Path(supplied)
+        if not supplied or not path.is_absolute():
+            raise RuntimeError('Facebook signoff: energetic local file mapping is missing')
+    else:
+        path = ROOT / identity['asset']
+    if not path.is_file():
+        raise RuntimeError('Facebook signoff: accepted recording file is missing')
+    raw = path.read_bytes()
+    if len(raw) != identity['bytes'] or hashlib.sha256(raw).hexdigest() != identity['sha256']:
+        raise RuntimeError('Facebook accepted station recording hash mismatch')
+    return profile, identity, raw
+
+
+def require_signoff_binding(candidate: dict) -> None:
+    profile, identity, _ = selected_signoff(candidate)
+    recording = candidate.get('dj_recording') or {}
+    if (recording.get('signoff_profile') != profile
+            or recording.get('advert_sha256') != identity['sha256']
+            or recording.get('signoff_evidence') != SIGNOFF_EVIDENCE
+            or recording.get('signoff_source') != identity.get('asset', identity.get('asset_env'))
+            or recording.get('advert', {}).get('cached_approved_recording') is not True
+            or not math.isfinite(float(recording.get('advert', {}).get('duration_seconds') or 0))
+            or abs(float(recording.get('advert', {}).get('duration_seconds') or 0)
+                   - identity['duration_seconds']) > 0.05):
+        raise RuntimeError('Facebook recording does not bind the selected accepted signoff')
+
+
+def require_approved_signoff_for_profile(profile: str) -> None:
+    _, identity, _ = selected_signoff({'signoff_profile': profile})
     approval = TEMPLATE.get('advert_approval') or {}
-    expected = str(TEMPLATE.get('advert_sha256') or '')
-    if (TEMPLATE.get('advert_approved') is not True or not re.fullmatch(r'[a-f0-9]{64}', expected)
+    # Preserve the separate production approval gate; identity acceptance alone
+    # never enables publication. No approver or approval date is manufactured.
+    if (TEMPLATE.get('advert_approved') is not True
+            or TEMPLATE.get('advert_sha256') != identity['sha256']
             or not approval.get('approved_by') or not approval.get('approved_at')
             or approval.get('brand_pronunciation_verified') is not True):
-        raise RuntimeError('Facebook production blocked: new Oldies Radyo recording awaits listening approval and SHA256 lock')
-    cached = ROOT / TEMPLATE['advert_asset']
-    if not cached.is_file() or hashlib.sha256(cached.read_bytes()).hexdigest() != expected:
-        raise RuntimeError('Facebook approved station recording hash mismatch')
-    if candidate is not None and candidate.get('dj_recording', {}).get('advert_sha256') != expected:
-        raise RuntimeError('Facebook production blocked: MP4 did not use the approved Oldies Radyo recording')
+        raise RuntimeError('Facebook production blocked: publication/listening approval metadata is incomplete')
+
+def require_approved_signoff(candidate: dict | None = None) -> None:
+    profile, _, _ = selected_signoff(candidate)
+    require_approved_signoff_for_profile(profile)
+    if candidate is not None:
+        require_signoff_binding(candidate)
+
+
+def planned_video_seconds(voiceover_seconds: float) -> float:
+    validate_template()
+    voice = float(voiceover_seconds)
+    if not math.isfinite(voice) or voice <= 0 or voice > TEMPLATE['max_voiceover_seconds']:
+        raise RuntimeError('Facebook natural voiceover is outside the 25–30-second budget')
+    # Quantize only the fixed visual tail to the existing 30fps renderer.
+    duration = math.ceil((voice + TEMPLATE['ending_tail_seconds']) * 30 - 1e-9) / 30
+    if not TEMPLATE['min_video_seconds'] <= duration <= TEMPLATE['max_video_seconds']:
+        raise RuntimeError('Facebook natural story plus accepted signoff must fit 25–30 seconds; revise copy, never pad or speed up')
+    return duration
+
+
+def validate_natural_recording(candidate: dict, measured_voiceover_seconds: float) -> float:
+    require_signoff_binding(candidate)
+    recording = candidate.get('dj_recording') or {}
+    story = recording.get('story') or {}
+    story_seconds = float(story.get('duration_seconds') or 0)
+    expected = (story_seconds + TEMPLATE['advert_gap_seconds']
+                + float(recording.get('advert', {}).get('duration_seconds') or 0))
+    if (not math.isfinite(story_seconds) or story_seconds <= 0
+            or story.get('tempo_factor') != 1.0
+            or not math.isfinite(float(story.get('estimated_wpm', 999)))
+            or float(story.get('estimated_wpm', 999)) > TEMPLATE['max_estimated_wpm']
+            or recording.get('speedup_applied') is not False
+            or recording.get('advert_gap_seconds') != TEMPLATE['advert_gap_seconds']
+            or not math.isfinite(float(recording.get('advert_start_seconds') or 0))
+            or abs(float(recording.get('advert_start_seconds') or 0)
+                   - (story_seconds + TEMPLATE['advert_gap_seconds'])) > .001
+            or not math.isfinite(measured_voiceover_seconds)
+            or abs(measured_voiceover_seconds - expected) > .1):
+        raise RuntimeError('Facebook natural recording timing/pace binding mismatch')
+    return planned_video_seconds(measured_voiceover_seconds)
 
 
 def build_dj_parts(candidate: dict) -> tuple[str, str]:
@@ -68,8 +162,8 @@ def build_dj_parts(candidate: dict) -> tuple[str, str]:
     else:
         source = re.sub(r'\s+', ' ', str(candidate.get('source_text', ''))).strip()
         first = re.split(r'(?<=[.!?])\s+(?=[A-Z])', source, maxsplit=1)[0]
-        if not first or artist.casefold() not in first.casefold() or not 4 <= len(first.split()) <= 20:
-            raise RuntimeError('Facebook DJ needs a short, complete sourced English story')
+        if not first or artist.casefold() not in first.casefold() or not 4 <= len(first.split()) <= TEMPLATE['max_story_words']:
+            raise RuntimeError('Facebook DJ needs a complete sourced English story')
         story = first.rstrip('.!?')
         if not re.search(r'\bon this day\b', story, re.I):
             story += f' — on this day in {year}'
@@ -113,13 +207,9 @@ def record_part(text: str, role: str, path: Path, project: str, token: str, synt
     target_seconds = words * 60 / TEMPLATE['target_wpm']
     factor = min(1.0, qc['duration_seconds'] / target_seconds)
     if factor < TEMPLATE['minimum_slowdown_factor']:
-        raise RuntimeError('Facebook DJ take was too rushed; rerecord instead of extreme time stretching')
-    if factor < 0.995:
-        timed = path.with_name(path.stem + '-relaxed.mp3')
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(path), '-af', f'atempo={factor:.6f}',
-                        '-c:a', 'libmp3lame', '-b:a', '192k', str(timed)], check=True, timeout=60)
-        timed.replace(path)
-        qc = inspect_audio(path)
+        raise RuntimeError('Facebook DJ take was too rushed; rerecord at a natural pace')
+    # Keep the natural take; timing gates never stretch or accelerate speech.
+    factor = 1.0
     estimated_wpm = words * 60 / qc['duration_seconds']
     if estimated_wpm > TEMPLATE['max_estimated_wpm']:
         raise RuntimeError('Facebook DJ take exceeds the relaxed pace limit')
@@ -129,10 +219,9 @@ def record_part(text: str, role: str, path: Path, project: str, token: str, synt
 
 def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, synthesize) -> Path:
     preview = os.getenv('OLDIES_PREVIEW_ONLY', '').strip().lower() in {'true', '1', 'yes', 'on'}
+    profile, identity, accepted_bytes = selected_signoff(candidate)
     if not preview:
-        require_approved_signoff()
-    elif TEMPLATE.get('preview_signoff_generation_allowed') is not True:
-        require_approved_signoff()
+        require_approved_signoff_for_profile(profile)
     story, advert = build_dj_parts(candidate)
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / 'voiceover-facebook-en.mp3'
@@ -140,23 +229,15 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
     story_path, advert_path = directory / 'dj-story-en.mp3', directory / 'dj-advert-en.mp3'
     try:
         story_qc = record_part(story, 'story', story_path, project, token, synthesize)
-        cached = ROOT / TEMPLATE['advert_asset']
-        expected_hash = str(TEMPLATE.get('advert_sha256') or '').strip()
-        if cached.is_file() and expected_hash and TEMPLATE.get('advert_approved') is True:
-            require_approved_signoff()
-            if hashlib.sha256(cached.read_bytes()).hexdigest() != expected_hash:
-                raise RuntimeError('Facebook approved station recording hash mismatch')
-            advert_path.write_bytes(cached.read_bytes())
-            advert_qc = inspect_audio(advert_path)
-            advert_qc = {'duration_seconds': advert_qc['duration_seconds'], 'cached_approved_recording': True}
-        else:
-            # The previous cached signoff said "Oldies Radio" and is intentionally never reused.
-            # Until a new Oldies Radyo signoff is approved and hash-locked, synthesize the exact locked brand text.
-            advert_qc = record_part(advert, 'advert', advert_path, project, token, synthesize)
+        # Copy exactly the hash-checked bytes; never regenerate an accepted ending.
+        advert_path.write_bytes(accepted_bytes)
+        advert_qc = inspect_audio(advert_path)
+        if abs(advert_qc['duration_seconds'] - identity['duration_seconds']) > 0.05:
+            raise RuntimeError('Facebook accepted signoff decoded duration mismatch')
+        advert_qc = {'duration_seconds': advert_qc['duration_seconds'], 'cached_approved_recording': True}
         gap = TEMPLATE['advert_gap_seconds']
         duration = story_qc['duration_seconds'] + gap + advert_qc['duration_seconds']
-        if duration > TEMPLATE['max_voiceover_seconds']:
-            raise RuntimeError(f'Facebook relaxed DJ recording is too long ({duration:.2f}s); shorten the copy, never speed up')
+        planned_video_seconds(duration)
         # A separate digital silence guarantees distance from the main announcement.
         graph = (f'[0:a]aresample=48000,aformat=channel_layouts=mono[a];'
                  f'anullsrc=r=48000:cl=mono,atrim=duration={gap},asetpts=PTS-STARTPTS[gap];'
@@ -166,8 +247,9 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
                         '-filter_complex', graph, '-map', '[voice]', '-c:a', 'libmp3lame', '-b:a', '192k', str(path)],
                        check=True, timeout=60)
         qc = inspect_audio(path)
-        if qc['duration_seconds'] > TEMPLATE['max_voiceover_seconds']:
-            raise RuntimeError('Facebook combined DJ recording exceeds the template duration')
+        planned_video_seconds(qc['duration_seconds'])
+        if abs(qc['duration_seconds'] - duration) > .1:
+            raise RuntimeError('Facebook combined DJ recording differs from natural segment durations')
     except Exception:
         path.unlink(missing_ok=True)
         raise
@@ -176,7 +258,10 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
                  'advert_start_seconds': round(story_qc['duration_seconds'] + gap, 3),
                  'speedup_applied': False, 'background_music_added': False,
                  'advert_sha256': hashlib.sha256(advert_path.read_bytes()).hexdigest(),
-                 'signoff_approval': 'approved' if TEMPLATE.get('advert_approved') is True else 'owner-listening-pending'}
+                 'signoff_profile': profile, 'signoff_evidence': SIGNOFF_EVIDENCE,
+                 'signoff_source': identity.get('asset', identity.get('asset_env')),
+                 'signoff_approval': 'accepted-station-ending-only',
+                 'final_media_approved': False}
     candidate.update(dj_script_en=f'{story} {advert}', tts_language=TEMPLATE['language'], tts_voice=TEMPLATE['voice'],
                      tts_engine='gemini-2.5-pro-tts-facebook-dj', dj_recording=recording,
                      voiceover_duration_seconds=qc['duration_seconds'])
@@ -223,8 +308,11 @@ def validate_media(video: Path, candidate: dict) -> dict:
     if not width or width * 16 != height * 9:
         raise RuntimeError('Facebook Global MP4 must retain the 9:16 visual template')
     duration = float(visual.get('duration') or qc['duration_seconds'])
-    if not 10 <= duration <= TEMPLATE['max_video_seconds'] + 0.05:
-        raise RuntimeError(f'Facebook Global MP4 must fit a 10–18-second relaxed Reel: {duration:.2f}s')
+    expected_duration = validate_natural_recording(candidate, float(candidate.get('voiceover_duration_seconds') or 0))
+    if (not math.isfinite(duration) or not TEMPLATE['min_video_seconds'] <= duration <= TEMPLATE['max_video_seconds']
+            or abs(duration - expected_duration) > .05
+            or abs(qc['duration_seconds'] - duration) > .05):
+        raise RuntimeError(f'Facebook Global MP4 must fit the natural 25–30-second recording and tail: {duration:.2f}s')
     qc.update(width=width, height=height, video_duration_seconds=duration, silent_publish_blocked=True, background_music_added=False)
     print(f'Audio stream detected: {qc["audio_codec"]}, {qc["audio_packets"]} packets; silent publish blocked')
     return qc
@@ -232,6 +320,7 @@ def validate_media(video: Path, candidate: dict) -> dict:
 
 def validate_recording(video: Path, candidate: dict) -> dict:
     validate_template()
+    validate_natural_recording(candidate, float(candidate.get('voiceover_duration_seconds') or 0))
     recording = candidate.get('dj_recording', {})
     if (recording.get('version') != TEMPLATE['version'] or recording.get('brand_name') != BRAND_NAME
             or recording.get('advert_text') != BRAND_ADVERT or re.search(r'\boldies\s+radio\b', str(candidate.get('dj_script_en', '')), re.I)

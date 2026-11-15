@@ -1,0 +1,82 @@
+{
+  "code_snapshot": "8e4d5451737e816fc4c2c91badbb9f0f6af625e8",
+  "python_executed": false,
+  "python_pass_count": 0,
+  "prepared_test_method_count": 26,
+  "payload_checks": [
+    [
+      "real-consumer-selects-before-story",
+      true
+    ],
+    [
+      "no-ending-TTS-fallback",
+      true
+    ],
+    [
+      "no-speech-retiming",
+      true
+    ],
+    [
+      "renderer-calls-shared-natural-gate",
+      true
+    ],
+    [
+      "publication-still-closed",
+      true
+    ]
+  ],
+  "visual_guard_source_equality": [
+    {
+      "name": "def validate_photo(",
+      "unchanged": true
+    },
+    {
+      "name": "def select_period_photos(",
+      "unchanged": true
+    },
+    {
+      "name": "def load_period_photos(",
+      "unchanged": true
+    },
+    {
+      "name": "def full_frame_canvas(",
+      "unchanged": true
+    },
+    {
+      "name": "def make_scenes(",
+      "unchanged": true
+    },
+    {
+      "name": "def validate_publish(",
+      "unchanged": true
+    }
+  ],
+  "github_readback": [
+    {
+      "path": "facebook_global_audio.py",
+      "blob": "4052f5cf5d7bd33b70a5222a8f179ec2abcd5e30",
+      "roundtrip_equal": true
+    },
+    {
+      "path": "facebook-global-template.json",
+      "blob": "1d88cc309e6b8583fa879613f99e3212835e5e4c",
+      "roundtrip_equal": true
+    },
+    {
+      "path": "facebook_global_visuals.py",
+      "blob": "2079fb10377f6159e43913feb260e02d1a5316d5",
+      "roundtrip_equal": true
+    },
+    {
+      "path": "test_facebook_global_audio.py",
+      "blob": "7d5eb5bd35a4735ec5fa5c17e3c7e71e8f3ada6a",
+      "roundtrip_equal": true
+    },
+    {
+      "path": "test_facebook_signoff_integration.py",
+      "blob": "1d45d770750c26e86655ba595b8dc2bcfb57dc28",
+      "roundtrip_equal": true
+    }
+  ],
+  "note": "Readback and source comparisons are not syntax or behavioural validation."
+}
