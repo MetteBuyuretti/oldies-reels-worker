@@ -62,3 +62,16 @@ Son kod/test snapshot: 8e4d5451737e816fc4c2c91badbb9f0f6af625e8.
 Sonraki yalnız manifest/rapor commit'i #32'de sabit bağlantıyla yazılır; HANDOFF.head_commit kod/test snapshot'ını ifade eder.
 
 Canlı değişiklik olmadığı için dağıtım geri dönüşü gerekmez. İncelemeyi bırakmak için draft PR36 kapatılabilir; taban PR22/main korunur. Kör reset/force-push/merge yapılmadı. Arka planda çalışan görev veya otomatik sohbet tetikleme iddiası yoktur.
+
+
+## MASTER checkpoint — 15.11.2026 | 21:28 TSİ
+
+The original NOT RUN / execution-environment-unavailable text above is historical. The later native delivery at c118ed21dee8777a79a4da05baf9d9553bed8e74 (work-output/local-followup-20261031/RESULT.md) was read directly in this session. For implementation 8e4d5451737e816fc4c2c91badbb9f0f6af625e8 it records compile exit0 and the same 43 offline fixtures (26 audio + 17 existing visual), zero failures/errors, real installed requests/google-auth/Pillow imports. This is operator evidence, not a new execution here, real provider integration or final media acceptance. No completed fixture suite was repeated.
+
+The remaining source-entry gap is concrete: current main facebook-global-en.yml is quarantined and selects engine=auto; main worker does not consume this branch's facebook_dj integration. PR36 still targets PR22's branch, not main. Do not remove the guard or merge stale PR22 as a shortcut. Active installed entry/ref, permanent signoff mapping and one actual event-specific final film + independent QC remain open. Accepted calm/energetic recordings remain accepted.
+
+Live channel reconciliation completed separately: Instagram's latest three visible Reels are Dfm96scpYxb (weekly 1–7 Nov, 59.375s), DfPw8yDNQmB (weekly 26–31 Oct, 59.535963s), De67RaiJCyt (Celentano, 59.433333s); all 1080x1920. None of their permalinks is represented in the current 16-row WP queue. These creator formats are not the 25–30s automated Facebook candidate and must not be shortened to meet its separate gate.
+
+The queued The Doors YouTube URL jQVOWWK7b5U shows “This video is private” in the current browser session, despite local youtube_status=published. Do not change visibility or mark verified_source=true based on title matching. The public @OldiesRadyo Shorts page instead lists Elvis aj3JAie-zQ8, Simple Minds nRjUFmkpffw and Billboard OXMpPvUXY20 first under Latest. A final-source or cross-platform equality claim remains unproved.
+
+Windsor exposes a YouTube account but returns no data because its Free plan allows one account and three are connected. No upgrade/disconnection was performed; browser read-only fallback worked. No Remote calls, new media, paid generation, workflow run, merge, schedule or publication occurred in this unit.
