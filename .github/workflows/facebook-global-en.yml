@@ -61,10 +61,11 @@ jobs:
           OLDIES_PREVIEW_ONLY: "false"
           OLDIES_REELS_LANGUAGE: "en"
           OLDIES_TTS_ENABLED: "true"
-          OLDIES_TTS_ENGINE: "auto"
-          OLDIES_TTS_FALLBACK: "true"
+          OLDIES_TTS_ENGINE: "facebook_dj"
+          OLDIES_TTS_FALLBACK: "false"
           OLDIES_TTS_VOICE: "en-AU-Chirp3-HD-Charon"
-          OLDIES_TTS_LANGUAGE: "en-AU"
+          OLDIES_TTS_LANGUAGE: "en-US"
+          OLDIES_FACEBOOK_SIGNOFF_PROFILE: "calm"
           OLDIES_GCP_PROJECT: "project-8af3c2f9-bd84-4afe-b8a"
         run: python worker.py
 
