@@ -85,18 +85,22 @@ namespace {
     $sanitize=new ReflectionMethod(Oldies_Radyo_Reels_Bridge::class,'sanitizeDraftForAbility');
     $sanitize->setAccessible(true);
     $ig=['instagram_media_id'=>'123456','permalink'=>'https://www.instagram.com/reel/test/','media_url'=>'https://example.org/final.mp4','source'=>'instagram_graph'];
-    $yt=['success'=>true,'dry_run'=>false,'status'=>'published','result'=>['success'=>true,'video_id'=>$id,'youtube_url'=>'https://youtube.com/shorts/'.$id,'status'=>'published']];
+    $yt=['success'=>true,'dry_run'=>false,'status'=>'published','result'=>['success'=>true,'video_id'=>$id,'youtube_url'=>'https://youtube.com/shorts/'.$id,'status'=>'published','visibility'=>'public']];
     $r=$sanitize->invoke(null,['id'=>'legacy','instagram_result'=>$ig,'youtube_result'=>$yt]);
     check($r['youtube_status']==='uploaded_unverified' && !$r['youtube_verified_source'] && !$r['youtube_publication_verified'], 'legacy upload marker cannot verify source/publication');
-    $yt['source_origin']='instagram_published_final'; $yt['source_instagram_media_id']='123456'; $yt['source_instagram_permalink']=$ig['permalink'];
+    check($r['youtube_visibility']==='unknown', 'legacy requested visibility is not remote visibility evidence');
+    $yt['source_origin']='instagram_published_final'; $yt['source_instagram_media_id']='123456'; $yt['source_instagram_permalink']=$ig['permalink']; $yt['source_final_media_url']=$ig['media_url'];
     $yt['result']['publication_verified']=true; $yt['result']['visibility']='public'; $yt['result']['upload_status']='processed';
     $r=$sanitize->invoke(null,['id'=>'bound','instagram_result'=>$ig,'youtube_result'=>$yt]);
     check($r['youtube_verified_source'] && $r['youtube_publication_verified'], 'exact provenance binding and public receipt verify independently');
     $yt['source_instagram_media_id']='999';
     $r=$sanitize->invoke(null,['id'=>'mismatch','instagram_result'=>$ig,'youtube_result'=>$yt]);
     check(!$r['youtube_verified_source'] && $r['youtube_publication_verified'], 'wrong Instagram source rejected even for public video');
+    $yt['source_instagram_media_id']='123456'; $yt['source_final_media_url']='https://example.org/wrong.mp4';
+    $r=$sanitize->invoke(null,['id'=>'wrong-file','instagram_result'=>$ig,'youtube_result'=>$yt]);
+    check(!$r['youtube_verified_source'], 'different final video URL cannot inherit source confirmation');
     $yt['dry_run']=true;
     $r=$sanitize->invoke(null,['id'=>'simulation','instagram_result'=>$ig,'youtube_result'=>$yt]);
     check(!$r['youtube_success'] && !$r['youtube_publication_verified'] && $r['youtube_status']==='simulated', 'wrapper dry-run overrides apparent successful nested receipt');
-    echo 'RESULT '.$count.'/12 passed; no provider/network/publication calls'.PHP_EOL;
+    echo 'RESULT '.$count.'/14 passed; no provider/network/publication calls'.PHP_EOL;
 }
