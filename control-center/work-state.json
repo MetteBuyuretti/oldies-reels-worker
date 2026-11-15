@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-15T19:22:40.925Z",
+  "updated_at": "2026-11-16T00:00:00Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1356,15 +1356,17 @@
       "support": "ChatGPT WordPress oturumu; WATCHDOG QA; kurucu nihai onay",
       "status": "queued",
       "completed_units": [
-        "part-001-read-only-discovery-and-design-brief-20261115"
+        "part-001-read-only-discovery-and-design-brief-20261115",
+        "part-002-implementation-instruction-20261116"
       ],
-      "last_checkpoint": "2026-11-15T18:53:00Z",
-      "next_step": "WORK MASTER gerçek ALINDI/BAŞLADI teyidi versin; aktif tema v7.3.7.1 kaynak dosyaları ve aylık arşiv bileşenini tespit edip önceki news-monthly-separation ile uzlaştırsın. Sayfa ID630 Query Loop crop sorunu ve Elvis/diğer portreler için staging CSS/tema pilotu; 390px QA; WATCHDOG bağımsız inceleme; kurucu onaysız canlı uygulama yok.",
-      "note": "15 Kas 2026: kurucu bordo-krem görselli aylık banner ve blur-fill portre standardını görsel olarak beğendi. WP page 630 ve aktif tema salt-okunur doğrulandı. Github issue #43 açıldı, intake/part-001 oluşturuldu. Canlı değişiklik YOK, master kabulü henüz doğrulanmadı.",
+      "last_checkpoint": "2026-11-16T00:00:00Z",
+      "next_step": "WORK MASTER'ın gerçek ALINDI teyidini ve tema dosya haritasını #43 altında bekle. Tema v7.3.7.1 kaynaklarını, #630 Query Loop, Ekim/Kasım arşiv bileşeni ve Elvis gerçek medya kök nedenini bul; part-003-theme-mapping.md üret. Önce staging + 390px QA; WATCHDOG ve kurucu onayı olmadan canlıya alma.",
+      "note": "15-16 Kas 2026: initial discovery part-001 + implementation plan part-002 git recorded; #43 ve Ana Kumanda #32 yorumları yazıldı. Canlı değişiklik yok. Başka oturumun görevi fiilen aldığı doğrulanmadı.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/43",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-visual-refresh-20261115/part-001-intake.md",
-        "https://oldiesradyo.com/muzik-haberleri/"
+        "https://oldiesradyo.com/muzik-haberleri/",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-visual-refresh-20261115/part-002-implementation-brief.md"
       ]
     }
   ],
