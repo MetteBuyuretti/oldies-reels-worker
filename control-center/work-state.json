@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-12T02:00:13.289Z",
+  "updated_at": "2026-11-15T18:30:00Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -656,11 +656,12 @@
         "master_compile_and_offline_43_fixture_tests_scoped_pass",
         "native_energetic_original_file_hash_matches_accepted_asset_J3_R0",
         "native_real_requests_google_auth_Pillow_imports_compile_and_same43_fixture_suite_pass_received",
-        "energetic_actual_selected_signoff_process_mapping_contract_pass_received"
+        "energetic_actual_selected_signoff_process_mapping_contract_pass_received",
+        "master_20261115_pr36_stale_validation_handoff_and_pr_description_reconciled"
       ],
-      "last_checkpoint": "2026-10-30T23:46:25.295Z",
-      "next_step": "Nativegerçekbağımlılık43fixturekanıtıkorunacak, aynısıyenidenistenmeyecek. SomutFBadayını doğruçalışangiriş/refvekalıcıdosyaeşlemesine bağlayan daruygulamapaketi ile tamhikâye/storyboard/gerçek25–30sfilm ve bağımsızmedyakabulü ayrı ilerler. Aktifgirişkanıtsızlığı cihazgeneliyokluk sayılmaz; yeniWork2TRöngörevi buFBkaynaktesliminigerialmaz.",
-      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Yerel recovery dört/altı PR33blob eşleşmesi; worker/editorial gate farklı, git metadata yok. Preview local_voiceover tüketiyor. İki kabul sesinin kimliği ve26/29EkimFacebook giriş makbuzu UNRESOLVED; yeni medya/profil değişikliği yok.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: MASTER WD6509320201 kararını TAM okudu; iki gerçek kapanışın bağımsız bytes/hash/süre/decode kabulü merkeze işlendi. Kimlik engeli kapalı, yeniden arama/üretim/dinleme onayı gerekmiyor. Windows kopyası/aktif giriş/entegrasyon hâlâ doğrulanmadı. Yeni Windows teslimi yok; bu Work'te gerçek yerel başlatma aracı bulunmuyor. Status blocked yalnız kalan yerel entegrasyon için; kabul edilmiş alt sonuç geri alınmadı.\n30.10.2026 | 01:13 TSİ: Mevcut WindowsCodex Commanderdevamını01:09aldı/başladı; Reelsentegrasyonu başladı demek değildir. WD6509451390kazanımı kullan talebi tek görev ekine işlendi. Kaynak/varlık kabulü korunuyor; Windows eşleme ve aktif giriş çıktısı hâlâ bekliyor.\n30.10.2026 19:13 TSİ: Work2devir görevi merkeze kaydedildi. YerelCodexJingle/Work2FBkod sahipliği ayrıldı; PR22head9ad08776değişmemiş, Work2dal/teslim henüz yok. Kabul edilmiş ses kimliği korunuyor.\n30.10.2026 | 19:58 TSİ: Kurucu Work2'ye görevi ilettiğini bildirdi. Bu işin dayanağı 26 Ekim İngilizce Facebook Reels ses entegrasyonu kaydıdır. Uygulayıcı teyidi/teslimi henüz yok; önceki ses kabulü ve yayın sınırları korunuyor.\n30.10.2026 | 23:51 TSİ: Work2R1/R2/PR36teslimi ve J3R0alındı. MASTER43offlinefixture testini dar importtaklitleriyle gerçekkoştu;12kapanıştesti ayrıca doğrudan geçti,toplam43'e yeniden eklenmedi. EnergeticWindowsfile tamhashmatch;calmbilinenyollardayok. AktifFacebooklauncher/ref hâlâ işaretligirişlerdekanıtsız. Sesler yenidinaranmayacak/üretilmeyecek;gerçekWindowsuygulama/film/yayın yok.\n31.10.2026 | 02:44 TSİ KOORDİNATÖR: Nativec118ed21'de aynı43fixture gerçekmevcutrequests/google-auth/Pillowile,importtaklidiolmadanPASS; öncekiimport-SDKortamsınırı dar kapsamda kapandı. İlkTEMPerişimbaşarısızlığıkorunmuş,yalnızfixtureTEMPdüzeltmesiyleçalıştı. Yeni43testsayılmaz;gerçekHTTP/auth/TTS/FFmpeg/film0. Energetic gerçekselected_signofffonksiyonundayalnızçocukenvilekabul;envtemizlendi. İşaretlikümedeaktifWindowsFBlauncher/refhâlâkanıtsız,calmözgünPR22kaynağıbiliniyor. Aynıtest/hashesyenidenaranmayacak.",
+      "last_checkpoint": "2026-11-15T18:30:00Z",
+      "next_step": "PR36 source/test kazanımını koru; yalnız intended active preview giriş/ref ve permanent accepted signoff mapping eksiğini tamamla. Ardından gerçek event-specific final medya+bağımsız QC; paid TTS/dispatch veya yayın yetkisi varsayma. Aynı43fixture/ses onayı tekrarlanmayacak.",
+      "note": "26.10.2026 |05:13TSİ: KullanıcınınWATCHDOG05:06raporu eklendi. Enerjik hareketli, sakin slowiçerik içinkabul beyanı; fizikselörnekdosyalar bu tur okunmadı. PR22open/draft/mergedfalse; mainpublishif:false. Eski17spilot25–30sstandardınakabuldeğil. MevcutworkflowCharon kullanacakbiçimde, iki profilseçimibağlantısı henüztamamdeğil.\n29.10.2026 | 15:12 TSİ: MASTER PR35 teslimi ve WD6495949780/6495957638 okundu;16/16 bağımsız dar teknik PASS. Windows uygulaması ve gerçek üretim kabulü yok. Yerel Codex yeni görev teyidi bekliyor; Work tüneli yalnız sabit tarihsel rapora erişiyor.\n29.10.2026 | 16:00 TSİ — WINDOWS CODEX: Yerel recovery dört/altı PR33blob eşleşmesi; worker/editorial gate farklı, git metadata yok. Preview local_voiceover tüketiyor. İki kabul sesinin kimliği ve26/29EkimFacebook giriş makbuzu UNRESOLVED; yeni medya/profil değişikliği yok.\n29.10.2026 | 16:11 TSİ: MASTER9dosyalık yerel teslimi ve3alım/ara teslim kaydını doğrudan okudu. Yerel görev alımı artık kanıtlı; Windows sonuçları operatör kanıtı, Work'te yeniden koşulmuş değil. Genel operasyonel/süreklilik ve bağımsız yeni teslim kabulü bekliyor.\n29.10.2026 | 17:10 TSİ: WD16:58kararı alındı; darTumblrkabülü/6araçolumlukapsamgörüşübeklemeyikaldırdı. MASTERaynısomutpaketiuygulamayayönlendirdi. ReelsikiKAPANIŞınbytes/hash/süre/decodekanıtıbubulutWork'tedoğrulandı. FizikselWindowsaktivasyonu/yeniWorkaraççağrısıhenüzyok.\n30.10.2026 | 01:06 TSİ: MASTER WD6509320201 kararını TAM okudu; iki gerçek kapanışın bağımsız bytes/hash/süre/decode kabulü merkeze işlendi. Kimlik engeli kapalı, yeniden arama/üretim/dinleme onayı gerekmiyor. Windows kopyası/aktif giriş/entegrasyon hâlâ doğrulanmadı. Yeni Windows teslimi yok; bu Work'te gerçek yerel başlatma aracı bulunmuyor. Status blocked yalnız kalan yerel entegrasyon için; kabul edilmiş alt sonuç geri alınmadı.\n30.10.2026 | 01:13 TSİ: Mevcut WindowsCodex Commanderdevamını01:09aldı/başladı; Reelsentegrasyonu başladı demek değildir. WD6509451390kazanımı kullan talebi tek görev ekine işlendi. Kaynak/varlık kabulü korunuyor; Windows eşleme ve aktif giriş çıktısı hâlâ bekliyor.\n30.10.2026 19:13 TSİ: Work2devir görevi merkeze kaydedildi. YerelCodexJingle/Work2FBkod sahipliği ayrıldı; PR22head9ad08776değişmemiş, Work2dal/teslim henüz yok. Kabul edilmiş ses kimliği korunuyor.\n30.10.2026 | 19:58 TSİ: Kurucu Work2'ye görevi ilettiğini bildirdi. Bu işin dayanağı 26 Ekim İngilizce Facebook Reels ses entegrasyonu kaydıdır. Uygulayıcı teyidi/teslimi henüz yok; önceki ses kabulü ve yayın sınırları korunuyor.\n30.10.2026 | 23:51 TSİ: Work2R1/R2/PR36teslimi ve J3R0alındı. MASTER43offlinefixture testini dar importtaklitleriyle gerçekkoştu;12kapanıştesti ayrıca doğrudan geçti,toplam43'e yeniden eklenmedi. EnergeticWindowsfile tamhashmatch;calmbilinenyollardayok. AktifFacebooklauncher/ref hâlâ işaretligirişlerdekanıtsız. Sesler yenidinaranmayacak/üretilmeyecek;gerçekWindowsuygulama/film/yayın yok.\n31.10.2026 | 02:44 TSİ KOORDİNATÖR: Nativec118ed21'de aynı43fixture gerçekmevcutrequests/google-auth/Pillowile,importtaklidiolmadanPASS; öncekiimport-SDKortamsınırı dar kapsamda kapandı. İlkTEMPerişimbaşarısızlığıkorunmuş,yalnızfixtureTEMPdüzeltmesiyleçalıştı. Yeni43testsayılmaz;gerçekHTTP/auth/TTS/FFmpeg/film0. Energetic gerçekselected_signofffonksiyonundayalnızçocukenvilekabul;envtemizlendi. İşaretlikümedeaktifWindowsFBlauncher/refhâlâkanıtsız,calmözgünPR22kaynağıbiliniyor. Aynıtest/hashesyenidenaranmayacak.\n15.11.2026 | 21:30 TSİ MASTER: PR36 HANDOFF/RESULT ve PR açıklaması sonradan doğrudan okunan c118ed21 native compile+43 fixture kanıtıyla uzlaştırıldı; ilk NOT RUN tarihsel olarak korundu. Testler/accepted sesler tekrarlanmadı. Main engine auto ve kapalı guard PR36 facebook_dj entegrasyonunu tüketmiyor; kurulu aktif giriş/permanent mapping ve gerçek final film+bağımsız QC açık. Yeni üretim, ücret, merge/yayın yok. Kanıt MASTER-CHECKPOINT-20261115.",
       "acceptance": {
         "voice_preference": "founder_reported_calm_for_slow_energetic_for_upbeat",
         "approved_asset_identity": "accepted_by_master_and_independent_watchdog_6509320201_existing_signoffs_only",
@@ -699,7 +700,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/6bbf8ace87d096c062dabcdbb09d9dc8b4ae108d/work-output/jingle-j3-20261030/evidence/reels-r0-input.json",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/f3313a5af2ba2b698f90517e9f06371bfadee063/work-output/status-solution-20261031/REPORT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/c118ed21dee8777a79a4da05baf9d9553bed8e74/work-output/local-followup-20261031/RESULT.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/419123b91a058aafea4a658d3d09c86b7cf86b2c/work-output/closure-program-20261031/PROGRAM.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/419123b91a058aafea4a658d3d09c86b7cf86b2c/work-output/closure-program-20261031/PROGRAM.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/c480a0abde686fd995091736b61d5960bd5159ac/work-output/general-audit-20261114/MASTER-CHECKPOINT-20261115.md"
       ],
       "control_time": "30.10.2026 | 01:06 TSİ aktif kontrol tamamlandı. Sonraki somut kontrol gerçek yerel teslim veya proje araçları bu Work'e geldiğinde; otomatik izleme/uyandırma başlatılmadı.",
       "last_status_audit": "2026-10-30T22:01:47.048Z"
@@ -1318,6 +1320,26 @@
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/4233c829cc7342500a4dc9077c1c8ffc027ae2c7/work-output/closure-program-20261031/WORK2-JINGLE-FINAL-START.md"
       ]
+    },
+    {
+      "id": "general-closure-20261114",
+      "job_id": "GENERAL-CLOSURE-20261114",
+      "owner": "WORK MASTER",
+      "completed_units": [
+        "current_main_and_pr36_entry_mapping",
+        "pr36_handoff_result_pr_validation_blocker_reconciled",
+        "wp16_live_queue_and_last3_ig_read",
+        "youtube_private_mismatch_and_public_channel_inventory_verified"
+      ],
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/c480a0abde686fd995091736b61d5960bd5159ac/work-output/general-audit-20261114/MASTER-CHECKPOINT-20261115.md"
+      ],
+      "title": "Watchdog 14 Kasım genel plan — ilk iki P0 uygulaması",
+      "status": "checkpointed",
+      "last_checkpoint": "2026-11-15T18:30:00Z",
+      "next_step": "İlk birim tamam: PR36 eski test engeli düzeltildi; canlı IG/YT kayıt uyuşmazlığı kanıtlandı. Sonraki dar birim platform receipt/final-source yazıcısını ve intended EN preview girişini doğrular; uygun küçük düzeltme hazırlığı. Operasyonel kapanış yok.",
+      "note": "15.11.2026 | 21:30 TSİ. WP16 legacy kayıt; son3IG URL burada yok. TheDoors youtube published yerel kaydına rağmen canlı sayfada private. Windsor Free hesap sayısı nedeniyle read engelli; browser fallback başarılı. Remote0/yeniCodex0/üretim0/yayın0. Antigravity/Etsy kapsam dışı. WATCHDOG ayrı alım/kabulü iddia edilmedi.",
+      "control_time": "Bu aktif birimin kanıtı kaydedildi; sonraki aktif birimde ilk eksik adımdan devam. Arka plan/otomatik tetikleme yok."
     }
   ],
   "last_status_audit": {
