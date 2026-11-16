@@ -1,6 +1,20 @@
 {
-  "days": {},
-  "events": {},
+  "days": {
+    "2026-11-17": {
+      "day": "2026-11-17",
+      "event": "1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0826be167186a0fac",
+      "status": "reserved",
+      "run_id": "43974968577"
+    }
+  },
+  "events": {
+    "1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0826be167186a0fac": {
+      "day": "2026-11-17",
+      "event": "1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0826be167186a0fac",
+      "status": "reserved",
+      "run_id": "43974968577"
+    }
+  },
   "failed_attempts": [
     {
       "day": "2026-11-17",
