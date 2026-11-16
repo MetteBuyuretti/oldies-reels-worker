@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Daily English review production. No publishing credentials or endpoints."""
 from __future__ import annotations
-import argparse, base64, hashlib, io, json, os, subprocess, wave
+import argparse, base64, hashlib, io, json, os, re, subprocess, wave, zipfile
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -76,8 +76,75 @@ class Ledger:
         self.data['days'][day] = record; self.data['events'][key] = record; self.save()
 
 
+def clean_provider_pauses(raw, directory):
+    """Remove only detected digital dead air; speech samples remain byte-identical."""
+    with wave.open(io.BytesIO(raw), 'rb') as w:
+        channels, width, rate = w.getnchannels(), w.getsampwidth(), w.getframerate()
+        frames = w.readframes(w.getnframes())
+    if (channels, width, rate) != (1, 2, 24000):
+        raise RuntimeError('Unexpected provider PCM format; silence editing refused')
+    duration = len(frames) / (rate * width)
+    probe = subprocess.run(['ffmpeg','-hide_banner','-nostats','-i','pipe:0','-af',
+        'silencedetect=n=-50dB:d=1.0','-f','null','-'],input=raw,capture_output=True,timeout=60,check=True)
+    intervals=[]; start=None
+    for m in re.finditer(r'silence_(start|end):\s*([\d.]+)',probe.stderr.decode()):
+        if m[1]=='start': start=float(m[2])
+        elif start is not None:
+            intervals.append((start,min(duration,float(m[2]))));start=None
+    if start is not None: intervals.append((start,duration))
+    chunks=[]; cursor=0; edits=[]
+    for a,b in intervals:
+        # Keep a 20ms guard around detected boundaries, preserving speech transients.
+        if a > .02: a += .02
+        if b < duration-.02: b -= .02
+        i,j=round(a*rate),round(b*rate)
+        keep=.10 if b>=duration-.02 else (.10 if a<.02 else .50)
+        if b-a<=keep: continue
+        n=round(keep*rate); left=n//2
+        chunks.extend([frames[cursor*width:i*width],frames[i*width:(i+left)*width],frames[(j-(n-left))*width:j*width]])
+        cursor=j; edits.append({'silence_start':a,'silence_end':b,'kept_seconds':keep})
+    chunks.append(frames[cursor*width:]);pcm=b''.join(chunks)
+    result=io.BytesIO()
+    with wave.open(result,'wb') as w:
+        w.setnchannels(channels);w.setsampwidth(width);w.setframerate(rate);w.writeframes(pcm)
+    cleaned=result.getvalue();directory.mkdir(parents=True,exist_ok=True)
+    (directory/'provider-story-original.wav').write_bytes(raw)
+    (directory/'provider-pause-edits.json').write_text(json.dumps({'original_sha256':hashlib.sha256(raw).hexdigest(),
+        'cleaned_sha256':hashlib.sha256(cleaned).hexdigest(),'original_seconds':duration,
+        'cleaned_seconds':len(pcm)/(rate*width),'speech_tempo_factor':1.0,'speech_samples_changed':False,'edits':edits},indent=2))
+    return cleaned
+
+
+def recovered_provider_take(text):
+    marker=ROOT/'.github/manual-english-review-trigger'
+    if os.getenv('GITHUB_EVENT_NAME')!='push' or not marker.exists(): return None
+    try: spec=json.loads(marker.read_text()).get('recover_provider')
+    except ValueError: return None
+    if not spec: return None
+    if hashlib.sha256(text.encode()).hexdigest()!=spec['story_sha256']:
+        raise RuntimeError('Recovered provider transcript mismatch')
+    repo=os.environ['GITHUB_REPOSITORY'];headers={'Authorization':'Bearer '+os.environ['GH_TOKEN']}
+    base=f'https://api.github.com/repos/{repo}/actions/artifacts/{int(spec["artifact_id"])}'
+    metadata=requests.get(base,headers=headers,timeout=30);metadata.raise_for_status()
+    run=metadata.json()['workflow_run']
+    if run['id']!=spec['run_id'] or run['head_sha']!=spec['head_sha']:
+        raise RuntimeError('Recovered provider artifact provenance mismatch')
+    archive=requests.get(base+'/zip',headers=headers,timeout=60);archive.raise_for_status()
+    with zipfile.ZipFile(io.BytesIO(archive.content)) as z:
+        info=z.getinfo('dj-story-en.mp3')
+        if info.file_size>20*1024*1024: raise RuntimeError('Recovered provider source too large')
+        raw=z.read(info)
+    if hashlib.sha256(raw).hexdigest()!=spec['audio_sha256']:
+        raise RuntimeError('Recovered provider audio hash mismatch')
+    print('Recovered exact provider recording and transcript; new provider calls=0')
+    return raw
+
+
 def free_tts(**kwargs):
     """Fixed free-tier Developer API model; never select a paid fallback."""
+    directory=Path(os.environ.get('OLDIES_EN_OUTPUT_DIR',str(ROOT/'english-output')))
+    recovered=recovered_provider_take(kwargs['text'])
+    if recovered is not None: return clean_provider_pauses(recovered,directory)
     key = os.environ['GEMINI_API_KEY']
     prompt = ('Say the following in English, slowly and warmly, like a relaxed late-night music radio host. '
               'Use gentle natural pauses after each sentence, never rushing. '
@@ -95,13 +162,13 @@ def free_tts(**kwargs):
     raw = base64.b64decode(part['data'], validate=True)
     if not 1000 < len(raw) < 20 * 1024 * 1024:
         raise RuntimeError(f'Invalid TTS bytes: {len(raw)}; MIME {part.get("mimeType", "unknown")}')
-    if 'wav' in part.get('mimeType', ''): return raw
+    if 'wav' in part.get('mimeType', ''): return clean_provider_pauses(raw,directory)
     if not part.get('mimeType', '').startswith('audio/L16') and not part.get('mimeType', '').startswith('audio/pcm'):
         raise RuntimeError('Unexpected TTS audio encoding')
     out = io.BytesIO()
     with wave.open(out, 'wb') as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(24000); w.writeframes(raw)
-    return out.getvalue()
+    return clean_provider_pauses(out.getvalue(),directory)
 
 
 def licensed_music(directory):
@@ -166,6 +233,7 @@ def build(day, output, ledger):
         (output / 'status.json').write_text(json.dumps({'status': 'duplicate_blocked', 'event': key}))
         print('Duplicate event blocked; no provider request.'); return
     os.environ['OLDIES_PREVIEW_ONLY'] = 'true'
+    os.environ['OLDIES_EN_OUTPUT_DIR'] = str(output.resolve())
     voice = audio.synthesize_dj(candidate, output, '', '', free_tts)
     candidate['tts_engine'] = MODEL
     candidate['voiceover'] = {'enabled': True, 'source': MODEL}
@@ -191,7 +259,7 @@ def build(day, output, ledger):
     manifest = {'status': 'rendered_pending_artifact', 'production_day': day, 'event_key': key,
         'sha256': digest(target), 'bytes': target.stat().st_size, 'tts_model': MODEL,
         'clean_qc': clean_qc, 'mixed_audio_qc': final_qc, 'music': MUSIC, 'music_credit': CREDIT,
-        'publication_performed': False, 'human_media_acceptance': False, 'candidate': candidate}
+        'background_music_added': True, 'publication_performed': False, 'human_media_acceptance': False, 'candidate': candidate}
     (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
     print(json.dumps({k:manifest[k] for k in ('status','production_day','sha256','publication_performed')}))
 

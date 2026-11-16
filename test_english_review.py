@@ -4,6 +4,9 @@ from unittest.mock import patch
 import english_review as review
 
 class ReviewTests(unittest.TestCase):
+    def setUp(self):
+        context=patch.dict('os.environ', {'GITHUB_EVENT_NAME':'unit-test'})
+        context.start();self.addCleanup(context.stop)
     def test_reservation_survives_fresh_process(self):
         with tempfile.TemporaryDirectory() as t:
             p = Path(t)/'state.json'; first=review.Ledger(p)
@@ -41,5 +44,32 @@ class ReviewTests(unittest.TestCase):
         a={'artist':'The Beatles','event_date':'1963-11-22','source_text':'Release'}
         self.assertEqual(review.event_key(a),review.event_key(dict(a,artist='THE BEATLES')))
         self.assertNotEqual(review.event_key(a),review.event_key(dict(a,event_date='1963-11-23')))
+
+class PauseCleanupTests(unittest.TestCase):
+    def test_only_detected_silent_samples_are_removed(self):
+        import io, math, struct, wave
+        rate=24000
+        tone=b''.join(struct.pack('<h',int(8000*math.sin(2*math.pi*440*i/rate))) for i in range(rate))
+        out=io.BytesIO()
+        with wave.open(out,'wb') as w:
+            w.setnchannels(1);w.setsampwidth(2);w.setframerate(rate)
+            w.writeframes(tone+b'\0'*(2*rate*2)+tone+b'\0'*(int(1.2*rate)*2))
+        with tempfile.TemporaryDirectory() as t:
+            cleaned=review.clean_provider_pauses(out.getvalue(),Path(t))
+            with wave.open(io.BytesIO(cleaned),'rb') as w:
+                frames=w.readframes(w.getnframes());duration=w.getnframes()/rate
+            self.assertAlmostEqual(duration,2.66,places=2)
+            self.assertEqual(frames[:len(tone)],tone)
+            self.assertIn(tone,frames[len(tone):])
+            info=json.loads((Path(t)/'provider-pause-edits.json').read_text())
+            self.assertFalse(info['speech_samples_changed'])
+            self.assertEqual(info['speech_tempo_factor'],1.0)
+    def test_recovery_rejects_different_transcript_before_download(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);(root/'.github').mkdir()
+            (root/'.github/manual-english-review-trigger').write_text(json.dumps({'recover_provider':{'story_sha256':'other'}}))
+            with patch.object(review,'ROOT',root),patch.dict('os.environ',{'GITHUB_EVENT_NAME':'push'}),patch.object(review.requests,'get') as get:
+                with self.assertRaises(RuntimeError):review.recovered_provider_take('different story')
+                get.assert_not_called()
 
 if __name__=='__main__': unittest.main()
