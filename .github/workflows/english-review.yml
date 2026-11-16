@@ -8,6 +8,7 @@ on:
     - cron: '23 11 * * *' # 14:23 Europe/Istanbul
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: oldies-english-review
   cancel-in-progress: false
