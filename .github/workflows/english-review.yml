@@ -1,6 +1,9 @@
 name: Oldies daily English review
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/manual-english-review-trigger"]
   schedule:
     - cron: '23 11 * * *' # 14:23 Europe/Istanbul
 permissions:

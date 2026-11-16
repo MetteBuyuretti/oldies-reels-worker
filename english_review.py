@@ -79,14 +79,9 @@ class Ledger:
 def free_tts(**kwargs):
     """Fixed free-tier Developer API model; never select a paid fallback."""
     key = os.environ['GEMINI_API_KEY']
-    prompt = ('Generate spoken English audio.\n'
-              '### AUDIO PROFILE\nA warm, mature male late-night radio DJ.\n'
-              '### DIRECTOR NOTES\nSpeak slowly and thoughtfully, never a fast newsreader. '
-              'Use a relaxed conversational rhythm, about 110 words per minute. '
-              'Let each thought settle. Leave a noticeable natural pause after each sentence '
-              'and a small breath at each comma. This short story should last about twenty seconds. '
-              'No music, singing, filler, or added words. Read only the transcript.\n'
-              '### TRANSCRIPT\n')
+    prompt = ('Say the following in English, slowly and warmly, like a relaxed late-night music radio host. '
+              'Use gentle natural pauses after each sentence, never rushing. '
+              'Read only these words, with no additions:\n')
     payload = {'contents': [{'parts': [{'text': prompt + kwargs['text'].replace('. ', '.\n\n')}]}],
         'generationConfig': {'responseModalities': ['AUDIO'], 'speechConfig': {
             'voiceConfig': {'prebuiltVoiceConfig': {'voiceName': 'Charon'}}}}}
@@ -98,7 +93,8 @@ def free_tts(**kwargs):
     part = next((p['inlineData'] for p in parts if 'inlineData' in p), None)
     if not part: raise RuntimeError('TTS returned no audio')
     raw = base64.b64decode(part['data'], validate=True)
-    if not 1000 < len(raw) < 20 * 1024 * 1024: raise RuntimeError('Invalid TTS bytes')
+    if not 1000 < len(raw) < 20 * 1024 * 1024:
+        raise RuntimeError(f'Invalid TTS bytes: {len(raw)}; MIME {part.get("mimeType", "unknown")}')
     if 'wav' in part.get('mimeType', ''): return raw
     if not part.get('mimeType', '').startswith('audio/L16') and not part.get('mimeType', '').startswith('audio/pcm'):
         raise RuntimeError('Unexpected TTS audio encoding')

@@ -6,9 +6,11 @@
       "kind": "album_chart_week",
       "instagram_music_title": "Please Please Me",
       "event_headline": "PLEASE PLEASE ME AT NUMBER ONE",
-      "dj_story_text": "On this day in nineteen sixty-three, the Beatles held Britain's number one album with Please Please Me. Gerry and the Pacemakers followed in second place. Two Liverpool groups at the top: a snapshot of the Merseybeat years.",
+      "dj_story_text": "November seventeenth, nineteen sixty-three. Please Please Me kept the Beatles at number one on Britain's album chart. Immediately behind them: Gerry and the Pacemakers, with How Do You Like It. Two Liverpool groups sharing the summit of Britain's record-buying world.",
       "source_text": "The Beatles' Please Please Me is number one and Gerry and the Pacemakers' How Do You Like It is number two on the Official Albums Chart for 17-23 November 1963.",
-      "sources": ["https://www.officialcharts.com/charts/albums-chart/19631117/7502/"],
+      "sources": [
+        "https://www.officialcharts.com/charts/albums-chart/19631117/7502/"
+      ],
       "editorial_review": "2026-11-17: chart owner page verified ranks 1 and 2; present-tense week status, not a new-entry claim; final phrase is editorial context.",
       "reviewed": true
     }
