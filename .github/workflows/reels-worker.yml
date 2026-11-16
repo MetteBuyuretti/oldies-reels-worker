@@ -100,7 +100,7 @@ jobs:
           OLDIES_PREVIEW_ARTIST: ${{ inputs.preview_artist }}
           OLDIES_REELS_LANGUAGE: ${{ inputs.reels_language || 'tr' }}
           OLDIES_TTS_ENABLED: ${{ github.event_name == 'schedule' && 'true' || (inputs.tts_enabled && 'true' || 'false') }}
-          OLDIES_TTS_ENGINE: "auto"
+          OLDIES_TTS_ENGINE: ${{ inputs.reels_language == 'en' && 'facebook_dj' || 'auto' }}
           OLDIES_GEMINI_TTS_VOICE: ${{ github.event_name == 'schedule' && 'auto' || (inputs.gemini_tts_voice || 'Charon') }}
           OLDIES_TTS_FALLBACK: "true"
           OLDIES_TTS_VOICE: ${{ inputs.tts_voice }}
