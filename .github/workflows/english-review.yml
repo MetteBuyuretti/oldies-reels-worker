@@ -1,0 +1,47 @@
+name: Oldies daily English review
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 11 * * *' # 14:23 Europe/Istanbul
+permissions:
+  contents: write
+concurrency:
+  group: oldies-english-review
+  cancel-in-progress: false
+jobs:
+  prepare-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install existing renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          pip install -r requirements.txt
+      - name: Validate orchestration
+        run: python -m unittest test_english_review -v
+      - name: Prepare one licensed English review
+        env:
+          GEMINI_API_KEY: ${{ secrets.OLDIES_EN_GEMINI_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+          OLDIES_PREVIEW_ONLY: 'true'
+        run: python english_review.py
+      - name: Save review and exact blocker evidence
+        if: always()
+        id: artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-review-${{ github.run_id }}
+          path: english-output/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Commit completed delivery only after artifact storage
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python english_review.py --commit
