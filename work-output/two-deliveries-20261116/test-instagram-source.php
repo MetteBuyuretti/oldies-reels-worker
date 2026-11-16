@@ -33,7 +33,7 @@ namespace OldiesRadyo\SocialAutomation\Security {
     }
 }
 namespace {
-    require $argv[1] ?? __DIR__.'/bridge.readback.php';
+    require ($argv[1] ?? __DIR__.'/bridge.readback.php');
     $count=0; $calls=0;
     function check($ok,$label){global $count;if(!$ok)throw new \RuntimeException($label);$count++;echo 'PASS '.$label.PHP_EOL;}
     $media=['id'=>'98765','media_type'=>'VIDEO','media_product_type'=>'REELS','permalink'=>'https://www.instagram.com/reel/fixture/','caption'=>'Fixture','timestamp'=>'2026-11-16T00:00:00+0000'];
