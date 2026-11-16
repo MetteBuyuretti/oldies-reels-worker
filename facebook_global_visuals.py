@@ -121,8 +121,9 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path, draw_text_
     if len(photos) != 3:
         raise RuntimeError('Facebook template requires three approved photographs')
     story, advert = candidate['dj_recording']['story_text'], candidate['dj_recording']['advert_text']
+    screen_story = str(candidate.get('on_screen_story') or story.split(' — on this day')[0]).strip()
     content = [(str(candidate.get('event_headline') or candidate['artist']), str(candidate['date_label']), 'ON THIS DAY IN MUSIC'),
-               (str(candidate['artist']), story.split(' — on this day')[0], 'THE STORY'),
+               (str(candidate['artist']), screen_story, 'THE STORY'),
                ('Timeless music', 'Listen, enjoy, share.\noldiesradyo.com/en/', 'OLDIES RADYO • MUSIC & MEMORIES')]
     paths = []
     for index, (photo, text) in enumerate(zip(photos, content), 1):
@@ -180,3 +181,4 @@ def validate_publish(candidate: dict) -> None:
     visual = candidate.get('visual_qc', {})
     if visual.get('full_source_frame_visible') is not True or visual.get('crop_applied') is not False or visual.get('zoom_applied') is not False:
         raise RuntimeError('Facebook publish blocked: full-frame, no-crop/no-zoom evidence required')
+
