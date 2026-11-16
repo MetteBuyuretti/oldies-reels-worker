@@ -6,7 +6,15 @@
       "status": "artifact_saved",
       "run_id": "43977060028",
       "sha256": "d4221fb56035bc4bcd1656fec4b3b028e85880d7cc1902efba7885d18be8f0a4",
-      "artifact_run": "43977060028"
+      "artifact_run": "43977060028",
+      "latest_review_revision": {
+        "sha256": "9303fe1f785e9bf771fdd9e4138048c7fbbf19b123c21847f7a7076949e745ec",
+        "library_file_id": "libfile_de84f323a7d08191b2129d1971039aea",
+        "revision": "complete-on-screen-fact-card",
+        "source_run": 43977060028,
+        "new_provider_calls": 0,
+        "seconds": 29.833333
+      }
     }
   },
   "events": {
@@ -16,7 +24,15 @@
       "status": "artifact_saved",
       "run_id": "43977060028",
       "sha256": "d4221fb56035bc4bcd1656fec4b3b028e85880d7cc1902efba7885d18be8f0a4",
-      "artifact_run": "43977060028"
+      "artifact_run": "43977060028",
+      "latest_review_revision": {
+        "sha256": "9303fe1f785e9bf771fdd9e4138048c7fbbf19b123c21847f7a7076949e745ec",
+        "library_file_id": "libfile_de84f323a7d08191b2129d1971039aea",
+        "revision": "complete-on-screen-fact-card",
+        "source_run": 43977060028,
+        "new_provider_calls": 0,
+        "seconds": 29.833333
+      }
     }
   },
   "failed_attempts": [
