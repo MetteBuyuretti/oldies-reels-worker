@@ -155,16 +155,24 @@ def build_dj_parts(candidate: dict) -> tuple[str, str]:
     if not artist or not re.fullmatch(r'\d{4}', year):
         raise RuntimeError('Facebook DJ copy requires an artist and verified event year')
     kind = candidate.get('kind', 'events')
-    if kind == 'births':
+    authored = candidate.get('dj_story_text')
+    if authored is not None:
+        if not isinstance(authored, str):
+            raise RuntimeError('Facebook DJ authored story must be text')
+        story = re.sub(r'\s+', ' ', authored).strip()
+        if not story or artist.casefold() not in story.casefold() or len(story.split()) < 4:
+            raise RuntimeError('Facebook DJ needs a complete sourced English story')
+    elif kind == 'births':
         story = f'Born on this day in {year}: {artist}. A voice from the golden years of music.'
     elif kind == 'deaths':
         story = f'Remembering {artist}, who left us on this day in {year}. The music lives on.'
     else:
         source = re.sub(r'\s+', ' ', str(candidate.get('source_text', ''))).strip()
-        first = re.split(r'(?<=[.!?])\s+(?=[A-Z])', source, maxsplit=1)[0]
-        if not first or artist.casefold() not in first.casefold() or not 4 <= len(first.split()) <= TEMPLATE['max_story_words']:
+        if not source or artist.casefold() not in source.casefold() or not 4 <= len(source.split()) <= TEMPLATE['max_story_words']:
             raise RuntimeError('Facebook DJ needs a complete sourced English story')
-        story = first.rstrip('.!?')
+        # Preserve every supplied sentence; a shortened first sentence can turn
+        # a valid 25–30 second script into a rejected 17 second recording.
+        story = source.rstrip('.!?')
         if not re.search(r'\bon this day\b', story, re.I):
             story += f' — on this day in {year}'
         story += '.'
@@ -223,6 +231,10 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
     if not preview:
         require_approved_signoff_for_profile(profile)
     story, advert = build_dj_parts(candidate)
+    # Fail before a provider call when the supplied copy cannot fit the locked
+    # budget at the intended pace. Actual measured audio is still checked below.
+    planned_video_seconds(spoken_word_count(story) * 60 / TEMPLATE['target_wpm']
+                          + TEMPLATE['advert_gap_seconds'] + identity['duration_seconds'])
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / 'voiceover-facebook-en.mp3'
     path.unlink(missing_ok=True)

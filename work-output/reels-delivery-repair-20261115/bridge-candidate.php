@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Oldies Radyo Reels Bridge
  * Description: Secure MP4 intake and authenticated REST bridge for the existing Oldies Radyo Instagram Reels publishing pipeline.
- * Version: 2.3.8-YT9-RECEIPT
+ * Version: 2.3.8-YT11-SOURCE
  * Author: Oldies Radyo
  * Requires at least: 6.5
  * Requires PHP: 8.1
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 
 final class Oldies_Radyo_Reels_Bridge
 {
-    private const VERSION = '2.3.8-YT9-RECEIPT';
+    private const VERSION = '2.3.8-YT11-SOURCE';
     private const REST_NAMESPACE = 'oldies/v1';
     private const META_GRAPH_BASE = 'https://graph.instagram.com/v26.0';
     private const MAX_UPLOAD_BYTES = 104857600; // 100 MiB.
@@ -299,7 +299,7 @@ final class Oldies_Radyo_Reels_Bridge
             return new WP_Error('instagram_user_missing', 'Instagram hesap kimliği alınamadı.');
         }
         $response = self::metaGraphRequest('/' . $userId . '/media', 'GET', [
-            'fields' => 'id,caption,media_type,media_product_type,media_audio_type,permalink,media_url,timestamp',
+            'fields' => 'id,caption,media_type,media_product_type,permalink,media_url,timestamp',
             'limit' => 20,
         ]);
         if (is_wp_error($response)) {
@@ -1061,6 +1061,50 @@ final class Oldies_Radyo_Reels_Bridge
                 </tbody>
             </table>
 
+            <h2>Instagram → YouTube kaynak kontrolü</h2>
+            <p><a class="button" href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=oldies-reels-bridge&oldies_read_instagram=1'), 'oldies_reels_read_instagram')); ?>">Son Instagram videolarını oku</a></p>
+            <?php
+            if (!empty($_GET['oldies_read_instagram'])) {
+                $readNonce = sanitize_text_field(wp_unslash((string)($_GET['_wpnonce'] ?? '')));
+                if (!wp_verify_nonce($readNonce, 'oldies_reels_read_instagram')) {
+                    echo '<p>Kaynak kontrolü için sayfayı yeniden açın.</p>';
+                } else {
+                    $recentMedia = self::abilityListInstagramRecent();
+                    if (is_wp_error($recentMedia)) {
+                        echo '<div class="notice notice-error"><p>' . esc_html($recentMedia->get_error_code() . ': ' . $recentMedia->get_error_message()) . '</p></div>';
+                    } elseif (empty($recentMedia)) {
+                        echo '<p>Hesaptan okunabilen yeni video bulunamadı.</p>';
+                    } else {
+                        echo '<table class="widefat striped" style="max-width:1100px"><thead><tr><th>Tarih / kaynak kimliği</th><th>İçerik</th><th>Kaynak</th></tr></thead><tbody>';
+                        foreach ($recentMedia as $recentVideo) {
+                            echo '<tr><td>' . esc_html((string)$recentVideo['timestamp']) . '<br><code>' . esc_html((string)$recentVideo['media_id']) . '</code></td>';
+                            echo '<td>' . esc_html((string)$recentVideo['caption']) . '</td><td><a target="_blank" rel="noopener noreferrer" href="' . esc_url((string)$recentVideo['permalink']) . '">Instagram’da aç</a>';
+                            if (!empty($recentVideo['media_url'])) {
+                                echo '<br><a target="_blank" rel="noopener noreferrer" href="' . esc_url((string)$recentVideo['media_url']) . '">Final videoyu aç</a>';
+                            } else {
+                                echo '<br>İndirilebilir final dosya yok.';
+                            }
+                            $audioLabel = trim((string)($recentVideo['media_audio_type'] ?? ''));
+                            echo '<br>Ses: ' . esc_html($audioLabel !== '' ? $audioLabel : 'bilinmiyor');
+                            $probeUrl = add_query_arg('oldies_probe_instagram', (string)$recentVideo['media_id'], admin_url('admin.php?page=oldies-reels-bridge&oldies_read_instagram=1'));
+                            echo '<br><a href="' . esc_url(wp_nonce_url($probeUrl, 'oldies_reels_read_instagram')) . '">Tekil kaynağı doğrula</a>';
+                            if (self::sanitizeMetaId($_GET['oldies_probe_instagram'] ?? '') === (string)$recentVideo['media_id']) {
+                                $probed = self::getInstagramFinalMedia((string)$recentVideo['media_id']);
+                                if (is_wp_error($probed)) {
+                                    echo '<p><strong>Aktarım bekliyor:</strong> ' . esc_html($probed->get_error_code() . ': ' . $probed->get_error_message()) . '</p>';
+                                } else {
+                                    echo '<p><a target="_blank" rel="noopener noreferrer" href="' . esc_url((string)$probed['media_url']) . '">Tekil API final dosyası</a></p>';
+                                }
+                            }
+                            echo '</td></tr>';
+                        }
+                        echo '</tbody></table>';
+                    }
+                }
+            }
+            ?>
+            <p class="description">Bu kontrol yalnız okur. Video yüklemez veya yayımlamaz; mevcut taslaklarla otomatik eşleştirme yapmaz.</p>
+
             <h2>Kalite Politikası</h2>
             <p>En az <?php echo (int)$policy['minimum_sources']; ?> farklı yabancı kaynak · kalite eşiği <?php echo (int)$policy['minimum_score']; ?>/100 · günde en fazla <?php echo (int)$policy['maximum_daily_drafts']; ?> taslak · aynı sanatçı için <?php echo (int)$policy['artist_repeat_days']; ?> gün ara · insan onayı zorunlu.</p>
 
@@ -1700,7 +1744,7 @@ final class Oldies_Radyo_Reels_Bridge
             return new WP_Error('instagram_media_id_required', 'Instagram medya kimliği gerekli.');
         }
         $response = self::metaGraphRequest('/' . $mediaId, 'GET', [
-            'fields' => 'id,caption,media_type,media_product_type,media_audio_type,permalink,media_url,timestamp',
+            'fields' => 'id,caption,media_type,media_product_type,permalink,media_url,timestamp',
         ]);
         if (is_wp_error($response)) {
             return $response;
@@ -2451,4 +2495,5 @@ final class Oldies_Radyo_Reels_Bridge
 register_activation_hook(__FILE__, [Oldies_Radyo_Reels_Bridge::class, 'activate']);
 register_deactivation_hook(__FILE__, [Oldies_Radyo_Reels_Bridge::class, 'deactivate']);
 Oldies_Radyo_Reels_Bridge::boot();
+
 
