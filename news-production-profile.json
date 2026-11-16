@@ -1,0 +1,22 @@
+{
+  "id": "news-upbeat-v1",
+  "target_wpm": 145,
+  "max_estimated_wpm": 160,
+  "voice_direction": "Read this music news with a bright, upbeat, friendly radio-presenter delivery. Smile in your voice, sound engaged and lively, and use flowing phrases with crisp natural transitions. Aim for about 145 words per minute. Read only the supplied words.",
+  "music": {
+    "title": "News Theme",
+    "creator": "Kevin MacLeod",
+    "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100544",
+    "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/News%20Theme.mp3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "sha256": "671e9432ce2361a0074a5c97a9d2e19e495f8ff29e6cbad2afe35e2a7d6057e4",
+    "tempo_bpm": 124
+  },
+  "bed_lufs": -24,
+  "speech_target_lufs": -16,
+  "duck_ratio": 2,
+  "stock_warning_days": 3,
+  "stock_target_days": 7,
+  "provider_calls_per_story": 1
+}

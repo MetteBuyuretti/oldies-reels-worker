@@ -45,6 +45,16 @@ class ReviewTests(unittest.TestCase):
         self.assertEqual(review.event_key(a),review.event_key(dict(a,artist='THE BEATLES')))
         self.assertNotEqual(review.event_key(a),review.event_key(dict(a,event_date='1963-11-23')))
 
+class NewsProfileTests(unittest.TestCase):
+    def test_news_and_calm_have_separate_natural_speech_rules(self):
+        import facebook_global_audio as audio
+        self.assertEqual(audio.speech_rules({'delivery_profile':'news-upbeat-v1'}),(145,160))
+        self.assertEqual(audio.speech_rules({}),(128,138))
+    def test_news_uses_licensed_driving_bed_at_audible_level(self):
+        self.assertEqual(review.MUSIC['title'],'News Theme')
+        self.assertEqual(review.PROFILE['bed_lufs'],-24)
+        self.assertIn('CC BY 4.0',review.CREDIT)
+
 class PauseCleanupTests(unittest.TestCase):
     def test_only_detected_silent_samples_are_removed(self):
         import io, math, struct, wave

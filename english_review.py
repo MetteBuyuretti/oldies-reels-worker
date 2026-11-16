@@ -9,16 +9,11 @@ import requests
 
 ROOT = Path(__file__).resolve().parent
 MODEL = 'gemini-2.5-flash-preview-tts'
-MUSIC = {
-    'title': 'Carefree', 'creator': 'Kevin MacLeod',
-    'source': 'https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400037',
-    'download': 'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3',
-    'license': 'CC BY 4.0', 'license_url': 'https://creativecommons.org/licenses/by/4.0/',
-    'sha256': '8433b770a630d9b1594fd484442c677907ece899a4d149954cd2e74fd733e311',
-}
-CREDIT = ('Music: "Carefree" by Kevin MacLeod (incompetech.com). '
-          'Licensed under CC BY 4.0: https://creativecommons.org/licenses/by/4.0/. '
-          'Edited: excerpt, reduced volume and fade-out.')
+PROFILE=json.loads((ROOT/'news-production-profile.json').read_text())
+MUSIC=PROFILE['music']
+CREDIT=(f'Music: "{MUSIC["title"]}" by {MUSIC["creator"]} (incompetech.com). '
+        f'Licensed under {MUSIC["license"]}: {MUSIC["license_url"]}. '
+        'Edited: excerpt, broadcast mix, ducking and fade-out.')
 
 
 def digest(path):
@@ -146,10 +141,8 @@ def free_tts(**kwargs):
     recovered=recovered_provider_take(kwargs['text'])
     if recovered is not None: return clean_provider_pauses(recovered,directory)
     key = os.environ['GEMINI_API_KEY']
-    prompt = ('Say the following in English, slowly and warmly, like a relaxed late-night music radio host. '
-              'Use gentle natural pauses after each sentence, never rushing. '
-              'Read only these words, with no additions:\n')
-    payload = {'contents': [{'parts': [{'text': prompt + kwargs['text'].replace('. ', '.\n\n')}]}],
+    prompt=PROFILE['voice_direction']+'\nTranscript:\n'
+    payload = {'contents': [{'parts': [{'text': prompt + kwargs['text']}]}],
         'generationConfig': {'responseModalities': ['AUDIO'], 'speechConfig': {
             'voiceConfig': {'prebuiltVoiceConfig': {'voiceName': 'Charon'}}}}}
     r = requests.post(f'https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent',
@@ -183,10 +176,14 @@ def licensed_music(directory):
 
 def mix_music(clean, bed, target, duration):
     # Preserve the DJ recording and its actual gap; mix the bed at a restrained level.
-    graph = (f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,volume=0.055,'
-             f'afade=t=in:d=0.6,afade=t=out:st={duration-1.2}:d=1.2[bed];'
-             '[0:a][bed]amix=inputs=2:duration=first:normalize=0,'
-             'alimiter=limit=0.794:level=false[a]')
+    graph = (f'[0:a]asplit=2[voice][control];'
+             f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,'
+             f'loudnorm=I={PROFILE["bed_lufs"]}:TP=-3:LRA=6,'
+             f'afade=t=in:d=0.15,afade=t=out:st={duration-.7}:d=.7[bed];'
+             f'[bed][control]sidechaincompress=threshold=0.06:ratio={PROFILE["duck_ratio"]}:'
+             'attack=15:release=220[ducked];'
+             '[voice][ducked]amix=inputs=2:duration=first:normalize=0,'
+             'alimiter=limit=0.76:level=false[a]')
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(clean), '-stream_loop', '-1', '-i', str(bed),
         '-filter_complex', graph, '-map', '0:v:0', '-map', '[a]', '-c:v', 'copy', '-c:a', 'aac',
         '-b:a', '192k', '-ar', '48000', '-ac', '2', '-t', str(duration), '-movflags', '+faststart', str(target)], check=True, timeout=120)
@@ -207,9 +204,10 @@ def select_candidate(day, directory):
             candidate = worker.apply_reel_language(candidate, 'en')
             if headline: candidate['event_headline'] = headline
             candidate['signoff_profile'] = 'calm'
+            candidate['delivery_profile'] = PROFILE['id']
             # Gate text and all reviewed photos before any provider request.
             story, _ = audio.build_dj_parts(candidate)
-            audio.planned_video_seconds(audio.spoken_word_count(story) * 60 / audio.TEMPLATE['target_wpm'] + 1.1 + 6.72)
+            audio.planned_video_seconds(audio.spoken_word_count(story) * 60 / PROFILE['target_wpm'] + 1.1 + 6.72)
             photos, credits = visuals.load_period_photos(candidate, directory)
             candidate['image_credits'] = credits
             return candidate, photos
@@ -257,7 +255,7 @@ def build(day, output, ledger):
     (output / 'caption.txt').write_text(caption, encoding='utf-8')
     if CREDIT not in (output / 'caption.txt').read_text(): raise RuntimeError('Mandatory attribution missing')
     manifest = {'status': 'rendered_pending_artifact', 'production_day': day, 'event_key': key,
-        'sha256': digest(target), 'bytes': target.stat().st_size, 'tts_model': MODEL,
+        'sha256': digest(target), 'bytes': target.stat().st_size, 'tts_model': MODEL, 'production_profile': PROFILE,
         'clean_qc': clean_qc, 'mixed_audio_qc': final_qc, 'music': MUSIC, 'music_credit': CREDIT,
         'background_music_added': True, 'publication_performed': False, 'human_media_acceptance': False, 'candidate': candidate}
     (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
@@ -269,7 +267,10 @@ def main():
     parser.add_argument('--day', default=datetime.now(ZoneInfo('Europe/Istanbul')).date().isoformat())
     parser.add_argument('--output', type=Path, default=ROOT / 'english-output')
     parser.add_argument('--local-ledger'); args = parser.parse_args()
-    ledger = Ledger(args.local_ledger)
+    marker=ROOT/'.github/manual-english-review-trigger'
+    try: preview=json.loads(marker.read_text()).get('preview_audio_profile') if os.getenv('GITHUB_EVENT_NAME')=='push' else False
+    except (ValueError,OSError): preview=False
+    ledger=Ledger(args.output/'profile-preview-ledger.json' if preview else args.local_ledger)
     if args.commit:
         path = args.output / 'manifest.json'
         if path.exists(): ledger.complete(json.loads(path.read_text()))

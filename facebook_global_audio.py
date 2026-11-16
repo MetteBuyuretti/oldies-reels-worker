@@ -28,6 +28,13 @@ LOCKED_SETTINGS = {
 }
 
 
+def speech_rules(candidate=None):
+    if (candidate or {}).get('delivery_profile') == 'news-upbeat-v1':
+        profile=json.loads((ROOT/'news-production-profile.json').read_text())
+        return profile['target_wpm'], profile['max_estimated_wpm']
+    return TEMPLATE['target_wpm'], TEMPLATE['max_estimated_wpm']
+
+
 def validate_template(template: dict | None = None) -> None:
     settings = TEMPLATE if template is None else template
     for key, value in LOCKED_SETTINGS.items():
@@ -136,7 +143,7 @@ def validate_natural_recording(candidate: dict, measured_voiceover_seconds: floa
     if (not math.isfinite(story_seconds) or story_seconds <= 0
             or story.get('tempo_factor') != 1.0
             or not math.isfinite(float(story.get('estimated_wpm', 999)))
-            or float(story.get('estimated_wpm', 999)) > TEMPLATE['max_estimated_wpm']
+            or float(story.get('estimated_wpm', 999)) > speech_rules(candidate)[1]
             or recording.get('speedup_applied') is not False
             or recording.get('advert_gap_seconds') != TEMPLATE['advert_gap_seconds']
             or not math.isfinite(float(recording.get('advert_start_seconds') or 0))
@@ -190,12 +197,13 @@ def spoken_word_count(text: str) -> int:
     return len(re.findall(r"[\w]+(?:['’][\w]+)?", text)) + 2 * len(re.findall(r'\b\d{4}\b', text))
 
 
-def record_part(text: str, role: str, path: Path, project: str, token: str, synthesize) -> dict:
+def record_part(text: str, role: str, path: Path, project: str, token: str, synthesize, candidate=None) -> dict:
+    target_wpm, max_wpm = speech_rules(candidate)
     prompt = (
         'English only. Be a warm, unhurried music-radio DJ speaking personally to one listener. '
         'A friendly smile in your voice; intimate and conversational, with gentle natural inflection. '
         'Never a newsreader, hard-sell announcer, or robotic voice. '
-        f'Read at approximately {TEMPLATE["target_wpm"]} words per minute. Let each phrase breathe; '
+        f'Read at approximately {target_wpm} words per minute. Let each phrase breathe; '
         'do not race to fit a time limit. Read the supplied words exactly once. '
         'No music, singing, effects, filler or added words. '
     )
@@ -212,14 +220,14 @@ def record_part(text: str, role: str, path: Path, project: str, token: str, synt
     path.write_bytes(raw)
     qc = inspect_audio(path)
     words = spoken_word_count(text)
-    target_seconds = words * 60 / TEMPLATE['target_wpm']
+    target_seconds = words * 60 / target_wpm
     factor = min(1.0, qc['duration_seconds'] / target_seconds)
     if factor < TEMPLATE['minimum_slowdown_factor']:
         raise RuntimeError('Facebook DJ take was too rushed; rerecord at a natural pace')
     # Keep the natural take; timing gates never stretch or accelerate speech.
     factor = 1.0
     estimated_wpm = words * 60 / qc['duration_seconds']
-    if estimated_wpm > TEMPLATE['max_estimated_wpm']:
+    if estimated_wpm > max_wpm:
         raise RuntimeError('Facebook DJ take exceeds the relaxed pace limit')
     return {'duration_seconds': qc['duration_seconds'], 'spoken_words_estimated': words,
             'estimated_wpm': round(estimated_wpm, 1), 'tempo_factor': round(factor, 4)}
@@ -233,14 +241,14 @@ def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, sy
     story, advert = build_dj_parts(candidate)
     # Fail before a provider call when the supplied copy cannot fit the locked
     # budget at the intended pace. Actual measured audio is still checked below.
-    planned_video_seconds(spoken_word_count(story) * 60 / TEMPLATE['target_wpm']
+    planned_video_seconds(spoken_word_count(story) * 60 / speech_rules(candidate)[0]
                           + TEMPLATE['advert_gap_seconds'] + identity['duration_seconds'])
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / 'voiceover-facebook-en.mp3'
     path.unlink(missing_ok=True)
     story_path, advert_path = directory / 'dj-story-en.mp3', directory / 'dj-advert-en.mp3'
     try:
-        story_qc = record_part(story, 'story', story_path, project, token, synthesize)
+        story_qc = record_part(story, 'story', story_path, project, token, synthesize, candidate=candidate)
         # Copy exactly the hash-checked bytes; never regenerate an accepted ending.
         advert_path.write_bytes(accepted_bytes)
         advert_qc = inspect_audio(advert_path)
@@ -340,7 +348,7 @@ def validate_recording(video: Path, candidate: dict) -> dict:
             or recording.get('advert_gap_seconds') != TEMPLATE['advert_gap_seconds']
             or recording.get('background_music_added') is not False):
         raise RuntimeError('Facebook publish blocked: approved warm DJ recording and separated station promotion required')
-    if float(recording.get('story', {}).get('estimated_wpm', 999)) > TEMPLATE['max_estimated_wpm']:
+    if float(recording.get('story', {}).get('estimated_wpm', 999)) > speech_rules(candidate)[1]:
         raise RuntimeError('Facebook publish blocked: DJ story is too fast')
     advert = recording.get('advert', {})
     advert_wpm = spoken_word_count(recording['advert_text']) * 60 / float(advert.get('duration_seconds') or .001)
@@ -356,3 +364,4 @@ def validate_recording(video: Path, candidate: dict) -> dict:
     return {'warm_recording_template': TEMPLATE['version'], 'story_estimated_wpm': recording['story']['estimated_wpm'],
             'advert_estimated_wpm': round(advert_wpm, 1), 'advert_gap_seconds': TEMPLATE['advert_gap_seconds'],
             'gap_max_volume_db': float(level.group(1)), 'speedup_applied': False}
+
