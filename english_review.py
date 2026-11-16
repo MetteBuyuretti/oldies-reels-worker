@@ -79,7 +79,10 @@ class Ledger:
 def free_tts(**kwargs):
     """Fixed free-tier Developer API model; never select a paid fallback."""
     key = os.environ['GEMINI_API_KEY']
-    payload = {'contents': [{'parts': [{'text': 'Synthesize speech. ' + kwargs['prompt'] +
+    prompt = kwargs['prompt'].replace('128 words per minute', '112 words per minute')
+    prompt += (' Speak slowly, warmly, with clear natural pauses between sentences. '
+               'Allow about twenty seconds for this short story. Never rush or compress phrases. ')
+    payload = {'contents': [{'parts': [{'text': 'Synthesize speech. ' + prompt +
                  '\nRead only this transcript:\n' + kwargs['text']}]}],
         'generationConfig': {'responseModalities': ['AUDIO'], 'speechConfig': {
             'voiceConfig': {'prebuiltVoiceConfig': {'voiceName': 'Charon'}}}}}
