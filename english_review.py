@@ -237,7 +237,7 @@ def stock_health(day,ledger,output):
             ready.append({'artist':c['artist'],'event_date':c['event_date'],'kind':c['kind']})
         except (ValueError,RuntimeError) as exc:rejected.append({'event':c['event_date'],'reason':str(exc)})
     report={'checked_day':day,'ready_unproduced_stories':len(ready),'target':PROFILE['stock_target_days'],
-            'status':'ready' if len(ready)>=PROFILE['stock_warning_days'] else 'low_stock','items':ready,'rejected':rejected,
+            'status':'ready' if len(ready)>PROFILE['stock_warning_days'] else 'low_stock','items':ready,'rejected':rejected,
             'note':'Reviewed text and period-photo stock, not pre-rendered videos. Archive items show their real date.'}
     output.mkdir(parents=True,exist_ok=True);(output/'stock-health.json').write_text(json.dumps(report,indent=2))
     summary=os.getenv('GITHUB_STEP_SUMMARY')
