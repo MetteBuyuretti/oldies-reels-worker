@@ -79,11 +79,15 @@ class Ledger:
 def free_tts(**kwargs):
     """Fixed free-tier Developer API model; never select a paid fallback."""
     key = os.environ['GEMINI_API_KEY']
-    prompt = kwargs['prompt'].replace('128 words per minute', '112 words per minute')
-    prompt += (' Speak slowly, warmly, with clear natural pauses between sentences. '
-               'Allow about twenty seconds for this short story. Never rush or compress phrases. ')
-    payload = {'contents': [{'parts': [{'text': 'Synthesize speech. ' + prompt +
-                 '\nRead only this transcript:\n' + kwargs['text']}]}],
+    prompt = ('Generate spoken English audio.\n'
+              '### AUDIO PROFILE\nA warm, mature male late-night radio DJ.\n'
+              '### DIRECTOR NOTES\nSpeak slowly and thoughtfully, never a fast newsreader. '
+              'Use a relaxed conversational rhythm, about 110 words per minute. '
+              'Let each thought settle. Leave a noticeable natural pause after each sentence '
+              'and a small breath at each comma. This short story should last about twenty seconds. '
+              'No music, singing, filler, or added words. Read only the transcript.\n'
+              '### TRANSCRIPT\n')
+    payload = {'contents': [{'parts': [{'text': prompt + kwargs['text'].replace('. ', '.\n\n')}]}],
         'generationConfig': {'responseModalities': ['AUDIO'], 'speechConfig': {
             'voiceConfig': {'prebuiltVoiceConfig': {'voiceName': 'Charon'}}}}}
     r = requests.post(f'https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent',
