@@ -1,4 +1,12 @@
 {
   "preview_audio_profile": true,
-  "purpose": "Owner requested a brighter music-news announcer and clearly audible driving news bed; one preview only"
+  "purpose": "Verify fixed broadcast mix and seven-story fallback stock without new TTS",
+  "recover_provider": {
+    "artifact_id": 14282467374,
+    "run_id": 43979581753,
+    "head_sha": "22a0692bc95badb0273b41449cd33767dc18c0b5",
+    "member": "provider-story-original.wav",
+    "audio_sha256": "96a7fb1eb0ea5def537c0a3a8f35d7e8905a26d6c2a0cf13d6965ff3b069f6cc",
+    "story_sha256": "3fb7f74877ea0caa3187fc06539599c5509925bc930db7c6b6478c7acc06c107"
+  }
 }

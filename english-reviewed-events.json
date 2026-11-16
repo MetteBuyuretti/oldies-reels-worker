@@ -14,6 +14,111 @@
       "editorial_review": "2026-11-17: chart owner page verified ranks 1 and 2; present-tense week status, not a new-entry claim; final phrase is editorial context.",
       "reviewed": true,
       "on_screen_story": "Please Please Me led the UK album chart. Gerry and the Pacemakers held second place."
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-03-22",
+      "kind": "album_release",
+      "event_headline": "PLEASE PLEASE ME ARRIVES",
+      "on_screen_story": "Please Please Me was released in Britain. Ten tracks were recorded in a single day.",
+      "dj_story_text": "March twenty-second, nineteen sixty-three. The Beatles released Please Please Me in Britain, turning their club repertoire into a debut album. Ten of its fourteen tracks had been recorded in a single day. A fast beginning for a band about to change pop music.",
+      "source_text": "March twenty-second, nineteen sixty-three. The Beatles released Please Please Me in Britain, turning their club repertoire into a debut album. Ten of its fourteen tracks had been recorded in a single day. A fast beginning for a band about to change pop music.",
+      "sources": [
+        "https://www.thebeatles.com/please-please-me"
+      ],
+      "reviewed": true,
+      "archive_fallback_allowed": true,
+      "editorial_review": "2026-11-17: primary artist source read; date and facts verified; final framing is editorial. Archive fallback must show actual historical date."
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-02-11",
+      "kind": "recording_session",
+      "event_headline": "TEN TRACKS IN ONE DAY",
+      "on_screen_story": "Ten tracks for Please Please Me were recorded on one remarkable studio day.",
+      "dj_story_text": "February eleventh, nineteen sixty-three. The Beatles recorded ten tracks for Please Please Me in one day, mixing songs from their stage set with Lennon and McCartney originals. Imagine the pace inside that studio: a working band capturing its sound before the crowds grew even bigger.",
+      "source_text": "February eleventh, nineteen sixty-three. The Beatles recorded ten tracks for Please Please Me in one day, mixing songs from their stage set with Lennon and McCartney originals. Imagine the pace inside that studio: a working band capturing its sound before the crowds grew even bigger.",
+      "sources": [
+        "https://www.thebeatles.com/please-please-me"
+      ],
+      "reviewed": true,
+      "archive_fallback_allowed": true,
+      "editorial_review": "2026-11-17: primary artist source read; date and facts verified; final framing is editorial. Archive fallback must show actual historical date."
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-04-11",
+      "kind": "single_release",
+      "event_headline": "FROM ME TO YOU",
+      "on_screen_story": "From Me to You arrived in Britain, backed with Thank You Girl.",
+      "dj_story_text": "April eleventh, nineteen sixty-three. From Me to You arrived as a single by the Beatles in Britain, paired with Thank You Girl. John Lennon and Paul McCartney wrote the song, and George Martin produced the record. Another short, sharp step in the band's breakthrough year.",
+      "source_text": "April eleventh, nineteen sixty-three. From Me to You arrived as a single by the Beatles in Britain, paired with Thank You Girl. John Lennon and Paul McCartney wrote the song, and George Martin produced the record. Another short, sharp step in the band's breakthrough year.",
+      "sources": [
+        "https://www.thebeatles.com/me-you"
+      ],
+      "reviewed": true,
+      "archive_fallback_allowed": true,
+      "editorial_review": "2026-11-17: primary artist source read; date and facts verified; final framing is editorial. Archive fallback must show actual historical date."
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-08-23",
+      "kind": "single_release",
+      "event_headline": "SHE LOVES YOU",
+      "on_screen_story": "She Loves You was released in Britain and became its best-selling single of 1963.",
+      "dj_story_text": "August twenty-third, nineteen sixty-three. The Beatles released She Loves You in Britain, with I'll Get You on the other side. Written by Lennon and McCartney and produced by George Martin, the single became Britain's best-selling record of that year. Beatlemania was gathering serious momentum.",
+      "source_text": "August twenty-third, nineteen sixty-three. The Beatles released She Loves You in Britain, with I'll Get You on the other side. Written by Lennon and McCartney and produced by George Martin, the single became Britain's best-selling record of that year. Beatlemania was gathering serious momentum.",
+      "sources": [
+        "https://www.thebeatles.com/she-loves-you"
+      ],
+      "reviewed": true,
+      "archive_fallback_allowed": true,
+      "editorial_review": "2026-11-17: primary artist source read; date and facts verified; final framing is editorial. Archive fallback must show actual historical date."
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-07-01",
+      "kind": "recording_session",
+      "event_headline": "RECORDING SHE LOVES YOU",
+      "on_screen_story": "The Beatles recorded She Loves You at EMI Studios, London.",
+      "dj_story_text": "July first, nineteen sixty-three. The Beatles recorded She Loves You at EMI Studios in London. George Martin produced the session, and the song would reach British record shops the following month. Hear the excitement in that performance: this was a band finding its stride.",
+      "source_text": "July first, nineteen sixty-three. The Beatles recorded She Loves You at EMI Studios in London. George Martin produced the session, and the song would reach British record shops the following month. Hear the excitement in that performance: this was a band finding its stride.",
+      "sources": [
+        "https://www.thebeatles.com/she-loves-you"
+      ],
+      "reviewed": true,
+      "archive_fallback_allowed": true,
+      "editorial_review": "2026-11-17: primary artist source read; date and facts verified; final framing is editorial. Archive fallback must show actual historical date."
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-11-29",
+      "kind": "single_release",
+      "event_headline": "I WANT TO HOLD YOUR HAND",
+      "on_screen_story": "I Want to Hold Your Hand arrived with more than a million British advance orders.",
+      "dj_story_text": "November twenty-ninth, nineteen sixty-three. The Beatles released I Want to Hold Your Hand in Britain, backed with This Boy. Advance orders had already passed a million copies. Yet another Beatles record, She Loves You, stood above it in the charts. What a remarkable moment for Liverpool.",
+      "source_text": "November twenty-ninth, nineteen sixty-three. The Beatles released I Want to Hold Your Hand in Britain, backed with This Boy. Advance orders had already passed a million copies. Yet another Beatles record, She Loves You, stood above it in the charts. What a remarkable moment for Liverpool.",
+      "sources": [
+        "https://www.thebeatles.com/i-want-hold-your-hand"
+      ],
+      "reviewed": true,
+      "archive_fallback_allowed": true,
+      "editorial_review": "2026-11-17: primary artist source read; date and facts verified; final framing is editorial. Archive fallback must show actual historical date."
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-10-17",
+      "kind": "recording_session",
+      "event_headline": "A FOUR-TRACK BREAKTHROUGH",
+      "on_screen_story": "I Want to Hold Your Hand was their first record made with four-track equipment.",
+      "dj_story_text": "October seventeenth, nineteen sixty-three. At EMI Studios in London, the Beatles recorded I Want to Hold Your Hand. It became their first record made with four-track equipment. A technical step forward behind a song that would soon take their sound to a much wider audience.",
+      "source_text": "October seventeenth, nineteen sixty-three. At EMI Studios in London, the Beatles recorded I Want to Hold Your Hand. It became their first record made with four-track equipment. A technical step forward behind a song that would soon take their sound to a much wider audience.",
+      "sources": [
+        "https://www.thebeatles.com/i-want-hold-your-hand"
+      ],
+      "reviewed": true,
+      "archive_fallback_allowed": true,
+      "editorial_review": "2026-11-17: primary artist source read; date and facts verified; final framing is editorial. Archive fallback must show actual historical date."
     }
   ]
 }

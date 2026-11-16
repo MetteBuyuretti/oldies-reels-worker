@@ -55,6 +55,26 @@ class NewsProfileTests(unittest.TestCase):
         self.assertEqual(review.PROFILE['bed_lufs'],-24)
         self.assertIn('CC BY 4.0',review.CREDIT)
 
+class ContinuityStockTests(unittest.TestCase):
+    def test_seven_reviewed_backups_have_real_period_photo_coverage(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);ledger=review.Ledger(root/'ledger.json')
+            current=json.loads((review.ROOT/'english-reviewed-events.json').read_text())['events'][0]
+            ledger.data['events'][review.event_key(current)]={'status':'artifact_saved'}
+            report=review.stock_health('2026-11-18',ledger,root)
+            self.assertEqual(report['ready_unproduced_stories'],7)
+            self.assertFalse(report['rejected'])
+    def test_backup_is_date_labelled_archive_and_never_a_used_event(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);ledger=review.Ledger(root/'ledger.json')
+            events=json.loads((review.ROOT/'english-reviewed-events.json').read_text())['events']
+            for event in events[:2]:ledger.data['events'][review.event_key(event)]={'status':'artifact_saved'}
+            candidate,photos=review.select_candidate('2026-11-18',root,ledger)
+            self.assertEqual(candidate['date_context'],'archive')
+            self.assertNotIn(review.event_key(candidate),ledger.data['events'])
+            self.assertNotIn('on this day',candidate['dj_story_text'].lower())
+            self.assertEqual(len(photos),3)
+
 class PauseCleanupTests(unittest.TestCase):
     def test_only_detected_silent_samples_are_removed(self):
         import io, math, struct, wave

@@ -126,7 +126,9 @@ def recovered_provider_take(text):
         raise RuntimeError('Recovered provider artifact provenance mismatch')
     archive=requests.get(base+'/zip',headers=headers,timeout=60);archive.raise_for_status()
     with zipfile.ZipFile(io.BytesIO(archive.content)) as z:
-        info=z.getinfo('dj-story-en.mp3')
+        member=spec.get('member','dj-story-en.mp3')
+        if member not in {'dj-story-en.mp3','provider-story-original.wav'}: raise RuntimeError('Unexpected recovery audio member')
+        info=z.getinfo(member)
         if info.file_size>20*1024*1024: raise RuntimeError('Recovered provider source too large')
         raw=z.read(info)
     if hashlib.sha256(raw).hexdigest()!=spec['audio_sha256']:
@@ -179,7 +181,8 @@ def mix_music(clean, bed, target, duration):
     graph = (f'[0:a]asplit=2[voice][control];'
              f'[1:a]atrim=duration={duration},asetpts=PTS-STARTPTS,'
              f'loudnorm=I={PROFILE["bed_lufs"]}:TP=-3:LRA=6,'
-             f'afade=t=in:d=0.15,afade=t=out:st={duration-.7}:d=.7[bed];'
+             f'aresample=48000,aformat=channel_layouts=stereo,'
+             f'afade=t=in:d=0.15,afade=t=out:st={duration-.7}:d=0.7[bed];'
              f'[bed][control]sidechaincompress=threshold=0.06:ratio={PROFILE["duck_ratio"]}:'
              'attack=15:release=220[ducked];'
              '[voice][ducked]amix=inputs=2:duration=first:normalize=0,'
@@ -190,14 +193,17 @@ def mix_music(clean, bed, target, duration):
     subprocess.run(['ffmpeg', '-v', 'error', '-i', str(target), '-f', 'null', '-'], check=True, timeout=120)
 
 
-def select_candidate(day, directory):
+def select_candidate(day, directory, ledger=None):
     from zero_cost import research_candidates
     import worker, facebook_global_audio as audio, facebook_global_visuals as visuals
     failures = []
     reviewed = json.loads((ROOT / 'english-reviewed-events.json').read_text())['events']
-    curated = [c for c in reviewed if c.get('reviewed') is True and c.get('sources')
-               and str(c.get('event_date', ''))[5:] == day[5:]]
-    candidates = curated or research_candidates([], today=datetime.fromisoformat(day))
+    used=(ledger.data.get('events',{}) if ledger else {})
+    eligible=[c for c in reviewed if c.get('reviewed') is True and c.get('sources') and event_key(c) not in used]
+    dated=[c for c in eligible if str(c.get('event_date',''))[5:]==day[5:]]
+    archive=[c for c in eligible if c.get('archive_fallback_allowed') and c not in dated]
+    curated=dated+archive
+    candidates=curated or research_candidates([], today=datetime.fromisoformat(day))
     for candidate in candidates:
         try:
             headline = candidate.get('event_headline') if candidate in curated else None
@@ -205,6 +211,7 @@ def select_candidate(day, directory):
             if headline: candidate['event_headline'] = headline
             candidate['signoff_profile'] = 'calm'
             candidate['delivery_profile'] = PROFILE['id']
+            candidate['date_context']='on_this_day' if candidate['event_date'][5:]==day[5:] else 'archive'
             # Gate text and all reviewed photos before any provider request.
             story, _ = audio.build_dj_parts(candidate)
             audio.planned_video_seconds(audio.spoken_word_count(story) * 60 / PROFILE['target_wpm'] + 1.1 + 6.72)
@@ -216,16 +223,41 @@ def select_candidate(day, directory):
     raise RuntimeError('No eligible event with three reviewed period photos. ' + ' | '.join(failures)[:3000])
 
 
+def stock_health(day,ledger,output):
+    import facebook_global_audio as audio,facebook_global_visuals as visuals
+    ready=[];rejected=[]
+    for c in json.loads((ROOT/'english-reviewed-events.json').read_text())['events']:
+        if (not c.get('reviewed') or not c.get('sources') or event_key(c) in ledger.data.get('events',{})
+                or not (c.get('archive_fallback_allowed') or c['event_date'][5:]==day[5:])):continue
+        try:
+            c=dict(c,delivery_profile=PROFILE['id'])
+            story,_=audio.build_dj_parts(c)
+            audio.planned_video_seconds(audio.spoken_word_count(story)*60/PROFILE['target_wpm']+1.1+6.72)
+            visuals.select_period_photos(c)
+            ready.append({'artist':c['artist'],'event_date':c['event_date'],'kind':c['kind']})
+        except (ValueError,RuntimeError) as exc:rejected.append({'event':c['event_date'],'reason':str(exc)})
+    report={'checked_day':day,'ready_unproduced_stories':len(ready),'target':PROFILE['stock_target_days'],
+            'status':'ready' if len(ready)>=PROFILE['stock_warning_days'] else 'low_stock','items':ready,'rejected':rejected,
+            'note':'Reviewed text and period-photo stock, not pre-rendered videos. Archive items show their real date.'}
+    output.mkdir(parents=True,exist_ok=True);(output/'stock-health.json').write_text(json.dumps(report,indent=2))
+    summary=os.getenv('GITHUB_STEP_SUMMARY')
+    if summary:
+        with open(summary,'a') as f:f.write(f"\nEnglish news stock: {len(ready)} reviewed unused stories; status {report['status']}.\n")
+    if report['status']=='low_stock':print('::warning::English reviewed content stock is below three stories')
+    return report
+
+
 def build(day, output, ledger):
     import facebook_global_audio as audio, facebook_global_visuals as visuals
     from worker import draw_text_block, MAX_VIDEO_BYTES
     output.mkdir(parents=True, exist_ok=True)
+    stock_health(day,ledger,output)
     if day in ledger.data['days']:
         (output / 'status.json').write_text(json.dumps({'status': 'duplicate_blocked', 'day': day}))
         print('Duplicate day blocked; no provider request.'); return
     audio.selected_signoff({'signoff_profile': 'calm'})
     bed = licensed_music(output)
-    candidate, photos = select_candidate(day, output)
+    candidate, photos = select_candidate(day, output, ledger)
     key = event_key(candidate)
     if not ledger.reserve(day, key):
         (output / 'status.json').write_text(json.dumps({'status': 'duplicate_blocked', 'event': key}))

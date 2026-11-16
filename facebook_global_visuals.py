@@ -122,7 +122,7 @@ def make_scenes(candidate: dict, photos: list[Path], directory: Path, draw_text_
         raise RuntimeError('Facebook template requires three approved photographs')
     story, advert = candidate['dj_recording']['story_text'], candidate['dj_recording']['advert_text']
     screen_story = str(candidate.get('on_screen_story') or story.split(' — on this day')[0]).strip()
-    content = [(str(candidate.get('event_headline') or candidate['artist']), str(candidate['date_label']), 'ON THIS DAY IN MUSIC'),
+    content = [(str(candidate.get('event_headline') or candidate['artist']), str(candidate['date_label']), ('FROM THE MUSIC ARCHIVE' if candidate.get('date_context')=='archive' else 'ON THIS DAY IN MUSIC')),
                (str(candidate['artist']), screen_story, 'THE STORY'),
                ('Timeless music', 'Listen, enjoy, share.\noldiesradyo.com/en/', 'OLDIES RADYO • MUSIC & MEMORIES')]
     paths = []
