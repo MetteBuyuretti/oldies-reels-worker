@@ -154,7 +154,7 @@ def render(scenes: list[Path], target: Path, voiceover: Path, candidate: dict, m
     inputs, graph = [], []
     for index, (scene, length) in enumerate(zip(scenes, lengths)):
         inputs += ['-loop', '1', '-framerate', '30', '-t', f'{length:.3f}', '-i', str(scene)]
-        graph.append(f'[{index}:v]setsar=1,format=yuv420p,settb=AVTB,setpts=PTS-STARTPTS[v{index}]')
+        graph.append(f'[{index}:v]setsar=1,format=yuv420p,settb=AVTB,setpts=PTS-STARTPTS,fps=30[v{index}]')
     graph += [f'[v0][v1]xfade=transition=fade:duration={fade}:offset={first:.3f}[x]',
               f'[x][v2]xfade=transition=fade:duration={fade}:offset={second:.3f}[v]',
               '[3:a]aformat=sample_rates=48000:channel_layouts=stereo,highpass=f=70,lowpass=f=16000,loudnorm=I=-16:TP=-1.0:LRA=7,apad[voice]']
