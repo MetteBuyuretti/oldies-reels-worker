@@ -6,5 +6,6 @@
     "head_sha": "d9c8a73db9cd9be9011ff69c84d8c3d2840c845d",
     "audio_sha256": "14fb3f51c766a339fcea278765ed5b0a1c390ba32c7e3cc663b26b02a6771181",
     "story_sha256": "8d5426de50bd9f81bd93226a01eb92d4bab1a667258282d8c53f97792b4a67a1"
-  }
+  },
+  "duplicate_check": "Verify same-day final remains unchanged; 2026-11-17"
 }
