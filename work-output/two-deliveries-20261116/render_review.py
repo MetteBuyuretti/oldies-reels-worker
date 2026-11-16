@@ -6,7 +6,10 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parent / 'oldies-reels-repair'
+ROOT = next((p for p in (HERE.parent/'oldies-reels-repair', HERE.parents[1])
+             if (p/'facebook_global_audio.py').is_file()), None)
+if ROOT is None:
+    raise RuntimeError('Use the PR44 reviewed source checkout containing facebook_global_audio.py')
 sys.path.insert(0,str(ROOT))
 import facebook_global_audio as a
 import facebook_global_visuals as v

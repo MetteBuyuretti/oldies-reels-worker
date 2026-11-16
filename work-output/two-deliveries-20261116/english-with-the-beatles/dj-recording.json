@@ -1,0 +1,26 @@
+{
+  "version": "3.1-work2-candidate",
+  "brand_name": "Oldies Radyo",
+  "story_text": "Between tours and radio shows, the Beatles made their second album. With the Beatles reached British shops on November twenty-second, nineteen sixty-three, mixing Lennon–McCartney originals with favourites from their stage set. Imagine hearing that record for the very first time.",
+  "advert_text": "Oldies Radyo. Timeless music. Listen, enjoy, share.",
+  "story": {
+    "duration_seconds": 20.851,
+    "spoken_words_estimated": 43,
+    "estimated_wpm": 123.7,
+    "tempo_factor": 1.0
+  },
+  "advert": {
+    "duration_seconds": 6.72,
+    "cached_approved_recording": true
+  },
+  "advert_gap_seconds": 1.1,
+  "advert_start_seconds": 21.951,
+  "speedup_applied": false,
+  "background_music_added": false,
+  "advert_sha256": "1dc358ef0cea5a3a6d9fe20d9934358fed5ccd0009ba0838a60bba9f28bb9d9c",
+  "signoff_profile": "calm",
+  "signoff_evidence": "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/32#issuecomment-6509320201",
+  "signoff_source": "assets/facebook/en-warm-signoff-radyo-v3.mp3",
+  "signoff_approval": "accepted-station-ending-only",
+  "final_media_approved": false
+}

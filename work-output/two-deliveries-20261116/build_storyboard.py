@@ -2,10 +2,15 @@
 import hashlib
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path(__file__).resolve().parents[1] / 'oldies-reels-repair'
+HERE = Path(__file__).resolve().parent
+ROOT = next((p for p in (HERE.parent/'oldies-reels-repair', HERE.parents[1])
+             if (p/'facebook_global_audio.py').is_file()), None)
+if ROOT is None:
+    raise RuntimeError('Use the PR44 reviewed source checkout containing facebook_global_audio.py')
 sys.path.insert(0, str(ROOT))
 from worker import draw_text_block
 from facebook_global_visuals import select_period_photos, full_frame_canvas
@@ -19,7 +24,7 @@ STORY = ('Between tours and radio shows, the Beatles made their second album. '
          'mixing Lennon–McCartney originals with favourites from their stage set. '
          'Imagine hearing that record for the very first time.')
 c = {'id':'en-with-the-beatles-19631122-review-20261116', 'status':'PREPRODUCTION_VOICE_PENDING',
-     'created_at':'2026-11-16T19:10:00Z', 'artist':'The Beatles', 'event_date':'1963-11-22',
+     'created_at':datetime.now(timezone.utc).isoformat(), 'artist':'The Beatles', 'event_date':'1963-11-22',
      'event_headline':'With The Beatles', 'date_label':'22 November 1963', 'kind':'events',
      'dj_story_text':STORY, 'source_text':STORY, 'signoff_profile':'calm',
      'sources':['https://www.thebeatles.com/beatles',

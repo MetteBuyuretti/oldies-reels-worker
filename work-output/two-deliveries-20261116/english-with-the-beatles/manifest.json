@@ -1,0 +1,46 @@
+{
+  "voiceover-facebook-en.mp3": {
+    "bytes": 689516,
+    "sha256": "bdd260aaea453688fdca269e0b5e45a31dd4995ce49d1469ffc7514e9dcfcd42"
+  },
+  "dj-advert-en.mp3": {
+    "bytes": 26880,
+    "sha256": "1dc358ef0cea5a3a6d9fe20d9934358fed5ccd0009ba0838a60bba9f28bb9d9c"
+  },
+  "scene-2.jpg": {
+    "bytes": 272552,
+    "sha256": "20e2999c63584301f327931011ddc7d696654f575b00d854edd085b536c85945"
+  },
+  "candidate.json": {
+    "bytes": 13691,
+    "sha256": "5fe2e33e47a35d84b35d4091fb17f52f5091a1556bde86c7e11582ed46407741"
+  },
+  "scene-3.jpg": {
+    "bytes": 414430,
+    "sha256": "8a0f9d32995fd9063df8ae7bdf664aa53a2b55c5d7c2a448da3dc3a6481086a0"
+  },
+  "scene-1.jpg": {
+    "bytes": 246522,
+    "sha256": "e351d957fb51cb86857d36533eab95849222bfedeea524d68cedd395266f8bd5"
+  },
+  "dj-story-en.wav": {
+    "bytes": 1000890,
+    "sha256": "ed960e671cf2d1be7ff69023e4acacbde7976a813586ce2da1cb3835c3518f93"
+  },
+  "story.txt": {
+    "bytes": 283,
+    "sha256": "23de45454c5c6897d6cb1d022137b1ee7458ab4ede2f9109768d9c7574829596"
+  },
+  "storyboard.jpg": {
+    "bytes": 305423,
+    "sha256": "c92d61876495263a03ff30d793f5ee7db3d8df114c0912836379a505b727ec1f"
+  },
+  "dj-recording.json": {
+    "bytes": 1178,
+    "sha256": "d8d30ceffff109f85affcc465f8d141a545efa8cdbc94400bf78247d4222fa49"
+  },
+  "OldiesRadyo-WithTheBeatles-EN-Review-20261116.mp4": {
+    "bytes": 1944078,
+    "sha256": "25fb5ee531dc52b14308e62680658602b8f9619860dfed1bb836f303abfcd1d1"
+  }
+}
