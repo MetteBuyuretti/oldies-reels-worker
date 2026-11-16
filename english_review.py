@@ -127,9 +127,15 @@ def select_candidate(day, directory):
     from zero_cost import research_candidates
     import worker, facebook_global_audio as audio, facebook_global_visuals as visuals
     failures = []
-    for candidate in research_candidates([], today=datetime.fromisoformat(day)):
+    reviewed = json.loads((ROOT / 'english-reviewed-events.json').read_text())['events']
+    curated = [c for c in reviewed if c.get('reviewed') is True and c.get('sources')
+               and str(c.get('event_date', ''))[5:] == day[5:]]
+    candidates = curated or research_candidates([], today=datetime.fromisoformat(day))
+    for candidate in candidates:
         try:
+            headline = candidate.get('event_headline') if candidate in curated else None
             candidate = worker.apply_reel_language(candidate, 'en')
+            if headline: candidate['event_headline'] = headline
             candidate['signoff_profile'] = 'calm'
             # Gate text and all reviewed photos before any provider request.
             story, _ = audio.build_dj_parts(candidate)
@@ -174,6 +180,7 @@ def build(day, output, ledger):
             or target.stat().st_size > MAX_VIDEO_BYTES):
         raise RuntimeError('Mixed final film differs from verified duration/frame/size')
     caption = candidate.get('dj_script_en', '') + '\n\n' + CREDIT + '\nMusic source: ' + MUSIC['source']
+    for source in candidate.get('sources', []): caption += '\nEvent source: ' + source
     for p in candidate['image_credits']:
         caption += '\nPhoto: ' + p['creator'] + ' — ' + p['license'] + ' — ' + p['source']
     (output / 'caption.txt').write_text(caption, encoding='utf-8')
