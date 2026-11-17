@@ -100,9 +100,9 @@ def publish(output,ledger,day):
     require_policy();record=ledger.data.get('days',{}).get(day)
     if not record:raise RuntimeError('Daily render ledger entry is missing')
     prior=record.get('facebook',{})
-    if prior.get('publication_verified'):
+    if prior.get('publication_verified') or prior.get('state') in {'publication_requested','uploaded_unverified'}:
         (output/'facebook-publication.json').write_text(json.dumps(dict(prior,duplicate_blocked=True),indent=2))
-        print('Facebook daily publication already verified; no upload');return
+        print('Facebook already published or awaiting verification; no repeat upload');return
     manifest=json.loads((output/'manifest.json').read_text()) if (output/'manifest.json').exists() else prepare_existing(output,ledger,day)
     candidate,video=verify_final(output,manifest)
     content_id='oldies-news-'+review.event_key(candidate)[:48]
@@ -123,7 +123,14 @@ def publish(output,ledger,day):
     (output/'facebook-publication.json').write_text(json.dumps(out,indent=2))
     record['facebook']=out;ledger.data['events'][record['event']]['facebook']=out;ledger.save()
     print(json.dumps({k:out.get(k) for k in ['state','video_id','permalink','publication_verified']}))
-    if not out['publication_verified']:raise RuntimeError('Facebook upload was not verified as completed publication; keep receipt for bounded follow-up')
+    if not out['publication_verified']:
+        payload=result.get('data',result)
+        status=payload.get('status',{})
+        processing=(payload.get('success') is True and payload.get('dry_run') is not True
+                    and bool(re.fullmatch(r'[0-9_]+',out['video_id']))
+                    and status.get('video_status') in {'processing','ready'})
+        if not processing:raise RuntimeError('Facebook did not confirm a real upload; inspect saved receipt')
+        print('Facebook accepted the upload and is processing it; daily continuity monitor must verify publication, without another upload')
 
 
 def main():

@@ -1,4 +1,6 @@
 import unittest
+import tempfile
+from pathlib import Path
 import english_review as review
 import facebook_news_publish as publish
 
@@ -20,6 +22,14 @@ class EraMusicTests(unittest.TestCase):
         self.assertEqual(track['style_decade'],1980)
 
 class PublicationReceiptTests(unittest.TestCase):
+    def test_pending_publication_never_uploads_again(self):
+        with tempfile.TemporaryDirectory() as d:
+            ledger=review.Ledger(Path(d)/'ledger.json')
+            ledger.data['days']['2026-11-17']={'facebook':{'state':'uploaded_unverified','video_id':'12345','publication_verified':False}}
+            publish.publish(Path(d),ledger,'2026-11-17')
+            receipt=__import__('json').loads((Path(d)/'facebook-publication.json').read_text())
+            self.assertTrue(receipt['duplicate_blocked'])
+            self.assertFalse(receipt['publication_verified'])
     def test_processing_is_not_completed_publication(self):
         r=publish.classify({'success':True,'video_id':'12345','status':{'video_status':'processing','publishing_phase':{'status':'complete'}}})
         self.assertFalse(r['publication_verified'])
