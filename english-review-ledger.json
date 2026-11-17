@@ -16,12 +16,40 @@
         "seconds": 29.833333
       },
       "facebook": {
-        "state": "publication_requested",
+        "state": "uploaded_unverified",
         "publication_verified": false,
         "content_id": "oldies-news-1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0",
         "sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-17-the-beatles-44032001689-1.mp4",
-        "run_id": "44032001689"
+        "run_id": "44032001689",
+        "video_id": "1515026953796803",
+        "permalink": "",
+        "remote_response": {
+          "success": true,
+          "dry_run": false,
+          "content_id": "oldies-news-1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0",
+          "video_id": "1515026953796803",
+          "post_id": "1515026953796803",
+          "post_url": "/reel/1515026953796803/",
+          "status": {
+            "video_status": "processing",
+            "processing_progress": 0,
+            "uploading_phase": {
+              "status": "complete",
+              "bytes_transferred": 1970521
+            },
+            "processing_phase": {
+              "status": "in_progress"
+            },
+            "publishing_phase": {
+              "status": "not_started"
+            },
+            "copyright_check_status": {
+              "status": "in_progress"
+            }
+          },
+          "media_sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190"
+        }
       }
     }
   },
@@ -42,12 +70,40 @@
         "seconds": 29.833333
       },
       "facebook": {
-        "state": "publication_requested",
+        "state": "uploaded_unverified",
         "publication_verified": false,
         "content_id": "oldies-news-1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0",
         "sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-17-the-beatles-44032001689-1.mp4",
-        "run_id": "44032001689"
+        "run_id": "44032001689",
+        "video_id": "1515026953796803",
+        "permalink": "",
+        "remote_response": {
+          "success": true,
+          "dry_run": false,
+          "content_id": "oldies-news-1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0",
+          "video_id": "1515026953796803",
+          "post_id": "1515026953796803",
+          "post_url": "/reel/1515026953796803/",
+          "status": {
+            "video_status": "processing",
+            "processing_progress": 0,
+            "uploading_phase": {
+              "status": "complete",
+              "bytes_transferred": 1970521
+            },
+            "processing_phase": {
+              "status": "in_progress"
+            },
+            "publishing_phase": {
+              "status": "not_started"
+            },
+            "copyright_check_status": {
+              "status": "in_progress"
+            }
+          },
+          "media_sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190"
+        }
       }
     }
   },
