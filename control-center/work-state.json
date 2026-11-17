@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-17T06:42:20.584Z",
+  "updated_at": "2026-11-17T07:02:20.583Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1391,17 +1391,20 @@
         "wp16_live_queue_and_last3_ig_read",
         "youtube_private_mismatch_and_public_channel_inventory_verified",
         "20261115_live_YT_receipt_and_exact_IG_source_binding_repair_14_native_PHP_fixtures",
-        "20261115_main_based_EN_consumer_integration_PR44_56_Python_checks_gates_preserved"
+        "20261115_main_based_EN_consumer_integration_PR44_56_Python_checks_gates_preserved",
+        "master-resumption-newer-en-facebook-jingle-ig-and-theme-mapping-reconciled-20261117"
       ],
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/c480a0abde686fd995091736b61d5960bd5159ac/work-output/general-audit-20261114/MASTER-CHECKPOINT-20261115.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/f00dd1f0a1ddfaacc4e8c3d9eb395e65bc9e083d/work-output/reels-delivery-repair-20261115/DELIVERY.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/44"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/44",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-visual-refresh-20261115/part-003-theme-mapping.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-live-20261117/VERIFIED.md"
       ],
       "title": "Watchdog 14 Kasım genel plan — ilk iki P0 uygulaması",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-15T19:22:40.925Z",
-      "next_step": "PR44 bağımsız kod incelemesi ve gerçek güncel EN final-film QC'si; karantina/yayın için mevcut onay sınırı. IGson3 için exact source/platform receipt kanıtı eksik; başlıktan eski taslağa bağlama veya hamvideoyafallback yok. Kod/test/kabul edilmiş sesler tekrar üretilmeyecek.",
+      "last_checkpoint": "2026-11-17T07:02:20.583Z",
+      "next_step": "17Kasım EN Facebook VERIFIED.md ve güncel reels-en kaydı, 14-16Kasım eski EN-preproduction anlatımından ileridedir; kabul edilmiş bugünkü filmi tekrar üretme. IGson3 finalMP4/media_url engeli ayrı instagram-youtube-final-source kaydında sürer; aynıGETleri tekrarlama. Jingle gerçek yeni pair sürekliliği+dinleme açık; kurulu finalizerı tekrar kurma. #43 part-003 canlı tema haritası artık mevcut; ilk eksik staging kaynağından devam. PR44 bütün kapsamı/TR kapısı bu uzlaştırmayla kapanmadı.",
       "note": "15.11.2026 | 21:30 TSİ. WP16 legacy kayıt; son3IG URL burada yok. TheDoors youtube published yerel kaydına rağmen canlı sayfada private. Windsor Free hesap sayısı nedeniyle read engelli; browser fallback başarılı. Remote0/yeniCodex0/üretim0/yayın0. Antigravity/Etsy kapsam dışı. WATCHDOG ayrı alım/kabulü iddia edilmedi.\n15.11.2026 | 22:20 TSİ MASTER uygulaması: mevcut WP YouTubePublisher+ReelsBridge2.3.8-YT9-RECEIPT canlı düzeltildi. Upload/requested visibility/simulation != verified publication; exact IGid+permalink+finalURL bağı zorunlu. Native PHP lint+14fixture PASS; canlı16kayıt korunuyor, eskiDoors uploaded_unverified/publicationfalse/sourcefalse/visibilityunknown. PR36 Englishconsumer yalnızgerekliENhunklarıyla güncelmainbazlı PR44'e taşındı;56PythonPASS; genericTRfiller preexisting regresyonu düzeltildi. Eskiworkflowguard/saat/TRdurationgerialınmadı. PR44DRAFT/unmerged; gerçekfinalmedya+bağımsızQC/yayınkabulü yok. YeniTTS/video/paidAPI/publish/scheduler0. AyrıWDalımıvar sayılmadı.",
       "control_time": "Bu aktif birimin kanıtı kaydedildi; sonraki aktif birimde ilk eksik adımdan devam. Arka plan/otomatik tetikleme yok."
     },
@@ -1410,19 +1413,21 @@
       "title": "Müzik Haberleri — kalıcı kart görseli/Elvis blur-fill ve aylık banner yenileme",
       "owner": "WORK MASTER",
       "support": "ChatGPT WordPress oturumu; WATCHDOG QA; kurucu nihai onay",
-      "status": "queued",
+      "status": "checkpointed",
       "completed_units": [
         "part-001-read-only-discovery-and-design-brief-20261115",
-        "part-002-implementation-instruction-20261116"
+        "part-002-implementation-instruction-20261116",
+        "part-003-live-markup-stylesheet-elvis-and-historical-theme-source-mapping-20261117"
       ],
-      "last_checkpoint": "2026-11-16T00:00:00Z",
-      "next_step": "WORK MASTER'ın gerçek ALINDI teyidini ve tema dosya haritasını #43 altında bekle. Tema v7.3.7.1 kaynaklarını, #630 Query Loop, Ekim/Kasım arşiv bileşeni ve Elvis gerçek medya kök nedenini bul; part-003-theme-mapping.md üret. Önce staging + 390px QA; WATCHDOG ve kurucu onayı olmadan canlıya alma.",
-      "note": "15-16 Kas 2026: initial discovery part-001 + implementation plan part-002 git recorded; #43 ve Ana Kumanda #32 yorumları yazıldı. Canlı değişiklik yok. Başka oturumun görevi fiilen aldığı doğrulanmadı.",
+      "last_checkpoint": "2026-11-17T07:02:20.583Z",
+      "next_step": "ALINDI: part-003 canlı DOM/CSS + eski uygulanmış kaynak eşlemesi tamam. #630 eski Gutenberg Query Loop canlı render kaynağı değil; TR/EN news-archive-page/news-card-grid kullanıyor. Kurulu page-muzik-haberleri.php + functions.php oldies_latest_news_items + style.css + inc/ai-english.php güncel hash/yedeklerini oku; eski 25Ekim kaynağı canlıyla eşit varsayma. Ardından haber sayfasıyla sınırlı blur-fill+iki ayrı Elvis kaynağı ve TR/EN dinamik görselli ay banner staging;390px QA. Güncel Bu Ay/Geçmiş Aylar tercihi geçerli. Önceki staging/QA/kurucu canlı kabul sınırı sürer.",
+      "note": "15-16 Kas 2026: initial discovery part-001 + implementation plan part-002 git recorded; #43 ve Ana Kumanda #32 yorumları yazıldı. Canlı değişiklik yok. Başka oturumun görevi fiilen aldığı doğrulanmadı.\n17 Kasım 2026 WORK MASTER mevcut oturum: gerçek devam alındı. Canlı tema7.3.7.1, TR630 ve EN1714, Elvis4880/4881 medya4568(1000x1200), ayrıca eski ElvisWeek cover kartı doğrulandı. Live .news-card img240px/mobil220px; 15Kasım Elvis contain+koyu boşluk, eski ElvisWeek cover ayrı. Tema kaynak yolunu eski uygulanmış repo dosyasıyla eşledik. Canlı değişiklik/üretim0.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/43",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-visual-refresh-20261115/part-001-intake.md",
         "https://oldiesradyo.com/muzik-haberleri/",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-visual-refresh-20261115/part-002-implementation-brief.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-visual-refresh-20261115/part-002-implementation-brief.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/news-visual-refresh-20261115/part-003-theme-mapping.md"
       ]
     },
     {
