@@ -32,3 +32,8 @@ Varolan6adeb7788b448191bc35ab09148fc565görevi05:15ve15:15Istanbulolarakgüncell
 Tam7günkapsamaolmadığıaçık; mevcutbakımın gerçekyeniSanatçı/fotoçalışmasıgerekiyor. ÜcretsizTTSkotasıvegelecekdoğalscheduleçalışmasıvarsayılmaz. Tekbaşarıçokgünsüreklilikdeğildir. WDbuoturumdeğildir; bağımsızkabuluuydurulmaz.
 Rollbackbase625ad5ae2262acbb4a996b06e1e9265c753200cc. YalnızbuTeslimin seçici/publisher/policy/workflowhunklarıgeri alınır; kabul edilmişsesler,görseller,Facebookledgerı ve diğerplatformlardeğiştirilmez. Bakımgörevininöncekisabahpromptukayıtlıtarihçededir. Yeniücret/secret/billing/PC/RemoteCommander/Antigravity/Etsydeğişikliği0.
 İlkkontrol:18Kasım05:15hazırlık;14:23producer;15:15yayınkanıtı. Buakışoturmadanbaşkageliştirmeyegeçilmez.
+
+## GERÇEK UZAK GİRİŞ SONUCU — 17.11.2026 16:35 TSİ (UTC+3)
+Main97aa45636f5a3eaed293da020c734c5335402e7c gerçek workflow44093881446 tamamlandı:SUCCESS. Native GitHub28test/0.080s PASS; log açıkça `Duplicate day blocked; no provider request.` ve `Facebook already published or awaiting verification; no repeat upload` diyor. Bugünkü1515026953796803yayınına ikinci yükleme, yeniTTS veya render yapılmadı. Bu kanıt orchestration+mükerrer engelidir;18Kasım doğal üretim/yeniolay finalfilmi veya çokgünsüreklilik PASS değildir.
+WP5176 yeniden okundu:private,TDIM ve05:15/14:23/15:15saatleri+MASTERrolü mevcut. Bakımgörevi readbackenabled ve18Kasım05:15sonrakikoşu. Yeni bağımsızWDkabulü yok.
+Koşu:https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44093881446
