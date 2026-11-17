@@ -14,6 +14,14 @@
         "source_run": 43977060028,
         "new_provider_calls": 0,
         "seconds": 29.833333
+      },
+      "facebook": {
+        "state": "publication_requested",
+        "publication_verified": false,
+        "content_id": "oldies-news-1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0",
+        "sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190",
+        "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-17-the-beatles-44032001689-1.mp4",
+        "run_id": "44032001689"
       }
     }
   },
@@ -32,6 +40,14 @@
         "source_run": 43977060028,
         "new_provider_calls": 0,
         "seconds": 29.833333
+      },
+      "facebook": {
+        "state": "publication_requested",
+        "publication_verified": false,
+        "content_id": "oldies-news-1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0",
+        "sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190",
+        "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-17-the-beatles-44032001689-1.mp4",
+        "run_id": "44032001689"
       }
     }
   },
