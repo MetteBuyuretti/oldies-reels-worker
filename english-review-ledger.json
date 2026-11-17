@@ -16,14 +16,14 @@
         "seconds": 29.833333
       },
       "facebook": {
-        "state": "uploaded_unverified",
-        "publication_verified": false,
+        "state": "published",
+        "publication_verified": true,
         "content_id": "oldies-news-1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0",
         "sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-17-the-beatles-44032001689-1.mp4",
         "run_id": "44032001689",
         "video_id": "1515026953796803",
-        "permalink": "",
+        "permalink": "https://www.facebook.com/reel/1515026953796803",
         "remote_response": {
           "success": true,
           "dry_run": false,
@@ -49,6 +49,16 @@
             }
           },
           "media_sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190"
+        },
+        "verification": {
+          "method": "authenticated_browser_public_reel_playback",
+          "verified_at": "2026-11-17T06:42:19.287Z",
+          "page_name": "Oldies Radyo",
+          "audience": "public",
+          "video_duration_seconds": 26.166666,
+          "ready_state": 4,
+          "observed_playback_seconds": 17.373977,
+          "permalink": "https://www.facebook.com/reel/1515026953796803"
         }
       }
     }
@@ -70,14 +80,14 @@
         "seconds": 29.833333
       },
       "facebook": {
-        "state": "uploaded_unverified",
-        "publication_verified": false,
+        "state": "published",
+        "publication_verified": true,
         "content_id": "oldies-news-1150617d223fd3f5851424bb054f07a21a0cd7cd09b524f0",
         "sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-17-the-beatles-44032001689-1.mp4",
         "run_id": "44032001689",
         "video_id": "1515026953796803",
-        "permalink": "",
+        "permalink": "https://www.facebook.com/reel/1515026953796803",
         "remote_response": {
           "success": true,
           "dry_run": false,
@@ -103,6 +113,16 @@
             }
           },
           "media_sha256": "d8f491ee7aba46bc53793ec98bf65231b6352707769816260ab0ece1161f8190"
+        },
+        "verification": {
+          "method": "authenticated_browser_public_reel_playback",
+          "verified_at": "2026-11-17T06:42:19.287Z",
+          "page_name": "Oldies Radyo",
+          "audience": "public",
+          "video_duration_seconds": 26.166666,
+          "ready_state": 4,
+          "observed_playback_seconds": 17.373977,
+          "permalink": "https://www.facebook.com/reel/1515026953796803"
         }
       }
     }
