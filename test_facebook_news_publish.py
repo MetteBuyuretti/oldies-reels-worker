@@ -22,6 +22,17 @@ class EraMusicTests(unittest.TestCase):
         self.assertEqual(track['style_decade'],1980)
 
 class PublicationReceiptTests(unittest.TestCase):
+    def test_old_bootstrap_cannot_be_published_on_another_day(self):
+        with tempfile.TemporaryDirectory() as d, __import__('unittest.mock').mock.patch.object(publish,'POLICY',{'bootstrap':{'day':'2000-01-01'}}):
+            with self.assertRaisesRegex(RuntimeError,'differs from today'):
+                publish.verify_daily_source(Path(d),{'production_day':'2000-01-01'})
+
+    def test_new_day_film_needs_saved_source_evidence(self):
+        day=publish.datetime.now(publish.ZoneInfo('Europe/Istanbul')).date().isoformat()
+        with tempfile.TemporaryDirectory() as d, __import__('unittest.mock').mock.patch.object(publish,'POLICY',{'bootstrap':{}}):
+            with self.assertRaisesRegex(RuntimeError,'Missing saved exact-day'):
+                publish.verify_daily_source(Path(d),{'production_day':day,'candidate':{}})
+
     def test_pending_publication_never_uploads_again(self):
         with tempfile.TemporaryDirectory() as d:
             ledger=review.Ledger(Path(d)/'ledger.json')

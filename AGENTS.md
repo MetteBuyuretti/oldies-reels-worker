@@ -3,6 +3,7 @@
 Bu repository üzerinde çalışan ChatGPT Work / Codex / başka bir ajan, uzun bir göreve başlamadan önce aşağıdaki kuralları uygular.
 
 ## Zorunlu başlangıç
+0. `MASTER_OPERATING_DIRECTIVE.md` içindeki güncel kurucu rol/öncelik talimatını ve işaret ettiği onaylı anayasayı oku.
 1. Önce `control-center/work-state.json` dosyasını oku.
 2. İlgili görev kaydı varsa tamamlanmış adımları tekrar yapma.
 3. `next_step` alanından veya ilk tamamlanmamış adımdan devam et.

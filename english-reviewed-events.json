@@ -119,6 +119,26 @@
       "reviewed": true,
       "archive_fallback_allowed": true,
       "editorial_review": "2026-11-17: primary artist source read; date and facts verified; final framing is editorial. Archive fallback must show actual historical date."
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-11-18",
+      "kind": "silver_disc_awards",
+      "event_headline": "SILVER AWARDS AT EMI HOUSE",
+      "on_screen_story": "London, 18 November 1963. Silver awards celebrated the Beatles’ first two albums and their breakthrough year.",
+      "dj_story_text": "November eighteenth, nineteen sixty-three. At EMI House in London, the Beatles collected silver awards for their first two albums. Singles and EP honours followed at the same celebration. Liverpool's four musicians were turning a breakthrough year into a remarkable collection of records and recognition.",
+      "source_text": "At EMI House in London the Beatles received silver album awards; their singles and EP were also recognised.",
+      "sources": [
+        "https://www.thisdayinmusic.com/on-this-day-in-music-november-18/"
+      ],
+      "reviewed": true,
+      "editorial_review": "WORK MASTER 17 Nov 2026: exact TDIM event14581 read; English copy paraphrases factual event, no invented quote or claim of album release on this day. Three existing reviewed1963 originals are available. Primary event month/day and source fingerprint are bound before TTS.",
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "14581",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-18/",
+        "source_sha256": "d07c1378c59cdc54ff02059c2fc33426aa1fa4d2d3855f8d154b3eed15201b03"
+      }
     }
   ]
 }

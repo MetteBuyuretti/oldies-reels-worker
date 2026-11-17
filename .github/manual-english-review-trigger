@@ -1,1 +1,5 @@
-{"publish_existing":true,"purpose":"Owner approved permanent 25-30s format and daily Facebook upload; publish accepted existing news with correct 1960s instrumental, no new TTS"}
+{
+  "publish_existing": false,
+  "day": "2026-11-17",
+  "purpose": "Owner-authorized exact-day TDIM integration: live orchestration duplicate-only verification; today already published, no new provider/render/upload"
+}

@@ -210,24 +210,25 @@ def mix_music(clean, bed, target, duration):
 
 
 def select_candidate(day, directory, ledger=None):
-    from zero_cost import research_candidates
     import worker, facebook_global_audio as audio, facebook_global_visuals as visuals
+    import tdim_daily
     failures = []
     reviewed = json.loads((ROOT / 'english-reviewed-events.json').read_text())['events']
     used=(ledger.data.get('events',{}) if ledger else {})
     eligible=[c for c in reviewed if c.get('reviewed') is True and c.get('sources') and event_key(c) not in used]
-    dated=[c for c in eligible if str(c.get('event_date',''))[5:]==day[5:]]
-    archive=[c for c in eligible if c.get('archive_fallback_allowed') and c not in dated]
-    curated=dated+archive
-    candidates=curated or research_candidates([], today=datetime.fromisoformat(day))
+    entries=tdim_daily.fetch_events(day,directory)
+    candidates=[c for c in eligible if any(tdim_daily.matches(c,e,day) for e in entries)]
+    candidates.sort(key=lambda c: (int(c['event_date'][:4])//10*10 not in (1980,1990),
+                                  -int(c.get('editorial_priority',0))))
     for candidate in candidates:
         try:
-            headline = candidate.get('event_headline') if candidate in curated else None
+            candidate = dict(candidate)
+            headline = candidate.get('event_headline')
             candidate = worker.apply_reel_language(candidate, 'en')
             if headline: candidate['event_headline'] = headline
             candidate['signoff_profile'] = 'calm'
             candidate['delivery_profile'] = PROFILE['id']
-            candidate['date_context']='on_this_day' if candidate['event_date'][5:]==day[5:] else 'archive'
+            candidate['date_context']='on_this_day'
             # Gate text and all reviewed photos before any provider request.
             story, _ = audio.build_dj_parts(candidate)
             audio.planned_video_seconds(audio.spoken_word_count(story) * 60 / PROFILE['target_wpm'] + 1.1 + 6.72)
@@ -236,15 +237,19 @@ def select_candidate(day, directory, ledger=None):
             return candidate, photos
         except (RuntimeError, ValueError) as exc:
             failures.append(f"{candidate.get('artist')}: {exc}")
-    raise RuntimeError('No eligible event with three reviewed period photos. ' + ' | '.join(failures)[:3000])
+    raise RuntimeError('No reviewed exact-day This Day in Music story with three reviewed period photos. '
+                       'Daily editorial maintenance must prepare it; archive substitution is disabled. '
+                       + ' | '.join(failures)[:3000])
 
 
 def stock_health(day,ledger,output):
     import facebook_global_audio as audio,facebook_global_visuals as visuals
+    import tdim_daily
+    from datetime import timedelta
     ready=[];rejected=[]
     for c in json.loads((ROOT/'english-reviewed-events.json').read_text())['events']:
         if (not c.get('reviewed') or not c.get('sources') or event_key(c) in ledger.data.get('events',{})
-                or not (c.get('archive_fallback_allowed') or c['event_date'][5:]==day[5:])):continue
+                or (c.get('daily_source') or {}).get('provider')!='thisdayinmusic.com'):continue
         try:
             c=dict(c,delivery_profile=PROFILE['id'])
             story,_=audio.build_dj_parts(c)
@@ -252,14 +257,20 @@ def stock_health(day,ledger,output):
             visuals.select_period_photos(c)
             ready.append({'artist':c['artist'],'event_date':c['event_date'],'kind':c['kind']})
         except (ValueError,RuntimeError) as exc:rejected.append({'event':c['event_date'],'reason':str(exc)})
-    report={'checked_day':day,'ready_unproduced_stories':len(ready),'target':PROFILE['stock_target_days'],
-            'status':'ready' if len(ready)>PROFILE['stock_warning_days'] else 'low_stock','items':ready,'rejected':rejected,
-            'note':'Reviewed text and period-photo stock, not pre-rendered videos. Archive items show their real date.'}
+    horizon=[(datetime.fromisoformat(day)+timedelta(days=i)).date().isoformat()
+             for i in range(PROFILE['stock_target_days'])]
+    coverage={d:[c for c in ready if c['event_date'][5:]==d[5:]] for d in horizon}
+    covered=sum(bool(items) for items in coverage.values())
+    report={'checked_day':day,'ready_unproduced_stories':len(coverage[day]),
+            'ready_calendar_days':covered,'target':PROFILE['stock_target_days'],
+            'status':'ready' if covered>PROFILE['stock_warning_days'] and coverage[day] else 'low_stock',
+            'items':ready,'coverage':coverage,'missing_days':[d for d in horizon if not coverage[d]],'rejected':rejected,
+            'note':'Calendar coverage of reviewed exact-day TDIM text and three period photos. Live source binding is rechecked before TTS. Archive backups do not count.'}
     output.mkdir(parents=True,exist_ok=True);(output/'stock-health.json').write_text(json.dumps(report,indent=2))
     summary=os.getenv('GITHUB_STEP_SUMMARY')
     if summary:
-        with open(summary,'a') as f:f.write(f"\nEnglish news stock: {len(ready)} reviewed unused stories; status {report['status']}.\n")
-    if report['status']=='low_stock':print('::warning::English reviewed content stock is below three stories')
+        with open(summary,'a') as f:f.write(f"\nEnglish news stock: {covered}/7 calendar days; today {len(coverage[day])}; status {report['status']}.\n")
+    if report['status']=='low_stock':print('::warning::Exact-day English content coverage is low; editorial maintenance required')
     return report
 
 

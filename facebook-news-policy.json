@@ -25,5 +25,17 @@
     "sha256": "c4bd5c60c5e77ab0dc012ff51d2f08baf73e9a169e174b3e9e7485ca8c9ab71c"
   },
   "wordpress_record_id": 5176,
-  "wordpress_record_url": "https://oldiesradyo.com/2026/11/17/oldies-facebook-reels-kalici-yayin-kurallari/"
+  "wordpress_record_url": "https://oldiesradyo.com/2026/11/17/oldies-facebook-reels-kalici-yayin-kurallari/",
+  "daily_source": {
+    "provider": "thisdayinmusic.com",
+    "exact_calendar_day_required": true,
+    "archive_substitution_allowed": false,
+    "source_recheck_before_tts": true,
+    "editorial_owner": "WORK MASTER",
+    "stock_target_calendar_days": 7,
+    "maintenance_times": [
+      "05:15",
+      "15:15"
+    ]
+  }
 }

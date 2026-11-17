@@ -66,6 +66,7 @@ def prepare_existing(output,ledger,day):
 
 def verify_final(output,manifest):
     require_policy();candidate=manifest['candidate'];video=output/'oldies-english-licensed-master.mp4'
+    verify_daily_source(output,manifest)
     if review.digest(video)!=manifest['sha256']:raise RuntimeError('Final MP4 hash mismatch')
     audio.validate_media(output/'clean-dj-review.mp4',candidate)
     audio.validate_recording(output/'clean-dj-review.mp4',candidate);visuals.validate_publish(candidate)
@@ -78,6 +79,22 @@ def verify_final(output,manifest):
     if not POLICY['min_seconds']<=duration<=POLICY['max_seconds'] or (int(stream['width']),int(stream['height']))!=(1080,1920):
         raise RuntimeError('Final duration or format violates permanent policy')
     return candidate,video
+
+
+def verify_daily_source(output,manifest):
+    """The accepted bootstrap stays intact; subsequent days require exact-day TDIM."""
+    day=manifest.get('production_day','')
+    if day!=datetime.now(ZoneInfo('Europe/Istanbul')).date().isoformat():
+        raise RuntimeError('Final film production day differs from today')
+    if day==POLICY.get('bootstrap',{}).get('day'):return
+    import tdim_daily
+    candidate=manifest['candidate']
+    path=output/'daily-source.json'
+    if not path.is_file():raise RuntimeError('Missing saved exact-day source evidence')
+    source=json.loads(path.read_text())
+    if (source.get('production_day')!=day or candidate.get('date_context')!='on_this_day'
+            or not any(tdim_daily.matches(candidate,e,day) for e in source.get('events',[]))):
+        raise RuntimeError('Final film is not bound to today and its verified This Day in Music event')
 
 
 def classify(result):
