@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "selection": "event-year decade; modern royalty-free instrumental in historical style, not an unlicensed original hit",
+  "tracks": {
+    "1950": {
+      "title": "Sock Hop",
+      "creator": "Kevin MacLeod",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100495",
+      "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Sock%20Hop.mp3",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "sha256": "e61036fd4b90724ed194fbd6947106dbb0f0aaa031d92726f93eed08349ebe2e",
+      "tempo_bpm": 124,
+      "instrumental": true,
+      "era_style": "1950s rock and roll",
+      "style_decade": 1950,
+      "recording_is_period_original": false
+    },
+    "1960": {
+      "title": "Surf Shimmy",
+      "creator": "Kevin MacLeod",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1700018",
+      "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Surf%20Shimmy.mp3",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "sha256": "932424252801c51a6385c1339ebb57571cee76eda6431eaa338dcacb677c4d94",
+      "tempo_bpm": 170,
+      "instrumental": true,
+      "era_style": "1960s surf rock",
+      "style_decade": 1960,
+      "recording_is_period_original": false
+    },
+    "1970": {
+      "title": "Disco Medusae",
+      "creator": "Kevin MacLeod",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1500041",
+      "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Disco%20Medusae.mp3",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "sha256": "1b54c9d99110f5ad3e8ced322681f0f81d18c919434e55375b40dc75c8bb09f3",
+      "tempo_bpm": 115,
+      "instrumental": true,
+      "era_style": "1970s disco",
+      "style_decade": 1970,
+      "recording_is_period_original": false
+    },
+    "1980": {
+      "title": "Newer Wave",
+      "creator": "Kevin MacLeod",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN2000024",
+      "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Newer%20Wave.mp3",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "sha256": "ef26589e066cc2f60f9523f8a3c17e543f57fc9e1145efc3bc46f7e5db92d0bc",
+      "tempo_bpm": 110,
+      "instrumental": true,
+      "era_style": "1980s synth pop",
+      "style_decade": 1980,
+      "recording_is_period_original": false
+    },
+    "1990": {
+      "title": "Street Party",
+      "creator": "Kevin MacLeod",
+      "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1700087",
+      "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Street%20Party.mp3",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "sha256": "b49adaacb7ed1050f39fc09ff9190922097af3a2824dc8479b4cdbf24121f788",
+      "tempo_bpm": 114,
+      "instrumental": true,
+      "era_style": "1990s TV-party groove",
+      "style_decade": 1990,
+      "recording_is_period_original": false
+    }
+  }
+}

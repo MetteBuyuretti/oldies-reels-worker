@@ -1,0 +1,29 @@
+{
+  "id": "oldies-facebook-news-v1",
+  "approved_at": "2026-11-17T09:26:03.933617+03:00",
+  "approved_by": "Mete, owner",
+  "owner_approved": true,
+  "live_facebook_enabled": true,
+  "style": "lively, medium-to-upbeat; accepted news-upbeat-v1",
+  "min_seconds": 25,
+  "max_seconds": 30,
+  "music_era_range": [
+    1950,
+    1990
+  ],
+  "instrumental_only": true,
+  "license_policy": "commercial reuse allowed; mandatory credit; do not claim modern recordings were made in the historical decade",
+  "speech_music_balance": "speech intelligible, clearly audible era bed, sidechain ducking",
+  "daily_time": "14:23",
+  "timezone": "Europe/Istanbul",
+  "wordpress_site": "https://oldiesradyo.com",
+  "approval_reference": "https://chatgpt.com/library?file_id=libfile_33d87ff9eda08191b898bfb212a602f6&account_id=personal",
+  "bootstrap": {
+    "day": "2026-11-17",
+    "artifact_id": 14282157996,
+    "run_id": 43980617825,
+    "sha256": "c4bd5c60c5e77ab0dc012ff51d2f08baf73e9a169e174b3e9e7485ca8c9ab71c"
+  },
+  "wordpress_record_id": 5176,
+  "wordpress_record_url": "https://oldiesradyo.com/2026/11/17/oldies-facebook-reels-kalici-yayin-kurallari/"
+}

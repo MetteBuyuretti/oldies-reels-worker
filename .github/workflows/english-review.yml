@@ -1,4 +1,4 @@
-name: Oldies daily English review
+name: Oldies daily English Facebook Reel
 on:
   workflow_dispatch:
   push:
@@ -28,13 +28,18 @@ jobs:
           sudo apt-get install -y ffmpeg fonts-dejavu-core
           pip install -r requirements.txt
       - name: Validate orchestration
-        run: python -m unittest test_english_review -v
+        run: python -m unittest test_english_review test_facebook_news_publish -v
       - name: Prepare one licensed English review
         env:
           GEMINI_API_KEY: ${{ secrets.OLDIES_EN_GEMINI_API_KEY }}
           GH_TOKEN: ${{ github.token }}
           OLDIES_PREVIEW_ONLY: 'true'
-        run: python english_review.py
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = push ] && python -c 'import json; assert json.load(open(".github/manual-english-review-trigger")).get("publish_existing")'; then
+            python facebook_news_publish.py --prepare-existing
+          else
+            python english_review.py
+          fi
       - name: Save review and exact blocker evidence
         if: always()
         id: artifact
@@ -49,3 +54,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python english_review.py --commit
+      - name: Publish accepted daily news to Facebook and verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
+          OLDIES_WP_BEARER: ${{ secrets.OLDIES_WP_BEARER }}
+          OLDIES_WP_BASE_URL: ${{ vars.OLDIES_WP_BASE_URL }}
+        run: python facebook_news_publish.py
+      - name: Save Facebook publication receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: facebook-publication-${{ github.run_id }}
+          path: english-output/facebook-publication.json
+          retention-days: 90
+          if-no-files-found: ignore

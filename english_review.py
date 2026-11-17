@@ -166,13 +166,29 @@ def free_tts(**kwargs):
     return clean_provider_pauses(out.getvalue(),directory)
 
 
-def licensed_music(directory):
+def era_music(candidate):
+    year=int(candidate['event_date'][:4])
+    decade=int(candidate.get('music_era_decade',year//10*10))
+    catalog=json.loads((ROOT/'era-music-catalog.json').read_text())['tracks']
+    if str(decade) not in catalog:raise RuntimeError('1950s-1990s musical era must be explicitly identified')
+    track=dict(catalog[str(decade)])
+    if track.get('instrumental') is not True or track['style_decade']!=decade:
+        raise RuntimeError('Instrumental era metadata mismatch')
+    credit=(f'Music: "{track["title"]}" by {track["creator"]} (incompetech.com). '
+            f'Licensed under {track["license"]}: {track["license_url"]}. '
+            'Edited: excerpt, broadcast mix, ducking and fade-out.')
+    candidate['music_license']=track;candidate['music_credit']=credit
+    return track,credit
+
+
+def licensed_music(directory, candidate=None):
+    track,credit=era_music(candidate) if candidate is not None else (MUSIC,CREDIT)
     path = directory / 'licensed-bed.mp3'
-    r = requests.get(MUSIC['download'], timeout=45); r.raise_for_status()
+    r = requests.get(track['download'], timeout=45); r.raise_for_status()
     if len(r.content) > 15 * 1024 * 1024: raise RuntimeError('Music exceeds size limit')
     path.write_bytes(r.content)
-    if digest(path) != MUSIC['sha256']: raise RuntimeError('Licensed music changed; re-review required')
-    (directory / 'music-license.json').write_text(json.dumps(dict(MUSIC, credit=CREDIT), indent=2))
+    if digest(path) != track['sha256']: raise RuntimeError('Licensed music changed; re-review required')
+    (directory / 'music-license.json').write_text(json.dumps(dict(track, credit=credit), indent=2))
     return path
 
 
@@ -256,8 +272,8 @@ def build(day, output, ledger):
         (output / 'status.json').write_text(json.dumps({'status': 'duplicate_blocked', 'day': day}))
         print('Duplicate day blocked; no provider request.'); return
     audio.selected_signoff({'signoff_profile': 'calm'})
-    bed = licensed_music(output)
     candidate, photos = select_candidate(day, output, ledger)
+    bed = licensed_music(output,candidate)
     key = event_key(candidate)
     if not ledger.reserve(day, key):
         (output / 'status.json').write_text(json.dumps({'status': 'duplicate_blocked', 'event': key}))
@@ -280,15 +296,16 @@ def build(day, output, ledger):
             or abs(float(video_stream['duration']) - clean_qc['video_duration_seconds']) > 0.05
             or target.stat().st_size > MAX_VIDEO_BYTES):
         raise RuntimeError('Mixed final film differs from verified duration/frame/size')
-    caption = candidate.get('dj_script_en', '') + '\n\n' + CREDIT + '\nMusic source: ' + MUSIC['source']
+    credit=candidate['music_credit'];music=candidate['music_license']
+    caption = candidate.get('dj_script_en', '') + '\n\n' + credit + '\nMusic source: ' + music['source']
     for source in candidate.get('sources', []): caption += '\nEvent source: ' + source
     for p in candidate['image_credits']:
         caption += '\nPhoto: ' + p['creator'] + ' — ' + p['license'] + ' — ' + p['source']
     (output / 'caption.txt').write_text(caption, encoding='utf-8')
-    if CREDIT not in (output / 'caption.txt').read_text(): raise RuntimeError('Mandatory attribution missing')
+    if credit not in (output / 'caption.txt').read_text(): raise RuntimeError('Mandatory attribution missing')
     manifest = {'status': 'rendered_pending_artifact', 'production_day': day, 'event_key': key,
         'sha256': digest(target), 'bytes': target.stat().st_size, 'tts_model': MODEL, 'production_profile': PROFILE,
-        'clean_qc': clean_qc, 'mixed_audio_qc': final_qc, 'music': MUSIC, 'music_credit': CREDIT,
+        'clean_qc': clean_qc, 'mixed_audio_qc': final_qc, 'music': music, 'music_credit': credit,
         'background_music_added': True, 'publication_performed': False, 'human_media_acceptance': False, 'candidate': candidate}
     (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
     print(json.dumps({k:manifest[k] for k in ('status','production_day','sha256','publication_performed')}))
@@ -305,7 +322,9 @@ def main():
     ledger=Ledger(args.output/'profile-preview-ledger.json' if preview else args.local_ledger)
     if args.commit:
         path = args.output / 'manifest.json'
-        if path.exists(): ledger.complete(json.loads(path.read_text()))
+        if path.exists():
+            manifest=json.loads(path.read_text())
+            if not manifest.get('reused_approved_source'): ledger.complete(manifest)
         return
     try: build(args.day, args.output, ledger)
     except Exception as exc:

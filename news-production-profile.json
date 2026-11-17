@@ -18,5 +18,12 @@
   "duck_ratio": 2,
   "stock_warning_days": 3,
   "stock_target_days": 7,
-  "provider_calls_per_story": 1
+  "provider_calls_per_story": 1,
+  "approved_by_owner": true,
+  "owner_approved_at": "2026-11-17T09:26:03.933617+03:00",
+  "duration_min_seconds": 25,
+  "duration_max_seconds": 30,
+  "music_policy": "era-matched royalty-free instrumental, commercial reuse with attribution",
+  "era_catalog": "era-music-catalog.json",
+  "facebook_daily_publish": true
 }
