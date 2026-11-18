@@ -65,8 +65,10 @@
     "2026-11-18": {
       "day": "2026-11-18",
       "event": "38ab1517be01bf2439a20f90dd14dd496511686fef83313d4b46b3f839419b80",
-      "status": "reserved",
-      "run_id": "44302461083"
+      "status": "artifact_saved",
+      "run_id": "44302461083",
+      "sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363",
+      "artifact_run": "44302461083"
     }
   },
   "events": {
@@ -135,8 +137,10 @@
     "38ab1517be01bf2439a20f90dd14dd496511686fef83313d4b46b3f839419b80": {
       "day": "2026-11-18",
       "event": "38ab1517be01bf2439a20f90dd14dd496511686fef83313d4b46b3f839419b80",
-      "status": "reserved",
-      "run_id": "44302461083"
+      "status": "artifact_saved",
+      "run_id": "44302461083",
+      "sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363",
+      "artifact_run": "44302461083"
     }
   },
   "failed_attempts": [
