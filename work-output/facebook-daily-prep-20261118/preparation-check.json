@@ -1,0 +1,214 @@
+{
+  "checked_at": "2026-11-18T05:24:17.656994+03:00",
+  "ready_calendar_days": 6,
+  "target": 7,
+  "ready": [
+    {
+      "day": "2026-11-18",
+      "artist": "The Beatles",
+      "event_date": "1963-11-18",
+      "source_event_id": "14581",
+      "source_sha256": "d07c1378c59cdc54ff02059c2fc33426aa1fa4d2d3855f8d154b3eed15201b03",
+      "words": 45,
+      "planned_seconds": 27.066666666666666,
+      "photo_sha256": [
+        "0ce328f1a4daefb00aee1f7de6571e2e3f04ff3bea0a8b2b7d9077e707528ddc",
+        "8cd12e16ecbec19d5c84cdfb054b10f87a285931d5c51f9327369b625003acba",
+        "01e0cb0b8b4bfee8b5126cfda01381010fe52c05e23487594e507926b9f84aea"
+      ],
+      "photo_years": [
+        1963,
+        1963,
+        1963
+      ]
+    },
+    {
+      "day": "2026-11-19",
+      "artist": "The Beatles",
+      "event_date": "1962-11-19",
+      "source_event_id": "5606",
+      "source_sha256": "7d32a39defca4483702ef77d04ffad7fe7d1458ffdecc61f01ee74b2f5ce998a",
+      "words": 45,
+      "planned_seconds": 27.066666666666666,
+      "photo_sha256": [
+        "0ce328f1a4daefb00aee1f7de6571e2e3f04ff3bea0a8b2b7d9077e707528ddc",
+        "8cd12e16ecbec19d5c84cdfb054b10f87a285931d5c51f9327369b625003acba",
+        "01e0cb0b8b4bfee8b5126cfda01381010fe52c05e23487594e507926b9f84aea"
+      ],
+      "photo_years": [
+        1963,
+        1963,
+        1963
+      ]
+    },
+    {
+      "day": "2026-11-22",
+      "artist": "The Beatles",
+      "event_date": "1963-11-22",
+      "source_event_id": "5722",
+      "source_sha256": "a80d6b6d1582aaf93e23e03405aa8d9a44ad4db135fedfa036bf9fb38dafcb2e",
+      "words": 46,
+      "planned_seconds": 27.466666666666665,
+      "photo_sha256": [
+        "0ce328f1a4daefb00aee1f7de6571e2e3f04ff3bea0a8b2b7d9077e707528ddc",
+        "8cd12e16ecbec19d5c84cdfb054b10f87a285931d5c51f9327369b625003acba",
+        "01e0cb0b8b4bfee8b5126cfda01381010fe52c05e23487594e507926b9f84aea"
+      ],
+      "photo_years": [
+        1963,
+        1963,
+        1963
+      ]
+    },
+    {
+      "day": "2026-11-23",
+      "artist": "The Beatles",
+      "event_date": "1962-11-23",
+      "source_event_id": "14613",
+      "source_sha256": "d55891e1580cb6d6b4299ef1cef3bf4ba3064813d4d1f33977191e7d51ab4cda",
+      "words": 45,
+      "planned_seconds": 27.066666666666666,
+      "photo_sha256": [
+        "0ce328f1a4daefb00aee1f7de6571e2e3f04ff3bea0a8b2b7d9077e707528ddc",
+        "8cd12e16ecbec19d5c84cdfb054b10f87a285931d5c51f9327369b625003acba",
+        "01e0cb0b8b4bfee8b5126cfda01381010fe52c05e23487594e507926b9f84aea"
+      ],
+      "photo_years": [
+        1963,
+        1963,
+        1963
+      ]
+    },
+    {
+      "day": "2026-11-20",
+      "artist": "The Supremes",
+      "event_date": "1965-11-20",
+      "source_event_id": "6019",
+      "source_sha256": "ce3c93c13ab19d2b9ea0ecfeead0a49fc0817c9d0b73527cf9bd0b32f144151d",
+      "words": 46,
+      "planned_seconds": 27.466666666666665,
+      "photo_sha256": [
+        "b814728faa44c697ed85cddc93afb5a3a01854493bac130b56c4a04da8430a2a",
+        "617ac796dc7b498f74f6afc8286b82d79d00b843b4aba99137a816cb187d0ff2",
+        "6afe2385f4ceb15819f2848c0a68d8dca2a4194393917eadf5190a958d9727be"
+      ],
+      "photo_years": [
+        1965,
+        1965,
+        1965
+      ]
+    },
+    {
+      "day": "2026-11-21",
+      "artist": "Elton John",
+      "event_date": "1971-11-21",
+      "source_event_id": "6954",
+      "source_sha256": "f6e2d2e994d77a95e1e044f01b3f97b25672821abca8d689c6d7b05cd97cd0f2",
+      "words": 46,
+      "planned_seconds": 27.466666666666665,
+      "photo_sha256": [
+        "1ce2d0e792dc0f718f369ff2adf82a82f5f74975571925ac8c5f7a3e1be8bb36",
+        "723cfd9162ef8ae75085f083fbccf58d6252cbe15f7ac934ff096dccbec28615",
+        "873efc067f9613450aa2c24f67896ce66df562f1c39107cea75fcdad6c6454a7"
+      ],
+      "photo_years": [
+        1971,
+        1971,
+        1971
+      ]
+    }
+  ],
+  "missing_days": [
+    "2026-11-24"
+  ],
+  "provider_calls": 0,
+  "renders": 0,
+  "uploads": 0,
+  "independent_watchdog_acceptance": false,
+  "validation_scope": "Repository TDIM matches, audio duration plan, real photo selector and SHA/decode checks; requests import stub only, no HTTP/provider test.",
+  "commit": "accfca874a423da07315dcebaaffc19e0e9c990b",
+  "november24_research": {
+    "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-24/",
+    "candidates": [
+      {
+        "artist": "Buddy Holly",
+        "event_date": "1999-11-24",
+        "event_id": "11299",
+        "source_sha256": "93b152cb234e535d39b64fc2c02340d570664729524f115755762d981c5c841d"
+      },
+      {
+        "artist": "Albert Collins",
+        "event_date": "1993-11-24",
+        "event_id": "4671",
+        "source_sha256": "7e5bc99c9f7a64639294439253551a12fc3527096b87b36920a80f215632a7f1"
+      },
+      {
+        "artist": "Bill Wyman",
+        "event_date": "1992-11-24",
+        "event_id": "10302",
+        "source_sha256": "c70cc0f26314e041969e92d2909b3473073f59f32c4d23b8a2ffe18bd93786e7"
+      },
+      {
+        "artist": "Eric Carr",
+        "event_date": "1991-11-24",
+        "event_id": "4645",
+        "source_sha256": "d6c0b23fc6b2320f4ac00e7a9ce06ca6cd5e3788fba8729a7c5ccc9b43b9b84e"
+      },
+      {
+        "artist": "Freddie Mercury",
+        "event_date": "1991-11-24",
+        "event_id": "4646",
+        "source_sha256": "629fc021e48bf854b1f92a5214b72facb53f2033a54fdf60ed3848d8eff24954"
+      },
+      {
+        "artist": "Motley Crue",
+        "event_date": "1984-11-24",
+        "event_id": "17016",
+        "source_sha256": "bbbb136c952a19c8285e298215a7c6a9645d2a8f3f2795cc3feb007f9b5ec621"
+      },
+      {
+        "artist": "Feargal Sharkey",
+        "event_date": "1983-11-24",
+        "event_id": "8907",
+        "source_sha256": "18e7a1f43f7e44233f512afa413f80c9196c275f6847cba6ec4c305207ea3090"
+      },
+      {
+        "artist": "Chicago",
+        "event_date": "1976-11-24",
+        "event_id": "7782",
+        "source_sha256": "485ba5401b7877f6ea86b9390f7c38b925a9fdbb01a6a8c541005eba7c7705fd"
+      },
+      {
+        "artist": "Ringo Starr",
+        "event_date": "1973-11-24",
+        "event_id": "7255",
+        "source_sha256": "15f17448598bb37095def1ae875379eab51ab2fc1cc32e487f6fe55ba2cb1476"
+      },
+      {
+        "artist": "Diana Ross",
+        "event_date": "1968-11-24",
+        "event_id": "6497",
+        "source_sha256": "e64dceb7f6988056066708a21b7b04079017efc6a4fece5a3028cb20b2e5b295"
+      },
+      {
+        "artist": "John Lennon",
+        "event_date": "1966-11-24",
+        "event_id": "6173",
+        "source_sha256": "52482e4b3a714f6a1cc4e5ed04c33e9e3b907a4c17ae8d385d7973bc70387e5e"
+      },
+      {
+        "artist": "The Who",
+        "event_date": "1964-11-24",
+        "event_id": "16634",
+        "source_sha256": "7b3949f40b8988af1911094e45f18879f79713a9810bc2a945ff6ce477b70fb2"
+      }
+    ],
+    "ready": false,
+    "next_step": "Find and inspect three distinct same-year/allowed-period photos for one November24 event; no exception or invented approval. Ringo1973/Who1964/Chicago1976 searches did not yield three eligible images; DianaRoss1968 group photos need solo dominance assessment.",
+    "searches": [
+      "https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=Ringo%20Starr%201973&gsrnamespace=6&format=json",
+      "https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=%22The%20Who%22%20%221964%22&gsrnamespace=6&format=json",
+      "https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=%22Diana%20Ross%22%20%221968%22&gsrnamespace=6&format=json"
+    ]
+  }
+}
