@@ -70,14 +70,14 @@
       "sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363",
       "artifact_run": "44302461083",
       "facebook": {
-        "state": "uploaded_unverified",
-        "publication_verified": false,
+        "state": "published",
+        "publication_verified": true,
         "content_id": "oldies-news-38ab1517be01bf2439a20f90dd14dd496511686fef83313d",
         "sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-18-the-beatles-44302461083-1.mp4",
         "run_id": "44302461083",
         "video_id": "1759431565162805",
-        "permalink": "",
+        "permalink": "https://www.facebook.com/reel/1759431565162805",
         "remote_response": {
           "success": true,
           "dry_run": false,
@@ -103,6 +103,20 @@
             }
           },
           "media_sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363"
+        },
+        "verification": {
+          "method": "authenticated_browser_public_reel_playback",
+          "verified_at": "2026-11-18 12:19:54 UTC",
+          "page_name": "Oldies Radyo",
+          "audience": "public",
+          "video_duration_seconds": 27.133333,
+          "ready_state": 4,
+          "observed_playback_seconds": 16.657182,
+          "paused": false,
+          "caption_event_date": "1963-11-18",
+          "music_credit": "Surf Shimmy — Kevin MacLeod — CC BY4.0",
+          "event_and_three_photo_credits_observed": true,
+          "permalink": "https://www.facebook.com/reel/1759431565162805"
         }
       }
     }
@@ -178,14 +192,14 @@
       "sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363",
       "artifact_run": "44302461083",
       "facebook": {
-        "state": "uploaded_unverified",
-        "publication_verified": false,
+        "state": "published",
+        "publication_verified": true,
         "content_id": "oldies-news-38ab1517be01bf2439a20f90dd14dd496511686fef83313d",
         "sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-18-the-beatles-44302461083-1.mp4",
         "run_id": "44302461083",
         "video_id": "1759431565162805",
-        "permalink": "",
+        "permalink": "https://www.facebook.com/reel/1759431565162805",
         "remote_response": {
           "success": true,
           "dry_run": false,
@@ -211,6 +225,20 @@
             }
           },
           "media_sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363"
+        },
+        "verification": {
+          "method": "authenticated_browser_public_reel_playback",
+          "verified_at": "2026-11-18 12:19:54 UTC",
+          "page_name": "Oldies Radyo",
+          "audience": "public",
+          "video_duration_seconds": 27.133333,
+          "ready_state": 4,
+          "observed_playback_seconds": 16.657182,
+          "paused": false,
+          "caption_event_date": "1963-11-18",
+          "music_credit": "Surf Shimmy — Kevin MacLeod — CC BY4.0",
+          "event_and_three_photo_credits_observed": true,
+          "permalink": "https://www.facebook.com/reel/1759431565162805"
         }
       }
     }
