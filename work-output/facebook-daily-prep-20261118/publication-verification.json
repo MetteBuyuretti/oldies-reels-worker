@@ -1,0 +1,217 @@
+{
+  "checked_at": "2026-11-18 12:21:08 UTC",
+  "operator": "MASTER/root",
+  "day": "2026-11-18",
+  "scheduled_1423_run_observed": false,
+  "recovery": {
+    "single_trigger_commit": "ce322033a79284c1579806cc1c2a8cacd6253519",
+    "run_id": 44302461083,
+    "reason": "No scheduled producer, day reservation, failed attempt or pending publication existed; fresh exact TDIM binding and real three-photo selector passed before triggering.",
+    "marker_day": "2026-11-18",
+    "repeat_trigger_allowed": false
+  },
+  "artifacts": {
+    "artifact_zip_hashes": [
+      "582f485cc45881b74d37f7ebdcca9106ddaed98a635721c03f3d8172f017b961",
+      "2e5f75efc50c4bec96533c5f212c9a7d18478487fcb61c8a4fd588aba81e8bf6"
+    ],
+    "manifest.json": {
+      "production_day": "2026-11-18",
+      "event_key": "38ab1517be01bf2439a20f90dd14dd496511686fef83313d4b46b3f839419b80",
+      "sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363",
+      "bytes": 2061519,
+      "clean_qc": {
+        "audio_stream_detected": true,
+        "audio_packets": 1269,
+        "audio_codec": "aac",
+        "duration_seconds": 27.133,
+        "mean_volume_db": -19.5,
+        "max_volume_db": -2,
+        "width": 1080,
+        "height": 1920,
+        "video_duration_seconds": 27.133333,
+        "silent_publish_blocked": true,
+        "background_music_added": false,
+        "warm_recording_template": "3.1-work2-candidate",
+        "story_estimated_wpm": 144.5,
+        "advert_estimated_wpm": 62.5,
+        "advert_gap_seconds": 1.1,
+        "gap_max_volume_db": -91,
+        "speedup_applied": false
+      },
+      "music": {
+        "title": "Surf Shimmy",
+        "creator": "Kevin MacLeod",
+        "source": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1700018",
+        "download": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Surf%20Shimmy.mp3",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "sha256": "932424252801c51a6385c1339ebb57571cee76eda6431eaa338dcacb677c4d94",
+        "tempo_bpm": 170,
+        "instrumental": true,
+        "era_style": "1960s surf rock",
+        "style_decade": 1960,
+        "recording_is_period_original": false
+      },
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "14581",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-18/",
+        "source_sha256": "d07c1378c59cdc54ff02059c2fc33426aa1fa4d2d3855f8d154b3eed15201b03"
+      },
+      "event_date": "1963-11-18"
+    },
+    "daily-source.json": {
+      "production_day": "2026-11-18",
+      "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-18/",
+      "selected_record_present": true
+    },
+    "stock-health.json": {
+      "checked_day": "2026-11-18",
+      "ready_unproduced_stories": 1,
+      "ready_calendar_days": 6,
+      "target": 7,
+      "status": "ready",
+      "items": [
+        {
+          "artist": "The Beatles",
+          "event_date": "1963-11-18",
+          "kind": "silver_disc_awards"
+        },
+        {
+          "artist": "The Beatles",
+          "event_date": "1962-11-19",
+          "kind": "concerts"
+        },
+        {
+          "artist": "The Beatles",
+          "event_date": "1963-11-22",
+          "kind": "album_release"
+        },
+        {
+          "artist": "The Beatles",
+          "event_date": "1962-11-23",
+          "kind": "television_audition"
+        },
+        {
+          "artist": "The Supremes",
+          "event_date": "1965-11-20",
+          "kind": "single_chart"
+        },
+        {
+          "artist": "Elton John",
+          "event_date": "1971-11-21",
+          "kind": "tour_opening"
+        }
+      ],
+      "coverage": {
+        "2026-11-18": [
+          {
+            "artist": "The Beatles",
+            "event_date": "1963-11-18",
+            "kind": "silver_disc_awards"
+          }
+        ],
+        "2026-11-19": [
+          {
+            "artist": "The Beatles",
+            "event_date": "1962-11-19",
+            "kind": "concerts"
+          }
+        ],
+        "2026-11-20": [
+          {
+            "artist": "The Supremes",
+            "event_date": "1965-11-20",
+            "kind": "single_chart"
+          }
+        ],
+        "2026-11-21": [
+          {
+            "artist": "Elton John",
+            "event_date": "1971-11-21",
+            "kind": "tour_opening"
+          }
+        ],
+        "2026-11-22": [
+          {
+            "artist": "The Beatles",
+            "event_date": "1963-11-22",
+            "kind": "album_release"
+          }
+        ],
+        "2026-11-23": [
+          {
+            "artist": "The Beatles",
+            "event_date": "1962-11-23",
+            "kind": "television_audition"
+          }
+        ],
+        "2026-11-24": []
+      },
+      "missing_days": [
+        "2026-11-24"
+      ],
+      "rejected": [],
+      "note": "Calendar coverage of reviewed exact-day TDIM text and three period photos. Live source binding is rechecked before TTS. Archive backups do not count."
+    },
+    "facebook-publication.json": {
+      "state": "uploaded_unverified",
+      "publication_verified": false,
+      "content_id": "oldies-news-38ab1517be01bf2439a20f90dd14dd496511686fef83313d",
+      "sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363",
+      "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1963-11-18-the-beatles-44302461083-1.mp4",
+      "run_id": "44302461083",
+      "video_id": "1759431565162805",
+      "permalink": "",
+      "remote_response": {
+        "success": true,
+        "dry_run": false,
+        "content_id": "oldies-news-38ab1517be01bf2439a20f90dd14dd496511686fef83313d",
+        "video_id": "1759431565162805",
+        "post_id": "1759431565162805",
+        "post_url": "/reel/1759431565162805/",
+        "status": {
+          "video_status": "processing",
+          "processing_progress": 0,
+          "uploading_phase": {
+            "status": "complete",
+            "bytes_transferred": 2061519
+          },
+          "processing_phase": {
+            "status": "in_progress"
+          },
+          "publishing_phase": {
+            "status": "not_started"
+          },
+          "copyright_check_status": {
+            "status": "in_progress"
+          }
+        },
+        "media_sha256": "21bf7eab9c1c77336ed58eccbc01c68aad4ca10e1448fd9fa7a692a747f4b363"
+      }
+    }
+  },
+  "browser_verification": {
+    "video_id": "1759431565162805",
+    "url": "https://www.facebook.com/reel/1759431565162805",
+    "page_name": "Oldies Radyo",
+    "audience": "public",
+    "ready_state": 4,
+    "paused": false,
+    "observed_playback_seconds": 16.657182,
+    "video_duration_seconds": 27.133333,
+    "caption_and_event_music_photo_credits_observed": true,
+    "method": "authenticated_cloud_browser_same_video_playback",
+    "local_extension_tool_result": "Unknown tool browser.js; existing signed-in cloud browser succeeded"
+  },
+  "ledger_verification_commit": "0dad696f47ff7fd191c5100ff6a92d81be284ac0",
+  "original_async_receipt_preserved": true,
+  "new_tts_calls": 1,
+  "uploads": 1,
+  "repeated_uploads": 0,
+  "main_schedule_changed": false,
+  "independent_watchdog_acceptance": false,
+  "continuity": "November18 recovery succeeded; autonomous scheduled next-day execution still unproven.",
+  "first_missing_step": "Verify next natural14:23 run; fill November24 exact-day event with three inspected permitted-period photos; do not repeat today's provider/render/upload."
+}
