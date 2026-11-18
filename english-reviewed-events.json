@@ -199,6 +199,46 @@
         "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-23/",
         "source_sha256": "d55891e1580cb6d6b4299ef1cef3bf4ba3064813d4d1f33977191e7d51ab4cda"
       }
+    },
+    {
+      "artist": "The Supremes",
+      "event_date": "1965-11-20",
+      "kind": "single_chart",
+      "event_headline": "I HEAR A SYMPHONY AT NUMBER ONE",
+      "dj_story_text": "November twentieth, nineteen sixty-five. The Supremes reached number one in America with I Hear a Symphony, their sixth chart-topping single. Behind the record stood Motown's Holland, Dozier and Holland team. Three voices, a sweeping arrangement, and another unforgettable chapter in Detroit's extraordinary pop story.",
+      "on_screen_story": "I Hear a Symphony became the Supremes' sixth US number one.",
+      "source_text": "November twentieth, nineteen sixty-five. The Supremes reached number one in America with I Hear a Symphony, their sixth chart-topping single. Behind the record stood Motown's Holland, Dozier and Holland team. Three voices, a sweeping arrangement, and another unforgettable chapter in Detroit's extraordinary pop story.",
+      "sources": [
+        "https://www.thisdayinmusic.com/on-this-day-in-music-november-20/"
+      ],
+      "reviewed": true,
+      "editorial_review": "MASTER/root 18 Nov2026: live TDIM event/date/artist/fingerprint verified. Original46-word English copy. Three same-year CC0 Nationaal Archief originals visually inspected, full frames and exact stored hashes recorded.",
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "6019",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-20/",
+        "source_sha256": "ce3c93c13ab19d2b9ea0ecfeead0a49fc0817c9d0b73527cf9bd0b32f144151d"
+      }
+    },
+    {
+      "artist": "Elton John",
+      "event_date": "1971-11-21",
+      "kind": "tour_opening",
+      "event_headline": "MADMAN TAKES TO THE ROAD",
+      "dj_story_text": "November twenty-first, nineteen seventy-one. Elton John opened a thirteen-date British tour at the Coventry Theatre, taking Madman Across the Water on the road. The album's embroidered artwork had taken two weeks to make. From a handmade sleeve to the stage, the details mattered.",
+      "on_screen_story": "Elton opened a thirteen-date UK tour at Coventry Theatre, promoting Madman Across the Water.",
+      "source_text": "November twenty-first, nineteen seventy-one. Elton John opened a thirteen-date British tour at the Coventry Theatre, taking Madman Across the Water on the road. The album's embroidered artwork had taken two weeks to make. From a handmade sleeve to the stage, the details mattered.",
+      "sources": [
+        "https://www.thisdayinmusic.com/on-this-day-in-music-november-21/"
+      ],
+      "reviewed": true,
+      "editorial_review": "MASTER/root 18 Nov2026: live TDIM event/date/artist/fingerprint verified. Original46-word English copy. Three same-year CC0 Nationaal Archief originals visually inspected, full frames and exact stored hashes recorded.",
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "6954",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-21/",
+        "source_sha256": "f6e2d2e994d77a95e1e044f01b3f97b25672821abca8d689c6d7b05cd97cd0f2"
+      }
     }
   ]
 }
