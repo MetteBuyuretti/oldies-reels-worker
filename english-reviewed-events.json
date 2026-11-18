@@ -139,6 +139,66 @@
         "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-18/",
         "source_sha256": "d07c1378c59cdc54ff02059c2fc33426aa1fa4d2d3855f8d154b3eed15201b03"
       }
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1962-11-19",
+      "kind": "concerts",
+      "event_headline": "THREE SHOWS IN ONE DAY",
+      "on_screen_story": "The Beatles packed three shows into one day. After a lunchtime set at Liverpool's Cavern Club, they headed to the Midlands, playing Smethwick Baths Ballroom and West Bromwich's Adelphi Ballroom",
+      "dj_story_text": "November nineteenth, nineteen sixty-two. The Beatles packed three shows into one day. After a lunchtime set at Liverpool's Cavern Club, they headed to the Midlands, playing Smethwick Baths Ballroom and West Bromwich's Adelphi Ballroom. Beatlemania was ahead; this was the hard-working road there.",
+      "source_text": "November nineteenth, nineteen sixty-two. The Beatles packed three shows into one day. After a lunchtime set at Liverpool's Cavern Club, they headed to the Midlands, playing Smethwick Baths Ballroom and West Bromwich's Adelphi Ballroom. Beatlemania was ahead; this was the hard-working road there.",
+      "sources": [
+        "https://www.thisdayinmusic.com/on-this-day-in-music-november-19/"
+      ],
+      "reviewed": true,
+      "editorial_review": "MASTER/root 18 Nov 2026: live TDIM parsed by repository tdim_daily.py; exact ID/date/artist/fingerprint matched. Original English paraphrase. Existing reviewed photos and year-research reused; no new photo flags.",
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "5606",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-19/",
+        "source_sha256": "7d32a39defca4483702ef77d04ffad7fe7d1458ffdecc61f01ee74b2f5ce998a"
+      }
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1963-11-22",
+      "kind": "album_release",
+      "event_headline": "WITH THE BEATLES ARRIVES",
+      "on_screen_story": "With the Beatles arrived in Britain, the band's second album in a breakthrough year. Advance orders had reached half a million",
+      "dj_story_text": "November twenty-second, nineteen sixty-three. With the Beatles arrived in Britain, the band's second album in a breakthrough year. Advance orders had reached half a million. It would spend fifty-one weeks on the British charts, carrying the sound of four Liverpool musicians into homes.",
+      "source_text": "November twenty-second, nineteen sixty-three. With the Beatles arrived in Britain, the band's second album in a breakthrough year. Advance orders had reached half a million. It would spend fifty-one weeks on the British charts, carrying the sound of four Liverpool musicians into homes.",
+      "sources": [
+        "https://www.thisdayinmusic.com/on-this-day-in-music-november-22/"
+      ],
+      "reviewed": true,
+      "editorial_review": "MASTER/root 18 Nov 2026: live TDIM parsed by repository tdim_daily.py; exact ID/date/artist/fingerprint matched. Original English paraphrase. Existing reviewed photos and year-research reused; no new photo flags.",
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "5722",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-22/",
+        "source_sha256": "a80d6b6d1582aaf93e23e03405aa8d9a44ad4db135fedfa036bf9fb38dafcb2e"
+      }
+    },
+    {
+      "artist": "The Beatles",
+      "event_date": "1962-11-23",
+      "kind": "television_audition",
+      "event_headline": "A TEN-MINUTE BBC AUDITION",
+      "on_screen_story": "The Beatles travelled to London's Saint James' Church Hall for a ten-minute BBC television audition. A fan's letter opened the door",
+      "dj_story_text": "November twenty-third, nineteen sixty-two. The Beatles travelled to London's Saint James' Church Hall for a ten-minute BBC television audition. A fan's letter opened the door. Four days later, the answer was no. Even a band famous began with chances that went nowhere.",
+      "source_text": "November twenty-third, nineteen sixty-two. The Beatles travelled to London's Saint James' Church Hall for a ten-minute BBC television audition. A fan's letter opened the door. Four days later, the answer was no. Even a band famous began with chances that went nowhere.",
+      "sources": [
+        "https://www.thisdayinmusic.com/on-this-day-in-music-november-23/"
+      ],
+      "reviewed": true,
+      "editorial_review": "MASTER/root 18 Nov 2026: live TDIM parsed by repository tdim_daily.py; exact ID/date/artist/fingerprint matched. Original English paraphrase. Existing reviewed photos and year-research reused; no new photo flags.",
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "14613",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-23/",
+        "source_sha256": "d55891e1580cb6d6b4299ef1cef3bf4ba3064813d4d1f33977191e7d51ab4cda"
+      }
     }
   ]
 }
