@@ -119,6 +119,12 @@
           "permalink": "https://www.facebook.com/reel/1759431565162805"
         }
       }
+    },
+    "2026-11-19": {
+      "day": "2026-11-19",
+      "event": "88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935cb592ecab9f0365a",
+      "status": "reserved",
+      "run_id": "44522490069"
     }
   },
   "events": {
@@ -241,6 +247,12 @@
           "permalink": "https://www.facebook.com/reel/1759431565162805"
         }
       }
+    },
+    "88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935cb592ecab9f0365a": {
+      "day": "2026-11-19",
+      "event": "88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935cb592ecab9f0365a",
+      "status": "reserved",
+      "run_id": "44522490069"
     }
   },
   "failed_attempts": [
