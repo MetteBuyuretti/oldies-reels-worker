@@ -186,13 +186,13 @@
       "kind": "television_audition",
       "event_headline": "A TEN-MINUTE BBC AUDITION",
       "on_screen_story": "The Beatles travelled to London's Saint James' Church Hall for a ten-minute BBC television audition. A fan's letter opened the door",
-      "dj_story_text": "November twenty-third, nineteen sixty-two. The Beatles travelled to London's Saint James' Church Hall for a ten-minute BBC television audition. A fan's letter opened the door. Four days later, the answer was no. Even a band famous began with chances that went nowhere.",
-      "source_text": "November twenty-third, nineteen sixty-two. The Beatles travelled to London's Saint James' Church Hall for a ten-minute BBC television audition. A fan's letter opened the door. Four days later, the answer was no. Even a band famous began with chances that went nowhere.",
+      "dj_story_text": "November twenty-third, nineteen sixty-two. The Beatles travelled to London's Saint James' Church Hall for a ten-minute BBC television audition. A fan's letter opened the door. Four days later, the answer was no. Even future stars began with chances that went nowhere.",
+      "source_text": "November twenty-third, nineteen sixty-two. The Beatles travelled to London's Saint James' Church Hall for a ten-minute BBC television audition. A fan's letter opened the door. Four days later, the answer was no. Even future stars began with chances that went nowhere.",
       "sources": [
         "https://www.thisdayinmusic.com/on-this-day-in-music-november-23/"
       ],
       "reviewed": true,
-      "editorial_review": "MASTER/root 18 Nov 2026: live TDIM parsed by repository tdim_daily.py; exact ID/date/artist/fingerprint matched. Original English paraphrase. Existing reviewed photos and year-research reused; no new photo flags.",
+      "editorial_review": "MASTER/root 18 Nov 2026: live TDIM parsed by repository tdim_daily.py; exact ID/date/artist/fingerprint matched. Original English paraphrase. Existing reviewed photos and year-research reused; no new photo flags. 19 Nov2026 MASTER: grammar only, 'Even future stars began'; factual source binding unchanged;44words.",
       "daily_source": {
         "provider": "thisdayinmusic.com",
         "event_id": "14613",
