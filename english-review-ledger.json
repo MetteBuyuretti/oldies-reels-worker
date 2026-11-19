@@ -123,8 +123,10 @@
     "2026-11-19": {
       "day": "2026-11-19",
       "event": "88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935cb592ecab9f0365a",
-      "status": "reserved",
-      "run_id": "44522490069"
+      "status": "artifact_saved",
+      "run_id": "44522490069",
+      "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
+      "artifact_run": "44522490069"
     }
   },
   "events": {
@@ -251,8 +253,10 @@
     "88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935cb592ecab9f0365a": {
       "day": "2026-11-19",
       "event": "88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935cb592ecab9f0365a",
-      "status": "reserved",
-      "run_id": "44522490069"
+      "status": "artifact_saved",
+      "run_id": "44522490069",
+      "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
+      "artifact_run": "44522490069"
     }
   },
   "failed_attempts": [
