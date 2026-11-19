@@ -1,0 +1,557 @@
+{
+  "checked_at": "2026-11-19 02:20:23 UTC",
+  "operator": "MASTER/root",
+  "production_day": "2026-11-19",
+  "horizon": [
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-21",
+    "2026-11-22",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25"
+  ],
+  "ready_calendar_days": 5,
+  "missing_days": [
+    "2026-11-24",
+    "2026-11-25"
+  ],
+  "today_ready": true,
+  "today_event_id": "5606",
+  "source_check": "All seven live TDIM pages read with repository parse_events; five existing dated entries matched current IDs/artist/date/fingerprint. No archive substitution.",
+  "photo_bank_blob_sha": "6b45f18ffa578a431b86993c190f6dc20b55a496",
+  "photo_reuse": "Existing nine approved photo records and assets unchanged from prior verified selector/hash/decode receipt; suitable existing imagery not researched again.",
+  "drafts": [
+    {
+      "artist": "Ringo Starr",
+      "event_date": "1973-11-24",
+      "kind": "single_chart",
+      "event_headline": "PHOTOGRAPH REACHES NUMBER ONE",
+      "dj_story_text": "November twenty-fourth, nineteen seventy-three. Ringo Starr reached number one in America with Photograph, written with George Harrison. His first solo American chart-topper brought two former Beatles together behind an instantly memorable song. Sometimes a photograph holds a memory; this one became a record.",
+      "on_screen_story": "Photograph became Ringo Starr's first US number one, written with George Harrison.",
+      "reviewed": false,
+      "ready_for_production": false,
+      "sources": [
+        "https://www.thisdayinmusic.com/on-this-day-in-music-november-24/"
+      ],
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "7255",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-24/",
+        "source_sha256": "15f17448598bb37095def1ae875379eab51ab2fc1cc32e487f6fe55ba2cb1476"
+      },
+      "spoken_word_count": 46,
+      "blocker": "Three distinct licensed full-frame correct-period artist-dominant photographs not yet verified."
+    },
+    {
+      "artist": "Whitney Houston",
+      "event_date": "1995-11-25",
+      "kind": "single_chart",
+      "event_headline": "EXHALE AT NUMBER ONE",
+      "dj_story_text": "November twenty-fifth, nineteen ninety-five. Whitney Houston reached number one in America with Exhale, the Babyface song from Waiting to Exhale. It became her eleventh American chart-topper. That gentle chorus needed a few syllables, but Whitney gave them all the feeling a song needs.",
+      "on_screen_story": "Exhale (Shoop Shoop), written by Babyface, became Whitney Houston's eleventh US number one.",
+      "reviewed": false,
+      "ready_for_production": false,
+      "sources": [
+        "https://www.thisdayinmusic.com/on-this-day-in-music-november-25/"
+      ],
+      "daily_source": {
+        "provider": "thisdayinmusic.com",
+        "event_id": "10667",
+        "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-25/",
+        "source_sha256": "ed2f00ace8605d4c8beda807d648e78127cd833029fd2e2986d3bcc685bfaa06"
+      },
+      "spoken_word_count": 46,
+      "blocker": "Three distinct licensed full-frame correct-period artist-dominant photographs not yet verified."
+    }
+  ],
+  "photo_research": {
+    "lastsearch-2.json": {
+      "result_count": 9,
+      "candidates": [
+        {
+          "id": 69141552,
+          "title": "File:1290 Avenue of the Americas (formerly Coconuts record store); site of the historic 1994 meeting between Mariah Carey and yours truly (6306852120).jpg",
+          "date": "2011-10-28 18:54"
+        },
+        {
+          "id": 69141679,
+          "title": "File:1290 Avenue of the Americas (formerly Coconuts record store); site of the historic 1994 meeting between Mariah Carey and yours truly (7231532572).jpg",
+          "date": "2012-05-06 20:11"
+        },
+        {
+          "id": 96862751,
+          "title": "File:An audience of military personnel and dependents listens as singer Whitney Houston performs during an HBO-televised concert honoring the service men and women who took part in Opera - DPLA - 0629c38c4ceed8bddf9088478cfce8fe.jpeg",
+          "date": "31 March 1991<div style=\"display: none;\">date QS:P571,+1991-03-31T00:00:00Z/11</div>"
+        },
+        {
+          "id": 24271515,
+          "title": "File:Mariah Carey at Pearls Theatre, The Palms, Las Vegas, 12 September 2009 (5262980692).jpg",
+          "date": "2009-09-12 21:05"
+        },
+        {
+          "id": 96953295,
+          "title": "File:Singer Whitney Houston and other performers take part in an HBO-televised concert honoring the service men and women who took part in Operation Desert Storm - DPLA - 236250338675508cd98f524effc8f3f0.jpeg",
+          "date": "31 March 1991<div style=\"display: none;\">date QS:P571,+1991-03-31T00:00:00Z/11</div>"
+        }
+      ]
+    },
+    "lastsearch-0.json": {
+      "result_count": 3,
+      "candidates": [
+        {
+          "id": 133235228,
+          "title": "File:Georgy Girl - When the Stars Begin to Fall - Cash Box ad 1966.jpg",
+          "date": "1966-11-26"
+        },
+        {
+          "id": 27054099,
+          "title": "File:Kedarnath in 1860.jpg",
+          "date": "2013-06-22"
+        },
+        {
+          "id": 7409780,
+          "title": "File:SH-3As HS-11 USS Wasp CVS-18 1965.jpg",
+          "date": "1965"
+        }
+      ]
+    },
+    "lastsearch-1.json": {
+      "result_count": 8,
+      "candidates": [
+        {
+          "id": 113119433,
+          "title": "File:Chuck-Berry-1976.jpg",
+          "date": "Taken on 7 August 1976"
+        },
+        {
+          "id": 27103341,
+          "title": "File:Chuck Berry (1958).png",
+          "date": "Ad: 25 November 1972<br>Photo: circa 1958"
+        },
+        {
+          "id": 16879564,
+          "title": "File:Chuck Berry 1972.JPG",
+          "date": "1972-09-29"
+        },
+        {
+          "id": 113311887,
+          "title": "File:Chuck Berry 1972.png",
+          "date": "1972-07-22"
+        },
+        {
+          "id": 57400995,
+          "title": "File:Chuck Berry circa 1958.jpg",
+          "date": "1972-11-25"
+        }
+      ]
+    },
+    "beatles-0.json": {
+      "result_count": 20,
+      "candidates": [
+        {
+          "id": 154050195,
+          "title": "File:02024 1054 Vinyl records in Bielsko-Biała.jpg",
+          "date": "Taken on 18 October 2024"
+        },
+        {
+          "id": 145581261,
+          "title": "File:1964 Events montage 16-grid version.jpg",
+          "date": "2024-02-20"
+        },
+        {
+          "id": 66029612,
+          "title": "File:Aankomst Brian Epstein (manager Beatles) op Schiphol (Grand Gala du Disque 1965), Bestanddeelnr 918-2516.jpg",
+          "date": "1965-10-01"
+        },
+        {
+          "id": 68235157,
+          "title": "File:Beatles 1965 concerto Roma Adriano interno.jpg",
+          "date": "Taken on 27 June 1965"
+        },
+        {
+          "id": 16559014,
+          "title": "File:Beatles and George Martin in studio 1966.JPG",
+          "date": "There is no date stamp, but someone has labeled the photo as circa 1966.  It's clear that the photo "
+        }
+      ]
+    },
+    "beatles-1.json": {
+      "result_count": 20,
+      "candidates": [
+        {
+          "id": 46785073,
+          "title": "File:1964-Lennon-McCartney (cropped).jpg",
+          "date": "1964-06-05"
+        },
+        {
+          "id": 67327570,
+          "title": "File:Aankomst Beatles op Schiphol, de Beatles op de vliegtuigtrap met aan hun voeten , Bestanddeelnr 916-5123.jpg",
+          "date": "1964-06-05"
+        },
+        {
+          "id": 67327637,
+          "title": "File:Aankomst Beatles op Schiphol, de Beatles tijdens persconferentie Jimmy Nicol, v, Bestanddeelnr 916-5129.jpg",
+          "date": "1964-06-05"
+        },
+        {
+          "id": 190063101,
+          "title": "File:Aankomst Beatles op Schiphol, de Beatles tijdens persconferentie Jimmy Nicol, v, Bestanddeelnr 916-5129 (cropped).jpg",
+          "date": "1964-06-05"
+        },
+        {
+          "id": 67327621,
+          "title": "File:Aankomst Beatles op Schiphol, omringd door politiemensen gaan de Beatles naar de, Bestanddeelnr 916-5128.jpg",
+          "date": "1964-06-05"
+        }
+      ]
+    },
+    "fallback-0.json": {
+      "result_count": 1,
+      "candidates": [
+        {
+          "id": 22565721,
+          "title": "File:The Supremes Frontier Hotel Las Vegas 1969.JPG",
+          "date": "1969-01-19"
+        }
+      ]
+    },
+    "fallback-1.json": {
+      "result_count": 1,
+      "candidates": [
+        {
+          "id": 29673514,
+          "title": "File:The Supremes 1967.JPG",
+          "date": "December 22, 1967-earliest date stamp"
+        }
+      ]
+    },
+    "25cat-1.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "25cat-2.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "25cat-3.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "25cat-0.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "finalcat-3.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "finalcat-1.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "finalcat-2.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "finalcat-0.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "cat-1.json": {
+      "result_count": 5,
+      "candidates": [
+        {
+          "id": 66959508,
+          "title": "File:Feargal Sharkey 2009 Labour conference photo A.jpg",
+          "date": "2009-09-28 12:16:54"
+        },
+        {
+          "id": 66959570,
+          "title": "File:Feargal Sharkey 2009 Labour conference photo C.jpg",
+          "date": "2009-09-28 12:42:34"
+        },
+        {
+          "id": 12384359,
+          "title": "File:FeargalSharkey2009.jpg",
+          "date": "2009-09-28"
+        },
+        {
+          "id": 5779220,
+          "title": "File:FergalSharkey.jpg",
+          "date": "2009-01-13 19:52"
+        },
+        {
+          "id": 146659596,
+          "title": "File:The Undertones 1979 San Francisco Examiner.jpg",
+          "date": "1980-07-18"
+        }
+      ]
+    },
+    "cat-0.json": {
+      "result_count": 3,
+      "candidates": [
+        {
+          "id": 2405948,
+          "title": "File:AlbertCollins1990.jpg",
+          "date": "1990-09-16"
+        },
+        {
+          "id": 2148828,
+          "title": "File:Albert Collins at Reunion on the Mall.jpg",
+          "date": "1993-01-18"
+        },
+        {
+          "id": 15960126,
+          "title": "File:Albert Collins.jpg",
+          "date": "1980-04-29"
+        }
+      ]
+    },
+    "cat-3.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "cat-2.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "cat-4.json": {
+      "result_count": 26,
+      "candidates": [
+        {
+          "id": 94909010,
+          "title": "File:Bed-In for Peace, Amsterdam 1969 - John Lennon & Yoko Ono 05 cropped.jpg",
+          "date": "1969-03-25"
+        },
+        {
+          "id": 3797776,
+          "title": "File:Genius Bar, SoHo Apple Store, September 2003.jpg",
+          "date": "2003-09-22 12:33:28"
+        },
+        {
+          "id": 14797205,
+          "title": "File:I Met the Walrus Excerpt.ogv",
+          "date": "2011-04-05"
+        },
+        {
+          "id": 99364788,
+          "title": "File:John Lennon (1969).jpg",
+          "date": "1969-03-31"
+        },
+        {
+          "id": 93750759,
+          "title": "File:John Lennon 1969 (cropped)-Colorized.jpg",
+          "date": "1969-03-31"
+        }
+      ]
+    },
+    "lennon-category.json": {
+      "result_count": 26,
+      "candidates": [
+        {
+          "id": 94909010,
+          "title": "File:Bed-In for Peace, Amsterdam 1969 - John Lennon & Yoko Ono 05 cropped.jpg",
+          "date": "1969-03-25"
+        },
+        {
+          "id": 3797776,
+          "title": "File:Genius Bar, SoHo Apple Store, September 2003.jpg",
+          "date": "2003-09-22 12:33:28"
+        },
+        {
+          "id": 14797205,
+          "title": "File:I Met the Walrus Excerpt.ogv",
+          "date": "2011-04-05"
+        },
+        {
+          "id": 99364788,
+          "title": "File:John Lennon (1969).jpg",
+          "date": "1969-03-31"
+        },
+        {
+          "id": 93750759,
+          "title": "File:John Lennon 1969 (cropped)-Colorized.jpg",
+          "date": "1969-03-31"
+        }
+      ]
+    },
+    "lennon.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "extra-2.json": {
+      "result_count": 3,
+      "candidates": [
+        {
+          "id": 133128799,
+          "title": "File:I'll Never Find Another You - Open Up Them Pearly Gates - Cash Box ad 1965.jpg",
+          "date": "1965-03-13"
+        },
+        {
+          "id": 164402280,
+          "title": "File:The Seekers.jpg",
+          "date": "1965-03-13"
+        },
+        {
+          "id": 27154053,
+          "title": "File:The Seekers.png",
+          "date": "1965-05-22"
+        }
+      ]
+    },
+    "extra-3.json": {
+      "result_count": 15,
+      "candidates": [
+        {
+          "id": 25320209,
+          "title": "File:Beatles Trenter 1963.jpg",
+          "date": "2013-03-28 10:19:37"
+        },
+        {
+          "id": 74689615,
+          "title": "File:Beatles Trenter 1963 (cropped).jpg",
+          "date": "2013-03-28 10:19:37"
+        },
+        {
+          "id": 183492497,
+          "title": "File:John-wa-portrait.jpg",
+          "date": "Autumn 1968<div style=\"display: none;\">date QS:P,+1968-00-00T00:00:00Z/9,P4241,Q40720568</div>"
+        },
+        {
+          "id": 30317756,
+          "title": "File:JohnLennon1963.jpg",
+          "date": "1963-10-30"
+        },
+        {
+          "id": 99364788,
+          "title": "File:John Lennon (1969).jpg",
+          "date": "1969-03-31"
+        }
+      ]
+    },
+    "extra-0.json": {
+      "result_count": 4,
+      "candidates": [
+        {
+          "id": 30228382,
+          "title": "File:Daryl Bobb.jpg",
+          "date": "2013-12-18 20:20:49"
+        },
+        {
+          "id": 30228383,
+          "title": "File:Daryl Bobb.png",
+          "date": "2013-12-18 20:21:08"
+        },
+        {
+          "id": 69141511,
+          "title": "File:Mariah Carey - Fantasy at Madison Square Garden, 10 October 1995 (5453809561).jpg",
+          "date": "1995-10-10 21:00"
+        },
+        {
+          "id": 24271515,
+          "title": "File:Mariah Carey at Pearls Theatre, The Palms, Las Vegas, 12 September 2009 (5262980692).jpg",
+          "date": "2009-09-12 21:05"
+        }
+      ]
+    },
+    "extra-1.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "commons-1.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "commons-2.json": {
+      "result_count": 0,
+      "candidates": []
+    },
+    "commons-3.json": {
+      "result_count": 14,
+      "candidates": [
+        {
+          "id": 94194220,
+          "title": "File:Diana Ross (10695844926).jpg",
+          "date": "circa between 1960 and 1968<div style=\"display: none;\">date QS:P,+1960-00-00T00:00:00Z/8,P1319,+1960"
+        },
+        {
+          "id": 66476744,
+          "title": "File:Diana Ross en The Supremes tijdens opname in RAI voor AVRO-TV, Bestanddeelnr 920-9922.jpg",
+          "date": "1968-01-16"
+        },
+        {
+          "id": 66476753,
+          "title": "File:Diana Ross en The Supremes tijdens opname in RAI voor AVRO-TV, Bestanddeelnr 920-9923.jpg",
+          "date": "1968-01-16"
+        },
+        {
+          "id": 66476763,
+          "title": "File:Diana Ross en The Supremes tijdens opname in RAI voor AVRO-TV, Bestanddeelnr 920-9924.jpg",
+          "date": "1968-01-16"
+        },
+        {
+          "id": 66476776,
+          "title": "File:Diana Ross en The Supremes tijdens opname in RAI voor AVRO-TV, Bestanddeelnr 920-9925.jpg",
+          "date": "1968-01-16"
+        }
+      ]
+    },
+    "commons-0.json": {
+      "result_count": 1,
+      "candidates": [
+        {
+          "id": 2148828,
+          "title": "File:Albert Collins at Reunion on the Mall.jpg",
+          "date": "1993-01-18"
+        }
+      ]
+    }
+  },
+  "visual_rejection_evidence": [
+    {
+      "ids": [
+        66476744,
+        66476753,
+        66476763,
+        66476776,
+        66476789,
+        65924806,
+        66476585,
+        66476619
+      ],
+      "artist": "Diana Ross",
+      "reason": "1968 live/press frames contain the Supremes. At most two views make Diana individually dominant; other full frames give bandmates equal emphasis or include a wide TV production scene. No third solo-dominant set approved."
+    },
+    {
+      "ids": [
+        65912968,
+        66759098,
+        65912921,
+        44122819
+      ],
+      "artist": "John Lennon",
+      "reason": "Original frames inspected: foreground security/crowd, John obscured, equal Yoko portrait, or crowded bed-in with guests. No three artist-dominant full frames."
+    },
+    {
+      "ids": [
+        192134341,
+        192142998,
+        51530839,
+        51530841
+      ],
+      "artist": "Whitney Houston",
+      "reason": "1994 originals inspected: two contact sheets, two related television/video stills from the same performance. Contact-sheet/derived stills not silently approved as three original photographs."
+    },
+    {
+      "artist": "Albert Collins",
+      "reason": "Same-year1993 search finds one eligible high-resolution original;1992 search/category no additional set.1990 not allowed without pre-existing ±2/±3 exception; none requested."
+    }
+  ],
+  "transient_access_note": "Two Commons searches returned HTTP429; no persistent block or global service outage inferred. No paid source fallback or approval bypass.",
+  "provider_calls": 0,
+  "renders": 0,
+  "uploads": 0,
+  "independent_watchdog_acceptance": false,
+  "next_step": "Retain today's prepared exact-day event for14:23. Complete24/25photo sets or choose another exact-day event. Reuse this negative-research index instead of repeating identical searches."
+}
