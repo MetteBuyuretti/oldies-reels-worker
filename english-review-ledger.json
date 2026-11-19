@@ -126,7 +126,15 @@
       "status": "artifact_saved",
       "run_id": "44522490069",
       "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
-      "artifact_run": "44522490069"
+      "artifact_run": "44522490069",
+      "facebook": {
+        "state": "publication_requested",
+        "publication_verified": false,
+        "content_id": "oldies-news-88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935",
+        "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
+        "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1962-11-19-the-beatles-44522490069-1.mp4",
+        "run_id": "44522490069"
+      }
     }
   },
   "events": {
@@ -256,7 +264,15 @@
       "status": "artifact_saved",
       "run_id": "44522490069",
       "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
-      "artifact_run": "44522490069"
+      "artifact_run": "44522490069",
+      "facebook": {
+        "state": "publication_requested",
+        "publication_verified": false,
+        "content_id": "oldies-news-88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935",
+        "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
+        "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1962-11-19-the-beatles-44522490069-1.mp4",
+        "run_id": "44522490069"
+      }
     }
   },
   "failed_attempts": [
