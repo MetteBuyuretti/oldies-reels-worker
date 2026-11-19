@@ -128,14 +128,14 @@
       "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
       "artifact_run": "44522490069",
       "facebook": {
-        "state": "uploaded_unverified",
-        "publication_verified": false,
+        "state": "published",
+        "publication_verified": true,
         "content_id": "oldies-news-88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935",
         "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1962-11-19-the-beatles-44522490069-1.mp4",
         "run_id": "44522490069",
         "video_id": "1440487271017148",
-        "permalink": "",
+        "permalink": "https://www.facebook.com/reel/1440487271017148",
         "remote_response": {
           "success": true,
           "dry_run": false,
@@ -161,6 +161,16 @@
             }
           },
           "media_sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc"
+        },
+        "verification": {
+          "method": "authenticated_browser_public_reel_playback",
+          "verified_at": "2026-11-19 12:19:58 UTC",
+          "page_name": "Oldies Radyo",
+          "audience": "public",
+          "video_duration_seconds": 25.699999,
+          "ready_state": 4,
+          "observed_playback_seconds": 3.631394,
+          "permalink": "https://www.facebook.com/reel/1440487271017148"
         }
       }
     }
@@ -294,14 +304,14 @@
       "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
       "artifact_run": "44522490069",
       "facebook": {
-        "state": "uploaded_unverified",
-        "publication_verified": false,
+        "state": "published",
+        "publication_verified": true,
         "content_id": "oldies-news-88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935",
         "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1962-11-19-the-beatles-44522490069-1.mp4",
         "run_id": "44522490069",
         "video_id": "1440487271017148",
-        "permalink": "",
+        "permalink": "https://www.facebook.com/reel/1440487271017148",
         "remote_response": {
           "success": true,
           "dry_run": false,
@@ -327,6 +337,16 @@
             }
           },
           "media_sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc"
+        },
+        "verification": {
+          "method": "authenticated_browser_public_reel_playback",
+          "verified_at": "2026-11-19 12:19:58 UTC",
+          "page_name": "Oldies Radyo",
+          "audience": "public",
+          "video_duration_seconds": 25.699999,
+          "ready_state": 4,
+          "observed_playback_seconds": 3.631394,
+          "permalink": "https://www.facebook.com/reel/1440487271017148"
         }
       }
     }
