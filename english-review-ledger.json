@@ -128,12 +128,40 @@
       "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
       "artifact_run": "44522490069",
       "facebook": {
-        "state": "publication_requested",
+        "state": "uploaded_unverified",
         "publication_verified": false,
         "content_id": "oldies-news-88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935",
         "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1962-11-19-the-beatles-44522490069-1.mp4",
-        "run_id": "44522490069"
+        "run_id": "44522490069",
+        "video_id": "1440487271017148",
+        "permalink": "",
+        "remote_response": {
+          "success": true,
+          "dry_run": false,
+          "content_id": "oldies-news-88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935",
+          "video_id": "1440487271017148",
+          "post_id": "1440487271017148",
+          "post_url": "/reel/1440487271017148/",
+          "status": {
+            "video_status": "processing",
+            "processing_progress": 0,
+            "uploading_phase": {
+              "status": "complete",
+              "bytes_transferred": 1888720
+            },
+            "processing_phase": {
+              "status": "in_progress"
+            },
+            "publishing_phase": {
+              "status": "not_started"
+            },
+            "copyright_check_status": {
+              "status": "in_progress"
+            }
+          },
+          "media_sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc"
+        }
       }
     }
   },
@@ -266,12 +294,40 @@
       "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
       "artifact_run": "44522490069",
       "facebook": {
-        "state": "publication_requested",
+        "state": "uploaded_unverified",
         "publication_verified": false,
         "content_id": "oldies-news-88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935",
         "sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc",
         "delivery_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/releases/download/reels-delivery/1962-11-19-the-beatles-44522490069-1.mp4",
-        "run_id": "44522490069"
+        "run_id": "44522490069",
+        "video_id": "1440487271017148",
+        "permalink": "",
+        "remote_response": {
+          "success": true,
+          "dry_run": false,
+          "content_id": "oldies-news-88f3dc4e1423fab6abf8cd8d393912f043e76eed268ec935",
+          "video_id": "1440487271017148",
+          "post_id": "1440487271017148",
+          "post_url": "/reel/1440487271017148/",
+          "status": {
+            "video_status": "processing",
+            "processing_progress": 0,
+            "uploading_phase": {
+              "status": "complete",
+              "bytes_transferred": 1888720
+            },
+            "processing_phase": {
+              "status": "in_progress"
+            },
+            "publishing_phase": {
+              "status": "not_started"
+            },
+            "copyright_check_status": {
+              "status": "in_progress"
+            }
+          },
+          "media_sha256": "8dbf0638dcdf5a2c16bb0d4baf2be8a7ad87769f5b0cd5e518d8ac91db5cedbc"
+        }
       }
     }
   },
