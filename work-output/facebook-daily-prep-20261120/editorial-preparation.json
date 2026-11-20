@@ -1,0 +1,37 @@
+{
+  "production_day": "2026-11-20",
+  "ready_calendar_days": [
+    "2026-11-20",
+    "2026-11-21",
+    "2026-11-22",
+    "2026-11-23"
+  ],
+  "missing_days": [
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26"
+  ],
+  "today": {
+    "artist": "The Supremes",
+    "event_id": "6019",
+    "visible_event_confirmed": true,
+    "photo_bank_sha": "6b45f18ffa578a431b86993c190f6dc20b55a496",
+    "fresh_parser_output": false
+  },
+  "access": "Direct HTTP 403; browser Imperva Error 15. Indexed daily text accessible, raw TDIM record unavailable.",
+  "prior_drafts": "work-output/facebook-daily-prep-20261119/editorial-preparation.json",
+  "draft": {
+    "artist": "The Beatles",
+    "event_date": "1962-11-26",
+    "reviewed": false,
+    "script": "November twenty-sixth, nineteen sixty-two. At EMI Studios in London, the Beatles put both sides of their next single on tape: Please Please Me and Ask Me Why. George Martin produced the session, and the record reached British shops the following January.",
+    "word_count": 41,
+    "sources": [
+      "https://www.thisdayinmusic.com/on-this-day-in-music-november-26/",
+      "https://www.thebeatles.com/please-please-me-0",
+      "https://www.thebeatles.com/ask-me-why"
+    ],
+    "next": "Obtain genuine TDIM parser event ID and fingerprint; apply existing photo selector and recorded 1962/1963 research before review."
+  },
+  "independent_acceptance": "pending"
+}
