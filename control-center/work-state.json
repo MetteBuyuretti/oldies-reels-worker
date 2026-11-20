@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-20 02:18:41 UTC",
+  "updated_at": "2026-11-20 12:18:50 UTC",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -706,11 +706,12 @@
         "20261119_24and25_46word_sourcebound_drafts_saved_not_ready_stock",
         "20261119_photo_negative_research_and_inspection_saved_no_unearned_approvals",
         "20261119-single-recovery-44522490069-artifact-and-public-facebook-playback-verified",
-        "20261120-calendar-stock-four-and-nov26-editorial-draft-saved"
+        "20261120-calendar-stock-four-and-nov26-editorial-draft-saved",
+        "20261120-afternoon-checked-scheduled-run-history-and-latest-duplicate-receipts"
       ],
-      "last_checkpoint": "2026-11-20 02:18:41 UTC",
-      "next_step": "Önce 20 Kasım producer gerçek koşusu ve kaynak makbuzunu kontrol et. Ardından 24–25 için üç uygun fotoğraflı olay ve 26 için gerçek TDIM parser kaydı; WATCHDOG bağımsız kabulü ayrı.",
-      "note": "20 Kasım Supremes olayı görünür kaynakta eşleşti; 3 onaylı dönem fotoğrafı mevcut. Canlı ham TDIM erişimi 403/Imperva 15; taze parser doğrulaması yok. 20–23 kayıtlı hazır, 24–26 açık.",
+      "last_checkpoint": "2026-11-20 12:18:50 UTC",
+      "next_step": "20 Kasım için önce güncel gerçek TDIM event 6019 fingerprint ve uygun üç fotoğraf PASS kanıtı; koşu ve ledger güncel okunmadan kurtarma yok. Geç gelen doğal koşuda gerçek günün makbuzunu denetle; 24–26 hazırlık açığı ve bağımsız kabul ayrı bekliyor.",
+      "note": "20 Kasım 15:17 TSİ kontrolünde günün koşusu, reservation veya gönderim kaydı yok. Son koşu 44599096973, 19 Kasım 22:30 TSİ: duplicate_blocked; 19 Kasım yayımlanmış aynı video makbuzu korundu, 20 Kasım manifest ve daily-source yok. Son stok makbuzu dört takvim günü gösteriyor.",
       "acceptance": {
         "voice_preference": "Owner explicitly accepted news-upbeat-v1; lively medium-upbeat,25-30s,balanced era-matched royalty-free instrumental",
         "approved_asset_identity": "accepted_by_master_and_independent_watchdog_6509320201_existing_signoffs_only",
@@ -782,7 +783,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261119/editorial-preparation.json",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44522490069",
         "https://www.facebook.com/reel/1440487271017148",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261120/editorial-preparation.json"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261120/editorial-preparation.json",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44599096973"
       ],
       "control_time": "18 Kasım 2026 05:15 TSİ hazırlık;14:23 üretim;15:15 yayın kontrolü ve gerekirse tek güvenli kurtarma.",
       "last_status_audit": "2026-10-30T22:01:47.048Z"
