@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-20 12:18:50 UTC",
+  "updated_at": "2026-11-21 02:17:32 UTC",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -707,11 +707,12 @@
         "20261119_photo_negative_research_and_inspection_saved_no_unearned_approvals",
         "20261119-single-recovery-44522490069-artifact-and-public-facebook-playback-verified",
         "20261120-calendar-stock-four-and-nov26-editorial-draft-saved",
-        "20261120-afternoon-checked-scheduled-run-history-and-latest-duplicate-receipts"
+        "20261120-afternoon-checked-scheduled-run-history-and-latest-duplicate-receipts",
+        "20261121-calendar-coverage-and-nov27-harrison-draft"
       ],
-      "last_checkpoint": "2026-11-20 12:18:50 UTC",
-      "next_step": "20 Kasım için önce güncel gerçek TDIM event 6019 fingerprint ve uygun üç fotoğraf PASS kanıtı; koşu ve ledger güncel okunmadan kurtarma yok. Geç gelen doğal koşuda gerçek günün makbuzunu denetle; 24–26 hazırlık açığı ve bağımsız kabul ayrı bekliyor.",
-      "note": "20 Kasım 15:17 TSİ kontrolünde günün koşusu, reservation veya gönderim kaydı yok. Son koşu 44599096973, 19 Kasım 22:30 TSİ: duplicate_blocked; 19 Kasım yayımlanmış aynı video makbuzu korundu, 20 Kasım manifest ve daily-source yok. Son stok makbuzu dört takvim günü gösteriyor.",
+      "last_checkpoint": "2026-11-21 02:17:32 UTC",
+      "next_step": "21 Kasım için gerçek producer koşusunun TDIM makbuzunu ve Facebook sonucunu 15:15 TSİ kontrol et. Stokta önce 24 Kasım uygun üç fotoğraf, sonra 25–27 açıklarını tamamla.",
+      "note": "21 Kasım Elton John olayı görünür TDIM kaynağında eşleşti; üç onaylı 1971 fotoğrafı kayıtlı. Doğrudan kaynak HTTP 403; güncel parser makbuzu yok. 21–23 kayıtlı hazır, 24–27 açık.",
       "acceptance": {
         "voice_preference": "Owner explicitly accepted news-upbeat-v1; lively medium-upbeat,25-30s,balanced era-matched royalty-free instrumental",
         "approved_asset_identity": "accepted_by_master_and_independent_watchdog_6509320201_existing_signoffs_only",
@@ -784,7 +785,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44522490069",
         "https://www.facebook.com/reel/1440487271017148",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261120/editorial-preparation.json",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44599096973"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44599096973",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261121/editorial-preparation.json"
       ],
       "control_time": "18 Kasım 2026 05:15 TSİ hazırlık;14:23 üretim;15:15 yayın kontrolü ve gerekirse tek güvenli kurtarma.",
       "last_status_audit": "2026-10-30T22:01:47.048Z"
