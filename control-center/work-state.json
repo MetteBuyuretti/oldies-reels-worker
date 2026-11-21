@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-21T10:44:47.134Z",
+  "updated_at": "2026-11-21T12:15:00Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -711,8 +711,8 @@
         "20261121-calendar-coverage-and-nov27-harrison-draft"
       ],
       "last_checkpoint": "2026-11-21 02:17:32 UTC",
-      "next_step": "21 Kasım için gerçek producer koşusunun TDIM makbuzunu ve Facebook sonucunu 15:15 TSİ kontrol et. Stokta önce 24 Kasım uygun üç fotoğraf, sonra 25–27 açıklarını tamamla.",
-      "note": "21 Kasım Elton John olayı görünür TDIM kaynağında eşleşti; üç onaylı 1971 fotoğrafı kayıtlı. Doğrudan kaynak HTTP 403; güncel parser makbuzu yok. 21–23 kayıtlı hazır, 24–27 açık. 21 Kasım kurucu bildirimi: üretim/yayın gerçekleşmediğinde özgün doğrulanmış hata ve ilk düzeltme adımı kullanıcıya kısa uyarı olarak bildirilecek; bilinmeyen neden açıkça belirtilecek.",
+      "next_step": "21 Kasım 15:15 TSİ: bugünün schedule koşusu henüz görünmüyor; yeni tetikleme öncesi TDIM günlük kaynak parser makbuzunu ve güncel ledger rezervasyonunu doğrula. Kaynak PASS ise aynı gün tek kurtarma markerını kullan; 20 Kasım hatası için eksik exact-day reviewed haber ve üç fotoğraf hazırlığını tamamla.",
+      "note": "21 Kasım Elton John olayı görünür TDIM kaynağında eşleşti; üç onaylı 1971 fotoğrafı kayıtlı. Doğrudan kaynak HTTP 403; güncel parser makbuzu yok. 21–23 kayıtlı hazır, 24–27 açık. 21 Kasım kurucu bildirimi: üretim/yayın gerçekleşmediğinde özgün doğrulanmış hata ve ilk düzeltme adımı kullanıcıya kısa uyarı olarak bildirilecek; bilinmeyen neden açıkça belirtilecek.\n21.11.2026 15:15 TSİ: En son gerçek schedule run 44799540563 (20 Kasım 22:09 TSİ) failure. prepare-review adımında RuntimeError: o gün için üç reviewed dönem fotoğraflı reviewed exact-day TDIM haberi yok; render ve Facebook adımları skipped, yayın makbuzu yok. 21 Kasım 15:15 itibarıyla yeni workflow run ve ledger günü yok. 21 Kasım source parser güncel makbuzu yok (doğrudan HTTP403 gözlendi); recovery PASS önkoşulu henüz sağlanmadı. Bugün üretim/yayın başarısı ilan edilmez.",
       "acceptance": {
         "voice_preference": "Owner explicitly accepted news-upbeat-v1; lively medium-upbeat,25-30s,balanced era-matched royalty-free instrumental",
         "approved_asset_identity": "accepted_by_master_and_independent_watchdog_6509320201_existing_signoffs_only",
@@ -721,7 +721,7 @@
         "independent_watchdog": "accepted_signoff_identity_only_WD_SIGNOFF_IDENTITY_20261030_01",
         "live_publication": "November18 Facebook1759431565162805 public27.133333s playing/readyState4 verified, same-video source hash21bf7eab...; original processing receipt retained.",
         "current_local_repair_receipt": "partial_source_identity_observed_6497201301",
-        "production_and_continuity": "Nov18 single controlled recovery succeeded; scheduled14:23run absent at15:15, next natural scheduled run not yet proven. No continuity PASS or independent acceptance claimed.",
+        "production_and_continuity": "20Nov scheduled run44799540563 failed pre-production: no exact-day reviewed event with three reviewed photos. 21Nov 15:15 TRT: no scheduled run or day ledger yet; current source preflight not PASS, publication unverified.",
         "windows_local_copy_match": "energetic_full_hash_match_calm_not_found_in_known_paths_original_PR22_source_known",
         "independent_final_media_review": "pending_separate_from_signoff_identity",
         "work2_handoff": "received_source_delivery_and_master_scoped_fixture_validation",
@@ -786,7 +786,8 @@
         "https://www.facebook.com/reel/1440487271017148",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261120/editorial-preparation.json",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44599096973",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261121/editorial-preparation.json"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261121/editorial-preparation.json",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44799540563"
       ],
       "control_time": "18 Kasım 2026 05:15 TSİ hazırlık;14:23 üretim;15:15 yayın kontrolü ve gerekirse tek güvenli kurtarma.",
       "last_status_audit": "2026-10-30T22:01:47.048Z"
