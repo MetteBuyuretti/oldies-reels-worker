@@ -1,0 +1,38 @@
+{
+  "production_day": "2026-11-21",
+  "ready_calendar_days": [
+    "2026-11-21",
+    "2026-11-22",
+    "2026-11-23"
+  ],
+  "missing_days": [
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26",
+    "2026-11-27"
+  ],
+  "today": {
+    "artist": "Elton John",
+    "existing_event_id": "6954",
+    "visible_event_confirmed": true,
+    "existing_photo_bank_sha": "6b45f18ffa578a431b86993c190f6dc20b55a496",
+    "fresh_parser_receipt": false,
+    "direct_http": 403
+  },
+  "draft": {
+    "artist": "George Harrison",
+    "event_date": "1970-11-27",
+    "reviewed": false,
+    "script": "November twenty-seventh, nineteen seventy. George Harrison stepped into the spotlight with All Things Must Pass. The triple album brought us My Sweet Lord and What Is Life. Harrison and Phil Spector co-produced it, with Ringo Starr, Billy Preston and Eric Clapton among the players.",
+    "words": 44,
+    "sources": [
+      "https://www.thisdayinmusic.com/on-this-day-in-music-november-27/",
+      "https://www.georgeharrison.com/releases/all-things-must-pass/"
+    ],
+    "pending": [
+      "TDIM parser event ID and fingerprint",
+      "three original period images with license, uncut composition and SHA-256"
+    ]
+  },
+  "independent_acceptance": "pending"
+}
