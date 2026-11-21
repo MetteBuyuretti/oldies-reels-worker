@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-21 02:17:32 UTC",
+  "updated_at": "2026-11-21T10:44:47.134Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -712,7 +712,7 @@
       ],
       "last_checkpoint": "2026-11-21 02:17:32 UTC",
       "next_step": "21 Kasım için gerçek producer koşusunun TDIM makbuzunu ve Facebook sonucunu 15:15 TSİ kontrol et. Stokta önce 24 Kasım uygun üç fotoğraf, sonra 25–27 açıklarını tamamla.",
-      "note": "21 Kasım Elton John olayı görünür TDIM kaynağında eşleşti; üç onaylı 1971 fotoğrafı kayıtlı. Doğrudan kaynak HTTP 403; güncel parser makbuzu yok. 21–23 kayıtlı hazır, 24–27 açık.",
+      "note": "21 Kasım Elton John olayı görünür TDIM kaynağında eşleşti; üç onaylı 1971 fotoğrafı kayıtlı. Doğrudan kaynak HTTP 403; güncel parser makbuzu yok. 21–23 kayıtlı hazır, 24–27 açık. 21 Kasım kurucu bildirimi: üretim/yayın gerçekleşmediğinde özgün doğrulanmış hata ve ilk düzeltme adımı kullanıcıya kısa uyarı olarak bildirilecek; bilinmeyen neden açıkça belirtilecek.",
       "acceptance": {
         "voice_preference": "Owner explicitly accepted news-upbeat-v1; lively medium-upbeat,25-30s,balanced era-matched royalty-free instrumental",
         "approved_asset_identity": "accepted_by_master_and_independent_watchdog_6509320201_existing_signoffs_only",
