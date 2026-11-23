@@ -222,15 +222,24 @@ def record_part(text: str, role: str, path: Path, project: str, token: str, synt
     words = spoken_word_count(text)
     target_seconds = words * 60 / target_wpm
     factor = min(1.0, qc['duration_seconds'] / target_seconds)
-    if factor < TEMPLATE['minimum_slowdown_factor']:
-        raise RuntimeError('Facebook DJ take was too rushed; rerecord at a natural pace')
-    # Keep the natural take; timing gates never stretch or accelerate speech.
-    factor = 1.0
     estimated_wpm = words * 60 / qc['duration_seconds']
-    if estimated_wpm > max_wpm:
-        raise RuntimeError('Facebook DJ take exceeds the relaxed pace limit')
+    reason = None
+    if factor < TEMPLATE['minimum_slowdown_factor']:
+        reason = 'Facebook DJ take was too rushed; rerecord at a natural pace'
+    elif estimated_wpm > max_wpm:
+        reason = 'Facebook DJ take exceeds the relaxed pace limit'
+    # Preserve measurements and the natural take even when the pace gate rejects it.
+    evidence={'duration_seconds':qc['duration_seconds'],'spoken_words_estimated':words,
+        'estimated_wpm':round(estimated_wpm,1),'target_wpm':target_wpm,'maximum_wpm':max_wpm,
+        'target_seconds':round(target_seconds,3),'tempo_factor':1.0,
+        'sha256':hashlib.sha256(raw).hexdigest(),'role':role,
+        'accepted':reason is None,'rejection_reason':reason}
+    path.with_suffix(path.suffix+'.pace.json').write_text(json.dumps(evidence,indent=2))
+    if reason:
+        raise RuntimeError(reason)
     return {'duration_seconds': qc['duration_seconds'], 'spoken_words_estimated': words,
-            'estimated_wpm': round(estimated_wpm, 1), 'tempo_factor': round(factor, 4)}
+            'estimated_wpm': round(estimated_wpm, 1), 'tempo_factor': 1.0}
+
 
 
 def synthesize_dj(candidate: dict, directory: Path, project: str, token: str, synthesize) -> Path:
@@ -364,4 +373,5 @@ def validate_recording(video: Path, candidate: dict) -> dict:
     return {'warm_recording_template': TEMPLATE['version'], 'story_estimated_wpm': recording['story']['estimated_wpm'],
             'advert_estimated_wpm': round(advert_wpm, 1), 'advert_gap_seconds': TEMPLATE['advert_gap_seconds'],
             'gap_max_volume_db': float(level.group(1)), 'speedup_applied': False}
+
 
