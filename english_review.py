@@ -218,6 +218,33 @@ def select_candidate(day, directory, ledger=None):
     eligible=[c for c in reviewed if c.get('reviewed') is True and c.get('sources') and event_key(c) not in used]
     entries=tdim_daily.fetch_events(day,directory)
     candidates=[c for c in eligible if any(tdim_daily.matches(c,e,day) for e in entries)]
+    source_diagnostics=[]
+    for reviewed_candidate in eligible:
+        if reviewed_candidate.get('event_date', '')[5:] != day[5:]:
+            continue
+        binding=reviewed_candidate.get('daily_source') or {}
+        matching_id=[e for e in entries if e['source_event_id']==str(binding.get('event_id'))]
+        if any(tdim_daily.matches(reviewed_candidate,e,day) for e in matching_id):
+            reason='source_binding_verified'
+        elif not matching_id:
+            reason='reviewed_source_event_missing'
+        elif any(e['source_sha256']!=binding.get('source_sha256') for e in matching_id):
+            reason='source_fingerprint_changed_review_required'
+        else:
+            reason='source_identity_or_url_mismatch'
+        source_diagnostics.append({'artist':reviewed_candidate.get('artist'),
+            'event_date':reviewed_candidate.get('event_date'), 'reason':reason,
+            'reviewed_sha256':binding.get('source_sha256'),
+            'current_sha256':[e['source_sha256'] for e in matching_id]})
+    directory=Path(directory);directory.mkdir(parents=True,exist_ok=True)
+    (directory/'source-binding-check.json').write_text(json.dumps({
+        'production_day':day,'live_entry_count':len(entries),
+        'exactly_bound_candidates':len(candidates),'candidates':source_diagnostics,
+        'publication_performed':False},indent=2))
+    if not candidates:
+        reasons=', '.join(sorted({c['reason'] for c in source_diagnostics})) or 'no_reviewed_candidate_for_day'
+        raise RuntimeError('No reviewed exact-day source binding: '+reasons+
+                           '. See source-binding-check.json; no provider request or archive substitution.')
     candidates.sort(key=lambda c: (int(c['event_date'][:4])//10*10 not in (1980,1990),
                                   -int(c.get('editorial_priority',0))))
     for candidate in candidates:
@@ -280,6 +307,13 @@ def build(day, output, ledger):
     output.mkdir(parents=True, exist_ok=True)
     stock_health(day,ledger,output)
     if day in ledger.data['days']:
+        record=ledger.data['days'][day]
+        if record.get('status') != 'artifact_saved':
+            reason='Existing reservation has no completed artifact; reconcile its run and saved provider take before retrying'
+            (output/'status.json').write_text(json.dumps({'status':'incomplete_reservation_blocked',
+                'day':day,'reservation':record,'reason':reason,'publication_performed':False,
+                'provider_request_performed':False}))
+            raise RuntimeError(reason)
         (output / 'status.json').write_text(json.dumps({'status': 'duplicate_blocked', 'day': day}))
         print('Duplicate day blocked; no provider request.'); return
     audio.selected_signoff({'signoff_profile': 'calm'})
@@ -340,8 +374,13 @@ def main():
     try: build(args.day, args.output, ledger)
     except Exception as exc:
         args.output.mkdir(parents=True, exist_ok=True)
-        (args.output / 'status.json').write_text(json.dumps({'status': 'blocked', 'reason': str(exc),
-            'publication_performed': False}, ensure_ascii=False, indent=2))
+        status_path=args.output/'status.json'
+        try: previous=json.loads(status_path.read_text())
+        except (OSError,ValueError): previous={}
+        details=previous if previous.get('status')=='incomplete_reservation_blocked' and previous.get('day')==args.day else {}
+        status_path.write_text(json.dumps({**details,'status':details.get('status','blocked'),
+            'day':args.day,'reason':str(exc),'publication_performed':False},ensure_ascii=False,indent=2))
         raise
 
 if __name__ == '__main__': main()
+
