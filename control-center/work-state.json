@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-23T12:16:00Z",
+  "updated_at": "2026-11-23T12:21:39.974Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1531,7 +1531,7 @@
       "title": "Etsy mevcut ilan otomasyonu — ürün profili, paket writer ve yeni kaynak devamı",
       "owner": "WORK MASTER/root; mevcut Etsy otomasyon projesi",
       "status": "blocked",
-      "last_checkpoint": "2026-11-23T09:49:06.157Z",
+      "last_checkpoint": "2026-11-23T12:21:39.974Z",
       "completed_units": [
         "existing-source-root-causes-verified",
         "supplier-native-profile-and-packet-route-installed-in-current-bridge",
@@ -1539,10 +1539,16 @@
         "windows-staging-45-tests-passed",
         "existing-draft-two-real-panel-dispatch-runs-zero-etsy-writes",
         "candidate-request-and-workflow-evidence-reconciled",
-        "rollback-backup-and-shared-etsy-handoff-recorded"
+        "rollback-backup-and-shared-etsy-handoff-recorded",
+        "founder-approved-printkk-key-created-ui-permissions-verified",
+        "current-user-dpapi-config-installed",
+        "signed-product-three-get-readback-passed",
+        "existing-design-and-eight-render-sha-matches-bound",
+        "windows-regression-fifty-tests-passed",
+        "stale-expired-key-preparation-blocker-replaced-with-current-step"
       ],
       "technical_result": {
-        "tests_passed": 45,
+        "tests_passed": 50,
         "tests_failed": 0,
         "listing_id": 4622145547,
         "actual_dispatch_runs": 2,
@@ -1550,17 +1556,24 @@
         "etsy_mutations": 0,
         "independent_acceptance": false,
         "new_artwork_end_to_end_verified": false,
-        "published": false
+        "published": false,
+        "printkk_key_created": true,
+        "credentials_dpapi_verified": true,
+        "printkk_product_readback_verified": true,
+        "printkk_signed_gets_this_turn": 5,
+        "accepted_supplier_render_hash_matches": 8,
+        "printkk_design_code": "nJpvRViVUZb",
+        "printkk_design_specification_code": "nJpvRViVUZbRG",
+        "printkk_design_post_this_turn": 0,
+        "order_execution_verified": false
       },
       "blockers": [
-        "PRINTKK_RESEARCH_KEY_EXPIRED",
-        "PRINTKK_IMAGES_DESIGNS_WRITE_NEW_ACCESS_CONFIRMATION_REQUIRED",
-        "NEW_ARTWORK_NATIVE_PRINT_AREA_MAPPING_AND_RENDER_INTEGRATION_UNVERIFIED",
+        "NEW_ARTWORK_PLACEMENT_RENDER_QC_AND_PACKET_REQUIRED",
         "NEW_ARTWORK_END_TO_END_PILOT_PENDING",
         "INDEPENDENT_WATCHDOG_ACCEPTANCE_PENDING"
       ],
-      "next_step": "Kurucu dar PrintKK Images+Designs write erişimini onayladıktan sonra yeni key/yerel yapılandırmayı tamamla; gerçek product printAreaCode ve safe-area eşlemesini doğrula, yeni işe bağlı render+SEO+paket üretimini bağla; tek yeni kaynakla tam DRAFT ve tekrar aynı ID kanıtı al. Mevcut4622145547/adopted_existing paketi korunur. Açık eski panel süreci yeniden başlatılmadı. Yeni scheduler/publish/orders/payment yok.",
-      "note": "23.11.2026 12:49 TSİ — ChatGPT WORK MASTER implemented this repair; no new DeepSeek Harness delivery. PrintKK New API form prepared but Get code/Submit unused, no credential created. Images/Designs Full access proposed; Products/Orders Read only; default Unrestricted IP. Shared file updated, other chat ACK not observed. Final screenshot/mark call blocked by app configuration, not bypassed. Existing DRAFT technical DONE does not close new-artwork production or continuity.",
+      "next_step": "PrintKK bağlantısı ONAYLI ve canlı3GET+mevcutdesign2GET ile doğrulandı; anahtarı tekrar oluşturma. Yeni kaynak için mevcutnativeyola yerleşim→render→QC→paket üretimini bağla; tek onaylı yeni görselle tamDRAFT ve tekraraynıID pilotunu yap. Mevcut4622145547/adopted_existing veprofilv1hashkilidini koru. API designcode nJpvRViVUZb veOneSize nJpvRViVUZbRG,8/8onaylırenderSHAeşleşmesi mevcut; gerçek siparişkarşılama sınanmadı.",
+      "note": "23.11.2026 12:49 TSİ — ChatGPT WORK MASTER implemented this repair; no new DeepSeek Harness delivery. PrintKK New API form prepared but Get code/Submit unused, no credential created. Images/Designs Full access proposed; Products/Orders Read only; default Unrestricted IP. Shared file updated, other chat ACK not observed. Final screenshot/mark call blocked by app configuration, not bypassed. Existing DRAFT technical DONE does not close new-artwork production or continuity.\n23.11.2026 15:21 TSİ — Founder approved exact new access. Separate key created: Images/Designs Full access, Products/Orders Read only, unrestricted IP. OTP retrieved from correct existing Gmail session. Config encrypted with Windows CurrentUser DPAPI and private ACL; no plaintext file. Saved permission UI verified,50/50Windows tests;current accepted packetLOCAL_PACKET_VERIFIED. Old static Research-key expiry is historical; current runtime shows credentials_ready/product_mapping_verified and NEW_ARTWORK_PLACEMENT_RENDER_QC_AND_PACKET_REQUIRED. Shared PC handoff updated; no other-chat ACK or new DeepSeek Harness receipt.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/etsy-factory-repair-20261123/REPORT.md",
         "https://www.etsy.com/your/shops/me/listing-editor/edit/4622145547"
