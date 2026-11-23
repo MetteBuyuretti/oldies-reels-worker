@@ -1,5 +1,6 @@
 # Oldies Radyo — Harness, Reels ve Etsy teslim durumu
-2026-11-23 07:59 TSİ (UTC+3)
+İlk kontrol: 2026-11-23 07:59 TSİ (UTC+3)
+Son ek: 2026-11-23 08:17 TSİ (UTC+3)
 
 Operasyon sahibi: WORK MASTER/root. Bağımsız WATCHDOG kabulü bu oturumda yapılmadı. Bu rapor 23 Kasım canlı kontrolüne dayanır; tarihsel teslimler yeni üretim sayılmadı.
 
@@ -50,3 +51,19 @@ Operasyon sahibi: WORK MASTER/root. Bağımsız WATCHDOG kabulü bu oturumda yap
 - Etsy ortak kayıt: C:\Users\METE\Documents\Oldies-Radyo-Automation\Etsy-Listing-Factory\ETSY-ANA-DEVIR-KAYDI.md
 - Etsy kanıt kökü: C:\Users\METE\Documents\Oldies-AI-Calismalari\Aktif-Araclar\Oldies-Etsy-Gemini\autonomous-queue\production\jobs\req-custom-29e75e7b304e-f2c6c2497d82baac0068
 - Burada etsy-official-media-readback-20261123.json, bag-partner-get-readback-20261123.json, etsy-strict-full-qc.json ve media/printkk-official-20261123/manifest.json mevcut.
+
+
+## 2026-11-23 08:17 TSİ (UTC+3) — Malzeme alanları ve senaryolu Etsy videosu
+
+GERÇEKLEŞEN: Aynı DRAFT4622145547 üzerinde malzeme etiketleri Polyester ve Quilted fabric olarak kaydedildi. Açıklamada kapitone polyester, sublimasyon, beyaz sap, ana fermuar, bir iç açık cep ve bir iç fermuarlı cep belirtildi; ayrı secondary color White(property52047899002/value10) kaydedildi. Material multi Polyester, primaryGreen, Pin-up&rockabilly korunuyor. Gerçek API GET ve canlı UI kaydı doğrulandı.
+
+Kumaş alanı sınırı: Resmi Etsy taxonomy190 Primary fabric type49673508889 ve Secondary fabric type47626760372 listelerinde Polyester/Quilted yok. Gerçek UI Polyester araması No matches found; doğru serbest değer Quiltedd polyester yazımı API'de value_ids gerektiriyor. Bilinmeyen Canvas/Cotton/Satin/Matelasse seçilmedi, sahte valueID üretilmedi. Tedarikçi ayrı astar/dolgu kumaşını açıklamamış. Bu iki alan dolu diye raporlanmayacak; eksik tedarikçi detayı ve taxonomy uyumsuzluğu kayıtlı.
+
+VIDEO: Beş sahne (ürün→kullanım→kapitone→iç cepler→markalı kapanış), yumuşak geçiş/3.5%yakınlaşma, kısaİngilizce metin,15.000sn/1080x1080/H264/sessiz. Etsyvideo_id855949729,GETvideo_stateactive;listingstateDRAFT. KaynakWindows6208744bytes/SHA460721b0b078c0da5bfe9ea6db035131fea13483e246863083720fbdfe990c22; Etsy-transcode1769056bytes/SHA73891dc4fbdf8286e97f3c907661231b4d403d2d6e699afd7afa3a4dcd30b2cb. DecodePASS. Etsy canlı oynatım15snsonaulaştı,videoendpreviewgörüldü. Yeniilan/yayın/ücret0.
+
+Kanıtlar aynıjob: materials-update-readback-20261123.json,video-upload-readback-20261123.json,video-20261123/{render_video.py,video-qc.json,Oldies-Rockabilly-Tote-15s.mp4}; supplier-evidence/printkk-4j40gj/material-attribute-audit-20261123.json. Packet.copy/materials/description/media güncel. Ücretli video servisi/kredi kullanılmadı. Windows'a doğrudan dosya taşıma mümkün olmadığı için mevcut imageio_ffmpeg ile aynı beşsahneli film Windows'ta ayrıca render edildi; iki sürümün hashleri karıştırılmadı. Video Librarylibfile_72bc3f305e9c8191862378ec751bdbac v1 gerçekEtsygeriindirilenfilmdir.
+
+BEKLEYEN: Primary/secondaryfabric accurate supplier weave/category mapping; önceki28/30cm ölçü farkı; bağımsız kabul ve ürün-nötr otomasyon sürekliliği. Kullanıcıya yeni teknik soru yöneltilmedi. SonrakiEtsyoperatörü aynıtaslak/8resim/1videoyu korumalı, yenidenuploadyapmamalı; gerçekACKhalaayrı.
+
+Tedarikçi malzeme kaynağı: https://www.printkk.com/product/info/quilted-shoulder-tote-bag
+Etsy resmi video kuralları: https://help.etsy.com/hc/en-gb/articles/360053206073-How-to-Add-Listing-Videos
