@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-23T05:17:48Z",
+  "updated_at": "2026-11-23T09:49:06.157Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1507,7 +1507,7 @@
       "title": "Etsy existing DRAFT4622145547 official mockups and China partner",
       "owner": "WORK MASTER / Etsy automation project shared files",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-23T05:17:48Z",
+      "last_checkpoint": "2026-11-23T09:49:06.157Z",
       "completed_units": [
         "same-draft-4622145547-preserved",
         "official-printkk-original-design-front-back-saved",
@@ -1518,10 +1518,50 @@
         "material-tags-quilted-details-secondary-white-get-verified",
         "fifteen-second-five-scene-video-uploaded-playback-verified"
       ],
-      "next_step": "Etsy automation chat must record real ACK in ETSY-ANA-DEVIR-KAYDI.md; keep same job/draft/eight images. Resolve supplier dimension card28cm vs description30cm before publication and validate product-neutral adapter continuity. Do not create a second draft or re-upload. Publication remains Mete-only.",
-      "note": "2026-11-23 07:59 TSİ (UTC+3) — API technical field QC complete/no blockers, not independent acceptance or full factory continuity. Existing draft has8images,SKU2101887537453862968,36.99USD,13tags,FR/DE/ES/JA13tags each. New PrintKK China production partner5894229 only this draft; previousUSpartner/otherlistings unchanged. No video (optional), no publication/cost. ChatGPT chat browser restriction prevents direct chat ACK; shared files read/written, no automatic wake assumed.\n2026-11-23 08:17 TSİ (UTC+3) — Materials Polyester/Quilted fabric, construction/zip/inner pocket description and White secondary color GET/UI saved. Primary/secondary fabric type has no accurate Polyester option in official taxonomy; no Canvas/Cotton guess. Video855949729 active on existing DRAFT,15s1080square,played to end;publicationfalse. Separate supplier weave/lining composition unavailable. See Library report v1 and shared PC receipt.",
+      "next_step": "Kabul edilmiş aynı DRAFT4622145547 mevcut factory yolunda iki kez 10GET/0Etsy yazımıyla doğrulandı. 45/45 Windows staging testi ve kurulum kanıtı yeni etsy-listing-factory-repair-20261123 görevindedir. Mevcut taslağı/medyayı tekrar oluşturma. Yeni görselle render/üretim eşlemesi, ölçü28/30cm, US tarif sınıflaması ve bağımsız kabul açık.",
+      "note": "2026-11-23 07:59 TSİ (UTC+3) — API technical field QC complete/no blockers, not independent acceptance or full factory continuity. Existing draft has8images,SKU2101887537453862968,36.99USD,13tags,FR/DE/ES/JA13tags each. New PrintKK China production partner5894229 only this draft; previousUSpartner/otherlistings unchanged. No video (optional), no publication/cost. ChatGPT chat browser restriction prevents direct chat ACK; shared files read/written, no automatic wake assumed.\n2026-11-23 08:17 TSİ (UTC+3) — Materials Polyester/Quilted fabric, construction/zip/inner pocket description and White secondary color GET/UI saved. Primary/secondary fabric type has no accurate Polyester option in official taxonomy; no Canvas/Cotton guess. Video855949729 active on existing DRAFT,15s1080square,played to end;publicationfalse. Separate supplier weave/lining composition unavailable. See Library report v1 and shared PC receipt.\n23.11.2026 12:49 TSİ — Same existing DRAFT adopted through current panel dispatcher twice, 0 Etsy mutations; unrelated listings unchanged. Shared candidate/request/status reconciled. New-artwork automation is not accepted.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/harness-etsy-reels-20261123/STATUS.md",
+        "https://www.etsy.com/your/shops/me/listing-editor/edit/4622145547"
+      ]
+    },
+    {
+      "id": "etsy-listing-factory-repair-20261123",
+      "title": "Etsy mevcut ilan otomasyonu — ürün profili, paket writer ve yeni kaynak devamı",
+      "owner": "WORK MASTER/root; mevcut Etsy otomasyon projesi",
+      "status": "blocked",
+      "last_checkpoint": "2026-11-23T09:49:06.157Z",
+      "completed_units": [
+        "existing-source-root-causes-verified",
+        "supplier-native-profile-and-packet-route-installed-in-current-bridge",
+        "product-specific-seo-isolated-from-sweatshirt",
+        "windows-staging-45-tests-passed",
+        "existing-draft-two-real-panel-dispatch-runs-zero-etsy-writes",
+        "candidate-request-and-workflow-evidence-reconciled",
+        "rollback-backup-and-shared-etsy-handoff-recorded"
+      ],
+      "technical_result": {
+        "tests_passed": 45,
+        "tests_failed": 0,
+        "listing_id": 4622145547,
+        "actual_dispatch_runs": 2,
+        "etsy_gets_per_run": 10,
+        "etsy_mutations": 0,
+        "independent_acceptance": false,
+        "new_artwork_end_to_end_verified": false,
+        "published": false
+      },
+      "blockers": [
+        "PRINTKK_RESEARCH_KEY_EXPIRED",
+        "PRINTKK_IMAGES_DESIGNS_WRITE_NEW_ACCESS_CONFIRMATION_REQUIRED",
+        "NEW_ARTWORK_NATIVE_PRINT_AREA_MAPPING_AND_RENDER_INTEGRATION_UNVERIFIED",
+        "NEW_ARTWORK_END_TO_END_PILOT_PENDING",
+        "INDEPENDENT_WATCHDOG_ACCEPTANCE_PENDING"
+      ],
+      "next_step": "Kurucu dar PrintKK Images+Designs write erişimini onayladıktan sonra yeni key/yerel yapılandırmayı tamamla; gerçek product printAreaCode ve safe-area eşlemesini doğrula, yeni işe bağlı render+SEO+paket üretimini bağla; tek yeni kaynakla tam DRAFT ve tekrar aynı ID kanıtı al. Mevcut4622145547/adopted_existing paketi korunur. Açık eski panel süreci yeniden başlatılmadı. Yeni scheduler/publish/orders/payment yok.",
+      "note": "23.11.2026 12:49 TSİ — ChatGPT WORK MASTER implemented this repair; no new DeepSeek Harness delivery. PrintKK New API form prepared but Get code/Submit unused, no credential created. Images/Designs Full access proposed; Products/Orders Read only; default Unrestricted IP. Shared file updated, other chat ACK not observed. Final screenshot/mark call blocked by app configuration, not bypassed. Existing DRAFT technical DONE does not close new-artwork production or continuity.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/etsy-factory-repair-20261123/REPORT.md",
         "https://www.etsy.com/your/shops/me/listing-editor/edit/4622145547"
       ]
     }
