@@ -1,3 +1,66 @@
+# Oldies Etsy — güncel onarım ve PrintKK bağlantısı
+Düzenleme: 23.11.2026 15:20 TSİ (UTC+3). Sorumlu: WORK MASTER / bu ChatGPT oturumu.
+
+## GERÇEKLEŞEN
+Kurucunun bu turdaki “Onaylıyorum” mesajı uygulanmıştır. PrintKK'de Oldies-Etsy-Draft-Production adlı ayrı anahtar oluşturuldu; eski araştırma anahtarı değiştirilmedi. Kayıt yeniden açılarak gerçek kaydedilmiş yetkiler doğrulandı:
+| Kapsam | Kaydedilmiş yetki |
+|---|---|
+| Images | Full access |
+| Products | Read only |
+| Designs | Full access |
+| Orders | Read only |
+| IP | Unrestricted — onaylanan kapsam |
+Anahtar sayfasının tarih göstergesi oluşturma23.11.2026 04:04:07 / bitiş23.12.2026 04:04:07. API şeması tasarım tarihlerinin UTC-8 olduğunu söylüyor; anahtar ekranının zaman dilimi kesin ilan edilmedi. Yerel erişim22Aralık00:00UTC'de daha erken ve güvenli biçimde kapanır.
+
+Doğrulama kodu bağlı oldiesradyo Gmail hesabına değil, PrintKK'nin mettebuyuretti hesabına geldi. Tarayıcıda bu hesabın mevcut oturumu bulundu, yalnız ilgili PrintKK API doğrulama e-postası kullanıldı; kullanıcıdan kod taşıması istenmedi.
+Anahtar Windows CurrentUser DPAPI ile şifrelendi; özel klasör yalnız mevcut kullanıcıya erişim veriyor. Kaydetme ve geri açma birebir doğrulandı. Anahtar/decrypted config rapora, pakete veya düz metin dosyasına eklenmedi.
+
+Canlı imzalı API kontrolü15:14:09TSİ: ping, server time ve4J40GJ ürün detayı PASS (3GET/0API yazımı). Ürün: Quilted Shoulder Tote Bag. One Size ürün/SKU kimliği2101887537453862968 metin olarak korundu.
+| Doğrulanmış baskı alanı | Gerçek API kimliği |
+|---|---|
+| Front | 2072605839071850497 |
+| Back | 2072605993418043393 |
+| Front Handle | 2117425228077809665 |
+| Back Handle | 2117425284268900354 |
+
+Mevcut ürünün tasarım listesi ve detayı ayrıca2GET ile alındı.15:17:10TSİ:
+- Tasarım: nJpvRViVUZb; One Size tasarım varyantı: nJpvRViVUZbRG.
+- Tasarım adı onaylı özgün kaynak SHA256'sını içeriyor; yerel kaynak hash'i tekrar eşleşti.
+- API'nin8resmi mockup dosyası indirildi;8/8hash kabul edilmiş8Etsy kaynak dosyasıyla birebir eşleşti.
+- Bu, kabul edilmiş ürünün gerçek tedarikçi tasarım referansıdır. Yeni tasarım yaratımı veya gerçek sipariş karşılama denemesi değildir.
+- Etsy SKU'su ve kabul edilmiş DRAFT4622145547 değiştirilmedi.
+
+Mevcut proje içine DPAPI config okuyucu, GET probe ve güncel hazırlık durumu modülü bağlandı. Yeni kaynak paketinin henüz olmaması artık eski araştırma anahtarının süresinin dolmasıyla açıklanmıyor. Doğru mevcut engel: NEW_ARTWORK_PLACEMENT_RENDER_QC_AND_PACKET_REQUIRED.
+Ürün profili dosyası ve eski işin hash kilidi korunmuştur; yeni anahtar erişimi ayrı canlı kanıt kaydından okunur.
+Windows staging50/50PASS, fail0. Kapsam önceki45test +5yeni DPAPI/durum senaryosudur. Mevcut DRAFT için kurulu giriş LOCAL_PACKET_VERIFIED döndü; bağımlılık/import hatası yok.
+Kod geri dönüş yedeği: autonomous-queue/implementation/printkk-key-integration-1795436351061.
+Önceki12:41/12:42 gerçek panel başlatıcısı makbuzları korunuyor; bu tur bunlar yeni Etsy GET/yazımı yapıldı diye sunulmuyor.
+
+## BEKLEYEN
+- Yeni görselin otomatik yerleşimi ve yeni tedarikçi render/paket üretimi henüz uygulanıp gerçek yeni kaynakla kabul edilmedi.
+- Yeni kaynakla tam DRAFT oluşturma, son panel sürümünün gerçek görsel seçimiyle denenmesi ve ikinci çalışmada aynı ID sürekliliği.
+- Sayısal bleed/yerleşim kalitesi; eski28/30cm ölçü uyuşmazlığı; US tarif sınıflandırması ve bağımsız WORK WATCHDOG kabulü.
+- Gerçek sipariş/otomatik fulfillment sınanmadı. DeepSeek Harness için yeni çalıştırma veya teslim kanıtı yok; bu ek onarımı WORK MASTER yaptı.
+
+## PLANLANAN / ilk eksik adım
+Sorumlu WORK MASTER. Güncel PrintKK bağlantısını tekrar kurma. Önce aynı mevcut native ürün yolunda yeni işe bağlı ön/arka yerleşim ve beyaz sap politikasını kesinleştir; resmi tasarım/render çıktısını,8+görseli, kaynak hash'ini ve metin/video paketini bağla. Ardından tek onaylı yeni kaynakla tam DRAFT ve tekrar aynı iş/ID kontrolü yap. Mevcut kabul edilmiş ilana dokunma. Yeni maliyet/yayın/sipariş için mevcut sınırlar geçerli; bu tur bunlar yapılmadı. Bağımsız kabulden önce bütün ilan otomasyonunu tamamlandı sayma.
+
+## Kanıtlar ve operasyonel sınırlar
+- supplier-evidence/printkk-4j40gj/api-product-readback-20261123.json
+- supplier-evidence/printkk-4j40gj/api-design-readback-20261123.json
+- supplier-evidence/printkk-4j40gj/api-design-artwork-binding-20261123.json
+- supplier-evidence/printkk-4j40gj/supplier-api-access-20261123.json
+- Aynı iş klasörü/supplier-fulfillment-reference-20261123.json
+- windows-50-test-output.txt; önceki gerçek DRAFT makbuzları kod paketinde.
+- Yerel pano ile tarayıcı panosu farklıydı; şifreli aktarım kullanıldı. PowerShell'de Türkçe kültürün case-insensitive regex farkı ve korunmuş klasörde ACL'nin tekrar atanması sorunu giderildi; gizli değerler düz metin dosyaya yazılmadı.
+- Yeni Windows scheduler, Etsy ilanı/yayını, PrintKK üretim siparişi veya ödeme yok. Yeni tasarım/API render oluşturma POST'u yapılmadı. Anahtar oluşturma PrintKK yönetim ekranında gerçekleştirildi.
+- Ortak PC devir kaydına bu gelişme eklenir; karşı oturumun gerçekten görevi aldığı/ACK verdiği bu kayıtla varsayılmaz.
+
+---
+
+## Tarihsel kayıt — 23 Kasım12:47TSİ ilk onarım
+Aşağıdaki anahtar/onay bekleyen ifadeler o saatin tarihsel durumudur; güncel sonuç yukarıdadır.
+
 # Oldies Etsy — mevcut otomasyon onarımı ve teslim kaydı
 Düzenleme: 23.11.2026 12:47 TSİ (UTC+3).
 Sorumlu: WORK MASTER / bu ChatGPT oturumu.
@@ -95,3 +158,4 @@ Yalnız gerçek ürünün oranını ve özgün baskıyı koru. Çekim/render iç
 ## Koordinasyon ve Harness
 Bu kod düzeltmesini ChatGPT WORK MASTER yaptı. DeepSeek Harness'in yeni işine ait çalıştırma/teslim kanıtı yok; önceki rapordaki ACCOUNT_QUOTA engelinin çözüldüğü bu işlemle kanıtlanmadı.
 Etsy otomasyon yardım sohbetinin otomatik görevi aldığı varsayılmıyor. Gerçek ortak PC devir kaydı bu oturumda güncellendi; karşı oturumun ACK'si ve bağımsız kabul ayrı kalır.
+
