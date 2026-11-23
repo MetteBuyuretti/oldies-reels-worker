@@ -102,3 +102,32 @@ class PauseCleanupTests(unittest.TestCase):
                 get.assert_not_called()
 
 if __name__=='__main__': unittest.main()
+
+
+class BlockerDiagnosticsTests(unittest.TestCase):
+    def test_changed_source_is_reported_before_photos_or_provider(self):
+        import tdim_daily
+        events=json.loads((review.ROOT/'english-reviewed-events.json').read_text())['events']
+        candidate=next(c for c in events if c['event_date']=='1963-11-22')
+        binding=candidate['daily_source']
+        entry={'source_event_id':str(binding['event_id']),'event_date':candidate['event_date'],
+               'artist':candidate['artist'],'source_url':binding['source_url'],'source_sha256':'changed'}
+        with tempfile.TemporaryDirectory() as t,patch('tdim_daily.fetch_events',return_value=[entry]),patch('facebook_global_visuals.load_period_photos') as photos,patch.object(review,'free_tts') as provider:
+            out=Path(t)
+            with self.assertRaisesRegex(RuntimeError,'source_fingerprint_changed_review_required'):
+                review.select_candidate('2026-11-22',out)
+            report=json.loads((out/'source-binding-check.json').read_text())
+            self.assertEqual(report['exactly_bound_candidates'],0)
+            self.assertTrue(any(c['reason']=='source_fingerprint_changed_review_required' for c in report['candidates']))
+            photos.assert_not_called();provider.assert_not_called()
+    def test_reserved_failure_cannot_masquerade_as_completed_duplicate(self):
+        with tempfile.TemporaryDirectory() as t,patch.dict('os.environ',{'GITHUB_EVENT_NAME':'unit-test'}),patch.object(review,'stock_health'),patch.object(review,'select_candidate') as select:
+            out=Path(t);ledger=review.Ledger(out/'ledger.json')
+            ledger.reserve('2026-11-21','fixture-event')
+            before=json.dumps(ledger.data,sort_keys=True)
+            with self.assertRaisesRegex(RuntimeError,'no completed artifact'):
+                review.build('2026-11-21',out,ledger)
+            status=json.loads((out/'status.json').read_text())
+            self.assertEqual(status['status'],'incomplete_reservation_blocked')
+            self.assertFalse(status['provider_request_performed'])
+            self.assertEqual(before,json.dumps(ledger.data,sort_keys=True));select.assert_not_called()
