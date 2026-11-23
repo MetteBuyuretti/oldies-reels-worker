@@ -205,3 +205,21 @@ RECORD_PART = audio.record_part
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class RejectedTakeEvidenceTests(unittest.TestCase):
+    def test_rejected_natural_take_keeps_measurements_and_hash_without_retry(self):
+        import hashlib,tempfile
+        from unittest.mock import Mock
+        raw=b'original-provider-take'
+        provider=Mock(return_value=raw)
+        with tempfile.TemporaryDirectory() as t,patch.object(audio,'inspect_audio',return_value={'duration_seconds':5}):
+            take=Path(t)/'story.wav'
+            with self.assertRaisesRegex(RuntimeError,'too rushed'):
+                audio.record_part(' '.join(['word']*40),'story',take,'','',provider,{'delivery_profile':'news-upbeat-v1'})
+            proof=json.loads(take.with_suffix('.wav.pace.json').read_text())
+            self.assertEqual(proof['sha256'],hashlib.sha256(raw).hexdigest())
+            self.assertEqual(proof['maximum_wpm'],160)
+            self.assertEqual(proof['tempo_factor'],1.0)
+            self.assertFalse(proof['accepted']);self.assertEqual(take.read_bytes(),raw)
+            provider.assert_called_once()
