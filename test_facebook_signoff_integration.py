@@ -47,7 +47,7 @@ class SignoffFixture:
             context.start()
             self.addCleanup(context.stop)
 
-    def record_story(self, text, role, path, project, token, synthesize):
+    def record_story(self, text, role, path, project, token, synthesize, candidate=None):
         self.assertEqual(role, 'story', 'An accepted ending must never reach TTS')
         path.write_bytes(synthesize(text=text))
         return {'duration_seconds': self.story_seconds, 'estimated_wpm': 120,
@@ -171,3 +171,4 @@ class FacebookSignoffTests(SignoffFixture, unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
