@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-23T02:18:30Z",
+  "updated_at": "2026-11-23T04:59:59Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -708,11 +708,13 @@
         "20261119-single-recovery-44522490069-artifact-and-public-facebook-playback-verified",
         "20261120-calendar-stock-four-and-nov26-editorial-draft-saved",
         "20261120-afternoon-checked-scheduled-run-history-and-latest-duplicate-receipts",
-        "20261121-calendar-coverage-and-nov27-harrison-draft"
+        "20261121-calendar-coverage-and-nov27-harrison-draft",
+        "source-reservation-pace-diagnostics-pr46-merged-57-offline-tests-20261123",
+        "fresh-23nov-tdim-three-photo-preflight-zero-provider-calls"
       ],
-      "last_checkpoint": "2026-11-21 02:17:32 UTC",
+      "last_checkpoint": "2026-11-23T04:59:59Z",
       "next_step": "23 Kasım 14:23 producer koşusunu ve 15:15 artifact/ledger/Facebook makbuzunu denetle; 22 Kasımın eksik koşusunu ayrıca güncel workflow kanıtıyla uzlaştır. 24–29 Kasım için TDIM canlı parser + üç ayrı lisanslı dönem fotoğrafı doğrulanmadan hazır stok işaretleme.",
-      "note": "21 Kasım Elton John olayı görünür TDIM kaynağında eşleşti; üç onaylı 1971 fotoğrafı kayıtlı. Doğrudan kaynak HTTP 403; güncel parser makbuzu yok. 21–23 kayıtlı hazır, 24–27 açık. 21 Kasım kurucu bildirimi: üretim/yayın gerçekleşmediğinde özgün doğrulanmış hata ve ilk düzeltme adımı kullanıcıya kısa uyarı olarak bildirilecek; bilinmeyen neden açıkça belirtilecek.\n21.11.2026 15:15 TSİ: En son gerçek schedule run 44799540563 (20 Kasım 22:09 TSİ) failure. prepare-review adımında RuntimeError: o gün için üç reviewed dönem fotoğraflı reviewed exact-day TDIM haberi yok; render ve Facebook adımları skipped, yayın makbuzu yok. 21 Kasım 15:15 itibarıyla yeni workflow run ve ledger günü yok. 21 Kasım source parser güncel makbuzu yok (doğrudan HTTP403 gözlendi); recovery PASS önkoşulu henüz sağlanmadı. Bugün üretim/yayın başarısı ilan edilmez.\n22.11.2026 15:15 TSİ: Son schedule run44933456158, 21 Kasım 21:04 TSİ, prepare-review step6 failure: facebook_global_audio.py record_part 'Facebook DJ take exceeds the relaxed pace limit'. Event/photo seçimi geçti ve day21 ledger reserved kaldı; MP4 ve facebook-publication makbuzu yok. 22 Kasım 15:15 itibarıyla workflow listesinde day22 koşusu yok, ledger day22 yok. 22 Kasım source-bound Beatles story kayıtlı fakat bu kontrolde güncel TDIM parser PASS makbuzu yok; recovery tetiklenmedi. 21 Kasım üretim/yayın kanıtlanmadı.\n23.11.2026 05:18 TSİ: 23 Kasım Beatles BBC audition event14613, 44 sözcüklü reviewed kaynak bağı mevcut (TDIM 18 Kasım parser fingerprint d55891...). Ledgerda 22/23 Kasım günü henüz yok. Bugünkü gerçek producer ve kaynak makbuzu bekleniyor; eski 21 Kasım reserved kayıt korunuyor. 24–29 yedi takvim günü stoğu tam değil; yeni reviewed/photo onayı verilmedi.",
+      "note": "21 Kasım Elton John olayı görünür TDIM kaynağında eşleşti; üç onaylı 1971 fotoğrafı kayıtlı. Doğrudan kaynak HTTP 403; güncel parser makbuzu yok. 21–23 kayıtlı hazır, 24–27 açık. 21 Kasım kurucu bildirimi: üretim/yayın gerçekleşmediğinde özgün doğrulanmış hata ve ilk düzeltme adımı kullanıcıya kısa uyarı olarak bildirilecek; bilinmeyen neden açıkça belirtilecek.\n21.11.2026 15:15 TSİ: En son gerçek schedule run 44799540563 (20 Kasım 22:09 TSİ) failure. prepare-review adımında RuntimeError: o gün için üç reviewed dönem fotoğraflı reviewed exact-day TDIM haberi yok; render ve Facebook adımları skipped, yayın makbuzu yok. 21 Kasım 15:15 itibarıyla yeni workflow run ve ledger günü yok. 21 Kasım source parser güncel makbuzu yok (doğrudan HTTP403 gözlendi); recovery PASS önkoşulu henüz sağlanmadı. Bugün üretim/yayın başarısı ilan edilmez.\n22.11.2026 15:15 TSİ: Son schedule run44933456158, 21 Kasım 21:04 TSİ, prepare-review step6 failure: facebook_global_audio.py record_part 'Facebook DJ take exceeds the relaxed pace limit'. Event/photo seçimi geçti ve day21 ledger reserved kaldı; MP4 ve facebook-publication makbuzu yok. 22 Kasım 15:15 itibarıyla workflow listesinde day22 koşusu yok, ledger day22 yok. 22 Kasım source-bound Beatles story kayıtlı fakat bu kontrolde güncel TDIM parser PASS makbuzu yok; recovery tetiklenmedi. 21 Kasım üretim/yayın kanıtlanmadı.\n23.11.2026 05:18 TSİ: 23 Kasım Beatles BBC audition event14613, 44 sözcüklü reviewed kaynak bağı mevcut (TDIM 18 Kasım parser fingerprint d55891...). Ledgerda 22/23 Kasım günü henüz yok. Bugünkü gerçek producer ve kaynak makbuzu bekleniyor; eski 21 Kasım reserved kayıt korunuyor. 24–29 yedi takvim günü stoğu tam değil; yeni reviewed/photo onayı verilmedi.\n2026-11-23 07:59 TSİ (UTC+3): MASTER actual audit: Nov22 run45055863329 failed before TTS because reviewed TDIM event5722 text hash changed, not missing photographs. Nov21 reserved record remains incomplete after pace failure. PR46 merged00f8dad93674eeb49e77d77aadd7e2148a0421e7: precise source/reservation/rejected-take diagnostics, stale fixture correction, expanded daily tests;57offlinePASS. Current23Nov live TDIM event14613 fingerprint and3photos preflightPASS, no new provider/publish. Harness new task account quota exhausted, did not start. Actual daily generation/publication/independent acceptance still pending.",
       "acceptance": {
         "voice_preference": "Owner explicitly accepted news-upbeat-v1; lively medium-upbeat,25-30s,balanced era-matched royalty-free instrumental",
         "approved_asset_identity": "accepted_by_master_and_independent_watchdog_6509320201_existing_signoffs_only",
@@ -788,7 +790,9 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44599096973",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/facebook-daily-prep-20261121/editorial-preparation.json",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44799540563",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44933456158"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/actions/runs/44933456158",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/harness-etsy-reels-20261123/STATUS.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/46"
       ],
       "control_time": "18 Kasım 2026 05:15 TSİ hazırlık;14:23 üretim;15:15 yayın kontrolü ve gerekirse tek güvenli kurtarma.",
       "last_status_audit": "2026-10-30T22:01:47.048Z"
@@ -1479,6 +1483,44 @@
       "note": "16.11.2026 |22:13 TSİ:2.3.8-YT11-SOURCE canlı. Hatalımedia_audio_typealanı kaldırıldıktan sonra3/3tekilGET instagram_final_media_missing döndü. Boşaudio_type müziklisansı kanıtı değildir. YouTubeupload/yayın0. EskiChrisIsaaklist URLveriyor; token topluarızası yok.\n16.11.2026 |22:19:52 TSİ: Native nihai kaynak testi açık aday dosya argümanıyla8/8PASS(PID16612). Canlısourceexacteşitlikkanıtı ve finalMP4bekleyen3kimlikkalıcıraporda. YeniYouTubeupload0.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/two-deliveries-20261116/CHECKPOINT.md"
+      ]
+    },
+    {
+      "id": "deepseek-harness-reels-repair-20261123",
+      "title": "DeepSeek Harness quota and current Reels assignment",
+      "owner": "WORK MASTER",
+      "status": "blocked",
+      "last_checkpoint": "2026-11-23T04:59:59Z",
+      "completed_units": [
+        "previous-p1-revision-delivery-read",
+        "new-task-source-bundle-prepared",
+        "native-account-quota-error-observed"
+      ],
+      "next_step": "Harness new assignment cannot run until account quota/balance resolves; no charge authorized. Do not claim started/delivered. Small Reels patch already completed by WORK MASTER via PR46; do not redo it.",
+      "note": "2026-11-23 07:59 TSİ (UTC+3) — ACCOUNT_QUOTA / No balance available / Request quota exhausted. New receipt absent; previous P1 delivered is offline audit, not production repair.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/harness-etsy-reels-20261123/STATUS.md"
+      ]
+    },
+    {
+      "id": "etsy-4j40gj-draft-media-20261123",
+      "title": "Etsy existing DRAFT4622145547 official mockups and China partner",
+      "owner": "WORK MASTER / Etsy automation project shared files",
+      "status": "checkpointed",
+      "last_checkpoint": "2026-11-23T04:59:59Z",
+      "completed_units": [
+        "same-draft-4622145547-preserved",
+        "official-printkk-original-design-front-back-saved",
+        "eight-official-native-mockups-uploaded-get-verified",
+        "separate-china-partner-5894229-bound-get-verified",
+        "live-sku-price-attributes-four-translations-qc-passed",
+        "shared-etsy-handoff-file-appended"
+      ],
+      "next_step": "Etsy automation chat must record real ACK in ETSY-ANA-DEVIR-KAYDI.md; keep same job/draft/eight images. Resolve supplier dimension card28cm vs description30cm before publication and validate product-neutral adapter continuity. Do not create a second draft or re-upload. Publication remains Mete-only.",
+      "note": "2026-11-23 07:59 TSİ (UTC+3) — API technical field QC complete/no blockers, not independent acceptance or full factory continuity. Existing draft has8images,SKU2101887537453862968,36.99USD,13tags,FR/DE/ES/JA13tags each. New PrintKK China production partner5894229 only this draft; previousUSpartner/otherlistings unchanged. No video (optional), no publication/cost. ChatGPT chat browser restriction prevents direct chat ACK; shared files read/written, no automatic wake assumed.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/harness-etsy-reels-20261123/STATUS.md",
+        "https://www.etsy.com/your/shops/me/listing-editor/edit/4622145547"
       ]
     }
   ],
