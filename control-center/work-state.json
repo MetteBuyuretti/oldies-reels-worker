@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-23T04:59:59Z",
+  "updated_at": "2026-11-23T05:17:48Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1507,17 +1507,19 @@
       "title": "Etsy existing DRAFT4622145547 official mockups and China partner",
       "owner": "WORK MASTER / Etsy automation project shared files",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-23T04:59:59Z",
+      "last_checkpoint": "2026-11-23T05:17:48Z",
       "completed_units": [
         "same-draft-4622145547-preserved",
         "official-printkk-original-design-front-back-saved",
         "eight-official-native-mockups-uploaded-get-verified",
         "separate-china-partner-5894229-bound-get-verified",
         "live-sku-price-attributes-four-translations-qc-passed",
-        "shared-etsy-handoff-file-appended"
+        "shared-etsy-handoff-file-appended",
+        "material-tags-quilted-details-secondary-white-get-verified",
+        "fifteen-second-five-scene-video-uploaded-playback-verified"
       ],
       "next_step": "Etsy automation chat must record real ACK in ETSY-ANA-DEVIR-KAYDI.md; keep same job/draft/eight images. Resolve supplier dimension card28cm vs description30cm before publication and validate product-neutral adapter continuity. Do not create a second draft or re-upload. Publication remains Mete-only.",
-      "note": "2026-11-23 07:59 TSİ (UTC+3) — API technical field QC complete/no blockers, not independent acceptance or full factory continuity. Existing draft has8images,SKU2101887537453862968,36.99USD,13tags,FR/DE/ES/JA13tags each. New PrintKK China production partner5894229 only this draft; previousUSpartner/otherlistings unchanged. No video (optional), no publication/cost. ChatGPT chat browser restriction prevents direct chat ACK; shared files read/written, no automatic wake assumed.",
+      "note": "2026-11-23 07:59 TSİ (UTC+3) — API technical field QC complete/no blockers, not independent acceptance or full factory continuity. Existing draft has8images,SKU2101887537453862968,36.99USD,13tags,FR/DE/ES/JA13tags each. New PrintKK China production partner5894229 only this draft; previousUSpartner/otherlistings unchanged. No video (optional), no publication/cost. ChatGPT chat browser restriction prevents direct chat ACK; shared files read/written, no automatic wake assumed.\n2026-11-23 08:17 TSİ (UTC+3) — Materials Polyester/Quilted fabric, construction/zip/inner pocket description and White secondary color GET/UI saved. Primary/secondary fabric type has no accurate Polyester option in official taxonomy; no Canvas/Cotton guess. Video855949729 active on existing DRAFT,15s1080square,played to end;publicationfalse. Separate supplier weave/lining composition unavailable. See Library report v1 and shared PC receipt.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/harness-etsy-reels-20261123/STATUS.md",
         "https://www.etsy.com/your/shops/me/listing-editor/edit/4622145547"
