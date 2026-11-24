@@ -1,0 +1,21 @@
+{
+  "day": "2026-11-24",
+  "status": "draft_not_ready",
+  "artist": "Chicago",
+  "event_date": "1976-11-24",
+  "kind": "chart_week",
+  "dj_story_text": "November twenty-fourth, nineteen seventy-six. Chicago's 'If You Leave Me Now' was number one in Britain. Official Charts confirms three consecutive weeks at the top. That tender, soaring ballad became the American band's only UK chart-topper, and a signature sound of seventies radio.",
+  "sources": [
+    "https://www.thisdayinmusic.com/on-this-day-in-music-november-24/",
+    "https://www.officialcharts.com/songs/chicago-if-you-leave-me-now/"
+  ],
+  "daily_source": {
+    "provider": "thisdayinmusic.com",
+    "event_id": "7782",
+    "source_url": "https://www.thisdayinmusic.com/on-this-day-in-music-november-24/",
+    "source_sha256": "e3e92a96b55423cc05b888d1c104aed2dcfbea3dee648d37aecdf5d8f1c317f4"
+  },
+  "source_discrepancy": "TDIM says the three-week run started Nov 24; Official Charts shows No.1 weeks Nov 13,20,27. Draft says number one on Nov 24 without repeating start claim.",
+  "photo_gate": "No three reviewed, licensed, full-frame 1976 Chicago period photos in current bank; do not mark reviewed or count as ready.",
+  "reviewed": false
+}
