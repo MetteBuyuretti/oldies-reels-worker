@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-25T16:53:12+03:00",
+  "updated_at": "2026-11-25T17:45:22+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1617,8 +1617,8 @@
       "id": "instagram-highlight-menu-refresh-20261125",
       "title": "Instagram — 12 plak kapaklı öne çıkan menü yenileme",
       "owner": "MASTER KUMANDA-WORK /root",
-      "status": "in_progress",
-      "last_checkpoint": "2026-11-25T16:53:12+03:00",
+      "status": "checkpointed",
+      "last_checkpoint": "2026-11-25T17:45:22+03:00",
       "completed_units": [
         "full-v3-and-current-task-register-read",
         "authenticated-instagram-oldiesradyo-and-existing-two-highlights-inspected",
@@ -1628,23 +1628,38 @@
         "twelve-cover-stories-published-instagram-only-via-existing-meta-session",
         "six-new-highlights-created-with-verified-circular-covers",
         "weekly-seven-archived-events-and-period-stories-added",
-        "sixties-v2-generated-and-extra-one-story-publication-explicitly-approved"
+        "sixties-v2-generated-and-extra-one-story-publication-explicitly-approved",
+        "six-missing-original-covers-republished-instagram-only-20261125-1731",
+        "70s-80s-vinyl-covers-repaired-with-existing-selected-stories-preserved",
+        "60s-v2-50s-magaza-talepler-canli-yayin-highlights-created",
+        "duyuru-renamed-dj-mete-with-two-selected-originals-and-two-mete-videos",
+        "twelve-target-titles-covers-and-order-verified-after-page-reload",
+        "old-tanitimlar-left-intact-after-empty-selected-editor-observation",
+        "public-website-and-etsy-destinations-opened",
+        "five-page-report-with-two-after-screenshots-and-starter-drafts-saved"
       ],
-      "next_step": "Özgün6eksik kapak JPEG'i /workspace/shared/oldies-instagram-repair-20261125 altında hazır. Mevcut Meta oturumundan yalnız@oldiesradyo için tek6lık yeniden yayın; sonucu kontrol etmeden tekrarlama. 70s/80s mevcut menülerin eski içeriklerini tutup kapaklarını düzelt. Kalan60s-v2,50s,Mağaza,Talepler ile eskiDuyuru/Tanıtımların içerikleri korunarak DJMete/CanlıYayın menülerini tamamla; hedef12. Sonra profil/menü kaydı ve bağlantıları doğrula. Sonraki kontrol bu yayın makbuzu/IG arşivi; kullanıcıdan aynı yetkiyi tekrar isteme.",
-      "note": "25.11.2026 | 10:54 TSİ: User-directed Instagram task authorized. Created: Anketler, Müzik Haberleri(+Freddie memorial), Müzik Tarihi(+17–23Nov7 events),90s(+Nirvana),80s(+Olivia/DireStraits/Phil),70s(+PinkFloyd/Hendrix). First12coverstories visible in IG selector. Existing2highlights/stories/settings/integrations retained. First60cover rejected by founder; v2 guitar/radio shown and single-extra-story publication separately approved. No deletion/newconnection/paidpromotion. Intermediate sources/screenshots/assets in current shared task folder; final durable package pending.\n25.11.2026 15:40 TSİ: Kurucu kalan işi durdurdu ve kullanıldı gerekçesiyle silinen hikâyelerin menülerden de kaybolduğunu bildirdi. Salt okunur kontrol70s/80s kapak gerilemesini doğruladı; silmeyi yapan işlem/oturum doğrulanmadı. Bu incelemede hesapta silme/yayın/düzenleme/geri yükleme yapılmadı. Önceki6menü oluşturma kaydı tarihsel teslimdir; güncel tamkabul değildir.\n25.11.2026 | 16:53 TSİ: Kurucunun yeni düzelt/geri ekle talimatı önceki durdurmayı kaldırdı. Canlı profil ve arşiv yeniden okundu: yeni60s-v2 arşivde mevcut, tekrar yayınlanmayacak. Arşivde70s,80s,DJMete,Mağaza,Talepler,CanlıYayın kapakları yok; özgün6dosya kalıcı kayıttan kurtarıldı. Web Your activity alanı Son Silinenler kontrolü sunmadı. Yeni silme işlemi yok; yalnız doğrulanan6eksik kaynak yeniden girilecek. Kaynak hikâyeler kullanıldı diye silinmeyecek; arşivde korunacak.",
+      "next_step": "Kapak onarımı ve12hedef menünün sırası doğrulandı; yeniden yayınlama. Mevcut webUI Instagram bağlantı/soru/anket çıkartması sunmuyor. Destekleyen mevcut yetkili ekranda4hazır başlangıç taslağını çıkartmalarla hazırlayıp yeni hikâye yayını için kurucu onayı al; ardından canlı işlevi doğrula. EskiTanıtımlar kaynaklarını tam okumadan dönüştürme/kaldırma. Kapak kaynaklarını arşivde tut. Bağımsız Watchdog/DeepSeek kabulü yok.",
+      "note": "25.11.2026 | 10:54 TSİ: User-directed Instagram task authorized. Created: Anketler, Müzik Haberleri(+Freddie memorial), Müzik Tarihi(+17–23Nov7 events),90s(+Nirvana),80s(+Olivia/DireStraits/Phil),70s(+PinkFloyd/Hendrix). First12coverstories visible in IG selector. Existing2highlights/stories/settings/integrations retained. First60cover rejected by founder; v2 guitar/radio shown and single-extra-story publication separately approved. No deletion/newconnection/paidpromotion. Intermediate sources/screenshots/assets in current shared task folder; final durable package pending.\n25.11.2026 15:40 TSİ: Kurucu kalan işi durdurdu ve kullanıldı gerekçesiyle silinen hikâyelerin menülerden de kaybolduğunu bildirdi. Salt okunur kontrol70s/80s kapak gerilemesini doğruladı; silmeyi yapan işlem/oturum doğrulanmadı. Bu incelemede hesapta silme/yayın/düzenleme/geri yükleme yapılmadı. Önceki6menü oluşturma kaydı tarihsel teslimdir; güncel tamkabul değildir.\n25.11.2026 | 16:53 TSİ: Kurucunun yeni düzelt/geri ekle talimatı önceki durdurmayı kaldırdı. Canlı profil ve arşiv yeniden okundu: yeni60s-v2 arşivde mevcut, tekrar yayınlanmayacak. Arşivde70s,80s,DJMete,Mağaza,Talepler,CanlıYayın kapakları yok; özgün6dosya kalıcı kayıttan kurtarıldı. Web Your activity alanı Son Silinenler kontrolü sunmadı. Yeni silme işlemi yok; yalnız doğrulanan6eksik kaynak yeniden girilecek. Kaynak hikâyeler kullanıldı diye silinmeyecek; arşivde korunacak.\n25.11.2026 | 17:45 TSİ: Altı eksik özgün kapak hikâyesi yalnız Instagram hedefiyle yeniden yayınlandı; Meta başarı bildirimi ve arşivde6görsel görüldü.70s/80s kapakları düzeltildi,60s-v2/50s/Mağaza/Talepler/CanlıYayın oluşturuldu; Duyuru bölümünde editörde görünen2eski seçim korunup kapak+2Mete videosu eklendi,adıDJ Mete yapıldı.12hedef başlık/kapak/sıra yeniden yükleme sonrası doğrulandı. Tanıtımlar eski hikâyeleri izleyicide var,editörde seçili kaynaklar boş; riskli düzenleme iptal edilip ayrıca korundu:12hedef+1eskiTanıtımlar. Silme/ayar/otomasyon değişikliği yok. Tıklanabilir dinleme/Etsy linki ve etkileşimli soru/anket uygulanmadı; webUI destek sınırı. Öncesi geçici ekran dosyası kayıp; sonrasından2gerçekgörüntü raporda.",
       "evidence_urls": [
         "https://www.instagram.com/oldiesradyo/",
-        "https://www.instagram.com/stories/highlights/17920431951541494/"
+        "https://www.instagram.com/stories/highlights/17920431951541494/",
+        "https://chatgpt.com/library?file_id=libfile_9dff371f823881919e96aba4173c03b9&account_id=personal"
       ],
       "acceptance": {
-        "twelve_menu_delivery": "repair_in_progress",
+        "twelve_menu_delivery": "twelve_target_covers_titles_order_verified_functional_content_partial",
         "cover_stories_published": 12,
-        "highlights_new_created": 6,
-        "final_order": "not_completed",
-        "clickable_links": "pending",
-        "sixties_revision": "current_archive_visually_verified_present_no_republication",
+        "highlights_new_created": 11,
+        "final_order": "Canlı Yayın,Talepler,DJ Mete,Mağaza,50s,60s,70s,80s,90s,Müzik Tarihi,Müzik Haberleri,Anketler; legacy Tanıtımlar preserved after target12",
+        "clickable_links": "not_implemented_web_editor_limitation;website_and_etsy_destination_opened_only",
+        "sixties_revision": "v2_guitar_radio_cover_applied_to_60s_with_Beatles_and_BeachBoys",
         "independent_watchdog": "not_performed",
-        "cover_regression": "70s_and_80s_current_covers_differ_from_previously_saved_vinyl_designs"
+        "cover_regression": "70s_and_80s_repaired_verified_after_reload",
+        "recovery_cover_stories_published": 6,
+        "after_screenshots": 2,
+        "before_screenshot": "shown_earlier_in_chat_temporary_file_not_recovered",
+        "interactive_polls_requests": "not_implemented_starter_copy_drafted_not_published",
+        "existing_tanitimlar": "retained_without_modification",
+        "selected_dj_mete_sources": 5
       },
       "founder_stop": {
         "active": false,
@@ -1662,7 +1677,7 @@
         "deletion_actor": "not_verified",
         "deletion_cause": "not_verified",
         "assistant_log_review": "Accessible calls in this conversation show no story Delete or highlight Remove action. This does not identify which action caused the reported loss.",
-        "recovery": "authorized_by_latest_founder_instruction_six_missing_original_assets_recovered_not_yet_republished",
+        "recovery": "six-original-missing-covers-republished-and-70s-80s-covers-restored",
         "account_mutations_this_incident_check": 0
       },
       "founder_stop_history": [
