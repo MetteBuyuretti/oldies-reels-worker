@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-25T10:54:55+03:00",
+  "updated_at": "2026-11-25T12:40:15.458Z",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1617,8 +1617,8 @@
       "id": "instagram-highlight-menu-refresh-20261125",
       "title": "Instagram — 12 plak kapaklı öne çıkan menü yenileme",
       "owner": "MASTER KUMANDA-WORK /root",
-      "status": "in_progress",
-      "last_checkpoint": "2026-11-25T10:54:55+03:00",
+      "status": "checkpointed",
+      "last_checkpoint": "2026-11-25T12:40:15.458Z",
       "completed_units": [
         "full-v3-and-current-task-register-read",
         "authenticated-instagram-oldiesradyo-and-existing-two-highlights-inspected",
@@ -1630,20 +1630,38 @@
         "weekly-seven-archived-events-and-period-stories-added",
         "sixties-v2-generated-and-extra-one-story-publication-explicitly-approved"
       ],
-      "next_step": "60s-v2 dosyası hazır/onaylı: mevcut Meta story composer ile yalnız Instagram'a tek revizyon hikâyesi yayınla; yeniden yayın yapmadan sonucu kontrol et. Ardından60s,50s,Mağaza,Talepler yeni menüleri; eski Duyuru/Tanıtımlar içeriklerini koruyarak uygun DJMete/CanlıYayın yeniden adlandırma ve yeni kapak. Hedef toplam12; mevcut eski hikâyeler silinmez. Tıklanabilir radyo/Etsy bağlantısı ve gerçek oylama içeriği ayrı açık; Meta Instagram link düğmesi devre dışı. Son profil/menü sırası/bağlantı kontrolü+önce/sonra teslim.",
-      "note": "25.11.2026 | 10:54 TSİ: User-directed Instagram task authorized. Created: Anketler, Müzik Haberleri(+Freddie memorial), Müzik Tarihi(+17–23Nov7 events),90s(+Nirvana),80s(+Olivia/DireStraits/Phil),70s(+PinkFloyd/Hendrix). First12coverstories visible in IG selector. Existing2highlights/stories/settings/integrations retained. First60cover rejected by founder; v2 guitar/radio shown and single-extra-story publication separately approved. No deletion/newconnection/paidpromotion. Intermediate sources/screenshots/assets in current shared task folder; final durable package pending.",
+      "next_step": "KURUCU DURDURDU. Kalan menü üretimi/uygulaması ve yayın yürütülmeyecek. Silinen hikâye bildirimi açık olay kaydıdır; yeni onaylı devam olmadan geri yükleme veya yeniden yayın yok. 60s-v2 için son işlem25Kasım11:03TSİ Paylaş gönderimidir; yayın sonucu doğrulanmadı, kör tekrar yok.",
+      "note": "25.11.2026 | 10:54 TSİ: User-directed Instagram task authorized. Created: Anketler, Müzik Haberleri(+Freddie memorial), Müzik Tarihi(+17–23Nov7 events),90s(+Nirvana),80s(+Olivia/DireStraits/Phil),70s(+PinkFloyd/Hendrix). First12coverstories visible in IG selector. Existing2highlights/stories/settings/integrations retained. First60cover rejected by founder; v2 guitar/radio shown and single-extra-story publication separately approved. No deletion/newconnection/paidpromotion. Intermediate sources/screenshots/assets in current shared task folder; final durable package pending.\n25.11.2026 15:40 TSİ: Kurucu kalan işi durdurdu ve kullanıldı gerekçesiyle silinen hikâyelerin menülerden de kaybolduğunu bildirdi. Salt okunur kontrol70s/80s kapak gerilemesini doğruladı; silmeyi yapan işlem/oturum doğrulanmadı. Bu incelemede hesapta silme/yayın/düzenleme/geri yükleme yapılmadı. Önceki6menü oluşturma kaydı tarihsel teslimdir; güncel tamkabul değildir.",
       "evidence_urls": [
         "https://www.instagram.com/oldiesradyo/",
         "https://www.instagram.com/stories/highlights/17920431951541494/"
       ],
       "acceptance": {
-        "twelve_menu_delivery": "incomplete",
+        "twelve_menu_delivery": "stopped_incomplete",
         "cover_stories_published": 12,
         "highlights_new_created": 6,
-        "final_order": "pending",
+        "final_order": "not_completed",
         "clickable_links": "pending",
-        "sixties_revision": "extra_story_publication_approved_not_yet_executed",
-        "independent_watchdog": "not_performed"
+        "sixties_revision": "publish_clicked_11:03_TSI_result_not_verified_do_not_repeat",
+        "independent_watchdog": "not_performed",
+        "cover_regression": "70s_and_80s_current_covers_differ_from_previously_saved_vinyl_designs"
+      },
+      "founder_stop": {
+        "active": true,
+        "recorded_at": "2026-11-25T12:40:15.458Z",
+        "instruction": "Kalan işi tamamlama",
+        "scope": "No further Instagram menu completion, publishing, deletion or restoration under this task without founder continuation instruction."
+      },
+      "incident": {
+        "reported_by": "Mete / founder",
+        "report": "Some stories were deleted as already used and disappeared from highlights.",
+        "read_only_profile_checked_at": "2026-11-25T12:40:15.458Z",
+        "observed": "Profile still lists six new highlights plus original DUYURU BÖLÜMÜ/Tanıtımlar. 70s cover now Hendrix story image;80s cover now Phil Collins story image, unlike earlier verified gold vinyl covers.70s viewer shows Hendrix archive story.",
+        "deletion_actor": "not_verified",
+        "deletion_cause": "not_verified",
+        "assistant_log_review": "Accessible calls in this conversation show no story Delete or highlight Remove action. This does not identify which action caused the reported loss.",
+        "recovery": "not_attempted_founder_stop",
+        "account_mutations_this_incident_check": 0
       }
     }
   ],
