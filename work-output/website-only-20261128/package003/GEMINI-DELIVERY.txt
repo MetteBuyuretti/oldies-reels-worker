@@ -1,0 +1,210 @@
+Oldies Radyo · Preflight
+
+Oldies Polylang MCP Helper 1.3.0: MCP abilities registered successfully.
+
+Bu bildirimi gizle.
+Read-only Preflight PASS
+
+FAIL durumunda write action’lar sunucu tarafında kapalıdır.
+
+Check	Result	Evidence
+Command Center	PASS	1.0.5
+WordPress	PASS	7.1.5
+PHP	PASS	8.4.28
+Reels plugin	PASS	Plugin state
+oldies-reels/list-drafts	PASS	Registered ability
+oldies-reels/prepare-for-edits	PASS	Registered ability
+oldies-reels/get-edits-handoff	PASS	Registered ability
+oldies-reels/list-instagram-recent	PASS	Final Instagram media integration
+oldies-reels/confirm-instagram-published	PASS	Final Instagram media integration
+Instagram token lifecycle	PASS	Token=stored; AppSecret=stored; state=HEALTHY
+Instagram recent media	PASS	Read-only; token may block
+News table	PASS	Read only
+Etsy table	PASS	Read only
+Facebook health	PASS	Read only
+Polylang health	PASS	Read only
+News REST route	PASS	Registration only
+
+
+ALINDI WEB-GEM-QA-20261128-03
+
+Test Kapsamı
+
+Test edilen: Scheduler::handleNewsSourceCheckExecution() izolasyonundaki kilit (TRANSIENT_NEWS_LOCK) davranışı, NewsCoordinator::runScheduledCycle() çağrı sayısı, skipped dönüşü ve exception yakalama/sır maskeleme.
+
+Test edilmeyen (iddia edilemez): Gerçek NewsCoordinator::pollAllSources(), ingested_ids işleme akışı ve auto_publish davranışı test edilmemektedir; testteki NewsCoordinator yalnızca sahte (mock/stub) bir sınıftır. Ayrıca runScheduledCycle() kodunda processArticle((int)$artId, false, false) çağrıldığı görülüyor; gerçek pollAllSources ve ingested_ids davranışını doğrulamak için gerçek NewsCoordinator (veya kaynak/ingest veri akışını temsil eden entegrasyon/birim testleri) ile ayrı test eklenmelidir.
+
+En Küçük Diff (Yalnız Haber Cron Schedule Kaydı)
+
+Mevcut WP-Cron event listesi okunmadığı için bu sıralama kesin kesinti nedeni değildir; yalnız CRON_NEWS_SOURCE_CHECK için oldies_15_minutes aralığının wp_schedule_event anında bulunmasını güvence altına alan en küçük aday:
+
+Diff
+         // 3. News Sources 15-Minute Monitoring Check
+         if (!wp_next_scheduled(self::CRON_NEWS_SOURCE_CHECK)) {
++            add_filter('cron_schedules', [$this, 'registerCustomCronIntervals']);
+             wp_schedule_event(time() + 300, 'oldies_15_minutes', self::CRON_NEWS_SOURCE_CHECK);
+         }
+
+
+Not: Yalnız haber hook'u (CRON_NEWS_SOURCE_CHECK / oldies_15_minutes) ile sınırlıdır; diğer cron'lara veya zamanlamalara dokunmaz.
+
+2 Anlamlı Test Senaryosu
+
+Filtre önceden eklenmemişken haber event kaydı: cron_schedules henüz tetiklenmemişken scheduleDefaultEvents() çalıştırıldığında CRON_NEWS_SOURCE_CHECK için oldies_15_minutes aralığı ile wp_schedule_event çağrılmalı ve CRON_ETSY_PRODUCT_SYNC gibi diğer hook'ların schedule parametreleri değiştirilmemeli.
+
+Zaten planlanmış haber event'inde mükerrer kayıt yapmama: wp_next_scheduled(self::CRON_NEWS_SOURCE_CHECK) zaten doluysa wp_schedule_event tekrar çağrılmamalı.
+
+Gerçek Sonuç
+
+ÇALIŞTIRILMADI
+
+Tek Sonraki Adım
+
+MASTER tarafından canlı/ilgili ortamda gerçek WP-Cron event listesinin (wp cron event list veya salt-okunur WP-Cron sorgusu) okunarak oldies_news_check_sources_cron kaydının varlığının ve aralığının kontrol edilmesi.
+
+
+
+
+Otomatik
+
+Gemini bir yapay zeka modeli olduğu için hata yapabilir.
+
+Yükselt
+
+CORRECTED DELIVERY
+
+Somut PHP İzole Test Dosyası (tests/NewsCronRecurrenceTest.php)
+PHP
+<?php
+declare(strict_types=1);
+
+namespace OldiesRadyo\SocialAutomation\Cron {
+    $GLOBALS['wp_filters'] = [];
+    $GLOBALS['wp_scheduled_events'] = [];
+    $GLOBALS['wp_cleared_hooks'] = [];
+    $GLOBALS['wp_next_scheduled_map'] = [];
+
+    function add_filter(string $hook, callable $callback): void {
+        $GLOBALS['wp_filters'][$hook][] = $callback;
+    }
+
+    function apply_filters(string $hook, $value) {
+        foreach ($GLOBALS['wp_filters'][$hook] ?? [] as $cb) {
+            $value = $cb($value);
+        }
+        return $value;
+    }
+
+    function wp_next_scheduled(string $hook) {
+        return $GLOBALS['wp_next_scheduled_map'][$hook] ?? false;
+    }
+
+    function wp_schedule_event(int $timestamp, string $recurrence, string $hook): bool {
+        $defaultIntervals = [
+            'hourly' => 3600,
+            'daily'  => 86400,
+        ];
+        $resolved = apply_filters('cron_schedules', $defaultIntervals);
+        if (!isset($resolved[$recurrence])) {
+            throw new \RuntimeException("Missing recurrence interval: {$recurrence}");
+        }
+        $GLOBALS['wp_scheduled_events'][] = [
+            'timestamp'  => $timestamp,
+            'recurrence' => $recurrence,
+            'hook'       => $hook,
+        ];
+        return true;
+    }
+
+    function wp_clear_scheduled_hook(string $hook): int {
+        $GLOBALS['wp_cleared_hooks'][] = $hook;
+        return 1;
+    }
+}
+
+namespace {
+    define('ABSPATH', __DIR__);
+    require __DIR__ . '/candidate/src/Cron/Scheduler.php';
+
+    use OldiesRadyo\SocialAutomation\Cron\Scheduler;
+
+    final class TestScheduler extends Scheduler {
+        public function rescheduleDailyPost(): void {
+            // No-op in isolated news recurrence test; avoids real SettingsManager dependency.
+        }
+    }
+
+    function assertTrue(bool $cond, string $msg): void {
+        if (!$cond) {
+            throw new \RuntimeException($msg);
+        }
+    }
+
+    function makeFixture(bool $newsAlreadyScheduled): TestScheduler {
+        $GLOBALS['wp_filters'] = [];
+        $GLOBALS['wp_scheduled_events'] = [];
+        $GLOBALS['wp_cleared_hooks'] = [];
+
+        $future = time() + 600;
+        $GLOBALS['wp_next_scheduled_map'] = [
+            Scheduler::CRON_TOKEN_HEALTH          => $future,
+            Scheduler::CRON_VIDEO_PERIODIC_CLEANUP => $future,
+            Scheduler::CRON_RETENTION_CLEANUP      => $future,
+            Scheduler::CRON_ETSY_PRODUCT_SYNC     => $future,
+            Scheduler::CRON_NEWS_SOURCE_CHECK    => $newsAlreadyScheduled ? $future : false,
+        ];
+
+        $ref = new \ReflectionClass(Scheduler::class);
+        /** @var TestScheduler $scheduler */
+        $scheduler = $ref->newInstanceWithoutConstructor();
+
+        if ($ref->hasProperty('etsyProductSync')) {
+            $prop = $ref->getProperty('etsyProductSync');
+            $prop->setAccessible(true);
+            $prop->setValue($scheduler, null);
+        }
+
+        return $scheduler;
+    }
+
+    // Test 1: Only news event is scheduled and only oldies_15_minutes interval is registered.
+    $scheduler = makeFixture(false);
+    $scheduler->scheduleDefaultEvents();
+
+    $resolvedSchedules = \OldiesRadyo\SocialAutomation\Cron\apply_filters('cron_schedules', []);
+    assertTrue(count($GLOBALS['wp_scheduled_events']) === 1, 'Expected exactly one wp_schedule_event call.');
+    assertTrue(
+        $GLOBALS['wp_scheduled_events'][0]['hook'] === Scheduler::CRON_NEWS_SOURCE_CHECK,
+        'Scheduled event must be news source check hook.'
+    );
+    assertTrue(
+        $GLOBALS['wp_scheduled_events'][0]['recurrence'] === 'oldies_15_minutes',
+        'Scheduled recurrence must be oldies_15_minutes.'
+    );
+    assertTrue(isset($resolvedSchedules['oldies_15_minutes']), 'oldies_15_minutes must be registered.');
+    assertTrue(!isset($resolvedSchedules['oldies_5_minutes']), 'oldies_5_minutes must not be registered.');
+    echo "PASS 1 only news + 15m filter\n";
+
+    // Test 2: Existing news event -> zero wp_schedule_event calls.
+    $schedulerExisting = makeFixture(true);
+    $schedulerExisting->scheduleDefaultEvents();
+
+    assertTrue(
+        count($GLOBALS['wp_scheduled_events']) === 0,
+        'Existing news event must result in zero wp_schedule_event calls.'
+    );
+    echo "PASS 2 existing news no schedule call\n";
+}
+
+Yürütme Durumu
+
+ÇALIŞTIRILMADI
+
+
+
+
+Otomatik
+
+Gemini bir yapay zeka modeli olduğu için hata yapabilir.
+
+Yükselt
