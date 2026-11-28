@@ -1,0 +1,552 @@
+{
+  "recorded_at": "2026-11-28T12:31:00+03:00",
+  "scope": "website only; database queries SELECT only",
+  "cron": {
+    "query": "SELECT option_name, LENGTH(option_value) AS bytes, (CHAR_LENGTH(option_value)-CHAR_LENGTH(REPLACE(option_value,'oldies_news_check_sources_cron','')))/CHAR_LENGTH('oldies_news_check_sources_cron') AS news_count, CASE WHEN LOCATE('oldies_news_check_sources_cron',option_value)>0 THEN SUBSTRING(option_value,GREATEST(1,LOCATE('oldies_news_check_sources_cron',option_value)-40),360) ELSE 'ABSENT' END AS news_fragment FROM `152006258`.`wp_options` WHERE option_name='cron';",
+    "result": "←\n     \nSık kullanılanlar\n \n152006258\nYeni\nwp_commentmeta\nwp_comments\nwp_hfcm_scripts\nwp_jetpack_sync_queue\nwp_links\nwp_mosmcp_audit_log\nwp_mosmcp_nhis\nwp_mosmcp_nhi_grants\nwp_mosmcp_oauth_clients\nwp_mosmcp_oauth_codes\nwp_mosmcp_oauth_tokens\nwp_oldies_etsy_distribution_items\nwp_oldies_etsy_product_jobs\nwp_oldies_facebook_jobs\nwp_oldies_news_articles\nwp_oldies_news_sources\nwp_oldies_social_jobs\nwp_oldies_social_publication_jobs\nwp_oldies_video_archive\nwp_options\nwp_postmeta\nwp_posts\nwp_termmeta\nwp_terms\nwp_term_relationships\nwp_term_taxonomy\nwp_usermeta\nwp_users\n Sunucu: 127.0.0.1\n Veritabanları\n SQL\n Durum\n Dışa aktar\n İçe aktar\n Ayarlar\n Değişkenler\n Karakter Grupları\n Motorlar\n Eklentiler\n \n Konsol\nküçükten büyüğe\nbüyükten küçüğe\nSıra:\nSQL Hata Ayıklama\nÇalıştırma sırası\nAldığı süre\nSıralama:\nSorguları grupla\nSQL hata ayıklama bilgisi alınırken bazı hatalar meydana geldi.\nSeçenekler\nVarsayılana ayarla\nHer zaman sorgu mesajlarını genişlet\nBaşlangıçta sorgu geçmişini göster\nŞu an gözatılan sorguyu göster\n Enter tuşuna basıldığında sorguları çalıştır ve Shift+Enter tuşları ile yeni satır ekle. Bunu kalıcı yapmak için ayarlara bakın.\nKoyu temaya değiştir\n\n\nSorgu kutusunu göster\n Şu anki seçim benzersiz bir sütun içermiyor. Kılavuz düzenleme, onay kutusu, Düzenle, Kopyala ve Sil özellikleri kullanılabilir değil. \n Gösterilen satır 0 - 0 (toplam 1, Sorgu 0.0002 saniye sürdü.)\nSELECT option_name, LENGTH(option_value) AS bytes, (CHAR_LENGTH(option_value)-CHAR_LENGTH(REPLACE(option_value,'oldies_news_check_sources_cron','')))/CHAR_LENGTH('oldies_news_check_sources_cron') AS news_count, CASE WHEN LOCATE('oldies_news_check_sources_cron',option_value)>0 THEN SUBSTRING(option_value,GREATEST(1,LOCATE('oldies_news_check_sources_cron',option_value)-40),360) ELSE 'ABSENT' END AS news_fragment FROM `152006258`.`wp_options` WHERE option_name='cron';\n Profil çıkarma [ Satır içi düzenle ] [ Düzenle ] [ SQL'i açıkla ] [ PHP kodu oluştur ] [ Yenile ]\n Tümünü göster\t|\t\t\tSatır sayısı: \n25\n50\n100\n250\n500\n\tSatırları süz: \t\t\nFazladan seçenekler\noption_name\n\t\nbytes\n\t\nnews_count\n\t\nnews_fragment\n\t\n\ncron\n\t\n6412\n\t\n0.0000\n\t\nABSENT\n Tümünü göster\t|\t\t\tSatır sayısı: \n25\n50\n100\n250\n500\n\tSatırları süz: \t\t\nSorgu sonuçları işlemleri\n Yazdır  Panoya kopyala  Dışa aktar  Çizelge göster  Görünüm oluştur",
+    "conclusion": "oldies_news_check_sources_cron absent from serialized cron option; disappearance cause not established; not repaired"
+  },
+  "config": {
+    "result": "←\n     \nSık kullanılanlar\n \n152006258\nYeni\nwp_commentmeta\nwp_comments\nwp_hfcm_scripts\nwp_jetpack_sync_queue\nwp_links\nwp_mosmcp_audit_log\nwp_mosmcp_nhis\nwp_mosmcp_nhi_grants\nwp_mosmcp_oauth_clients\nwp_mosmcp_oauth_codes\nwp_mosmcp_oauth_tokens\nwp_oldies_etsy_distribution_items\nwp_oldies_etsy_product_jobs\nwp_oldies_facebook_jobs\nwp_oldies_news_articles\nwp_oldies_news_sources\nwp_oldies_social_jobs\nwp_oldies_social_publication_jobs\nwp_oldies_video_archive\nwp_options\nwp_postmeta\nwp_posts\nwp_termmeta\nwp_terms\nwp_term_relationships\nwp_term_taxonomy\nwp_usermeta\nwp_users\n Sunucu: 127.0.0.1\n Veritabanları\n SQL\n Durum\n Dışa aktar\n İçe aktar\n Ayarlar\n Değişkenler\n Karakter Grupları\n Motorlar\n Eklentiler\n \n Konsol\nküçükten büyüğe\nbüyükten küçüğe\nSıra:\nSQL Hata Ayıklama\nÇalıştırma sırası\nAldığı süre\nSıralama:\nSorguları grupla\nSQL hata ayıklama bilgisi alınırken bazı hatalar meydana geldi.\nSeçenekler\nVarsayılana ayarla\nHer zaman sorgu mesajlarını genişlet\nBaşlangıçta sorgu geçmişini göster\nŞu an gözatılan sorguyu göster\n Enter tuşuna basıldığında sorguları çalıştır ve Shift+Enter tuşları ile yeni satır ekle. Bunu kalıcı yapmak için ayarlara bakın.\nKoyu temaya değiştir\n\n\nSorgu kutusunu göster\n Gösterilen satır 0 - 4 (toplam 5, Sorgu 0.0003 saniye sürdü.)\nSELECT option_name, CHAR_LENGTH(option_value) AS stored_length, CASE WHEN option_name='oldies_social_db_version' OR option_name LIKE '%news_monitoring_enabled' OR option_name LIKE '%news_auto_publish' THEN option_value ELSE '[VALUE NOT READ]' END AS safe_value FROM `152006258`.`wp_options` WHERE option_name='oldies_social_db_version' OR option_name LIKE 'oldies%news_monitoring%' OR option_name LIKE 'oldies%news_auto_publish%' OR option_name LIKE 'oldies%openai%';\n Profil çıkarma [ Satır içi düzenle ] [ Düzenle ] [ SQL'i açıkla ] [ PHP kodu oluştur ] [ Yenile ]\n Tümünü göster\t|\t\t\tSatır sayısı: \n25\n50\n100\n250\n500\n\tSatırları süz: \tAnahtara göre sırala: \nPRIMARY (ASC)\nPRIMARY (DESC)\noption_name (ASC)\noption_name (DESC)\nautoload (ASC)\nautoload (DESC)\nYok\n\t\nFazladan seçenekler\n\t\noption_name\n\t\nstored_length\n\t\nsafe_value\n\t\n\n\t\n Düzenle\n\t\n Kopyala\n\t\n Sil\n\t\noldies_news_auto_publish\n\t\n1\n\t\n0\n\n\n\t\n Düzenle\n\t\n Kopyala\n\t\n Sil\n\t\noldies_news_monitoring_enabled\n\t\n1\n\t\n1\n\n\n\t\n Düzenle\n\t\n Kopyala\n\t\n Sil\n\t\noldies_social_db_version\n\t\n5\n\t\n1.7.5\n\n\n\t\n Düzenle\n\t\n Kopyala\n\t\n Sil\n\t\noldies_social_openai_image_model\n\t\n11\n\t\n[VALUE NOT READ]\n\n\n\t\n Düzenle\n\t\n Kopyala\n\t\n Sil\n\t\noldies_social_openai_text_model\n\t\n12\n\t\n[VALUE NOT READ]\n  Tümünü işaretle Seçilileri:  Düzenle  Kopyala  Sil  Dışa aktar\n Tümünü göster\t|\t\t\tSatır sayısı: \n25\n50\n100\n250\n500\n\tSatırları süz: \tAnahtara göre sırala: \nPRIMARY (ASC)\nPRIMARY (DESC)\noption_name (ASC)\noption_name (DESC)\nautoload (ASC)\nautoload (DESC)\nYok\n\t\nSorgu sonuçları işlemleri\n Yazdır  Panoya kopyala  Dışa aktar  Çizelge göster  Görünüm oluştur",
+    "no_secret_values_read": true
+  },
+  "native_pair_counts": {
+    "query": "SELECT p.post_type, lang.slug AS language, COUNT(DISTINCT p.ID) AS published_items, COUNT(DISTINCT CASE WHEN lang.slug='tr' AND en.ID IS NULL THEN p.ID END) AS tr_without_published_en\nFROM `152006258`.`wp_posts` p\nJOIN `152006258`.`wp_term_relationships` lr ON lr.object_id=p.ID\nJOIN `152006258`.`wp_term_taxonomy` lt ON lt.term_taxonomy_id=lr.term_taxonomy_id AND lt.taxonomy='language'\nJOIN `152006258`.`wp_terms` lang ON lang.term_id=lt.term_id AND lang.slug IN ('tr','en')\nLEFT JOIN (SELECT gr.object_id, gt.description FROM `152006258`.`wp_term_relationships` gr JOIN `152006258`.`wp_term_taxonomy` gt ON gt.term_taxonomy_id=gr.term_taxonomy_id AND gt.taxonomy='post_translations') pairs ON pairs.object_id=p.ID\nLEFT JOIN `152006258`.`wp_posts` en ON en.ID=CASE WHEN LOCATE('s:2:\"en\";i:',pairs.description)>0 THEN CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(pairs.description,'s:2:\"en\";i:',-1),';',1) AS UNSIGNED) ELSE 0 END AND en.post_status='publish'\nWHERE p.post_status='publish' AND p.post_type IN ('post','page')\nGROUP BY p.post_type,lang.slug ORDER BY p.post_type,lang.slug;",
+    "result": "←\n     \nSık kullanılanlar\n \n152006258\nYeni\nwp_commentmeta\nwp_comments\nwp_hfcm_scripts\nwp_jetpack_sync_queue\nwp_links\nwp_mosmcp_audit_log\nwp_mosmcp_nhis\nwp_mosmcp_nhi_grants\nwp_mosmcp_oauth_clients\nwp_mosmcp_oauth_codes\nwp_mosmcp_oauth_tokens\nwp_oldies_etsy_distribution_items\nwp_oldies_etsy_product_jobs\nwp_oldies_facebook_jobs\nwp_oldies_news_articles\nwp_oldies_news_sources\nwp_oldies_social_jobs\nwp_oldies_social_publication_jobs\nwp_oldies_video_archive\nwp_options\nwp_postmeta\nwp_posts\nwp_termmeta\nwp_terms\nwp_term_relationships\nwp_term_taxonomy\nwp_usermeta\nwp_users\n Sunucu: 127.0.0.1\n Veritabanları\n SQL\n Durum\n Dışa aktar\n İçe aktar\n Ayarlar\n Değişkenler\n Karakter Grupları\n Motorlar\n Eklentiler\n \n Konsol\nküçükten büyüğe\nbüyükten küçüğe\nSıra:\nSQL Hata Ayıklama\nÇalıştırma sırası\nAldığı süre\nSıralama:\nSorguları grupla\nSQL hata ayıklama bilgisi alınırken bazı hatalar meydana geldi.\nSeçenekler\nVarsayılana ayarla\nHer zaman sorgu mesajlarını genişlet\nBaşlangıçta sorgu geçmişini göster\nŞu an gözatılan sorguyu göster\n Enter tuşuna basıldığında sorguları çalıştır ve Shift+Enter tuşları ile yeni satır ekle. Bunu kalıcı yapmak için ayarlara bakın.\nKoyu temaya değiştir\n\n\nSorgu kutusunu göster\n Şu anki seçim benzersiz bir sütun içermiyor. Kılavuz düzenleme, onay kutusu, Düzenle, Kopyala ve Sil özellikleri kullanılabilir değil. \n Gösterilen satır 0 - 3 (toplam 4, Sorgu 0.0080 saniye sürdü.) [post_type: PAGE... - POST...]\nSELECT p.post_type, lang.slug AS language, COUNT(DISTINCT p.ID) AS published_items, COUNT(DISTINCT CASE WHEN lang.slug='tr' AND en.ID IS NULL THEN p.ID END) AS tr_without_published_en FROM `152006258`.`wp_posts` p JOIN `152006258`.`wp_term_relationships` lr ON lr.object_id=p.ID JOIN `152006258`.`wp_term_taxonomy` lt ON lt.term_taxonomy_id=lr.term_taxonomy_id AND lt.taxonomy='language' JOIN `152006258`.`wp_terms` lang ON lang.term_id=lt.term_id AND lang.slug IN ('tr','en') LEFT JOIN (SELECT gr.object_id, gt.description FROM `152006258`.`wp_term_relationships` gr JOIN `152006258`.`wp_term_taxonomy` gt ON gt.term_taxonomy_id=gr.term_taxonomy_id AND gt.taxonomy='post_translations') pairs ON pairs.object_id=p.ID LEFT JOIN `152006258`.`wp_posts` en ON en.ID=CASE WHEN LOCATE('s:2:\"en\";i:',pairs.description)>0 THEN CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(pairs.description,'s:2:\"en\";i:',-1),';',1) AS UNSIGNED) ELSE 0 END AND en.post_status='publish' WHERE p.post_status='publish' AND p.post_[...]\n Profil çıkarma [ Düzenle ] [ Yenile ]\n Tümünü göster\t|\t\t\tSatır sayısı: \n25\n50\n100\n250\n500\n\tSatırları süz: \t\t\nFazladan seçenekler\npost_type  1\n\t\nlanguage\n\t\npublished_items\n\t\ntr_without_published_en\n\t\n\npage\n\t\nen\n\t\n544\n\t\n0\n\n\npage\n\t\ntr\n\t\n588\n\t\n44\n\n\npost\n\t\nen\n\t\n40\n\t\n0\n\n\npost\n\t\ntr\n\t\n55\n\t\n15\n Tümünü göster\t|\t\t\tSatır sayısı: \n25\n50\n100\n250\n500\n\tSatırları süz: \t\t\nSorgu sonuçları işlemleri\n Yazdır  Panoya kopyala  Dışa aktar  Çizelge göster  Görünüm oluştur",
+    "published_tr_without_published_en": {
+      "page": 44,
+      "post": 15,
+      "total": 59
+    },
+    "interpretation": "Native relationships plus published EN status; triage for existing orphan translations/drafts/exclusions before new production; not 59 newly commissioned translations."
+  },
+  "native_pair_missing_items": [
+    {
+      "id": 155,
+      "type": "page",
+      "title_as_displayed": "1980'ler",
+      "slug_as_displayed": "1980ler",
+      "parent": 0
+    },
+    {
+      "id": 204,
+      "type": "page",
+      "title_as_displayed": "Oldies Radyo CanlÄ±",
+      "slug_as_displayed": "oldies-radyo-canli",
+      "parent": 0
+    },
+    {
+      "id": 221,
+      "type": "page",
+      "title_as_displayed": "Aktiviteler",
+      "slug_as_displayed": "oldies-organizasyonlar",
+      "parent": 0
+    },
+    {
+      "id": 224,
+      "type": "page",
+      "title_as_displayed": "Yeni Haberler",
+      "slug_as_displayed": "yeni-haberler",
+      "parent": 0
+    },
+    {
+      "id": 459,
+      "type": "page",
+      "title_as_displayed": "Radyo Podcastler",
+      "slug_as_displayed": "radyo-podcastler",
+      "parent": 0
+    },
+    {
+      "id": 488,
+      "type": "page",
+      "title_as_displayed": "Radyo CanlÄ± YayÄ±n",
+      "slug_as_displayed": "radyo-canli-yayin",
+      "parent": 0
+    },
+    {
+      "id": 818,
+      "type": "page",
+      "title_as_displayed": "Radyo Instagram",
+      "slug_as_displayed": "radyo-instagram",
+      "parent": 0
+    },
+    {
+      "id": 908,
+      "type": "page",
+      "title_as_displayed": "The Rolling Stones Yeni AlbÃ¼mÃ¼ Foreign Tongues i...",
+      "slug_as_displayed": "rolling-stones-foreign-tongues-ingiltere-bir-numar...",
+      "parent": 0
+    },
+    {
+      "id": 917,
+      "type": "page",
+      "title_as_displayed": "Bon Joviâ€™den Madison Square Gardenâ€™da Yedi YÄ±...",
+      "slug_as_displayed": "bon-jovi-msg-always-bed-of-roses-2026",
+      "parent": 0
+    },
+    {
+      "id": 987,
+      "type": "page",
+      "title_as_displayed": "Paul McCartney Kariyerinde Bir Ä°lk: Ä°lk Mercury ...",
+      "slug_as_displayed": "paul-mccartney-ilk-mercury-prize-adayligi-2026",
+      "parent": 0
+    },
+    {
+      "id": 1101,
+      "type": "page",
+      "title_as_displayed": "Whitney Houstonâ€™Ä±n Ä°lk ResmÃ® Barbie BebeÄŸi T...",
+      "slug_as_displayed": "whitney-houston-wh1tney-barbie-2026",
+      "parent": 0
+    },
+    {
+      "id": 1103,
+      "type": "page",
+      "title_as_displayed": "New Radicals 28 YÄ±l Sonra Yeni ÅžarkÄ±yla DÃ¶ndÃ¼",
+      "slug_as_displayed": "new-radicals-28-yil-sonra-yeni-sarki",
+      "parent": 0
+    },
+    {
+      "id": 1105,
+      "type": "page",
+      "title_as_displayed": "Elvis Week 2026 Gracelandâ€™da Candlelight Vigil i...",
+      "slug_as_displayed": "elvis-week-2026-graceland-basladi",
+      "parent": 0
+    },
+    {
+      "id": 1107,
+      "type": "page",
+      "title_as_displayed": "Madonna ve Kylie Minogue â€œLove Sensationâ€ ile ...",
+      "slug_as_displayed": "madonna-kylie-minogue-love-sensation",
+      "parent": 0
+    },
+    {
+      "id": 1109,
+      "type": "page",
+      "title_as_displayed": "Stevie Nicks ve Lindsey Buckingham ArasÄ±ndaki Buz...",
+      "slug_as_displayed": "stevie-nicks-lindsey-buckingham-barisma",
+      "parent": 0
+    },
+    {
+      "id": 1111,
+      "type": "page",
+      "title_as_displayed": "Jethro Tull 14 KasÄ±mâ€™da Ä°stanbulâ€™da",
+      "slug_as_displayed": "jethro-tull-istanbul-2026",
+      "parent": 0
+    },
+    {
+      "id": 1113,
+      "type": "page",
+      "title_as_displayed": "AÄŸustos 2026â€™dan Oldies Music Haberleri",
+      "slug_as_displayed": "agustos-2026-oldies-music-haberleri",
+      "parent": 0
+    },
+    {
+      "id": 1125,
+      "type": "page",
+      "title_as_displayed": "Instagramâ€™dan Gelenler",
+      "slug_as_displayed": "instagramdan-gelenler",
+      "parent": 0
+    },
+    {
+      "id": 1149,
+      "type": "page",
+      "title_as_displayed": "Oldies Radyo Android UygulamasÄ±",
+      "slug_as_displayed": "android-uygulamasi",
+      "parent": 0
+    },
+    {
+      "id": 1193,
+      "type": "page",
+      "title_as_displayed": "Kim Wilde â€” 1980â€™ler Kariyeri",
+      "slug_as_displayed": "kim-wilde-2",
+      "parent": 835
+    },
+    {
+      "id": 1195,
+      "type": "page",
+      "title_as_displayed": "Kylie Minogue â€” 1980â€™ler Kariyeri",
+      "slug_as_displayed": "kylie-minogue-2",
+      "parent": 835
+    },
+    {
+      "id": 1210,
+      "type": "page",
+      "title_as_displayed": "Bon Jovi â€” 1980â€™ler Kariyeri",
+      "slug_as_displayed": "bon-jovi-2",
+      "parent": 835
+    },
+    {
+      "id": 1235,
+      "type": "page",
+      "title_as_displayed": "Radiohead â€” 1990â€™lar Kariyeri",
+      "slug_as_displayed": "radiohead-2",
+      "parent": 837
+    },
+    {
+      "id": 1392,
+      "type": "page",
+      "title_as_displayed": "Oldies Radyo iPhone UygulamasÄ±",
+      "slug_as_displayed": "iphone-uygulamasi",
+      "parent": 0
+    },
+    {
+      "id": 1394,
+      "type": "page",
+      "title_as_displayed": "ZZ Top Davulcusu Frank Beard HayatÄ±nÄ± Kaybetti",
+      "slug_as_displayed": "frank-beard-zz-top-hayatini-kaybetti",
+      "parent": 0
+    },
+    {
+      "id": 1396,
+      "type": "page",
+      "title_as_displayed": "Rod Stewart Kalp Operasyonu SonrasÄ± Konserlerine ...",
+      "slug_as_displayed": "rod-stewart-kalp-operasyonu-2026",
+      "parent": 0
+    },
+    {
+      "id": 1398,
+      "type": "page",
+      "title_as_displayed": "Ritchie Blackmore 33 YÄ±l Sonra Deep Purple ile Ay...",
+      "slug_as_displayed": "ritchie-blackmore-deep-purple-33-yil-sonra",
+      "parent": 0
+    },
+    {
+      "id": 1401,
+      "type": "page",
+      "title_as_displayed": "CÃ©line Dion AltÄ± YÄ±l Sonra Ä°lk Tam Konseriyle ...",
+      "slug_as_displayed": "celine-dion-paris-sahne-donusu-2026",
+      "parent": 0
+    },
+    {
+      "id": 1403,
+      "type": "page",
+      "title_as_displayed": "Earth, Wind & Fire Davulcusu John Parisâ€™in SaÄŸl...",
+      "slug_as_displayed": "john-paris-earth-wind-fire-saglik-2026",
+      "parent": 0
+    },
+    {
+      "id": 1405,
+      "type": "page",
+      "title_as_displayed": "Journey Son ABD Turne BÃ¶lÃ¼mÃ¼ne HazÄ±rlanÄ±yor",
+      "slug_as_displayed": "journey-final-frontier-son-turne-2026",
+      "parent": 0
+    },
+    {
+      "id": 1407,
+      "type": "page",
+      "title_as_displayed": "The Beatles Filmleri Ä°Ã§in Abbey Road Sahnesi Ã‡e...",
+      "slug_as_displayed": "beatles-filmleri-abbey-road-2028",
+      "parent": 0
+    },
+    {
+      "id": 1409,
+      "type": "page",
+      "title_as_displayed": "Axl Rose Ã‡ene RahatsÄ±zlÄ±ÄŸÄ±na RaÄŸmen ÃœÃ§ Saa...",
+      "slug_as_displayed": "axl-rose-tmj-metlife-konseri-2026",
+      "parent": 0
+    },
+    {
+      "id": 1411,
+      "type": "page",
+      "title_as_displayed": "Courtney Love Uzun ZamandÄ±r Beklenen AlbÃ¼mÃ¼nÃ¼ ...",
+      "slug_as_displayed": "courtney-love-yeni-albumu-tamamladi-2026",
+      "parent": 0
+    },
+    {
+      "id": 1413,
+      "type": "page",
+      "title_as_displayed": "Sheryl Crow Yedi ÅžarkÄ±lÄ±k â€œPick You Upâ€ Alb...",
+      "slug_as_displayed": "sheryl-crow-pick-you-up-2026",
+      "parent": 0
+    },
+    {
+      "id": 1415,
+      "type": "page",
+      "title_as_displayed": "Erykah Badu ve The Alchemist Ortak AlbÃ¼m YayÄ±mlÄ...",
+      "slug_as_displayed": "erykah-badu-alchemist-ortak-album-2026",
+      "parent": 0
+    },
+    {
+      "id": 1417,
+      "type": "page",
+      "title_as_displayed": "Hollywood Vampires ÃœÃ§ YÄ±l Sonra DÃ¶ndÃ¼; Ronnie...",
+      "slug_as_displayed": "hollywood-vampires-ronnie-wood-londra-2026",
+      "parent": 0
+    },
+    {
+      "id": 1419,
+      "type": "page",
+      "title_as_displayed": "Bryan Adams Turnesini Haziran 2027â€™ye UzattÄ±",
+      "slug_as_displayed": "bryan-adams-turne-2027",
+      "parent": 0
+    },
+    {
+      "id": 1421,
+      "type": "page",
+      "title_as_displayed": "Madonna 68â€™inci YaÅŸÄ±nÄ± Korfuâ€™da Ailesiyle K...",
+      "slug_as_displayed": "madonna-68-yas-korfu-2026",
+      "parent": 0
+    },
+    {
+      "id": 1423,
+      "type": "page",
+      "title_as_displayed": "Frankie Valli: â€œEmekli OlmadÄ±m, SaÄŸlÄ±ÄŸÄ±ma O...",
+      "slug_as_displayed": "frankie-valli-emeklilik-aciklamasi-2026",
+      "parent": 0
+    },
+    {
+      "id": 1425,
+      "type": "page",
+      "title_as_displayed": "Bonnie Tyler Swanseaâ€™da Son YolculuÄŸuna UÄŸurla...",
+      "slug_as_displayed": "bonnie-tyler-swansea-anma-2026",
+      "parent": 0
+    },
+    {
+      "id": 1429,
+      "type": "page",
+      "title_as_displayed": "Yoko Onoâ€™nun MÃ¼ziÄŸi Los Angelesâ€™ta â€œYoko O...",
+      "slug_as_displayed": "yoko-ono-yoko-only-konseri-2026",
+      "parent": 0
+    },
+    {
+      "id": 1632,
+      "type": "page",
+      "title_as_displayed": "Gizlilik PolitikasÄ±",
+      "slug_as_displayed": "gizlilik-politikasi",
+      "parent": 0
+    },
+    {
+      "id": 2753,
+      "type": "page",
+      "title_as_displayed": "Yeni Haberler",
+      "slug_as_displayed": "yeni-haberler-2",
+      "parent": 0
+    },
+    {
+      "id": 4548,
+      "type": "page",
+      "title_as_displayed": "MÃ¼zik Tarihi Quiz â€” 25 Soru, TR/EN Pilot",
+      "slug_as_displayed": "muzik-tarihi-quiz",
+      "parent": 0
+    },
+    {
+      "id": 1,
+      "type": "post",
+      "title_as_displayed": "Oldies Radyo",
+      "slug_as_displayed": "oldies-radyo-hakkinda",
+      "parent": 0
+    },
+    {
+      "id": 172,
+      "type": "post",
+      "title_as_displayed": "Bryan Adams'dan Yeni Konserler Serisi",
+      "slug_as_displayed": "bryan-adams",
+      "parent": 0
+    },
+    {
+      "id": 279,
+      "type": "post",
+      "title_as_displayed": "1950'lerin mÃ¼ziÄŸiyle sallan yuvarlan!",
+      "slug_as_displayed": "1950lerin-muzigiyle-sallan-yuvarlan",
+      "parent": 0
+    },
+    {
+      "id": 283,
+      "type": "post",
+      "title_as_displayed": "En gÃ¼zel 10 eski zaman yÄ±ldÄ±zÄ± (1940â€²lar)",
+      "slug_as_displayed": "en-guzel-10-eski-zaman-yildizi-1940%e2%80%b2lar",
+      "parent": 0
+    },
+    {
+      "id": 303,
+      "type": "post",
+      "title_as_displayed": "En gÃ¼zel 10 eski zaman yÄ±ldÄ±zÄ± (1950â€²ler)",
+      "slug_as_displayed": "en-guzel-10-eski-zaman-yildizi-1950%e2%80%b2ler",
+      "parent": 0
+    },
+    {
+      "id": 321,
+      "type": "post",
+      "title_as_displayed": "Marilyn Monroe ve Bilinmeyen HayatÄ±",
+      "slug_as_displayed": "marilyn-monroe-ve-bilinmeyen-hayati",
+      "parent": 0
+    },
+    {
+      "id": 353,
+      "type": "post",
+      "title_as_displayed": "Mete Buyuran",
+      "slug_as_displayed": "mete-buyuran",
+      "parent": 0
+    },
+    {
+      "id": 412,
+      "type": "post",
+      "title_as_displayed": "Elvis Presley TÃ¼rkiye Fan KulÃ¼p ToplantÄ± ve Gec...",
+      "slug_as_displayed": "elvis-presley-turkiye-fan-kulup-toplanti-ve-gecesi",
+      "parent": 0
+    },
+    {
+      "id": 414,
+      "type": "post",
+      "title_as_displayed": "Oldies Rock Night (Glam &amp; Classic Rock)",
+      "slug_as_displayed": "oldies-rock-night-glam-classic-rock",
+      "parent": 0
+    },
+    {
+      "id": 418,
+      "type": "post",
+      "title_as_displayed": "HakettiÄŸi deÄŸeri bulamamÄ±ÅŸ bir ÅŸarkÄ±: â€œSym...",
+      "slug_as_displayed": "hakettigi-degeri-bulamamis-bir-sarki-sympathy",
+      "parent": 0
+    },
+    {
+      "id": 420,
+      "type": "post",
+      "title_as_displayed": "Bir John Lennon filmi: â€œNowhere Boyâ€",
+      "slug_as_displayed": "bir-john-lennon-filmi-nowhere-boy",
+      "parent": 0
+    },
+    {
+      "id": 422,
+      "type": "post",
+      "title_as_displayed": "Ã–zel Chuck Berry RÃ¶portajÄ±",
+      "slug_as_displayed": "ozel-chuck-berry-roportaji",
+      "parent": 0
+    },
+    {
+      "id": 428,
+      "type": "post",
+      "title_as_displayed": "Oldies Radyo Instagram HesabÄ±mÄ±z Aktiftir",
+      "slug_as_displayed": "oldies-radyo-instagram-hesabimiz-aktiftir",
+      "parent": 0
+    },
+    {
+      "id": 498,
+      "type": "post",
+      "title_as_displayed": "PAUL MCCARTNEY 60 SENE SONRA HANGÄ° THE BEATLES Åž...",
+      "slug_as_displayed": "paul-mccartney-60-sene-sonra-hangi-the-beatles-sar...",
+      "parent": 0
+    },
+    {
+      "id": 4261,
+      "type": "post",
+      "title_as_displayed": "Lionel Richie Kalp Ritmi BozukluÄŸu Nedeniyle BaÅŸ...",
+      "slug_as_displayed": "lionel-richie-kalp-islemi-atriyal-fibrilasyon",
+      "parent": 0
+    }
+  ],
+  "ui_limitations": "phpMyAdmin displayed truncated titles/slugs and mojibake; preserved as observed. Do not infer public-site encoding damage from these UI strings. IDs and relationships are authoritative for follow-up.",
+  "gemini_pro": {
+    "task_id": "WEB-GEM-EN-20261128-02",
+    "url": "https://gemini.google.com/u/2/app/6718abb7294f320f?pageId=none",
+    "account": "Mette Buyuretti AI Pro, verified before send",
+    "tr_ids": [
+      866,
+      867,
+      868,
+      869,
+      870
+    ],
+    "en_ids": [
+      1942,
+      1943,
+      1944,
+      1945,
+      1946
+    ],
+    "delivery": "\n\nKarşılaştırma Kapsamı: Verilen 5 TR sayfasının (866–870) ziyaretçi görünümü tam metinleri ile önceki en_html (1942–1946) içerikleri; başlık/giriş, story-deck, görsel arşiv başlıkları, 5 ana editoryal bölüm (866/1942'deki dinleme rotası dâhil), öne çıkan isimler, dükkân ve kaynak blokları bazında satır satır karşılaştırıldı.\n\nTR ID\tEN ID\tTam Metin & Bölüm Eşleşmesi\tKanıtlı Anlam Farkı / İngilizce Hatası\tEn Dar Düzeltme\n866\t1942\tTam (5 ana bölüm + dinleme rotası + kaynaklar birebir)\tHata yok. TR'deki Needles and Pins \"12 telli gitar\" ifadesi EN'de bilinçli editoryal düzeltmeyle \"ringing guitar textures\" yapılmış ve Editor’s guitar note ile kaynaklı açıklanmış.\tYok\n867\t1943\tTam (5 ana bölüm + kişi/kulüp/albüm adları birebir)\tYok\tYok\n868\t1944\tTam (5 ana bölüm + kişi/alt kültür ayrıntıları birebir)\tYok\tYok\n869\t1945\tTam (5 ana bölüm + yapımcı/sanatçı/teknik ayrıntılar birebir)\tYok\tYok\n870\t1946\tTam (5 ana bölüm + stüdyo/tarih ayrıntıları birebir)\tHata yok. TR'de FAME ile gruplanan Percy Sledge EN'de bilinçli editoryal düzeltmeyle ayrı Norala stüdyosu olarak belirtilmiş ve Editor’s studio note ile kaynaklı açıklanmış.\tYok\n\nSonuç: Beş EN dosyasında (1942–1946) eksik ana bölüm, atlanmış kişi/tarih/dinleme rotası veya anlamı bozan çeviri hatası bulunmadı; ek düzeltme adayı gerekmiyor.\n\nTamamlandı\n\n\n\n\nHidrojen\n\nGemini bir yapay zeka modeli olduğu için hata yapabilir.\n\nBilgisayar\nTamamlandı",
+    "master_boundary": "Supplied rendered TR texts after public fetch blocked. Full sections present. Two deliberate factual/editorial differences retained as review notes; Gemini is not independent factual acceptance. No replacement or retranslation."
+  },
+  "deepseek": {
+    "task_id": "WEB-DS-CRON-20261128-01",
+    "url": "https://chat.deepseek.com/a/chat/s/0de7a4f0-13a0-43ac-a08e-11b833bb6000",
+    "delivery": "Verilen kod/akış üzerinden akıl yürüttüm; kaynak okumadım, fixture/test çalıştırmadım. Bu bir kabul/PASS değildir.\n\nMantık/güvenlik riski: cron_schedules filtresi yalnız !wp_next_scheduled(...) dalında ekleniyor. Event bir kez oluştuktan sonraki isteklerde oldies_15_minutes tekrar tanımlı olmayabilir; WP recurrence’ı wp_get_schedules() içinde bulamazsa yeniden planlama düşer. Ayrıca wp_next_scheduled($hook) args’siz kontrol edildiği için aynı hook farklı args ile varsa duplicate event riski var; wp_schedule_event dönüş değeri de kontrol edilmiyor. Ayrı catch adayında token’ın loglanmaması olumlu, fakat yalnız class+basename+line ile Throwable yutmak teşhis/alert körlüğü yaratır.\n\nAdayın çözmediği kalıcılık/başlatma sorunu: Aday scheduleDefaultEvents/DB versiyon farkı akışına bağlı; normal init’te veya cron option temizlendiğinde/plug-in yeniden etkinleştiğinde DB versiyon farkı yoksa onarım çalışmayabilir. Mevcut event varsa ama oldies_15_minutes interval’i eksik/bozuksa aday bunu düzeltmiyor; yalnız “hiç event yoksa” kurulum yapıyor.\n\nGerçek cron export’ta mutlaka istenen alanlar: oldies_news_check_sources_cron için tüm _get_cron_array() kayıtları: hook, tam args (boş array/serialized), timestamp (UTC ve site-local), schedule adı, duplicate sayısı; wp_next_scheduled($hook, $args) ve wp_get_schedule($hook, $args); wp_get_schedules() içinde oldies_15_minutes ve interval=900; ayrıca DISABLE_WP_CRON/sunucu cron durumu ve export anındaki time().\n\nYanlış PASS riskleri: Yalnız wp_next_scheduled non-false görülmesi; yalnız oldies_5_minutes sosyal/Etsy recurrencelarına dokunulmaması; yalnız catch’in class+basename+line yazması ve finally cleanup’ın korunması; PHP fixture’ları çalıştırılmadan statik akıştan PASS verilmesi; gerçek newsevent listesi okunmadan monitoringON/auto_publishOFF/lastscan22Sep durumunun PASS’e dayanak sayılması.\n\nEn küçük düzeltme: cron_schedules filtresini koşul dışına alıp her init’te oldies_15_minutes’i tanımla; wp_next_scheduled ve wp_schedule_event çağrılarında aynı $args=[] kullan; mevcut event varsa wp_get_schedule ile schedule adını doğrula. Örnek minimal akış:\n\nphp\nKopyala\nİndir\nadd_filter('cron_schedules', function($s) {\n    if (!isset($s['oldies_15_minutes'])) {\n        $s['oldies_15_minutes'] = ['interval' => 900, 'display' => 'Oldies 15 Minutes'];\n    }\n    return $s;\n});\n$args = [];\nif (!wp_next_scheduled('oldies_news_check_sources_cron', $args)) {\n    wp_schedule_event(time() + 300, 'oldies_15_minutes', 'oldies_news_check_sources_cron', $args);\n}\nDerin Düşünme\nAkıllı Arama\nYapay zeka tarafından oluşturulmuştur, sadece referans amaçlıdır.",
+    "master_correction": "Concern that recurrence disappears on subsequent requests overlooks baseline Scheduler::init registering intervals every request. Valid concerns retained: normal-init missing-event recovery and wp_schedule_event return verification. No auto-adoption; not WATCHDOG."
+  },
+  "php_runtime": {
+    "runtime_source": "https://downloads.php.net/~windows/releases/php-8.4.28-nts-Win32-vs17-x64.zip",
+    "php_version_manifest": "8.4.28",
+    "archive_sha256": "c1f9280588b7b6ad7b518969022f0b0175f106fab9d0639ad0e4ce7cd47ac1ed",
+    "temporary_root": "C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym",
+    "files_sha256": {
+      "logging/test.php": "ab9fa1ecc3db887687685d897f3a9ed162648bf93c1994a01524f87aa921c8c7",
+      "logging/candidate/src/Cron/Scheduler.php": "de1447e3025c5d7b4e024e0dbf55156498051bf8c35fa38127d9f92419a57a37",
+      "recurrence/test.php": "6d79bb78af7c5a9b6a00a22d7efd23202633166a9a87eea1cbecdedeb4cadcc9",
+      "recurrence/candidate/src/Cron/Scheduler.php": "3e91008fd0ffcc46713a1136ca388af3c881838d6a5855d975c5c32b268d3644"
+    },
+    "runs": [
+      {
+        "command": [
+          "-n",
+          "-v"
+        ],
+        "exit_code": 0,
+        "stdout": "PHP 8.4.28 (cli) (built: Nov 18 2026 00:57:45) (NTS Visual C++ 2022 x64)\nCopyright (c) The PHP Group\nBuilt by The PHP Group\nZend Engine v4.4.28, Copyright (c) Zend Technologies\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "-n",
+          "-l",
+          "C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\logging\\test.php"
+        ],
+        "exit_code": 0,
+        "stdout": "No syntax errors detected in C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\logging\\test.php\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "-n",
+          "-l",
+          "C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\logging\\candidate\\src\\Cron\\Scheduler.php"
+        ],
+        "exit_code": 0,
+        "stdout": "No syntax errors detected in C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\logging\\candidate\\src\\Cron\\Scheduler.php\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "-n",
+          "-l",
+          "C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\recurrence\\test.php"
+        ],
+        "exit_code": 0,
+        "stdout": "No syntax errors detected in C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\recurrence\\test.php\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "-n",
+          "-l",
+          "C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\recurrence\\candidate\\src\\Cron\\Scheduler.php"
+        ],
+        "exit_code": 0,
+        "stdout": "No syntax errors detected in C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\recurrence\\candidate\\src\\Cron\\Scheduler.php\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "-n",
+          "C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\logging\\test.php"
+        ],
+        "exit_code": 0,
+        "stdout": "PASS 1 existing lock\nPASS 2 success\nPASS 3 exception redaction and cleanup\nPASS 4 skipped\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "-n",
+          "C:\\Users\\METE\\AppData\\Local\\Temp\\oldies-web-qa-20261128-0b6ohlym\\recurrence\\test.php"
+        ],
+        "exit_code": 0,
+        "stdout": "PASS 1 only news + 15m filter\nPASS 2 existing news no schedule call\n",
+        "stderr": ""
+      }
+    ],
+    "all_exit_zero": true
+  },
+  "work2": {
+    "status": "not dispatched; no confirmed correct session; runtime tests executed by MASTER after PC restored",
+    "site_write_permission": false
+  }
+}
