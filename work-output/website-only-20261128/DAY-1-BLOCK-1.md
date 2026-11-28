@@ -1,0 +1,22 @@
+# 28 Kasım — Günlük çalışma / Blok1
+**28.11.2026 | 12:00 TSİ (UTC+3)**  
+WORK MASTER/root; başlangıç11:54TSİ, checkpoint12:00TSİ. Bu günlük kayıt otomatik takvim/arka plan çalışması değildir.
+
+## GERÇEKLEŞEN
+1. Yayımlanmış **1132** WordPress sayfasının güncelmetaverienvanteri tekseferde alındı(12sayfaAPI,uniqueID1132). /en/ adresönekli544,diğer588. Bunlar nativelang/eşleşmişçiftsayısı değildir;44fark=44eksikçeviri denmedi. Kaynak: day1/published-pages-metadata.json . Yazılar(posts),taslaklar veotomatik/dinamikENadresleribuenvanterletoplamayrı.
+2. EskiBatch008ilk5bekleyençeviri kaydı eskimiş:TR860↔EN1937Elvis,861↔1938Sinatra,862↔1939DeanMartin,863↔1940RayCharles,864↔1941JohnnyCash.5/5nativePolylangpair-previewvalid,publish;ENmetinleri13921–14567civarındaHTMLkarakter,yeniokuma5Ekimdeğişiklikleri. Bunlaryenidençeviriyeverilmedi. ElvisTR860post_contentboş,ancaktemadinamiküretiyor;boşRESTbody 'sitedeiçerikyok'demekdeğil. İngilizce5dosyanıntümsanatsaltarihdoğruluğubu5paircheckilekabuledilmedi.
+3. **CANLIküçükdüzeltme:** EN1937Elvis1960sayfasında mevcut'Explore the career in the1950s'metnineEN1950Elvis1744adresibağlandı. ÖncesimetniGitHubday1/en1937-before-internal-link.html . Hedefsayfa1744publishenvanterdekayıtlı. Güncelkaynakdeğişmediğisaveöncesiteyitedildi. Browserziyaretçigörünümündelinkhref https://oldiesradyo.com/en/1950s/elvis-presley/ doğrulandı. RollbackyalnızanchorıöncekidüzmetneyadayedekHTML'egerialma.
+4. **Taslakdüzeltmesi:** GeminiProWEB-GEM-EDITORIAL-20261128-01gerçekALINDI+teslim. TR5198/EN5199Beatleskarşılaştırması;ENkaynaklistesindeTürkçeaçıklamalarbuldu. MASTERyalnız4kaynaklinkininetiketiniİngilizceyaptı;URLler/gövdegerçekleri/değerlendirmeveTRmetindeğişmedi. EN5199draftolarakkaldı;readbackmetnibirebireşit,statusdraft. Öncesiyedekday1/beatles-en5199-before-source-label-fix.html .
+5. Prohesabıkimliği+Proetiketi bu görevin gönderiminden önce yeniden doğrulandı. MevcutProkonuşması https://gemini.google.com/u/2/app/6718abb7294f320f?pageId=none . Gemini'yesiteyeyazmayetkisiverilmedi. Gemini kaynakların açıldığınıveiddialarındoğrulandığınıbildirdi;MASTERbuoturumdabununayrıbağımsızfaktüelkontrolünüyapmadı. RollingStone/MusicRadarikincilkaynaklardır;'4birincilkaynak'açıldıifadesioperatörbeyanıdır,kabuldeğil. Haberyayımlanmadı.
+
+## Güncel engeller — tekrar denemeyi bırakma sınırı
+- Yerel PHPbinarybulunamadı.
+- RemoteDesktopCommanderyetkiliciha z'Mete-DELL-2025'Offlinegörünüyor;komut/testgönderilmedi. Work2'yegörevbaşlamışsayılmadı.
+- WPsftp/sshget:SSHavailabletrueamaenabledfalse,SFTPusernameyok. Hesap/SSH/şifreizinideğiştirilmedi.
+- GerçekWP-Cronnews eventlist/recurrence/nexttimestamp buerişimyollarındanhâlâalınamadı;panelHEALTHYgerçekcronkanıtısayılmadı.
+- CanlıAIEnglishpaneli:yayınlanmışadres643,hazırEN0,kuyruk0,bugün0istek;önceGeminiAPIanahtarıkaydetuyarısı. Paneldekisayılar1132yayınpageenvanteriyleaynıkapsamdeğil. FreeTiermodelve80günlükistekyerelayarlarıpanelbeyanı;APIanahtarıoluşturulmadı,providerçağrısı,toplutaramaveyaçeviritetiklenmedi. GeminiProchataboneliğiAPIcredentialyerinegeçmez. Buayrıçeviriarayüzününhazırbulunmadığıgörülüyor.
+- Eski59/450güncelolarakdoğrulanmadı. Tümnativepairaudit1132tekilçağrıylayapılmadı;güncelmetadataartıörneknativeeşlemeazisteklealındı.
+
+## Sonraki blok
+OperasyonsahibiMASTER.1) Habercronlistesiiçinyeniyaklaşım:güvenlimevcutsalt-okunurexportveyaçalışırPHPtestortamı;offlinecihaz/kapalıSSHaynışekildetekrarsorgulanmayacak. İzinigenişletmedenalternatifyoksaengeltekileştirilecek.2) EskiBatch008ikincibeşli866–870/1942–1946günceldurumunuöncekikayıttanüretmeyerekkontrolet;varolantammetniyenidençevirtme.3) SEO429kaynakbelirlemesiayrıkalır.4) BeatlesfactQAgerçekbirincilkaynakdesteğivegerekliyayınkararıtamamlanır.
+Günlükyaklaşımkabul:kısapaket,hazırlığıPro'yaayır,canlıyazmayıMASTER'datut;günsonukayıttamamlanan/kalan/yarınayrı. Buçalışmadasürekliyeniotomasyonaçılmadı.
