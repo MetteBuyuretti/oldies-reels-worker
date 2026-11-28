@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-28T11:44:42+03:00",
+  "updated_at": "2026-11-28T11:51:09+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1703,7 +1703,7 @@
       "title": "Web sitesi — haber, TR/EN, SEO ve kullanım eksiklerinin giderilmesi",
       "owner": "WORK MASTER/root current conversation",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-28T11:44:42+03:00",
+      "last_checkpoint": "2026-11-28T11:51:09+03:00",
       "completed_units": [
         "founder-website-only-scope-recorded",
         "package001-live-server-logs-and-publication-boundary-checked",
@@ -1719,14 +1719,15 @@
         "mandatory-identity-and-plan-pre-send-routing-rule-recorded",
         "correct-ai-pro-qa03-task-submitted-received-delivered"
       ],
-      "next_step": "NativeGSCURLprefixother4xx1/1=wp-admin/admin-ajax.php(first17Nov,lastcrawl19Nov)triage済;429ayrı. GerçekWPcronnews eventlist/recurrence/nexttimestamp bekliyor. PR48 package003 recurrence adayı+MASTERdüzeltilmişfixture hazır;PHPtestlerkoşulmadı. Work2gerçekalımıyok. Sağlıkpanelini cronPASSsayma,geniştarama/deploy/retryyok.",
+      "next_step": "28–29Kasımdengeplanı:Work1günde2×15–20dkhedefblok;ilkblok gerçeknewscron/providerhealth+429/GSCayrımı+güncelTR/ENenvanteri;GeminiPro5–10çift/tekdiffhazırlığı;Work2yalnıztekPHPtestpaketi erişimdoğrulanırsa. Eski59/450güncelsayılmayacak. NormalChatGPT/DeepSeekyeniişalımıyok. CanlıyazmayalnızMASTER,aynıonarım/QAtekrarıyok.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-001.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/48",
         "https://gemini.google.com/app/9c935cf6a2b266c0",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-003.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-ACCOUNT-INCIDENT.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-PRO-QA03-RECEIPT.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-PRO-QA03-RECEIPT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/BALANCED-TWO-DAY-PLAN.md"
       ],
       "scope": [
         "website",
@@ -1769,7 +1770,24 @@
         }
       },
       "quota_policy": "10–20 minute targeted packages; reuse evidence; no broad repeat crawl; no new paid tools; current remaining quota not measurable",
-      "acceptance": "Active-source recovery and external Gemini review delivery complete; candidate in draft PR48; no PHP runtime PASS, live repair or continuity claim"
+      "acceptance": "Active-source recovery and external Gemini review delivery complete; candidate in draft PR48; no PHP runtime PASS, live repair or continuity claim",
+      "resource_plan": {
+        "recorded_at": "2026-11-28T11:51:09+03:00",
+        "target_dates": [
+          "2026-11-28",
+          "2026-11-29"
+        ],
+        "work1_daily_blocks": 2,
+        "work1_block_minutes": "15-20 target, not quota guarantee",
+        "work2_total_target": "one 10-15 minute PHP test package if executable access confirmed",
+        "gemini": "verified Pro primary code/editorial preparation; batches of 5-10 pairs",
+        "normal_chatgpt": "planned fallback; independent session not confirmed",
+        "deepseek": "optional bounded candidate review; no paid retry",
+        "live_site_writer": "WORK MASTER only",
+        "new_schedules_created": false,
+        "measured_remaining_quota": false,
+        "plan_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/BALANCED-TWO-DAY-PLAN.md"
+      }
     }
   ],
   "last_status_audit": {
