@@ -17,3 +17,11 @@ Temel anayasa: work-output/master-work2-intake-20261031/FOUNDER-APPROVED-CONSTIT
 Günün kaynağı thisdayinmusic.com ilgili gün sayfasıdır. Haber özgün İngilizceyle düzenlenir; sitedeki Getty/ücretli fotoğraflar kendiliğinden lisanslanmış sayılmaz. Bugünün yerine başka tarihin arşivi kullanılamaz. Tarih/olay kimliği/kaynak parmak izi sağlayıcı çağrısından önce kontrol edilir.
 Beğenilen17Kasım Beatles filmi referanstır: canlı orta-üsttempo, doğalCharon hedef145/ençok160WPM, anlaşılırDJ+belirgin dönem fonu. Üç güzel, farklı, doğru sanatçı/dönem/lisans fotoğrafı şartı korunur.
 İlk gerçek yayın CANLIDA; yeni kaynak seçicinin testi, gelecekteki çok günlük doğal üretim veya bağımsız WATCHDOG kabulü yerine geçmez.
+
+## 28.11.2026 | 04:46 TSİ — Kurucu kapsam güncellemesi: yalnız web sitesi
+
+Mete'nin bu oturumdaki son açık talimatı: “Facebook Reels bu projenin şu anda dışında. Ayrı iş onlar. ... Bu iş tamamen web sitesi projesi. ... birinci çalışma planını başlat”. Bu çalışma açısından yukarıdaki Reels önceliği geçerli değildir; sosyal medya, Facebook Reels, YouTube, Jingle ve Etsy bu web sitesi projesinin kapsamı dışındadır. Diğer projelerin zamanlamaları veya ayarları bu kayıtla değiştirilmez.
+
+WORK MASTER/root bu web projesinin operasyon sahibidir. Kapsam: haber akışı ve yabancı kaynak doğruluğu, TR/EN çeviri-eşleme eksikleri, SEO/4xx/indeks, site iç bağlantıları, haber kartları/aylık banner ve mobil kullanım. İlk paket: mevcut kaynak/log ve yayın kuyruğunu okuyarak haber kesintisinin sınırını, gerçek 4xx örneklerini ve en küçük güvenli çözümü belirlemek. Tamamlanmış 301/RSS/head onarımları korunur. Yeni ücret, kör yayın/retry, toplu redirect, eklenti güncelleme ve GSC toplu doğrulama yapılmaz.
+
+Work2/Gemini görev alımı, teknik erişim ve kota doğrulanmadan atanmış/başlamış sayılmaz. Watchdog bağımsız kabulü gerçek kanıtla ayrı tutulur. Bu kapsam değişikliği anayasa veya diğer projelerin üretim yetkilerini genişletmez.
