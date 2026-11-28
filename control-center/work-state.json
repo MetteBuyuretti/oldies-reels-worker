@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-28T11:41:24+03:00",
+  "updated_at": "2026-11-28T11:44:42+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1703,7 +1703,7 @@
       "title": "Web sitesi — haber, TR/EN, SEO ve kullanım eksiklerinin giderilmesi",
       "owner": "WORK MASTER/root current conversation",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-28T11:41:24+03:00",
+      "last_checkpoint": "2026-11-28T11:44:42+03:00",
       "completed_units": [
         "founder-website-only-scope-recorded",
         "package001-live-server-logs-and-publication-boundary-checked",
@@ -1716,7 +1716,8 @@
         "new-other4xx-exact-one-url-admin-ajax-triage",
         "founder-reported-wrong-gemini-account-confirmed",
         "correct-mette-buyuretti-ai-pro-account-menu-verified",
-        "mandatory-identity-and-plan-pre-send-routing-rule-recorded"
+        "mandatory-identity-and-plan-pre-send-routing-rule-recorded",
+        "correct-ai-pro-qa03-task-submitted-received-delivered"
       ],
       "next_step": "NativeGSCURLprefixother4xx1/1=wp-admin/admin-ajax.php(first17Nov,lastcrawl19Nov)triage済;429ayrı. GerçekWPcronnews eventlist/recurrence/nexttimestamp bekliyor. PR48 package003 recurrence adayı+MASTERdüzeltilmişfixture hazır;PHPtestlerkoşulmadı. Work2gerçekalımıyok. Sağlıkpanelini cronPASSsayma,geniştarama/deploy/retryyok.",
       "evidence_urls": [
@@ -1724,7 +1725,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/48",
         "https://gemini.google.com/app/9c935cf6a2b266c0",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-003.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-ACCOUNT-INCIDENT.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-ACCOUNT-INCIDENT.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-PRO-QA03-RECEIPT.md"
       ],
       "scope": [
         "website",
@@ -1746,15 +1748,21 @@
           "authority": "source review and isolated candidate diff only; no live website writes"
         },
         "gemini": {
-          "status": "historical_deliveries_wrong_account_confirmed; correct_pro_account_verified; no_new_message_sent",
-          "task_id": "WEB-GEM-QA-20261128-03",
-          "url": "https://gemini.google.com/app/9c935cf6a2b266c0",
+          "status": "correct_pro_received_and_delivered_static_review; runtime_not_executed",
+          "task_id": "WEB-GEM-QA-20261128-03-PRO",
+          "url": "https://gemini.google.com/u/2/app/6718abb7294f320f?pageId=none",
           "authority": "code/tests proposal only; no live website access/write authority",
           "previous_status_preserved": "qa03_received_delivered_master_corrected_candidate_tests_not_run",
           "correct_pro_conversation": "https://gemini.google.com/u/2/app/6718abb7294f320f?pageId=none",
           "historical_wrong_account_conversation": "https://gemini.google.com/app/9c935cf6a2b266c0",
           "historical_wrong_account": true,
-          "pro_account_qa03_receipt": false
+          "pro_account_qa03_receipt": true,
+          "expected_account_verified_before_send": true,
+          "plan_verified_before_send": "Pro",
+          "same_account_verified_after_delivery": true,
+          "static_review": "complete; no further candidate correction requested",
+          "php_runtime_tests": "NOT_EXECUTED; operator reports PHP unavailable",
+          "site_write_permission": false
         },
         "watchdog": {
           "status": "independent_receipt_pending"
@@ -1905,7 +1913,8 @@
       "account_index_is_identity": false,
       "on_mismatch": "STOP; do not send, change account, duplicate task or assume paid plan",
       "site_write_permission": false,
-      "automatic_enforcement": "Operator pre-send verification rule; no extension/software-level routing guard installed"
+      "automatic_enforcement": "Operator pre-send verification rule; no extension/software-level routing guard installed",
+      "last_successful_verified_submission_at": "2026-11-28T11:44:42+03:00"
     }
   }
 }
