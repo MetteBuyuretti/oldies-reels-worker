@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "mcp_handler_calls": [
+    "import_approved_image",
+    "verify_asset_file",
+    "read_asset_receipt"
+  ],
+  "actual_windows_file": true,
+  "sha256": "05456723ade4e3e6262d52fbdc132f8dbde05a361d633aeadd50af557e4a8e88",
+  "bytes": 74,
+  "width": 4,
+  "height": 3,
+  "network": "TEST-ONLY local byte injection, not live HTTPS",
+  "production_tool_activated": false
+}

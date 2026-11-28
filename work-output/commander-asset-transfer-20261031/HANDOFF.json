@@ -1,0 +1,17 @@
+{
+  "task": "COMMANDER-ASSET-TRANSFER-20261031-07",
+  "received_issue_comment": 6546409052,
+  "status": "TEST EDİLDİ - ISOLATED CANDIDATE",
+  "proposed_root": "C:\\Users\\METE\\Oldies-Radyo-Assets\\incoming",
+  "root_created_or_activated": false,
+  "added_tools": ["import_approved_image", "verify_asset_file", "read_asset_receipt"],
+  "fixture": {"bytes": 74, "width": 4, "height": 3, "sha256": "05456723ade4e3e6262d52fbdc132f8dbde05a361d633aeadd50af557e4a8e88", "source": "injected local synthetic fixture, not live HTTPS"},
+  "core_tests_passed": 7,
+  "legacy_project_tests_passed": 15,
+  "legacy_report_test": "PASS",
+  "live_tunnel_restart": false,
+  "production_scope_changed": false,
+  "real_1956_asset_transferred": false,
+  "source_kind": "ChatGPT Library file; authorized bytes materialization unavailable in this session",
+  "next": "Independent review and explicit root/source/activation decision; obtain authorized original bytes and expected hash"
+}
