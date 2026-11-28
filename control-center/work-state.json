@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-28T12:00:23+03:00",
+  "updated_at": "2026-11-28T12:09:14+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1704,7 +1704,7 @@
       "title": "Web sitesi — haber, TR/EN, SEO ve kullanım eksiklerinin giderilmesi",
       "owner": "WORK MASTER/root current conversation",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-28T12:00:23+03:00",
+      "last_checkpoint": "2026-11-28T12:09:14+03:00",
       "completed_units": [
         "founder-website-only-scope-recorded",
         "package001-live-server-logs-and-publication-boundary-checked",
@@ -1722,7 +1722,8 @@
         "day1-published-page-metadata-1132-captured",
         "day1-batch008-first-five-full-en-native-pairs-reconciled",
         "day1-en1937-live-career-link-repaired-browser-verified",
-        "day1-beatles5199-source-labels-corrected-draft-readback"
+        "day1-beatles5199-source-labels-corrected-draft-readback",
+        "daily-bounded-web-work-automation-created-enabled-readback"
       ],
       "next_step": "Gün1blok1tamam:1132publishpageenvanteri;Batch008ilk5ENtammetin+nativeeşleşmevar,yenidenüretme. EN1937careerlinkcanlıdüzeltildi,EN5199kaynaketiketleridraftdüzeltildi. Sonrakiblokgerçekcronexport/PHPortamıiçinyeniyaklaşım;RemoteDCoffline/SSHdisabledtekraraynıdenemeyok. AIEnglishkuyruk0/APIkeyuyarısı;ProchatAPIkeydeğil. Güncel59/450kesinsayılmayacak.",
       "evidence_urls": [
@@ -1733,7 +1734,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-ACCOUNT-INCIDENT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-PRO-QA03-RECEIPT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/BALANCED-TWO-DAY-PLAN.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAY-1-BLOCK-1.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAY-1-BLOCK-1.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAILY-WORK-SCHEDULE.md"
       ],
       "scope": [
         "website",
@@ -1814,6 +1816,19 @@
         "native_pairs_verified": 5,
         "translation_backlog_exact_count": "not yet verified; counts by URL prefix only",
         "new_automation_created": false
+      },
+      "daily_work_automation": {
+        "id": "Automation_bd242da9ea8081918a0e6147ebca19e8",
+        "is_enabled": true,
+        "timezone": "Europe/Istanbul",
+        "next_run_time": "2026-11-29T12:30:00+03:00",
+        "first_run_observed": false,
+        "budget_minutes_per_run": 15,
+        "max_daily_blocks_including_manual": 2,
+        "notification_policy": "new verified milestone or founder decision blocker only; deduplicate",
+        "stop_rule": "pause when all website goals accepted",
+        "environment_selection": "inherited; tool returned null environment details",
+        "record_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAILY-WORK-SCHEDULE.md"
       }
     }
   ],
