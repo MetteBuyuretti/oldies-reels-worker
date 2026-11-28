@@ -25,3 +25,6 @@ Mete'nin bu oturumdaki son açık talimatı: “Facebook Reels bu projenin şu a
 WORK MASTER/root bu web projesinin operasyon sahibidir. Kapsam: haber akışı ve yabancı kaynak doğruluğu, TR/EN çeviri-eşleme eksikleri, SEO/4xx/indeks, site iç bağlantıları, haber kartları/aylık banner ve mobil kullanım. İlk paket: mevcut kaynak/log ve yayın kuyruğunu okuyarak haber kesintisinin sınırını, gerçek 4xx örneklerini ve en küçük güvenli çözümü belirlemek. Tamamlanmış 301/RSS/head onarımları korunur. Yeni ücret, kör yayın/retry, toplu redirect, eklenti güncelleme ve GSC toplu doğrulama yapılmaz.
 
 Work2/Gemini görev alımı, teknik erişim ve kota doğrulanmadan atanmış/başlamış sayılmaz. Watchdog bağımsız kabulü gerçek kanıtla ayrı tutulur. Bu kapsam değişikliği anayasa veya diğer projelerin üretim yetkilerini genişletmez.
+
+### 28.11.2026 | 04:46 TSİ — Kota ve operatör yetkisi
+Kurucu: limiti dengeli kullan; uzun tek çalışma yerine dar paketler. Work2/Gemini yalnız kodlama/inceleme/içerik adayı hazırlayabilir; sitede değişiklik yapma yetkisi verilmez. Canlı uygulama MASTER'da ve mevcut onay sınırlarında kalır. Paket1 kaydı: work-output/website-only-20261128/PACKAGE-001.md. Harici operatör alımı henüz doğrulanmadı.
