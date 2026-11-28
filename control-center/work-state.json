@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-28T11:51:09+03:00",
+  "updated_at": "2026-11-28T12:00:23+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -341,10 +341,11 @@
         "batch-007-10-full-features-published",
         "batch-007-all336-source-paragraphs-and44-images-retained",
         "batch-007-native20-frontend10-bidirectional10-and27-links-QA",
-        "checkpoint010-full-translations70"
+        "checkpoint010-full-translations70",
+        "batch008-first-five-existing-full-english-pages-and-native-pairs-confirmed-20261128"
       ],
-      "last_checkpoint": "2026-10-04T21:15:20.669Z",
-      "next_step": "Batch008 queue:TR860–864→EN1937–1941 five remaining1960s artist features, then TR866–870→EN1942–1946 five music-style histories. Fresh native reads and full source review. TR613 EN554;59unpaired;450short-EN review candidates;70full translations complete;five existing news reviewed. No background worker.",
+      "last_checkpoint": "2026-11-28T12:00:23+03:00",
+      "next_step": "28Kasımgüncelkontrol:Batch008ilk5TR860–864↔EN1937–1941zatenpublish/tamENve5nativepairvalid;yenidençevirme. SonrakiilkeksikkanıtTR866–870/EN1942–1946durumunu tazeoku. Eski59unpaired/450shortENgüncelsayıdeğil;1132publishpageenvanteri544enönek/588diğer,nativeeksikpaircountdeğil.",
       "note": "Checkpoint010: ten additional source-grounded full translations in status follow-up; total70. All336 source paragraphs retained,10EN pages/20native language records/10live switches/27internal links and images pass. Four taxonomy labels architecture-locked;3 source holds;duplicate-description/news-footer/mobile viewport QA pending. ExistingENURLs/TR/globaltheme preserved."
     },
     {
@@ -1703,7 +1704,7 @@
       "title": "Web sitesi — haber, TR/EN, SEO ve kullanım eksiklerinin giderilmesi",
       "owner": "WORK MASTER/root current conversation",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-28T11:51:09+03:00",
+      "last_checkpoint": "2026-11-28T12:00:23+03:00",
       "completed_units": [
         "founder-website-only-scope-recorded",
         "package001-live-server-logs-and-publication-boundary-checked",
@@ -1717,9 +1718,13 @@
         "founder-reported-wrong-gemini-account-confirmed",
         "correct-mette-buyuretti-ai-pro-account-menu-verified",
         "mandatory-identity-and-plan-pre-send-routing-rule-recorded",
-        "correct-ai-pro-qa03-task-submitted-received-delivered"
+        "correct-ai-pro-qa03-task-submitted-received-delivered",
+        "day1-published-page-metadata-1132-captured",
+        "day1-batch008-first-five-full-en-native-pairs-reconciled",
+        "day1-en1937-live-career-link-repaired-browser-verified",
+        "day1-beatles5199-source-labels-corrected-draft-readback"
       ],
-      "next_step": "28–29Kasımdengeplanı:Work1günde2×15–20dkhedefblok;ilkblok gerçeknewscron/providerhealth+429/GSCayrımı+güncelTR/ENenvanteri;GeminiPro5–10çift/tekdiffhazırlığı;Work2yalnıztekPHPtestpaketi erişimdoğrulanırsa. Eski59/450güncelsayılmayacak. NormalChatGPT/DeepSeekyeniişalımıyok. CanlıyazmayalnızMASTER,aynıonarım/QAtekrarıyok.",
+      "next_step": "Gün1blok1tamam:1132publishpageenvanteri;Batch008ilk5ENtammetin+nativeeşleşmevar,yenidenüretme. EN1937careerlinkcanlıdüzeltildi,EN5199kaynaketiketleridraftdüzeltildi. Sonrakiblokgerçekcronexport/PHPortamıiçinyeniyaklaşım;RemoteDCoffline/SSHdisabledtekraraynıdenemeyok. AIEnglishkuyruk0/APIkeyuyarısı;ProchatAPIkeydeğil. Güncel59/450kesinsayılmayacak.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-001.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/48",
@@ -1727,7 +1732,8 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-003.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-ACCOUNT-INCIDENT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-PRO-QA03-RECEIPT.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/BALANCED-TWO-DAY-PLAN.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/BALANCED-TWO-DAY-PLAN.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAY-1-BLOCK-1.md"
       ],
       "scope": [
         "website",
@@ -1749,8 +1755,8 @@
           "authority": "source review and isolated candidate diff only; no live website writes"
         },
         "gemini": {
-          "status": "correct_pro_received_and_delivered_static_review; runtime_not_executed",
-          "task_id": "WEB-GEM-QA-20261128-03-PRO",
+          "status": "correct_pro_editorial01_received_delivered_labels_applied_to_existing_draft",
+          "task_id": "WEB-GEM-EDITORIAL-20261128-01",
           "url": "https://gemini.google.com/u/2/app/6718abb7294f320f?pageId=none",
           "authority": "code/tests proposal only; no live website access/write authority",
           "previous_status_preserved": "qa03_received_delivered_master_corrected_candidate_tests_not_run",
@@ -1763,7 +1769,8 @@
           "same_account_verified_after_delivery": true,
           "static_review": "complete; no further candidate correction requested",
           "php_runtime_tests": "NOT_EXECUTED; operator reports PHP unavailable",
-          "site_write_permission": false
+          "site_write_permission": false,
+          "master_fact_acceptance": "not independent fact PASS; source labels only applied"
         },
         "watchdog": {
           "status": "independent_receipt_pending"
@@ -1787,6 +1794,26 @@
         "new_schedules_created": false,
         "measured_remaining_quota": false,
         "plan_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/BALANCED-TWO-DAY-PLAN.md"
+      },
+      "daily_execution": {
+        "date": "2026-11-28",
+        "block": 1,
+        "status": "checkpointed",
+        "started_at": "2026-11-28T11:54:42+03:00",
+        "checkpoint_at": "2026-11-28T12:00:23+03:00",
+        "report_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAY-1-BLOCK-1.md",
+        "published_page_inventory": 1132,
+        "en_url_prefix": 544,
+        "other_url_prefix": 588,
+        "live_changes": [
+          "EN1937 existing 1950s career text linked to published EN1744; browser href verified"
+        ],
+        "draft_changes": [
+          "EN5199 four source labels translated; status remains draft; exact readback"
+        ],
+        "native_pairs_verified": 5,
+        "translation_backlog_exact_count": "not yet verified; counts by URL prefix only",
+        "new_automation_created": false
       }
     }
   ],
