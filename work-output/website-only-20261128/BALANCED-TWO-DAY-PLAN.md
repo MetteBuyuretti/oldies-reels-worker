@@ -1,0 +1,44 @@
+# Web sitesi — iki günlük görev sırası ve kaynak dağılımı
+**28.11.2026 | 11:51 TSİ (UTC+3)**  
+Operasyon sahibi: WORK MASTER/root. Hedef pencere:28–29Kasım2026. Kapsam:yalnızwebsitesi;Reels,sosyalüretim,YouTube,Jingle,Etsyhariç.
+Durum:PLANLANDI;buplanla yenioperatörbaşlatılmadı/yayın veyaotomasyonkurulmadı.
+
+## Karar ve kapasite
+Kurucu: kalan6gündeWork1/Work2limitleridengeli kullanılacak,diğerprojelerederezervkalacak. GerçekkalanWorkkotası/Mesajmaliyetibuoturumdanölçülmüyor. Aşağıdakidakikalar **çalışmahedefi**,kotagarantisi veyaarkaplantetiklemedeğildir.
+- Work1: günlük2blok,herbiri15–20dk;normalhedef30–40dk. Yalnızsomutkapanışaçokyakınteknikpakette1ek10dkblok;uzunbelirsizçalışmayok.
+- Work2: tümikigünlükwebpenceresinde1hedefli10–15dktekniktestpaketi. PHPçalıştırmayeteneğidoğrulanamazsaaynıişaçıklamasınıtekrarlamayacak.
+- GeminiPro: kod/içerik/çeviri hazırlığının anaoperatörü;birseferde5–10TR/ENçiftveya1darcodepaketi. Herseferkimlik+Prokontrolü. SonQA03Proincelemesitamamlandı;PHPolmadığıiçintekrartestyürütmegöreviGemini'yeverilmeyecek.
+- ChatGPTnormalsohbet: mevcutmetinlerdençeviri/başlık/özet/içbağlantıönerileri. Ayrıoturumgörevdevri/kapasitesibuturkanıtlanmadı;planlıyedek. Work1'inkendi içindeçalışmanı'normalsohbeteaktarıldı'diyeadlandırmayacak.Kotadanbağımsız/sınırsızvarsayılmayacak.
+- DeepSeek: yalnızsonadaydiffindeikinci görüş;çalışanerşimyetersiz/bakiyeengelivarsadenenipdurulmayacak.Yenimasrafyok.Watchdogbağımsızkabulününyerinegeçmez.
+- Work1uygulama,gerçeksitekontrolüvekapanış;diğerlerininsiteyazma,yayın,cron/deployyetkisiyok.
+
+## Sıra ve paketler
+| Sıra / hedefgün | Paket | Önerilenhazırlayıcı | Work1işi | Bittiölçütü |
+|---|---|---|---|---|
+|1 / 28Kasım ilkblok|W1-NEWS:haberzinciri|Work2:PR48PHP-l+package002/003ayrıfixtureyalnızgerçekruntimevarsa|GerçeknewsWPcronevent/recurrence/nexttimestamp,sırgöstermeyenproviderhealth,kaynak/yedek/rollback;kanıtlanmışenküçükdüzeltme|YetkiligerçekTR/ENçıktı,mükerrersiz;sonrakidoğalkoşuayrıkontrol|
+|2 / 28Kasım ilkblok|W1-SEO:erişim/indeks|MASTERmevcutGSCkanıtından;Geminiyalnızsınıflandırma|429sınırlandırmasınıGSCtekadminajax4xx'denayır;kalan404/noindex/robotsgruplarındaörneklenmişönemliiçeriknedenleri|ÖnemliiçerikURLlerininniçinsengellendiğivegerekendüzeltmekanıtlı;meşruistisnalarhatasayılmaz|
+|3 / 28Kasım hazırlık,29Kasımuygulama|GEM-EN:TR/ENeksikleri|GeminiProana;normalChatGPTyedek|Birdefagüncelmetadata/eşleşmeenvanteri,tekortakkuyruk;paketteslimlerinisınırlıörneklem+anlamkontrolüyleuygula|Kuyruktakiherçiftinkaynağı,dilbağı,tammetni,kritiktarih/isimdoğruluğuvetümteslimdurumlarıkayıtlı|
+|4 / 28Kasım hazırlık,29Kasımuygulama|GEM-VISUAL:haberkartı/aylıkbanner|GeminiProgünceltemakaynağıüzerindediffhazırlar|Güncel4temadosyasınıbirdefaoku/hash/yedek;TR/EN,390pxönizlemevegerekencanlıkabul|OkunurTR/ENbanner,doğrufotoğrafkadrajı,BuAy/GeçmişAylarvemobilQA|
+|5 / 29Kasım|GEM-EDITORIAL:haber/hizmetmetinleri|GeminiPro/erişimi doğrulanırsaChatGPTnormal|Mevcuttaslaklarıtekraraçmadanfaktüelkontrol,içbağlantı/kaynak/görsel/yayınkararı|Onaylımevcutmetinlertamam;taslaktutulmasıgerekenleryanlışlıklayayınlanmaz|
+|6 / 29Kasımsonblok|MASTER-ACCEPTANCE:kapanış|DeepSeekyalnızgereken1diffincelemesi;Watchdoggerçekalımıayrı|AnaTR/ENsayfalar,haberakışı,dilgeçişi,mobil/linkler,canonical/meta/robots/sitemap;sonrakidoğalhaberkoşusu|TeknikPASS/gerçekkullanım/süreklilikayrıkanıt;kalanteknikengellerteklistede|
+
+## Günlük çalışma düzeni
+28Kasım: Work1ilkblokta1ve2'ninilkeksikkanıtınıalıpblokajıaçar;aynıveripaketiGemini'yehazırlıkiçingönderilir. Work2tekPHPtestişiiçinuygunsaçalışır. Work1ikinci blokteslimleriveyetkilidaruygulamayısonuçlandırır.
+29Kasım: Work1ilkbloktabanner+çeviriteslimleriuygulanır;ikinci blokgerçeksiteveilkdoğalsüreklilikkabulüiçinayrılır.
+Bunlaroturumlaraktifkenuygulanacakplan;geceboyusürekliçalışma,karşısohbetotomatikuyanmasıveyasaatlitetiklemekurulmuşdeğildir.
+
+## Ortak teslim sözleşmesi ve tekrar önleme
+Herpaketkimlik,tarih/saat,gerçekalım,kaynakhash/sürüm,nihaiçıktı,gerçektetesti,engelveteksonrakiadımlateslimedilir.
+Hazırdevir/ALINDI/çalıştı/teslim/bağımsızkabulayrıkayıt. Aynımetneikiyazardüzenlemeverilmez. Birblogdönemi içintekhaberlistesi,tekTR/ENkuyruğu,tekadaybranch.
+Mevcut26URL301/RSSveheadv0.1.2onarımı,etkinScheduler4dosyakurtarma,ProQA03tekrarlanmaz. Son7g429tarama100örnekbiliniyor;kanıtsızgenişyenitaramayok.
+Büyükaraştırma,uzunrapor/ekrantekrarıvegenel'durumkontrolü'yerineyalnızilkeksikkanıt.
+Birpaket15–20dkdakapanmıyorsagerçekkalanengeltekileştirilir,teslimkontrolnoktasınabölünür;aynıbaşarısızyöntem2denemedensonrayenikanıtsıztekrarlanmaz.
+Work1raporu ençok5madde+aynıortakkayıtlinki.
+
+## İki günlük hedefin sınırı
+Amaçmevcutwebsitesieksiğinikapatmaktır. **59eşleşmemiş/450kısaEN** Ekimtarihlibacklograkamlarıdır;bugünkügerçekişsayısıdeğil. Güncelenvanterilkpaketteçıkarılır. İlk5çiftinölçülmüşteslim/QA/uygulamasüresiyletümkuyrukikigünesığıyor mudanlaşılır. Tümeskiarşivsığmıyorsabugünsayısalgerçekdurumverilir;bitmeyeni'kapatıldı'demekveya6günlükkotayı48saattetüketmekyok.
+Öncelikarıza/indeksengeli→haberakışı→dilvetamlık→görünüm→mevcuthizmetmetinleri. Yenigeliştirmeaçılmayacak. Eksikarşiviçingöreviptaledilmez;ayrıkalançiftlistesiveteslimtakvimikorunur.
+Kurucuyayalnızgerekenstratejikkarar,gerçekengelveyamevcutkurallardakritikcanlıonaysunulur;raportaşıyıcısıyapılmaz.
+
+## Mevcutgerçekoperatördurumu
+GeminiMetteBuyurettiAIProkimliğiveCODE/QA03teslimleridoğrulandı. Work2yeniPHPişalımıkanıtlanmadı;normalChatGPTayrıoturumveDeepSeekbuişiçindoğrulanmadı. Budosyadaki dağılımönerisi buoperatörlerinbaşladığıanlamınagelmez.
