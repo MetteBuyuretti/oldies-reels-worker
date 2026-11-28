@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-28T04:46:04+03:00",
+  "updated_at": "2026-11-28T05:10:12+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1703,15 +1703,20 @@
       "title": "Web sitesi — haber, TR/EN, SEO ve kullanım eksiklerinin giderilmesi",
       "owner": "WORK MASTER/root current conversation",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-28T04:46:04+03:00",
+      "last_checkpoint": "2026-11-28T05:10:12+03:00",
       "completed_units": [
         "founder-website-only-scope-recorded",
         "package001-live-server-logs-and-publication-boundary-checked",
-        "restricted-work2-gemini-handoffs-prepared"
+        "restricted-work2-gemini-handoffs-prepared",
+        "active-news-source-four-files-exported",
+        "gemini-code-task-received-and-delivered",
+        "pr48-news-diagnostic-candidate-and-four-case-harness-prepared-not-executed"
       ],
-      "next_step": "Sıradaki dar paket: güncel haber üreticisinin gerçek kaynak/schedule/logunu salt-okunur elde et veya Work2 gerçek ALINDI teyidini doğrula; 429kaynağı veGSC exactURL ayrı kanıtlanacak. Canlı değişiklik yetkisi operatörlere verilmez. Tam audit/çalışanhead-301-RSS onarımlarını tekrarlama.",
+      "next_step": "Paket2 PR48 hazır: aktif v1.7.5 dört kaynak kurtarıldı;Gemini gerçekALINDI+adayteslimi var. İzolePHP4senaryo harness çalıştırılmalı(yerelPHPyok);gerçekWPcron oldies_news_check_sources_cron recurrence listesi salt-okunur alınmalı. Auto_publishOFFkoru,CheckSources/GenerateDraft/publish/retrytetikleme. Kurulu kaynakhash değiştiyse aday uygulama.429/GSCayrıkol. Work2alımı veWatchdogkabulü henüz yok.",
       "evidence_urls": [
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-001.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-001.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/48",
+        "https://gemini.google.com/app/9c935cf6a2b266c0"
       ],
       "scope": [
         "website",
@@ -1733,15 +1738,18 @@
           "authority": "source review and isolated candidate diff only; no live website writes"
         },
         "gemini": {
-          "status": "prepared_not_sent_or_received",
-          "authority": "foreign-source and translation QA only; no live website writes"
+          "status": "received_and_delivered_code_review",
+          "task_id": "WEB-GEM-CODE-20261128-02",
+          "url": "https://gemini.google.com/app/9c935cf6a2b266c0",
+          "authority": "code candidate only; no live site authority",
+          "acceptance": "MASTER scoped diff review only; PHP tests pending"
         },
         "watchdog": {
           "status": "independent_receipt_pending"
         }
       },
       "quota_policy": "10–20 minute targeted packages; reuse evidence; no broad repeat crawl; no new paid tools; current remaining quota not measurable",
-      "acceptance": "Diagnosis checkpoint only; no repair, operational PASS or continuity acceptance"
+      "acceptance": "Active-source recovery and external Gemini review delivery complete; candidate in draft PR48; no PHP runtime PASS, live repair or continuity claim"
     }
   ],
   "last_status_audit": {
