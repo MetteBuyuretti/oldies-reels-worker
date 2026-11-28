@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-28T04:37:29+03:00",
+  "updated_at": "2026-11-28T04:46:04+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -30,11 +30,12 @@
         "seo-head-description-live-plugin-v0.1.2-20261112",
         "lionel-header-draft-link-hidden-20261112",
         "native-polylang-10-bidirectional-pairs-20261112",
-        "read-only-web-health-audit-traffic-bilingual-publishing-20261128"
+        "read-only-web-health-audit-traffic-bilingual-publishing-20261128",
+        "website-package001-log-evidence-and-news-chain-boundary-20261128"
       ],
       "next_step": "28 Kasım güncel SALT-OKUNUR denetiminden devam: (1) 19 Kasım yeni GSC 'Başka bir 4xx' exact URL listesi ve gerçek Google index/crawl; 7 meşru 404'ü kör redirect/Validate Fix yapma, (2) 20 Kasım sonrası Yeni Haberler boşluğu, 24 Kasım #5198/#5199 draft ve Guard1.0.4 cron/log/idempotency, (3) Article JSON-LD TR çift graph semantiği, iki staging pilot ve bağımsız WATCHDOG. 12 Kasım v0.1.2 head, 17 exact301,9 RSS onarımını TEKRAR ETME; #43 görsel/banner ayrı iş; canlı WP yazma/yayın/ücret yok.",
-      "last_checkpoint": "2026-11-28T04:37:29+03:00",
-      "note": "05.11.2026 | 07:16 TSİ: Ana Kumanda mevcut oturum Paket A kamuya açık REST/HTML + WordPress Polylang read-only doğrulamasını tamamladı: Yeni Haberler kategorisi 10 TR/10 EN aday çift (7 çift Ekim 1 sonrası); 20/20 HTTP200+single self-canonical+karşılıklı hreflang; 20/20 çift meta description, 20/20 iki JSON-LD scripti, Bowie TR iki Article; 17/20 tag boş; 20/20 excerpt+featured. Native Polylang 4 çift her iki yönde doğrulandı, tüm 10 çiftin native eşleşmesi kanıtlanmış değil. Robots/sitemap uçları 200. GSC Wizard payment_required; gerçek Google indeks UNVERIFIED. WordPress canlı kod/ayar/yayın değişmedi. Ayrı Work MASTER oturumunun otomatik uyanması varsayılmıyor. Kanıt part-001-audit.md ve CSV.\n05.11.2026 | 07:21 TSİ: WordPress.com canlı plugin list sürümleri doğrulandı (News Guard1.0.4, Polylang3.9.1, Integrity0.2.1, Site Kit1.187.0, Jetpack16.4). Windows arşivindeki eski News Guard v1.0.3 PHP kaynak okundu; mevcut v1.0.4 ile aynı sayılmıyor. Canlı news sitemap Bowie TR/EN başlığında XML parse sonrası literal &#039; double-encoding doğrulandı. Paket B önkontrol kalıcı dosyada; gerçek v1.0.4 source/hook/log halen bekliyor. Hiçbir canlı WP değişikliği yok.\n11.11.2026 | 04:54 TSİ: Ana Kumanda mevcut oturumu Google GSC Chrome arayüzünden güncel resmi CSV indirdi; 129 etkilenen: 96 Beklemede, 33 Başarısız. Eski 95 listesiyle 91 ortak (hepsi Beklemede). 33 failed salt-okunur HEAD: 27×404, 3×428, 3 joker test edilmedi. 16 eski slug canonical final200; 9 feed linki site HTML'inde RSS olarak duyuruluyor ama hedef 404/428; TR Lionel#4261 canlı, EN#4974 taslak. Github CSV+rapor+Issue#41 kanıtlı. CANLI WP/GSC değişikliği yok. Ayrı WORK MASTER/WATCHDOG alımı otomatik varsayılmıyor.\n11.11.2026 | 05:07 TSİ: Eski 3×HTTP 428 kaydı GET+HEAD ile yeniden doğrulandı, 3×404. GSC failed toplam 33 kayıtta 30×404 ve üç joker test edilmedi. Kaynak 33 satırlı triage CSV korundu, yeni iki yeniden kontrol sütunu eklendi. #41 yorum 6784917705. Canlı site değişmedi; WATCHDOG bağımsız QA ve kurucu canlı onay sınırı sürüyor.\n12.11.2026 | 02:43 TSİ: Ana Kumanda #41 disabled onarım PHP adayını oluşturdu ve GitHub'a yazdı. 16 exact redirect/12 target; 9 EN RSS exact yol. Yerel dosyanın Git SHA'sı repo PHP ile birebir; php -l PASS, 102 offline assert PASS. Canlı 12 hedef: 12/12 HTTP200+title+h1+canonical+EN dil işareti. WP 8/8 EN post publish ve kategori ID786982547. Canlı kök RSS /feed/ 200/XML iken alternatif EN feed query vars URL'leri 404; FEEDS asla otomatik etkinleşmedi. 16 exact de canlı değil. WATCHDOG/kurucu canlı onay kapısı değişmedi. #41 yorum 6809959404 ve QA raporu mevcut.\n12.11.2026 | 03:57 TSİ: 404 alt işi CANLIDA 26/33 URL doğrulandı. 17 exact 301 (16 1950 old slug + 2015 post#303 alias) ve 9 EN RSS feed XML200; iki ayrı WP eklentisi active (1.0.1 / 0.1.0), rollback deactivate. Root /feed/ + homepage 200. 7 URI bilerek 404: 3 security wildcard, 2 draft (#77,#4974), 2 malformed; kötü redirect yok. GitHub #41 yorum 6811206217. Yeni GSC validation yok, bağımsız WATCHDOG PASS yok.\n12.11.2026: Work-olmayan Oldies Master Kumanda bağlı WordPress ve kamuya açık canlı HTML salt-okunur QA ile çift description ve Lionel header draft linkinin sürdüğünü doğruladı; 26/33 önceki onarım korunuyor; kurulu kaynak PHP erişimi olmadığı için canlı kod değişikliği yapılmadı. Bkz. 06-seo-live-recheck-20261112.md.\n12 Nov 2026 Oldies Master Kumanda: live wpcom plugin-upload + activate, bounded SEO head cleanup v0.1.2; 13 local PHP fixtures passed; final live HTML 5/5 one description/canonical and Lionel EN draft link hidden. Native 10 TR↔EN pairs both ways confirmed publish. No GSC validation/publishing. Details 08-live-head-nav-fix-acceptance-20261112.md.\n28.11.2026 | 04:37 TSİ: Güncel read-only tarama: canlı 8/8 200, tek meta description/canonical, tr/en hreflang PASS; bağlı WP 28 aktif plugin, #41 v0.1.2 ve eski 301/RSS düzeltmeleri aktif. 24 TR/24 EN güncel haber, 12 TR/12 EN ülke araştırması; Norveç/İsveç/Eno/Duran 4 native çift PASS. 20 Kasım sonrası yeni haber publish yok, 24 Kasım Beatles 5198/5199 draft; 27 Kasım Norveç weekly Cron publish PASS. Jetpack önceki30g vs son30g 422→446 views, 213→250 visitors; follower email1. 19 Kasım GSC başka4xx alert (eski 7 bilerek404 ile eşitliği kanıtlanmadı); GSC Wizard paid and Windsor 3>1 account plan block, indeks/GA4/IG takipçi UNVERIFIED. #43 haberkartı/banner açık. Kanıt web-health-audit-20261128.md; canlı değişiklik 0.",
+      "last_checkpoint": "2026-11-28T04:46:04+03:00",
+      "note": "05.11.2026 | 07:16 TSİ: Ana Kumanda mevcut oturum Paket A kamuya açık REST/HTML + WordPress Polylang read-only doğrulamasını tamamladı: Yeni Haberler kategorisi 10 TR/10 EN aday çift (7 çift Ekim 1 sonrası); 20/20 HTTP200+single self-canonical+karşılıklı hreflang; 20/20 çift meta description, 20/20 iki JSON-LD scripti, Bowie TR iki Article; 17/20 tag boş; 20/20 excerpt+featured. Native Polylang 4 çift her iki yönde doğrulandı, tüm 10 çiftin native eşleşmesi kanıtlanmış değil. Robots/sitemap uçları 200. GSC Wizard payment_required; gerçek Google indeks UNVERIFIED. WordPress canlı kod/ayar/yayın değişmedi. Ayrı Work MASTER oturumunun otomatik uyanması varsayılmıyor. Kanıt part-001-audit.md ve CSV.\n05.11.2026 | 07:21 TSİ: WordPress.com canlı plugin list sürümleri doğrulandı (News Guard1.0.4, Polylang3.9.1, Integrity0.2.1, Site Kit1.187.0, Jetpack16.4). Windows arşivindeki eski News Guard v1.0.3 PHP kaynak okundu; mevcut v1.0.4 ile aynı sayılmıyor. Canlı news sitemap Bowie TR/EN başlığında XML parse sonrası literal &#039; double-encoding doğrulandı. Paket B önkontrol kalıcı dosyada; gerçek v1.0.4 source/hook/log halen bekliyor. Hiçbir canlı WP değişikliği yok.\n11.11.2026 | 04:54 TSİ: Ana Kumanda mevcut oturumu Google GSC Chrome arayüzünden güncel resmi CSV indirdi; 129 etkilenen: 96 Beklemede, 33 Başarısız. Eski 95 listesiyle 91 ortak (hepsi Beklemede). 33 failed salt-okunur HEAD: 27×404, 3×428, 3 joker test edilmedi. 16 eski slug canonical final200; 9 feed linki site HTML'inde RSS olarak duyuruluyor ama hedef 404/428; TR Lionel#4261 canlı, EN#4974 taslak. Github CSV+rapor+Issue#41 kanıtlı. CANLI WP/GSC değişikliği yok. Ayrı WORK MASTER/WATCHDOG alımı otomatik varsayılmıyor.\n11.11.2026 | 05:07 TSİ: Eski 3×HTTP 428 kaydı GET+HEAD ile yeniden doğrulandı, 3×404. GSC failed toplam 33 kayıtta 30×404 ve üç joker test edilmedi. Kaynak 33 satırlı triage CSV korundu, yeni iki yeniden kontrol sütunu eklendi. #41 yorum 6784917705. Canlı site değişmedi; WATCHDOG bağımsız QA ve kurucu canlı onay sınırı sürüyor.\n12.11.2026 | 02:43 TSİ: Ana Kumanda #41 disabled onarım PHP adayını oluşturdu ve GitHub'a yazdı. 16 exact redirect/12 target; 9 EN RSS exact yol. Yerel dosyanın Git SHA'sı repo PHP ile birebir; php -l PASS, 102 offline assert PASS. Canlı 12 hedef: 12/12 HTTP200+title+h1+canonical+EN dil işareti. WP 8/8 EN post publish ve kategori ID786982547. Canlı kök RSS /feed/ 200/XML iken alternatif EN feed query vars URL'leri 404; FEEDS asla otomatik etkinleşmedi. 16 exact de canlı değil. WATCHDOG/kurucu canlı onay kapısı değişmedi. #41 yorum 6809959404 ve QA raporu mevcut.\n12.11.2026 | 03:57 TSİ: 404 alt işi CANLIDA 26/33 URL doğrulandı. 17 exact 301 (16 1950 old slug + 2015 post#303 alias) ve 9 EN RSS feed XML200; iki ayrı WP eklentisi active (1.0.1 / 0.1.0), rollback deactivate. Root /feed/ + homepage 200. 7 URI bilerek 404: 3 security wildcard, 2 draft (#77,#4974), 2 malformed; kötü redirect yok. GitHub #41 yorum 6811206217. Yeni GSC validation yok, bağımsız WATCHDOG PASS yok.\n12.11.2026: Work-olmayan Oldies Master Kumanda bağlı WordPress ve kamuya açık canlı HTML salt-okunur QA ile çift description ve Lionel header draft linkinin sürdüğünü doğruladı; 26/33 önceki onarım korunuyor; kurulu kaynak PHP erişimi olmadığı için canlı kod değişikliği yapılmadı. Bkz. 06-seo-live-recheck-20261112.md.\n12 Nov 2026 Oldies Master Kumanda: live wpcom plugin-upload + activate, bounded SEO head cleanup v0.1.2; 13 local PHP fixtures passed; final live HTML 5/5 one description/canonical and Lionel EN draft link hidden. Native 10 TR↔EN pairs both ways confirmed publish. No GSC validation/publishing. Details 08-live-head-nav-fix-acceptance-20261112.md.\n28.11.2026 | 04:37 TSİ: Güncel read-only tarama: canlı 8/8 200, tek meta description/canonical, tr/en hreflang PASS; bağlı WP 28 aktif plugin, #41 v0.1.2 ve eski 301/RSS düzeltmeleri aktif. 24 TR/24 EN güncel haber, 12 TR/12 EN ülke araştırması; Norveç/İsveç/Eno/Duran 4 native çift PASS. 20 Kasım sonrası yeni haber publish yok, 24 Kasım Beatles 5198/5199 draft; 27 Kasım Norveç weekly Cron publish PASS. Jetpack önceki30g vs son30g 422→446 views, 213→250 visitors; follower email1. 19 Kasım GSC başka4xx alert (eski 7 bilerek404 ile eşitliği kanıtlanmadı); GSC Wizard paid and Windsor 3>1 account plan block, indeks/GA4/IG takipçi UNVERIFIED. #43 haberkartı/banner açık. Kanıt web-health-audit-20261128.md; canlı değişiklik 0.\n28.11.2026 | 04:46 TSİ: Web-only Package001: last7d429total1086(100satırörneklem),robots/sitemap/content+auditREST etkileniyor;UAkimlikdoğrulamasıyok,Google/GSCeşitliğikanıtlanmadı. Edge defensive/DDosfalse.4PHPwarning24KasımMCPdraftsaatlerinde;fatalyok,köksebepdeğil. Beatles5198/5199validPolylangdraft;27Kasımcronpublishvar,genelcronarızasıkanıtyok. Work2/Geminisaltadayhazırlamadevirlerihazır,iletilmedi/alınmadı;canlıyetkiyalnızMASTER. Raporwebsite-only-20261128/PACKAGE-001.md.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/issues/41",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/oldies-news-seo-bilingual-20261105/PROJECT.md",
@@ -1696,6 +1697,51 @@
         "existing_stories": "Preserve every pre-existing selected story when changing title or cover.",
         "account_settings": "Do not change biography/avatar/username/security/connections or automations."
       }
+    },
+    {
+      "id": "website-only-remediation-20261128",
+      "title": "Web sitesi — haber, TR/EN, SEO ve kullanım eksiklerinin giderilmesi",
+      "owner": "WORK MASTER/root current conversation",
+      "status": "checkpointed",
+      "last_checkpoint": "2026-11-28T04:46:04+03:00",
+      "completed_units": [
+        "founder-website-only-scope-recorded",
+        "package001-live-server-logs-and-publication-boundary-checked",
+        "restricted-work2-gemini-handoffs-prepared"
+      ],
+      "next_step": "Sıradaki dar paket: güncel haber üreticisinin gerçek kaynak/schedule/logunu salt-okunur elde et veya Work2 gerçek ALINDI teyidini doğrula; 429kaynağı veGSC exactURL ayrı kanıtlanacak. Canlı değişiklik yetkisi operatörlere verilmez. Tam audit/çalışanhead-301-RSS onarımlarını tekrarlama.",
+      "evidence_urls": [
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-001.md"
+      ],
+      "scope": [
+        "website",
+        "news",
+        "TR-EN translations",
+        "SEO-index-4xx",
+        "mobile-and-news-visuals"
+      ],
+      "excluded": [
+        "Facebook Reels",
+        "social production",
+        "YouTube",
+        "Jingle",
+        "Etsy"
+      ],
+      "handoffs": {
+        "work2": {
+          "status": "prepared_not_sent_or_received",
+          "authority": "source review and isolated candidate diff only; no live website writes"
+        },
+        "gemini": {
+          "status": "prepared_not_sent_or_received",
+          "authority": "foreign-source and translation QA only; no live website writes"
+        },
+        "watchdog": {
+          "status": "independent_receipt_pending"
+        }
+      },
+      "quota_policy": "10–20 minute targeted packages; reuse evidence; no broad repeat crawl; no new paid tools; current remaining quota not measurable",
+      "acceptance": "Diagnosis checkpoint only; no repair, operational PASS or continuity acceptance"
     }
   ],
   "last_status_audit": {
@@ -1818,5 +1864,12 @@
     "priority": "Settle English daily TDIM-to-Facebook operation before other development",
     "founder_instruction_date": "2026-11-17",
     "recorded_at": "2026-11-17T13:33:50.041Z"
+  },
+  "current_project_scope": {
+    "id": "website-only-remediation-20261128",
+    "recorded_at": "2026-11-28T04:46:04+03:00",
+    "founder_instruction": "Facebook Reels bu projenin şu anda dışında. Bu iş tamamen web sitesi projesi. Birinci çalışma planını başlat.",
+    "previous_reels_priority_applies_to_this_project": false,
+    "operator_live_site_write_permission": false
   }
 }
