@@ -2,7 +2,7 @@
   "schema_version": 1,
   "policy": "checkpoint-before-next-unit",
   "default_chunk_minutes": "10-20",
-  "updated_at": "2026-11-28T12:09:14+03:00",
+  "updated_at": "2026-11-28T12:33:00+03:00",
   "tasks": [
     {
       "id": "oldies-news-seo-bilingual-20261105",
@@ -1704,7 +1704,7 @@
       "title": "Web sitesi — haber, TR/EN, SEO ve kullanım eksiklerinin giderilmesi",
       "owner": "WORK MASTER/root current conversation",
       "status": "checkpointed",
-      "last_checkpoint": "2026-11-28T12:09:14+03:00",
+      "last_checkpoint": "2026-11-28T12:33:00+03:00",
       "completed_units": [
         "founder-website-only-scope-recorded",
         "package001-live-server-logs-and-publication-boundary-checked",
@@ -1723,9 +1723,14 @@
         "day1-batch008-first-five-full-en-native-pairs-reconciled",
         "day1-en1937-live-career-link-repaired-browser-verified",
         "day1-beatles5199-source-labels-corrected-draft-readback",
-        "daily-bounded-web-work-automation-created-enabled-readback"
+        "daily-bounded-web-work-automation-created-enabled-readback",
+        "day1-block2-gemini-pro-en02-five-pairs-delivered",
+        "day1-block2-deepseek-cron01-advice-delivered-master-triaged",
+        "day1-block2-real-php8428-four-syntax-six-fixture-pass",
+        "day1-block2-native-cron-option-news-hook-absent-confirmed-select-only",
+        "day1-block2-polylang59-published-tr-without-published-en-list-captured"
       ],
-      "next_step": "Gün1blok1tamam:1132publishpageenvanteri;Batch008ilk5ENtammetin+nativeeşleşmevar,yenidenüretme. EN1937careerlinkcanlıdüzeltildi,EN5199kaynaketiketleridraftdüzeltildi. Sonrakiblokgerçekcronexport/PHPortamıiçinyeniyaklaşım;RemoteDCoffline/SSHdisabledtekraraynıdenemeyok. AIEnglishkuyruk0/APIkeyuyarısı;ProchatAPIkeydeğil. Güncel59/450kesinsayılmayacak.",
+      "next_step": "Prepare and test one minimal combined news-only recovery candidate against fresh active source: handle missing news event on normal init and scheduling failure without changing other schedules or auto_publish. No cron repair or deployment yet. Then classify actual59 list for orphan EN/draft/exclusion before new translations. First10 old batch008 EN pages already full; no retranslation.",
       "evidence_urls": [
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/PACKAGE-001.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/pull/48",
@@ -1735,7 +1740,9 @@
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/GEMINI-PRO-QA03-RECEIPT.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/BALANCED-TWO-DAY-PLAN.md",
         "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAY-1-BLOCK-1.md",
-        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAILY-WORK-SCHEDULE.md"
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAILY-WORK-SCHEDULE.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAY-1-BLOCK-2.md",
+        "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/day1/block2-evidence.json"
       ],
       "scope": [
         "website",
@@ -1753,14 +1760,14 @@
       ],
       "handoffs": {
         "work2": {
-          "status": "prepared_not_sent_or_received",
+          "status": "not_dispatched_duplicate_php_work_avoided_master_completed_tests",
           "authority": "source review and isolated candidate diff only; no live website writes"
         },
         "gemini": {
-          "status": "correct_pro_editorial01_received_delivered_labels_applied_to_existing_draft",
-          "task_id": "WEB-GEM-EDITORIAL-20261128-01",
+          "status": "correct_pro_en02_received_delivered_five_complete_pairs",
+          "task_id": "WEB-GEM-EN-20261128-02",
           "url": "https://gemini.google.com/u/2/app/6718abb7294f320f?pageId=none",
-          "authority": "code/tests proposal only; no live website access/write authority",
+          "authority": "editorial/code preparation and review only; no site writes",
           "previous_status_preserved": "qa03_received_delivered_master_corrected_candidate_tests_not_run",
           "correct_pro_conversation": "https://gemini.google.com/u/2/app/6718abb7294f320f?pageId=none",
           "historical_wrong_account_conversation": "https://gemini.google.com/app/9c935cf6a2b266c0",
@@ -1770,16 +1777,23 @@
           "plan_verified_before_send": "Pro",
           "same_account_verified_after_delivery": true,
           "static_review": "complete; no further candidate correction requested",
-          "php_runtime_tests": "NOT_EXECUTED; operator reports PHP unavailable",
+          "php_runtime_tests": "MASTER executed official PHP8.4.28: four syntax and six isolated fixture scenarios PASS",
           "site_write_permission": false,
-          "master_fact_acceptance": "not independent fact PASS; source labels only applied"
+          "master_fact_acceptance": "main sections complete; two deliberate editorial differences noted, no independent historical fact PASS"
         },
         "watchdog": {
           "status": "independent_receipt_pending"
+        },
+        "deepseek": {
+          "status": "received_delivered_master_triaged",
+          "task_id": "WEB-DS-CRON-20261128-01",
+          "url": "https://chat.deepseek.com/a/chat/s/0de7a4f0-13a0-43ac-a08e-11b833bb6000",
+          "authority": "bounded technical advice only; no site writes; not WATCHDOG",
+          "scope_correction": "Baseline init already registers recurrence every request; conditional-filter criticism not accepted as stated"
         }
       },
       "quota_policy": "10–20 minute targeted packages; reuse evidence; no broad repeat crawl; no new paid tools; current remaining quota not measurable",
-      "acceptance": "Active-source recovery and external Gemini review delivery complete; candidate in draft PR48; no PHP runtime PASS, live repair or continuity claim",
+      "acceptance": "Actual external deliveries, real isolated PHP tests, missing live news hook and current native59 list verified. Live news automation recovery/continuity and independent WATCHDOG acceptance pending.",
       "resource_plan": {
         "recorded_at": "2026-11-28T11:51:09+03:00",
         "target_dates": [
@@ -1799,11 +1813,11 @@
       },
       "daily_execution": {
         "date": "2026-11-28",
-        "block": 1,
+        "block": 2,
         "status": "checkpointed",
         "started_at": "2026-11-28T11:54:42+03:00",
-        "checkpoint_at": "2026-11-28T12:00:23+03:00",
-        "report_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAY-1-BLOCK-1.md",
+        "checkpoint_at": "2026-11-28T12:33:00+03:00",
+        "report_url": "https://github.com/MetteBuyuretti/oldies-reels-worker/blob/main/work-output/website-only-20261128/DAY-1-BLOCK-2.md",
         "published_page_inventory": 1132,
         "en_url_prefix": 544,
         "other_url_prefix": 588,
@@ -1813,9 +1827,18 @@
         "draft_changes": [
           "EN5199 four source labels translated; status remains draft; exact readback"
         ],
-        "native_pairs_verified": 5,
-        "translation_backlog_exact_count": "not yet verified; counts by URL prefix only",
-        "new_automation_created": false
+        "native_pairs_verified": 10,
+        "translation_backlog_exact_count": {
+          "tr_pages_without_published_en": 44,
+          "tr_posts_without_published_en": 15,
+          "total": 59,
+          "requires_classification": true
+        },
+        "new_automation_created": false,
+        "php_fixture_pass": 6,
+        "php_syntax_pass": 4,
+        "news_hook_exists": false,
+        "live_news_repaired": false
       },
       "daily_work_automation": {
         "id": "Automation_bd242da9ea8081918a0e6147ebca19e8",
