@@ -28,3 +28,7 @@ Work2/Gemini görev alımı, teknik erişim ve kota doğrulanmadan atanmış/ba�
 
 ### 28.11.2026 | 04:46 TSİ — Kota ve operatör yetkisi
 Kurucu: limiti dengeli kullan; uzun tek çalışma yerine dar paketler. Work2/Gemini yalnız kodlama/inceleme/içerik adayı hazırlayabilir; sitede değişiklik yapma yetkisi verilmez. Canlı uygulama MASTER'da ve mevcut onay sınırlarında kalır. Paket1 kaydı: work-output/website-only-20261128/PACKAGE-001.md. Harici operatör alımı henüz doğrulanmadı.
+
+## 28.11.2026 | 11:41 TSİ — Gemini hesabı zorunlu yönlendirme kontrolü
+Kurucunun düzeltmesi: Gemini işleri yalnız Mette Buyuretti AI Pro hesabına gönderilecek. Eski genel /app sohbeti varsayılan farklı hesaba açılmıştı; geçmiş alım/teslimin Pro hesabına ait olduğu iddia edilmeyecek. Doğru mevcut konuşma: https://gemini.google.com/u/2/app/6718abb7294f320f?pageId=none .
+Her gönderimden ÖNCE aynı sekmenin Google hesap menüsünde seçili kimlik Mette Buyuretti, hesap e-postasının SHA256 değeri a6d7a2be2c46c91387f228592e48f00289b78cf63004cf1971b899f39879fb91 ve AI Pro plan etiketi birlikte doğrulanır. Genel gemini.google.com/app adresi veya yalnız /u/2 indeksi kimlik kanıtı değildir; hesap indeksi oturumda değişebilir. Bu3kanıttanbiriuyuşmazsaGÖNDERİMDURUR. Başkahesabageridönüş/yenigörevkopyasıyok. Doğrulanmışkonuşmavehesapkanıtıgörevalımkaydıylaeşlenir. Bu yazılı operatör kapısıdır; tarayıcıyı teknik olarak kilitleyen bir yazılım kurulmuş değildir. Gemini'ye canlı site yetkisi verilmez.
